@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+
+    <table>
+
+    	<sql>
+
+          <![CDATA[
+				CREATE TABLE cs_member (
+				  me_id NUMBER(20) not null PRIMARY KEY,
+				  mcat_id NUMBER(20) DEFAULT '',
+				  me_realname VARCHAR2(250)  DEFAULT '',
+				  me_nickname VARCHAR2(250)  DEFAULT '',
+				  me_card_id VARCHAR2(250)  DEFAULT '',
+				  me_sex NUMBER(4) DEFAULT '0',
+				  me_vocation VARCHAR2(250)  DEFAULT '',
+				  me_age VARCHAR2(250)  DEFAULT '',
+				  me_address VARCHAR2(250)  DEFAULT '',
+				  me_email VARCHAR2(250)  DEFAULT '',
+				  me_tel VARCHAR2(250)  DEFAULT '',
+				  me_phone VARCHAR2(250)  DEFAULT '',
+				  me_status NUMBER(4) DEFAULT '0',
+				  app_id VARCHAR2(250)  DEFAULT '',
+				  site_id VARCHAR2(250)  DEFAULT ''
+				) 
+
+		   ]]> 
+
+       </sql>        
+
+	   <sql>
+
+          <![CDATA[
+
+				CREATE TABLE cs_member_category (
+				  mcat_id NUMBER(20) not null PRIMARY KEY,
+				  mcat_name VARCHAR2(250)  DEFAULT '',
+				  mcat_memo VARCHAR2(1000)  DEFAULT '',
+				  sort_id NUMBER(4) DEFAULT '0'				  
+				) 
+
+		   ]]> 
+
+       </sql>
+       
+	   <sql>
+	   <![CDATA[
+	   CREATE TABLE cs_member_config (
+		  config_id NUMBER(20) not null PRIMARY KEY,
+		  is_allow NUMBER(4) DEFAULT '0',
+		  is_check NUMBER(4) DEFAULT '0',
+		  reg_pro clob ,
+		  close_pro VARCHAR2(1000)  DEFAULT '',
+		  forbidden_name clob
+		) 
+	   ]]>
+	   </sql>
+
+	    <sql>
+	   <![CDATA[
+		CREATE TABLE cs_member_register (
+		  register_id NUMBER(20) not null PRIMARY KEY,
+		  me_id NUMBER(20) DEFAULT '',
+		  me_account VARCHAR2(250)  DEFAULT '',
+		  me_password VARCHAR2(250)  DEFAULT '',
+		  register_type NUMBER(4) DEFAULT '0'
+		)
+	   ]]>
+	   </sql>
+    </table>	
+</root>

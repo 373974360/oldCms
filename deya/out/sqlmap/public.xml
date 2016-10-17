@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="public">	
+	<!-- sequence 处理　开始 -->
+	<!-- 根据表名得到新ID -->	
+	<select id="getSequence" parameterType="java.lang.String" resultType="java.lang.String">
+		select seq from cs_wcm_sequence where table_name = #{table_name}
+	</select>
+	<!-- sequence表中插入新数据 -->	
+	<insert id="insert_sequence" parameterType="Map">
+	 	insert into cs_wcm_sequence (table_name,seq)values(#{table_name},#{seq})
+	</insert>	
+	<!-- 根据表名更新ID -->	
+	<update id="update_sequence" parameterType="java.lang.String">
+	 	update cs_wcm_sequence set seq = seq + 1 where table_name = #{table_name}
+	</update>
+	<!-- sequence 处理　结束 -->
+	<!-- 设置操作类审计日志　开始 -->
+	<insert id="insert_setting_logs" parameterType="com.deya.wcm.bean.logs.SettingLogsBean">
+	  insert into cs_log_setting(audit_id,user_id,user_name,audit_des,audit_time,ip,app_id,site_id)values(#{audit_id},#{user_id},#{user_name},#{audit_des},#{audit_time},#{ip},#{app_id},#{site_id})
+	</insert>
+	<!-- 设置操作类审计日志　结束 -->
+	
+	<!-- 初始化操作，建表 -->
+	<update id="initSql_createSql"  parameterType="java.util.HashMap">
+         ${sql}
+	</update>
+	
+	<!-- 初始化操作，查询表sql,判断表是否存在 -->
+	<select id="initSql_getCount" parameterType="Map" resultType="java.lang.Integer">
+	 <![CDATA[        
+		    ${sql}
+	  ]]> 
+	</select>
+	
+	<!-- 动态查询 -->
+	<select id="getSearchSql" parameterType="Map" resultType="Map">
+		 <![CDATA[        
+		    ${sql}
+	  ]]> 
+	</select>
+	
+	<!-- 动态插入 -->
+	<insert id="insert_dynamic_sql" parameterType="Map">
+		${sql}
+	</insert>
+	
+	<!-- 动态删除 -->
+	<delete id="delete_dynamic_sql" parameterType="Map">
+		<![CDATA[        
+		    ${sql}
+	  ]]> 
+	</delete>
+</mapper>

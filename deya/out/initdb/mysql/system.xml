@@ -1,0 +1,594 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+
+    <table>
+
+    	<sql>
+
+          <![CDATA[
+
+				create table cs_info_meta(
+
+					meta_id bigint(20) not null PRIMARY KEY,
+
+					meta_ename varchar(250) default '',
+
+					meta_sname varchar(250) default '',
+
+					meta_cname varchar(250) default '',
+
+					meta_define varchar(250) default '',				
+
+					meta_datatype varchar(250) default '',
+
+					meta_codomain varchar(250) default '',
+
+					meta_iselect int(4) default 0,
+
+					meta_maxtimes int(4) default 0,
+
+					meta_sample varchar(250) default '',
+
+					meta_type varchar(250) default '',
+
+					parent_id int(4) default 0,
+
+					is_core int(4) default 0
+
+				)
+
+		   ]]> 
+
+       </sql>
+
+	   <sql>
+
+          <![CDATA[
+
+				create table cs_info_model(
+
+					model_id bigint(20) not null PRIMARY KEY,
+
+					model_ename varchar(250) default '',
+
+					model_name varchar(250) default '',
+
+					table_name varchar(250) default '',
+
+					model_sort int(4) default 999,				
+
+					template_list varchar(250) default '',
+
+					template_show varchar(250) default '',
+
+					model_icon varchar(250) default '',
+
+					app_id varchar(250) default '',
+
+					disabled int(4) default 0,
+
+					model_memo varchar(1000) default '',
+					add_page varchar(250) default '',
+					view_page varchar(250) default '',
+					model_type varchar(20) default ''
+
+				)
+
+		   ]]> 
+
+       </sql>
+
+       <sql>
+
+          <![CDATA[
+
+				create table cs_info_field(
+
+					field_id bigint(20) not null PRIMARY KEY,
+
+					model_id bigint(20),
+
+					meta_id bigint(20),
+
+					field_ename varchar(250) default '',
+
+					field_cname varchar(250) default '',
+
+					table_name varchar(250) default '',
+
+					is_show int(4) default 0,				
+
+					field_memo varchar(1000) default ''
+
+				)
+
+		   ]]> 
+
+       </sql>
+
+       
+
+       <sql>
+
+          <![CDATA[
+
+				create table cs_info_hotword(
+
+					hot_id bigint(20) not null PRIMARY KEY,
+
+					hot_name varchar(250) default '',					
+
+					hot_url varchar(500) default '',
+
+					app_id varchar(250) default '',
+
+					site_id varchar(250) default ''
+
+				)
+
+		   ]]> 
+
+       </sql>
+
+       <sql>
+
+          <![CDATA[
+
+				create table cs_info_author(
+					  author_id      bigint(20) not null,
+					  author_name    varchar(250) default '',
+					  author_initial varchar(250) default '',
+					  author_url     varchar(500) default '',
+					  app_id         varchar(250) default '',
+					  site_id        varchar(250) default ''
+				)
+
+		   ]]> 
+
+       </sql>
+
+       <sql>
+
+          <![CDATA[
+
+				create table cs_sys_filterword(
+
+					filterword_id bigint(20) not null PRIMARY KEY,
+
+					pattern varchar(250) default '',					
+
+					replacement varchar(500) default '',
+
+					app_id varchar(250) default '',
+
+					site_id varchar(250) default ''
+
+				)
+
+		   ]]> 
+
+       </sql>
+
+	   <sql>
+
+          <![CDATA[
+
+				create table cs_ware_category(
+
+					id bigint(20) not null PRIMARY KEY,
+
+					wcat_id bigint(20) default 0,	
+
+					parent_id bigint(20) default 0,								
+
+					wcat_name varchar(250) default '',
+
+					wcat_position varchar(250) default '',
+
+					wcat_level int(4) default 0,
+
+					wcat_memo varchar(1000) default '',
+
+					sort_id int(4) default 0,
+
+					app_id varchar(250) default '',
+
+					site_id varchar(250) default '',
+					receive_recom int(4) default 0
+
+				)
+
+		   ]]> 
+
+       </sql>       
+
+       <sql>
+
+          <![CDATA[
+
+				create table cs_ware(
+
+					id bigint(20) not null PRIMARY KEY,
+
+					ware_id bigint(20) default 0,	
+
+					wcat_id bigint(20) default 0,								
+
+					ware_name varchar(250) default '',
+
+					rss_url varchar(250) default '',
+
+					ware_content text ,					
+
+					ware_type int(4) default 0,
+
+					info_num int(4) default 0,
+
+					ware_width int(4) default 0,
+
+					ware_interval int(4) default 0,
+
+					ware_url varchar(250) default '',
+
+					sort_id int(4) default 0,
+
+					ware_memo varchar(1000) default '',
+
+					last_dtime varchar(250) default '',
+
+					next_dtime varchar(250) default '',
+
+					app_id varchar(250) default '',
+
+					site_id varchar(250) default '',
+					
+					update_dtime varchar(250) default '',
+					
+					receive_recom int(4) default 0
+
+				)
+
+		   ]]> 
+
+       </sql>       
+
+       <sql>
+
+          <![CDATA[
+
+				create table cs_ware_info(
+
+					winfo_id bigint(20) not null PRIMARY KEY,
+
+					ware_id bigint(20) default 0,
+
+					sort_id int(4) default 999,
+
+					app_id varchar(250) default '',
+
+					site_id varchar(250) default ''
+
+				)
+
+		   ]]> 
+
+       </sql>       
+
+       <sql>
+
+          <![CDATA[
+
+				create table cs_ware_infos(
+
+				    id bigint(20) not null PRIMARY KEY,
+
+				    ware_id bigint(20) default 0,
+
+					winfo_id bigint(20) default 0,
+
+					pre_title varchar(250) default '',
+					
+					title varchar(250) default '',
+
+					subtitle varchar(250) default '',
+
+					title_color varchar(250) default '',
+
+					description varchar(1000) default '',
+
+					thumb_url varchar(250) default '',
+
+					content_url varchar(250) default '',
+
+					sort_id int(4) default 999,
+
+					publish_dtime varchar(20) default '',					
+
+					app_id varchar(250) default '',
+
+					site_id varchar(250) default ''
+
+				)
+
+		   ]]> 
+
+       </sql>       
+
+       <sql>
+
+          <![CDATA[
+
+				create table cs_info_ref(
+
+					ref_id bigint(20) not null PRIMARY KEY,
+
+					ware_id bigint(20) default 0,
+
+					info_id bigint(20) default 0,
+
+					update_dtime varchar(20) default '',
+
+					ref_user bigint(20) default 0,					
+
+					app_id varchar(250) default '',
+
+					site_id varchar(250) default ''
+
+				)
+
+		   ]]> 
+
+       </sql>
+	   <sql>
+          <![CDATA[
+				create table cs_sys_config(
+					config_id  bigint(20) not null PRIMARY KEY,
+					config_group	varchar(255),
+					config_key	varchar(255),
+					config_value	varchar(2000),
+					site_id	varchar(255),
+					app_id	varchar(255)
+				)
+		   ]]> 
+       </sql>
+	   <sql>
+          <![CDATA[
+				create table cs_sys_dict_category(
+					id    bigint(20) not null PRIMARY KEY,
+					dict_cat_id varchar(255),
+					dict_cat_name varchar(255),
+					dict_cat_memo varchar(1000),
+					is_sys int(4)  default 0,
+					app_id varchar(255),
+					site_id varchar(255)
+				)
+		   ]]> 
+       </sql>
+	   <sql>
+          <![CDATA[
+				create table cs_sys_dict(
+					id bigint(20) not null PRIMARY KEY,
+					dict_cat_id varchar(255),
+					dict_id varchar(255),
+					dict_name varchar(255),
+					dict_sort int(4),
+					is_defult int(4)  default 0,
+					app_id varchar(255),
+					site_id varchar(255)
+				)
+		   ]]> 
+       </sql>
+		<sql>
+          <![CDATA[
+				create table cs_comment(
+					  cmt_id      bigint(20) not null,
+					  item_id     bigint(20),
+					  parent_id   bigint(20) default 0,
+					  cmt_content varchar(2000) default '',
+					  me_id       bigint(20),
+					  me_nickname varchar(250) default '',
+					  add_dtime   varchar(20) not null,
+					  cmt_ip      varchar(50) default '',
+					  support_num bigint(20) default 0,
+					  cmt_status  int(4) default 0,
+					  is_deleted  int(4) default 0,
+					  app_id      varchar(250) default '',
+					  site_id     varchar(250) default ''
+				)
+		   ]]> 
+       </sql>
+       <sql>
+          <![CDATA[
+				create table cs_info_source(
+					 source_id      bigint(20) not null,
+					  source_name    varchar(250),
+					  source_initial varchar(250),
+					  source_url     varchar(500),
+					  logo_path      varchar(250),
+					  app_id         varchar(250),
+					  site_id        varchar(250)
+				)
+		   ]]> 
+       </sql>
+       <sql>
+          <![CDATA[
+				create table cs_info_tags(
+					 tag_id    bigint(20) not null,
+					tag_name  varchar(250) default '',
+					tag_color varchar(250) default '',
+					font_size bigint(20),
+					tag_times bigint(20),
+					app_id    varchar(250),
+					site_id   varchar(250)
+				)
+		   ]]> 
+       </sql>
+       <sql>
+          <![CDATA[
+				create table cs_info_udefined(
+					ud_id       bigint(20) not null,
+					info_id     bigint(20),
+					model_id    bigint(20),
+					field_ename varchar(250) default '',
+					field_value varchar(1000) default ''
+				)
+		   ]]> 
+       </sql>
+       <sql>
+          <![CDATA[
+				create table cs_wcat_priv(
+					id        bigint(20) not null,
+					wcat_id   bigint(20) default 0,
+					prv_id    bigint(20) default 0,
+					priv_type int(4) default 0,
+					app_id    varchar(250) default '',
+					site_id   varchar(250) default ''
+				)
+		   ]]> 
+       </sql>
+       <sql>
+          <![CDATA[
+				create table cs_err_report(
+					id bigint(20) not null PRIMARY KEY,
+					info_id bigint(20),
+					info_title varchar(1000),
+					info_url varchar(1000),
+					err_type varchar(255),   -- 错误类型  1:错别字  2:图片显示错误  3:页面格式错误  4:其他错误 
+				    err_content text,       -- 错误内容
+				    err_name varchar(255),   -- 提交人姓名
+					err_name_tel varchar(255),   -- 提交人电话
+					err_name_email varchar(255),   -- 提交人邮箱
+					err_name_ip varchar(255),   -- 提交人ip
+					err_time varchar(255),  -- 提交时间
+				    err_state varchar(2),  -- 状态     1:用户提交（未处理）  2:不予处理    3:已处理
+					err_note  text,    -- 意见
+				    site_id varchar(255),   -- 站点id
+				    o_time varchar(255)   -- 处理时间
+				)
+		   ]]> 
+       </sql>
+       <sql>
+          <![CDATA[
+				create table cs_comment_set(
+					id bigint(20) not null PRIMARY KEY,
+					app_id varchar(250),  
+					site_id varchar(250),
+					is_public varchar(10),
+					com_prefix varchar(1000),  
+				    is_need varchar(10),  
+				    is_code varchar(10),
+					time_spacer varchar(250),  
+					ip_time varchar(250),
+					pass_size bigint(20), 
+					tact_word  longtext
+				 )				
+		   ]]> 
+       </sql>
+       <sql>
+          <![CDATA[
+				create table cs_comment_main(
+					id bigint(20) not null PRIMARY KEY,
+					info_id bigint(20) default 0,
+					info_uuid varchar(250) default '',
+					app_id varchar(250) default '',
+					site_id varchar(250) default '',
+					info_type int(4) default 0,
+					is_member int(4) default 0,
+					nick_name varchar(250) default '', 
+					user_name varchar(250) default '',
+					member_id bigint(20) default 0,
+					tel varchar(250) default '',
+					email varchar(250) default '',
+					add_time varchar(20) default '',
+					content longtext ,
+					content2 longtext ,
+					is_report int(4) default 0,
+					report_count bigint(20) default 0,
+					report_last_time varchar(20) default '',
+					is_quest int(4) default 0,
+					ip varchar(250) default '',
+					is_status  int(4) default 0,
+					support_count bigint(20) default 0,
+					parent_id bigint(20) default 0,
+					parent_str varchar(4000) default '',
+					is_replay int(4) default 0,
+					is_delete int(4) default 0,
+					is_top int(4) default 0,
+					top_time varchar(20) default ''
+				)				
+		   ]]> 
+       </sql> 
+       <sql>
+          <![CDATA[
+			create table cs_field_data(
+				id bigint(20) not null PRIMARY KEY,
+				field_enname varchar(255),  
+				field_cnname varchar(255),
+				field_type varchar(20),
+				is_sys varchar(20),  
+				is_null varchar(20),  
+				is_display varchar(20),
+				field_text varchar(255),
+				field_info text,  
+				add_time  varchar(255)
+			 )				
+		   ]]> 
+       </sql>
+        <sql>
+          <![CDATA[
+			create table cs_model_data(
+				id bigint(20) not null PRIMARY KEY,
+				from_id bigint(20),
+				model_id bigint(20),
+				field_enname varchar(255),  
+				field_cnname varchar(255),
+				field_type varchar(20),
+				is_sys varchar(20),  
+				is_null varchar(20),  
+				is_display varchar(20),
+				field_text varchar(255),
+				field_sort bigint(20),
+				field_info text,  
+				add_time  varchar(255),
+				field_flag varchar(255),
+				field_flag2 varchar(255) 
+			 )				
+		   ]]> 
+       </sql>
+        <sql>
+          <![CDATA[
+			create table cs_wcminfo_zykinfo(
+				id varchar(255) not null PRIMARY KEY,
+				info_id bigint(20) 
+			 )			
+		   ]]> 
+       </sql>
+        <sql>
+          <![CDATA[
+			create table cs_zykinfo_file(
+				id bigint(20) not null PRIMARY KEY,
+				info_id bigint(20),
+				file_id varchar(255) ,
+				fileSize bigint(20),
+				fileSufix varchar(255),
+				fileName varchar(255),
+				businessId varchar(255),
+				fieldName varchar(255)
+			 )			
+		   ]]> 
+       </sql>
+        <sql>
+            <![CDATA[
+			create table rmi_server_conf(
+				id bigint(20) not null PRIMARY KEY,
+				ip varchar(20) not null ,
+				port varchar(20) not null
+			 )
+		   ]]>
+        </sql>
+    </table>	
+
+    
+
+</root>

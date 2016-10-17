@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//CN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="../../styles/themes/default/tree.css">
+<script type="text/javascript" src="js/json2.js"></script>
+<script type="text/javascript" src="js/swfobject.js"></script>
+<script type="text/javascript" src="/sys/js/jquery.js"></script>
+<style>#chartContainer{width:450px;height:400px;border:1px solid #CCC;}</style>
+<script type="text/javascript">
+
+	var chartData = "";
+$(document).ready(function(){
+	chartData = /*{ "title": { "text": "详细统计信息"}, "elements":[{ "tip":"#label# : #val# <br>所占信息比例 : #percent#","type":"pie", "start-angle": 180,"colours": ["#d01f3c","#356aa0","#C79810","#73880A","#D15600","#6BBA70"],"alpha":     0.6, "stroke": 6, "animate":  1, "values" : [{"value":4,"label":"主动公开信息"},{"value":1,"label":"依申请公开信息"},{"value":1,"label":"不公开信息"}]}]};
+	// */ top.getCurrentFrameObj().pieJsonData;
+	
+	if(chartData == null || chartData=="undefined"){
+		alert("null");
+		return;
+	}
+	
+	swfobject.embedSWF("/sys/js/open-flash-chart/open-flash-chart.swf", "chartContainer", "450", "400", "9.0.0"); 
+});
+
+
+function open_flash_chart_data() { 
+	return chartData;
+	//return JSON.stringify(chartData);
+}
+</script>
+</head>
+<body>
+<div id="chartContainer">
+</div>
+</body>
+</html>

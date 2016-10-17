@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="ware">
+<!-- ******************* 信息标签分类 处理开*********************** -->
+	<!-- 根据站点ID得到标签分类，用于克隆站点 -->
+	<select id="getWareCataListBySiteID" parameterType="java.lang.String" resultType="com.deya.wcm.bean.system.ware.WareCategoryBean">
+		select * from cs_ware_category where site_id = #{site_id} order by id
+	</select>
+
+	<!-- 取得所有的信息标签分类信息列表 -->
+	<select id="getWareCataList" resultType="com.deya.wcm.bean.system.ware.WareCategoryBean">
+		select * from cs_ware_category order by sort_id
+	</select>
+	
+	<!-- 取得信息标签分类列表条数，暂时不使用。如果需要分页，补充 -->
+	<select id="getWareCateCnt" resultType="com.deya.wcm.bean.system.ware.WareCategoryBean">
+		
+	</select>
+	
+	<!-- 插入信息标签分类信息 -->
+	<insert id="insertWareCategory" parameterType="com.deya.wcm.bean.system.ware.WareCategoryBean">
+		insert into cs_ware_category(id,wcat_id,parent_id,wcat_name,wcat_position,wcat_level,
+			wcat_memo, sort_id, app_id,site_id)
+		values(#{id},#{wcat_id},#{parent_id},#{wcat_name},#{wcat_position},#{wcat_level},
+			#{wcat_memo},#{sort_id}, #{app_id},#{site_id})
+	</insert>
+	
+	<!-- 修改信息标签分类信息 -->
+	<update id="updateWareCategory" parameterType="com.deya.wcm.bean.system.ware.WareCategoryBean">
+		update cs_ware_category 
+		set
+			wcat_level=#{wcat_level},
+			parent_id=#{parent_id},
+			wcat_name=#{wcat_name},
+			wcat_position=#{wcat_position},
+			wcat_memo=#{wcat_memo}
+		where 
+			id=#{id}
+	</update>
+	
+	<!-- 保存修改排序 -->
+	<update id="saveWareCateSort" parameterType="com.deya.wcm.bean.system.ware.WareCategoryBean">
+		update cs_ware_category set
+			sort_id = #{sort_id}
+		where id=#{id}
+	</update>
+	
+	<!-- 删除信息标签分类信息 -->
+	<delete id="deleteWareCategory" parameterType="Map">
+		delete from cs_ware_category
+		where wcat_id in (${id}) and site_id = #{site_id}
+	</delete>
+<!-- ******************* 信息标签分类 处理结束 *********************** -->	
+
+<!-- ******************* 信息标签处理开*********************** -->
+	<!-- 根据站点ID得到标签，用于克隆站点 -->
+	<select id="getWareListBySiteID" parameterType="java.lang.String" resultType="com.deya.wcm.bean.system.ware.WareBean">
+		select * from cs_ware where site_id = #{site_id} order by id
+	</select>
+
+	<!-- 查询需要更新的列表 -->
+	<select id="getTimerWareList" parameterType="Map" resultType="com.deya.wcm.bean.system.ware.WareBean">
+	<![CDATA[
+		select * from cs_ware where ware_type=1 and ware_interval > 0 and (next_dtime = #{current_time} or next_dtime is null or next_dtime < #{current_time} ) 
+	]]>
+		<if test="server_ip != null">	
+		and site_id in (select si.site_id from cs_site si,cs_site_server ser where si.server_id = ser.server_id and ser.server_ip = #{server_ip})
+		</if>
+		order by id	
+	</select>
+
+	<!-- 取得信息标签列表 -->
+	<select id="getAllWareList" resultType="com.deya.wcm.bean.system.ware.WareBean">
+		select id, ware_id, wcat_id, ware_name, rss_url,
+			 ware_type, info_num, ware_width, ware_interval,
+			ware_url, sort_id, ware_memo, update_dtime, next_dtime, 
+			app_id, site_id ,receive_recom
+		from cs_ware
+	</select>
+	
+	<!-- 通过ID取得信息标签 -->
+	<select id="getWareByID" parameterType="java.lang.String" resultType="com.deya.wcm.bean.system.ware.WareBean">
+		select * from cs_ware 
+		where id=#{id}
+	</select>
+	
+	<!-- 通过ware_id和站点ID取得信息标签 -->
+	<select id="getWareBeanByWareID" parameterType="Map" resultType="com.deya.wcm.bean.system.ware.WareBean">
+		select * from cs_ware 
+		where ware_id=#{ware_id} and site_id = #{site_id}
+	</select>
+	
+	<!-- 添加信息标签 -->
+	<insert id="insertWare" parameterType="com.deya.wcm.bean.system.ware.WareBean">
+		insert into cs_ware( id, ware_id, wcat_id, ware_name, rss_url,
+			ware_content, ware_type, info_num, ware_width, ware_interval,
+			ware_url, sort_id, ware_memo, update_dtime, next_dtime, 
+			app_id, site_id,receive_recom )
+		values( #{id}, #{ware_id}, #{wcat_id}, #{ware_name}, #{rss_url},
+			#{ware_content}, #{ware_type}, #{info_num}, #{ware_width}, #{ware_interval},
+			#{ware_url}, #{sort_id}, #{ware_memo}, #{update_dtime}, #{next_dtime}, 
+			#{app_id}, #{site_id},#{receive_recom} )
+	</insert>
+	
+	<!-- 修改信息标签***页面修改时调-->
+	<update id="updateWare" parameterType="com.deya.wcm.bean.system.ware.WareBean">
+		update cs_ware set
+			ware_name = 		#{ware_name}
+		 	,wcat_id = 			#{wcat_id}	
+		  	,ware_type = 		#{ware_type}	
+			,ware_content = 	#{ware_content} 
+			,info_num = 		#{info_num}	
+			,ware_width = 		#{ware_width}	
+			,ware_interval = 	#{ware_interval}	
+			,rss_url = 			#{rss_url}	
+			,ware_memo = 		#{ware_memo}
+			,receive_recom = #{receive_recom}
+			where
+				id = #{id}
+	</update>
+	
+	<!-- 修改信息内容 -->
+	<update id="updateWareContent" parameterType="com.deya.wcm.bean.system.ware.WareBean">
+		update cs_ware set ware_content = #{ware_content} where ware_id=#{ware_id} and site_id = #{site_id}
+	</update>
+	
+	<!-- 修改页面更新时间 -->
+	<update id="updateWareTime" parameterType="com.deya.wcm.bean.system.ware.WareBean">
+		update cs_ware set update_dtime = #{update_dtime}
+		<if test="next_dtime != null">
+		,next_dtime = #{next_dtime} 
+		</if>		
+		where id=#{id}
+	</update>
+	
+	<!-- 修改手动标签显示行数 -->
+	<update id="update_ware_infoNum" parameterType="Map">
+		update cs_ware set info_num = #{info_num} where ware_id = #{ware_id} and site_id = #{site_id}
+	</update>
+	
+	<!-- 保存信息标签排序 -->
+	<update id="saveWareSort" parameterType="com.deya.wcm.bean.system.ware.WareBean">
+		update cs_ware  set
+			sort_id = #{sort_id}
+		where id=#{id}
+	</update>
+	
+	<!-- 删除信息标签 -->
+	<delete id="deleteWare" parameterType="Map">
+		delete from cs_ware 
+		where
+			ware_id in (${ware_id}) and site_id = #{site_id}
+	</delete>
+	
+	<!-- 通过信息标签分类ID删除信息标签 -->
+	<delete id="deleteWareByWcatIDS" parameterType="Map">
+		delete from cs_ware 
+		where 
+			wcat_id in (${id}) and site_id = #{site_id}
+	</delete>
+	
+	<update id="moveWareToOtherCategory" parameterType="Map">
+		update cs_ware set wcat_id=#{wcat_id} where ware_id in (${ware_ids})
+	</update>
+
+	<!-- ******************* 标签分类与人员关  开始 *********************** -->
+	<select id="getWareReleUserList" resultType="com.deya.wcm.bean.system.ware.WareReleUser">
+		select * from cs_wcat_priv order by id
+	</select>
+	
+	<insert id="insert_ware_user" parameterType="com.deya.wcm.bean.system.ware.WareReleUser">
+		insert into cs_wcat_priv(id,wcat_id,prv_id,priv_type,app_id,site_id)
+		values(#{id},#{wcat_id},#{prv_id},#{priv_type},#{app_id},#{site_id})
+	</insert>
+	
+	<delete id="delete_ware_user_byCat" parameterType="Map">
+		delete from cs_wcat_priv where wcat_id in (${wcat_id}) and site_id = #{site_id}
+	</delete>
+	<!-- ******************* 标签分类与人员关  结束 *********************** -->
+</mapper>

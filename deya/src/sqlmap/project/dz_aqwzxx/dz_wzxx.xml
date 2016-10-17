@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="project">
+	<select id="getWzxxCount" parameterType="Map" resultType="java.lang.String">
+		select count(id) from dz_aqwzxx where 1=1 
+		<where>						
+			<if test="keyword != null">and (wzmc like '%${keyword}%' or wzjyfw like '%${keyword}%' or wzjj like '%${keyword}%' or lxrxm like '%${keyword}%' )</if>
+			<if test="bmlx != null">and bmlx = ${keyword}</if>
+		</where>
+		
+	</select>
+
+	<select id="getWzxxList" parameterType="Map" resultType="com.cicro.project.dz_aqwzxx.WzxxBean">
+		select * from (
+		       select row_.*, rownum rownum_ from (   
+		            select id,wzmc,wzwz,jzsj,alexa,icp,ssxq,cplx,wzjyfw,wzjj,hjry,zcyh,smrz,iscf,isglzd,isaqlc,aqysl,fjpd,baxx,aqjsxm,aqjszw,aqjscz,aqjssj,aqjsyx,dwmc,gsfr,lxdz,yb,zczj,wzbl,dwxz,lxrxm,zw,cz,phone,email,stzz,bmlx,addTime,status  from dz_aqwzxx where 1=1 
+		            <where>						
+						<if test="keyword != null">and (wzmc like '%${keyword}%' or wzjyfw like '%${keyword}%' or wzjj like '%${keyword}%' or lxrxm like '%${keyword}%' )</if>
+						<if test="bmlx != null">and bmlx = ${keyword}</if>
+					</where>
+		           order by ${orderby}	
+		<![CDATA[
+		        ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
+	    	) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+	    ]]>			
+	</select>	
+
+	<select id="getAllWzxxList" resultType="com.cicro.project.dz_aqwzxx.WzxxBean">
+		select * from Wzxx where delete_flag != '1'
+	</select>
+
+	<select id="getWzxxList_mysql" parameterType="Map" resultType="com.cicro.project.dz_aqwzxx.WzxxBean"> 
+			select id,wzmc,wzwz,jzsj,alexa,icp,ssxq,cplx,wzjyfw,wzjj,hjry,zcyh,smrz,iscf,isglzd,isaqlc,aqysl,fjpd,baxx,aqjsxm,aqjszw,aqjscz,aqjssj,aqjsyx,dwmc,gsfr,lxdz,yb,zczj,wzbl,dwxz,lxrxm,zw,cz,phone,email,stzz,bmlx,addTime,status  from dz_aqwzxx where 1=1 
+			<where>						
+				<if test="keyword != null">and (wzmc like '%${keyword}%' or wzjyfw like '%${keyword}%' or wzjj like '%${keyword}%' or lxrxm like '%${keyword}%' )</if>
+				<if test="bmlx != null">and bmlx = ${keyword}</if>
+			</where>
+		    order by ${orderby} limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}	
+		
+	</select>	
+	
+	<select id="getWzxxBean" parameterType="Map" resultType="com.cicro.project.dz_aqwzxx.WzxxBean">
+		select * from dz_aqwzxx where id = #{id} 
+	</select>
+	
+	<insert id="insertWzxx" parameterType="com.cicro.project.dz_aqwzxx.WzxxBean">
+	 	insert into dz_aqwzxx(id,wzmc,wzwz,jzsj,alexa,icp,ssxq,cplx,wzjyfw,wzjj,hjry,zcyh,smrz,iscf,isglzd,isaqlc,aqysl,fjpd,baxx,aqjsxm,aqjszw,aqjscz,aqjssj,aqjsyx,dwmc,gsfr,lxdz,yb,zczj,wzbl,dwxz,lxrxm,zw,cz,phone,email,stzz,bmlx,addTime,status)
+	 	values(#{id},#{wzmc},#{wzwz},#{jzsj},#{alexa},#{icp},#{ssxq},#{cplx},#{wzjyfw},#{wzjj},#{hjry},#{zcyh},#{smrz},#{iscf},#{isglzd},#{isaqlc},#{aqysl},#{fjpd},#{baxx},#{aqjsxm},#{aqjszw},#{aqjscz},#{aqjssj},#{aqjsyx},#{dwmc},#{gsfr},#{lxdz},#{yb},#{zczj},#{wzbl},#{dwxz},#{lxrxm},#{zw},#{cz},#{phone},#{email},#{stzz},#{bmlx},#{addTime},#{status})
+	</insert>
+	
+	<update id="updateWzxx" parameterType="com.cicro.project.dz_aqwzxx.WzxxBean">
+	 	update dz_aqwzxx set wzmc= #{wzmc},wzwz= #{wzwz},jzsj= #{jzsj},alexa= #{alexa},
+	 	icp= #{icp},ssxq= #{ssxq},cplx=#{cplx},wzjyfw=#{wzjyfw},wzjj=#{wzjj},hjry=#{hjry},zcyh=#{zcyh},smrz=#{smrz},iscf=#{iscf},isglzd=#{isglzd},isaqlc=#{isaqlc},aqysl=#{aqysl},fjpd=#{fjpd},baxx=#{baxx},aqjsxm=#{aqjsxm},aqjszw=#{aqjszw},aqjscz=#{aqjscz},aqjssj=#{aqjssj},aqjsyx=#{aqjsyx},dwmc=#{dwmc},gsfr=#{gsfr},lxdz=#{lxdz},yb=#{yb},zczj=#{zczj},wzbl=#{wzbl},dwxz=#{dwxz},lxrxm=#{lxrxm},zw=#{zw},cz=#{cz},phone=#{phone},email=#{email},stzz=#{stzz}
+	 	where id = #{id}
+	</update>
+	
+	<delete id="deleteWzxx" parameterType="Map">
+		update dz_aqwzxx set status = '-1'  where id in (${ids})
+	</delete>
+</mapper>

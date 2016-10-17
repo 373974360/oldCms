@@ -1,0 +1,544 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="template">	
+	
+	<!-- **************************** 模板　开始 ************************************************* -->
+	<select id="getAllTemplateList" resultType="com.deya.wcm.bean.system.template.TemplateBean">
+		select * from cs_template 
+			<if test="site_id != null">
+				where site_id=#{site_id} 
+			</if>
+		 order by t_id
+	</select>
+	<delete id="deleteTemplate" parameterType="Map" >
+		delete from cs_template where t_id in (${t_ids}) and site_id=#{site_id}
+	</delete>
+	
+	<!-- 得到模板总数 -->
+	<select id="getTemplateCount" parameterType="Map" resultType="java.lang.String">
+		select count(t_id) from cs_template where app_id = #{app_id}
+		<if test="site_id != null">
+			and site_id = #{site_id}
+		</if>
+		<if test="con_value != null">
+			and ${con_name} like '%${con_value}%'
+		</if>
+	</select>
+	
+	<select id="getTemplateBean" parameterType="Map" resultType="com.deya.wcm.bean.system.template.TemplateBean">
+		select * from cs_template where t_id = #{t_id}
+		<if test="site_id != null and t_ver != null">
+				site_id=#{site_id}  and t_ver=#{t_ver}
+		</if>
+		 
+	</select>
+	
+	<insert id="insertTemplate" parameterType="com.deya.wcm.bean.system.template.TemplateBean">
+		insert into cs_template(id, t_id, t_ver, app_id, site_id) values (#{id},#{t_id},#{t_ver},#{app_id},#{site_id})
+	</insert>
+	
+	<update id="updateTemplate" parameterType="com.deya.wcm.bean.system.template.TemplateBean">
+		update cs_template set t_ver=#{t_ver},app_id=#{app_id},site_id=#{site_id} where t_id=#{t_id} and site_id=#{site_id}
+	</update>
+	<!-- 根据条件查询模板信息 -->
+	<select id="getTemplateListForDB" parameterType="Map" resultType="com.deya.wcm.bean.system.template.TemplateBean" >	 
+	select * from (
+	       select row_.*, rownum rownum_ from (       
+	            select * from cs_template where app_id=#{app_id}
+				<if test="site_id != null">
+					and site_id = #{site_id}
+				</if>
+				<if test="con_value != null">
+					and ${con_name} like '%${con_value}%'
+				</if>	
+	             order by ${sort_name} ${sort_type}
+	<![CDATA[
+	        ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
+    	) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+    ]]>	
+	</select>
+	
+	<select id="getTemplateListForDB_mysql" parameterType="Map" resultType="com.deya.wcm.bean.system.template.TemplateBean" >	
+		 select * from cs_template where app_id=#{app_id}
+				<if test="site_id != null">
+					and site_id = #{site_id}
+				</if>
+				<if test="con_value != null">
+					and ${con_name} like '%${con_value}%'
+				</if>	
+	             order by ${sort_name} ${sort_type} limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER} 
+	</select>
+	
+	<select id="getTemplateListForDB_mssql" parameterType="Map" resultType="com.deya.wcm.bean.system.template.TemplateBean" >
+		select top ${page_size} *  
+		  from cs_template 		 
+			where app_id=#{app_id}
+				<if test="site_id != null">
+					and site_id = #{site_id}
+				</if>
+				<if test="con_value != null">
+					and ${con_name} like '%${con_value}%'
+				</if>	
+			and t_id not in
+			  (select top ${start_num} t_id
+				 from cs_template
+				 where app_id=#{app_id}
+				<if test="site_id != null">
+					and site_id = #{site_id}
+				</if>
+				<if test="con_value != null">
+					and ${con_name} like '%${con_value}%'
+				</if>	 
+				 order by ${sort_name} ${sort_type} )				
+				order by ${sort_name} ${sort_type}
+	</select>
+	<!-- **************************** cs_template_edit ************************************************* -->
+	<!-- **************************** cs_template_edit ************************************************* -->
+	<!-- **************************** cs_template_edit ************************************************* -->
+	<!-- **************************** cs_template_edit ************************************************* -->
+	<!-- **************************** 模板　开始 ************************************************* -->
+	<select id="getAllTemplateEditList" resultType="com.deya.wcm.bean.system.template.TemplateEditBean">
+		select * from cs_template_edit
+		<where>
+			<if test="tcat_id != '' and tcat_id != null">
+				 and tcat_id=#{tcat_id} 
+			</if>
+			<if test="site_id != '' and site_id != null">
+				 and  site_id=#{site_id} 
+			</if>
+<!--			<if test="app_id != '' and app_id != null">-->
+<!--				 and app_id=#{app_id}-->
+<!--			</if>-->
+			<if test="con_value != null">
+				and ${con_name} like '%${con_value}%'
+			</if>
+		</where>
+		 order by t_id desc
+	</select>
+	<delete id="deleteTemplateEdit" parameterType="Map" >
+		delete from cs_template_edit where t_id in (${t_ids}) and site_id=#{site_id}
+	</delete>
+	
+	<!-- 得到模板总数 -->
+	<select id="getTemplateEditCount" parameterType="Map" resultType="java.lang.String">
+		select count(t_id) from cs_template_edit 
+		<where>
+			<if test="tcat_id != '' and tcat_id != null">
+				 and tcat_id=#{tcat_id} 
+			</if>
+			<if test="site_id != '' and site_id != null">
+				 and  site_id=#{site_id} 
+			</if>
+<!--			<if test="app_id != '' and app_id != null">-->
+<!--				 and app_id=#{app_id}-->
+<!--			</if>-->
+			<if test="con_value != null">
+				and ${con_name} like '%${con_value}%'
+			</if>
+		</where>
+	</select>
+	
+	<select id="getTemplateEditBean" parameterType="Map" resultType="com.deya.wcm.bean.system.template.TemplateEditBean">
+		select * from cs_template_edit
+		<where>
+			<if test="t_id != null and t_id != ''">
+				 t_id = #{t_id}
+			</if>
+			
+			<if test="site_id != null and site_id != ''">
+				 and site_id=#{site_id}
+			</if>
+			
+<!--			<if test="app_id != null and app_id != ''">-->
+<!--				 and app_id=#{app_id}-->
+<!--			</if>-->
+		</where>
+	</select>
+	
+	<insert id="insertTemplateEdit" parameterType="com.deya.wcm.bean.system.template.TemplateEditBean">
+		insert into cs_template_edit(id,t_id,tcat_id,t_ename,t_cname,t_path,t_content,t_ver,creat_user,creat_dtime,modify_user,modify_dtime,app_id,site_id) values (#{id},#{t_id},#{tcat_id},#{t_ename},#{t_cname},#{t_path},#{t_content},#{t_ver},#{creat_user},#{creat_dtime},#{modify_user},#{modify_dtime},#{app_id},#{site_id})
+	</insert>
+	
+	<update id="updateTemplateEdit" parameterType="com.deya.wcm.bean.system.template.TemplateEditBean">
+		update cs_template_edit set tcat_id=#{tcat_id},t_ename=#{t_ename},t_cname=#{t_cname},t_path=#{t_path},t_content=#{t_content},t_ver=#{t_ver},creat_user=#{creat_user},creat_dtime=#{creat_dtime},modify_user=#{modify_user},modify_dtime=#{modify_dtime},app_id=#{app_id},site_id=#{site_id},t_status=#{t_status} where t_id=#{t_id} and site_id=#{site_id}
+	</update>
+	<!-- 根据条件查询模板信息 -->
+	<sql id="getTemplateEditListForDB_sql_item">
+		id,t_id,tcat_id,t_ename,t_cname,t_path,t_ver,creat_user,creat_dtime,modify_user,modify_dtime,app_id,site_id,t_status
+	</sql>
+	<sql id="getTemplateEditListForDB_sql_conn">
+		<where>
+			<if test="tcat_id != '' and tcat_id != null">
+				 and tcat_id=#{tcat_id} 
+			</if>
+			<if test="site_id != '' and site_id != null">
+				 and  site_id=#{site_id} 
+			</if>
+
+			<if test="con_value != null">
+				and ${con_name} like '%${con_value}%'
+			</if>
+		</where>
+	</sql>
+	<select id="getTemplateEditListForDB" parameterType="Map" resultType="com.deya.wcm.bean.system.template.TemplateEditBean" >	 
+	select * from (
+	       select row_.*, rownum rownum_ from (       
+	            select <include refid="getTemplateEditListForDB_sql_item"/> from cs_template_edit 
+	 		    <include refid="getTemplateEditListForDB_sql_conn"/>	       
+	            order by ${sort_name} ${sort_type}
+	<![CDATA[ 
+	        ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
+    	) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+    ]]>	
+	</select>
+	<select id="getTemplateEditListForDB_mysql" parameterType="Map" resultType="com.deya.wcm.bean.system.template.TemplateEditBean" >
+		select <include refid="getTemplateEditListForDB_sql_item"/> from cs_template_edit 
+	 		    <include refid="getTemplateEditListForDB_sql_conn"/>	       
+	            order by ${sort_name} ${sort_type} limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}  
+	</select>
+	
+	<select id="getTemplateEditListForDB_mssql" parameterType="Map" resultType="com.deya.wcm.bean.system.template.TemplateEditBean" >
+		select top ${page_size} <include refid="getTemplateEditListForDB_sql_item"/>  
+		  from cs_template_edit 		 
+			where t_id not in
+			  (select top ${start_num} t_id
+				 from cs_template_edit
+				 <if test="con_value != null">
+					where ${con_name} like '%${con_value}%'
+				 </if> 
+				 order by ${sort_name} ${sort_type} )
+				 <if test="tcat_id != '' and tcat_id != null">
+				 and tcat_id=#{tcat_id} 
+				</if>
+				<if test="site_id != '' and site_id != null">
+					 and  site_id=#{site_id} 
+				</if>
+	
+				<if test="con_value != null">
+					and ${con_name} like '%${con_value}%'
+				</if>
+				order by ${sort_name} ${sort_type}
+	</select>
+	<!-- **************************** cs_template_ver ************************************************* -->
+	<!-- **************************** cs_template_ver ************************************************* -->
+	<!-- **************************** 模板　开始 ************************************************* -->
+	<select id="getAllTemplateVerList" resultType="com.deya.wcm.bean.system.template.TemplateVerBean">
+		select * from cs_template_ver order by t_id
+	</select>
+	
+	<select id="getAllTemplateVerSome" resultType="com.deya.wcm.bean.system.template.TemplateVerBean">
+		select * from cs_template_ver where t_id in (${t_ids}) order by t_id
+	</select>
+	
+	<delete id="deleteTemplateVer" parameterType="Map" >
+		delete from cs_template_ver where t_id in (${t_ids}) and site_id = #{site_id}
+	</delete>
+	
+	<!-- 得到模板总数 -->
+	<select id="getTemplateVerCount" parameterType="Map" resultType="java.lang.String">
+		select count(t_id) from cs_template_ver 
+		<where>
+			<if test="t_id != null">
+				and t_id = #{t_id}
+			</if>
+			<if test="app_id != null">
+				and app_id = #{app_id}
+			</if>
+			<if test="site_id != null">
+				and site_id = #{site_id}
+			</if>
+			<if test="con_value != null">
+				and ${con_name} like '%${con_value}%'
+			</if>
+		</where>
+	</select>
+	
+	<select id="getTemplateVerBean" parameterType="Map" resultType="com.deya.wcm.bean.system.template.TemplateVerBean">
+		select * from cs_template_ver
+		<where>
+			<if test="t_id != '' and t_id != null">
+				 t_id = #{t_id} 
+			</if>
+			
+			<if test="site_id != '' and site_id != null">
+				 and site_id = #{site_id} 
+			</if>
+			
+			<if test="t_ver != '' and t_ver != null">
+				 and t_ver = #{t_ver}
+			</if>
+		</where>
+	</select>
+	
+	<select id="getTemplateVerBeanByState" parameterType="Map" resultType="com.deya.wcm.bean.system.template.TemplateVerBean">
+		 select * from (select * from cs_template_ver where t_id = #{t_id} and site_id= #{site_id} and t_status=1 order by t_ver desc) where  rownum=1
+	</select>
+	
+	<insert id="insertTemplateVer" parameterType="com.deya.wcm.bean.system.template.TemplateVerBean">
+		insert into cs_template_ver(id,t_id,tcat_id,t_ename,t_cname,t_path,t_content,t_ver,creat_user,creat_dtime,modify_user,modify_dtime,app_id,site_id,t_status) values (#{id},#{t_id},#{tcat_id},#{t_ename},#{t_cname},#{t_path},#{t_content},#{t_ver},#{creat_user},#{creat_dtime},#{modify_user},#{modify_dtime},#{app_id},#{site_id},#{t_status})
+	</insert>
+	
+	<update id="updateTemplateVer" parameterType="com.deya.wcm.bean.system.template.TemplateVerBean">
+		update cs_template_ver set tcat_id=#{tcat_id},t_ename=#{t_ename},t_cname=#{t_cname},t_path=#{t_path},t_content=#{t_content},creat_user=#{creat_user},creat_dtime=#{creat_dtime},modify_user=#{modify_user},modify_dtime=#{modify_dtime},app_id=#{app_id},site_id=#{site_id},t_status=#{t_status} where t_id=#{t_id} and t_ver = #{t_ver}
+	</update>
+	
+	<select id="getNewTemplateVerNum" parameterType="Map" resultType="java.lang.String">
+		select t_ver from (select t_ver from cs_template_ver where t_id = #{t_id} and site_id=#{site_id} order by t_ver desc) where  rownum=1
+	</select>
+	
+	<select id="getNewTemplateVerNum_mssql" parameterType="Map" resultType="java.lang.String">
+		select top 1 t_ver from cs_template_ver where t_id = #{t_id} and site_id=#{site_id} order by t_ver desc
+	</select>
+
+	<select id="getNewTemplateVerNum_mysql" parameterType="Map" resultType="java.lang.String">
+		select t_ver from cs_template_ver where t_id = #{t_id} and site_id=#{site_id} order by t_ver desc limit 0,1
+	</select>
+
+	<!-- 根据条件查询模板信息 -->
+	<sql id="getTemplateVerListForDB_sql_conn">
+		 <where>
+					<if test="t_id != null">
+						and t_id = #{t_id}
+					</if>
+					<if test="app_id != null">
+						and app_id = #{app_id}
+					</if>
+					<if test="site_id != null">
+						and site_id = #{site_id}
+					</if>
+					<if test="con_value != null">
+						and ${con_name} like '%${con_value}%'
+					</if>
+				</where>
+	</sql>
+	<select id="getTemplateVerListForDB" parameterType="Map" resultType="com.deya.wcm.bean.system.template.TemplateVerBean" >	 
+	select id,t_id,tcat_id,t_ename,t_cname,t_path,t_ver,app_id,site_id,t_status,creat_dtime,modify_dtime from (
+	       select row_.*, rownum rownum_ from (       
+	            select * from cs_template_ver 
+			  	<include refid="getTemplateVerListForDB_sql_conn"/>
+				order by ${sort_name} ${sort_type}
+	<![CDATA[	             
+	        ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
+    	) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+    ]]>	
+	</select>
+	
+	<select id="getTemplateVerListForDB_mysql" parameterType="Map" resultType="com.deya.wcm.bean.system.template.TemplateVerBean" >
+		select id,t_id,tcat_id,t_ename,t_cname,t_path,t_ver,app_id,site_id,t_status,creat_dtime,modify_dtime from cs_template_ver 
+			  	<include refid="getTemplateVerListForDB_sql_conn"/>
+				order by ${sort_name} ${sort_type} limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}  
+	</select>
+	
+	<select id="getTemplateVerListForDB_mssql" parameterType="Map" resultType="com.deya.wcm.bean.system.template.TemplateVerBean" >
+		select top ${page_size} id,t_id,tcat_id,t_ename,t_cname,t_path,t_ver,app_id,site_id,t_status,creat_dtime,modify_dtime  
+		  from cs_template_ver 		 
+			where t_id not in
+			  (select top ${start_num} t_id
+				 from cs_template_ver
+				 <include refid="getTemplateVerListForDB_sql_conn"/>
+				 order by ${sort_name} ${sort_type} )
+				 <if test="t_id != null">
+					and t_id = #{t_id}
+				</if>
+				<if test="app_id != null">
+					and app_id = #{app_id}
+				</if>
+				<if test="site_id != null">
+					and site_id = #{site_id}
+				</if>
+				<if test="con_value != null">
+					and ${con_name} like '%${con_value}%'
+				</if>
+				order by ${sort_name} ${sort_type}
+	</select>
+	
+	<!-- **************************** cs_template_class ************************************************* -->
+	<!-- **************************** cs_template_class ************************************************* -->
+	<!-- **************************** 模板　开始 ************************************************* -->
+	<select id="getAllTemplateClassList" resultType="com.deya.wcm.bean.system.template.TemplateClassBean">
+		select * from cs_template_class order by tclass_id
+	</select>
+	<delete id="deleteTemplateClass" parameterType="Map" >
+		delete from cs_template_class where tclass_id in (${tclass_ids})
+	</delete>
+	
+	<!-- 得到模板总数 -->
+	<select id="getTemplateClassCount" parameterType="Map" resultType="java.lang.String">
+		select count(tclass_id) from cs_template_class
+		<where>
+			<if test="site_id != null">
+				and site_id = #{site_id}
+			</if>
+			<if test="con_value != null">
+				and ${con_name} like '%${con_value}%'
+			</if>
+		</where>
+	</select>
+	
+	<select id="getTemplateClassBean" parameterType="java.lang.String" resultType="com.deya.wcm.bean.system.template.TemplateClassBean">
+		select * from cs_template_class where tclass_id = #{tclass_id}
+	</select>
+	
+	<insert id="insertTemplateClass" parameterType="com.deya.wcm.bean.system.template.TemplateClassBean">
+		insert into cs_template_class(tclass_id, tclass_ename, tclass_cname, tclass_memo, app_id) values (#{tclass_id},#{tclass_ename},#{tclass_cname},#{tclass_memo},#{app_id})
+	</insert>
+	
+	<update id="updateTemplateClass" parameterType="com.deya.wcm.bean.system.template.TemplateClassBean">
+		update cs_template_class set tclass_ename=#{tclass_ename},tclass_cname=#{tclass_cname},tclass_memo=#{tclass_memo},app_id=#{app_id} where tclass_id=#{tclass_id}
+	</update>
+	<!-- 根据条件查询模板信息 -->
+	<select id="getTemplateClassListForDB" parameterType="Map" resultType="com.deya.wcm.bean.system.template.TemplateClassBean" >	 
+	select * from (
+	       select row_.*, rownum rownum_ from (       
+	            select * from cs_template_class where app_id=#{app_id}
+	 		    <if test="site_id != null">
+					and site_id = #{site_id}
+				</if>
+				<if test="con_value != null">
+					and ${con_name} like '%${con_value}%'
+				</if>
+				order by ${sort_name} ${sort_type}
+	<![CDATA[
+	            
+	        ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
+    	) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+    ]]>	
+	</select>
+	
+	<select id="getTemplateClassListForDB_mysql" parameterType="Map" resultType="com.deya.wcm.bean.system.template.TemplateClassBean" >
+		select * from cs_template_class where app_id=#{app_id}
+	 		    <if test="site_id != null">
+					and site_id = #{site_id}
+				</if>
+				<if test="con_value != null">
+					and ${con_name} like '%${con_value}%'
+				</if>
+				order by ${sort_name} ${sort_type} limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER} 
+	</select>	
+	<select id="getTemplateClassListForDB_mssql" parameterType="Map" resultType="com.deya.wcm.bean.system.template.TemplateClassBean" >
+		select top ${page_size} *  
+		  from cs_template_class 		 
+			where app_id=#{app_id}
+	 		    <if test="site_id != null">
+					and site_id = #{site_id}
+				</if>
+				<if test="con_value != null">
+					and ${con_name} like '%${con_value}%'
+				</if>
+			and tclass_id not in
+			  (select top ${start_num} tclass_id
+				 from cs_template_class
+				 where app_id=#{app_id}
+	 		    <if test="site_id != null">
+					and site_id = #{site_id}
+				</if>
+				<if test="con_value != null">
+					and ${con_name} like '%${con_value}%'
+				</if> 
+				 order by ${sort_name} ${sort_type} )				 
+				order by ${sort_name} ${sort_type}
+	</select>	
+	<!-- **************************** cs_template_category ************************************************* -->
+	<!-- **************************** cs_template_category ************************************************* -->
+	<!-- **************************** 模板　开始 ************************************************* -->
+	<!-- 根据站点ID得到模板分类列表 -->
+	<select id="getTemplateCategoryListBySiteID" resultType="com.deya.wcm.bean.system.template.TemplateCategoryBean">
+		select * from cs_template_category where site_id = #{site_id} order by id
+	</select>
+
+	<select id="getAllTemplateCategoryList" resultType="com.deya.wcm.bean.system.template.TemplateCategoryBean">
+		select * from cs_template_category order by tcat_id
+	</select>
+	<delete id="deleteTemplateCategory" parameterType="Map" >
+		delete from cs_template_category where tcat_id in (${tcat_ids}) and site_id = #{site_id}
+	</delete>
+	
+	<!-- 模板分类排序 -->
+	<update id="sort_template_category" parameterType="Map">
+		update cs_template_category set sort_id=${sort_id} where id=${id}
+	</update>
+	
+	<!-- 得到模板总数 -->
+	<select id="getTemplateCategoryCount" parameterType="Map" resultType="java.lang.String">
+		select count(tcat_id) from cs_template_category 
+		<where>
+<!--	 		<if test="app_id != null">-->
+<!--	 			 and app_id=#{app_id}-->
+<!--	 		</if>-->
+	 		<if test="site_id != null">
+				and site_id = #{site_id}
+			</if>
+			<if test="parent_id != null">
+				and parent_id = #{parent_id}
+			</if>
+			<if test="con_value != null">
+				and ${con_name} like '%${con_value}%'
+			</if>
+	 	</where>  
+	</select>
+	
+	<select id="getTemplateCategoryBean" parameterType="Map" resultType="com.deya.wcm.bean.system.template.TemplateCategoryBean">
+		select * from cs_template_category where tcat_id = #{tcat_id} 
+		<if test="site_id != null and site_id != ''">
+		   and site_id=#{site_id}
+		</if>
+<!--		<if test="app_id != null and app_id != ''">-->
+<!--		   and app_id=#{app_id}-->
+<!--		</if>-->
+	</select>
+	
+	<insert id="insertTemplateCategory" parameterType="com.deya.wcm.bean.system.template.TemplateCategoryBean">
+		insert into cs_template_category(id,tcat_id, tclass_id, tcat_ename, tcat_cname, parent_id, tcat_position, tcat_memo, app_id, site_id) 
+		values (#{id},#{tcat_id},#{tclass_id},#{tcat_ename},#{tcat_cname},#{parent_id},#{tcat_position},#{tcat_memo},#{app_id},#{site_id})
+	</insert>
+	
+	<update id="updateTemplateCategory" parameterType="com.deya.wcm.bean.system.template.TemplateCategoryBean">
+		update cs_template_category set tclass_id=#{tclass_id},tcat_ename=#{tcat_ename},tcat_cname=#{tcat_cname},parent_id=#{parent_id},tcat_position=#{tcat_position},tcat_memo=#{tcat_memo},app_id=#{app_id} where tcat_id=#{tcat_id} and site_id=#{site_id}
+	</update>
+	<!-- 根据条件查询模板信息 -->
+	<sql id="getTemplateCategoryListForDB_sql_conn">
+		<where>
+	 		<if test="site_id != null">
+				and site_id = #{site_id}
+			</if>
+			<if test="parent_id != null">
+				and parent_id = #{parent_id}
+			</if>
+			<if test="con_value != null">
+				and ${con_name} like '%${con_value}%'
+			</if>
+	 	</where>
+	</sql>
+	<select id="getTemplateCategoryListForDB" parameterType="Map" resultType="com.deya.wcm.bean.system.template.TemplateCategoryBean" >	 
+	        select * from cs_template_category
+ 			<include refid="getTemplateCategoryListForDB_sql_conn"/>
+           order by sort_id,id	 
+	</select>
+	
+	<select id="getTemplateCategoryListForDB_mysql" parameterType="Map" resultType="com.deya.wcm.bean.system.template.TemplateCategoryBean" >
+		select * from cs_template_category
+	 			<include refid="getTemplateCategoryListForDB_sql_conn"/>
+	           order by sort_id,id limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}  
+	</select>
+	
+	<select id="getTemplateCategoryListForDB_mssql" parameterType="Map" resultType="com.deya.wcm.bean.system.template.TemplateCategoryBean" >
+		select top ${page_size} *  
+		  from cs_template_category 		 
+			where tcat_id not in
+			  (select top ${start_num} tcat_id
+				 from cs_template_category
+				 <include refid="getTemplateCategoryListForDB_sql_conn"/>
+				 order by sort_id,id )
+				 <if test="site_id != null">
+				and site_id = #{site_id}
+				</if>
+				<if test="parent_id != null">
+					and parent_id = #{parent_id}
+				</if>
+				<if test="con_value != null">
+					and ${con_name} like '%${con_value}%'
+				</if>
+				order by sort_id,id
+	</select>
+</mapper>

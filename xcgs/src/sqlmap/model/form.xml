@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="form">	
+	 
+     <!-- 得到列表 -->
+     <!-- 
+	 <select id="getFormFieldsListByModelId" parameterType="Map" resultType="com.deya.wcm.services.model.Fields">
+	       <![CDATA[    
+		           select m.*,f.field_cnname as from_field_cnname from cs_model_data m,cs_field_data f where m.from_id=f.id and m.model_id=#{model_id} order by m.field_sort asc,m.from_id desc
+		  ]]> 
+	 </select>
+	  -->
+	  
+	 <select id="getFormFieldsListByModelId" parameterType="Map" resultType="com.deya.wcm.services.model.Fields">
+	       <![CDATA[    
+		           select m.*  from cs_model_data m where m.model_id=#{model_id} order by m.field_sort asc,m.from_id desc
+		  ]]> 
+	 </select>  
+	    
+	  
+	 <!-- 得到列表 -->
+	 <select id="getFormFieldsListByModelIdN" parameterType="Map" resultType="com.deya.wcm.services.model.Fields">
+	       <![CDATA[    
+		           select * from cs_model_data where model_id=#{model_id} order by field_sort asc,from_id desc
+		  ]]> 
+	 </select>
+
+	 <!-- 得到列表 数量 -->
+	 <select id="getFormFieldsListByModelIdCount" parameterType="Map" resultType="java.lang.Integer">
+	           select count(id) from cs_model_data where model_id=#{model_id}
+	 </select>
+	 
+	 <!-- 得到列表 数量 -->
+	 <select id="getFormFieldsListByFromIdsCount" parameterType="Map" resultType="java.lang.Integer">
+	           select count(id) from cs_model_data where from_id in (${from_ids})
+	 </select>
+	 
+	<!-- 删除 -->
+	<delete id="deleteFormFieldsByModeIdAndFromId" parameterType="Map">
+	      delete from cs_model_data where model_id=#{model_id} and from_id in (${from_ids})
+	</delete>
+	
+	 <!-- 添加 -->
+	 <insert id="addFormFields" parameterType="com.deya.wcm.services.model.Fields">
+	     <![CDATA[ 
+			 insert into cs_model_data(id,from_id,model_id,field_sort,field_enname,field_cnname,field_type,is_sys,is_null,is_display,field_text,field_info,add_time) 
+			 values(#{id},#{from_id},#{model_id},#{field_sort},#{field_enname},#{field_cnname},#{field_type},#{is_sys},#{is_null},#{is_display},#{field_text},#{field_info},#{add_time})  
+	     ]]>
+	 </insert>
+	 
+	 	<!-- 保存排序 -->
+	<update id="sortFormFields" parameterType="Map">
+		update cs_model_data set field_sort = #{field_sort} where id = #{id}
+	</update>
+	
+	<!-- 设置信息列表header -->
+	<update id="updateFormFieldFlag" parameterType="Map">
+		update cs_model_data set 
+		  <if test="field_flag == 'title'">
+		     <if test="action == 'set'">
+		     field_flag = #{field_flag}
+		 	 </if>
+		 	 <if test="action == 'out'">
+		     field_flag = ''
+		 	 </if>
+		  </if>
+		  <if test="field_flag == 'publish_time'">
+		     <if test="action == 'set'">
+		      field_flag2 = #{field_flag}
+		 	 </if>
+		 	 <if test="action == 'out'">
+		      field_flag2 = ''
+		 	 </if>
+		  </if>
+		 where id = #{id}
+	</update>
+	
+		 <!-- 查看详细信息 -->
+	 <select id="getFormFieldById" parameterType="Map" resultType="com.deya.wcm.services.model.Fields">
+	 <![CDATA[        
+		    select * from cs_model_data where id=#{id}  
+		]]>
+	</select>
+	
+	 <!-- 修改 -->
+	 <update id="updateFormFieldsById" parameterType="com.deya.wcm.services.model.Fields">
+	     <![CDATA[  
+	         update cs_model_data set field_enname=#{field_enname},field_cnname=#{field_cnname},field_type=#{field_type},is_sys=#{is_sys},is_null=#{is_null},
+	                 is_display=#{is_display}, field_text=#{field_text},field_info=#{field_info} 
+	                 where id = #{id}   
+	     ]]>
+	 </update> 
+	 
+	 <!-- 删除-->
+	 <delete id="deleteFormFields" parameterType="Map">
+	     <![CDATA[ 
+			 delete from cs_model_data where id in (${ids})
+	     ]]> 
+	 </delete>
+	
+</mapper>

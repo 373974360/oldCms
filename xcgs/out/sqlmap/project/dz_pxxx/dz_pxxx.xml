@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="project">
+	<select id="getPxxxCount" parameterType="Map" resultType="java.lang.String">
+		select count(id) from dz_pxxx
+		<where>						
+			<if test="pxmc != null">and pxmc like '%${pxmc}%' </if>
+			<if test="pxlx != null">and pxlx like '%${pxlx}%' </if>
+			<if test="pxsj != null">and pxsj like '%${pxsj}%' </if>
+			<if test="bz != null">and bz like '%${bz}%' </if>
+			<if test="keyword != null">and (pxmc like '%${keyword}%' or pxlx like '%${keyword}%' or pxsj like '%${keyword}%' or bz like '%${keyword}%' )</if>
+			and status != '-1'
+		</where>
+	</select>
+
+	<select id="getPxxxList_oracle" parameterType="Map" resultType="com.cicro.project.dz_pxxx.PxxxBean">
+		select * from (
+		       select row_.*, rownum rownum_ from (   
+		            select id,pxmc,pxlx,rsxz,pxsj,bz,status from dz_pxxx
+		            <where>						
+						<if test="pxmc != null">and pxmc like '%${pxmc}%' </if>
+						<if test="pxlx != null">and pxlx like '%${pxlx}%' </if>
+						<if test="pxsj != null">and pxsj like '%${pxsj}%' </if>
+						<if test="bz != null">and bz like '%${bz}%' </if>
+						<if test="keyword != null">and (pxmc like '%${keyword}%' or pxlx like '%${keyword}%' or pxsj like '%${keyword}%' or bz like '%${keyword}%' )</if>
+						and status != '-1'
+					</where>
+		           order by ${orderby}	
+		<![CDATA[
+		        ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
+	    	) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+	    ]]>			
+	</select>	
+
+	<select id="getAllPxxxList" resultType="com.cicro.project.dz_pxxx.PxxxBean">
+		select * from dz_pxxx where status != '-1'
+	</select>
+
+	<select id="getPxxxList" parameterType="Map" resultType="com.cicro.project.dz_pxxx.PxxxBean"> 
+			select id,pxmc,pxlx,rsxz,pxsj,bz,status from dz_pxxx
+			<where>						
+				<if test="pxmc != null">and pxmc like '%${pxmc}%' </if>
+				<if test="pxlx != null">and pxlx like '%${pxlx}%' </if>
+				<if test="pxsj != null">and pxsj like '%${pxsj}%' </if>
+				<if test="bz != null">and bz like '%${bz}%' </if>
+				<if test="keyword != null">and (pxmc like '%${keyword}%' or pxlx like '%${keyword}%' or pxsj like '%${keyword}%' or bz like '%${keyword}%' )</if>
+				and status != '-1'
+			</where>
+		    order by ${orderby} limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}	
+		
+	</select>	
+	
+	<select id="getPxxxBean" parameterType="Map" resultType="com.cicro.project.dz_pxxx.PxxxBean">
+		select * from dz_pxxx where id = #{id} 
+	</select>
+	
+	<insert id="insertPxxx" parameterType="com.cicro.project.dz_pxxx.PxxxBean">
+	 	insert into dz_pxxx(id,pxmc,pxlx,rsxz,pxsj,bz,status)
+	 	values(#{id},#{pxmc},#{pxlx},#{rsxz},#{pxsj},#{bz},#{status})
+	</insert>
+	
+	<update id="updatePxxx" parameterType="com.cicro.project.dz_pxxx.PxxxBean">
+	 	update dz_pxxx set pxmc= #{pxmc},pxlx= #{pxlx},rsxz= #{rsxz},
+	 	pxsj= #{pxsj},pxsj= #{pxsj},bz= #{bz},status= #{status}
+	 	where id = #{id}
+	</update>
+	
+	<delete id="deletePxxx" parameterType="Map">
+		update dz_pxxx set status = '-1'  where id in (${ids})
+	</delete>
+</mapper>

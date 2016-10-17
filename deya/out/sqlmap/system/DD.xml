@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="dict">
+<!--	字典分类列表	   -->
+	<!-- 取得数据字典分类列表  -->
+	<select id="getDataDictionaryCategoryList" parameterType="Map" resultType="com.deya.wcm.bean.system.dict.DataDictCategoryBean">
+		select id,dict_cat_id,dict_cat_name,is_sys,app_id,site_id from cs_sys_dict_category
+		<where>
+			<if test="dict_cat_id != null and dict_cat_id != ''">
+				and dict_cat_id=#{dict_cat_id}
+			</if>
+			<if test="site_id != null and site_id != ''">
+				and site_id=#{site_id}
+			</if>
+			<if test="app_id != null and app_id != ''">
+				and app_id=#{app_id}
+			</if>
+		</where>
+	</select>
+	
+	<insert id="addDataDictionaryCategory" parameterType="Map">
+		insert into cs_sys_dict_category(id,dict_cat_id,dict_cat_name,dict_cat_memo,is_sys,app_id,site_id)
+	    values(${id},#{dict_cat_id},#{dict_cat_name},#{dict_cat_memo},${is_sys},#{app_id},#{site_id})
+	</insert>
+		
+	<delete id="delDataDictionaryCategory" parameterType="Map">
+		delete from cs_sys_dict_category where dict_cat_id in (#{ids})
+	</delete>
+	
+	<update id="updateDataDictionaryCategory">
+		update cs_sys_dict_category set dict_cat_name=#{dict_cat_name},dict_cat_memo=#{dict_cat_memo},is_sys=${is_sys},app_id=#{app_id},site_id=#{site_id} where dict_cat_id=#{dict_cat_id}
+	</update>
+	
+	<select id="selectOneDataDictionaryCategoryBean" parameterType="Map" resultType="com.deya.wcm.bean.system.dict.DataDictCategoryBean">
+		select * from cs_sys_dict_category where dict_cat_id=#{dict_cat_id}
+	</select>
+	
+<!--	字典列表	-->
+	<select id="getDataDictionaryList" parameterType="Map" resultType="com.deya.wcm.bean.system.dict.DataDictBean">
+		select id,dict_cat_id,dict_id,dict_name,dict_sort,is_defult,app_id,site_id from cs_sys_dict
+		<where>
+			<if test="dict_cat_id != null and dict_cat_id != ''">
+				and dict_cat_id=#{dict_cat_id}
+			</if>
+			<if test="site_id != null and site_id != ''">
+				and site_id=#{site_id}
+			</if>
+			<if test="app_id != null and app_id != ''">
+				and app_id=#{app_id}
+			</if>
+			<if test="dict_sort != null">
+				order by dict_sort ${dict_sort}
+			</if>
+		</where>
+	</select>
+	
+	<insert id="addDataDictionary" parameterType="Map">
+		insert into cs_sys_dict(id,dict_cat_id,dict_id,dict_name,dict_sort,is_defult,app_id,site_id)
+	    values(${id},#{dict_cat_id},#{dict_id},#{dict_name},${dict_sort},${is_defult},#{app_id},#{site_id})
+	</insert>
+	
+	<delete id="delDataDictionary" parameterType="Map">
+		delete from cs_sys_dict where dict_id in (#{ids})
+	</delete>
+	
+	<delete id="delDataDictionaryOfCategory" parameterType="Map">
+		delete from cs_sys_dict where dict_cat_id = #{id}
+	</delete>
+	
+	<select id="selectOneDataDictionaryBean" parameterType="Map" resultType="com.deya.wcm.bean.system.dict.DataDictBean">
+		select * from cs_sys_dict where dict_id=#{dict_id}
+	</select>
+	
+	<update id="updateDataDictionary" parameterType="com.deya.wcm.bean.system.dict.DataDictBean">
+		update cs_sys_dict set dict_cat_id=#{dict_cat_id},dict_name=#{dict_name},dict_sort=${dict_sort},is_defult=${is_defult},app_id=#{app_id},site_id=#{site_id} where dict_id=#{dict_id}
+	</update>
+	
+	<update id="updateDictSort" parameterType="Map">
+		update cs_sys_dict set dict_sort=${dict_sort} where dict_id=#{dict_id}
+	</update>
+</mapper>

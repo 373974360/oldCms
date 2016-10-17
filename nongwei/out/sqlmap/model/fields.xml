@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="fields">	
+	 
+     <!-- 得到列表 -->
+	 <select id="getFieldsList" parameterType="Map" resultType="com.deya.wcm.services.model.Fields">
+	       <![CDATA[
+			select * from (
+		       select row_.*, rownum rownum_ from (       
+		           select * from cs_field_data order by id desc
+		        ) row_ where rownum <=(#{start_num,,jdbcType=INTEGER} + #{page_size,,jdbcType=INTEGER})       
+	    	) where rownum_ >=(#{start_num,,jdbcType=INTEGER} + 1)
+		  ]]>
+	 </select>
+
+	 <!-- 得到列表 -->
+	 <select id="getFieldsList_mysql" parameterType="Map" resultType="com.deya.wcm.services.model.Fields">
+	       <![CDATA[ 
+		           select * from cs_field_data order by id desc limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER} 
+		  ]]>
+	 </select>
+
+	 <!-- 得到列表 数量 -->
+	 <select id="getFieldsListCount" parameterType="Map" resultType="java.lang.Integer">
+	           select count(id) from cs_field_data
+	           <where>
+				    <if test="field_enname != null">   
+				         field_enname = #{field_enname} 
+				    </if> 
+			   </where>
+	 </select>
+	 
+	 <!-- 添加 -->
+	 <insert id="addFields" parameterType="com.deya.wcm.services.model.Fields">
+	     <![CDATA[ 
+			 insert into cs_field_data(id,field_enname,field_cnname,field_type,is_sys,is_null,is_display,field_text,field_info,add_time) 
+			 values(#{id},#{field_enname},#{field_cnname},#{field_type},#{is_sys},#{is_null},#{is_display},#{field_text},#{field_info},#{add_time})  
+	     ]]>
+	 </insert> 
+	 
+	 <!-- 删除-->
+	 <delete id="deleteFields" parameterType="Map">
+	     <![CDATA[ 
+			 delete from cs_field_data where id in (${ids})
+	     ]]> 
+	 </delete>
+	 
+	 <!-- 查看详细信息 -->
+	 <select id="getFieldById" parameterType="Map" resultType="com.deya.wcm.services.model.Fields">
+	 <![CDATA[        
+		    select * from cs_field_data where id=#{id}  
+		]]>
+	</select>
+	
+	<!-- 修改 -->
+	 <update id="updateFieldsById" parameterType="com.deya.wcm.services.model.Fields">
+	     <![CDATA[ 
+	         update cs_field_data set field_enname=#{field_enname},field_cnname=#{field_cnname},field_type=#{field_type},is_sys=#{is_sys},is_null=#{is_null},
+	                 is_display=#{is_display}, field_text=#{field_text},field_info=#{field_info} 
+	                 where id = #{id}   
+	     ]]>
+	 </update> 
+	
+</mapper>

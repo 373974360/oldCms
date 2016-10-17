@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="gk_info">
+	<select id="getGKInfoCount" parameterType="Map" resultType="java.lang.Integer">
+		select count(ci.id) from cs_info ci,cs_gk_info gk,cs_info_category ca
+		            where ci.info_id = gk.info_id and ci.cat_id = ca.cat_id			
+			<if test="site_id != null">
+				and site_id = #{site_id}
+			</if>
+			<if test="is_auto_up != null">
+				and is_auto_up = #{is_auto_up}
+			</if>
+			<if test="is_host != null">
+				and is_host = #{is_host}
+			</if>
+			<if test="info_status != null">
+				and info_status = #{info_status}
+			</if>
+			<if test="final_status != null">
+				and final_status = #{final_status}
+			</if>
+			<if test="cat_id != null">
+				and cat_id = #{cat_id}
+			</if>
+			<if test="cat_ids != null and cat_ids != ''">
+				and cat_id in (${cat_ids})
+			</if>
+			<if test="shared_cat_ids != null">
+					and (gk.topic_id=${shared_cat_ids} or gk.theme_id=${shared_cat_ids} or gk.serve_id=${shared_cat_ids} or ca.cat_class_id = ${shared_cat_ids})
+				</if>
+			<if test="search_cat_ids != null and search_cat_ids != ''">
+				and cat_id in (${search_cat_ids})
+			</if>
+			<if test="con_value != null">
+				and ${con_name} like '%${con_value}%'
+			</if>
+			<if test="searchString != null">
+				and ${searchString}
+			</if>
+			<if test="searchString2 != null">
+				 ${searchString2}
+			</if>
+			
+	</select>
+	
+	<insert id="insert_gk_info" parameterType="com.deya.wcm.bean.cms.info.GKInfoBean">
+		insert into cs_gk_info(info_id,gk_index,gk_year,gk_num,doc_no,gk_file,generate_dtime,effect_dtime,aboli_dtime,topic_id,topic_name,theme_id,theme_name,serve_id,serve_name,topic_key,place_key,language,carrier_type,gk_validity,gk_format,gk_way,gk_type,gk_no_reason,gk_time_limit ,gk_range,gk_proc,gk_duty_dept,gk_input_dept)
+		values(#{info_id},#{gk_index},#{gk_year},#{gk_num},#{doc_no},#{gk_file},#{generate_dtime},#{effect_dtime},#{aboli_dtime},#{topic_id},#{topic_name},#{theme_id},#{theme_name},#{serve_id},#{serve_name},#{topic_key},#{place_key},#{language},#{carrier_type},#{gk_validity},#{gk_format},#{gk_way},#{gk_type},#{gk_no_reason},#{gk_time_limit },#{gk_range},#{gk_proc},#{gk_duty_dept},#{gk_input_dept})
+	</insert>
+	
+	<update id="update_gk_info" parameterType="com.deya.wcm.bean.cms.info.GKInfoBean">
+		update cs_gk_info set gk_index = #{gk_index},gk_year = #{gk_year},gk_num = #{gk_num},doc_no = #{doc_no},gk_file = #{gk_file},generate_dtime = #{generate_dtime},effect_dtime = #{effect_dtime},aboli_dtime = #{aboli_dtime},topic_id = #{topic_id},topic_name = #{topic_name},theme_id = #{theme_id},theme_name = #{theme_name},serve_id = #{serve_id},serve_name = #{serve_name},topic_key = #{topic_key},place_key = #{place_key},language = #{language},carrier_type = #{carrier_type},gk_validity = #{gk_validity},gk_format = #{gk_format},gk_way = #{gk_way},gk_type = #{gk_type},gk_no_reason = #{gk_no_reason},gk_time_limit = #{gk_time_limit},gk_range = #{gk_range},gk_proc = #{gk_proc},gk_duty_dept = #{gk_duty_dept},gk_input_dept = #{gk_input_dept} where info_id = #{info_id}
+	</update>
+	
+	<delete id="delete_gk_info" parameterType="Map">
+		delete from cs_gk_info where info_id in (${info_ids})
+	</delete>
+	
+	<!-- **********************需要替换的部分********************************* -->
+	<select id="getGKInfoList" parameterType="Map" resultType="com.deya.wcm.bean.cms.info.GKInfoBean" >	 
+		<![CDATA[  
+		select * from (
+		       select row_.*, rownum rownum_ from (       
+		            select ci.*,gk.gk_index,gk.gk_year,gk.gk_num,gk.doc_no,gk.gk_file,gk.generate_dtime,gk.effect_dtime,gk.aboli_dtime,gk.topic_id,gk.topic_name,gk.theme_id,gk.theme_name,gk.serve_id,gk.serve_name,gk.topic_key,gk.place_key,gk.language,gk.carrier_type,gk.gk_validity,gk.gk_format,gk.gk_way,gk.gk_type,gk.gk_no_reason,gk.gk_time_limit ,gk.gk_range,gk.gk_proc,gk.gk_duty_dept,gk.gk_input_dept 
+		            from cs_info ci,cs_gk_info gk,cs_info_category ca
+		            where ci.info_id = gk.info_id and ci.cat_id = ca.cat_id
+		 ]]>	
+				<if test="site_id != null">
+					and ci.site_id = #{site_id}
+				</if>
+				<if test="is_auto_up != null">
+					and ci.is_auto_up = ${is_auto_up}
+				</if>
+				<if test="is_host != null">
+					and ci.is_host = ${is_host}
+				</if>
+				<if test="info_status != null">
+					and ci.info_status = ${info_status}
+				</if>
+				<if test="final_status != null">
+					and ci.final_status = ${final_status}
+				</if>
+				<if test="cat_id != null">
+					and ci.cat_id = ${cat_id}
+				</if>
+				<if test="cat_ids != null and cat_ids != ''">
+					and ci.cat_id in (${cat_ids})
+				</if>
+				<if test="search_cat_ids != null and search_cat_ids != ''">
+					and ci.cat_id in (${search_cat_ids})
+				</if>
+				<if test="shared_cat_ids != null">
+					and (gk.topic_id=${shared_cat_ids} or gk.theme_id=${shared_cat_ids} or gk.serve_id=${shared_cat_ids} or ca.cat_class_id = ${shared_cat_ids})
+				</if>
+				<if test="con_value != null">
+					and ${con_name} like '%${con_value}%'
+				</if>
+				<if test="searchString != null">
+					and ${searchString}
+				</if>
+				<if test="searchString2 != null">
+					 ${searchString2}
+				</if>
+				<if test="highSearchString != null">
+					 ${highSearchString}
+				</if>
+		<![CDATA[
+		           order by ${sort_name} ${sort_type}
+		        ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
+	    	) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+	    ]]>	
+	</select>
+</mapper>

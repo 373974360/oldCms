@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="searchInfo">
+    <sql id="getJyyList_sql_conn">
+        where status != '-1'
+        <if test="keyword != null">
+            and ( xm like '%${keyword}%' or gzdw like '%${keyword}%' or jyfw like '%${keyword}%' or zsh like '%${keyword}%')
+        </if>
+        <if test="xm != null">
+            and xm like '%${xm}%'
+        </if>
+        <if test="xb != null">
+            and xb like '%${xb}%'
+        </if>
+        <if test="gzdw != null">
+            and gzdw like '%${gzdw}%'
+        </if>
+        <if test="jyfw != null">
+            and jyfw like '%${jyfw}%'
+        </if>
+        <if test="zsh != null">
+            and zsh like '%${zsh}%'
+        </if>
+        <if test="status != null">
+            and status = #{status}
+        </if>
+    </sql>
+
+    <select id="getAllJyy" resultType="com.deya.project.searchInfo.JyyBean" >
+        select id,xm,xb,gzdw,jyfw,zsh,bz,addTime,status from dz_jyy where status != '-1' order by id desc
+    </select>
+
+    <select id="getJyyCount" parameterType="Map" resultType="java.lang.String" >
+        select count(id) from dz_jyy
+        <include refid="getJyyList_sql_conn"/>
+    </select>
+
+    <select id="getJyyList" parameterType="Map" resultType="com.deya.project.searchInfo.JyyBean" >
+        select * jyfwom (
+        select row_.*, rownum rownum_ jyfwom (
+        select id,xm,xb,gzdw,jyfw,zsh,bz,addTime,status from dz_jyy <include refid="getJyyList_sql_conn"/>
+        order by ${orderby}
+        <![CDATA[
+		        ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}
+	    	) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+	    ]]>
+    </select>
+
+    <select id="getJyyList_mysql" parameterType="Map" resultType="com.deya.project.searchInfo.JyyBean" >
+        select id,xm,xb,gzdw,jyfw,zsh,bz,addTime,status from dz_jyy <include refid="getJyyList_sql_conn"/>
+        order by ${orderby} limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
+    </select>
+
+    <select id="getJyyList_mssql" parameterType="Map" resultType="com.deya.project.searchInfo.JyyBean" >
+        select top #{page_size} id,xm,xb,gzdw,jyfw,zsh,bz,addTime,status
+        from dz_jyy
+        <include refid="getJyyList_sql_conn"/>
+        and id not in
+        (select top #{start_num} id
+        from dz_jyy
+        <include refid="getJyyList_sql_conn"/>
+        order by ${orderby} )
+        order by ${orderby}
+    </select>
+
+    <select id="getJyyBean"  parameterType="Map" resultType="com.deya.project.searchInfo.JyyBean" >
+        select id,xm,xb,gzdw,jyfw,zsh,bz,addTime,status from dz_jyy where id=#{id}
+    </select>
+
+    <insert id="insertJyy" parameterType="com.deya.project.searchInfo.JyyBean">
+        insert into dz_jyy(
+        id,
+        xm,
+        xb,
+        gzdw,
+        jyfw,
+        zsh,
+        bz,
+        addTime,
+        status
+        ) values(
+        #{id},
+        #{xm},
+        #{xb},
+        #{gzdw},
+        #{jyfw},
+        #{zsh},
+        #{bz},
+        #{addTime},
+        #{status}
+        )
+    </insert>
+
+    <update id="updateJyy"  parameterType="com.deya.project.searchInfo.JyyBean">
+        update dz_jyy set
+        xm=#{xm},
+        xb=#{xb},
+        gzdw=#{gzdw},
+        jyfw=#{jyfw},
+        zsh=#{zsh},
+        bz=#{bz},
+        addTime=#{addTime},
+        status=#{status}
+        where id=#{id}
+    </update>
+
+    <update id="changeJyyStatus" parameterType="Map" >
+        update dz_jyy set status = #{status}  where id in (${ids})
+    </update>
+
+    <update id="deleteJyy" parameterType="Map" >
+        update dz_jyy set status = '-1' where id in (${ids})
+    </update>
+
+</mapper>

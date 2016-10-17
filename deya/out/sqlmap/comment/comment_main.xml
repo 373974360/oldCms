@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="comment_main">
+
+	<select id="getCommentMainParentStr" parameterType="java.lang.String" resultType="java.lang.String">
+		select parent_str from cs_comment_main where id = #{id}
+	</select>
+	
+	<insert id="insert_comment_main" parameterType="com.deya.wcm.bean.comment.CommentBean">
+		insert into cs_comment_main(id,info_id,info_uuid,app_id,site_id,info_type,is_member,nick_name,user_name,member_id,tel,email,add_time,content,content2,is_status,ip,parent_id,parent_str,is_quest)
+		values(#{id},#{info_id},#{info_uuid},#{app_id},#{site_id},#{info_type},#{is_member},#{nick_name},#{user_name},#{member_id},#{tel},#{email},#{add_time},#{content},#{content},#{is_status},#{ip},#{parent_id},#{parent_str},#{is_quest})
+	</insert>
+	
+	<!-- 修改内容 -->
+	<update id="update_comment_main" parameterType="Map">
+		update cs_comment_main 
+		<set>
+			<if test="content2 != null">content = #{content2},content2 = #{content2}</if>
+			<if test="is_report != null">is_report = #{is_report}</if>
+			<if test="report_count != null">report_count = report_count+1</if>
+			<if test="report_last_time != null">report_last_time = #{report_last_time}</if>
+			<if test="support_count != null">support_count = support_count+1</if>
+			<if test="is_replay != null">is_replay = 1</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<update id="update_comment_replay" parameterType="Map">
+		update cs_comment_main set is_replay=1 where id in (${parent_ids})
+	</update>
+	
+	<!-- 修改评论审核状态内容 -->
+	<update id="pass_comment_main" parameterType="Map">
+		update cs_comment_main set is_status = 1,content=content2 where id = #{id}
+	</update>	
+	
+	<update id="cancel_comment_main" parameterType="Map">
+		update cs_comment_main set is_status = -1,content=#{content} where id in (${ids})
+	</update>	
+	
+	<update id="delete_comment_main" parameterType="Map">
+		update cs_comment_main set is_delete=-1,content=#{content} where id in (${ids})
+	</update>
+	
+	<sql id="getCommentMainCountInfo_conn">
+		where com.site_id = #{site_id} and com.info_id = info.info_id and com.info_type = 1 and com.is_delete=0 
+		<if test="ip != null">and com.ip = #{ip}</if>
+		<if test="info_id != null">and com.info_id = #{info_id}</if>
+		<if test="info_uuid != null">and com.info_uuid = #{info_uuid}</if>
+		<if test="is_status != null">and com.is_status = #{is_status}</if>
+		<if test="is_quest != null">and com.is_quest = #{is_quest}</if>
+		<if test="start_day != null">
+			<![CDATA[  and com.add_time >= #{start_day}]]>
+		</if>
+		<if test="end_day != null">
+			<![CDATA[ and com.add_time <= #{end_day}]]>
+		</if>
+		<if test="keyword != null">
+			and (info.title like '%${keyword}%')
+		</if>
+		
+	</sql>
+	<!-- 取得信息类型的后台评论总数 -->
+	<select id="getCommentMainCountForInfo" parameterType="Map" resultType="java.lang.String">
+		select count(com.id) from cs_comment_main com,cs_info info 
+		<include refid="getCommentMainCountInfo_conn"/>	
+	</select>
+	
+	<!-- 取得信息类型的后台评论列表 -->
+	<select id="getCommentMainListForInfo" parameterType="Map" resultType="com.deya.wcm.bean.comment.CommentBean">
+		select * from (
+		       select row_.*, rownum rownum_ from (
+		select com.*,info.title,info.content_url from cs_comment_main com,cs_info info 
+		<include refid="getCommentMainCountInfo_conn"/>
+		order by ${sort_name} ${sort_type} 
+		<![CDATA[
+		        ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
+	    	) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+	    ]]>
+	</select>
+	
+	<select id="getCommentMainListForInfo_mysql" parameterType="Map" resultType="com.deya.wcm.bean.comment.CommentBean">
+		select com.*,info.title,info.content_url from cs_comment_main com,cs_info info 
+		<include refid="getCommentMainCountInfo_conn"/> order by ${sort_name} ${sort_type}
+		limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}		 
+	</select>
+	
+	<select id="getCommentMainListForInfo_mssql" parameterType="Map" resultType="com.deya.wcm.bean.comment.CommentBean">
+		select top ${page_size} com.*,info.title,info.content_url from cs_comment_main com,cs_info info 
+		<include refid="getCommentMainCountInfo_conn"/> and com.id not in(
+			select top ${start_num} id from cs_comment_main com,cs_info info 
+		<include refid="getCommentMainCountInfo_conn"/> order by ${sort_name} ${sort_type}
+		) order by ${sort_name} ${sort_type}
+	</select>
+	
+	<!-- *************************前台用sql **************************************** -->
+	<!-- 评论最多的新闻 -->
+	<select id="getHotCommentInfo" parameterType="Map" resultType="com.deya.wcm.bean.comment.CommentBean">
+		select * from (
+		       select row_.*, rownum rownum_ from (
+				select info.info_id,z.count,info.title,info.content_url from (
+					select count(id) as count,info_id from cs_comment_main where site_id=#{site_id} and info_type=1 and is_status=1 group by info_id 
+				) z,cs_info info where z.info_id = info.info_id order by z.count desc
+		<![CDATA[
+		        ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+1      
+	    	) where rownum_ >=1
+	    ]]>
+	</select>
+	
+	<select id="getHotCommentInfo_mysql" parameterType="Map" resultType="com.deya.wcm.bean.comment.CommentBean">
+		select info.info_id,z.count,info.title,info.content_url from (
+			select count(id) as count,info_id from cs_comment_main where site_id=#{site_id} and info_type = #{info_type} and is_status=1 group by info_id 
+		) z,cs_info info where z.info_id = info.info_id order by z.count desc
+		limit 0,#{page_size,,jdbcType=INTEGER}
+	</select>
+	
+	<select id="getHotCommentInfo_mssql" parameterType="Map" resultType="com.deya.wcm.bean.comment.CommentBean">
+		select top ${page_size} info.info_id,z.count,info.title,info.content_url from (
+			select count(id) as count,info_id from cs_comment_main where site_id=#{site_id} and info_type=1 and is_status=1 group by info_id 
+		) z,cs_info info where z.info_id = info.info_id order by z.count desc
+		
+	</select>
+	
+	<!-- 根据参数ID查询到所有评论信息，不区删除和审核状态，用于查盖楼 -->
+	<select id="getCommentListForIDS" parameterType="Map" resultType="com.deya.wcm.bean.comment.CommentBean">
+		select * from cs_comment_main where id in (${ids}) order by id
+	</select>
+	<sql id="getCommentBrowserCountInfo_conn">
+		where 
+		<choose>
+		 <when test="survey != null">info_uuid = #{id}</when>
+		 <otherwise>info_id = #{id}</otherwise>
+		</choose>
+		and info_type = #{info_type} and is_status = 1 and is_delete = 0		
+	</sql>
+	
+	<select id="getCommentMainCountForBrowser" parameterType="Map" resultType="java.lang.String">
+		select count(id) from cs_comment_main  <include refid="getCommentBrowserCountInfo_conn"/>
+	</select>
+	
+	<select id="getCommentMainListForBrowser" parameterType="Map" resultType="com.deya.wcm.bean.comment.CommentBean">
+		select * from (
+		       select row_.*, rownum rownum_ from (
+					select * from cs_comment_main  <include refid="getCommentBrowserCountInfo_conn"/>
+					order by id desc
+		<![CDATA[
+		        ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
+	    	) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+	    ]]>
+	</select>
+	
+	<select id="getCommentMainListForBrowser_mysql" parameterType="Map" resultType="com.deya.wcm.bean.comment.CommentBean">
+		select * from cs_comment_main  <include refid="getCommentBrowserCountInfo_conn"/> order by id desc
+		limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}	
+	</select>
+	
+	<select id="getCommentMainListForBrowser_mssql" parameterType="Map" resultType="com.deya.wcm.bean.comment.CommentBean">
+		select top ${page_size} * from cs_comment_main  <include refid="getCommentBrowserCountInfo_conn"/> 
+		and id not in (
+			select top ${start_num} id from cs_comment_main  <include refid="getCommentBrowserCountInfo_conn"/> order by id desc  
+		)
+		order by id desc  
+	</select>
+</mapper>

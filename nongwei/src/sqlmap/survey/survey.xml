@@ -1,0 +1,643 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="survey">
+	<!-- ***********************调查问卷分类管理　开始*********************** -->
+	<!-- 得到调查问卷分类总数 -->
+	<select id="getSurveyCategoryCount" parameterType="Map" resultType="java.lang.String" >
+		select count(id) from cp_survey_category where is_delete = 0 and site_id = #{site_id}
+	</select>
+	
+	<select id="getAllSurveyCategoryList" parameterType="java.lang.String" resultType="com.deya.wcm.bean.survey.SurveyCategory" >
+		select * from cp_survey_category where is_delete = 0
+	</select>
+	
+	<!-- 得到调查问卷分类总数 -->
+	<select id="getSurveyCountByCategoryID" parameterType="Map" resultType="java.lang.String" >
+		select count(cs.id) from cp_survey_category cc,cp_survey cs where cc.category_id = cs.category_id and cs.is_delete = 0 and cc.id = #{id}
+	</select>
+	
+	<!-- 得到调查问卷分类对象 -->
+	<select id="getSurveyCategoryBean" parameterType="java.lang.String" resultType="com.deya.wcm.bean.survey.SurveyCategory" >
+		select id,category_id,c_name,description,model_path,publish_status,template_list_path,template_content_path,template_result_path from cp_survey_category where category_id = #{category_id} and is_delete = 0
+	</select>
+	
+	<!-- 得到所有巳发布过的分类对象 -->
+	<select id="getAllSurveyCategoryName" resultType="com.deya.wcm.bean.survey.SurveyCategory" >
+		select id,category_id,c_name from cp_survey_category where is_delete = 0 and publish_status = 1
+	</select>
+	
+	<!-- 插入问卷调查分类 -->	
+	<insert id="insertSurveyCategory" parameterType="com.deya.wcm.bean.survey.SurveyCategory">
+		insert into cp_survey_category(id,category_id,c_name,description,model_path,publish_status,publish_time,add_time,add_user,template_list_path,template_content_path,template_result_path,site_id) 
+		values(#{id},#{category_id},#{c_name},#{description},#{model_path},#{publish_status},#{publish_time},#{add_time},#{add_user},#{template_list_path},#{template_content_path},#{template_result_path},#{site_id})
+	</insert>
+	
+	
+	<!-- 修改问卷调查分类 -->	
+	<update id="updateSurveyCategory" parameterType="com.deya.wcm.bean.survey.SurveyCategory">
+		update cp_survey_category set c_name = #{c_name},description = #{description},model_path = #{model_path},publish_status = #{publish_status},publish_time = #{publish_time},update_time = #{update_time}
+		,update_user = #{update_user},template_list_path = #{template_list_path},template_content_path = #{template_content_path},template_result_path=#{template_result_path}
+		where id = #{id}
+	</update>
+	
+	
+	<!-- 删除问卷调查分类 -->	
+	<update id="deleteSurveyCategory" parameterType="Map">
+		update cp_survey_category set is_delete=1 where id in (${ids})
+	</update>
+	
+	
+	<!-- 修改调查问卷分类发布状态 -->	
+	<update id="updateSurveyCategoryPublishStatus" parameterType="Map">
+		update cp_survey_category set publish_status=#{publish_status},publish_time=#{current_time} where id in (${ids})
+	</update>
+	
+	
+	<!-- ***********************调查问卷分类管理　结束*********************** -->
+
+	<!-- 得到推荐列表总数 -->
+	<select id="getSurveyRecommendListCount" parameterType="Map" resultType="java.lang.String">
+		select count(cs.id) from cp_survey cs,cp_survey_category cc  where cs.is_delete = 0 and cs.category_id = cc.category_id and cc.is_delete = 0 and cc.publish_status = 1 and cs.recommend_flag = 1 ${con}
+	</select>
+	
+	<!-- 得到问卷调查列表总数 -->
+	<select id="getSurveyListCountBrowser" parameterType="Map" resultType="java.lang.String">
+		select count(cs.id) from cp_survey cs,cp_survey_category cc  
+		where cs.is_delete = 0 and cs.category_id = cc.category_id 
+		<if test="site_id != null">and cc.site_id = #{site_id}</if> 
+		and cc.is_delete = 0 and cc.publish_status = 1 ${con}
+	</select>
+
+    <!-- 取题目and选项and子选项，使用一条sql取出所有层级关系 -->
+	<resultMap id="survey-sub" type="com.deya.wcm.bean.survey.SurveySub">
+		<id property="subject_id" column="subject_id" />
+	    <result property="sub_name" column="sub_name"/>
+	    <result property="subject_type" column="subject_type"/>	    
+	    <collection property="itemList" ofType="com.deya.wcm.bean.survey.SurveySuvItem" resultMap="sub-item"/>
+	</resultMap>
+	
+	<resultMap id="sub-item" type="com.deya.wcm.bean.survey.SurveySuvItem">		
+		<id property="item_id" column="item_id" />
+	    <result property="item_name" column="item_name"/>
+	    <collection property="childList" ofType="com.deya.wcm.bean.survey.SurveyChildItem" resultMap="item-child"/>
+	</resultMap>
+	
+	<resultMap id="item-child" type="com.deya.wcm.bean.survey.SurveyChildItem">
+		<id property="item_id" column="item_id" /><!-- 关联ID　取两表的关联 -->
+		<id property="item_num" column="item_num" />
+	    <result property="item_name" column="item_namec"/>
+	    <result property="score" column="score"/>
+	    <result property="is_text" column="is_text"/>
+	</resultMap>	
+	
+	<resultMap id="ansertItemDetail" type="Map">
+		<id property="item_id" column="item_id" />
+		<id property="item_value" column="item_value" />
+	    <result property="item_text" column="item_text"/>
+	    <result property="subject_id" column="subject_id"/>
+	    <result property="item_name" column="item_name"/>
+	</resultMap>    
+	
+	<!-- 得到问卷调查总数 -->
+	<select id="getSurveyCount" parameterType="Map" resultType="java.lang.String" >
+		select count(cs.id) from cp_survey cs,cp_survey_category cc  where cs.is_delete = 0 and cs.category_id = cc.category_id and cc.is_delete = 0 and cc.publish_status = 1 ${con}
+	</select>
+	
+	<!-- 得到问卷调查对象 -->
+	<select id="getSurveyBean" parameterType="java.lang.String" resultType="com.deya.wcm.bean.survey.SurveyBean" >
+		select * from cp_survey where s_id = #{s_id} 
+	</select>
+	
+	<!-- 得到问卷调查题目及选项对象 -->
+	<select id="getSurveySubjectBean" parameterType="java.lang.String" resultMap="survey-sub" >
+		select sub.survey_id,sub.subject_id,sub.sub_name,sub.subject_type,item.item_name,item.item_id,childs.item_num,childs.item_name as item_namec,childs.score,childs.is_text from cp_survey_sub sub,cp_survey_item item,cp_survey_child childs where sub.subject_id=item.subject_id and item.item_id = childs.item_id and item.subject_id = childs.subject_id and sub.survey_id = #{s_id} order by sub.sort,item.sort,childs.sort
+	</select>
+	
+	<!-- 得到问卷调查题目对象 -->
+	<select id="getSurveySubjectSingle" parameterType="java.lang.String" resultType="com.deya.wcm.bean.survey.SurveySub" >
+		select subject_id,sub_name,subject_type,sort from cp_survey_sub where survey_id=#{survey_id} order by sort
+	</select>
+	
+	<!-- 修改推荐设置 -->
+    <update id="updateSurveyRecommend" parameterType="java.lang.String">
+	  update cp_survey set recommend_flag = #{recommend_flag},recommend_time = #{current_time} where id in(${ids})
+	</update>
+		
+	<!-- 删除调查问卷主题及选项，用于修改问卷，对主题表进行全删全写 -->
+	<delete id="deleteSubject" parameterType="java.lang.String">
+		 delete from cp_survey_sub where survey_id = #{s_id}
+	</delete>	
+	<delete id="deleteSubjectItem" parameterType="java.lang.String">
+		 delete from cp_survey_item where survey_id = #{s_id}
+	</delete>
+	<delete id="deleteSubjectChild" parameterType="java.lang.String">
+		 delete from cp_survey_child where subject_id in (select subject_id from cp_survey_item where survey_id = #{s_id})
+	</delete>	
+	
+	<!-- 修改问卷调查 -->
+	<update id="updateSurvey" parameterType="com.deya.wcm.bean.survey.SurveyBean">
+		update cp_survey set category_id = #{category_id},s_name = #{s_name},description = #{description},is_register = #{is_register},ip_fre = #{ip_fre},start_time = #{start_time},end_time = #{end_time},is_show_subsort = #{is_show_subsort},survey_content = #{survey_content},model_path = #{model_path},ip_restrict = #{ip_restrict},update_time = #{update_time},update_user = #{update_user},is_show_result = #{is_show_result},is_show_title = #{is_show_title},spacing_interval = #{spacing_interval} where s_id = #{s_id}
+	</update>
+		
+	<!-- 插入问卷调查 -->
+	<insert id="insertSurvey" parameterType="com.deya.wcm.bean.survey.SurveyBean">
+		insert into cp_survey(id,s_id,category_id,s_name,description,is_register,ip_fre,start_time,end_time,is_show_subsort,is_show_result,is_show_title,survey_content,model_path,ip_restrict,add_time,add_user,spacing_interval,site_id)
+		values(#{id},#{s_id},#{category_id},#{s_name},#{description},#{is_register},#{ip_fre},#{start_time},#{end_time},#{is_show_subsort},#{is_show_result},#{is_show_title},#{survey_content},#{model_path},#{ip_restrict},#{add_time},#{add_user},#{spacing_interval},#{site_id})
+	</insert>
+	
+	<!-- 设置问卷调查属性 -->
+	<update id="setSurveyAttr" parameterType="com.deya.wcm.bean.survey.SurveyBean">
+		update cp_survey set category_id = #{category_id},is_register = #{is_register},ip_fre = #{ip_fre},start_time = #{start_time},end_time = #{end_time},model_path = #{model_path},pic_path = #{pic_path},verdict = #{verdict},ip_restrict = #{ip_restrict},is_show_result = #{is_show_result},show_result_status = #{show_result_status},spacing_interval = #{spacing_interval},is_checkcode = #{is_checkcode} where s_id = #{s_id}
+	</update>
+	
+	<!-- 插入问卷调查题目 -->
+	<insert id="insertSurveySub" parameterType="com.deya.wcm.bean.survey.SurveySub">
+		insert into cp_survey_sub(id,survey_id,subject_id,sub_name,subject_type,explains,is_required,sort) 
+		values(#{id},#{survey_id},#{subject_id},#{sub_name},#{subject_type},#{explains},#{is_required},#{sort})
+	</insert>
+	
+	<!-- 插入问卷调查题目选项 -->
+	<insert id="insertSurveySubItem" parameterType="com.deya.wcm.bean.survey.SurveySuvItem">
+	    insert into cp_survey_item(survey_id,subject_id,item_id,item_name,is_text,text_value,sort)values(#{survey_id},#{subject_id},#{item_id},#{item_name},#{is_text},#{text_value},#{sort})
+	</insert>
+	
+	<!-- 插入子选项 -->
+	<insert id="insertSurveyChildItem" parameterType="com.deya.wcm.bean.survey.SurveyChildItem">
+	    insert into cp_survey_child(subject_id,item_id,item_num,item_name,is_text,text_value,score,sort)values(#{subject_id},#{item_id},#{item_num},#{item_name},#{is_text},#{text_value},#{score},#{sort})
+	</insert>
+	
+	<!-- 发布问卷 -->
+	<update id="publishSurvey" parameterType="Map">	
+		update cp_survey set publish_status=#{publish_status},publish_time=#{current_time} where id in (${ids})
+	</update>
+	
+	<!-- 删除问卷 -->
+	<update id="deleteSurvey" parameterType="Map">		
+		update cp_survey set is_delete=1 where id in (${ids})
+	</update>
+	
+	<!-- 得到所有已发布的问卷对象，用于初始时存入缓存 -->	
+	<select id="getAllSurveyObjBYPublish" resultType="com.deya.wcm.bean.survey.SurveyBean" >
+		select cs.* from cp_survey_category sc,cp_survey cs where sc.category_id = cs.category_id and sc.is_delete = 0 and sc.publish_status = 1 and cs.is_delete = 0 and cs.publish_status = 1
+	</select>
+	<!-- *****************************调查统计　开始*****************************  -->
+	<!-- 得到所有问卷的答卷总数 -->
+	<select id="getStatisticsCount" parameterType="Map" resultType="java.lang.String" >
+		select count(min(cs.id)) from cp_survey cs,cp_survey_answer ca where cs.s_id = ca.s_id and cs.is_delete = 0 group by cs.s_id
+	</select>
+	<!-- 得到某一问卷的答卷总数 -->
+	<select id="getStatisticsCountBySurvey" parameterType="java.lang.String" resultType="java.lang.String" >
+		select count(id) from cp_survey_answer where s_id = #{s_id}
+	</select>
+		
+	<!-- 得到某份问卷的所有答卷统计数据 -->
+	<select id="getStatisticsDataBySurvey" parameterType="Map" resultType="com.deya.wcm.bean.survey.StatisticsBean" >
+		select count(answer_id) as counts,item_id,item_value as item_num from cp_survey_answer_item where s_id=#{s_id} 
+		<if test="con != null">
+		and answer_id in (select answer_id from cp_survey_answer_item where s_id=#{s_id} ${con})
+		</if>
+		 group by item_id,item_value order by item_id,item_value
+	</select>
+	
+	<!-- 得到某个投票选项的答卷总数 -->
+	<select id="getVoteCountBySurveyItem" parameterType="Map" resultType="java.lang.String" >
+		select count(answer_id) from cp_survey_answer_item where s_id=#{s_id} and item_id = #{item_id}
+	</select>
+	
+	<!-- 得到某个投票选项的答卷计数汇总 -->
+	<select id="getVoteTotalBySurveyItem" parameterType="Map" resultType="com.deya.wcm.bean.survey.StatisticsBean" >
+		select count(answer_id) as counts,item_id,item_value as item_num from cp_survey_answer_item where s_id=#{s_id} and item_id = #{item_id} group by item_id,item_value order by item_id,item_value
+	</select>
+	
+	<!-- 得到某个选项的答卷文本总数 -->
+	<select id="getItemTextCount" parameterType="Map" resultType="java.lang.String" >
+		select count(ca.answer_id) from cp_survey_answer ca,cp_survey_answer_item ci where ca.answer_id = ci.answer_id and ca.s_id = #{s_id} and ci.item_id=#{item_id} and ci.item_value=#{item_value} ${con}	
+		<if test="search_con != null">
+		 and ci.answer_id in (select answer_id from cp_survey_answer_item where s_id=#{s_id} ${search_con})
+		</if>
+	</select>
+	
+	<!-- 得到某个答卷详细信息 -->
+	<select id="getAnswerItemDetail" parameterType="java.lang.String" resultMap="ansertItemDetail" >
+		select cai.item_id,cai.item_value,min(cai.item_text) as item_text,min(cc.subject_id) as subject_id,min(cc.item_name) as item_name from cp_survey_answer_item cai,cp_survey_sub cs,cp_survey_child cc where cai.answer_id = #{answer_id} and cai.s_id = cs.survey_id and cs.subject_id = cc.subject_id and cai.item_id = cc.item_id and (cc.item_num = cai.item_value or (item_num=0 and is_text=1)) group by cai.item_id,cai.item_value
+	</select>
+	
+	<!-- 得到某个主题的答卷列表总数 -->
+	<select id="getAnswerListCount" parameterType="Map" resultType="java.lang.String" >		   
+	    select count(distinct ca.id) from cp_survey_answer ca,cp_survey_answer_item ci where ca.answer_id = ci.answer_id and ca.s_id = #{s_id}
+	    <if test="search_con != null">
+		 and ca.answer_id in (select answer_id from cp_survey_answer_item where s_id=#{s_id} ${search_con})
+		</if>
+	</select>
+	
+	<!-- *****************************调查统计　结束*****************************  -->
+	
+	<!-- *****************************问卷总统计　开始*****************************  -->
+	<!-- 得到所有巳发布过的分类对象 -->
+	<select id="getAllSurveyCategory" parameterType="java.lang.String" resultType="com.deya.wcm.bean.survey.SurveyCount" >
+		select category_id,c_name from cp_survey_category where is_delete = 0 and publish_status = 1 and site_id = #{site_id}
+	</select>
+	<!-- 按分类下的问卷数统计 -->
+	<select id="getSurveyCategoryCount2" parameterType="Map" resultType="com.deya.wcm.bean.survey.SurveyCount" >
+		select count(cs.id) as sur_count,cs.category_id from cp_survey cs,cp_survey_category cc where cs.site_id = #{site_id} and cs.category_id = cc.category_id and cc.is_delete = 0 and cc.publish_status = 1 and cs.is_delete =0 ${con} group by cs.category_id
+	</select>
+	<!-- 按分类下的问卷所有主题数统计-->
+	<select id="getSurveySubjectCount" parameterType="Map" resultType="com.deya.wcm.bean.survey.SurveyCount" >
+		select count(css.id) as subject_count,cs.category_id from cp_survey cs,cp_survey_category cc,cp_survey_sub css where cs.site_id = #{site_id} and cs.s_id = css.survey_id and cs.category_id = cc.category_id and cc.is_delete = 0 and cc.publish_status = 1 and cs.is_delete =0 and cs.publish_status = 1 ${con} group by cs.category_id
+	</select>
+	<!-- 按分类下的问卷所有答卷数统计-->
+	<select id="getSurveyAnswerCount" parameterType="Map" resultType="com.deya.wcm.bean.survey.SurveyCount" >
+		select count(csa.id) as answer_count,cs.category_id from cp_survey cs,cp_survey_category cc,cp_survey_answer csa where cs.site_id = #{site_id} and cs.s_id = csa.s_id and cs.category_id = cc.category_id and cc.is_delete = 0 and cc.publish_status = 1 and cs.is_delete =0 and cs.publish_status = 1 ${con} group by cs.category_id
+	</select>
+	
+	<!-- 得到最热问卷答卷统计 -->	
+	<select id="getHotCount_answer" parameterType="Map" resultType="com.deya.wcm.bean.survey.SurveyCount">
+		select count(csa.id) as answer_count,cs.s_id,max(cs.s_name) as s_name,max(cc.c_name) as c_name from cp_survey cs,cp_survey_category cc,cp_survey_answer csa where cs.site_id = #{site_id} and cs.s_id = csa.s_id and cs.category_id = cc.category_id and cc.is_delete = 0 and cc.publish_status = 1 and cs.is_delete =0 and cs.publish_status = 1 and cs.category_id in (${category_ids}) ${con} group by cs.s_id order by 1 desc		
+	</select>
+	<!-- 按分类下的问卷所有主题数统计-->
+	<select id="getSurveySubjectCountBySub" parameterType="Map" resultType="com.deya.wcm.bean.survey.SurveyCount" >
+		select count(css.id) as subject_count,cs.s_id from cp_survey cs,cp_survey_category cc,cp_survey_sub css where cs.s_id = css.survey_id and cs.category_id = cc.category_id and cc.is_delete = 0 and cc.publish_status = 1 and cs.is_delete =0 and cs.publish_status = 1 and cs.category_id in (${category_ids}) ${con} group by cs.s_id
+	</select>
+	<!-- *****************************问卷总统计　结束*****************************  -->
+	
+	<!-- *****************************问卷前台处理　开始***************************** -->
+	<!-- 插入答卷主表 -->	
+	<insert id="insertAnswer" parameterType="com.deya.wcm.bean.survey.SurveyAnswer">
+		insert into cp_survey_answer(id,answer_id,s_id,ip,answer_time,operate_time,user_name) 
+		values(#{id},#{answer_id},#{s_id},#{ip},#{answer_time},#{operate_time},#{user_name})
+	</insert>
+	
+	<!-- 插入答卷选项子表 -->
+	<insert id="insertAnswerItem" parameterType="com.deya.wcm.bean.survey.SurveyAnswerItem">
+	    insert into cp_survey_answer_item(answer_id,s_id,item_id,item_value,item_text)values(#{answer_id},#{s_id},#{item_id},#{item_value},#{item_text})
+	</insert>	
+	
+	<!-- 得到已发布问卷调查总数 -->
+	<select id="getSurveyCount_browser" parameterType="Map" resultType="java.lang.String" >
+		select count(id) from cp_survey where is_delete = 0 and publish_status = 1
+	</select>	
+	
+	<!-- 得到该IP的提交的次数 -->
+	<select id="getAnswerCountByIP" parameterType="Map" resultType="java.lang.String" >
+		select count(id) from cp_survey_answer where ip=#{ip} and s_id=#{s_id}
+	</select>
+	<!-- *****************************问卷前台处理　结束***************************** -->
+	
+	<!-- ****************************************************需更换部分****************************************************  -->
+	
+	
+	
+	<!-- ***********************调查问卷分类管理　开始*********************** -->
+	<!-- 得到调查问卷分类列表 -->
+	<select id="getSurveyCategoryList" parameterType="Map" resultType="com.deya.wcm.bean.survey.SurveyCategory">
+		<![CDATA[
+			select * from (
+			   select row_.*, rownum rownum_ from (       
+					select id,category_id,c_name,publish_status,publish_time,add_time from cp_survey_category where is_delete = 0 and site_id = #{site_id} order by id desc
+				) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
+			) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+		]]>
+	</select>
+	<select id="getSurveyCategoryList_mysql" parameterType="Map" resultType="com.deya.wcm.bean.survey.SurveyCategory">
+		<![CDATA[    
+					select id,category_id,c_name,publish_status,publish_time,add_time from cp_survey_category where is_delete = 0 and site_id = #{site_id} order by id desc   limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}  
+		]]>
+	</select>
+	<select id="getSurveyCategoryList_mssql" parameterType="Map" resultType="com.deya.wcm.bean.survey.SurveyCategory">
+		<![CDATA[    
+			select top ${page_size} id,category_id,c_name,publish_status,publish_time,add_time 
+			  from cp_survey_category 
+			  where is_delete = 0  and site_id = #{site_id}
+				and id not in
+				(select top ${start_num} id
+				   from cp_survey_category 
+				   where is_delete = 0  and site_id = #{site_id}
+				   order by id desc )
+			  order by id desc 
+		]]>
+	</select>
+	<!-- ***********************调查问卷分类管理　结束*********************** -->
+	
+	<!-- 得到问卷调查列表 -->
+	<select id="getSurveyList" parameterType="Map" resultType="com.deya.wcm.bean.survey.SurveyBean">
+	<![CDATA[
+		select * from (
+	       select row_.*, rownum rownum_ from (       
+	            select cs.id,cs.s_id,cs.s_name,cs.start_time,cs.end_time,cs.publish_status,cs.add_time,cc.c_name,cs.show_result_status,cs.recommend_flag 
+	            from cp_survey cs,cp_survey_category cc  
+	            where cs.is_delete = 0 and cs.category_id = cc.category_id 
+	     ]]>
+	     		<if test="site_id != null"> and cc.site_id = #{site_id} </if>
+	     <![CDATA[	           
+	            and cc.is_delete = 0 and cc.publish_status = 1 ${con} order by id desc
+	        ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
+    	) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+	]]></select>
+	<select id="getSurveyList_mysql" parameterType="Map" resultType="com.deya.wcm.bean.survey.SurveyBean">
+		<![CDATA[      
+			select cs.id,cs.s_id,cs.s_name,cs.start_time,cs.end_time,cs.publish_status,cs.add_time,cc.c_name,cs.show_result_status,cs.recommend_flag 
+			from cp_survey cs,cp_survey_category cc  
+			where cs.is_delete = 0 and cs.category_id = cc.category_id 
+		]]>
+	     		<if test="site_id != null"> and cc.site_id = #{site_id} </if>
+	     <![CDATA[
+			 and cc.is_delete = 0 and cc.publish_status = 1 ${con} order by id desc     limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}    
+		]]>
+	</select>
+	<select id="getSurveyList_mssql" parameterType="Map" resultType="com.deya.wcm.bean.survey.SurveyBean">
+		<![CDATA[      
+			select top ${page_size} 
+			cs.id,cs.s_id,cs.s_name,cs.start_time,cs.end_time,cs.publish_status,cs.add_time,cc.c_name,cs.show_result_status,cs.recommend_flag 
+			  from cp_survey cs,cp_survey_category cc  
+			  where cs.is_delete = 0 
+				and cs.category_id = cc.category_id 
+				and cc.is_delete = 0 
+				and cc.publish_status = 1
+		]]>
+	     		<if test="site_id != null"> and cc.site_id = #{site_id} </if>
+	     <![CDATA[ 
+				${con}
+				and cs.id not in
+				(select top ${start_num} cs.id
+				  from cp_survey cs,cp_survey_category cc  
+				  where cs.is_delete = 0 
+					and cs.category_id = cc.category_id 
+					and cc.is_delete = 0 
+					and cc.publish_status = 1 
+		]]>
+	     		<if test="site_id != null"> and cc.site_id = #{site_id} </if>
+	     <![CDATA[ 
+					${con} 
+				  order by id desc)
+			  order by id desc		    
+		]]>
+	</select>
+			<!-- *****************************调查统计　开始*****************************  -->
+	<!-- 得到问卷调查统计列表 -->
+	<select id="getStatisticsList" parameterType="Map" resultType="com.deya.wcm.bean.survey.SurveyBean">
+	<![CDATA[
+		select * from (
+	       select row_.*, rownum rownum_ from (       
+	            select cs.s_id,count(ca.id) as answer_counts,min(cs.s_name) as s_name,min(cs.start_time) as start_time,min(cs.end_time) as end_time,min(cs.publish_status) as publish_status  from cp_survey cs,cp_survey_answer ca where cs.s_id = ca.s_id and cs.is_delete = 0 and cs.site_id = #{site_id} group by cs.s_id order by min(cs.id) desc 
+	        ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
+    	) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+	]]>
+	</select>
+	<select id="getStatisticsList_mysql" parameterType="Map" resultType="com.deya.wcm.bean.survey.SurveyBean">
+		<![CDATA[ 
+					select cs.s_id,count(ca.id) as answer_counts,min(cs.s_name) as s_name,min(cs.start_time) as start_time,min(cs.end_time) as end_time,min(cs.publish_status) as publish_status  from cp_survey cs,cp_survey_answer ca where cs.s_id = ca.s_id and cs.is_delete = 0 and cs.site_id = #{site_id} group by cs.s_id order by min(cs.id) desc  limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}    
+		]]>
+	</select>
+	<select id="getStatisticsList_mssql" parameterType="Map" resultType="com.deya.wcm.bean.survey.SurveyBean">
+		<![CDATA[ 
+				select top ${page_size} 
+					cs.s_id,count(ca.id) as answer_counts,min(cs.s_name) as s_name,min(cs.start_time) as start_time,min(cs.end_time) as end_time,min(cs.publish_status) as publish_status  
+				  from cp_survey cs,cp_survey_answer ca
+				  where cs.s_id = ca.s_id 
+					and cs.is_delete = 0 
+					and cs.s_id not in
+					(select top ${start_num} cs.s_id
+					   from cp_survey cs,cp_survey_answer ca
+					   where cs.s_id = ca.s_id and cs.is_delete = 0 and cs.site_id = #{site_id}
+					   group by cs.s_id 
+					   order by min(cs.id) desc )
+				  group by cs.s_id 
+				  order by min(cs.id) desc 	    
+		]]>
+	</select>
+	
+	<!-- 得到某个选项的答卷文本列表 -->
+	<select id="getItemTextList" parameterType="Map" resultType="com.deya.wcm.bean.survey.SurveyAnswer" >
+		<![CDATA[
+			select * from (
+			   select row_.*, rownum rownum_ from (       
+					select ca.answer_id,ca.user_name,ca.answer_time,ci.item_text from cp_survey_answer ca,cp_survey_answer_item ci where ca.answer_id = ci.answer_id and ca.s_id = #{s_id} and ci.item_id=#{item_id} and ci.item_value=#{item_value} ${con}			    
+				) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
+			) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+		]]>	    
+	</select>
+	<select id="getItemTextList_mysql" parameterType="Map" resultType="com.deya.wcm.bean.survey.SurveyAnswer" >
+		<![CDATA[
+					select ca.answer_id,ca.user_name,ca.answer_time,ci.item_text from cp_survey_answer ca,cp_survey_answer_item ci where ca.answer_id = ci.answer_id and ca.s_id = #{s_id} and ci.item_id=#{item_id} and ci.item_value=#{item_value} ${con}	 limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}  
+		]]>	    
+	</select>
+	<select id="getItemTextList_mssql" parameterType="Map" resultType="com.deya.wcm.bean.survey.SurveyAnswer" >
+		<![CDATA[
+			select top ${page_size} ca.answer_id,ca.user_name,ca.answer_time,ci.item_text 
+			  from cp_survey_answer ca,cp_survey_answer_item ci 
+			  where ca.answer_id = ci.answer_id 
+				and ca.s_id = #{s_id} 
+				and ci.item_id=#{item_id} 
+				and ci.item_value=#{item_value} 
+				${con}
+				and ca.answer_id not in
+				(select top ${start_num} ca.answer_id
+				   from cp_survey_answer ca,cp_survey_answer_item ci 
+				   where ca.answer_id = ci.answer_id 
+					 and ca.s_id = #{s_id} 
+					 and ci.item_id=#{item_id} 
+					 and ci.item_value=#{item_value} 
+					 ${con}
+				   order by ca.answer_id desc)
+			  order by ca.answer_id desc 
+		]]>	    
+	</select>
+	
+	<select id="getItemTextList2" parameterType="Map" resultType="com.deya.wcm.bean.survey.SurveyAnswer" >
+		<![CDATA[
+			select * from (
+			   select row_.*, rownum rownum_ from (       
+					select ca.answer_id,ca.user_name,ca.answer_time,ci.item_text from cp_survey_answer ca,cp_survey_answer_item ci where ca.answer_id = ci.answer_id and ca.s_id = #{s_id} and ci.item_id=#{item_id} and ci.item_value=#{item_value} ${con}	and ci.answer_id in (select answer_id from cp_survey_answer_item where s_id=#{s_id} ${search_con})		    
+				) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
+			) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+		]]>	    
+	</select>
+	<select id="getItemTextList2_mysql" parameterType="Map" resultType="com.deya.wcm.bean.survey.SurveyAnswer" >
+		<![CDATA[    
+					select ca.answer_id,ca.user_name,ca.answer_time,ci.item_text from cp_survey_answer ca,cp_survey_answer_item ci where ca.answer_id = ci.answer_id and ca.s_id = #{s_id} and ci.item_id=#{item_id} and ci.item_value=#{item_value} ${con}	and ci.answer_id in (select answer_id from cp_survey_answer_item where s_id=#{s_id} ${search_con})  	 limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}  
+		]]>	    
+	</select>
+	<select id="getItemTextList2_mssql" parameterType="Map" resultType="com.deya.wcm.bean.survey.SurveyAnswer" >
+		<![CDATA[    
+			select top ${page_size} ca.answer_id,ca.user_name,ca.answer_time,ci.item_text 
+			  from cp_survey_answer ca,cp_survey_answer_item ci 
+			  where ca.answer_id = ci.answer_id 
+				and ca.s_id = #{s_id} 
+				and ci.item_id=#{item_id} 
+				and ci.item_value=#{item_value} 
+				${con}
+				and ci.answer_id in (select answer_id from cp_survey_answer_item where s_id=#{s_id} ${search_con})
+				and ca.answer_id not in
+				  (select top ${start_num} ca.answer_id
+					 from cp_survey_answer ca,cp_survey_answer_item ci 
+					 where ca.answer_id = ci.answer_id 
+					   and ca.s_id = #{s_id} 
+					   and ci.item_id=#{item_id} 
+					   and ci.item_value=#{item_value} 
+					   ${con}
+					   and ci.answer_id in (select answer_id from cp_survey_answer_item where s_id=#{s_id} ${search_con}) )	  
+		]]>	    
+	</select>
+	<!-- 得到某个主题的答卷列表 -->
+	<select id="getAnswerList" parameterType="Map" resultType="com.deya.wcm.bean.survey.SurveyAnswer" >
+	<![CDATA[
+		select * from (
+	       select row_.*, rownum rownum_ from (       
+	            select answer_id,ip,answer_time,user_name,operate_time from cp_survey_answer where s_id = #{s_id} order by id desc
+	        ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
+    	) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+	]]>	    
+	</select>
+	<select id="getAnswerList_mysql" parameterType="Map" resultType="com.deya.wcm.bean.survey.SurveyAnswer" >
+	<![CDATA[    
+	            select answer_id,ip,answer_time,user_name,operate_time from cp_survey_answer where s_id = #{s_id} order by id desc   limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}  
+	]]>	    
+	</select>
+	<select id="getAnswerList_mssql" parameterType="Map" resultType="com.deya.wcm.bean.survey.SurveyAnswer" >
+	<![CDATA[    
+	        select top ${page_size} answer_id,ip,answer_time,user_name,operate_time 
+			  from cp_survey_answer 
+			  where s_id = #{s_id} 
+				and answer_id not in
+				  (select top ${start_num} answer_id 
+					 from cp_survey_answer 
+					 where s_id = #{s_id} 
+					 order by id desc)
+			  order by id desc  
+	]]>	    
+	</select>
+	<select id="getAnswerList2" parameterType="Map" resultType="com.deya.wcm.bean.survey.SurveyAnswer" >
+		<![CDATA[
+			select * from (
+			   select row_.*, rownum rownum_ from (       
+					select distinct ca.answer_id,ca.id,ca.ip,ca.answer_time,ca.user_name,ca.operate_time from cp_survey_answer ca,cp_survey_answer_item ci where ca.answer_id = ci.answer_id and ca.s_id = #{s_id} and ca.answer_id in (select answer_id from cp_survey_answer_item where s_id=#{s_id} ${search_con}) order by ca.id desc
+				) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
+			) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+		]]>	    
+	</select>
+	<select id="getAnswerList2_mysql" parameterType="Map" resultType="com.deya.wcm.bean.survey.SurveyAnswer" >
+		<![CDATA[     
+					select distinct ca.answer_id,ca.id,ca.ip,ca.answer_time,ca.user_name,ca.operate_time from cp_survey_answer ca,cp_survey_answer_item ci where ca.answer_id = ci.answer_id and ca.s_id = #{s_id} and ca.answer_id in (select answer_id from cp_survey_answer_item where s_id=#{s_id} ${search_con}) order by ca.id desc   limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}  
+		]]>	    
+	</select>
+	<select id="getAnswerList2_mssql" parameterType="Map" resultType="com.deya.wcm.bean.survey.SurveyAnswer" >
+		<![CDATA[     
+				select top ${page_size} distinct ca.answer_id,ca.id,ca.ip,ca.answer_time,ca.user_name,ca.operate_time 
+				  from cp_survey_answer ca,cp_survey_answer_item ci 
+				  where ca.answer_id = ci.answer_id 
+					and ca.s_id = #{s_id} 
+					and ca.answer_id in (select answer_id from cp_survey_answer_item where s_id=#{s_id} ${search_con}) 
+					and ca.answer_id not in
+					(select top ${start_num} distinct ca.answer_id 
+					   from cp_survey_answer ca,cp_survey_answer_item ci 
+					   where ca.answer_id = ci.answer_id 
+						 and ca.s_id = #{s_id} 
+						 and ca.answer_id in (select answer_id from cp_survey_answer_item where s_id=#{s_id} ${search_con}) 
+					   order by ca.id desc )
+				  order by ca.id desc  
+		]]>	    
+	</select>
+			<!-- *****************************调查统计　结束*****************************  -->
+	
+	<!-- *****************************问卷前台处理　开始***************************** -->
+	<!-- 得到推荐列表 -->
+    <select id="getSurveyRecommendList" parameterType="Map" resultType="com.deya.wcm.bean.survey.SurveyBean">
+		<![CDATA[
+			select * from (
+			   select row_.*, rownum rownum_ from (  	 
+				select cs.category_id,cs.id,cs.s_id,cs.s_name,cs.start_time,cs.end_time,cs.publish_status,cs.add_time,cc.c_name,cs.show_result_status,cs.description from cp_survey cs,cp_survey_category cc  where cs.is_delete = 0 and cs.category_id = cc.category_id and cc.is_delete = 0 and cc.publish_status = 1 and cs.recommend_flag = 1 ${con} order by cs.recommend_time desc,cs.id desc  
+				 ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
+			) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+		]]>	    
+	</select>
+	 <select id="getSurveyRecommendList_mysql" parameterType="Map" resultType="com.deya.wcm.bean.survey.SurveyBean">
+		<![CDATA[ 
+				select cs.id,cs.s_id,cs.s_name,cs.start_time,cs.end_time,cs.publish_status,cs.add_time,cc.c_name,cs.show_result_status,cs.description from cp_survey cs,cp_survey_category cc  where cs.is_delete = 0 and cs.category_id = cc.category_id and cc.is_delete = 0 and cc.publish_status = 1 and cs.recommend_flag = 1 ${con} order by cs.recommend_time desc,cs.id desc    limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}  
+		]]>	    
+	</select>
+	<select id="getSurveyRecommendList_mssql" parameterType="Map" resultType="com.deya.wcm.bean.survey.SurveyBean">
+		<![CDATA[ 
+				select top ${page_size}
+					cs.id,cs.s_id,cs.s_name,cs.start_time,cs.end_time,cs.publish_status,cs.add_time,cc.c_name,cs.show_result_status,cs.description 
+				  from cp_survey cs,cp_survey_category cc  
+				  where cs.is_delete = 0 
+					and cs.category_id = cc.category_id 
+					and cc.is_delete = 0 
+					and cc.publish_status = 1 
+					and cs.recommend_flag = 1 
+					${con} 
+					and  cs.id not in
+					 (select top ${start_num} cs.id
+						from cp_survey cs,cp_survey_category cc  
+						where cs.is_delete = 0 
+						  and cs.category_id = cc.category_id 
+						  and cc.is_delete = 0 
+						  and cc.publish_status = 1 
+						  and cs.recommend_flag = 1 
+						  ${con} 
+						order by cs.recommend_time desc,cs.id desc)
+				  order by cs.recommend_time desc,cs.id desc  
+		]]>	    
+	</select>
+	
+	<!-- 得到已发布的问卷列表 -->
+	<select id="getSurveyList_browser" parameterType="Map" resultType="com.deya.wcm.bean.survey.SurveyBean" >
+	<![CDATA[
+		select * from (
+	       select row_.*, rownum rownum_ from (       
+	            select s_id,s_name,start_time,end_time from cp_survey where is_delete = 0 and publish_status = 1 
+	            ${con}
+	            order by ${ordery_by}
+	        ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
+    	) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+	]]>	    
+	</select>
+	<select id="getSurveyList_browser_mysql" parameterType="Map" resultType="com.deya.wcm.bean.survey.SurveyBean" >
+		<![CDATA[   
+					select s_id,s_name,start_time,end_time from cp_survey where is_delete = 0 and publish_status = 1 order by id desc   limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}  
+		]]>	    
+	</select>
+	<select id="getSurveyList_browser_mssql" parameterType="Map" resultType="com.deya.wcm.bean.survey.SurveyBean" >
+		<![CDATA[   
+			select top ${page_size} s_id,s_name,start_time,end_time 
+			  from cp_survey 
+			  where is_delete = 0 and publish_status = 1 
+				and s_id not in
+				  (select top ${start_num} s_id
+					 from cp_survey 
+					 where is_delete = 0 and publish_status = 1 
+					 order by id desc  )
+			  order by id desc  
+		]]>	    
+	</select>
+	<!-- 得到答案IP的最后提交时间 -->
+	<select id="getLastAnswerTimeByIP" parameterType="Map" resultType="java.lang.String">
+		<![CDATA[
+			select * from (
+			   select row_.*, rownum rownum_ from (       
+					select answer_time from cp_survey_answer where s_id=#{s_id} and ip=#{ip} order by answer_time desc
+				) row_ where rownum <=1       
+			) where rownum_ >=1
+		]]>
+	</select>
+	<select id="getLastAnswerTimeByIP_mysql" parameterType="Map" resultType="java.lang.String">
+		<![CDATA[   
+					select answer_time from cp_survey_answer where s_id=#{s_id} and ip=#{ip} order by answer_time desc  limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}  
+		]]>
+	</select>
+	<select id="getLastAnswerTimeByIP_mssql" parameterType="Map" resultType="java.lang.String">
+		<![CDATA[   
+			select top ${page_size} answer_time 
+			  from cp_survey_answer 
+			  where s_id=#{s_id} and ip=#{ip}
+				and id not in
+				  (select top ${start_num} id
+					 from cp_survey_answer 
+					 where s_id=#{s_id} and ip=#{ip} 
+					 order by answer_time desc  )
+			order by answer_time desc   
+		]]>
+	</select>
+	<!-- *****************************问卷前台处理　结束***************************** -->
+</mapper>

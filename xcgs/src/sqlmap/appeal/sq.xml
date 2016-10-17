@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="sq">
+    <!-- 根据年份得到当前最大的流水号 -->
+    <select id="getSQYearNum" parameterType="java.lang.String" resultType="java.lang.String">
+        <![CDATA[
+		select max(sq_all_number) from cp_sq where sq_dtime like '${current_year}%'
+	]]>
+    </select>
+
+    <!-- 根据年份和业务得到当前最大的流水号 -->
+    <select id="getSQNumber" parameterType="Map" resultType="java.lang.String">
+        <![CDATA[
+		select max(sq_number) from cp_sq where sq_dtime like '${current_year}%' and model_id = ${model_id}
+	]]>
+    </select>
+
+    <!-- 根据会员ID得到该会员所提交的信件列表（前台使用） -->
+    <select id="getBroSQListByMemberID" parameterType="java.lang.String" resultType="com.deya.wcm.bean.appeal.sq.SQBean">
+        select sq_id,sq_realname,model_id,sq_dtime,sq_title2,submit_name,sq_status,hits,day_hits,week_hits,month_hits,lasthit_dtime,query_code,sq_code from cp_sq
+        where me_id = #{me_id} order by sq_id desc
+    </select>
+
+    <!-- 得到信件列表总数（前台使用） -->
+    <select id="getBrowserSQCount" parameterType="Map" resultType="java.lang.String">
+        select count(sq_id) from cp_sq  where sq_flag in (0,1,2) and publish_status = 1 and is_open = 1 ${con}
+    </select>
+
+    <!-- 得到诉求详细信件（前台使用） -->
+    <select id="getBrowserSQBean" parameterType="java.lang.String" resultType="com.deya.wcm.bean.appeal.sq.SQBean">
+        select * from cp_sq where sq_id = #{sq_id}
+        <choose>
+            <when test="me_id != null">
+                and (me_id = #{me_id} or (publish_status = 1 and is_open = 1))
+            </when>
+            <otherwise>
+                and sq_flag in (0,1,2) and publish_status = 1 and is_open = 1
+            </otherwise>
+        </choose>
+    </select>
+
+    <!-- 根据信件ID得到所有的扩展字段 -->
+    <select id="getSQCustomList" parameterType="java.lang.String" resultType="com.deya.wcm.bean.appeal.sq.SQCustom">
+        select * from cp_sq_custom where sq_id = #{sq_id}
+    </select>
+
+    <!-- 根据信件ID和扩展字段名称得到内容 -->
+    <select id="getSQCustomValue" parameterType="Map" resultType="java.lang.String">
+        select cu_value from cp_sq_custom where sq_id = #{sq_id} and cu_key = #{cu_key}
+    </select>
+
+    <!-- 根据信件编码的查询码得到信件ID和modelid -->
+    <select id="searchBrowserSQBean" parameterType="Map" resultType="com.deya.wcm.bean.appeal.sq.SQBean">
+        select sq_id,model_id from cp_sq where query_code = #{query_code} and sq_code = #{sq_code}
+    </select>
+
+    <!-- 得到所有未办结的信件,条件1：未办结的信件　条件2：巳是超期，但不是红牌的 -->
+    <select id="getNotEndSQList" resultType="com.deya.wcm.bean.appeal.sq.SQBean">
+        select sq_id,model_id,sq_dtime,time_limit from cp_sq
+        <![CDATA[
+			where sq_status < 3 and (timeout_flag = 0 or (timeout_flag = 1 and alarm_flag < 3))
+		]]>
+        order by sq_id desc
+    </select>
+
+    <!-- 得到诉求列表总数 -->
+    <select id="getSqCount" parameterType="Map" resultType="java.lang.String">
+        select count(sq_id) from cp_sq where model_id in (${model_id})	and sq_status != '-99'
+        <choose><!-- 如果是管理员，取自身所在部门and提交部门为空的信件，否则取自身部门 -->
+            <when test="is_admin != null">
+                <!-- is_manager_page判断是否是信件管理的页面 -->
+                <if test="is_manager_page == null">
+                    <!-- 判断是否是待审件列表，如果是待审件(page_type不为空为待审件)，且是管理员的话，不加所属部门的条件, -->
+                    <if test="page_type == null">
+                        and (
+                        (do_dept is null or do_dept = 0)
+                        <if test="do_dept != null">
+                            or do_dept in (${do_dept})
+                        </if>
+                        )
+                    </if>
+                </if>
+            </when>
+            <otherwise>
+                <if test="is_manager_page == null">
+                    <if test="page_type != null">
+                        <!-- 待审件加入下面的sql -->
+                        ${dsj_sql}
+                    </if>
+                    and do_dept in (${do_dept})
+                </if>
+            </otherwise>
+        </choose>
+        <!-- 判断是发布状态 -->
+        <if test="publish_status != null">and publish_status = ${publish_status}</if>
+        <!-- 流程处理状态条件 -->
+        <if test="sq_status != null">
+            and sq_status in (${sq_status})
+        </if><!-- 信件标识条件  -->
+        <if test="sq_flag != null">
+            and sq_flag in (${sq_flag})
+        </if>
+        <!-- 判断是否是显示回退列表 -->
+        <if test="is_back != null">
+            and is_back = #{is_back}
+        </if><!-- 红黄牌条件 -->
+        <if test="alarm_flag != null">
+            and alarm_flag in (${alarm_flag})
+        </if><!-- 延期待审列表 -->
+        <if test="limit_flag != null">and limit_flag = ${limit_flag}</if><!-- 延时申请标识 -->
+        <if test="supervise_flag != null">and supervise_flag = ${supervise_flag}</if><!-- 督办标识 -->
+        <!-- 判断是自办还是转办 -->
+        <if test="prove_type != null">
+            and prove_type in (${prove_type})
+        </if>
+
+        <!-- 以下为查询条件 -->
+        <if test="pur_id != null">and pur_id = ${pur_id}</if>
+        <if test="submit_name != null">and submit_name like '%${submit_name}%'</if>
+        <if test="sq_dtime != null">and sq_dtime > #{sq_dtime}</if>
+        <if test="sq_title2 != null">and sq_title2 like '%${sq_title2}%'</if>
+        <if test="sq_realname != null">and sq_realname like '%${sq_realname}%'</if>
+        <if test="sq_content2 != null">and sq_content2 like '%${sq_content2}%'</if>
+        <if test="sq_code != null">and sq_code = #{sq_code}</if>
+    </select>
+
+    <!-- 得到已办理的信件总数 -->
+    <select id="getTransactSQCount" parameterType="Map" resultType="java.lang.String">
+        select count(distinct cs.sq_id) from cp_sq cs,cp_process cp	where cs.sq_id = cp.sq_id and cs.model_id in (${model_id}) and cp.do_dept = #{do_dept}
+        and cp.pro_type in (${pro_type})
+        <if test="sq_dtime != null">
+            and sq_dtime > #{sq_dtime}
+        </if>
+        <if test="pur_id != null">and pur_id = ${pur_id}</if>
+        <if test="submit_name != null">and submit_name like '%${submit_name}%'</if>
+        <if test="sq_title2 != null">and cs.sq_title2 like '%${sq_title2}%'</if>
+        <if test="sq_realname != null">and cs.sq_realname like '%${sq_realname}%'</if>
+        <if test="sq_content2 != null">and cs.sq_content2 like '%${sq_content2}%'</if>
+    </select>
+
+    <!-- 得到诉求详细信件 -->
+    <select id="getSqBean" parameterType="java.lang.String" resultType="com.deya.wcm.bean.appeal.sq.SQBean">
+        select * from cp_sq where sq_id = #{sq_id}
+    </select>
+
+    <!-- 插入诉求信件(前台提交) -->
+    <insert id="insert_sq" parameterType="com.deya.wcm.bean.appeal.sq.SQBean">
+        insert into cp_sq(sq_id,sq_code,model_id,me_id,sq_realname,sq_sex,sq_vocation,sq_age,sq_address,sq_email,sq_tel,sq_phone,sq_card_id,sq_dtime,is_open,sq_ip,sq_title,sq_title2,sq_content,sq_content2,sq_type,query_code,cat_id,area_id,pur_id,people_num,submit_name,time_limit,accept_dtime,do_dept,publish_status,sq_flag,sq_reply,publish_dtime,over_dtime,step_id,sq_status,hits,sq_all_number,sq_number)
+        values(#{sq_id},#{sq_code},#{model_id},#{me_id},#{sq_realname},#{sq_sex},#{sq_vocation},#{sq_age},#{sq_address},#{sq_email},#{sq_tel},#{sq_phone},#{sq_card_id},#{sq_dtime},#{is_open},#{sq_ip},#{sq_title},#{sq_title},#{sq_content},#{sq_content},#{sq_type},#{query_code},#{cat_id},#{area_id},#{pur_id},#{people_num},#{submit_name},#{time_limit},#{accept_dtime},#{do_dept},#{publish_status},#{sq_flag},#{sq_reply},#{publish_dtime},#{over_dtime},#{step_id},#{sq_status},#{hits},#{sq_all_number},#{sq_number})
+    </insert>
+
+    <!-- 插入扩展字段(前台提交) -->
+    <insert id="insert_sq_custom" parameterType="com.deya.wcm.bean.appeal.sq.SQCustom">
+        insert into cp_sq_custom(cu_id,model_id,sq_id,cu_key,cu_value)
+        values(#{cu_id},#{model_id},#{sq_id},#{cu_key},#{cu_value})
+    </insert>
+
+    <!-- 根据业务ID删除扩展字段 -->
+    <delete id="delete_sq_custom" parameterType="Map">
+        delete from cp_sq_custom where model_id in (${model_ids})
+    </delete>
+
+    <!-- 修改信件内容 -->
+    <update id="update_sq" parameterType="com.deya.wcm.bean.appeal.sq.SQBean">
+        update cp_sq set
+        sq_title2 = #{sq_title2},
+        sq_content2=#{sq_content2},
+        is_open=#{is_open},
+        area_id=#{area_id},
+        cat_id=#{cat_id},
+        pur_id=#{pur_id},
+        publish_status=#{publish_status},
+        submit_name=#{submit_name},
+        do_dept=#{do_dept},
+        weight=#{weight}
+        where sq_id = #{sq_id}
+    </update>
+
+    <!-- 修改扩展字段 -->
+    <insert id="update_sq_custom" parameterType="com.deya.wcm.bean.appeal.sq.SQCustom">
+        update cp_sq_custom set cu_value = #{cu_value} where cu_id = #{cu_id} and cu_key = #{cu_key}
+    </insert>
+
+    <!-- 修改信件点击次数  -->
+    <update id="setSQClickCount" parameterType="Map">
+        update cp_sq set hits = hits+1,day_hits = day_hits+1,week_hits = week_hits+1,month_hits = month_hits+1,lasthit_dtime=#{lasthit_dtime} where sq_id = #{sq_id}
+    </update>
+
+    <!-- 修改信件状态 -->
+    <update id="update_sq_status" parameterType="Map">
+        update cp_sq
+        <set>
+            <if test="sq_status != null">sq_status = #{sq_status},</if>
+            <if test="sq_reply != null">sq_reply = #{sq_reply},</if>
+            <if test="do_dept != null">do_dept = #{do_dept},</if>
+            <if test="publish_status != null">publish_status = #{publish_status},</if>
+            <if test="prove_type != null">prove_type = #{prove_type},</if>
+            <if test="sq_flag != null">sq_flag = #{sq_flag},</if>
+            <if test="over_dtime != null">over_dtime = #{over_dtime},</if>
+            <if test="step_id != null">step_id = #{step_id},</if>
+            <if test="is_back != null">is_back = #{is_back},</if>
+            <if test="limit_flag != null">limit_flag = #{limit_flag},</if>
+            <if test="supervise_flag != null">supervise_flag = #{supervise_flag},</if>
+            <if test="is_open != null">is_open = #{is_open},</if>
+            <if test="initial_sq_id != null">initial_sq_id = #{initial_sq_id},</if>
+            <if test="accept_dtime != null">accept_dtime = #{accept_dtime},</if>
+            <if test="sq_title2 != null">sq_title2 = #{sq_title2},</if>
+            <if test="sq_content2 != null">sq_content2 = #{sq_content2},</if>
+            <if test="timeout_flag != null">timeout_flag = #{timeout_flag},</if>
+            <if test="alarm_flag != null">alarm_flag = #{alarm_flag},</if>
+            <if test="time_limit != null">time_limit = #{time_limit},</if>
+            <if test="sat_score != null">sat_score = #{sat_score},</if>
+            <if test="weight != null">weight = #{weight},</if>
+            <if test="publish_dtime != null">publish_dtime = #{publish_dtime},</if>
+        </set>
+        where sq_id = #{sq_id}
+    </update>
+
+    <!-- 修改回退标识 -->
+    <update id="update_sq_back" parameterType="Map">
+        update cp_sq set is_back = #{is_back} where sq_id = #{sq_id}
+    </update>
+
+    <!-- 根据sq_id删除信件 -->
+    <update id="delete_sq_byID" parameterType="Map">
+        update cp_sq set sq_status = '-99' where sq_id in (${sq_ids})
+    </update>
+
+    <!-- 根据业务ID删除信件 -->
+    <update id="delete_sq_byModelID" parameterType="Map">
+        update cp_sq set sq_status = '-99' where model_id in (${model_ids})
+    </update>
+    <!-- 根据业务ID删除流程 -->
+    <delete id="delete_proce_byModelID" parameterType="Map">
+        delete from cp_process where sq_id in (select sq_id from cp_sq where model_id in (${model_ids}))
+    </delete>
+    <!-- 根据业务ID删除附件 -->
+    <delete id="delete_atta_byModelID" parameterType="Map">
+        delete from cp_sq_attachment where sq_id in (select sq_id from cp_sq where model_id in (${model_ids}))
+    </delete>
+    <!-- 根据业务ID删除特征标识 -->
+    <delete id="delete_tag_byModelID" parameterType="Map">
+        delete from cp_sq_tag where sq_id in (select sq_id from cp_sq where model_id in (${model_ids}))
+    </delete>
+
+    <select id="getAllSQListByYear" parameterType="java.lang.String" resultType="com.deya.wcm.bean.appeal.sq.SQBean">
+        <![CDATA[
+		select sq_id,model_id from cp_sq where sq_dtime like '${c_year}%'
+	]]>
+    </select>
+
+    <update id="update_sq_number" parameterType="Map">
+        update cp_sq set sq_all_number = ${sq_all_number},sq_number=${sq_number} where sq_id = ${sq_id}
+    </update>
+
+    <!-- ******************** 流程处理 开始 ****************************** -->
+    <!-- 根据信件ID得到流程列表 -->
+    <select id="getProcessListBySqID" parameterType="java.lang.String" resultType="com.deya.wcm.bean.appeal.sq.ProcessBean">
+        select * from cp_process where sq_id = #{sq_id} order by pro_id
+    </select>
+
+    <!-- 根据信件ID得到最后一步流程信息 -->
+    <select id="getLastProcessBySqID" parameterType="java.lang.String" resultType="com.deya.wcm.bean.appeal.sq.ProcessBean">
+        select * from cp_process where pro_id = (select max(pro_id) from cp_process where sq_id = #{sq_id})
+    </select>
+
+    <!-- 插入流程信件 -->
+    <insert id="insert_sq_process" parameterType="com.deya.wcm.bean.appeal.sq.ProcessBean">
+        insert into cp_process(pro_id,sq_id,user_id,user_realname,do_dept,dept_name,pro_dtime,pro_type,pro_note,to_dept_name,old_dept_id,old_sq_status,old_prove_type)
+        values(#{pro_id},#{sq_id},#{user_id},#{user_realname},#{do_dept},#{dept_name},#{pro_dtime},#{pro_type},#{pro_note},#{to_dept_name},#{old_dept_id},#{old_sq_status},#{old_prove_type})
+    </insert>
+
+    <delete id="delete_sq_process" parameterType="Map">
+        delete from cp_process where sq_id in (${sq_id})
+    </delete>
+
+    <delete id="delete_sq_process_byProid" parameterType="java.lang.String">
+        delete from cp_process where pro_id = #{pro_id}
+    </delete>
+    <!-- ******************** 流程处理 结束 ****************************** -->
+
+    <!-- ******************** 特征标识处理 开始 ****************************** -->
+    <!-- 根据诉求ID得到特征列表 -->
+    <select id="getSQTagList" parameterType="java.lang.String" resultType="com.deya.wcm.bean.system.assist.TagsBean">
+        select tag_id,tag_name from cs_info_tags where tag_id in (select tag_id from cp_sq_tag where sq_id = #{sq_id})
+    </select>
+
+    <!-- 插入特征关联表 -->
+    <insert id="insert_sq_tag" parameterType="Map">
+        insert into cp_sq_tag(sq_id,tag_id)values(#{sq_id},#{tag_id})
+    </insert>
+
+    <!-- 删除特征关联表 -->
+    <insert id="delete_sq_tag" parameterType="Map">
+        delete from cp_sq_tag where sq_id in (${sq_ids})
+    </insert>
+    <!-- ******************** 特征标识处理 结束 ****************************** -->
+
+    <!-- ******************** 附件处理 开始 ****************************** -->
+    <!-- 得到附件信息  -->
+    <select id="getSQAttachmentList" parameterType="Map" resultType="com.deya.wcm.bean.appeal.sq.SQAttachment">
+        select * from cp_sq_attachment where sq_id in (${sq_ids}) and relevance_type = #{relevance_type}
+    </select>
+
+    <!-- 插入附件关联信息 -->
+    <insert id="insert_sq_atta" parameterType="com.deya.wcm.bean.appeal.sq.SQAttachment">
+        insert into cp_sq_attachment(sq_id,att_name,att_path,relevance_type)values(#{sq_id},#{att_name},#{att_path},#{relevance_type})
+    </insert>
+
+    <!-- 删除附件关联信息 -->
+    <delete id="delete_sq_atta" parameterType="Map">
+        delete from cp_sq_attachment where sq_id in (${sq_ids})
+        <if test="relevance_type != null">and relevance_type = #{relevance_type}</if>
+    </delete>
+    <!-- ******************** 附件处理 结束 ****************************** -->
+
+    <!-- ******************** 需要处理的部分 开始 ****************************** -->
+    <!-- 得到诉求列表 -->
+    <sql id="getSqList_sql_item">
+        pur_id,sq_code,sq_id,model_id,me_id,sq_realname,do_dept,sq_dtime,sq_title2,submit_name,supervise_flag,alarm_flag,timeout_flag,publish_status,sq_status,weight,sq_all_number,sq_number
+    </sql>
+    <sql id="getSqList_sql_conn">
+        where model_id in (${model_id}) and sq_status != '-99'
+        <choose><!-- 如果是管理员，取自身所在部门and提交部门为空的信件，否则取自身部门 -->
+            <when test="is_admin != null">
+                <!-- 判断是否是待审件列表，如果是待审件(page_type不为空为待审件)，且是管理员的话，不加所属部门的条件, -->
+                <if test="is_manager_page == null">
+                    <if test="page_type == null">
+                        and (
+                        (do_dept is null or do_dept = 0)
+                        <if test="do_dept != null">
+                            or do_dept in (${do_dept})
+                        </if>
+                        )
+                    </if>
+                </if>
+            </when>
+            <otherwise>
+                <if test="is_manager_page == null">
+                    <!-- 待审件加入下面的sql -->
+                    <if test="page_type != null">${dsj_sql}</if>
+                    and do_dept in (${do_dept})
+                </if>
+            </otherwise>
+        </choose>
+        <!-- 流程处理状态条件 -->
+        <if test="sq_status != null">and sq_status in (${sq_status})</if><!-- 信件标识条件  -->
+        <if test="sq_flag != null">and sq_flag in (${sq_flag})</if>
+        <!-- 判断是否是显示回退列表 -->
+        <if test="is_back != null">and is_back = #{is_back}</if><!-- 红黄牌条件 -->
+        <if test="alarm_flag != null">and alarm_flag in (${alarm_flag})</if><!-- 延期待审列表 -->
+        <if test="limit_flag != null">and limit_flag = ${limit_flag}</if><!-- 延时申请标识 -->
+        <if test="supervise_flag != null">and supervise_flag = ${supervise_flag}</if><!-- 督办标识 -->
+        <!-- 判断是自办还是转办 -->
+        <if test="prove_type != null">and prove_type in (${prove_type})</if>
+        <!-- 判断是发布状态 -->
+        <if test="publish_status != null">and publish_status = ${publish_status}</if>
+        <!-- 以下为查询条件 -->
+        <if test="pur_id != null">and pur_id = ${pur_id}</if>
+        <if test="submit_name != null">and submit_name like '%${submit_name}%'</if>
+        <if test="sq_dtime != null">and sq_dtime > #{sq_dtime}</if>
+        <if test="sq_title2 != null">and sq_title2 like '%${sq_title2}%'</if>
+        <if test="sq_realname != null">and sq_realname like '%${sq_realname}%'</if>
+        <if test="sq_content2 != null">and sq_content2 like '%${sq_content2}%'</if>
+        <if test="sq_code != null">and sq_code = #{sq_code}</if>
+        <if test="me_id != null">and me_id = #{me_id}</if>
+    </sql>
+    <select id="getSqList" parameterType="Map" resultType="com.deya.wcm.bean.appeal.sq.SQBean">
+        select * from (
+        select row_.*, rownum rownum_ from (
+        select <include refid="getSqList_sql_item"/> from cp_sq
+        <include refid="getSqList_sql_conn"/>
+        order by ${sort_name} ${sort_type}
+        <![CDATA[
+	        ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
+    	) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+    ]]>
+    </select>
+
+    <select id="getSqList_mysql" parameterType="Map" resultType="com.deya.wcm.bean.appeal.sq.SQBean">
+        select <include refid="getSqList_sql_item"/> from cp_sq <include refid="getSqList_sql_conn"/> order by ${sort_name} ${sort_type} limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
+    </select>
+
+    <select id="getSqList_mssql" parameterType="Map" resultType="com.deya.wcm.bean.appeal.sq.SQBean">
+        select top ${page_size} <include refid="getSqList_sql_item"/>
+        from cp_sq
+        <include refid="getSqList_sql_conn"/>
+        and sq_id not in
+        (select top ${start_num} sq_id
+        from cp_sq	 <include refid="getSqList_sql_conn"/>
+        order by ${sort_name} ${sort_type}  )
+        order by ${sort_name} ${sort_type}
+    </select>
+
+    <!-- 得到已办理的信件列表 -->
+    <sql id="getTransactSQList_sql_item">
+        distinct cs.sq_id,cs.publish_status,cs.sq_status,cs.sq_code,cs.model_id,cs.me_id,cs.sq_realname,cs.do_dept,cs.sq_dtime,cs.sq_title2,cs.submit_name,cs.supervise_flag,cs.alarm_flag,cs.timeout_flag,cs.weight
+    </sql>
+    <sql id="getTransactSQList_sql_conn">
+        where cs.sq_id = cp.sq_id and cs.model_id in (${model_id}) and cp.do_dept = #{do_dept}
+        and cp.pro_type in (${pro_type})
+        <if test="sq_dtime != null">
+            and sq_dtime > #{sq_dtime}
+        </if>
+        <if test="pur_id != null">and pur_id = ${pur_id}</if>
+        <if test="submit_name != null">and submit_name like '%${submit_name}%'</if>
+        <if test="sq_title2 != null">and cs.sq_title2 like '%${sq_title2}%'</if>
+        <if test="sq_realname != null">and cs.sq_realname like '%${sq_realname}%'</if>
+        <if test="sq_content2 != null">and cs.sq_content2 like '%${sq_content2}%'</if>
+        <if test="sq_code != null">and sq_code = #{sq_code}</if>
+    </sql>
+    <select id="getTransactSQList" parameterType="Map" resultType="com.deya.wcm.bean.appeal.sq.SQBean">
+        select * from (
+        select row_.*, rownum rownum_ from (
+        select <include refid="getTransactSQList_sql_item"/> from cp_sq cs,cp_process cp <include refid="getTransactSQList_sql_conn"/> order by ${sort_name} ${sort_type}
+        <![CDATA[
+	        ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
+    	) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+    ]]>
+    </select>
+    <select id="getTransactSQList_mysql" parameterType="Map" resultType="com.deya.wcm.bean.appeal.sq.SQBean">
+        select <include refid="getTransactSQList_sql_item"/> from cp_sq cs,cp_process cp <include refid="getTransactSQList_sql_conn"/> order by ${sort_name} ${sort_type} limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
+    </select>
+    <select id="getTransactSQList_mssql" parameterType="Map" resultType="com.deya.wcm.bean.appeal.sq.SQBean">
+        select top ${page_size} <include refid="getTransactSQList_sql_item"/>
+        from cp_sq cs,cp_process cp
+        <include refid="getTransactSQList_sql_conn"/>
+        and sq_id not in
+        (select top ${start_num} sq_id
+        from cp_sq cs,cp_process cp <include refid="getTransactSQList_sql_conn"/>
+        order by ${sort_name} ${sort_type}  )
+        order by ${sort_name} ${sort_type}
+    </select>
+
+    <!-- 得到重复件列表 -->
+    <sql id="getReduplicateSQList_sql_conn">
+        where sq_flag = 0 and sq_id != #{sq_id}
+        <if test="sq_title2 != null">and sq_title2 = #{sq_title2}</if>
+        <if test="sq_realname != null">and sq_realname = #{sq_realname}</if>
+        <if test="sq_title2_l != null">and sq_title2 like '%${sq_title2_l}%'</if>
+        <if test="sq_realname_l != null">and sq_realname like '%${sq_realname_l}%'</if>
+        <if test="sq_content2 != null">and sq_content2 like '%${sq_content2}%'</if>
+    </sql>
+    <select id="getReduplicateSQList" parameterType="Map" resultType="com.deya.wcm.bean.appeal.sq.SQBean">
+        select * from (
+        select row_.*, rownum rownum_ from (
+        select * from cp_sq where sq_id in (select sq_id from cp_sq <include refid="getReduplicateSQList_sql_conn"/>
+        <![CDATA[
+	             ) order by sq_id desc
+	        ) row_ where rownum <=10
+    	) where rownum_ >=0
+    ]]>
+    </select>
+
+    <select id="getReduplicateSQList_mysql" parameterType="Map" resultType="com.deya.wcm.bean.appeal.sq.SQBean">
+        select * from cp_sq  <include refid="getReduplicateSQList_sql_conn"/> order by sq_id desc limit 0,10
+    </select>
+
+    <select id="getReduplicateSQList_mssql" parameterType="Map" resultType="com.deya.wcm.bean.appeal.sq.SQBean">
+        select top ${page_size} *
+        from cp_sq
+        <include refid="getReduplicateSQList_sql_conn"/>
+        and sq_id not in
+        (select top ${start_num} sq_id
+        from cp_sq <include refid="getReduplicateSQList_sql_conn"/>
+        order by sq_id desc )
+        order by sq_id desc
+    </select>
+
+    <!-- 得到信件列表（前台使用） -->
+    <sql id="getBrowserSQList_sql_item">
+        sq_code,do_dept,is_open,area_id,pur_id,sq_id,sq_realname,model_id,sq_dtime,sq_title2,submit_name,sq_status,hits,day_hits,week_hits,month_hits,lasthit_dtime,weight,sq_all_number,sq_number
+    </sql>
+    <select id="getBrowserSQList" parameterType="Map" resultType="com.deya.wcm.bean.appeal.sq.SQBean">
+        select * from (
+        select row_.*, rownum rownum_ from (
+        select <include refid="getBrowserSQList_sql_item"/> from cp_sq
+        where sq_flag in (0,1,2) and publish_status = 1 and is_open = 1 ${con}
+        order by ${order_by}
+        <![CDATA[
+	        ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
+    	) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+    ]]>
+    </select>
+    <select id="getBrowserSQList_mysql" parameterType="Map" resultType="com.deya.wcm.bean.appeal.sq.SQBean">
+        select <include refid="getBrowserSQList_sql_item"/> from cp_sq
+        where sq_flag in (0,1,2) and publish_status = 1 and is_open = 1 ${con}
+        order by ${order_by} limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
+    </select>
+    <select id="getBrowserSQList_mssql" parameterType="Map" resultType="com.deya.wcm.bean.appeal.sq.SQBean">
+        select top ${page_size} <include refid="getBrowserSQList_sql_item"/>
+        from cp_sq
+        where sq_flag in (0,1,2) and publish_status = 1 and is_open = 1 ${con}
+        and sq_id not in
+        (select top ${start_num} sq_id
+        from cp_sq	where sq_flag in (0,1,2) and publish_status = 1 and is_open = 1 ${con}
+        order by ${order_by} )
+        order by ${order_by}
+    </select>
+
+
+</mapper>

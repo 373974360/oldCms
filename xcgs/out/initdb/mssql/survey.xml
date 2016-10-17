@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+
+    <table>
+       <sql>
+          <![CDATA[
+				create table cp_survey_category(
+					id int not null PRIMARY KEY,
+					category_id varchar(200) default '',
+					c_name varchar(1000) default '',
+					description  ntext ,
+					model_path varchar(255) default '',
+					publish_status int default 0,
+					publish_time varchar(40) default '',
+					add_time varchar(200) default '',
+					add_user varchar(200) default '',
+					update_time varchar(200) default '',
+					update_user varchar(200) default '',
+					is_delete int default 0,
+					sort int default 0,
+					site_id varchar(200) default '',
+					template_list_path bigint default 0,
+					template_content_path bigint default 0,
+					template_result_path bigint default 0
+				)
+		   ]]> 
+       </sql>
+       <sql>
+          <![CDATA[
+			create table cp_survey(
+				id int not null PRIMARY KEY,
+				s_id varchar(200) default '',
+				category_id varchar(200) default '',
+				s_name varchar(1000) default '',
+				description  ntext ,
+				s_type varchar(255) default '',
+				is_register int default 0,
+				is_show_subsort int default 0,
+				ip_fre int default 1,
+				start_time varchar(40) default '',
+				end_time varchar(40) default '',
+				model_path varchar(255) default '',
+				pic_path varchar(500) default '',
+				show_result_status int default 1,
+				verdict ntext ,
+				ip_restrict varchar(4000) default '',
+				publish_status int default 0,
+				publish_time varchar(40) default '',
+				survey_content ntext ,
+				is_show_title int default 0,
+				is_show_result int default 0,
+				recommend_flag int default 0,
+				recommend_time varchar(40) default '',
+				add_time varchar(200) default '',
+				add_user varchar(200) default '',
+				update_time varchar(200) default '',
+				update_user varchar(200) default '',
+				is_delete int default 0,
+				sort int default 0,
+				spacing_interval varchar(20) default '',
+				site_id varchar(200) default '',
+				is_checkcode int default 0
+			)
+		   ]]> 
+       </sql>
+       <sql>
+          <![CDATA[
+			create table cp_survey_sub(id int not null PRIMARY KEY,survey_id varchar(200) default '',subject_id varchar(200) default '',sub_name varchar(1000) default '',subject_type varchar(100) default '',explains varchar(4000) default '',item_value varchar(4000) default '',is_required int default 0,sort int default 0)
+		]]> 
+       </sql>
+       <sql>
+          <![CDATA[
+			create table cp_survey_item(survey_id varchar(200) default '',subject_id varchar(200) default '',item_id varchar(200) default '',item_num int default 0,item_name varchar(1000) default '',is_text int default 0,text_value varchar(255) default '',sort int default 0)
+
+		   ]]> 
+       </sql>
+       <sql>
+          <![CDATA[
+			create table cp_survey_child(subject_id varchar(200) default '',item_id varchar(200) default '',item_num int default 0,item_name varchar(1000) default '',is_text int default 0,text_value varchar(255) default '',score int default 0,sort int default 0)
+
+		   ]]> 
+       </sql>
+       <sql>
+          <![CDATA[
+			create table cp_survey_answer(id int not null PRIMARY KEY,answer_id varchar(200) default '',s_id varchar(200) default '',ip varchar(100) default '',answer_time varchar(40) default '',operate_time int default 0,user_name varchar(200) default '')
+
+		   ]]> 
+       </sql>
+       <sql>
+          <![CDATA[
+				create table cp_survey_answer_item(answer_id varchar(200) default '',s_id varchar(200) default '',item_id varchar(100) default '',item_value varchar(40) default '',item_text varchar(4000) default '')
+		   ]]> 
+       </sql>
+    </table>
+    
+</root>

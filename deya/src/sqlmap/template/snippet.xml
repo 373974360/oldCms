@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="snippet">	
+	<!-- 得到节假日列表 -->
+	<select id="getAllSnippet" resultType="com.deya.wcm.bean.template.snippet.SnippetBean">
+	   select * from cs_snippet order by id
+	</select>
+	<!-- 得到代码片断对象 -->
+	<select id="getSnippetBean" parameterType="java.lang.String" resultType="com.deya.wcm.bean.template.snippet.SnippetBean">
+	   select * from cs_snippet where id = #{id}
+	</select>
+	<!-- 得到代码片断信息总数 -->
+	<select id="getSnippetCount" resultType="java.lang.String">
+		select count(*) from cs_snippet
+	</select>
+	<!-- 新增代码片断 -->
+	<insert id="insert_Snippet" parameterType="com.deya.wcm.bean.template.snippet.SnippetBean">
+	   insert into cs_snippet(id,sni_id,sni_name,sni_content,app_id,site_id) 
+	          values(#{id},#{sni_id},#{sni_name},#{sni_content},#{app_id},#{site_id})
+	</insert>
+	<!-- 修改代码片断 -->	
+	<update id="update_Snippet" parameterType="com.deya.wcm.bean.template.snippet.SnippetBean">
+		update cs_snippet set sni_name = #{sni_name},sni_content = #{sni_content}
+		where id = #{id} 
+	</update>
+	<!-- 删除代码片断 -->
+	<delete id="delete_Snippet_ids" parameterType="Map">
+		delete from cs_snippet where id in (${id})
+	</delete>
+</mapper>

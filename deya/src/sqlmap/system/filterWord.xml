@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="filterWord">
+	<select id="getFilterWordList" resultType="com.deya.wcm.bean.system.filterWord.FilterWordBean">
+		select * from cs_sys_filterword order by filterword_id desc
+	</select>
+
+	<resultMap id="sub_map" type="com.deya.wcm.bean.system.filterWord.FilterWordBean">
+		<id property="filterword_id" column="filterword_id"/>
+		<result property="pattern" column="pattern" />
+		<result property="replacement" column="replacement" />
+		<result property="app_id" column="app_id" />
+		<result property="site_id" column="site_id" />
+	</resultMap>
+	
+	<!-- 得到指定过滤词对象 -->
+	<select id="getFilterWordBean" parameterType="java.lang.String" resultType="com.deya.wcm.bean.system.filterWord.FilterWordBean">
+		select * from cs_sys_filterword where filterword_id = #{filterword_id}
+	</select>
+	
+	<!-- 新增过滤词 -->
+	<insert id="insert_FilterWord" parameterType="com.deya.wcm.bean.system.filterWord.FilterWordBean">
+		insert into cs_sys_filterword (filterword_id,pattern,replacement)
+		values (#{filterword_id},#{pattern},#{replacement})
+	</insert>
+	
+	<!-- 修改过滤词 -->
+	<update id="update_FilterWord" parameterType="com.deya.wcm.bean.system.filterWord.FilterWordBean">
+		update cs_sys_filterword set pattern=#{pattern},replacement=#{replacement}
+		where filterword_id=#{filterword_id}
+	</update>
+	
+	<!-- 删除过滤词 -->
+	<delete id="delete_FilterWord" parameterType="Map">
+		delete from cs_sys_filterword where filterword_id in (${filterword_ids})
+	</delete>
+	
+	<!-- *******************分页******************* -->
+	
+	<select id="getFilterWordCount" parameterType="Map" resultType="java.lang.String">
+		select count(filterword_id) from cs_sys_filterword 
+	</select>
+	
+	<select id="getAllFilterWord" parameterType="Map" resultType="com.deya.wcm.bean.system.filterWord.FilterWordBean">
+		select * from (
+			select row_.*,rownum rownum_ from(				
+					select * from cs_sys_filterword
+				<if test="con_value != null">
+					where ${con_name} like '%${con_value}%'
+				</if>
+	<![CDATA[
+				 order by ${sort_name} ${sort_type}
+			) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
+    	) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+	]]>
+	</select>
+	
+	<select id="getAllFilterWord_mysql" parameterType="Map" resultType="com.deya.wcm.bean.system.filterWord.FilterWordBean">
+		select * from cs_sys_filterword	
+            <if test="con_value != null">
+				where ${con_name} like '%${con_value}%'
+			</if>order by ${sort_name} ${sort_type} limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
+	</select>
+	
+	<select id="getAllFilterWord_mssql" parameterType="Map" resultType="com.deya.wcm.bean.system.filterWord.FilterWordBean">
+		select top ${page_size} *  
+		  from cs_sys_filterword 		 
+			where filterword_id not in
+			  (select top ${start_num} filterword_id
+				 from cs_sys_filterword
+				 <if test="con_value != null">
+					where ${con_name} like '%${con_value}%'
+				 </if> 
+				 order by ${sort_name} ${sort_type} )
+				 <if test="con_value != null">
+					and ${con_name} like '%${con_value}%'
+				</if>
+				order by ${sort_name} ${sort_type}
+	</select>
+</mapper>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="gk_f_pic">
+	
+	<delete id="delete_gk_f_tygs" parameterType="Map">
+		delete from cs_info_pic where info_id=#{info_id}
+	</delete>
+
+	<resultMap id="gkpic_info_man" type="com.deya.wcm.bean.cms.info.GKPicBean">
+		<id property="info_id" column="info_id" />
+	    <collection property="pic_content" ofType="java.lang.String" select="getPicModelContent" column="info_id"/>
+	    <collection property="item_list" ofType="java.util.List" select="getPicInfoList" column="info_id"/>
+	</resultMap>
+	
+	<resultMap id="gkpic_item" type="com.deya.wcm.bean.cms.info.PicItemBean">		
+		<id property="info_id" column="info_id" />		
+	    <result property="pic_path" column="pic_path"/>
+	    <result property="pic_note" column="pic_note"/>
+	</resultMap>
+	
+	<select id="getGKPicBean" parameterType="Map" resultMap="gkpic_info_man" >
+		select ci.*,gk.gk_index,gk.gk_year,gk.gk_num,gk.doc_no,gk.gk_file,gk.generate_dtime,gk.effect_dtime,gk.aboli_dtime,
+		gk.topic_id,gk.topic_name,gk.theme_id,gk.theme_name,gk.serve_id,gk.serve_name,gk.topic_key,gk.place_key,gk.language,
+		gk.carrier_type,gk.gk_validity,gk.gk_format,gk.gk_way,gk.gk_type,gk.gk_no_reason,gk.gk_time_limit ,gk.gk_range,
+		gk.gk_proc,gk.gk_duty_dept,gk.gk_input_dept,gk.file_head,gk.gk_signer
+		from cs_info ci,cs_gk_info gk
+		where ci.info_id=#{info_id} and ci.info_id = gk.info_id
+	</select>	
+</mapper>

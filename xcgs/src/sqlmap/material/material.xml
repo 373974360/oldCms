@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="material">
+    <!-- ********************处理素材库文件夹开始************************** -->
+	<!-- 插入素材库文件夹信息 -->	
+	<insert id="insert_MateFolder" parameterType="com.deya.wcm.bean.material.MateFolderBean">
+		insert into cs_attachment_folder(f_id,parent_id,cname,f_treeposition,creat_dtime,user_id,app_id,site_id)
+		values(#{f_id},#{parent_id},#{cname},#{f_treeposition},#{creat_dtime},#{user_id},#{app_id},#{site_id})
+	</insert>
+	<!-- 得到所有素材库文件夹列表 -->
+	<select id="getMateFolderList" resultType="com.deya.wcm.bean.material.MateFolderBean">
+		select *  from cs_attachment_folder 
+	</select>
+	<!-- 得到单个文件夹信息 -->
+	<select id="getMateFolderBean" parameterType="java.lang.String" resultType="com.deya.wcm.bean.material.MateFolderBean">
+		select * from cs_attachment_folder where f_id = #{f_id}
+	</select>
+	<!-- 修改素材库文件夹信息 -->	
+	<update id="update_MateFolder" parameterType="com.deya.wcm.bean.material.MateFolderBean">
+		update cs_attachment_folder set cname = #{cname},app_id = #{app_id} where f_id = #{f_id}
+	</update>
+	<!-- 移动素材库文件夹 -->	
+	<update id="move_MateFolder" parameterType="Map">
+		update cs_attachment_folder set parent_id = #{parent_id},f_treeposition=#{f_treeposition} where f_id = #{f_id}
+	</update>
+	<!-- 删除素材库文件夹 -->
+	<delete id="delete_MateFolder" parameterType="Map">
+		delete from cs_attachment_folder where  f_id in (${f_id})
+	</delete>
+	<!-- ********************处理素材库文件夹结束******************** -->
+	
+	<!-- ********************处理素材库信息开始******************** -->
+	<!--根据id得到单个素材对象 -->
+	<select id="getMateInfoBean" parameterType="java.lang.String" resultType="com.deya.wcm.bean.material.MateInfoBean">
+		select * from cs_attachment  where att_id = #{att_id}
+	</select>
+	
+	<!-- 移动附件 -->
+	<update id="move_mate_info" parameterType="Map">
+		update cs_attachment set f_id = ${f_id} where att_id in (${att_ids})
+	</update>
+	
+	<!--插入素材信息 -->
+	<insert id="insertMateInfo" parameterType="com.deya.wcm.bean.material.MateInfoBean">
+		insert into cs_attachment(att_id,f_id,att_ename,att_cname,att_path,alias_name,thumb_url,
+			hd_url,fileext,filesize,att_type,att_description,user_id,upload_dtime,app_id,site_id)
+		values(#{att_id},#{f_id},#{att_ename},#{att_cname},#{att_path},#{alias_name},#{thumb_url},
+			#{hd_url},#{fileext},#{filesize},#{att_type},#{att_description},#{user_id},#{upload_dtime},
+			#{app_id},#{site_id})
+	</insert>
+	<!--修改素材信息 -->
+	<insert id="updateMateInfo" parameterType="com.deya.wcm.bean.material.MateInfoBean">
+		update cs_attachment set alias_name = #{alias_name},att_description = #{att_description} where att_id = #{att_id}
+	</insert>
+	<!-- 得到素材库文件总数 -->
+	<select id="getMateInfoListCounts"  parameterType="Map" resultType="java.lang.String">
+		select count(*)  from cs_attachment
+		<where>
+			<if test="f_id != null " >
+				and f_id = ${f_id}
+			</if>
+			<if test="att_type != null">
+				and att_type = ${att_type}
+			</if>
+			<if test="site_id != null">
+				and site_id = #{site_id}
+			</if>
+			<if test="alias_name != null">
+				and alias_name like '%${alias_name}%'
+			</if>
+			<if test="beignTime != null">
+				<![CDATA[ and upload_dtime  > #{beignTime}]]>
+			</if>
+			<if test="endTime != null">
+				<![CDATA[ and upload_dtime  < #{endTime} ]]>
+			</if>
+		</where>
+	</select> 
+	<!-- 删除素材库文件夹 -->
+	<delete id="deleteMateInfos" parameterType="Map">
+		delete from cs_attachment where  att_id in (${att_id})
+	</delete>
+	
+	<!-- ******************** 需要处理的部分 开始 ****************************** -->
+	<!-- 得到素材库文件列表 -->
+	<sql id="getMateInfoList_sql_conn">
+		<where>
+			<if test="f_id != null " >
+				and f_id = ${f_id}
+			</if>
+			<if test="att_type != null">
+				and att_type = ${att_type}
+			</if>
+			<if test="site_id != null">
+				and site_id = #{site_id}
+			</if>
+			<if test="alias_name != null">
+				and (alias_name like '%${alias_name}%' or att_ename like '%${alias_name}%')
+			</if>
+			<if test="beignTime != null">
+				<![CDATA[  and upload_dtime  > #{beignTime}]]>
+			</if>
+			<if test="endTime != null">
+				<![CDATA[ and upload_dtime  < #{endTime} ]]>
+			</if>
+		</where>
+	</sql>
+	<select id="getMateInfoList"  parameterType="Map" resultType="com.deya.wcm.bean.material.MateInfoBean">	 
+		select * from (
+	       select row_.*, rownum rownum_ from (       
+	            select * from cs_attachment
+				 <include refid="getMateInfoList_sql_conn"/>
+		           order by att_id desc 
+		<![CDATA[
+		        ) row_ where rownum < =#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
+	    	) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+	    ]]>	
+	</select>
+	
+	<select id="getMateInfoList_mysql"  parameterType="Map" resultType="com.deya.wcm.bean.material.MateInfoBean">
+		select * from cs_attachment
+		 <include refid="getMateInfoList_sql_conn"/>
+        order by att_id desc limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
+	</select>
+	
+	<select id="getMateInfoList_mssql"  parameterType="Map" resultType="com.deya.wcm.bean.material.MateInfoBean">
+		select top ${page_size} * 
+			  from cs_attachment 
+			  <include refid="getMateInfoList_sql_conn"/>
+				and att_id not in
+				  (select top ${start_num} att_id
+					 from cs_attachment	 <include refid="getMateInfoList_sql_conn"/> 
+					 order by att_id desc  )
+			order by att_id desc
+	</select>
+</mapper>

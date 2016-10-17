@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <table>
+       <sql>
+          <![CDATA[
+				create table cs_attachment_folder(
+					f_id NUMBER(20) not null PRIMARY KEY,
+					parent_id NUMBER(20),
+					cname VARCHAR2(250) default '',
+					f_treeposition VARCHAR2(250) default '',
+					creat_dtime VARCHAR2(250) default '',
+					user_id NUMBER(20),
+					APP_ID VARCHAR2(250) default '',		
+					SITE_ID VARCHAR2(250) default ''
+				)
+		   ]]> 
+       </sql>
+       <sql>
+          <![CDATA[
+				create table cs_attachment(
+					att_id NUMBER(20) not null PRIMARY KEY,
+					f_id NUMBER(20),
+					att_ename VARCHAR2(250) default '',
+					att_cname VARCHAR2(250) default '',		
+					att_path VARCHAR2(250) default '',					
+					alias_name VARCHAR2(250) default '',
+					thumb_url VARCHAR2(250) default '',
+					hd_url VARCHAR2(250) default '',		
+					fileext VARCHAR2(250) default '',
+					filesize NUMBER(20),
+					att_type NUMBER(4),
+					att_description VARCHAR2(1000) default '',
+					user_id NUMBER(20),		
+					upload_dtime VARCHAR2(250) default '',
+					app_id VARCHAR2(250) default '',
+					site_id VARCHAR2(250) default ''					
+				)
+		   ]]> 
+       </sql>
+    </table>	
+</root>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="count">	
+	
+	<!-- 通过 诉求目的 ， 时间，业务ID 得到诉求信件总数 -->
+	<select id="getCountByModelIdAndPur" parameterType="Map" resultType="java.lang.Integer">
+	<![CDATA[
+		select count(sq_id) from cp_sq where model_id in (${model_id}) and pur_id=${pur_id} and sq_dtime>#{s} and sq_dtime<#{e}
+	]]>
+	</select> 
+	
+	<!-- 通过 诉求目的 ， 时间，业务ID，处理状态  得到诉求信件数 -->
+	<select id="getCountByModelIdAndPurStatus" parameterType="Map" resultType="java.lang.Integer">
+	<![CDATA[
+		select count(sq_id) from cp_sq where model_id in (${model_id}) and pur_id=${pur_id} and sq_status=${sq_status} and sq_dtime>#{s} and sq_dtime<#{e}
+	]]>
+	</select>
+	 
+	<!-- 通过  诉求目的 ， 时间，业务ID ，信件类型 得到诉求信件数 -->
+	<select id="getCountByModelIdAndFlag" parameterType="Map" resultType="java.lang.Integer">
+		<![CDATA[
+		select count(sq_id) from cp_sq where model_id in (${model_id}) and pur_id=${pur_id} and sq_dtime>#{s} and sq_dtime<#{e}
+		 ]]>
+		<if test="sq_flag != null"> 
+               and sq_flag=${sq_flag}
+        </if> 
+	</select> 
+	  
+	<!-- 通过  诉求目的 ， 时间，业务ID ，警示状态    得到诉求信件数 -->
+	<select id="getCountByModelIdAndAlarm" parameterType="Map" resultType="java.lang.Integer">
+		<![CDATA[
+		select count(sq_id) from cp_sq where model_id in (${model_id}) and pur_id=${pur_id} and sq_dtime>#{s} and sq_dtime<#{e}
+		]]>
+		<if test="alarm_flag != null"> 
+               and alarm_flag=${alarm_flag}
+        </if>  
+        <if test="timeout_flag != null"> 
+               and timeout_flag=${timeout_flag}
+        </if> 
+        <if test="supervise_flag != null"> 
+               and supervise_flag=${supervise_flag}
+        </if>
+        <if test="limit_flag != null"> 
+               and limit_flag=${limit_flag}
+        </if>
+	</select>
+	
+	<!-- 通过  时间，业务ID ，部门ID  附加条件   得到诉求信件数 -->
+	<select id="getCountByModelIdAndDept" parameterType="Map" resultType="java.lang.Integer">
+		<![CDATA[
+		select count(sq_id) from cp_sq where model_id in (${model_id}) and sq_dtime>#{s} and sq_dtime<#{e} 
+		]]>
+		<if test="do_dept != null"> 
+                and do_dept=${do_dept}  
+        </if>
+		<if test="sq_status != null"> 
+               and sq_status=${sq_status} 
+        </if>
+        <if test="sq_flag != null"> 
+               and sq_flag=${sq_flag} 
+        </if>
+        <if test="timeout_flag != null"> 
+               and timeout_flag=${timeout_flag} 
+        </if> 
+        <if test="alarm_flag != null"> 
+               and alarm_flag=${alarm_flag} 
+        </if>   
+        <if test="supervise_flag != null"> 
+               and supervise_flag=${supervise_flag}  
+        </if>
+        <if test="limit_flag != null"> 
+               and limit_flag=${limit_flag}     
+        </if>
+         <if test="pur_id != null"> 
+               and pur_id=${pur_id}   
+         </if>  
+         <if test="sat_score != sat_score"> 
+               and sat_score>${sat_score}  
+         </if>  
+	</select>
+	<!-- 通过  时间，业务ID ，部门ID，满意度指标ID   得到满意度分数 -->
+	<select id="getCountByModelIdAndDeptSat" parameterType="Map" resultType="java.lang.Integer">
+		<![CDATA[
+		select sum(r.sat_score) from cp_sq s,cp_sat_record r where s.sq_id=r.sq_id and s.model_id in (${model_id}) and s.sq_dtime>#{s} and s.sq_dtime<#{e} and s.do_dept=${do_dept}
+	    and r.sat_id=${sat_id}  
+	    ]]>
+	</select>
+	
+	
+	<!-- 通过  时间，业务ID ，部门ID  附加条件   得到诉求信件列表 -->
+	<select id="getListByModelIdAndDept" parameterType="Map" resultType="com.deya.wcm.bean.appeal.count.LetterCountBean">
+		<![CDATA[
+		select s.sq_code,s.sq_title,s.sq_dtime,s.sq_status,s.model_id,m.model_cname from cp_sq s,cp_model m 
+		    where s.model_id=m.model_id and s.model_id in (${model_id}) and s.sq_dtime>#{s} and s.sq_dtime<#{e} and s.sq_flag=0
+		]]>
+		<if test="do_dept != null"> 
+                and s.do_dept=${do_dept}  
+        </if>
+		<if test="sq_status != null"> 
+               and s.sq_status=${sq_status} 
+        </if>
+        <if test="type != null">
+               and s.sq_status!=3
+        </if>
+	</select>
+	
+	<!-- 通过  时间，业务ID ，部门ID  附加条件   得到诉求信件列表 数目 -->
+	<select id="getListByModelIdAndDeptCount" parameterType="Map" resultType="java.lang.Integer">
+		<![CDATA[
+		select count(*) from cp_sq s,cp_model m 
+		    where s.model_id=m.model_id and s.model_id in (${model_id}) and s.sq_dtime>#{s} and s.sq_dtime<#{e} and s.sq_flag=0
+		]]>
+		<if test="do_dept != null"> 
+                and s.do_dept=${do_dept}  
+        </if>
+		<if test="sq_status != null"> 
+               and s.sq_status=${sq_status} 
+        </if>
+        <if test="type != null">
+               and s.sq_status!=3
+        </if>
+	</select>
+	
+</mapper>

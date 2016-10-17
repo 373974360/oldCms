@@ -1,0 +1,9 @@
+[
+{"id":1,"text":"我的便签","attributes":{"p1":"value11","p2":"info_list.html"}},
+{"id":2,"text":"我的内容","attributes":{"p1":"value21","p2":"http://www.baidu.com"}},
+{"id":3,"text":"我的权限","attributes":{"p1":"value11","p2":"info_list.html"}},
+{"id":4,"text":"我的短消息","attributes":{"p1":"value11","p2":"info_list.html"}},
+{"id":5,"text":"个人资料","attributes":{"p1":"value11","p2":"info_list.html"}},
+{"id":6,"text":"工作报表","attributes":{"p1":"value11","p2":"info_list.html"}},
+{"id":7,"text":"修改密码","attributes":{"p1":"value11","p2":"info_list.html"}}
+]

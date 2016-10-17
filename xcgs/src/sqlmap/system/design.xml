@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="design">
+<!-- ******************* 设计工具整体风格 开始 *********************** -->
+	<!-- 得到整体风格总数 -->
+	<select id="getDesignCssCount" resultType="java.lang.String">
+		select count(id) from cs_design_css
+	</select>
+	
+	<select id="getDesignCssBean" parameterType="java.lang.String" resultType="com.deya.wcm.bean.system.design.DesignCSSBean">
+		select * from cs_design_css where css_id = #{css_id}
+	</select>
+	
+	<insert id="insert_desing_css" parameterType="com.deya.wcm.bean.system.design.DesignCSSBean">
+		insert into cs_design_css(id,css_id,css_ename,css_name,thumb_url,weight,app_id,site_id)
+		values(#{id},#{css_id},#{css_ename},#{css_name},#{thumb_url},#{weight},#{app_id},#{site_id})
+	</insert>
+	
+	<update id="update_desing_css" parameterType="com.deya.wcm.bean.system.design.DesignCSSBean">
+		update cs_design_css
+		set css_ename=#{css_ename},css_name=#{css_name},thumb_url=#{thumb_url},weight=#{weight} where css_id=#{css_id}
+	</update>
+	
+	<delete id="delete_desing_css" parameterType="Map">
+		delete from cs_design_css where css_id in ${css_ids}
+	</delete>
+<!-- ~~~~~~~~~~~ 设计工具整体风格 结束 ~~~~~~~~~~~ -->	
+
+<!-- ******************* 设计工具布局 开始 *********************** -->
+	<select id="getDesignLayoutCount" resultType="java.lang.String">
+		select count(id) from cs_design_layout
+	</select>
+	
+	<select id="getDesignLayoutBean" parameterType="java.lang.String" resultType="com.deya.wcm.bean.system.design.DesignLayoutBean">
+		select * from cs_design_layout where layout_id = #{layout_id}
+	</select>
+	
+	<insert id="insert_desing_layout" parameterType="com.deya.wcm.bean.system.design.DesignCSSBean">
+		insert into cs_design_layout(id,layout_id,layout_name,layout_content,thumb_url,weight,app_id,site_id)
+		values(#{id},#{layout_id},#{layout_name},#{layout_content},#{thumb_url},#{weight},#{app_id},#{site_id})
+	</insert>
+	
+	<update id="update_desing_layout" parameterType="com.deya.wcm.bean.system.design.DesignCSSBean">
+		update cs_design_layout
+		set layout_name=#{layout_name},layout_content=#{layout_content},thumb_url=#{thumb_url},weight=#{weight} where layout_id=#{layout_id}
+	</update>
+	
+	<delete id="delete_desing_layout" parameterType="Map">
+		delete from cs_design_layout where layout_id in ${layout_ids}
+	</delete>
+<!-- ~~~~~~~~~~~ 设计工具布局 结束 ~~~~~~~~~~~ -->	
+
+<!-- ******************* 设计工具模块 开始 *********************** -->
+	<select id="getDesignModuleCount" resultType="java.lang.String">
+		select count(id) from cs_design_module
+	</select>
+	
+	<select id="getDesignModuleBean" parameterType="java.lang.String" resultType="com.deya.wcm.bean.system.design.DesignModuleBean">
+		select * from cs_design_module where module_id = #{module_id}
+	</select>
+	
+	<insert id="insert_desing_module" parameterType="com.deya.wcm.bean.system.design.DesignCSSBean">
+		insert into cs_design_module(id,module_id,datasouce_type,module_name,module_content,v_code,style_ids,attr_ids,thumb_url,weight,app_id,site_id)
+		values(#{id},#{module_id},#{datasouce_type},#{module_name},#{module_content},#{v_code},#{style_ids},#{attr_ids},#{thumb_url},#{weight},#{app_id},#{site_id})
+	</insert>
+	
+	<update id="update_desing_module" parameterType="com.deya.wcm.bean.system.design.DesignCSSBean">
+		update cs_design_module
+		set datasouce_type=#{datasouce_type},module_name=#{module_name},module_content=#{module_content},v_code=#{v_code},style_ids=#{style_ids},attr_ids=#{attr_ids},thumb_url=#{thumb_url},weight=#{weight} where module_id=#{module_id}
+	</update>
+	
+	<delete id="delete_desing_module" parameterType="Map">
+		delete from cs_design_module where module_id in ${module_ids}
+	</delete>
+<!-- ~~~~~~~~~~~ 设计工具模块 结束 ~~~~~~~~~~~ -->
+
+<!-- ******************* 设计工具内容样式 开始 *********************** -->
+		<select id="getDesignStyleCount" resultType="java.lang.String">
+		select count(id) from cs_design_style
+	</select>
+	
+	<select id="getDesignStyleBean" parameterType="java.lang.String" resultType="com.deya.wcm.bean.system.design.DesignStyleBean">
+		select * from cs_design_style where style_id = #{style_id}
+	</select>
+	
+	<insert id="insert_desing_style" parameterType="com.deya.wcm.bean.system.design.DesignCSSBean">
+		insert into cs_design_style(id,style_id,style_name,class_name,thumb_url,weight,app_id,site_id)
+		values(#{id},#{style_id},#{style_name},#{class_name},#{thumb_url},#{weight},#{app_id},#{site_id})
+	</insert>
+	
+	<update id="update_desing_style" parameterType="com.deya.wcm.bean.system.design.DesignCSSBean">
+		update cs_design_style
+		set style_name=#{style_name},class_name=#{class_name},thumb_url=#{thumb_url},weight=#{weight} where style_id=#{style_id}
+	</update>
+	
+	<delete id="delete_desing_style" parameterType="Map">
+		delete from cs_design_style where style_id in ${style_ids}
+	</delete>
+<!-- ~~~~~~~~~~~ 设计工具内容样式 结束 ~~~~~~~~~~~ -->
+
+<!-- ******************* 设计工具外框样式 开始 *********************** -->
+	<select id="getDesignFrameCount" resultType="java.lang.String">
+		select count(id) from cs_design_frame
+	</select>
+	
+	<select id="getDesignFrameBean" parameterType="java.lang.String" resultType="com.deya.wcm.bean.system.design.DesignFrameBean">
+		select * from cs_design_frame where frame_id = #{frame_id}
+	</select>
+	
+	<insert id="insert_desing_frame" parameterType="com.deya.wcm.bean.system.design.DesignCSSBean">
+		insert into cs_design_frame(id,frame_id,frame_name,frame_content,thumb_url,weight,app_id,site_id)
+		values(#{id},#{frame_id},#{frame_name},#{frame_content},#{thumb_url},#{weight},#{app_id},#{site_id})
+	</insert>
+	
+	<update id="update_desing_frame" parameterType="com.deya.wcm.bean.system.design.DesignCSSBean">
+		update cs_design_frame
+		set frame_name=#{frame_name},frame_content=#{frame_content},thumb_url=#{thumb_url},weight=#{weight} where frame_id=#{frame_id}
+	</update>
+	
+	<delete id="delete_desing_frame" parameterType="Map">
+		delete from cs_design_frame where frame_id in ${frame_ids}
+	</delete>
+<!-- ~~~~~~~~~~~ 设计工具外框样式 结束 ~~~~~~~~~~~ -->
+
+<!-- ******************* 设计工具方案 开始 *********************** -->
+	<select id="getDesignCaseCount" resultType="java.lang.String">
+		select count(id) from cs_design_case
+	</select>
+	
+	<select id="getDesignCaseBean" parameterType="java.lang.String" resultType="com.deya.wcm.bean.system.design.DesignCaseBean">
+		select * from cs_design_case where case_id = #{case_id}
+	</select>
+	
+	<insert id="insert_desing_case" parameterType="com.deya.wcm.bean.system.design.DesignCSSBean">
+		insert into cs_design_case(id,case_id,css_id,case_name,case_content,thumb_url,weight,app_id,site_id)
+		values(#{id},#{case_id},#{css_id},#{case_name},#{case_content},#{thumb_url},#{weight},#{app_id},#{site_id})
+	</insert>
+	
+	<update id="update_desing_case" parameterType="com.deya.wcm.bean.system.design.DesignCSSBean">
+		update cs_design_case
+		set css_id=#{css_id},case_name=#{case_name},case_content=#{case_content},thumb_url=#{thumb_url},weight=#{weight} where case_id=#{case_id}
+	</update>
+	
+	<delete id="delete_desing_case" parameterType="Map">
+		delete from cs_design_case where case_id in ${case_ids}
+	</delete>
+<!-- ~~~~~~~~~~~ 设计工具方案 结束 ~~~~~~~~~~~ -->
+
+<!-- ******************* 设计页面与栏目关联 开始 *********************** -->
+	<select id="getDesignCategoryCount" resultType="java.lang.String">
+		select count(id) from cs_design_category
+	</select>
+	
+	<select id="getDesignCategoryBean" parameterType="Map" resultType="com.deya.wcm.bean.system.design.DesignCategoryBean">
+		select * from cs_design_category where cat_id = #{category_id} and site_id = #{site_id} and page_type = #{page_type}
+	</select>
+	
+	<insert id="insert_desing_category" parameterType="com.deya.wcm.bean.system.design.DesignCSSBean">
+		insert into cs_design_category(id,cat_id,css_id,template_id,design_content,page_type,publish_status,app_id,site_id)
+		values(#{id},#{cat_id},#{css_id},#{template_id},#{design_content},#{page_type},#{publish_status},#{app_id},#{site_id})
+	</insert>
+	
+	<update id="update_desing_category" parameterType="com.deya.wcm.bean.system.design.DesignCSSBean">
+		update cs_design_category
+		set css_id=#{css_id},design_content=#{design_content},page_type=#{page_type},publish_status=#{publish_status} where cat_id=#{cat_id} and site_id = #{site_id} and page_type = #{page_type}
+	</update>
+	
+	<delete id="delete_desing_category" parameterType="Map">
+		delete from cs_design_category where site_id = #{site_id}
+		<if test="category_ids != null">and cat_id in (${category_ids})</if>
+		<if test="template_ids != null">and template_id in (${template_ids})</if>
+	</delete>
+<!-- ~~~~~~~~~~~ 设计页面与栏目关联 结束 ~~~~~~~~~~~ -->
+
+<!-- ****************************** 需要处理的部分 *************************************************** -->
+
+<!-- ******************* 设计工具整体风格 开始 *********************** -->
+	<!-- 得到整体风格总数 -->
+	<select id="getDesignCssList" resultType="com.deya.wcm.bean.system.design.DesignCSSBean">
+		select * from (
+		       select row_.*, rownum rownum_ from (       
+		            select * from cs_design_css order by weight desc,id
+		<![CDATA[
+		        ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
+	    	) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+	    ]]>	
+	</select>
+	
+	<select id="getDesignCssList_mysql" parameterType="java.lang.String" resultType="com.deya.wcm.bean.system.design.DesignCSSBean">
+		select * from cs_design_css order by weight desc,id limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
+	</select>
+	
+	<select id="getDesignCssList_mssql" parameterType="java.lang.String" resultType="com.deya.wcm.bean.system.design.DesignCSSBean">
+		select top ${page_size} * 
+			  from cs_design_css
+				where css_id not in
+				  (select top ${start_num} css_id
+					 from cs_design_css
+					 order by weight desc,id )
+			order by weight desc,id
+	</select>
+	
+<!-- ~~~~~~~~~~~ 设计工具整体风格 处理结束 ~~~~~~~~~~~ -->	
+<!-- ******************* 设计工具布局 开始 *********************** -->
+	<select id="getDesignLayoutList" resultType="com.deya.wcm.bean.system.design.DesignLayoutBean">
+		select * from (
+		       select row_.*, rownum rownum_ from (       
+		            select * from cs_design_layout order by weight desc,id
+		<![CDATA[
+		        ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
+	    	) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+	    ]]>	
+	</select>
+	
+	<select id="getDesignLayoutList_mysql" parameterType="java.lang.String" resultType="com.deya.wcm.bean.system.design.DesignLayoutBean">
+		select id,layout_id,layout_name,thumb_url,weight,app_id,site_id from cs_design_layout order by weight desc,id limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
+	</select>
+	
+	<select id="getDesignLayoutList_mssql" parameterType="java.lang.String" resultType="com.deya.wcm.bean.system.design.DesignLayoutBean">
+		select top ${page_size} id,layout_id,layout_name,thumb_url,weight,app_id,site_id 
+			  from cs_design_layout
+				where layout_id not in
+				  (select top ${start_num} layout_id
+					 from cs_design_layout
+					 order by weight desc,id )
+			order by weight desc,id
+	</select>	
+<!-- ~~~~~~~~~~~ 设计工具布局 结束 ~~~~~~~~~~~ -->	
+
+	<select id="getDesignItemValueCount" parameterType="Map" resultType="java.lang.String">
+		select count(id) from ${table_name} where ${item_name} = #{item_value}
+	</select>
+
+<!-- ******************* 设计工具模块 开始 *********************** -->
+	<select id="getDesignModuleList" resultType="com.deya.wcm.bean.system.design.DesignModuleBean">
+		select * from (
+		       select row_.*, rownum rownum_ from (       
+		            select * from cs_design_module order by weight desc,id
+		<![CDATA[
+		        ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
+	    	) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+	    ]]>	
+	</select>
+	
+	<select id="getDesignModuleList_mysql" parameterType="java.lang.String" resultType="com.deya.wcm.bean.system.design.DesignModuleBean">
+		select id,module_id,module_name,thumb_url,weight,app_id,site_id from cs_design_module order by weight desc,id limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
+	</select>
+	
+	<select id="getDesignModuleList_mssql" parameterType="java.lang.String" resultType="com.deya.wcm.bean.system.design.DesignModuleBean">
+		select top ${page_size} id,module_id,module_name,thumb_url,weight,app_id,site_id 
+			  from cs_design_module
+				where module_id not in
+				  (select top ${start_num} module_id
+					 from cs_design_module
+					 order by weight desc,id )
+			order by weight desc,id
+	</select>
+<!-- ~~~~~~~~~~~ 设计工具模块 结束 ~~~~~~~~~~~ -->
+
+<!-- ******************* 设计工具内容样式 开始 *********************** -->
+	<select id="getDesignStyleList" resultType="com.deya.wcm.bean.system.design.DesignStyleBean">
+		select * from (
+		       select row_.*, rownum rownum_ from (       
+		            select * from cs_design_style
+		            <if test="style_ids != null">
+		            	where style_id in (${style_ids})
+		            </if>
+		             order by weight desc,id 
+		<![CDATA[
+		        ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
+	    	) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+	    ]]>	
+	</select>
+	
+	<select id="getDesignStyleList_mysql" parameterType="java.lang.String" resultType="com.deya.wcm.bean.system.design.DesignStyleBean">
+		select * from cs_design_style order by weight desc,id limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
+	</select>
+	
+	<select id="getDesignStyleList_mssql" parameterType="java.lang.String" resultType="com.deya.wcm.bean.system.design.DesignStyleBean">
+		select top ${page_size} * 
+			  from cs_design_style
+				where style_id not in
+				  (select top ${start_num} style_id
+					 from cs_design_style
+					 order by weight desc,id )
+			order by weight desc,id
+	</select>	
+<!-- ~~~~~~~~~~~ 设计工具内容样式 结束 ~~~~~~~~~~~ -->
+
+<!-- ******************* 设计工具外框样式 开始 *********************** -->
+	<select id="getDesignFrameList" resultType="com.deya.wcm.bean.system.design.DesignFrameBean">
+		select * from (
+		       select row_.*, rownum rownum_ from (       
+		            select * from cs_design_frame order by weight desc,id
+		<![CDATA[
+		        ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
+	    	) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+	    ]]>	
+	</select>
+	
+	<select id="getDesignFrameList_mysql" parameterType="java.lang.String" resultType="com.deya.wcm.bean.system.design.DesignFrameBean">
+		select id,frame_id,frame_name,thumb_url,weight,app_id,site_id from cs_design_frame order by weight desc,id limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
+	</select>
+	
+	<select id="getDesignFrameList_mssql" parameterType="java.lang.String" resultType="com.deya.wcm.bean.system.design.DesignFrameBean">
+		select top ${page_size} id,frame_id,frame_name,thumb_url,weight,app_id,site_id 
+			  from cs_design_frame
+				where frame_id not in
+				  (select top ${start_num} frame_id
+					 from cs_design_frame
+					 order by weight desc,id )
+			order by weight desc,id
+	</select>
+<!-- ~~~~~~~~~~~ 设计工具外框样式 结束 ~~~~~~~~~~~ -->
+
+<!-- ******************* 设计工具方案 开始 *********************** -->
+	<select id="getDesignCaseList" resultType="com.deya.wcm.bean.system.design.DesignCaseBean">
+		select * from (
+		       select row_.*, rownum rownum_ from (       
+		            select * from cs_design_case order by weight desc,id
+		<![CDATA[
+		        ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
+	    	) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+	    ]]>	
+	</select>
+	
+	<select id="getDesignCaseList_mysql" parameterType="java.lang.String" resultType="com.deya.wcm.bean.system.design.DesignCaseBean">
+		select id,case_id,case_name,thumb_url,weight,app_id,site_id from cs_design_case order by weight desc,id limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
+	</select>
+	
+	<select id="getDesignCaseList_mssql" parameterType="java.lang.String" resultType="com.deya.wcm.bean.system.design.DesignCaseBean">
+		select top ${page_size} id,case_id,case_name,thumb_url,weight,app_id,site_id 
+			  from cs_design_case
+				where case_id not in
+				  (select top ${start_num} case_id
+					 from cs_design_case
+					 order by weight desc,id )
+			order by weight desc,id
+	</select>	
+<!-- ~~~~~~~~~~~ 设计工具方案 结束 ~~~~~~~~~~~ -->
+
+<!-- ******************* 设计页面与栏目关联 开始 *********************** -->
+		<select id="getDesignCategoryList" resultType="com.deya.wcm.bean.system.design.DesignCategoryBean">
+		select * from (
+		       select row_.*, rownum rownum_ from (       
+		            select id,cat_id,template_id,page_type,publish_status,app_id,site_id from cs_design_category order by weight desc,id
+		<![CDATA[
+		        ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
+	    	) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+	    ]]>	
+	</select>
+	
+	<select id="getDesignCategoryList_mysql" parameterType="java.lang.String" resultType="com.deya.wcm.bean.system.design.DesignCategoryBean">
+		select id,cat_id,template_id,page_type,publish_status,app_id,site_id from cs_design_category order by weight desc,id limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
+	</select>
+	
+	<select id="getDesignCategoryList_mssql" parameterType="java.lang.String" resultType="com.deya.wcm.bean.system.design.DesignCategoryBean">
+		select top ${page_size} id,cat_id,template_id,page_type,publish_status,app_id,site_id 
+			  from cs_design_category
+				where cat_id not in
+				  (select top ${start_num} cat_id
+					 from cs_design_category
+					 order by weight desc,id )
+			order by weight desc,id
+	</select>
+<!-- ~~~~~~~~~~~ 设计页面与栏目关联 结束 ~~~~~~~~~~~ -->
+</mapper>

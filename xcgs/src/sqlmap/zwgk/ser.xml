@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="ser">	
+	<!-- *****************************场景式服务分类 开始*****************************  -->
+	<select id="getAllSerCategoryList" resultType="com.deya.wcm.bean.zwgk.ser.SerCategoryBean">
+		select * from cs_ser_category
+	</select>
+	
+	<select id="getSerCategoryBean" parameterType="java.lang.String" resultType="com.deya.wcm.bean.zwgk.ser.SerCategoryBean">
+		select * from cs_ser_category where ser_id = #{ser_id}
+	</select>
+	
+	<insert id="insert_ser_category" parameterType="com.deya.wcm.bean.zwgk.ser.SerCategoryBean">
+		insert into cs_ser_category(id,ser_id,parent_id,cat_type,tree_position,cat_name,description,next_desc,url,template_index,template_list,template_content,publish_status,publish_time,res_flag,dict_id,add_time,add_user,thumb_url,xgwt_cat_id,cjwt_cat_id)
+		values(#{id},#{ser_id},#{parent_id},#{cat_type},#{tree_position},#{cat_name},#{description},#{next_desc},#{url},#{template_index},#{template_list},#{template_content},#{publish_status},#{publish_time},#{res_flag},#{dict_id},#{add_time},#{add_user},#{thumb_url},#{xgwt_cat_id},#{cjwt_cat_id})
+	</insert>
+	
+	<update id="update_ser_category" parameterType="com.deya.wcm.bean.zwgk.ser.SerCategoryBean">
+		update cs_ser_category set cat_type = #{cat_type},cat_name = #{cat_name},description=#{description},next_desc=#{next_desc},url=#{url},
+		template_index=#{template_index},template_list=#{template_list},template_content=#{template_content},publish_status=#{publish_status},
+		publish_time=#{publish_time},res_flag=#{res_flag},dict_id=#{dict_id},thumb_url=#{thumb_url} where ser_id = #{ser_id}
+	</update>
+	
+	<update id="update_ser_category_status" parameterType="Map">
+		update cs_ser_category set publish_status=#{publish_status},publish_time=#{publish_time} where ser_id in (${ser_ids})
+	</update>
+	
+	<update id="sort_ser_category" parameterType="Map">
+		update cs_ser_category set sort_id = #{sort_id} where ser_id = #{ser_id}
+	</update>
+	
+	<update id="move_ser_category" parameterType="Map">
+		update cs_ser_category set parent_id = #{parent_id},tree_position=#{tree_position} where ser_id = #{ser_id}
+	</update>
+	
+	<delete id="delete_ser_category" parameterType="Map">
+		delete from cs_ser_category where ser_id in (${ser_ids})
+	</delete>
+	
+	<!-- 根据主题ID删除信息栏目表中的相关信息,常见问题栏目 -->
+	<delete id="delete_info_category_forSer" parameterType="Map">
+		delete cs_info_category where cat_id in (
+			select xgwt_cat_id from cs_ser_category where ser_id in (${ser_ids})
+		) or cat_id in (
+			select cjwt_cat_id from cs_ser_category where ser_id in (${ser_ids})
+		)
+	</delete>
+	
+	<!-- 根据主题ID删除信息栏目模板关联表中的相关信息,常见问题栏目 -->
+	<delete id="delete_info_category_model_forSer" parameterType="Map">
+		delete cs_info_category_model where cat_id in (
+			select xgwt_cat_id from cs_ser_category where ser_id in (${ser_ids})
+		) or cat_id in (
+			select cjwt_cat_id from cs_ser_category where ser_id in (${ser_ids})
+		)
+	</delete>
+	
+	<!-- 修改相关信息栏目的内容页模板ID -->
+	<update id="update_category_model_forSer" parameterType="java.lang.String">
+		update cs_info_category_model set template_content = #{template_content_id} where cat_id in (select xgwt_cat_id from cs_ser_category) or cat_id in (select cjwt_cat_id from cs_ser_category)
+	</update>
+	
+	<!-- *****************************场景式服务分类 结束*****************************  -->
+	
+	<!-- *****************************场景式服务资源 开始*****************************  -->
+	<!-- 根据目录ID得到资源列表 -->
+	<select id="getSerResouceList" parameterType="java.lang.String" resultType="com.deya.wcm.bean.zwgk.ser.SerResouceBean">
+		select id,res_id,ser_id,title,url,res_status,publish_status,publish_time from cs_ser_resouce where ser_id = #{ser_id} 
+		<if test="publish_status != null">and publish_status = 1</if>
+		order by sort_id,res_id
+	</select>
+	
+	<select id="getSerResouceListByPublish" parameterType="java.lang.String" resultType="com.deya.wcm.bean.zwgk.ser.SerResouceBean">
+		select * from cs_ser_resouce where ser_id = #{ser_id} and publish_status = 1 order by sort_id,res_id
+	</select>
+	
+	<select id="getSerResouceBean" parameterType="java.lang.String" resultType="com.deya.wcm.bean.zwgk.ser.SerResouceBean">
+		select * from cs_ser_resouce where res_id = #{res_id}
+	</select>
+	
+	<insert id="insert_ser_resouce" parameterType="com.deya.wcm.bean.zwgk.ser.SerResouceBean">
+		insert into cs_ser_resouce(id,res_id,ser_id,title,content,url,res_status,publish_status,publish_time,add_time,add_user)
+		values(#{id},#{res_id},#{ser_id},#{title},#{content},#{url},#{res_status},#{publish_status},#{publish_time},#{add_time},#{add_user})
+	</insert>
+	
+	<update id="update_ser_resouce" parameterType="com.deya.wcm.bean.zwgk.ser.SerResouceBean">
+		update cs_ser_resouce set title=#{title},content=#{content},url=#{url},res_status=#{res_status},publish_status=#{publish_status},
+		publish_time=#{publish_time} where res_id = #{res_id}
+	</update>
+	
+	<update id="update_ser_resouce_status" parameterType="Map">
+		update cs_ser_resouce set publish_status=#{publish_status},publish_time=#{publish_time} where res_id in (${res_ids})
+	</update>
+	
+	<update id="sort_ser_resouce" parameterType="Map">
+		update cs_ser_resouce set sort_id = #{sort_id} where res_id = #{res_id}
+	</update>
+	
+	<delete id="delete_ser_resouce" parameterType="Map">
+		delete from cs_ser_resouce where
+		<if test="res_ids != null">res_id in (${res_ids})</if>
+		<if test="ser_ids != null">ser_id in (${ser_ids})</if>
+	</delete>
+	
+	
+	<!-- *****************************场景式服务资源 结束*****************************  -->
+</mapper>

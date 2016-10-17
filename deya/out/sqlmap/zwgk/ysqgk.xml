@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="ysqgk">	
+	<!-- *****************************依申请公开业务配置开始*****************************  -->
+	<select id="getYsqgkConfigBean" resultType="com.deya.wcm.bean.zwgk.ysqgk.YsqgkConfigBean">
+		select * from cs_gk_ysq_config
+	</select>
+	
+	<insert id="insert_ysqgk_config" parameterType="com.deya.wcm.bean.zwgk.ysqgk.YsqgkConfigBean">
+		insert into cs_gk_ysq_config (id,time_limit,code_pre,code_rule,code_num,query_num,file_url,must_member,remind_type,user_secret,is_auto_publish,template_form,template_list,template_content,template_over,template_print,template_query)
+		values (#{id},#{time_limit},#{code_pre},#{code_rule},#{code_num},#{query_num},#{file_url},#{must_member},
+		#{remind_type},#{user_secret},#{is_auto_publish},#{template_form},#{template_list},#{template_content},#{template_over},#{template_print},#{template_query})
+	</insert>
+	
+	<delete id="delete_ysqgk_config" parameterType="Map">
+		delete from cs_gk_ysq_config
+	</delete>
+	
+	<!-- *****************************依申请公开业务配置结束*****************************  -->
+	
+	
+	<!-- *****************************依申请公开信息开始*****************************  -->
+	<insert id="insert_ysqgk_info" parameterType="com.deya.wcm.bean.zwgk.ysqgk.YsqgkBean">
+	      insert into cs_gk_ysq (
+				      ysq_id,
+				      ysq_code,
+				      query_code,
+				      ysq_type,
+				      name,
+				      company,
+				      card_name,
+				      card_code,
+				      org_code,
+				      licence,
+				      legalperson,
+				      linkman,
+				      tel,
+				      fax,
+				      phone,
+				      email,
+				      postcode,
+				      address,
+				      put_dtime,
+				      content,
+				      gk_index,
+				      description,
+				      is_derate,
+				      offer_type,
+				      get_method,
+				      is_other,
+				      is_third,
+				      is_extend,
+				      accept_content,
+				      accept_dtime,
+				      accept_user,
+				      reply_type,
+				      reply_content,
+				      reply_dtime,
+				      reply_user,
+				      is_mail,
+				      node_id,
+				      node_name,
+				      do_state,
+				      final_status,
+				      publish_state,
+				      supervise_flag,
+				      time_limit,
+				      timeout_flag,
+				      sat_score,
+				      hits,
+				      day_hits,
+				      week_hits,
+				      month_hits,
+				      lasthit_dtime,
+				      weight
+		)  values (
+				      #{ysq_id},
+				      #{ysq_code},
+				      #{query_code},
+				      #{ysq_type},
+				      #{name},
+				      #{company},
+				      #{card_name},
+				      #{card_code},
+				      #{org_code},
+				      #{licence},
+				      #{legalperson},
+				      #{linkman},
+				      #{tel},
+				      #{fax},
+				      #{phone},
+				      #{email},
+				      #{postcode},
+				      #{address},
+				      #{put_dtime},
+				      #{content},
+				      #{gk_index},
+				      #{description},
+				      #{is_derate},
+				      #{offer_type},
+				      #{get_method},
+				      #{is_other},
+				      #{is_third},
+				      #{is_extend},
+				      #{accept_content},
+				      #{accept_dtime},
+				      #{accept_user},
+				      #{reply_type},
+				      #{reply_content},
+				      #{reply_dtime},
+				      #{reply_user},
+				      #{is_mail},
+				      0,
+				      '',
+				      #{do_state},
+				      #{final_status},
+				      #{publish_state},
+				      #{supervise_flag},
+				      #{time_limit},
+				      #{timeout_flag},
+				      #{sat_score},
+				      #{hits},
+				      #{day_hits},
+				      #{week_hits},
+				      #{month_hits},
+				      #{lasthit_dtime},
+				      #{weight}
+		    )
+	</insert>
+	
+	<select id="getYsqgkBean"  parameterType="java.lang.String"  resultType="com.deya.wcm.bean.zwgk.ysqgk.YsqgkBean">
+		select * from cs_gk_ysq  where ysq_id= #{ysq_id}
+	</select>
+	
+	<!-- 根据查询码和编码查出内容 -->
+	<select id="getYsqgkBeanForQuery"  parameterType="Map"  resultType="com.deya.wcm.bean.zwgk.ysqgk.YsqgkBean">
+		select * from cs_gk_ysq  where ysq_code= #{ysq_code} and query_code = #{query_code}
+	</select>
+	
+	<!-- 得到依申请总数，用于前台统计显示 -->
+	<select id="getYsqStatistics"  parameterType="Map"  resultType="java.lang.String">
+		select count(ysq.ysq_id) from cs_gk_ysq ysq,cs_gk_node gk where ysq.node_id = gk.node_id and ysq.final_status = 0
+	</select>
+	
+	<select id="getYsqgkListsCount" parameterType="Map" resultType="java.lang.Integer" >
+	    select count(ysq_id) from cs_gk_ysq 
+	            <where>
+					<if test="node_id != null">
+						and node_id = '${node_id}'
+					</if>
+					<if test="do_state != null">
+						and do_state = ${do_state}
+					</if>
+					<if test="final_status != null">
+						and final_status = ${final_status}
+					</if>
+					<!-- 以下为查询条件 -->
+					<if test="ysq_type != null">
+						and ysq_type = ${ysq_type}
+					</if>
+					<if test="put_dtime != null">
+						and put_dtime > '${put_dtime}'
+					</if>
+					<if test="con_value != null">
+					    and ${con_name} like '%${con_value}%'
+				    </if>
+				   	<if test="content != null">
+						and content like '%${content}%'
+					</if>
+					<if test="highSearchString != null">
+					 	${highSearchString}
+					</if>
+				</where>
+	</select>
+	<update id="deal_ysqgk_info" parameterType="Map">
+		update cs_gk_ysq 
+					<set>
+		                <if test="is_other != null"> is_other = #{is_other},</if>
+		                <if test="is_third != null"> is_third = #{is_third},</if>
+		                <if test="is_extend != null"> is_extend = #{is_extend},</if>
+						<if test="accept_content != null"> accept_content = #{accept_content},</if>
+						<if test="accept_dtime != null"> accept_dtime = #{accept_dtime},</if>
+						<if test="reply_content != null"> reply_content = #{reply_content},</if>
+						<if test="reply_dtime != null"> reply_dtime = #{reply_dtime},</if>
+						<if test="accept_user != null"> accept_user = #{accept_user},</if>
+						<if test="reply_user != null"> reply_user = #{reply_user},</if>
+						<if test="reply_type != null"> reply_type = #{reply_type},</if>
+						<if test="is_mail != null"> is_mail = #{is_mail},</if>
+						<if test="do_state != null"> do_state = #{do_state},</if>
+						<if test="final_status != null"> final_status = #{final_status},</if>
+						<if test="publish_state != null"> publish_state = #{publish_state},</if>
+						<if test="supervise_flag != null"> supervise_flag = #{supervise_flag},</if>
+						<if test="weight != null"> weight = #{weight} </if>
+					</set>
+		<where>
+			<if test="ysq_id != null">
+		     ysq_id = ${ysq_id}
+			</if>
+		</where>
+	</update>
+	<update id="reBackInfos" parameterType="Map">
+		update cs_gk_ysq  set final_status = 0
+		<where>
+			<if test="ysq_id != null">
+				ysq_id in (${ysq_id})
+			</if>
+		</where>
+	</update>
+	<update id="setDeleteState" parameterType="Map">
+		update cs_gk_ysq set final_status = -1
+		<where>
+			<if test="ysq_id != null">
+				ysq_id in (${ysq_id})
+			</if>
+		</where>
+	</update> 
+	
+	<delete id="delete_ysqgk_info" parameterType="Map">
+		delete from cs_gk_ysq
+		<where>
+			<if test="ysq_id != null">
+				ysq_id in (${ysq_id})
+			</if>
+		</where>
+	</delete>
+	<delete id="clear_hasdeleted_infos" parameterType="Map">
+		delete from cs_gk_ysq where final_status = -1
+	</delete> 
+	
+	<update id="update_ysqgk_info" parameterType="com.deya.wcm.bean.zwgk.ysqgk.YsqgkBean">
+		update cs_gk_ysq 
+			<set>   
+		                <if test="query_code != null"> query_code=#{query_code},</if>
+		                <if test="ysq_type != null"> ysq_type=#{ysq_type},</if>
+		                <if test="name != null"> name=#{name},</if>
+					    <if test="company != null">company=#{company},</if>
+					    <if test="card_name != null">card_name=#{card_name},</if>
+						<if test="card_code != null">card_code=#{card_code},</if>
+						<if test="org_code != null">org_code=#{org_code},</if>
+						<if test="licence != null">licence=#{licence},</if>
+						<if test="legalperson != null">legalperson=#{legalperson},</if>
+						<if test="linkman != null">linkman=#{linkman},</if>
+						<if test="tel != null">tel=#{tel},</if>
+						<if test="fax != null">fax=#{fax},</if>
+						<if test="phone != null">phone=#{phone},</if>
+						<if test="email != null">email=#{email},</if>
+						<if test="postcode != null">postcode=#{postcode},</if>
+						<if test="address != null">address=#{address},</if>
+						<if test="put_dtime != null">put_dtime=#{put_dtime},</if>
+						<if test="content != null">content=#{content},</if>
+						<if test="gk_index != null">gk_index=#{gk_index},</if>
+						<if test="description != null">description=#{description},</if>
+						<if test="is_derate != null">is_derate=#{is_derate},</if>
+						<if test="offer_type != null">offer_type=#{offer_type},</if>
+						<if test="get_method != null">get_method=#{get_method},</if>
+						<if test="is_other != null">is_other=#{is_other},</if>
+						<if test="is_third != null">is_third=#{is_third},</if>
+						<if test="is_extend != null">is_extend=#{is_extend},</if>
+						<if test="accept_content != null">accept_content=#{accept_content},</if>
+						<if test="accept_dtime != null">accept_dtime=#{accept_dtime},</if>
+						<if test="accept_user != null">accept_user=#{accept_user},</if>
+						<if test="reply_type != null">reply_type=#{reply_type},</if>
+						<if test="reply_content != null">reply_content=#{reply_content},</if>
+						<if test="reply_dtime != null">reply_dtime=#{reply_dtime},</if>
+						<if test="reply_user != null">reply_user=#{reply_user},</if>
+						<if test="is_mail != null">is_mail=#{is_mail},</if>
+						<if test="do_state != null">do_state=#{do_state},</if>
+						<if test="final_status != null">final_status=#{final_status},</if>
+						<if test="publish_state != null">publish_state=#{publish_state},</if>
+						<if test="supervise_flag != null">supervise_flag=#{supervise_flag},</if>
+						<if test="time_limit != null">time_limit=#{time_limit},</if>
+						<if test="timeout_flag != null">timeout_flag=#{timeout_flag},</if>
+						<if test="lasthit_dtime != null">lasthit_dtime=#{lasthit_dtime},</if>
+						<if test="weight != null">weight=#{weight}</if>
+			</set>
+		<where>
+			<if test="ysq_id != null">
+		     ysq_id = ${ysq_id}
+			</if>
+		</where>
+	</update>
+	<!-- *****************************依申请公开信息开始*****************************  -->
+	
+	
+	<!-- *****************************依申请公开常用语开始*****************************  -->
+	<select id="getYsqgkPhrasalBean" parameterType="java.lang.String" resultType="com.deya.wcm.bean.zwgk.ysqgk.YsqgkPhrasalBean">
+		select * from cs_gk_phrasal where  gph_id  = ${gph_id}
+	</select>
+	
+	<select id="getYsqgkPhrasalLists" resultType="com.deya.wcm.bean.zwgk.ysqgk.YsqgkPhrasalBean">
+		select * from cs_gk_phrasal order by sort_id,gph_id
+	</select>
+	
+	<insert id="insert_ysqgk_phrasal" parameterType="com.deya.wcm.bean.zwgk.ysqgk.YsqgkPhrasalBean">
+		insert into cs_gk_phrasal (gph_id,gph_title,gph_content,gph_type,sort_id) values (#{gph_id},#{gph_title},#{gph_content},#{gph_type},#{sort_id})
+	</insert>
+	
+	<update id="update_ysqgk_phrasal" parameterType ="com.deya.wcm.bean.zwgk.ysqgk.YsqgkPhrasalBean">
+		 update cs_gk_phrasal 
+		 set 
+		 gph_title=#{gph_title},gph_content=#{gph_content},gph_type =#{gph_type},sort_id =#{sort_id} where gph_id  = ${gph_id}
+	</update>
+	
+	<!-- 保存排序 -->
+	<update id="update_ysqgk_sort" parameterType="Map">
+		update cs_gk_phrasal  set sort_id = #{sort_id} where gph_id = #{gph_id}
+	</update>
+	
+	<delete id="delete_ysqgk_phrasal" parameterType="Map">
+		delete from cs_gk_phrasal where gph_id in  (${gph_id})
+	</delete>
+	
+	<!-- *****************************依申请公开常用语开始*****************************  -->
+	
+	<!-- *******************************需替换sql 开始******************************* -->
+	<sql id="getYsqgkLists_sql_conn">
+		<where>
+					<if test="node_id != null">
+						and node_id = '${node_id}'
+					</if>
+                    <if test="kw != null">
+                        and (name like '%${kw}%' or content like '%${kw}%')
+                    </if>
+					<if test="do_state != null">
+						and do_state = ${do_state}
+					</if>
+					<if test="final_status != null">
+						and final_status = ${final_status}
+					</if>
+					<!-- 以下为查询条件 -->
+					<if test="ysq_type != null">
+						and ysq_type = ${ysq_type}
+					</if>
+                    <if test="ysq_code != null">
+                        and ysq_code = '${ysq_code}'
+                    </if>
+                    <if test="name != null">
+                        and name = '${name}'
+                    </if>
+					<if test="put_dtime != null">
+						and put_dtime > '${put_dtime}'
+					</if>
+					<if test="con_value != null">
+						and ${con_name} like '%${con_value}%'
+				    </if>
+					<if test="content != null">
+						and content like '%${content}%'
+					</if>
+					<if test="highSearchString != null">
+					 	${highSearchString}
+					</if>
+				</where>
+	</sql>
+	<select id="getYsqgkLists" parameterType="Map" resultType="com.deya.wcm.bean.zwgk.ysqgk.YsqgkListBean">  
+	    <![CDATA[  
+		select * from (
+		       select row_.*, rownum rownum_ from(       
+		            select ysq_id,ysq_code,ysq_type,name,node_name,put_dtime,publish_state,is_third,is_extend,timeout_flag,do_state,reply_dtime     
+		             from cs_gk_ysq
+		 ]]>		            
+				<include refid="getYsqgkLists_sql_conn"/>
+		<![CDATA[
+		           order by ${sort_name} ${sort_type}
+		        ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
+	    	) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+	    ]]>	   
+	</select>
+	
+	<select id="getYsqgkLists_mysql" parameterType="Map" resultType="com.deya.wcm.bean.zwgk.ysqgk.YsqgkListBean">
+		select ysq_id,ysq_code,ysq_type,name,node_name,put_dtime,publish_state,is_third,is_extend,timeout_flag,do_state,reply_dtime    
+		             from cs_gk_ysq
+				<include refid="getYsqgkLists_sql_conn"/>
+				order by ${sort_name} ${sort_type} limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
+	</select>
+	
+	<select id="getYsqgkLists_mssql" parameterType="Map" resultType="com.deya.wcm.bean.zwgk.ysqgk.YsqgkListBean">
+		select top ${page_size} ysq_id,ysq_code,ysq_type,name,node_name,put_dtime,publish_state,is_third,is_extend,timeout_flag,do_state,reply_dtime    
+			  from cs_gk_ysq 
+			  <include refid="getYsqgkLists_sql_conn"/>
+				and ysq_id not in
+				  (select top ${start_num} ysq_id
+					 from cs_gk_ysq	<include refid="getYsqgkLists_sql_conn"/> 
+					 order by ${sort_name} ${sort_type}  )
+			order by ${sort_name} ${sort_type}
+	</select>
+</mapper>

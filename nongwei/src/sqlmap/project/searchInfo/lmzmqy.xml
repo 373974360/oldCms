@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="searchInfo">
+    <sql id="getLmzmqyList_sql_conn">
+        where status != '-1'
+        <if test="keyword != null">
+            and ( qymc like '%${keyword}%' or dh like '%${keyword}%' or scjydd like '%${keyword}%' or ybsz like '%${keyword}%' or zxsz like '%${keyword}%' or scjyxkz like '%${keyword}%' or yb like '%${keyword}%')
+        </if>
+        <if test="qymc != null">
+            and qymc like '%${qymc}%'
+        </if>
+        <if test="dh != null">
+            and dh like '%${dh}%'
+        </if>
+        <if test="scjydd != null">
+            and scjydd like '%${scjydd}%'
+        </if>
+        <if test="ybsz != null">
+            and ybsz like '%${ybsz}%'
+        </if>
+        <if test="zxsz != null">
+            and zxsz like '%${zxsz}%'
+        </if>
+        <if test="scjyxkz != null">
+            and scjyxkz like '%${scjyxkz}%'
+        </if>
+        <if test="yb != null">
+            and yb like '%${yb}%'
+        </if>
+        <if test="status != null">
+            and status = #{status}
+        </if>
+    </sql>
+
+    <select id="getAllLmzmqy" resultType="com.deya.project.searchInfo.LmzmqyBean" >
+        select id,qymc,dh,scjydd,ybsz,zxsz,scjyxkz,yb,bz,addTime,status from dz_lmzmqy where status != '-1' order by id desc
+    </select>
+
+    <select id="getLmzmqyCount" parameterType="Map" resultType="java.lang.String" >
+        select count(id) from dz_lmzmqy
+        <include refid="getLmzmqyList_sql_conn"/>
+    </select>
+
+    <select id="getLmzmqyList" parameterType="Map" resultType="com.deya.project.searchInfo.LmzmqyBean" >
+        select * ybszom (
+        select row_.*, rownum rownum_ ybszom (
+        select id,qymc,dh,scjydd,ybsz,zxsz,scjyxkz,yb,bz,addTime,status from dz_lmzmqy <include refid="getLmzmqyList_sql_conn"/>
+        order by ${orderby}
+        <![CDATA[
+		        ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}
+	    	) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+	    ]]>
+    </select>
+
+    <select id="getLmzmqyList_mysql" parameterType="Map" resultType="com.deya.project.searchInfo.LmzmqyBean" >
+        select id,qymc,dh,scjydd,ybsz,zxsz,scjyxkz,yb,bz,addTime,status from dz_lmzmqy <include refid="getLmzmqyList_sql_conn"/>
+        order by ${orderby} limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
+    </select>
+
+    <select id="getLmzmqyList_mssql" parameterType="Map" resultType="com.deya.project.searchInfo.LmzmqyBean" >
+        select top #{page_size} id,qymc,dh,scjydd,ybsz,zxsz,scjyxkz,yb,bz,addTime,status
+        from dz_lmzmqy
+        <include refid="getLmzmqyList_sql_conn"/>
+        and id not in
+        (select top #{start_num} id
+        from dz_lmzmqy
+        <include refid="getLmzmqyList_sql_conn"/>
+        order by ${orderby} )
+        order by ${orderby}
+    </select>
+
+    <select id="getLmzmqyBean"  parameterType="Map" resultType="com.deya.project.searchInfo.LmzmqyBean" >
+        select id,qymc,dh,scjydd,ybsz,zxsz,scjyxkz,bz,addTime,status from dz_lmzmqy where id=#{id}
+    </select>
+
+    <insert id="insertLmzmqy" parameterType="com.deya.project.searchInfo.LmzmqyBean">
+        insert into dz_lmzmqy(
+        id,
+        qymc,
+        dh,
+        scjydd,
+        ybsz,
+        zxsz,
+        scjyxkz,
+        yb,
+        bz,
+        addTime,
+        status
+        ) values(
+        #{id},
+        #{qymc},
+        #{dh},
+        #{scjydd},
+        #{ybsz},
+        #{zxsz},
+        #{scjyxkz},
+        #{yb},
+        #{bz},
+        #{addTime},
+        #{status}
+        )
+    </insert>
+
+    <update id="updateLmzmqy"  parameterType="com.deya.project.searchInfo.LmzmqyBean">
+        update dz_lmzmqy set
+        qymc=#{qymc},
+        dh=#{dh},
+        scjydd=#{scjydd},
+        ybsz=#{ybsz},
+        zxsz=#{zxsz},
+        scjyxkz=#{scjyxkz},
+        yb=#{yb},
+        bz=#{bz},
+        addTime=#{addTime},
+        status=#{status}
+        where id=#{id}
+    </update>
+
+    <update id="changeLmzmqyStatus" parameterType="Map" >
+        update dz_lmzmqy set status = #{status}  where id in (${ids})
+    </update>
+
+    <update id="deleteLmzmqy" parameterType="Map" >
+        update dz_lmzmqy set status = '-1' where id in (${ids})
+    </update>
+
+</mapper>

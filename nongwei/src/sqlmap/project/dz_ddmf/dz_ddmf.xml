@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="project">
+	<select id="getDdmfCount" parameterType="Map" resultType="java.lang.String">
+		select count(id) from dz_ddmf
+		<where>			
+			status != '-1'  							
+			<if test="keyword != null">and (xm like '%${keyword}%' or zy like '%${keyword}%' or xl like '%${keyword}%' or jg like '%${keyword}%' or zz like '%${keyword}%' )</if>
+		</where>
+		
+	</select>
+
+	<select id="getDdmfList" parameterType="Map" resultType="com.cicro.project.dz_ddmf.DdmfBean">
+		select * from (
+		       select row_.*, rownum rownum_ from (   
+		            select id,xm,nl,xb,zy,xl,jg,zz,xjsj,lxdh,qq,email,addtime,status from dz_ddmf  
+		            <where>		
+		            	status != '-1' 				
+						<if test="keyword != null"> and (xm like '%${keyword}%' or zy like '%${keyword}%' or xl like '%${keyword}%' or jg like '%${keyword}%' or zz like '%${keyword}%' )</if>
+					</where>
+		           order by ${orderby}	
+		<![CDATA[
+		        ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
+	    	) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+	    ]]>			
+	</select>	
+
+	<select id="getAllDdmfList" resultType="com.cicro.project.dz_ddmf.DdmfBean">
+		select * from dz_ddmf where status != '-1'
+	</select>
+
+	<select id="getDdmfList_mysql" parameterType="Map" resultType="com.cicro.project.dz_ddmf.DdmfBean"> 
+			select id,xm,nl,xb,zy,xl,jg,zz,xjsj,lxdh,qq,email,addtime,status from dz_ddmf 
+			<where>						
+				status != '-1' 
+				<if test="keyword != null"> and (xm like '%${keyword}%' or zy like '%${keyword}%' or xl like '%${keyword}%' or jg like '%${keyword}%' or zz like '%${keyword}%' )</if>
+			</where>
+		    order by ${orderby} limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}	
+		
+	</select>	
+	
+	<select id="getDdmfBean" parameterType="Map" resultType="com.cicro.project.dz_ddmf.DdmfBean">
+		select * from dz_ddmf where id = #{id} 
+	</select>
+	
+	<insert id="insertDdmf" parameterType="com.cicro.project.dz_ddmf.DdmfBean">
+	 	insert into dz_ddmf(id,xm,nl,xb,zy,xl,jg,zz,xjsj,lxdh,qq,email,addTime,status)
+	 	values(#{id},#{xm},#{nl},#{xb},#{zy},#{xl},#{jg},#{zz},#{xjsj},#{lxdh},#{qq},#{email},#{addTime},#{status})
+	</insert>
+	
+	<update id="updateDdmf" parameterType="com.cicro.project.dz_ddmf.DdmfBean">
+	 	update dz_ddmf set xm= #{xm},xb= #{xb},zy= #{zy},xl= #{xl},
+	 	jg= #{jg},zz= #{zz},xjsj=#{xjsj},lxdh=#{lxdh},qq=#{qq},email=#{email}
+	 	where id = #{id}
+	</update>
+	
+	<delete id="deleteDdmf" parameterType="Map">
+		update dz_ddmf set status = '-1'  where id in (${ids})
+	</delete>
+</mapper>

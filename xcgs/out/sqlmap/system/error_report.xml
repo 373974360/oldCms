@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="error_report">	
+	 
+     <!-- 得到纠错列表 -->
+	 <select id="getErrorReportList" parameterType="Map" resultType="com.deya.wcm.bean.system.error.ErrorReportBean">
+	       <![CDATA[
+			select * from (
+		       select row_.*, rownum rownum_ from (         
+		           select e.id,e.info_id,e.err_type,e.err_name,e.err_time,e.info_url,e.err_state,i.title as info_title,i.site_id from cs_err_report e,cs_info i 
+		           where e.info_id=i.info_id and e.site_id = #{site_id}
+		    ]]>
+		        <if test="err_state!=null">  
+		           and e.err_state = #{err_state}
+		        </if>
+		    <![CDATA[
+		            order by e.err_state asc,e.id desc 
+		        ) row_ where rownum <=(#{start_num,,jdbcType=INTEGER} + #{page_size,,jdbcType=INTEGER})       
+	    	) where rownum_ >=(#{start_num,,jdbcType=INTEGER} + 1)
+		  ]]>
+	 </select>
+	 
+	 <!-- 得到纠错列表 -->
+	 <select id="getErrorReportList_mysql" parameterType="Map" resultType="com.deya.wcm.bean.system.error.ErrorReportBean">
+	       <![CDATA[      
+		           select e.id,e.info_id,e.err_type,e.err_name,e.err_time,e.info_url,e.err_state,i.title as info_title,i.site_id from cs_err_report e,cs_info i 
+		           where e.info_id=i.info_id and e.site_id = #{site_id}
+		    ]]>
+		        <if test="err_state!=null">  
+		           and e.err_state = #{err_state}
+		        </if>
+		    <![CDATA[
+		            order by e.err_state asc,e.id desc  limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
+		  ]]>
+	 </select>
+	 
+	 
+	 <!-- 得到纠错列表 -->
+	 <select id="getErrorReportList_mssql" parameterType="Map" resultType="com.deya.wcm.bean.system.error.ErrorReportBean">
+		  
+		  <![CDATA[
+			select top ${page_size} e.id,e.info_id,e.err_type,e.err_name,e.err_time,e.info_url,e.err_state,i.title as info_title,i.site_id 
+			  from cs_err_report e,cs_info i  
+			  where e.info_id=i.info_id and e.site_id = #{site_id}  
+			  ]]>
+		        <if test="err_state!=null">  
+		           and e.err_state = #{err_state}
+		        </if>
+		    <![CDATA[
+				and e.id not in
+				  (select top ${start_num} e.id
+					 from cs_err_report e,cs_info i 
+					  where e.info_id=i.info_id and i.site_id = #{site_id}
+					  ]]>
+				        <if test="err_state!=null">  
+				           and e.err_state = #{err_state}
+				        </if>
+				    <![CDATA[
+					 order by e.err_state asc,e.id desc  )
+			order by e.err_state asc,e.id desc
+		    ]]> 
+	 </select>
+	    
+	 <!-- 得到纠错列表 数量 -->
+	 <select id="getErrorReportListCount" parameterType="Map" resultType="java.lang.Integer">
+	       <![CDATA[        
+		           select count(e.id) from cs_err_report e,cs_info i where e.info_id=i.info_id and e.site_id = #{site_id}
+		   ]]> 
+		        <if test="err_state!=null">  
+		           and e.err_state = #{err_state}  
+		        </if>
+	 </select>
+	   
+	 <!-- 插入纠错信息 -->
+	 <insert id="addErrorReport" parameterType="com.deya.wcm.bean.system.error.ErrorReportBean">
+	       <![CDATA[        
+		          insert into cs_err_report
+		            (id,info_id,info_title,info_url,err_type,err_content,err_name, err_name_tel,err_name_email, err_name_ip, err_time, err_state, err_note,site_id)
+		           values(#{id},#{info_id},#{info_title},#{info_url},#{err_type},#{err_content},#{err_name},#{err_name_tel},#{err_name_email},#{err_name_ip},#{err_time},#{err_state},#{err_note},#{site_id})
+           ]]>
+	 </insert>
+	 
+	 <!-- 删除纠错信息-->
+	 <delete id="deleteErrorReports" parameterType="Map" >
+	       <![CDATA[     
+		           delete from cs_err_report where id in (${ids}) 
+           ]]>   
+	 </delete>
+	 
+	 <!-- 得到纠错信息 -->
+	 <select id="getErrorReportById" parameterType="Map" resultType="com.deya.wcm.bean.system.error.ErrorReportBean">
+	       <![CDATA[        
+		           select e.id,e.info_id,e.err_type,e.err_name,e.err_time,e.info_url,e.err_state,e.err_content,e.err_name_tel,e.err_name_ip,e.err_note,
+		           e.o_time,i.title as info_title,i.site_id from cs_err_report e,cs_info i 
+		           where e.info_id=i.info_id and e.id = #{id}
+           ]]>  
+	 </select>
+	 
+	 <!-- 处理纠错信息 -->
+	 <update id="updateErrorReportById" parameterType="com.deya.wcm.bean.system.error.ErrorReportBean">
+	      <![CDATA[        
+		           update cs_err_report set err_note=#{err_note},o_time=#{o_time},err_state=#{err_state}
+		           where id = #{id}
+           ]]> 
+	 </update>
+
+	
+</mapper>

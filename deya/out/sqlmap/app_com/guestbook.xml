@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="guestbook">
+	<!-- ************************留言分类　开始 **************************** -->
+	<select id="getAllGuestBookCategoryList" resultType="com.deya.wcm.bean.appCom.guestbook.GuestBookCategory">
+		select * from cs_guestbook_cat
+	</select>
+	
+	<insert id="insert_guestbook_category" parameterType="com.deya.wcm.bean.appCom.guestbook.GuestBookCategory">
+		insert into cs_guestbook_cat(id,cat_id,title,publish_status,direct_publish,is_member,is_receive_show,is_auth_code,template_index,template_list,template_form,template_content,site_id,description)
+		values(#{id},#{cat_id},#{title},#{publish_status},#{direct_publish},#{is_member},#{is_receive_show},#{is_auth_code},#{template_index},#{template_list},#{template_form},#{template_content},#{site_id},#{description})
+	</insert>
+	
+	<update id="update_guestbook_category" parameterType="com.deya.wcm.bean.appCom.guestbook.GuestBookCategory">
+		update cs_guestbook_cat set 
+		direct_publish=#{direct_publish},title=#{title},publish_status=#{publish_status},is_member=#{is_member},is_receive_show=#{is_receive_show},
+		is_auth_code=#{is_auth_code},template_index=#{template_index},template_list=#{template_list},template_form=#{template_form},
+		description=#{description},template_content=#{template_content}
+		where cat_id = ${cat_id}
+	</update>
+	
+	<update id="publish_guestbook_category" parameterType="Map">
+		update cs_guestbook_cat set publish_status = ${publish_status} where cat_id in (${cat_ids})
+	</update>
+	
+	<update id="sort_guestbook_category" parameterType="Map">
+		update cs_guestbook_cat set sort_id = ${sort_id} where cat_id = ${cat_id}
+	</update>
+	
+	<delete id="delete_guestbook_category" parameterType="Map">
+		delete from cs_guestbook_cat where cat_id in (${cat_ids})
+	</delete>
+	<!-- ************************留言分类　结束 **************************** -->
+	
+	<!-- ************************留言类别　开始 **************************** -->
+	<select id="getAllGuestBookClassList" resultType="com.deya.wcm.bean.appCom.guestbook.GuestBookClass">
+		select * from cs_guestbook_class
+	</select>
+	
+	<insert id="insert_guestbook_class" parameterType="com.deya.wcm.bean.appCom.guestbook.GuestBookClass">
+		insert into cs_guestbook_class(id,class_id,cat_id,name,description,site_id)
+		values(#{id},#{class_id},#{cat_id},#{name},#{description},#{site_id})
+	</insert>
+	
+	<update id="update_guestbook_class" parameterType="com.deya.wcm.bean.appCom.guestbook.GuestBookClass">
+		update cs_guestbook_class set 
+		name=#{name},description=#{description}
+		where class_id = ${class_id}
+	</update>
+	
+	<update id="publish_guestbook_class" parameterType="Map">
+		update cs_guestbook_class set publish_status = ${publish_status} where class_id in (${class_ids})
+	</update>
+	
+	<update id="sort_guestbook_class" parameterType="Map">
+		update cs_guestbook_class set sort_id = ${sort_id} where class_id = ${class_id}
+	</update>
+	
+	<delete id="delete_guestbook_class" parameterType="Map">
+		delete from cs_guestbook_class where class_id in (${class_ids})
+	</delete>
+	<!-- ************************留言类别　结束 **************************** -->
+
+	<!-- ************************留言主题　开始 **************************** -->
+	<!-- 得到留言板主题总数 -->
+	<select id="getGuestBookSubCount" parameterType="Map" resultType="java.lang.String" >
+		select count(id) from cs_guestbook_sub where site_id=#{site_id}
+		<if test="cat_id != null">and cat_id = ${cat_id}</if>
+		<if test="keyword != null">and title like '%${keyword}%'</if>
+	</select>
+	
+	<select id="getAllGuestBookSubList" resultType="com.deya.wcm.bean.appCom.guestbook.GuestBookSub" >
+		select * from cs_guestbook_sub
+	</select>	
+	
+	<!-- 添加留言板主题 -->
+	<insert id="insert_guestbook_sub" parameterType="com.deya.wcm.bean.appCom.guestbook.GuestBookSub">
+		insert into cs_guestbook_sub(id,gbs_id,cat_id,site_id,title,publish_status,direct_publish,is_member,is_receive_show,is_auth_code,template_index,template_list,template_form,template_content,description,remark,add_time,publish_time)
+		values(#{id},#{gbs_id},#{cat_id},#{site_id},#{title},#{publish_status},#{direct_publish},#{is_member},#{is_receive_show},#{is_auth_code},#{template_index},#{template_list},#{template_form},#{template_content},#{description},#{remark},#{add_time},#{publish_time})
+	</insert>
+	
+	<!-- 修改留言板主题 -->
+	<update id="update_guestbook_sub" parameterType="com.deya.wcm.bean.appCom.guestbook.GuestBookSub">
+		update cs_guestbook_sub set cat_id=#{cat_id},title=#{title},publish_status=#{publish_status},direct_publish=#{direct_publish},is_member=#{is_member},
+		is_receive_show=#{is_receive_show},is_auth_code=#{is_auth_code},template_index=#{template_index},template_list=#{template_list},template_form=#{template_form},
+		description = #{description},template_content=#{template_content},remark=#{remark},publish_time=#{publish_time}
+		where gbs_id = ${gbs_id}
+	</update>
+	
+	<!-- 修改留言板主题状态 -->
+	<update id="publish_guestbook_sub" parameterType="Map">
+		update cs_guestbook_sub set publish_status = ${publish_status},publish_time=#{publish_time} where gbs_id in (${gbs_ids})
+	</update>
+	
+	<!-- 删除留言板主题 -->
+	<delete id="delete_guestbook_sub" parameterType="Map">
+		delete from cs_guestbook_sub where 
+		<if test="gbs_ids != null">gbs_id in (${gbs_ids})</if>
+		<if test="site_id != null">site_id = #{site_id}</if>
+	</delete>
+	<!-- ************************留言主题　结束 **************************** -->
+	
+	<!-- ************************留言内容　开始 **************************** -->
+	<!-- 得到留言内容 -->
+	<select id="getGuestBookBean" parameterType="java.lang.String" resultType="com.deya.wcm.bean.appCom.guestbook.GuestBookBean">
+		select * from cs_guestbook where id = #{id}
+	</select>
+	
+	<!-- 添加留言内容 -->
+	<insert id="insert_guestbook" parameterType="com.deya.wcm.bean.appCom.guestbook.GuestBookBean">
+		insert into cs_guestbook(id,gbs_id,site_id,nickname,title,address,content,member_id,ip,class_id,realname,phone,tel,post_code,idcard,vocation,age,sex,add_time,publish_status)
+		values(#{id},#{gbs_id},#{site_id},#{nickname},#{title},#{address},#{content},#{member_id},#{ip},#{class_id},#{realname},#{phone},#{tel},#{post_code},#{idcard},#{vocation},#{age},#{sex},#{add_time},#{publish_status})
+	</insert>
+	
+	<!-- 修改留言内容 -->
+	<update id="update_guestbook" parameterType="com.deya.wcm.bean.appCom.guestbook.GuestBookBean">
+		update cs_guestbook set 
+		nickname=#{nickname},title=#{title},address=#{address},content=#{content},
+		publish_status=#{publish_status},reply_status=#{reply_status},reply_time=#{reply_time},reply_content=#{reply_content},
+		realname=#{realname},phone=#{phone},tel=#{tel},post_code=#{post_code},idcard=#{idcard},vocation=#{vocation},age=#{age},sex=#{sex}
+		where id = ${id}
+	</update>
+	
+	<!-- 回复留言内容 -->
+	<update id="replay_guestbook" parameterType="com.deya.wcm.bean.appCom.guestbook.GuestBookBean">
+		update cs_guestbook set publish_status=#{publish_status},reply_status=#{reply_status},reply_time=#{reply_time},reply_content=#{reply_content} where id = ${id}
+	</update>
+	
+	<!-- 修改留言板主题状态 -->
+	<update id="publish_guestbook" parameterType="Map">
+		update cs_guestbook set publish_status = ${publish_status} where id in (${ids})
+	</update>
+	
+	<!-- 修改留言板点击数 -->
+	<update id="click_guestbook" parameterType="java.lang.String">
+		update cs_guestbook set hits = hits+1 where id = #{id}
+	</update>
+	
+	<!-- 删除留言板内容 -->
+	<delete id="delete_guestbook" parameterType="Map">
+		delete from cs_guestbook where 
+		<if test="ids != null">id in (${ids})</if>
+		<if test="gbs_ids != null">gbs_id in (${gbs_ids})</if>
+		<if test="site_id != null">site_id = #{site_id}</if>
+	</delete>
+	
+	<sql id="getBroInfoList_sql_conn">
+		<if test="publish_status != null">and publish_status=${publish_status}</if>
+		<if test="reply_status != null">and reply_status=${reply_status}</if>
+		<if test="keyword != null">and (title like '%${keyword}%' or nickname like '%${keyword}%' or address like '%${keyword}%' or content like '%${keyword}%' or ip like '%${keyword}%')</if>
+		<if test="start_day != null">and add_time > #{start_day}</if>
+		<if test="end_day != null"><![CDATA[and add_time < #{end_day}]]></if>
+	</sql>
+	
+	<!-- 根据留言主题ID得到总数 -->
+	<select id="getGuestbookCount" parameterType="Map" resultType="java.lang.String">
+		select count(id) from cs_guestbook where gbs_id=${gbs_id}
+		<include refid="getBroInfoList_sql_conn"/>	
+	</select>
+	
+	<select id="getGuestbookCount_catgory" parameterType="Map" resultType="java.lang.String">
+		select count(gb.id) from cs_guestbook_sub sub,cs_guestbook gb where sub.cat_id =#{cat_id} and sub.gbs_id = gb.gbs_id and sub.site_id=#{site_id}
+		<if test="publish_status != null">and gb.publish_status=${publish_status}</if>
+		<if test="reply_status != null">and gb.reply_status=${reply_status}</if>
+		<if test="start_day != null">and gb.add_time > #{start_day}</if>
+		<if test="end_day != null"><![CDATA[and gb.add_time < #{end_day}]]></if>	
+	</select>
+	<!-- ************************留言内容　结束 **************************** -->
+	
+	<!-- **************统计留言　开始***************** -->
+	<select id="getGuestbookStatistics" parameterType="Map" resultType="com.deya.wcm.bean.appCom.guestbook.GuestBookCount">
+		select count(gb.id) count,sub.gbs_id from cs_guestbook_sub sub,cs_guestbook gb where sub.gbs_id = gb.gbs_id and sub.site_id=#{site_id}
+		<if test="gbs_ids != null">and sub.gbs_id in (${gbs_ids})</if>
+		<if test="start_day != null">and gb.add_time > #{start_day}</if>
+		<if test="end_day != null"><![CDATA[and gb.add_time < #{end_day}]]></if>		
+		group by sub.gbs_id order by gbs_id desc
+	</select>
+	<!-- **************统计留言　结束***************** -->
+	
+	<!-- **********************需要替换的部分********************************* -->
+	<!-- 根据留言主题ID得到留言列表-->
+	<select id="getGuestbookList" parameterType="Map" resultType="com.deya.wcm.bean.appCom.guestbook.GuestBookBean">
+		select * from (
+	       select row_.*, rownum rownum_ from (
+			select * from cs_guestbook where gbs_id=${gbs_id}
+			<include refid="getBroInfoList_sql_conn"/>	
+			order by ${sort_name} ${sort_type}
+		<![CDATA[
+	        ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
+    	) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+    ]]>
+	</select>
+	
+	<select id="getGuestbookList_mysql" parameterType="Map" resultType="com.deya.wcm.bean.appCom.guestbook.GuestBookBean">
+		select * from cs_guestbook where gbs_id=${gbs_id} <include refid="getBroInfoList_sql_conn"/> order by ${sort_name} ${sort_type} limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}	
+	</select>
+	
+	<select id="getGuestbookList_mssql" parameterType="Map" resultType="com.deya.wcm.bean.appCom.guestbook.GuestBookBean">
+		select top ${page_size} * from cs_guestbook where gbs_id=${gbs_id} <include refid="getBroInfoList_sql_conn"/> and id not in 
+		(
+			select top ${start_num} * from cs_guestbook where gbs_id=${gbs_id} <include refid="getBroInfoList_sql_conn"/> 
+			order by ${sort_name} ${sort_type}
+		)
+		order by ${sort_name} ${sort_type}
+	</select>
+	
+	<select id="getGuestBookSubListForDB" parameterType="Map" resultType="com.deya.wcm.bean.appCom.guestbook.GuestBookSub">
+		select * from (
+	       select row_.*, rownum rownum_ from (
+			select id,gbs_id,cat_id,title,publish_status,publish_time,site_id from cs_guestbook_sub where site_id=#{site_id}
+		<if test="cat_id != null">and cat_id = ${cat_id}</if>
+		<if test="keyword != null">and title like '%${keyword}%'</if>
+		<if test="publish_status != null">and publish_status = ${publish_status}</if>			
+			order by ${sort_name} ${sort_type}
+		<![CDATA[
+	        ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
+    	) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+    ]]>
+	</select>
+	
+	<select id="getGuestBookSubListForDB_mysql" parameterType="Map" resultType="com.deya.wcm.bean.appCom.guestbook.GuestBookSub">
+		select id,gbs_id,cat_id,title,publish_status,publish_time,site_id from cs_guestbook_sub where site_id=#{site_id}
+		<if test="cat_id != null">and cat_id = ${cat_id}</if>		
+		<if test="publish_status != null">and publish_status = ${publish_status}</if>
+			order by ${sort_name} ${sort_type} limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
+	</select>
+	
+	<select id="getGuestBookSubListForDB_mssql" parameterType="Map" resultType="com.deya.wcm.bean.appCom.guestbook.GuestBookSub">
+		select top ${page_size} id,gbs_id,cat_id,title,publish_status,publish_time,site_id from cs_guestbook_sub where site_id=#{site_id}
+		<if test="cat_id != null">and cat_id = ${cat_id}</if>
+		<if test="publish_status != null">and publish_status = ${publish_status}</if>
+		 and id not in 
+		(
+			select top ${start_num} id from cs_guestbook_sub where site_id=#{site_id}
+		<if test="cat_id != null">and cat_id = ${cat_id}</if>
+		<if test="publish_status != null">and publish_status = ${publish_status}</if>
+			order by ${sort_name} ${sort_type}
+		)
+		order by ${sort_name} ${sort_type}
+	</select>
+</mapper>

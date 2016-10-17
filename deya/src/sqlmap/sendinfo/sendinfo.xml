@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="sendinfo">
+	<sql id="getReceiveInfoList_sql_conn">
+		where ri.site_id = #{site_id} and ri.is_delete=0 and ri.cat_id = cate.cat_id and ri.site_id = cate.site_id 
+		<if test="conn != null">${conn}</if>
+	</sql>
+	
+	<select id="getReceiveInfoListForIDS" parameterType="Map" resultType="com.deya.wcm.bean.sendInfo.ReceiveInfoBean">
+		select * from cs_receive_info where id in (${ids})
+	</select>
+
+	<select id="getReceiveInfoCount" parameterType="Map" resultType="java.lang.String">
+		select count(ri.id) from cs_receive_info ri,cs_info_category cate <include refid="getReceiveInfoList_sql_conn"/>
+	</select>
+	
+	<insert id="insert_receive_info" parameterType="com.deya.wcm.bean.sendInfo.ReceiveInfoBean">
+		insert into cs_receive_info(id,cat_id,model_id,top_title,pre_title,title,subtitle,title_color,thumb_url,description,author,editor,source,info_keywords,info_description,tags,input_user,input_dtime,app_id,site_id,page_count,is_pic,is_am_tupage,tupage_num,content,s_info_id,s_site_id,s_site_domain,s_site_name,s_user_id,s_user_name,s_send_dtime,s_content_url,send_record_id)
+		values(#{id},#{cat_id},#{model_id},#{top_title},#{pre_title},#{title},#{subtitle},#{title_color},#{thumb_url},#{description},#{author},#{editor},#{source},#{info_keywords},#{info_description},#{tags},#{input_user},#{input_dtime},#{app_id},#{site_id},#{page_count},#{is_pic},#{is_am_tupage},#{tupage_num},#{content},#{s_info_id},#{s_site_id},#{s_site_domain},#{s_site_name},#{s_user_id},#{s_user_name},#{s_send_dtime},#{s_content_url},#{send_record_id})
+	</insert>
+	
+	<!-- 采用信息 -->
+	<update id="adopt_receive_info" parameterType="Map">
+		update cs_receive_info set is_record=${is_record},adopt_status=#{adopt_status},adopt_dtime=#{adopt_dtime},
+		adopt_user=#{adopt_user},adopt_desc=#{adopt_desc}
+		where id in (${ids})
+	</update>
+	
+	<delete id="delete_receive_info" parameterType="Map">
+		update cs_receive_info set is_delete = 1  where id in (${ids})
+	</delete>
+	
+	<sql id="getReceiveInfoList_sql_item">
+		ri.id,ri.cat_id,ri.model_id,ri.site_id,ri.title,ri.s_info_id,ri.s_site_id,ri.s_site_domain,ri.s_site_name,ri.s_user_id,ri.s_user_name,ri.s_send_dtime,ri.s_content_url,ri.send_record_id,ri.adopt_status,ri.adopt_dtime,ri.adopt_desc,cate.cat_cname 
+	</sql>
+
+	<select id="getReceiveInfoList" parameterType="Map" resultType="com.deya.wcm.bean.sendInfo.ReceiveInfoBean">
+		select * from (
+		       select row_.*, rownum rownum_ from (       
+		            select <include refid="getReceiveInfoList_sql_item"/> from cs_receive_info ri,cs_info_category cate  
+		            <include refid="getReceiveInfoList_sql_conn"/> 
+		            order by id desc
+		<![CDATA[
+		        ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
+	    	) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+	    ]]>	
+	</select>
+	
+	<select id="getReceiveInfoList_mysql" parameterType="Map" resultType="com.deya.wcm.bean.sendInfo.ReceiveInfoBean">
+	select <include refid="getReceiveInfoList_sql_item"/> from cs_receive_info ri,cs_info_category cate  
+		            <include refid="getReceiveInfoList_sql_conn"/> 
+		            order by id desc limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
+	</select>
+	
+	<select id="getReceiveInfoList_mssql" parameterType="Map" resultType="com.deya.wcm.bean.sendInfo.ReceiveInfoBean">
+		select top ${page_size} <include refid="getReceiveInfoList_sql_item"/> from cs_receive_info ri,cs_info_category cate 
+		<include refid="getReceiveInfoList_sql_conn"/> and ri.id not in(
+			select top ${start_num} ri.id from cs_receive_info ri,cs_info_category cate 
+			<include refid="getReceiveInfoList_sql_conn"/> order by id desc
+		)		
+		order by id desc
+	</select>
+	
+	<!-- **********************接收统计  开始********************** -->
+	<!-- 统计条件 -->
+	<sql id="getReceiveInfoCount_conn">
+		where site_id=#{site_id}
+		<if test="adopt_status != null"> and adopt_status = #{adopt_status}</if>
+		<if test="s_site_id != null"> and s_site_id in (${s_site_id})</if>
+		<if test="start_time != null"> and s_send_dtime > #{start_time}</if>
+		<if test="end_time != null"><![CDATA[ and s_send_dtime < #{end_time}]]></if>
+	</sql>
+	
+	<!-- 得到接收栏目统计列表 -->
+	<select id="getReceiveCateListForRecord" parameterType="Map" resultType="com.deya.wcm.bean.sendInfo.SendRecordCount">
+		select distinct cat_id,count(id) send_count from cs_receive_info 
+		<include refid="getReceiveInfoCount_conn"/>
+		 group by cat_id order by 1
+	</select>
+	
+	<!-- 得到报送站点信息量统计列表 -->
+	<select id="getSendSiteCountForReceive" parameterType="Map" resultType="com.deya.wcm.bean.sendInfo.SendRecordCount">
+		select distinct s_site_name as site_name,count(id) send_count from cs_receive_info 
+		<include refid="getReceiveInfoCount_conn"/>
+		 group by s_site_name order by 1
+	</select>
+	
+	<!-- 根据站点得到所有报送到此站点的列表 -->
+	<select id="getSendSiteListForCount" parameterType="java.lang.String" resultType="com.deya.wcm.bean.sendInfo.ReceiveInfoBean">
+		select distinct s_site_id,s_site_name from cs_receive_info where site_id=#{site_id}
+	</select>
+	
+	<!-- 根据站点得到所有的接收栏目信息列表 -->
+	<select id="getReceiveCateInfoList" parameterType="java.lang.String" resultType="com.deya.wcm.bean.sendInfo.ReceiveInfoBean">
+		select distinct cat_id from cs_receive_info where site_id=#{site_id}
+	</select>
+	
+	<select id="getReceiveInfoBean" parameterType="java.lang.String" resultType="com.deya.wcm.bean.sendInfo.ReceiveInfoBean">
+		select * from cs_receive_info where id =#{id}
+	</select>
+	
+	<!-- **********************接收统计  结束********************** -->
+</mapper>

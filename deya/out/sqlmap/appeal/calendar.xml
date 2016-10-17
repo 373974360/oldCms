@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="calendar">	
+	<!-- 得到节假日列表 -->
+	<select id="getAllCalendar" resultType="com.deya.wcm.bean.appeal.calendar.CalendarBean">
+	   select * from cp_calendar order by ca_id
+	</select>
+	<!-- 得到节假日对象 -->
+	<select id="getCalendarBean" parameterType="java.lang.String" resultType="com.deya.wcm.bean.appeal.calendar.CalendarBean">
+	   select * from cp_calendar where ca_id = #{ca_id}
+	</select>
+	<!-- 得到节假日信息总数 -->
+	<select id="getCalendarCount" resultType="java.lang.String">
+		select count(*) from cp_calendar
+	</select>
+	<!-- 新增节假日 -->
+	<insert id="insert_Calendar" parameterType="com.deya.wcm.bean.appeal.calendar.CalendarBean">
+	   insert into cp_calendar(ca_id,ca_name,start_dtime,end_dtime,ca_flag,ca_type) 
+	          values(#{ca_id},#{ca_name},#{start_dtime},#{end_dtime},#{ca_flag},#{ca_type})
+	</insert>
+	<!-- 修改节假日 -->	
+	<update id="update_Calendar" parameterType="com.deya.wcm.bean.appeal.calendar.CalendarBean">
+		update cp_calendar set ca_name = #{ca_name},start_dtime = #{start_dtime},
+		       end_dtime = #{end_dtime},ca_flag = #{ca_flag},ca_type = #{ca_type} 
+		where ca_id = #{ca_id} 
+	</update>
+	<!-- 删除节假日 -->
+	<delete id="delete_Calendar_ids" parameterType="Map">
+		delete from cp_calendar where ca_id in (${ca_id})
+	</delete>
+</mapper>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="video_sql">
+	<!-- 根据信息id得到视频信息内容  -->
+	<select id="getVideoBean" parameterType="java.lang.String" resultType="com.deya.wcm.bean.cms.info.VideoBean">
+		select 
+			i.info_id,
+			i.cat_id,
+			i.model_id,
+			i.from_id,
+			i.top_title,
+			i.pre_title,
+			i.title,
+			i.subtitle,
+			i.title_color,
+			i.thumb_url,
+			i.description,
+			i.author,
+			i.editor,
+			i.source,
+			i.info_keywords,
+			i.info_description,
+			i.tags,
+			i.content_url,
+			i.wf_id,
+			i.step_id,
+			i.info_status,
+			i.final_status,
+			i.weight,
+			i.hits,
+			i.day_hits,
+			i.week_hits,
+			i.month_hits,
+			i.lasthit_dtime,
+			i.is_allow_comment,
+			i.comment_num,
+			i.released_dtime,
+			i.input_user,
+			i.input_dtime,
+			i.modify_user,
+			i.modify_dtime,
+			i.opt_dtime,
+			i.is_auto_up,
+			i.up_dtime,
+			i.is_auto_down,
+			i.down_dtime,
+			i.is_host,
+			i.title_hashkey,
+			i.app_id,
+			i.site_id,
+			i.i_ver,
+			i.is_pic,
+			v.att_id,
+			v.video_path,
+			v.play_time,
+			v.info_content,
+			gk.*
+		from
+			cs_info i,cs_info_video v,cs_gk_info gk
+		where
+			i.info_id=v.info_id and i.info_id=#{info_id} and i.info_id=gk.info_id 
+	</select>
+	
+	<insert id="addVideo" parameterType="com.deya.wcm.bean.cms.info.VideoBean">
+		insert into cs_info_video(
+			info_id,
+			att_id,
+			video_path,
+			play_time,
+			info_content
+		) values(
+			${info_id},
+			#{att_id},
+			#{video_path},
+			${play_time},
+			#{info_content}
+		)
+	</insert>
+	
+	<update id="updateVideo" parameterType="com.deya.wcm.bean.cms.info.VideoBean">
+		update cs_info_video set
+				att_id=	#{att_id},
+				video_path=	#{video_path},
+				play_time=  #{play_time},
+				info_content=#{info_content}
+		where info_id=#{info_id}
+	</update>
+
+	<delete id="deleteVideo" parameterType="Map">
+		delete from cs_info_video where info_id=#{info_id}
+	</delete>
+</mapper>

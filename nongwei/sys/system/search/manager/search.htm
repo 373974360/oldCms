@@ -1,0 +1,75 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>搜索</title>
+<style type="text/css">
+<!--
+body {
+     margin-left: 0px;
+     margin-top: 0px;
+	 margin-right: 0px;
+	 margin-bottom: 0px; 
+}
+
+#potion a:link {color: #5F5F5F; text-decoration:none;font-size:14px;}
+#potion a:visited {color: #5F5F5F;text-decoration:none;font-size:14px;}
+#potion a:hover {color: red; text-decoration:none;font-size:14px;}
+#potion a:active {color: #000000; text-decoration:none;font-size:14px;}
+-->
+</style>
+<style type="text/css">
+
+#q{padding-left:5px; border:1px solid #445531; width:350px; height:28px; padding-top:3px;font-size: 18px; color:#000000;}
+#searchOK{background-image:url(images/sousuo.jpg);font-size:14px;cursor:hand;width:78px;height:27px;background-color:#FFFFFF;background-repeat:repeat;background-attachment:scroll;background-position:center;border: 0 solid #000000;text-align:center;padding:7px;}
+</style> 
+<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript">
+      function check(){
+		   if($.trim($("#q").val())=="" ){
+			  alert("关键字不能为空!");
+			  $("#q").focus();
+			  return false;
+		   }else{
+			  $("#searchform").submit();
+		   }
+      }
+</script>
+</head>
+<body scroll="no">
+     <form id="searchform" name="searchform" action="searchResultGJ.jsp" method="get">
+     <div id="mainDisplayArea">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td width="1" height="8" background="images/tabtitlebg.gif"></td>
+				<td height="8" background="images/tabtitlebg2.gif" width="84"></td>
+				<td width="100%" height="8" background="images/tabtitlebg2.gif"></td>
+			</tr>
+			<tr>
+				<td width="1" height="8"></td>
+				<td height="8" width="84"></td>
+				<td width="100%" height="8"></td>
+			</tr>		
+		</table>
+
+	<div style="margin-left:30%;margin-top:80px;" id="buttom_div" class="buttom_div">
+		<input type="text"  id="q" value="" name="q" >
+	    &nbsp;&nbsp;<input type="button" id="searchOK" name="searchOK" value="搜  索" onclick="check()"/>
+	    </br></br>
+	    &nbsp;&nbsp;<div id="potion"><a href="searchGj.htm">高级搜索</a>
+		&nbsp;&nbsp;&nbsp;&nbsp;<a href="searchGjInfo.htm">高级搜索-信息</a>
+	    &nbsp;&nbsp;&nbsp;&nbsp;<a href="searchGjGK.htm">高级搜索-政务公开</a>  
+		&nbsp;&nbsp;&nbsp;&nbsp;<a href="searchGjFW.htm">高级搜索-服务</a>  
+		<!--
+	    &nbsp;&nbsp;&nbsp;&nbsp;<a href="searchGjBszn.htm">高级搜索-办事指南</a>
+		-->
+	    </div>
+	</div>
+ 
+    
+
+</div>
+	 </form>
+	
+
+</body>
+</html>

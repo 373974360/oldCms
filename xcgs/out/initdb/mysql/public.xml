@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+
+    <table>
+
+       <sql>
+
+          <![CDATA[
+
+          	create table cs_wcm_sequence(table_name varchar(200) not null PRIMARY KEY,seq bigint(10))
+
+		   ]]> 
+
+       </sql>
+
+       <sql>
+
+          <![CDATA[
+
+          	create table cs_log_setting(audit_id bigint(20) not null PRIMARY KEY,user_id bigint(20),user_name varchar(250) default '',
+
+          	audit_des varchar(250) default '',audit_time varchar(250) default '',ip varchar(250) default '',app_id varchar(250) default '',
+
+          	site_id varchar(250) default '')
+
+		   ]]> 
+
+       </sql>
+		<sql>
+
+          <![CDATA[
+
+          	create table cs_log_login(
+				audit_id   bigint(20) not null,
+				user_id    bigint(20),
+				user_name  varchar(250),
+				audit_des  varchar(250),
+				audit_time varchar(20),
+				ip         varchar(250),
+				app_id     varchar(250),
+				site_id    varchar(250)
+			)
+
+		   ]]> 
+
+       </sql>
+    </table>	
+
+    
+
+</root>

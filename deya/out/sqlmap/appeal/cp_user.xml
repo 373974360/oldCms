@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="cp_user">
+	<!-- 分页 得到指定部门下 注册用户  -->
+	<select id="getALLCpUserList" resultType="com.deya.wcm.bean.appeal.cpUser.CpUserBean">
+		select * from cp_user order by dept_id,user_id
+	</select>
+	
+	<!-- 新增注册用户 -->
+	<insert id="insert_cp_user" parameterType="com.deya.wcm.bean.appeal.cpUser.CpUserBean">
+		insert into cp_user (user_id,dept_id) values(#{user_id},#{dept_id})
+	</insert>
+	
+	<!-- 删除注册用户 -->
+	<delete id="delete_cp_user" parameterType="Map">
+		delete from cp_user where dept_id in (${dept_id})
+		<if test="userIds != null"> and user_id in (${userIds}) </if>
+	</delete>	
+	
+</mapper>

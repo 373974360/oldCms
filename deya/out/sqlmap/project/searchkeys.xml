@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="searchkeys">	
+	<!-- 保存排序 -->
+	<update id="sortSearchKeys" parameterType="Map">
+		update dz_search_keys set sort_id = #{sort_id} where id = #{id}
+	</update>
+	
+	 <!-- 得到列表 -->
+	 <select id="getSearchKeysList" parameterType="Map" resultType="com.deya.project.searchkeys.SearchKey">
+	       <![CDATA[  
+	       select * from (
+		       select row_.*, rownum rownum_ from (  
+		           select * from dz_search_keys where site_id=#{site_id} order by sort_id asc,id desc
+		       ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
+	    	) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+		  ]]> 
+	 </select>
+	 
+	 <!-- 得到列表 -->
+	 <select id="getSearchKeysList_mysql" parameterType="Map" resultType="com.deya.project.searchkeys.SearchKey">
+	       <![CDATA[  
+		           select * from dz_search_keys where site_id=#{site_id} order by sort_id asc,id desc limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
+		  ]]> 
+	 </select>
+	 
+	 <!-- 得到列表 -->
+	 <select id="getSearchKeysList_mssql" parameterType="Map" resultType="com.deya.project.searchkeys.SearchKey">
+	       <![CDATA[  
+			select top ${page_size} * 
+			  from dz_search_keys k
+			   where k.site_id=#{site_id} 
+				and k.id not in
+				  (select top ${start_num} k.id
+					 from dz_search_keys k
+					 where k.site_id=#{site_id} 
+					  order by k.sort_id asc,k.id desc
+				   )
+			 order by k.sort_id asc,k.id desc 
+		  ]]> 
+	 </select>
+	
+	 <!-- 得到列表 数量 -->
+	 <select id="getSearchKeysListCount" parameterType="Map" resultType="java.lang.Integer">
+	           select count(id) from dz_search_keys where site_id=#{site_id}
+	 </select>
+	
+	<!-- 删除 -->
+	<delete id="deleteSearchKeys" parameterType="Map">
+	      delete from dz_search_keys where id in (${ids})
+	</delete>
+	
+	 <!-- 添加 -->
+	 <insert id="addSearchKey" parameterType="com.deya.project.searchkeys.SearchKey">
+	     <![CDATA[ 
+			 insert into dz_search_keys(id,title,add_time,site_id) 
+			 values(#{id},#{title},#{add_time},#{site_id})  
+	     ]]>
+	 </insert>
+	 
+	 <!-- 修改 -->
+	 <update id="updateSearchKeyById" parameterType="com.deya.project.searchkeys.SearchKey">
+	     <![CDATA[  
+	         update dz_search_keys set
+	            title=#{title}
+	          where id = #{id}   
+	     ]]>
+	 </update> 
+	 
+	 	 <!-- 查看详细信息 -->
+	 <select id="getSearchKeyById" parameterType="Map" resultType="com.deya.project.searchkeys.SearchKey">
+	 <![CDATA[        
+		    select * from dz_search_keys where id=#{id}  
+		]]>
+	</select>
+	
+	
+	
+	<!-- 得到列表        Custom -->
+	 <select id="getSearchCustomKeysList" parameterType="Map" resultType="com.deya.project.searchkeys.SearchCustomKey">
+	       <![CDATA[  
+	       select * from (
+		       select row_.*, rownum rownum_ from (  
+		           select * from dz_search_customkeys where site_id=#{site_id} order by countnum desc,id desc
+		       ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
+	    	) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+		  ]]> 
+	 </select>
+	 
+	 <!-- 得到列表 -->
+	 <select id="getSearchCustomKeysList_mysql" parameterType="Map" resultType="com.deya.project.searchkeys.SearchCustomKey">
+	       <![CDATA[  
+		           select * from dz_search_customkeys where site_id=#{site_id} order by countnum desc,id desc limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
+		  ]]> 
+	 </select>
+	 
+	 <!-- 得到列表 -->
+	 <select id="getSearchCustomKeysList_mssql" parameterType="Map" resultType="com.deya.project.searchkeys.SearchCustomKey">
+
+       <![CDATA[  
+			select top ${page_size} * 
+			  from dz_search_customkeys ck
+			   where ck.site_id=#{site_id} 
+				and ck.id not in
+				  (select top ${start_num} ck.id
+					 from dz_search_customkeys ck
+					 where ck.site_id=#{site_id} 
+					  order by ck.countnum desc,ck.id desc
+				   )
+			 order by ck.countnum desc,ck.id desc 
+		  ]]> 
+	 </select>
+	
+	 <!-- 得到列表 数量 -->
+	 <select id="getSearchCustomKeysListCount" parameterType="Map" resultType="java.lang.Integer">
+	           select count(id) from dz_search_customkeys where site_id=#{site_id}
+	 </select>
+	
+	<!-- 删除 -->
+	<delete id="deleteSearchCustomKeys" parameterType="Map">
+	      delete from dz_search_customkeys where id in (${ids})
+	</delete>
+	
+	 <!-- 添加 -->
+	 <insert id="addSearchCustomKey" parameterType="com.deya.project.searchkeys.SearchCustomKey">
+	     <![CDATA[ 
+			 insert into dz_search_customkeys(id,title,countnum,site_id) 
+			 values(#{id},#{title},1,#{site_id})  
+	     ]]>
+	 </insert>
+	 
+	 <!-- 修改 -->
+	 <update id="updateSearchCustomKeyById" parameterType="com.deya.project.searchkeys.SearchCustomKey">
+	     <![CDATA[   
+	         update dz_search_customkeys set
+	            countnum=countnum+1
+	          where title = #{title} and site_id=#{site_id}
+	     ]]> 
+	 </update> 
+	 
+	 <!-- 查看详细信息 -->
+	 <select id="getSearchCustomKeyByTitle" parameterType="Map" resultType="com.deya.project.searchkeys.SearchCustomKey">
+	 <![CDATA[        
+		    select * from dz_search_customkeys where title = #{title}  and site_id=#{site_id}
+		]]>
+	</select>
+</mapper>

@@ -1,0 +1,281 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Image</title>
+		<link href="../../themes/default/default.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="/sys/styles/uploadify.css"/>
+		<script type="text/javascript" src="/sys/js/jquery.js"></script>
+		<script type="text/javascript" src="/sys/js/jsonrpc.js"></script>
+		<script type="text/javascript" src="/sys/js/java.js"></script>
+		<script type="text/javascript" src="/sys/js/sysUI.js"></script>
+		<script language="javascript" src="/sys/js/jquery.uploadify.js"></script>
+		<script language="javascript" src="/sys/js/uploadFile/swfobject.js"></script>
+		<script type="text/javascript" src="/sys/js/uploadTools.js"></script>
+		<style type="text/css" rel="stylesheet">		
+			body {
+				margin: 0;
+				font-size:12px;
+				overflow:hidden;
+			}
+			form {
+				margin:0;
+			}
+			label {
+				cursor:pointer;
+			}
+			#resetBtn {
+				margin-left:10px;
+				cursor:pointer;
+			}
+			.main {
+				padding: 0 10px;
+			}
+			.clearfix:after {
+				content: ".";
+				display: block;
+				height: 0;
+				clear: both;
+				visibility: hidden;
+			}
+			.tab-navi {
+				width:98%;
+				border-bottom:1px solid #A0A0A0;
+				padding-left:5px;
+				margin-bottom:10px;
+				
+			}
+			.tab-navi ul  {
+				list-style-image:none;
+				list-style-position:outside;
+				list-style-type:none;
+				margin:0;
+				padding:0;
+			}
+			.tab-navi li {
+				position: relative;
+				border: 1px solid #A0A0A0;
+				background-color: #E0E0E0;
+				margin: 0 2px -1px 0;
+				padding: 0 20px;
+				float: left;
+				line-height: 25px;
+				text-align: center;
+				color: #555555;
+				cursor: pointer;
+			}
+			.tab-navi li.selected {
+				background-color: #F0F0EE;
+				border-bottom: 1px solid #F0F0EE;
+				color: #000000;
+				cursor: default;
+			}
+			.tab-navi li.on {
+				background-color: #F0F0EE;
+				color: #000000;
+			}
+			.table  {
+				list-style-image:none;
+				list-style-position:outside;
+				list-style-type:none;
+				margin:0;
+				padding:0;
+				display:block;
+			}
+			.table li {
+				padding:0;
+				margin:0;
+				margin-bottom:10px;
+				display:list-item;
+			}
+			
+			.upload {
+				position: relative;
+				overflow: hidden;
+			}
+			input.url {
+				width: 200px;
+			}
+			#imgFile {
+				position: absolute;
+				top: 0;
+				right: 0;
+				width: 70px;
+				height: 25px;
+				z-index: 811212;
+				border: 0 none;
+				opacity:0;
+				filter:alpha(opacity=0);
+			}
+		</style>
+		<script type="text/javascript">
+
+			var is_resouce = false;//是否取资源库或是素材库的内容
+			if(parent.res_type != null && parent.res_type == "resouce")
+				is_resouce = true;
+
+			var site_id = parent.site_id;
+			if(site_id == "GK")
+			{//得到公开系统所关联的站点，主要用于公开指引等特殊栏目
+				site_id = jsonrpc.SiteRPC.getSiteIDByAppID(parent.app_id);
+			}
+			else
+			{//得到公开节点所关联的站点
+				if(site_id.indexOf("GK") == 0)
+				{
+					site_id = jsonrpc.GKNodeRPC.getGKNodeBeanByNodeID(site_id).rela_site_id;
+				}
+			}
+
+			$(document).ready(function(){
+				if(is_resouce == false)
+				{
+					var K_V = new Map();//区取站点素材配置信息
+					K_V.put("group", "attachment");
+					K_V.put("site_id", site_id);
+					K_V.put("app_id", "cms");
+					var resultMap = MateFolderRPC.getValues(K_V);
+					resultMap = Map.toJSMap(resultMap);
+					var is_press = resultMap.get("watermark");
+					var press_osition = resultMap.get("water_location");
+					if(is_press == 1)
+					{
+						$("#is_press").attr("checked",true);
+						$(":radio[id='press_osition'][value='"+press_osition+"']").attr("checked",true);
+						$(".create_press").show();
+					}
+
+					publicUploadButtomLoad("uploadify",true,false,"",is_press,press_osition,site_id,"uploadReturnHandl");
+					$("#i005").click(function(){
+						openSelectMaterialPage('uploadReturnHandl',site_id,'radio');
+					});
+				}else
+				{
+					initTemplateUpLoad();
+					$("#i005").click(function(){						
+						window.showModalDialog("/sys/system/template/select_file.jsp?site_id="+site_id,window,'dialogWidth:650px;dialogHeight:495px;scroll:no;status:no;center:yes');
+					});
+				}
+
+				$("#resetBtn").click(function(){
+					$("#hidden_div").html('<img src="'+$("#url").val()+'">');
+					$("#imgWidth").val($("#hidden_div img").width());
+					$("#imgHeight").val($("#hidden_div img").height());
+				})
+			});
+
+			function uploadReturnHandl(url)
+			{
+				 $(".clearfix li").eq(0).click();						 
+				$("#url").val(url);					
+			}
+
+			function changePressStatus()
+			{//因为初始化时已经把是否需要水印及位置设置进去了，如果这里有改变，需要通过修改bak值来改变初始设置的值
+				if($("#is_press").is(':checked'))
+				{
+					is_press_bak = 1;
+					press_osition_bak = $(":radio[id='press_osition'][checked='true']").val();
+					// alert(press_osition_bak);
+				}else
+				{
+					is_press_bak = 0;
+					press_osition_bak = 5;
+				}
+			}
+
+			function getInputVal(input_id)
+			{
+				if(input_id == "align"){
+					return $(":checked[name='"+input_id+"']").val();
+				}else
+					return $("input[name='"+input_id+"']").val();
+			}
+
+			function setInputVal(input_id,val)
+			{
+				if(val != "" && val != null)
+				{
+					if(input_id == "align"){
+						$("input[name='"+input_id+"'][value='"+val+"']").attr("checked","checked");
+					}else
+						$("input[name='"+input_id+"']").val(val);
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div class="main">			
+			<iframe name="uploadIframe" id="uploadIframe" style="display:none;"></iframe>
+			<input type="hidden" id="type" name="type" value="" />
+			<form id="uploadForm" name="uploadForm" method="post" enctype="multipart/form-data" target="uploadIframe">
+				<input type="hidden" id="editorId" name="id" value="" />
+				<input type="hidden" id="referMethod" name="referMethod" value="" />
+				<input type="hidden" name="imgBorder" value="0" />
+				<ul class="table">
+					<li style="height:30px;margin-top:10px">
+						<div id="tab1">
+							<div style="float:left;margin:auto;width:70px;"><label for="url">图片地址</label>&nbsp;</div>
+							<div style="float:left;margin:auto;"><input type="text" id="url" name="url" value="http://" maxlength="250" class="ke-inline-block ke-text-input url" /></div>
+							<div style="float:left;margin:auto;">&nbsp;<input id="uploadify" name="uploadify" type="file" class="" value="浏览"/></div>
+							<div style="float:left">&nbsp;<input id="i005" name="i005" type="button" onclick="" value="图片库" /></div>
+							<div style="float:left">&nbsp;<input id="sButton" name="sButton" type="button" onclick="changeThumbUrl('url')" value="使用原图" /></div>
+							
+						</div>
+						<div id="tab4" style="display:none;">
+							<label for="imgFile" class="ke-inline-block"><span id="lang.localUrl"></span></label>&nbsp;
+							<span class="ke-inline-block upload">
+								
+								<span class="ke-button-common ke-button-outer btn">
+									<input type="button" class="ke-button-common ke-button" id="viewLocal" value="" tabindex="-1" />
+								</span>
+								<input type="file" id="imgFile" name="imgFile" />
+							</span>
+						</div>						
+					</li>
+					<li class="create_press" style="display:none;">						
+						<div style="float:left"><label class="ke-inline-block" style="width:70px;"><span id="lang.align">生成水印</span></label></div>
+						<div style="float:left;width:200px"><input class="ke-inline-block" type="checkbox" id="is_press" onclick="changePressStatus()"></div>
+						<div style="float:left">
+							<label class="ke-inline-block" style="width:70px;"><span id="lang.align">水印位置</span></label>
+							<input class="ke-inline-block" type="radio" id="press_osition" name="press_osition" value="1" onclick="changePressStatus()">#1
+							<input class="ke-inline-block" type="radio" id="press_osition" name="press_osition" value="2" onclick="changePressStatus()">#2
+							<input class="ke-inline-block" type="radio" id="press_osition" name="press_osition" value="3" onclick="changePressStatus()">#3<br>
+							<label class="ke-inline-block" style="width:70px;"><span id="lang.align">&nbsp;</span></label>
+							<input class="ke-inline-block" type="radio" id="press_osition" name="press_osition" value="4" onclick="changePressStatus()">#4
+							<input class="ke-inline-block" type="radio" id="press_osition" name="press_osition" value="5" onclick="changePressStatus()">#5
+							<input class="ke-inline-block" type="radio" id="press_osition" name="press_osition" value="6" onclick="changePressStatus()">#6<br>
+							<label class="ke-inline-block" style="width:70px;"><span id="lang.align">&nbsp;</span></label>
+							<input class="ke-inline-block" type="radio" id="press_osition" name="press_osition" value="7" onclick="changePressStatus()">#7
+							<input class="ke-inline-block" type="radio" id="press_osition" name="press_osition" value="8" onclick="changePressStatus()">#8
+							<input class="ke-inline-block" type="radio" id="press_osition" name="press_osition" value="9" onclick="changePressStatus()">#9
+						</div>
+						<div style="clear:both"></div>
+					</li>
+					<li>
+						<div style="float:left"><label for="imgWidth" class="ke-inline-block" style="width:70px;"><span id="lang.size">图片大小</span></label></div>
+						<div style="float:left;width:200px"><span id="lang.width"></span><input type="text" id="imgWidth" name="imgWidth" value="" maxlength="4" class="ke-inline-block ke-text-input" style="width:50px;text-align:right;" />px
+						<span id="lang.height"></span>&nbsp;<input type="text" id="imgHeight" name="imgHeight" value="" maxlength="4" class="ke-inline-block ke-text-input" style="width:50px;text-align:right;" />px
+						<img class="ke-inline-block" src="images/refresh.png" width="16" height="16" id="resetBtn" alt="" />
+						</div>
+						<div style="float:left">
+							<label class="ke-inline-block" style="width:70px;"><span id="lang.align">对齐方式</span></label>
+							<input class="ke-inline-block" type="radio" id="defaultChk" name="align" value="" checked="checked" /> <img class="ke-inline-block" id="defaultImg" src="./images/align_top.gif" width="23" height="25" border="0" alt="" />
+							<input class="ke-inline-block" type="radio" id="leftChk" name="align" value="left" /> <img class="ke-inline-block" id="leftImg" src="./images/align_left.gif" width="23" height="25" border="0" alt="" />
+							<input class="ke-inline-block" type="radio" id="rightChk" name="align" value="right" /> <img class="ke-inline-block" id="rightImg" src="./images/align_right.gif" width="23" height="25" border="0" alt="" />
+						</div>
+						<div style="clear:both"></div>
+					</li>
+					<li>
+						<label for="imgTitle" class="ke-inline-block" style="width:70px;"><span id="lang.imgTitle">图片说明</span></label>
+						<input type="text" id="imgTitle" name="imgTitle" value="" maxlength="255" class="ke-inline-block ke-text-input" style="300px" />
+					</li>
+					<li>
+						<div id="fileQueue"></div>
+					</li>
+				</ul>
+			</form>
+		</div>
+		<div id="hidden_div" style="position:absolute;top:0;visibility;hidden;left:-1000px"></div>
+	</body>
+</html>

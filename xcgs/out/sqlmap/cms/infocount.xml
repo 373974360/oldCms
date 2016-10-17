@@ -1,0 +1,643 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="info_count">
+
+<!-- ************按照栏目统计站点的发布信息************ -->
+<select id="getInfoCountListByCat" parameterType="Map" resultType="Map">
+	select count(*) count, is_host from cs_info where
+		final_status=0
+		and info_status =8
+		and site_id = #{site_id}
+		<if test="cat_id != null">
+			and cat_id in (${cat_id})
+		</if>
+		<if test="input_user !=  null">
+			and input_user = #{input_user}
+		</if>
+		<if test="start_day != null">
+		<![CDATA[ 
+			and released_dtime >= #{start_day}
+		]]>
+		</if>
+		<if test="end_day != null">
+		<![CDATA[ 
+  			and released_dtime <= #{end_day}
+  		]]>
+  		</if>
+	group by is_host
+</select>
+
+<!-- *****************取得站点工作量统计信息******************* -->
+<select id="getInputCountList" parameterType="Map" resultType="Map">
+select i.count, i.input_user, u.user_realname from (
+	select count(*) count, input_user from cs_info where
+		final_status=0
+		<if test="info_status != null">
+			and info_status = #{info_status}
+		</if>
+		<if test="cat_ids != null">
+			and cat_id in (${cat_ids})
+		</if>
+		<if test="is_host != null">
+			and is_host in (${is_host})
+		</if>
+		<if test="start_day != null">
+		<![CDATA[
+			and input_dtime >= #{start_day}
+		]]>
+		</if>
+		<if test="end_day != null">
+		<![CDATA[
+  			and input_dtime <= #{end_day}
+  		]]>
+  		</if>
+  		<if test="is_pic != null">
+		<![CDATA[
+  			and is_pic = #{is_pic}
+  		]]>
+  		</if>
+		and site_id = #{site_id}
+	group by input_user 
+	) i,cs_org_user u where i.input_user = u.user_id 
+	order by count
+</select>
+
+<!-- ****************取得站点内某个人员的统计信息************************* -->
+<select id="getInputCountListByUserID" parameterType="Map" resultType="Map">
+select i.count, i.cat_id, g.cat_cname  from 
+	(select count(*) count, cat_id from cs_info where
+		final_status=0
+		and site_id = #{site_id}
+		<if test="input_user != null">
+			and input_user = #{input_user}
+		</if>
+		<if test="info_status != null">
+			and info_status = #{info_status}
+		</if>
+		<if test="cat_ids != null">
+			and cat_id in (${cat_ids})
+		</if>
+		<if test="is_host != null">
+			and is_host in (${is_host})
+		</if>
+		<if test="start_day != null">
+		<![CDATA[ 
+			and input_dtime >= #{start_day}
+		]]>
+		</if>
+		<if test="end_day != null">
+		<![CDATA[ 
+  			and input_dtime <= #{end_day}
+  		]]>
+  		</if>
+  		<if test="is_pic != null">
+		<![CDATA[
+  			and is_pic = #{is_pic}
+  		]]>
+  		</if>
+	group by cat_id
+	) i, cs_info_category g where i.cat_id = g.cat_id and site_id = #{site_id}
+</select>
+
+<!-- **********************************************需要更改的SQL******************************************************* -->
+<!-- ***************按照发布日期统计站点信息****************** -->
+<select id="getInfoCountListByDate" parameterType="Map" resultType="Map">
+	select count(*) count, is_host,released_dtime from (
+		select info_id, is_host
+		<if test="byday">
+		, SUBSTR(released_dtime,0,10) released_dtime
+		</if>
+		<if test="bymonth">
+		, SUBSTR(released_dtime,0,7)  released_dtime
+		</if>
+		from cs_info where
+		final_status=0
+		and info_status = 8
+		and site_id = #{site_id}
+		<if test="cat_ids != null">
+			and cat_id in (${cat_ids})
+		</if>
+		<if test="start_day != null">
+		<![CDATA[ 
+			and released_dtime >= #{start_day}
+		]]>
+		</if>
+		<if test="end_day != null">
+		<![CDATA[ 
+  			and released_dtime <= #{end_day}
+  		]]>
+  		</if>
+	)
+	group by is_host, released_dtime
+	order by released_dtime desc
+</select>
+
+<!-- ****按照发布日期统计站点信息mysql的sql语句**** -->
+<select id="getInfoCountListByDate_mysql" parameterType="Map" resultType="Map">
+	select count(*) count, is_host,released_dtime from (
+		select info_id, is_host
+		<if test="byday">
+		, left(released_dtime,10) released_dtime
+		</if>
+		<if test="bymonth">
+		, left(released_dtime,7)  released_dtime
+		</if>
+		from cs_info where
+		<if test="cat_ids != null">
+			and cat_id in (${cat_ids})
+		</if>
+		final_status=0
+		and info_status =8
+		and site_id = #{site_id}
+		<if test="start_day != null">
+		<![CDATA[ 
+			and released_dtime >= #{start_day}
+		]]>
+		</if>
+		<if test="end_day != null">
+		<![CDATA[ 
+  			and released_dtime <= #{end_day}
+  		]]>
+  		</if>
+	)
+	group by is_host, released_dtime
+	order by released_dtime desc
+</select>
+
+<!-- ***   以下是推送信息和访问统计信息统计	**** -->
+
+<select id="getInfoListsByCat_SiteId" parameterType="Map" resultType="com.deya.wcm.bean.cms.count.TuisongCountBean">
+	select info_id,cat_id,from_id,app_id from cs_info where final_status=0 and info_status in (8,4) and site_id = #{site_id}
+		<if test="cat_id != null">
+			and cat_id in (${cat_id})
+		</if>
+		<if test="start_day != null">
+		<![CDATA[ 
+			and released_dtime >= #{start_day}
+		]]>
+		</if>
+		<if test="end_day != null">
+		<![CDATA[ 
+  			and released_dtime <= #{end_day}
+  		]]>
+  		</if>
+</select>
+
+<!-- *** 访问统计入库 **** -->
+<insert id="add_accessinfo" parameterType="com.deya.wcm.bean.cms.count.InfoAccessBean">
+		insert into cs_info_access (id,info_id,cat_id,info_title,app_id,access_time,access_ip,access_url,access_day,access_month,access_year,site_id,site_domain) 
+		values(${id},${info_id},${cat_id},#{info_title},#{app_id},#{access_time},#{access_ip},#{access_url},#{access_day},#{access_month},#{access_year},#{site_id},#{site_domain})
+</insert>
+
+
+<!-- *****************取得站点访问量统计信息******************* -->
+<select id="getAccessCountsBySite_id"  parameterType="Map"  resultType="com.deya.wcm.bean.cms.count.InfoAccessBean" >
+	select count(*) icount,site_id  from cs_info_access where app_id ='cms'
+		<if test="start_day != null">
+		<![CDATA[
+	        and  access_time >= #{start_day}
+		]]>
+		</if>
+		<if test="end_day != null">
+		<![CDATA[
+  			and  access_time <= #{end_day}
+  		]]>
+  		</if>
+  		<if test="site_ids != null">
+		    and site_id  in (${site_ids})
+		</if>
+  	 group by site_id order by icount desc
+</select>
+
+<!-- *****************取得单个站点栏目信息访问量统计******************* -->
+<select id="getSiteCateAccessList"  parameterType="Map"  resultType="com.deya.wcm.bean.cms.count.InfoAccessBean" >
+	select count(*) icount,cat_id  from cs_info_access where app_id ='cms' and site_id = #{site_id}
+		<if test="start_day != null">
+		<![CDATA[
+	        and  access_time >= #{start_day}
+		]]>
+		</if>
+		<if test="end_day != null">
+		<![CDATA[
+  			and  access_time <= #{end_day}
+  		]]>
+  		</if>
+  		<if test="cat_id != null">
+		    and cat_id in (#{cat_id})
+		</if>
+  	 group by cat_id order by icount desc
+</select>
+
+<select id="getAccessInfoLists"  parameterType="Map"  resultType="com.deya.wcm.bean.cms.count.InfoAccessBean" >
+	select count(*) icount,info_id from cs_info_access where app_id ='cms'
+		<if test="start_day != null">
+		<![CDATA[
+	        and  access_time >= #{start_day}
+		]]>
+		</if>
+		<if test="end_day != null">
+		<![CDATA[
+  			and  access_time <= #{end_day}
+  		]]>
+  		</if>
+		<if test="cat_id != null">
+		    and cat_id = ${cat_id}
+		</if>
+		<if test="site_id != null">
+		    and site_id = #{site_id}
+		</if>
+  	    group by info_id order by icount desc
+</select>
+
+<select id="getcounts_ByCatSiteId"  parameterType="Map"  resultType="com.deya.wcm.bean.cms.count.InfoAccessBean" >
+	select count(*) icount,cat_id  from cs_info_access where app_id ='cms' and site_id = #{site_id}
+		<if test="start_day != null">
+		<![CDATA[
+	        and  access_time >= #{start_day}
+		]]>
+		</if>
+		<if test="end_day != null">
+		<![CDATA[
+  			and  access_time <= #{end_day}
+  		]]>
+  		</if>
+  	 group by cat_id
+</select>
+
+<select id="getOneSiteInfoLists" parameterType="Map" resultType="com.deya.wcm.bean.cms.info.InfoBean">
+	select info_id,cat_id,from_id,app_id from cs_info where final_status =0 and info_status in (8,4)
+		<if test="site_id != null">
+			and site_id = (#{site_id})
+		</if>
+		<if test="start_day != null">
+		<![CDATA[ 
+			and released_dtime >= #{start_day}
+		]]>
+		</if>
+		<if test="end_day != null">
+		<![CDATA[ 
+  			and released_dtime <= #{end_day}
+  		]]>
+  		</if>
+</select>
+
+<delete id="delete_AccessCountInfos" parameterType="Map" >
+     delete from cs_info_access  where  info_id in (${info_id})
+</delete>
+
+<!-- 统计每个栏目的信息访问量排行 -->
+<select id="getCatOrderListByCatid" parameterType="Map" resultType="com.deya.wcm.bean.cms.count.InfoAccessBean">
+select row_.*, rownum rownum_ from (select count(info_id) as icount,cat_id from cs_info_access where site_id = #{site_id}
+	<if test="start_day != null"><![CDATA[ and access_time >= #{start_day}]]></if>
+	<if test="end_day != null"><![CDATA[ and access_time <= #{end_day}]]></if>
+	group by cat_id  order by icount desc) row_ where <if test="row_count != null"><![CDATA[ rownum <= ${row_count}]]></if>
+</select>
+
+<select id="getCatOrderListByCatid_mysql" parameterType="Map" resultType="com.deya.wcm.bean.cms.count.InfoAccessBean">
+select count(info_id) as icount,cat_id from cs_info_access where site_id = #{site_id} 
+		<if test="start_day != null"><![CDATA[ and access_time >= #{start_day}]]></if>
+		<if test="end_day != null"><![CDATA[ and access_time <= #{end_day}]]></if>
+	group by cat_id order by icount desc <if test="row_count != null"><![CDATA[ limit ${row_count} ]]></if> 
+</select>
+
+<select id="getCatOrderListByCatid_mssql" parameterType="Map" resultType="com.deya.wcm.bean.cms.count.InfoAccessBean">
+   select <if test="row_count != null"><![CDATA[ top ${row_count}]]></if> count(info_id) as icount ,cat_id from cs_info_access where site_id = #{site_id} 
+		<if test="start_day != null"><![CDATA[ and access_time >= #{start_day}]]></if>
+		<if test="end_day != null"><![CDATA[ and access_time <= #{end_day}]]></if>
+	group by cat_id  order by icount desc
+</select>
+
+<!-- 统计每条信息访问量排行 -->
+<select id="getInfoOrderListByInfoid"  parameterType="Map"  resultType="com.deya.wcm.bean.cms.count.InfoAccessBean">
+    select row_.*, rownum rownum_ from (select count(info_id) as icount,info_id from cs_info_access where site_id = #{site_id}
+	<if test="start_day != null"><![CDATA[ and access_time >= #{start_day}]]></if>
+	<if test="end_day != null"><![CDATA[ and access_time <= #{end_day}]]></if>
+	group by info_id order by icount desc) row_ where <if test="row_count != null"><![CDATA[ rownum <= ${row_count}]]></if>
+</select>
+
+<select id="getInfoOrderListByInfoid_mysql"  parameterType="Map"  resultType="com.deya.wcm.bean.cms.count.InfoAccessBean">
+	select count(info_id) as icount ,info_id from cs_info_access where site_id = #{site_id} 
+		<if test="start_day != null"><![CDATA[ and access_time >= #{start_day}]]></if>
+		<if test="end_day != null"><![CDATA[ and access_time <= #{end_day}]]></if>
+	group by info_id  order by icount desc  <if test="row_count != null"><![CDATA[ limit ${row_count} ]]></if>
+</select>
+
+<select id="getInfoOrderListByInfoid_mssql"  parameterType="Map"  resultType="com.deya.wcm.bean.cms.count.InfoAccessBean">
+	select <if test="row_count != null"><![CDATA[ top ${row_count}]]></if> count(info_id) as icount ,info_id from cs_info_access where site_id = #{site_id} 
+		<if test="start_day != null"><![CDATA[ and access_time >= #{start_day}]]></if>
+		<if test="end_day != null"><![CDATA[ and access_time <= #{end_day}]]></if>
+	group by info_id order by icount desc
+</select>
+
+<!--信息访问量排行 -->
+<select id="getDayAccessCount" parameterType="Map" resultType="java.lang.String">
+    select count(info_id) as count from cs_info_access
+    <where>
+		<if test="site_id != null"><![CDATA[ and site_id = #{site_id}]]></if>
+		<if test="access_day != null"><![CDATA[ and access_day = #{access_day}]]></if>
+		<if test="access_month != null"><![CDATA[ and access_month = #{access_month}]]></if>
+		<if test="access_year != null"><![CDATA[ and access_year = #{access_year}]]></if>
+	</where>
+</select>
+<select id="getMonthAccessCount" parameterType="Map" resultType="java.lang.String">
+    select count(info_id) as count from cs_info_access
+    <where>
+		<if test="site_id != null"><![CDATA[ and site_id = #{site_id}]]></if>
+		<if test="start_day != null"><![CDATA[ and access_time >= #{start_day}]]></if>
+		<if test="end_day != null"><![CDATA[ and access_time <= #{end_day}]]></if>
+	</where>
+</select>
+
+<!-- 添加的用户工作量统计信息详细列表   add  by 2014-01-06-->
+<select id="getInfoListByUserIDTimeType"  parameterType="Map"  resultType="com.deya.wcm.bean.cms.info.InfoBean">      
+  select ci.title,ci.is_pic,ci.info_id,ci.cat_id,ci.thumb_url,ci.content_url,ci.input_user,ci.input_dtime
+   from cs_info ci,cs_info_category ca  where ci.cat_id = ca.cat_id and ci.site_id = ca.site_id and ci.final_status = 0
+         <if test="site_id != null">and ci.site_id = #{site_id}</if>
+	     <if test="input_user != null">and ci.input_user = #{input_user}</if>
+		 <if test="info_status != null">and ci.info_status = #{info_status}</if>
+		 <if test="cat_id != null">and ci.cat_id = #{cat_id}</if>
+		 <if test="is_host != null">and ci.is_host in (${is_host})</if>
+		 <if test="start_day != null"><![CDATA[ and ci.input_dtime >= #{start_day}]]></if>
+		 <if test="end_day != null"><![CDATA[ and ci.input_dtime <= #{end_day}]]></if>
+	  	 <if test="is_pic != null"><![CDATA[ and ci.is_pic = #{is_pic}]]></if>
+     order by ci.input_dtime desc
+</select>
+
+
+<!-- 统计站点访问量 -->
+<select id="getGkVisitorCount" resultType="com.deya.wcm.bean.cms.count.InfoAccessBean">
+	   select count(*) icount,site_id  from cs_info_access where app_id ='zwgk'
+		<if test="start_day != null">
+		<![CDATA[
+	        and  access_time >= #{start_day}
+		]]>
+		</if>
+		<if test="end_day != null">
+		<![CDATA[
+  			and  access_time <= #{end_day}
+  		]]>
+  		</if>
+  		<if test="site_ids != null">
+		    and site_id  in (${site_ids})
+		</if>
+  	 group by site_id order by icount desc
+</select>
+
+
+<!-- ****************取得所选栏目下的信息更新情况************************* -->
+<select id="getInfoUpdateListByCate" parameterType="Map" resultType="Map">
+select i.lasttime, i.cat_id, g.cat_cname  from 
+	(select cat_id,max(input_dtime) lasttime from cs_info where 1=1 
+		<if test="info_status != null">
+			and info_status = #{info_status} 
+		</if>
+		<if test="cat_ids != null">
+			and cat_id in (${cat_ids})
+		</if>
+	group by cat_id order by lasttime desc
+	) i, cs_info_category g where i.cat_id = g.cat_id
+	<if test="group_id != null">
+		and g.cat_position like '%#{group_id}%' 
+	</if>
+</select>
+
+<!-- *****************取得作者统计信息******************* -->
+<select id="getAuthorCountList" parameterType="Map" resultType="Map">
+	select count(*) count, author from cs_info where
+		final_status=0
+		<if test="info_status != null">
+			and info_status = #{info_status}
+		</if>
+		<if test="cat_ids != null">
+			and cat_id in (${cat_ids})
+		</if>
+		<if test="is_host != null">
+			and is_host in (${is_host})
+		</if>
+		<if test="start_day != null">
+		<![CDATA[
+			and released_dtime >= #{start_day}
+		]]>
+		</if>
+		<if test="end_day != null">
+		<![CDATA[
+  			and released_dtime <= #{end_day}
+  		]]>
+  		</if>
+  		<if test="is_pic != null">
+		<![CDATA[
+  			and is_pic = #{is_pic}
+  		]]>
+  		</if>
+		and site_id = #{site_id}
+	group by author having author != '' and author is not null order by count
+</select>
+
+
+<!--*************************************************西钞信息统计功能   开始*******************************************************-->
+
+    <!-- ****************按栏目，发布时间统计信息******************* -->
+    <select id="getCatListByReleaseDtime" parameterType="Map" resultType="Map">
+        select i.count, i.cat_id, g.cat_cname  from
+        (select count(*) count, cat_id from cs_info where
+        final_status=0
+        and site_id = #{site_id}
+        <if test="info_status != null">
+            and info_status = #{info_status}
+        </if>
+        <if test="cat_ids != null">
+            and cat_id in (${cat_ids})
+        </if>
+        <if test="start_day != null">
+            <![CDATA[
+                and released_dtime >= #{start_day}
+            ]]>
+        </if>
+        <if test="end_day != null">
+            <![CDATA[
+                and released_dtime <= #{end_day}
+            ]]>
+        </if>
+        group by cat_id
+        ) i, cs_info_category g where i.cat_id = g.cat_id and site_id = #{site_id}
+    </select>
+
+    <!-- ****************取某个栏目下面的所有详细信息******************* -->
+    <select id="getInfoListByCat" parameterType="Map" resultType="com.deya.wcm.bean.cms.info.InfoBean" >
+        select ci.pre_title,ci.is_pic,ci.info_id,ci.cat_id,ci.model_id,ci.description,ci.from_id,ci.title,ci.subtitle,ci.title_color,ci.thumb_url,ci.author,ci.editor,ci.source,ci.content_url,ci.weight,ci.hits,ci.day_hits,ci.week_hits,ci.month_hits,ci.released_dtime,ci.site_id,ci.page_count,ci.istop,ci.info_level,ci.isIpLimit,ca.cat_cname
+        from cs_info ci,cs_info_category ca
+        where ci.cat_id = ca.cat_id and
+        ci.final_status=0
+        and ci.site_id = #{site_id}
+        <if test="info_status != null">
+            and ci.info_status = #{info_status}
+        </if>
+        <if test="cat_ids != null">
+            and ci.cat_id in (${cat_ids})
+        </if>
+        <if test="start_day != null">
+            <![CDATA[
+                and ci.released_dtime >= #{start_day}
+            ]]>
+        </if>
+        <if test="end_day != null">
+            <![CDATA[
+                and ci.released_dtime <= #{end_day}
+            ]]>
+        </if>
+        order by ${orderby}
+    </select>
+
+
+    <!-- ****************按来源（部门），发布时间统计信息******************* -->
+    <select id="getDeptListByReleaseDtime" parameterType="Map" resultType="Map">
+        select i.count, d.dept_name,d.dept_id  from
+        (select count(*) count, source from cs_info where
+        final_status=0
+        and site_id = #{site_id}
+        <if test="info_status != null">
+            and info_status = #{info_status}
+        </if>
+        <if test="source != null">
+            and source in (${source})
+        </if>
+        <if test="start_day != null">
+            <![CDATA[
+                and released_dtime >= #{start_day}
+            ]]>
+        </if>
+        <if test="end_day != null">
+            <![CDATA[
+                and released_dtime <= #{end_day}
+            ]]>
+        </if>
+        group by source
+        ) i ,cs_org_dept d where i.source = d.dept_name
+    </select>
+
+    <!-- ****************取某个来源（部门）下面的所有详细信息******************* -->
+    <select id="getInfoListByDept" parameterType="Map" resultType="com.deya.wcm.bean.cms.info.InfoBean" >
+        select ci.pre_title,ci.is_pic,ci.info_id,ci.cat_id,ci.model_id,ci.description,ci.from_id,ci.title,ci.subtitle,ci.title_color,ci.thumb_url,ci.author,ci.editor,ci.source,ci.content_url,ci.weight,ci.hits,ci.day_hits,ci.week_hits,ci.month_hits,ci.released_dtime,ci.site_id,ci.page_count,ci.istop,ci.info_level,ci.isIpLimit,ca.cat_cname
+        from cs_info ci,cs_info_category ca
+        where ci.cat_id = ca.cat_id and
+        ci.final_status=0
+        and ci.site_id = #{site_id}
+        <if test="info_status != null">
+            and ci.info_status = #{info_status}
+        </if>
+        <if test="source != null">
+            and ci.source in (${source})
+        </if>
+        <if test="start_day != null">
+            <![CDATA[
+                and ci.released_dtime >= #{start_day}
+            ]]>
+        </if>
+        <if test="end_day != null">
+            <![CDATA[
+                and ci.released_dtime <= #{end_day}
+            ]]>
+        </if>
+        order by ${orderby}
+    </select>
+
+    <!-- ****************按作者，发布时间统计信息******************* -->
+    <select id="getAuthorListByReleaseDtime" parameterType="Map" resultType="Map">
+        select count(*) count, author from cs_info where
+        final_status=0
+        and site_id = #{site_id}
+        <if test="info_status != null">
+            and info_status = #{info_status}
+        </if>
+        <if test="author != null">
+            and author in (${author})
+        </if>
+        <if test="start_day != null">
+            <![CDATA[
+                and released_dtime >= #{start_day}
+            ]]>
+        </if>
+        <if test="end_day != null">
+            <![CDATA[
+                and released_dtime <= #{end_day}
+            ]]>
+        </if>
+        group by author
+    </select>
+
+    <!-- ****************取某个作者下面的所有详细信息******************* -->
+    <select id="getInfoListByAuthor" parameterType="Map" resultType="com.deya.wcm.bean.cms.info.InfoBean" >
+        select ci.pre_title,ci.is_pic,ci.info_id,ci.cat_id,ci.model_id,ci.description,ci.from_id,ci.title,ci.subtitle,ci.title_color,ci.thumb_url,ci.author,ci.editor,ci.source,ci.content_url,ci.weight,ci.hits,ci.day_hits,ci.week_hits,ci.month_hits,ci.released_dtime,ci.site_id,ci.page_count,ci.istop,ci.info_level,ci.isIpLimit,ca.cat_cname
+        from cs_info ci,cs_info_category ca
+        where ci.cat_id = ca.cat_id and
+        ci.final_status=0
+        and ci.site_id = #{site_id}
+        <if test="info_status != null">
+            and ci.info_status = #{info_status}
+        </if>
+        <if test="author != null">
+            and ci.author = #{author}
+        </if>
+        <if test="start_day != null">
+            <![CDATA[
+        and ci.released_dtime >= #{start_day}
+    ]]>
+        </if>
+        <if test="end_day != null">
+            <![CDATA[
+        and ci.released_dtime <= #{end_day}
+    ]]>
+        </if>
+        order by ${orderby}
+    </select>
+
+    <!-- ****************按照信息点击量统计信息******************* -->
+    <select id="getInfoHitsByReleaseDtime" parameterType="Map" resultType="com.deya.wcm.bean.cms.info.InfoBean" >
+        select ci.pre_title,ci.is_pic,ci.info_id,ci.cat_id,ci.model_id,ci.description,ci.from_id,ci.title,ci.subtitle,ci.title_color,ci.thumb_url,ci.author,ci.editor,ci.source,ci.content_url,ci.weight,ci.hits,ci.day_hits,ci.week_hits,ci.month_hits,ci.released_dtime,ci.site_id,ci.page_count,ci.istop,ci.info_level,ci.isIpLimit,ca.cat_cname
+        from cs_info ci,cs_info_category ca
+        where ci.cat_id = ca.cat_id and
+        ci.final_status=0
+        and ci.site_id = #{site_id}
+        <if test="info_status != null">
+            and ci.info_status = #{info_status}
+        </if>
+        <if test="start_day != null">
+            <![CDATA[
+        and ci.released_dtime >= #{start_day}
+    ]]>
+        </if>
+        <if test="end_day != null">
+            <![CDATA[
+        and ci.released_dtime <= #{end_day}
+    ]]>
+        </if>
+        order by ${orderby}
+    </select>
+
+    <!-- ****************按栏目点击量，发布时间统计信息******************* -->
+    <select id="getCatHitsByReleaseDtime" parameterType="Map" resultType="Map">
+        select i.count, i.cat_id,c.cat_cname  from
+        (select sum(hits) count, cat_id from cs_info where
+        final_status=0
+        and site_id = #{site_id}
+        <if test="info_status != null">
+            and info_status = #{info_status}
+        </if>
+        <if test="start_day != null">
+            <![CDATA[
+                and released_dtime >= #{start_day}
+            ]]>
+        </if>
+        <if test="end_day != null">
+            <![CDATA[
+                and released_dtime <= #{end_day}
+            ]]>
+        </if>
+        group by cat_id
+        ) i ,cs_info_category c where i.cat_id = c.cat_id
+    </select>
+
+<!--*************************************************西钞信息统计功能   结束*******************************************************-->
+
+</mapper>

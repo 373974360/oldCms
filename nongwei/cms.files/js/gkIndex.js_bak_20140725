@@ -1,0 +1,137 @@
+var setting = {      
+	//fontCss : {color:"red"},
+	name : "text",
+	nodesCol : "children",
+	expandSpeed : "slow", //fast slow ""
+	isSimpleData : false,    //是否为简单数组数据 这里还可以用array数据
+	showIcon : true,//不显示文件夹图标	
+	showLine: true, //是否带有虚线      
+	checkable: false, //是否带有选择框
+	callback : {
+		beforeExpand: beforeExpand,
+		onExpand: onExpand,
+		onClick: zTreeClick
+	}
+};  
+var zTreeObj;
+
+$(document).ready(function()
+{	
+	if(isShared)
+	{
+		zTreeObj = $.fn.zTree.init($("#tree"), setting, zTreeNodes[0].children);
+		//zTreeObj = $("#tree").zTree(setting, zTreeNodes[0].children);  
+	}
+	else
+	{
+		//zTreeObj = $("#tree").zTree(setting, zTreeNodes);  
+		zTreeObj = $.fn.zTree.init($("#tree"), setting, zTreeNodes);
+	}
+	
+	if(cat_id != "" && cat_id != null)
+	{
+		initRightFrameForCategory(cat_id);
+	}
+});
+
+//点击树所触发的事件
+function zTreeClick()
+{
+	var selectedNode = zTreeObj.getSelectedNode();
+	//if(selectedNode.children == null)
+		changeRightFrame(selectedNode.id);
+}
+
+//点击树改变右窗体链接地址 iframe的名称必须为rightFrame
+function changeRightFrame(id)
+{
+	var is_sh = false;
+	if(isShared)
+	{
+		is_sh = isShared;
+	}
+	$("#rightFrame").attr("src","/info/iList.jsp?isSd="+is_sh+"&node_id="+node_id+"&cat_id="+id);
+}
+
+//初始展示栏目数据,需要栏目ID
+function initRightFrameForCategory(cat_id)
+{
+	var node = zTreeObj.getNodeByParam("id",cat_id);
+	changeRightFrame(cat_id);
+	zTreeObj.selectNode(node);
+	zTreeObj.expandNode(node, true, false);
+}
+
+
+
+var curExpandNode = null;
+function beforeExpand(treeId, treeNode) {
+	var pNode = curExpandNode ? curExpandNode.parentNode:null;
+	var treeNodeP = treeNode.parentTId ? treeNode.parentNode:null;
+	var zTree = zTreeObj;
+	for(var i=0, l=!treeNodeP ? 0:treeNodeP.children.length; i<l; i++ ) {
+		if (treeNode !== treeNodeP.children[i]) {
+			zTree.expandNode(treeNodeP.children[i], false);
+		}
+	}
+	while (pNode) {
+		if (pNode === treeNode) {
+			break;
+		}
+		pNode = pNode.parentNode;
+	}
+	if (!pNode) {
+		singlePath(treeNode);
+	}
+
+}
+function singlePath(newNode) {
+	if (newNode === curExpandNode) return;
+	if (curExpandNode && curExpandNode.open==true) {
+		var zTree = zTreeObj;
+		if (newNode.parentTId === curExpandNode.parentTId) {
+			zTree.expandNode(curExpandNode, false);
+		} else {
+			var newParents = [];
+			while (newNode) {
+				newNode = newNode.getParentNode();
+				if (newNode === curExpandNode) {
+					newParents = null;
+					break;
+				} else if (newNode) {
+					newParents.push(newNode);
+				}
+			}
+			if (newParents!=null) {
+				var oldNode = curExpandNode;
+				var oldParents = [];
+				while (oldNode) {
+					oldNode = oldNode.getParentNode();
+					if (oldNode) {
+						oldParents.push(oldNode);
+					}
+				}
+				if (newParents.length>0) {
+					for (var i = Math.min(newParents.length, oldParents.length)-1; i>=0; i--) {
+						if (newParents[i] !== oldParents[i]) {
+							zTree.expandNode(oldParents[i], false);
+							break;
+						}
+					}
+				} else {
+					zTree.expandNode(oldParents[oldParents.length-1], false);
+				}
+			}
+		}
+	}
+	curExpandNode = newNode;
+}
+
+function onExpand(event, treeId, treeNode) {
+	curExpandNode = treeNode;
+}
+
+
+
+
+

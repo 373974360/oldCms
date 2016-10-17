@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+
+    <table>
+
+    	<sql>
+
+          <![CDATA[
+				create table cs_gk_node_category(
+					nodcat_id NUMBER(20) not null PRIMARY KEY,
+					parent_id NUMBER(20),
+					nodcat_name VARCHAR2(250) default '',
+					nod_position VARCHAR2(250) default '',
+					sort_id NUMBER(4),
+					app_id VARCHAR2(250) default ''
+				)
+
+		   ]]> 
+
+       </sql>        
+
+	   <sql>
+
+          <![CDATA[
+
+				create table cs_gk_node(
+					id NUMBER(20) not null PRIMARY KEY,
+					node_id VARCHAR2(250) default '',
+					nodcat_id NUMBER(20),
+					dept_id NUMBER(20),
+					rela_site_id VARCHAR2(250) default '',
+					node_name VARCHAR2(250) default '',
+					node_fullname VARCHAR2(250) default '',
+					node_status NUMBER(4),
+					index_template_id VARCHAR2(20) default '',
+					sort_id NUMBER(4),					
+					dept_code VARCHAR2(250) default '',
+					is_apply NUMBER(4),					
+					address varchar2(255),
+					postcode varchar2(255),
+					office_dtime varchar2(255),
+					tel varchar2(255),
+					fax varchar2(255),
+					email varchar2(255),
+					apply_name VARCHAR2(250) default '',
+					node_demo VARCHAR2(1000) default ''
+				)
+
+		   ]]> 
+
+       </sql>
+       
+	   <sql>
+	   <![CDATA[
+	   create table cs_gk_indexrole
+		(
+			id  number(20) primary key,
+			ir_id varchar2(250) default '',
+			ir_item varchar2(250) default '0',
+			ir_value varchar2(250) default '',
+			ir_space varchar2(250) default '',
+			is_valid number(4) default 1,
+			sort_id number(4) default 0,
+			ir_type number(4) default 0
+		)
+	   ]]>
+	   </sql>
+
+	    <sql>
+	   <![CDATA[
+		create table cs_gk_sequence
+		(
+			id number(20) primary key,
+			seq_item varchar2(250) default '',
+			seq_cur_value number(20) default 1,
+			seq_ymd varchar2(250) default'',
+			seq_type number(4) default 0,
+			app_id varchar2(250) default 'GK',
+			site_id varchar2(250) default ''
+		)
+	   ]]>
+	   </sql>
+	   <sql>
+          <![CDATA[
+				create table cs_gk_info(
+					info_id NUMBER(20) not null,
+					gk_index VARCHAR2(250) default '',
+					gk_year VARCHAR2(250) default '',
+					gk_num NUMBER(20) default 0,
+					doc_no VARCHAR2(250) default '',
+					gk_file VARCHAR2(250) default '',
+					generate_dtime VARCHAR2(20) default '',
+					effect_dtime VARCHAR2(20) default '',
+					aboli_dtime VARCHAR2(20) default '',
+					topic_id NUMBER(20) default 0,
+					topic_name VARCHAR2(250) default '',
+					theme_id NUMBER(20) default 0,
+					theme_name VARCHAR2(250) default '',
+					serve_id NUMBER(20) default 0,
+					serve_name VARCHAR2(250) default '',
+					topic_key VARCHAR2(250) default '',
+					place_key VARCHAR2(250) default '',
+					language VARCHAR2(250) default '',
+					carrier_type VARCHAR2(250) default '',
+					gk_validity VARCHAR2(250) default '',
+					gk_format VARCHAR2(250) default '',
+					gk_way VARCHAR2(250) default '',
+					gk_type NUMBER(4) default 0,
+					gk_no_reason VARCHAR2(1000) default '',
+					gk_time_limit  VARCHAR2(250) default '',
+					gk_range VARCHAR2(250) default '',
+					gk_proc VARCHAR2(1000) default '',
+					dict_cat_id VARCHAR2(250) default '',
+					sxlb_id VARCHAR2(250) default '',
+					sxlb_name VARCHAR2(250) default '',
+					gk_duty_dept VARCHAR2(250) default '',
+					gk_input_dept VARCHAR2(250) default '',
+					file_head VARCHAR2(250) default '',
+					gk_signer VARCHAR2(250) default ''
+				)
+		   ]]> 
+       </sql>
+       <sql>
+          <![CDATA[
+				create table cs_gk_f_tygs(
+					info_id NUMBER(20) not null,
+					gk_content clob
+				)
+		   ]]> 
+       </sql>
+
+		<sql>
+
+          <![CDATA[
+			create table cs_gk_f_jggk(
+			info_id number(20) primary key,
+			gk_nsjg clob default '',
+			gk_gzzz clob default '',	
+			gk_xmzw clob default '',
+			gk_dz varchar2(250) default '',
+			gk_yzbm varchar2(250) default '',
+			gk_zbdh varchar2(250) default '',
+			gk_chzh varchar2(250) default '',
+			gk_email varchar2(250) default '',
+			gk_weburl varchar2(250) default '',
+			gk_sltsbm varchar2(250) default '',
+			gk_sltsdh varchar2(250) default ''
+			)
+				
+
+		   ]]> 
+
+       </sql>
+
+	   <sql>
+          <![CDATA[
+				create table cs_gk_f_flgw(
+					info_id NUMBER(20) not null,
+					gk_uniform_num VARCHAR2(250) default '',
+					gk_qsrq VARCHAR2(20) default '',
+					gk_djrq VARCHAR2(20) default '',
+					gk_xxsxx VARCHAR2(250) default '',
+					gk_content clob
+				)
+		   ]]> 
+       </sql>
+	   <sql>
+          <![CDATA[
+				create table cs_gk_resfile(
+					res_id NUMBER(20) not null PRIMARY KEY,
+					info_id NUMBER(20) not null,
+					res_name VARCHAR2(250) default '',
+					res_url VARCHAR2(250) default '',
+					sort_id NUMBER(4) default 999
+				)
+		   ]]> 
+       </sql>
+       
+       
+       <sql>
+          <![CDATA[
+				create table cs_gk_f_bszn
+				(
+					info_id number(20),
+					gk_fwlb varchar2(250) default '',
+					gk_bsjg varchar2(250) default '',
+					gk_sxyj clob default '',
+					gk_bldx varchar2(250) default '',
+					gk_bltj clob default '',
+					gk_blsx clob default '',
+					gk_bllc clob default '',
+					gk_gsfs varchar2(250) default '',
+					gk_blshixian clob default '',
+					gk_sfbz clob default '',
+					gk_sfyj clob default '',
+					gk_zxqd clob default '',
+					gk_bgsj clob default '',
+					gk_cclx clob default '',
+					gk_jgwz varchar2(250) default '',
+					gk_jdjc clob default '',
+					gk_zrzj clob default '',
+					gk_wszx clob default '',
+					gk_wsbl clob default '',
+					gk_ztcx clob default '',
+					gk_wsts clob default '',
+					gk_memo varchar2(1000) default ''
+					
+				)
+		   ]]> 
+       </sql>
+	   <sql>
+          <![CDATA[
+				create table cs_gk_f_ldcy(
+					info_id NUMBER(20) not null,
+					gk_ldzw VARCHAR2(250) default '',
+					gk_grjl clob,
+					gk_gzfg clob,
+					gk_dz VARCHAR2(250) default '',
+					gk_tel VARCHAR2(250) default '',
+					gk_email VARCHAR2(250) default '',
+					gk_pic	 VARCHAR2(250) default '',
+					gk_content clob
+				)
+		   ]]> 
+       </sql>
+       <sql>
+          <![CDATA[
+				create table cs_gk_f_xsjg(
+					info_id NUMBER(20) not null,
+					gk_gzzz clob,
+					gk_fzr VARCHAR2(250) default '',
+					gk_bgdz VARCHAR2(250) default '',
+					gk_yzbm VARCHAR2(250) default '',
+					gk_gkdh VARCHAR2(250) default '',
+					gk_chzh VARCHAR2(250) default '',
+					gk_email VARCHAR2(250) default ''
+				)
+		   ]]> 
+       </sql>
+       <sql>
+          <![CDATA[
+				create table cs_gk_f_xzzf(
+					info_id NUMBER(20) not null,
+					gk_zflb VARCHAR2(250) default '',
+					gk_xzxw clob,
+					gk_xzcl clob,
+					gk_flyj clob,
+					gk_nrfj clob
+				)
+		   ]]> 
+       </sql>
+       
+       <sql>
+          <![CDATA[
+       		 create table cs_gk_count
+	   			(
+	   			cat_id number(20) not null,
+	   			info_count number(20) default 0,
+	   			z_count number(20) default 0,
+	   			y_count number(20) default 0,
+	   			b_count number(20) default 0,
+	   			update_time char(20) default '',
+	   			app_id varchar2(250) default '',
+	   			site_id varchar2(250) default ''
+	   			)
+		 ]]> 
+       </sql>
+		
+		<sql>
+	   <![CDATA[
+	   create table cs_gk_ysq_config
+		(
+			id  number(20) primary key,
+			time_limit number(4) default 15,
+			code_pre  varchar2(20) default 'YSQ',
+			code_rule varchar2(20) default 'YYYYMMDD',
+			code_num  number(4)  default 4,
+			query_num number(4)  default 4,
+			file_url  varchar2(250) default '',
+			must_member number(4) default 0,
+			remind_type varchar2(20) default '',
+			user_secret number(4) default 0,
+			is_auto_publish number(4) default 1,
+			template_form number(4) default 0,
+			template_list number(4) default 0,
+			template_content number(4) default 0,
+			template_over number(4) default 0,
+			template_print number(4) default 0,
+			template_query number(4) default 0
+		)
+	   ]]>
+	   </sql>
+
+	    <sql>
+          <![CDATA[
+				create table cs_gk_ysq(
+					ysq_id NUMBER(20) not null,
+					ysq_code VARCHAR2(250) default '',
+					query_code VARCHAR2(50) default '',
+					ysq_type number(4) default 0,
+					name  VARCHAR2(250) default '',					
+					company VARCHAR2(250) default '',
+					card_name VARCHAR2(250) default '',
+					card_code VARCHAR2(250) default '',
+					org_code VARCHAR2(250) default '',
+					licence VARCHAR2(250) default '',
+					legalperson VARCHAR2(250) default '',
+					linkman VARCHAR2(250) default '',					
+					tel VARCHAR2(250) default 0,
+					fax VARCHAR2(250) default '',
+					phone VARCHAR2(250) default 0,
+					email VARCHAR2(250) default '',
+					postcode VARCHAR2(250) default '',
+					address VARCHAR2(250) default '',
+					put_dtime VARCHAR2(250) default '',
+					content clob,
+					gk_index VARCHAR2(250) default '',
+					description clob,
+					is_derate NUMBER(4) default 0,
+					offer_type VARCHAR2(250) default '',
+					get_method  VARCHAR2(250) default '',
+					is_other NUMBER(4) default 0,
+					is_third NUMBER(4) default 0,
+					is_extend NUMBER(4) default 0,
+					accept_content clob,
+					accept_dtime VARCHAR2(20) default '',
+					accept_user  NUMBER(10) default 0,
+					reply_type  NUMBER(4) default 0,
+					reply_content  clob,
+					reply_dtime  VARCHAR2(20) default '',
+					reply_user  NUMBER(10) default 0,
+					is_mail  NUMBER(4) default 0,
+					node_id VARCHAR2(250) default '',
+					node_name VARCHAR2(250) default '',
+					do_state NUMBER(4) default 0, 
+					final_status NUMBER(4) default 0,
+					publish_state NUMBER(4) default 0,
+					supervise_flag NUMBER(4) default 0,
+					time_limit NUMBER(4) default 15,
+					timeout_flag NUMBER(4) default 0,
+					sat_score NUMBER(4) default 0,
+					hits NUMBER(20) default 0,
+					day_hits NUMBER(20) default 0,
+					week_hits NUMBER(20) default 0,
+					month_hits NUMBER(20) default 0,
+					lasthit_dtime VARCHAR2(20) default '',
+					weight NUMBER(4) default 60
+				)
+		   ]]> 
+       </sql>
+       <sql>
+          <![CDATA[
+				create table cs_gk_phrasal(
+					gph_id NUMBER(20) not null,
+					gph_title VARCHAR2(255) default '',
+					gph_content VARCHAR2(2000) default '',
+					gph_type NUMBER(4) default 0,
+					sort_id NUMBER(4)
+				)
+		   ]]> 
+       </sql>
+		<sql>
+          <![CDATA[
+				create table cs_ser_category(
+					id NUMBER(20) not null,
+					ser_id NUMBER(20),
+					parent_id NUMBER(20),
+					cat_type varchar2(20) default 'sub',
+					tree_position varchar2(250) default '',
+					cat_name varchar2(250) default '',
+					description varchar2(1000) default '',
+					next_desc varchar2(250) default '',
+					thumb_url varchar2(250) default '',
+					url varchar2(250) default '',
+					template_index NUMBER(20) default 0,
+					template_list NUMBER(20) default 0,
+					template_content NUMBER(20) default 0,
+					xgwt_cat_id NUMBER(20) default 0,
+					cjwt_cat_id NUMBER(20) default 0,
+					sort_id  NUMBER(4) default 999,
+					publish_status NUMBER(4) default 0,
+					publish_time varchar2(20) default '',
+					res_flag NUMBER(4) default 0,
+					dict_id varchar2(250) default '',
+					add_time varchar2(20) default '',
+					add_user varchar2(20) default '',
+					update_time varchar2(20) default '',
+					update_user varchar2(20) default ''
+				)
+		   ]]> 
+       </sql>
+       
+       <sql>
+          <![CDATA[
+				create table cs_ser_resouce(
+					id NUMBER(20) not null,
+					res_id NUMBER(20),
+					ser_id NUMBER(20),
+					title varchar2(250) default '',
+					content clob,
+					url varchar2(250) default '',
+					sort_id NUMBER(4) default 999,
+					res_status NUMBER(20) default 0,
+					publish_status NUMBER(4) default 0,
+					publish_time varchar2(20) default '',
+					add_time varchar2(20) default '',
+					add_user varchar2(20) default '',
+					update_time varchar2(20) default '',
+					update_user varchar2(20) default ''
+				)
+		   ]]> 
+       </sql>
+       <!-- 公开应用目录主表 -->
+       <sql>
+          <![CDATA[
+				create table cs_gk_app_catalog(
+					id NUMBER(20) not null,
+					cata_id NUMBER(20) not null,
+					cata_cname VARCHAR2(250) default '',
+					parent_id NUMBER(20),
+					tree_position VARCHAR2(250) default '',
+					template_index NUMBER(20),	
+					template_list NUMBER(20),
+					is_mutilpage NUMBER(4),
+					jump_url VARCHAR2(250) default '',
+					cat_keywords VARCHAR2(250) default '',
+					cat_description VARCHAR2(250) default '',
+					cat_memo VARCHAR2(1000) default '',
+					cat_sort NUMBER(4) default 999,
+					c_sql VARCHAR2(1000) default ''	
+				)
+		   ]]> 
+       </sql>
+       
+       <!-- 公开应用目录同步规则表 -->
+       <sql>
+          <![CDATA[
+				create table cs_gk_app_regu(
+					id NUMBER(20) not null,
+					cata_id NUMBER(20) not null,
+					regu_type NUMBER(4) default 0,
+					site_ids VARCHAR2(1000) default '',
+					cat_ids	VARCHAR2(1000) default ''
+				)
+		   ]]> 
+       </sql>
+    </table>	
+</root>

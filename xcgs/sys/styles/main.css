@@ -1,0 +1,105 @@
+@charset "utf-8";
+/*全局样式*/
+body {font-family:"\5FAE\8F6F\96C5\9ED1","\5B8B\4F53",Arial Narrow,arial,serif;background:#f7f7f7;font-size:12px;}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,blockquote,p{padding:0; margin:0; color:#2b2b2b;}
+table,td,tr,th{font-size:12px;}
+li{list-style-type:none;list-style:none;}
+table{ margin:0 auto;border-spacing:0; border-collapse:collapse;/*white-space:nowrap*/}
+img{border:0;}
+ol,ul {list-style:none;}
+caption,th {text-align:left;}
+h1,h2,h3,h4,h5,h6 {font-size:12px; font-weight:normal;}
+q:before,q:after {content:'';}   
+abbr,acronym {border:0;}
+address,caption,cite,code,dfn,em,th,var {font-weight:normal; font-style:normal;}   
+a {color:#2b2b2b;text-decoration:none;}
+a:visited {color:#2b2b2b;text-decoration:none;}
+a:hover {color:#ba2636;text-decoration:underline;}
+a:active {color:#ba2636;}
+
+.blank3 {clear:both; height:3px; overflow:hidden; display:block;}
+.blank5 {clear:both; height:5px; overflow:hidden; display:block;}
+.blank6 {clear:both; height:6px; overflow:hidden; display:block;}
+.blank9 {clear:both; height:9px; overflow:hidden; display:block;}
+.blank12 {clear:both; height:12px; overflow:hidden; display:block;}
+.blank15 {clear:both; height:15px; overflow:hidden; display:block;}
+.blank18 {clear:both; height:18px; overflow:hidden; display:block;}
+.blank21 {clear:both; height:21px; overflow:hidden; display:block;}
+.blank24 {clear:both; height:25px; overflow:hidden; display:block;}
+
+.red{ border:1px solid red;}
+.blue{ border:1px solid blue;}
+.left{ float:left;}
+.right{ float:right;}
+.pointer{cursor:pointer;}
+.textLeft{ text-align:left;}
+.textRight{ text-align:right;}
+.textCenter{ text-align:center}
+
+.contentBox3{ padding:3px;}/*内容盒子，主要用于定位好后的Div内部*/
+.contentBox6{ padding:6px;}
+.contentBox9{ padding:9px;}
+.contentBox12{ padding:12px;}
+.contentBox15{ padding:15px;}
+.contentBox18{ padding:18px;}
+
+.textIndent2em{ text-indent:2em;}
+
+.f13B{ font-size:13px; font-weight:bold; color:#2b2b2b;}
+.f14B{ font-size:14px; font-weight:bold; color:#2b2b2b;}
+.f_red{ color:#FC3804; vertical-align:middle; font-weight:bold; padding:0 3px; }
+
+.lineHeight140{line-height:140%;}
+.lineHeight160{line-height:160%;}
+.lineHeight180{line-height:180%;}
+.lineHeight200{line-height:200%;}
+.lineHeight20px{ line-height:20px;}
+.lineHeight23px{ line-height:23px;}
+.lineHeight25px{ line-height:25px;}
+.lineHeight30px{ line-height:30px;}
+.lineHeight35px{ line-height:35px;}
+
+.hidden {display:none;}
+.display{display:block;}
+
+.line2h{ width:100%; height:2px; font-size:1px; background:url(../images/line2h.gif) repeat-x;}
+
+.input_text{ height:18px; line-height:18px; font-size:12px; vertical-align:middle; border:1px solid #9DBFDD; background-color:#FFF; padding-left:3px; margin:0 4px 0 0; }
+.input_text_focus{border:1px solid #63C21C;}
+.input_checkbox{ vertical-align:middle; margin:0 4px 0 0;}
+.input_radio{ vertical-align:middle; margin:0 4px 0 0;}
+.input_textarea{line-height:18px; font-size:12px; vertical-align:middle; border:1px solid #9DBFDD; background-color:#FFF; padding-left:3px; margin:0 4px 0 0;}
+.input_textarea_focus{border:1px solid #63C21C;}
+.input_select{ height:20px; line-height:20px; font-size:12px;vertical-align:middle; border:1px solid #9DBFDD; background-color:#FFF;}
+.input_select option{font-size:12px; line-height:19px;}
+
+/*各种大小按钮*/
+.btn{border:0px; font-size:12px; letter-spacing:2px; vertical-align:middle;}
+.x2{width:41px;height:21px; background:url(../images/btn_x2.gif) 0 0 no-repeat;}
+.x3{width:56px;height:21px; background:url(../images/btn_x3.gif) 0 0 no-repeat;}
+.x4{width:71px;height:21px; background:url(../images/btn_x4.gif) 0 0 no-repeat;}
+.x5{width:86px;height:21px; background:url(../images/btn_x5.gif) 0 0 no-repeat;}
+.x6{width:101px;height:21px; background:url(../images/btn_x6.gif) 0 0 no-repeat;}
+.x_add{width:67px; height:21px; border:0px; font-size:12px; letter-spacing:2px; vertical-align:middle; background:url(../images/btn_add.png) no-repeat;}
+.btn-over{background-position:left -21px;}
+.btn-click{background-position:left -42px;}
+
+/*Tip提示效果*/
+.tip{position: absolute;z-index:9999;}
+
+.tip_top_bg{ height:5px; float:left;  background:url(../images/tip_top_bg.gif) repeat-x; }
+.tip_top_left{ width:5px; height:5px; float:left; background:url(../images/tip_top_left.gif) no-repeat left;}
+.tip_top_right{ width:5px; height:5px; float:right; background:url(../images/tip_top_right.gif) no-repeat right;}
+.tip_mid{ background:url(../images/tip_mid_bg.gif);}
+.tip_mid div{ background:url(../images/tip_mid_left.gif) repeat-y left;clear:both;}
+.tip_mid div div{  background:url(../images/tip_mid_right.gif) repeat-y right; color:#C00000; padding:3px 10px 0px 10px; line-height:14px;}
+.tip_foot_bg{ width:100px; height:14px; float:left;  background:url(../images/tip_foot_bg.gif) repeat-x; }
+.tip_foot_left{ width:28px; height:14px; float:left; background:url(../images/tip_foot_left.gif) no-repeat left;}
+.tip_foot_right{ width:5px; height:14px; float:right; background:url(../images/tip_foot_right.gif) no-repeat right;}
+
+/*边框颜色*/
+.border_color{border:1px solid #9DBFDD;background:#FFFFFF;}
+
+/*特殊输入框背景*/
+.select_input_default{background:url(../images/select_defu.gif) no-repeat right;cursor:default}
+.select_input_selected{background:url(../images/select_selected.gif) no-repeat right;cursor:default}

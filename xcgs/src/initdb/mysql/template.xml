@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <table>
+      <sql>
+          <![CDATA[
+				create table cs_snippet(
+					id bigint(20) not null PRIMARY KEY,
+					sni_id bigint(20) not null,
+					sni_name varchar(250),
+					sni_content text,
+					app_id varchar(250),
+					site_id varchar(250) default ''
+				)
+		   ]]> 
+       </sql>
+	   <sql>
+          <![CDATA[
+				create table cs_template(
+					id    bigint(20) not null PRIMARY KEY,
+					t_id              bigint(20) not null,
+					t_ver             int(4),
+					app_id        varchar(255),
+					site_id       varchar(255)
+				)
+		   ]]> 
+       </sql>
+	   <sql>
+          <![CDATA[
+				create table cs_template_class(
+					id    bigint(20) not null PRIMARY KEY,
+					tclass_id	   bigint(20) not null,
+					tclass_ename	varchar(255),
+					tclass_cname	varchar(255),
+					tclass_memo	varchar(1000),
+					app_id varchar(255)
+				)
+		   ]]> 
+       </sql>
+	   <sql>
+          <![CDATA[
+				create table cs_template_category(
+					id    bigint(20) not null PRIMARY KEY,
+					tcat_id	   bigint(20) not null,
+					tclass_id	 bigint(20),
+					tcat_ename	 varchar(255),
+					tcat_cname	 varchar(255),
+					parent_id 	bigint(20),
+					tcat_position 	varchar(255),
+					tcat_memo	varchar(1000),
+					app_id	varchar(255),
+					site_id	varchar(255),
+					sort_id int(4) default 999
+				)
+		   ]]> 
+       </sql>
+	   <sql>
+          <![CDATA[
+				create table cs_template_edit(
+					id    bigint(20) not null PRIMARY KEY,
+					t_id	bigint(20) not null,
+					tcat_id	bigint(20),
+					t_ename	varchar(255),
+					t_cname	varchar(255),
+					t_path	varchar(255),
+					t_content	 longtext,
+					t_ver	int(4),
+					creat_user	bigint(20),
+					creat_dtime	varchar(20),
+					modify_user	bigint(20),
+					modify_dtime	varchar(20),
+					app_id	varchar(255),
+					site_id	varchar(255),
+					t_status varchar(4) default 0
+				)
+		   ]]> 
+       </sql>
+	   <sql>
+          <![CDATA[
+				create table cs_template_ver(
+					id    bigint(20) not null PRIMARY KEY,
+					t_id	bigint(20) not null,
+					tcat_id	bigint(20),
+					t_ename	varchar(255),
+					t_cname	varchar(255),
+					t_path	varchar(255),
+					t_content	 longtext,
+					t_ver	int(4),
+					creat_user	bigint(20),
+					creat_dtime	varchar(20),
+					modify_user	bigint(20),
+					modify_dtime	varchar(20),
+					app_id	varchar(255),
+					site_id	varchar(255),
+					t_status varchar(4)
+				)
+		   ]]> 
+       </sql>
+       <sql>
+          <![CDATA[
+				create table cs_design_css(
+					id    bigint(20) not null PRIMARY KEY,
+					css_id	bigint(20) not null,
+					css_ename varchar(255),
+					css_name varchar(255),
+					thumb_url varchar(255),
+					weight int(4) default 0,
+					app_id varchar(255),
+					site_id varchar(255)
+				)
+		   ]]> 
+       </sql>
+       <sql>
+          <![CDATA[
+				create table cs_design_layout(
+					id    bigint(20) not null PRIMARY KEY,
+					layout_id	bigint(20) not null,
+					layout_name varchar(255),
+					layout_content longtext,
+					thumb_url varchar(255),
+					weight int(4) default 0,
+					app_id varchar(255),
+					site_id varchar(255)					
+				)
+		   ]]> 
+       </sql>
+       <sql>
+          <![CDATA[
+				create table cs_design_module(
+					id    bigint(20) not null PRIMARY KEY,
+					module_id bigint(20) not null,
+					datasouce_type int(4) default 0,
+					module_name varchar(255),
+					module_content longtext,
+					v_code longtext,
+					thumb_url varchar(255),
+					style_ids varchar(500),	
+					attr_ids varchar(500),					
+					weight int(4) default 0,
+					app_id varchar(255),
+					site_id varchar(255)					
+				)
+		   ]]> 
+       </sql>
+       <sql>
+          <![CDATA[
+				create table cs_design_style(
+					id    bigint(20) not null PRIMARY KEY,
+					style_id bigint(20) not null,
+					style_name varchar(255),
+					class_name varchar(255),
+					thumb_url varchar(255),		
+					weight int(4) default 0,
+					app_id varchar(255),
+					site_id varchar(255)					
+				)
+		   ]]> 
+       </sql>
+       <sql>
+          <![CDATA[
+				create table cs_design_frame(
+					id    bigint(20) not null PRIMARY KEY,
+					frame_id bigint(20) not null,
+					frame_name varchar(255),
+					frame_content longtext,					
+					thumb_url varchar(255),		
+					weight int(4) default 0,
+					app_id varchar(255),
+					site_id varchar(255)					
+				)
+		   ]]> 
+       </sql>
+       <sql>
+          <![CDATA[
+				create table cs_design_case(
+					id    bigint(20) not null PRIMARY KEY,
+					case_id bigint(20) not null,
+					css_id bigint(20) not null,
+					case_name varchar(255),
+					case_content longtext,					
+					thumb_url varchar(255),		
+					weight int(4) default 0,
+					app_id varchar(255),
+					site_id varchar(255)					
+				)
+		   ]]> 
+       </sql>
+       <sql>
+          <![CDATA[
+				create table cs_design_category(
+					id  bigint(20) not null PRIMARY KEY,
+					cat_id bigint(20) not null,
+					css_id bigint(20) not null,
+					template_id bigint(20) not null,
+					design_content longtext,					
+					page_type varchar(50),		
+					publish_status int(4) default 0,
+					app_id varchar(255),
+					site_id varchar(255)					
+				)
+		   ]]> 
+       </sql>
+    </table>	
+</root>
+ 

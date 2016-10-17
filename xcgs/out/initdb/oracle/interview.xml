@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+
+    <table>
+       <sql>
+          <![CDATA[
+				create table cp_scategory(
+				  id NUMBER(10) not null PRIMARY KEY,
+					category_id VARCHAR2(200) default '',
+					category_name VARCHAR2(255) default '',
+					description  VARCHAR2(4000) default '',
+					publish_status NUMBER(1) default 0,
+					publish_time VARCHAR2(40) default '',
+					is_grade NUMBER(1) default 0,
+					is_comment NUMBER(1) default 0,
+					is_com_audit NUMBER(1) default 0,
+					is_com_filter NUMBER(1) default 0,
+					is_p_audit NUMBER(1) default 0,
+					is_p_filter NUMBER(1) default 0,
+					is_show_text NUMBER(1) default 1,
+					is_register NUMBER(1) default 0,
+					is_t_flink NUMBER(1) default 0,
+					is_t_keyw NUMBER(1) default 0,
+					is_t_audit NUMBER(1) default 0,
+					m_forecast_path VARCHAR2(500) default '',
+					m_hlist_path VARCHAR2(500) default '',
+					m_on_path VARCHAR2(500) default '',
+					m_h_path VARCHAR2(500) default '',
+					m_rlist_path VARCHAR2(500) default '',
+					m_rcontent_list VARCHAR2(500) default '',
+					add_time VARCHAR2(200) default '',
+					add_user VARCHAR2(200) default '',
+					update_time VARCHAR2(200) default '',
+					update_user VARCHAR2(200) default '',
+					is_delete NUMBER(1) default 0,
+					sort NUMBER(5) default 0,
+					site_id VARCHAR2(200) default ''
+				)
+		   ]]> 
+       </sql>
+       <sql>
+          <![CDATA[
+			create table cp_subject(
+				id NUMBER(10) not null PRIMARY KEY,
+				sub_id VARCHAR2(200) default '',
+				category_id VARCHAR2(200) default '',
+				sub_name VARCHAR2(300) default '',
+				summary VARCHAR2(4000) default '',
+				intro VARCHAR2(4000) default '',
+				info clob default '',
+				start_time VARCHAR2(40) default '',
+				end_time VARCHAR2(40) default '',
+				status NUMBER(1) default 0,
+				audit_status NUMBER(1) default 0,
+				publish_status NUMBER(1) default 0,
+				publish_time VARCHAR2(40) default '',
+				is_auto_audit NUMBER(1) default 0,
+				auto_audit_time NUMBER(5) default 0,
+				apply_time VARCHAR2(40) default '',
+				apply_user VARCHAR2(50) default '',
+				apply_dept VARCHAR2(50) default '',
+				update_time VARCHAR2(40) default '',
+				update_user VARCHAR2(50) default '',
+				audit_time VARCHAR2(40) default '',
+				audit_user VARCHAR2(50) default '',
+				submit_status NUMBER(1) default 0,
+				is_delete NUMBER(1) default 0,
+				sort NUMBER(5) default 0,
+				click_count NUMBER(10) default 0,
+				recommend_flag NUMBER(5) default 0,
+				recommend_time VARCHAR2(40) default '',
+				history_record_pic clob default '',
+				history_record_text clob default '',
+				count_user NUMBER(5) default 0,
+				site_id VARCHAR2(200) default ''
+			)
+		   ]]> 
+       </sql>
+       <sql>
+          <![CDATA[
+			create table cp_resouse(id NUMBER(10) not null PRIMARY KEY,sub_id VARCHAR2(200) default '',affix_type VARCHAR2(50) default '',affix_path VARCHAR2(500) default '',description Varchar(4000) default '',affix_name VARCHAR2(255) default '',affix_status VARCHAR2(50) default '',add_time VARCHAR2(200) default '',add_user VARCHAR2(200) default '',update_time VARCHAR2(200) default '',update_user VARCHAR2(200) default '',sort NUMBER(5) default 0,is_delete NUMBER(1) default 0)			
+		   ]]> 
+       </sql>
+       <sql>
+          <![CDATA[
+			create table cp_actor(id NUMBER(10) not null PRIMARY KEY,actor_id VARCHAR2(200) default '',sub_id VARCHAR2(200) default '',actor_name VARCHAR2(255) default '',age  VARCHAR2(10) default '',sex  VARCHAR2(10) default '',email  VARCHAR2(255) default '',company  VARCHAR2(300) default '',a_post  VARCHAR2(255) default '',address  VARCHAR2(300) default '',description  VARCHAR2(4000) default '',pic_path  VARCHAR2(500) default '',add_time VARCHAR2(200) default '',add_user VARCHAR2(200) default '',update_time VARCHAR2(200) default '',update_user VARCHAR2(200) default '',is_delete NUMBER(1) default 0,sort NUMBER(5) default 0)			
+		   ]]> 
+       </sql>
+       <sql>
+          <![CDATA[
+			create table cp_releinfo(id NUMBER(10) not null PRIMARY KEY,info_id VARCHAR2(200) default '',sub_id VARCHAR2(200) default '',info_name VARCHAR2(200) default '',info_type VARCHAR2(100) default '',content clob default '',curl VARCHAR2(255) default '',affix_path VARCHAR2(1000) default '',add_time VARCHAR2(200) default '',add_user VARCHAR2(200) default '',update_time VARCHAR2(200) default '',update_user VARCHAR2(200) default '',is_delete NUMBER(1) default 0,sort NUMBER(5) default 0,publish_flag NUMBER(5) default 0)		
+		   ]]> 
+       </sql>
+       <sql>
+          <![CDATA[
+			create table cp_chat(id NUMBER(10) not null PRIMARY KEY,chat_id VARCHAR2(200) default '',sub_id VARCHAR2(200) default '',chat_user VARCHAR2(200) default '',content VARCHAR2(4000) default '',put_time VARCHAR2(40) default '',ip VARCHAR2(40) default '',chat_area  VARCHAR2(40) default '',audit_status NUMBER(1) default 0,chat_type VARCHAR2(200) default '',is_show NUMBER(1) default 0)
+		]]> 
+       </sql>
+    </table>    
+</root>

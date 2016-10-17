@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Link</title>
+		<link href="../../themes/default/default.css" rel="stylesheet">
+		<script type="text/javascript" src="/sys/js/jquery.js"></script>
+		<script type="text/javascript" src="/sys/js/jsonrpc.js"></script>
+		<script type="text/javascript" src="/sys/js/java.js"></script>
+		<script type="text/javascript" src="/sys/js/sysUI.js"></script>
+		<link type="text/css" rel="stylesheet" href="/sys/styles/uploadify.css" />
+		<script language="javascript" src="/sys/js/jquery.uploadify.js"></script>
+		<script language="javascript" src="/sys/js/uploadFile/swfobject.js"></script>
+		<script type="text/javascript" src="/sys/js/uploadTools.js"></script>
+		<style type="text/css" rel="stylesheet">
+			body {
+				margin: 0;
+				font-size:12px;
+				overflow:hidden;
+			}
+			label {
+				cursor:pointer;
+			}
+			.main {
+				margin: 0 10px;
+			}
+			.table {
+				list-style-image:none;
+				list-style-position:outside;
+				list-style-type:none;
+				margin:0;
+				padding:0;
+				display:block;
+			}
+			.table li {
+				padding:0;
+				margin-bottom:10px;
+				display:list-item;
+				line-height:1.5;
+			}
+		</style>
+		<script type="text/javascript">
+			var is_resouce = false;//是否取资源库或是素材库的内容
+			if(parent.res_type != null && parent.res_type == "resouce")
+				is_resouce = true;
+
+			var app_id = parent.app_id;
+			var site_id = parent.site_id;
+			if(site_id == "GK")
+			{//得到公开系统所关联的站点，主要用于公开指引等特殊栏目alert(site_id)
+				site_id = jsonrpc.SiteRPC.getSiteIDByAppID(parent.app_id);
+			}
+			else
+			{//得到公开节点所关联的站点
+				if(site_id.indexOf("GK") == 0)
+				{
+					//site_id = jsonrpc.GKNodeRPC.getGKNodeBeanByNodeID(site_id).rela_site_id;
+					site_id = jsonrpc.SiteRPC.getSiteIDByAppID(parent.app_id);
+				}
+			}
+
+			$(document).ready(function(){
+				if(is_resouce == false)
+				{
+					publicUploadFileButtomLoad("uploadify",true,false,"",0,5,site_id,"uploadReturnHandl");
+					$("#i005").click(function(){
+						openSelectMaterialPage('uploadReturnHandl',site_id,'radio');
+					});
+				}
+				else
+				{
+					initTemplateUpLoad();
+					$("#i005").click(function(){						
+						window.showModalDialog("/sys/system/template/select_file.jsp?site_id="+site_id,window,'dialogWidth:650px;dialogHeight:495px;scroll:no;status:no;center:yes');
+					});
+				}
+			});
+
+			function uploadReturnHandl(url,old_name)
+			{
+				 $(".clearfix li").eq(0).click();						 
+				 $("#url").val(url);		
+				 $("#file_old_name").val(old_name);
+			}
+
+			function getInputVal(input_id)
+			{
+				return $("input[name='"+input_id+"']").val();
+			}
+
+			function setInputVal(input_id,val)
+			{
+				if(val != "" && val != null)
+				{
+					$("input[name='"+input_id+"']").val(val);
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div class="main">
+			<ul class="table">
+				<li>
+					<div style="float:left;margin:auto;width:70px;"><label for="url">URL</label>&nbsp;</div>
+					<div style="float:left;margin:auto;"><input type="text" id="url" name="url" value="http://" class="ke-inline-block ke-text-input" style="width:220px" />
+					<input type="hidden" id="file_old_name" name="file_old_name">
+					</div>
+					<div style="float:left;margin:auto;">&nbsp;<input id="uploadify" name="uploadify" type="file" class="" value="浏览"/></div>
+					<div style="float:left">&nbsp;<input id="i005" name="i005" type="button" onclick="" value="素材库" /></div>
+					<div style="clear:both"></div>
+				</li>
+				<li>
+					<label for="imgWidth" class="ke-inline-block" style="width:70px;"><span id="lang.size">文字说明</span></label>
+					<input type="text" id="title" name="title" value="" maxlength="255" class="ke-inline-block ke-text-input" style="300px" />
+				</li>
+				<li>
+					<div id="fileQueue"></div>
+				</li>
+			</ul>
+		</div>
+	</body>
+</html>

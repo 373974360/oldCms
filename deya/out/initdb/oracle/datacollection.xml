@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+
+    <table>
+
+    	<sql>
+
+          <![CDATA[
+				CREATE TABLE cs_artInfo (
+				  id NUMBER(20) not null PRIMARY KEY,
+				  rule_id NUMBER(20) DEFAULT '0',
+				  art_title varchar2(2000) DEFAULT '',
+				  art_content clob,
+				  art_pubTime varchar2(100) DEFAULT '',
+				  art_source varchar2(2000) DEFAULT '',
+				  art_author varchar2(2000) DEFAULT '',
+				  art_keyWords varchar2(2000) DEFAULT '',
+				  art_hits NUMBER(4) DEFAULT '0',
+				  cat_id varchar2(10) DEFAULT '',
+				  artis_user NUMBER(4) DEFAULT '0',
+				  coll_time varchar2(30) DEFAULT '',
+				  url varchar2(200) DEFAULT NULL
+				)
+
+		   ]]> 
+
+       </sql>        
+
+	   <sql>
+
+          <![CDATA[
+
+				CREATE TABLE cs_collection (
+				  id NUMBER(20) not null PRIMARY KEY,
+				  rule_id NUMBER(20) DEFAULT '0',
+				  rcat_id NUMBER(20) DEFAULT '0',
+				  title varchar2(250) DEFAULT '',
+				  listUrl_start varchar2(250) DEFAULT '',
+				  listUrl_end varchar2(250) DEFAULT '',
+				  infotitle_start varchar2(250) DEFAULT '',
+				  infotitle_end varchar2(250) DEFAULT '',
+				  description_start varchar2(250) DEFAULT '',
+				  description_end varchar2(250) DEFAULT '',
+				  content_start varchar2(250) DEFAULT '',
+				  content_end varchar2(250) DEFAULT '',
+				  source_start varchar2(250) DEFAULT '',
+				  source_end varchar2(250) DEFAULT '',
+				  addTime_start varchar2(250) DEFAULT '',
+				  addTime_end varchar2(250) DEFAULT '',
+				  keywords_start varchar2(250) DEFAULT '',
+				  keywords_end varchar2(250) DEFAULT '',
+				  hits_start varchar2(250) DEFAULT '',
+				  hits_end varchar2(250) DEFAULT '',
+				  author_start varchar2(250) DEFAULT '',
+				  author_end varchar2(250) DEFAULT '',
+				  site_id varchar2(250) DEFAULT '',
+				  cate_ids varchar2(250) DEFAULT '',
+				  stop_time NUMBER(20) DEFAULT '0',
+				  pic_isGet NUMBER(20) DEFAULT '0',
+				  timeFormatType varchar2(250) DEFAULT '',
+				  pageEncoding varchar2(250) DEFAULT '',
+				  coll_url varchar2(250) DEFAULT '',
+				  contentUrl_start varchar2(250) DEFAULT '',
+				  contentUrl_end varchar2(250) DEFAULT '',
+				  cat_id varchar2(50) DEFAULT '',
+				  cat_name varchar2(50) DEFAULT '',
+				  coll_interval varchar2(50) DEFAULT ''
+				)
+		   ]]> 
+
+       </sql>
+
+        <sql>
+
+            <![CDATA[
+
+				create table cs_rule_category(
+
+					id NUMBER(20) not null PRIMARY KEY,
+
+					rcat_id NUMBER(20) default 0,
+
+					parent_id NUMBER(20) default 0,
+
+					rcat_name VARCHAR2(250) default '',
+
+					rcat_position VARCHAR2(250) default '',
+
+					rcat_level NUMBER(4) default 0,
+
+					rcat_memo VARCHAR2(1000) default '',
+
+					sort_id NUMBER(4) default 0,
+
+					app_id VARCHAR2(250) default '',
+
+					site_id VARCHAR2(250) default '',
+					receive_recom NUMBER(4) default 0
+
+				)
+
+		   ]]>
+
+        </sql>
+
+        <sql>
+            <![CDATA[
+				create table cs_rule_priv(
+					id        NUMBER(20) not null,
+					rcat_id   NUMBER(20) default 0,
+					prv_id    NUMBER(20) default 0,
+					priv_type NUMBER(4) default 0,
+					app_id    varchar2(250) default '',
+					site_id   varchar2(250) default ''
+				)
+		   ]]>
+        </sql>
+
+    </table>	
+</root>

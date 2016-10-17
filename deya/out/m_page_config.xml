@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 后台管理页面地址配置文件(访问路径) -->
+<properties>  
+   <variables>
+    <variable name="manager_path" value="/sys"/>
+  </variables>
+  <variables>
+    <variable name="org_path" value="${manager_path}/org"/>
+  </variables>    
+   <category name="m_org_path"> 
+     <property name="detp_list" value="${org_path}/dept/deptList.jsp"/>
+     <property name="menu_list" value="${org_path}/operate/menuList.jsp"/>
+     <property name="ware_update" value="${manager_path}/system/ware/ware_content.jsp"/>
+     <property name="article_page" value="${manager_path}/cms/info/article/articleDataList.jsp"/>
+     <property name="fw_page" value="${manager_path}/cms/info/article/fwInfoList.jsp"/>
+   </category>    
+</properties>

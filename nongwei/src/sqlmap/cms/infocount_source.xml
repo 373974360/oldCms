@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="sqlmap.cms.infocount_source">
+
+<!-- ************按照栏目统计站点的发布信息  -  按信息来源分类************ -->
+<select id="getInfoCountListBySource" parameterType="Map" resultType="Map">
+	select count(ci.id) as count ,source from 
+	(
+		select i.id as id,i.source as source from cs_info i,cs_info_category c 
+			where c.id=i.cat_id and i.info_status=8   
+			<if test="site_id !=  null">
+				and i.site_id = #{site_id}
+			</if>
+			<if test="cat_position != null">
+				and c.cat_position like '%${cat_position}%' 
+			</if>
+			<if test="is_host !=  null">
+				and i.is_host = #{is_host}
+			</if>
+			<if test="start_day != null">
+			<![CDATA[ 
+				and i.released_dtime >= #{start_day}
+			]]>
+			</if>
+			<if test="end_day != null">
+			<![CDATA[ 
+				and i.released_dtime <= #{end_day}
+			]]>
+			</if>
+			<if test="cate_ids != null">
+			and i.cat_id in (${cate_ids})
+		</if>
+		) ci 
+	group by source order by count desc
+</select>
+
+
+</mapper>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <file>public.xml</file>
+    <file>appeal.xml</file> 
+    <file>cms.xml</file> 
+    <file>control.xml</file>
+    <file>interview.xml</file>
+    <file>material.xml</file>
+    <file>member.xml</file>
+	<file>org.xml</file>
+    <file>page.xml</file>     
+    <file>survey.xml</file>        
+	<file>system.xml</file>   
+	<file>template.xml</file> 	
+	<file>zwgk.xml</file>
+	<file>query.xml</file>
+	<file>app_com.xml</file>
+	<file>datacollection.xml</file>
+</root>

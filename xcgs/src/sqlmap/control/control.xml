@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="control">
+	<!-- 得到网站群列表 -->	
+	<select id="getSiteGroupList" resultType="com.deya.wcm.bean.control.SiteGroupBean">
+		select * from cs_site_group order by sgroup_sort
+	</select>
+	
+	<!-- 插入网站群信息 -->
+	<insert id="insert_site_group" parameterType="com.deya.wcm.bean.control.SiteGroupBean">
+		insert into cs_site_group(sgroup_id,parent_id,sgroup_name,sgroup_ip,sgroup_prot,sgroup_sort,dept_id,sgroup_memo)
+		values(#{sgroup_id},#{parent_id},#{sgroup_name},#{sgroup_ip},#{sgroup_prot},#{sgroup_sort},#{dept_id},#{sgroup_memo})
+	</insert>
+	
+	<!-- 修改网站群信息 -->
+	<update id="update_site_group" parameterType="com.deya.wcm.bean.control.SiteGroupBean">
+		update cs_site_group set sgroup_name=#{sgroup_name},sgroup_ip=#{sgroup_ip},sgroup_prot=#{sgroup_prot},
+		dept_id=#{dept_id},sgroup_memo=#{sgroup_memo} where sgroup_id = #{sgroup_id}
+	</update>
+	
+	<!-- 保存网站群排序 -->
+	<update id="save_site_group_sort" parameterType="Map">
+		update cs_site_group set sgroup_sort = #{sgroup_sort} where sgroup_id = #{sgroup_id} 
+	</update>
+	
+	<!-- 删除网站群信息 -->
+	<delete id="delete_site_group" parameterType="java.lang.String">
+		delete from cs_site_group where sgroup_id = #{sgroup_id}
+	</delete>
+	
+	<!-- *********************** 服务器管理　开始 ********************************* -->
+	
+	<!-- 得到服务器列表 -->	
+	<select id="getSiteServerList"  resultType="com.deya.wcm.bean.control.SiteServerBean">
+		select * from cs_site_server order by server_id asc
+	</select>
+	
+	<!-- 插入服务器信息 -->
+	<insert id="insert_site_server" parameterType="com.deya.wcm.bean.control.SiteServerBean">
+		insert into cs_site_server(server_id,server_name,server_ip,server_type,server_memo)
+		values(#{server_id},#{server_name},#{server_ip},#{server_type},#{server_memo})
+	</insert>
+	
+	<!-- 修改服务器信息 -->
+	<update id="update_site_server" parameterType="com.deya.wcm.bean.control.SiteServerBean">
+		update cs_site_server set server_name=#{server_name},server_ip=#{server_ip},server_type=#{server_type},
+		server_memo=#{server_memo} where server_id=#{server_id}
+	</update>
+	
+	<!-- 删除服务器信息 -->
+	<delete id="delete_site_server" parameterType="Map">
+		delete from cs_site_server where server_id in (${server_id})
+	</delete>
+	<!-- *********************** 服务器管理　结束 ********************************* -->
+	
+	<!-- *********************** 站点管理　开始 ********************************* -->
+	<!-- 得到所有站点信息 -->	
+	<select id="getAllSiteList"  resultType="com.deya.wcm.bean.control.SiteBean">
+		select * from cs_site where site_status != -1 order by site_sort
+	</select>
+	
+	<!-- 根据站点ID得到站点对象 -->	
+	<select id="getSiteBean" parameterType="String" resultType="com.deya.wcm.bean.control.SiteBean">
+		select * from cs_site where site_id = #{site_id} and site_status != -1
+	</select>
+	
+	<!-- 插入站点信息 -->
+	<insert id="insert_site" parameterType="com.deya.wcm.bean.control.SiteBean">
+		insert into cs_site(site_id,parent_id,server_id,dept_id,site_name,site_cdkey,site_createtime,site_position,sgroup_id,site_demo,site_path,site_sort)
+		values(#{site_id},#{parent_id},#{server_id},#{dept_id},#{site_name},#{site_cdkey},#{site_createtime},#{site_position},#{sgroup_id},#{site_demo},#{site_path},#{site_sort})
+	</insert>
+	
+	<!--　修改站点信息 -->
+	<update id="update_site" parameterType="com.deya.wcm.bean.control.SiteBean">
+		update cs_site set server_id=#{server_id},dept_id=#{dept_id},site_name=#{site_name},site_cdkey=#{site_cdkey},
+		sgroup_id=#{sgroup_id},site_demo=#{site_demo},site_status=#{site_status} where site_id=#{site_id}
+	</update>
+	
+	<!--　修改站点状态信息 -->
+	<update id="update_site_status" parameterType="Map">
+		update cs_site set site_status = #{site_status},site_pausetime = #{site_pausetime} where site_id=#{site_id}
+	</update>
+	
+	<!--　保存站点排序信息 -->
+	<update id="save_site_sort" parameterType="Map">
+		update cs_site set site_sort = #{site_sort} where site_id=#{site_id}
+	</update>
+	
+	<update id="delete_site" parameterType="java.lang.String">
+		update cs_site set site_status = -1 where site_id=#{site_id}
+	</update>
+	<!-- *********************** 站点管理　结束 ********************************* -->
+	
+	<!-- *********************** 站点域名管理　开始 ********************************* -->
+	<!--　得到站点域名列表 -->
+	<select id="getSiteDomainList" resultType="com.deya.wcm.bean.control.SiteDomainBean">
+		select * from cs_site_domain order by site_id
+	</select>
+	
+	<!--　插入站点域名 -->
+	<insert id="insert_site_domain" parameterType="com.deya.wcm.bean.control.SiteDomainBean">
+		insert into cs_site_domain(domain_id,site_id,site_domain,is_default,is_host)
+		values(#{domain_id},#{site_id},#{site_domain},#{is_default},#{is_host})
+	</insert>
+	
+	<!--　修改站点域名(根据域名ID) -->
+	<update id="update_site_domain" parameterType="com.deya.wcm.bean.control.SiteDomainBean">
+		update cs_site_domain set site_domain=#{site_domain} where domain_id = #{domain_id}
+	</update>
+	
+	<!--　修改站点域名(根据域名名称) -->
+	<update id="update_site_domain_byName" parameterType="Map">
+		update cs_site_domain set site_domain=#{new_site_domain} where site_domain = #{site_domain}
+	</update>
+	
+	<!--　根据域名ID修改域名默认状态 -->
+	<update id="update_site_domain_status" parameterType="java.lang.String">
+		update cs_site_domain set is_default = 1 where domain_id = #{domain_id}
+	</update>
+	
+	<!--　根据站点ID将域名默认状态设置为0 -->
+	<update id="cancel_sitedomain_default" parameterType="java.lang.String">
+		update cs_site_domain set is_default = 0 where site_id = #{site_id}
+	</update>
+	
+	<!--　删除站点域名 -->
+	<delete id="delete_site_domain" parameterType="Map">
+		delete from cs_site_domain where domain_id in (${domain_id})
+	</delete>
+	
+	<!--　根据站点ID删除站点域名 -->
+	<delete id="delete_site_domainBySiteID" parameterType="java.lang.String">
+		delete from cs_site_domain where site_id = #{site_id}
+	</delete>
+	
+	<!-- *********************** 站点域名管理　结束 ********************************* -->
+	
+	<!-- *********************** 站点配置管理　开始 ********************************* -->
+	<!--　得到站点配置列表 -->
+	<select id="getAllSiteConfigList" resultType="com.deya.wcm.bean.control.SiteConfigBean">
+		select * from cs_site_config order by site_id,config_id
+	</select>
+	
+	<!--　得到站点配置列表 -->
+	<select id="getSiteConfigListBySiteID" parameterType="java.lang.String" resultType="com.deya.wcm.bean.control.SiteConfigBean">
+		select * from cs_site_config where site_id = #{site_id}
+	</select>
+	
+	<!--　插入站点配置信息 -->
+	<insert id="insert_site_config" parameterType="com.deya.wcm.bean.control.SiteConfigBean">
+		insert into cs_site_config(config_id,site_id,config_key,config_value)
+		values(#{config_id},#{site_id},#{config_key},#{config_value})
+	</insert>
+	
+	<!--　根据站点ID删除配置信息 -->
+	<delete id="delete_site_config" parameterType="java.lang.String">
+		delete from cs_site_config where site_id = #{site_id}
+	</delete>	
+	
+	<!--　根据主键ID删除配置信息 -->
+	<delete id="delete_site_configbyids" parameterType="Map"> 
+		delete from cs_site_config where config_id in (${config_ids}) 
+	</delete>
+	
+	<!-- 修改站点配置信息 -->
+	<update id="update_site_configbyid" parameterType="com.deya.wcm.bean.control.SiteConfigBean">
+		update cs_site_config set config_key=#{config_key},config_value=#{config_value} where config_id=#{config_id}
+	</update>
+	<!-- *********************** 站点配置管理　结束 ********************************* -->
+	
+	<!-- *********************** 站点与特殊应用管理　开始 ********************************* -->
+	<select id="getSiteAppReleList" resultType="com.deya.wcm.bean.control.SiteAppBean">
+		select * from cs_site_app
+	</select>
+	
+	<insert id="insert_site_rele_app" parameterType="com.deya.wcm.bean.control.SiteAppBean">
+		insert into cs_site_app(sa_id,site_id,app_id,mark1,mark2,mark3,mark4,mark5)
+		values(#{sa_id},#{site_id},#{app_id},#{mark1},#{mark2},#{mark3},#{mark4},#{mark5})
+	</insert>
+	
+	<insert id="insety_site_rele_app" parameterType="Map">
+		insert into cs_site_app(sa_id,site_id,app_id)
+		values(#{sa_id},#{site_id},#{app_id})
+	</insert>
+	
+	<delete id="delete_site_rele_app" parameterType="java.lang.String">
+		delete from cs_site_app where app_id = #{app_id}
+	</delete>
+	<!-- *********************** 站点与特殊应用管理　结束 ********************************* -->
+
+	<!-- **************************** 翻页　需更换部分 ************************************************* -->
+	<!-- 得到服务器列表 -->
+	<select id="getServerList" resultType="com.deya.wcm.bean.control.SiteServerBean" parameterType="Map">
+	<![CDATA[  
+	select * from ( 
+	       select row_.*, rownum rownum_ from (       
+	            select * from  cs_site_server order by ${sort_name} ${sort_type}
+	        ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
+    	) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+    ]]>	
+	</select>
+	
+	<select id="getServerList_mysql" resultType="com.deya.wcm.bean.control.SiteServerBean" parameterType="Map">
+		select * from  cs_site_server order by ${sort_name} ${sort_type} limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}	
+	</select>
+	
+	<select id="getServerList_mssql" resultType="com.deya.wcm.bean.control.SiteServerBean" parameterType="Map">
+		select top ${page_size} *
+			  from cs_site_server 
+			  where  server_id not in
+				  (select top ${start_num} server_id
+					 from cs_site_server		 
+					 order by ${sort_name} ${sort_type} )
+			order by ${sort_name} ${sort_type}	
+	</select>
+</mapper>

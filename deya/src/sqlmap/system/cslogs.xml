@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="logs">
+	
+	<resultMap id="cslog_sub" type="com.deya.wcm.bean.logs.SettingLogsBean">
+		<id property="audit_id" column="audit_id" />
+	    <result property="user_id" column="user_id"/>
+	    <result property="user_name" column="user_name"/>
+	    <result property="audit_des" column="audit_des"/>
+	    <result property="audit_time" column="audit_time"/>
+	    <result property="ip" column="ip"/>
+	    <result property="app_id" column="app_id"/>
+	    <result property="site_id" column="site_id"/>		    
+	</resultMap>
+
+
+	<!-- 得到所有审计日志列表 
+	<select id="getAllLogSetting" resultMap="cslog_sub">
+	 select * from cs_log_setting cls order by cls.audit_id desc
+	</select> -->
+	
+	<!-- 得到指定的审计日志对象 -->	
+	<select id="getLogSettingBean" parameterType="java.lang.String" resultType="com.deya.wcm.bean.logs.SettingLogsBean">
+	 select * from cs_log_setting where audit_id = #{audit_id}
+	</select>
+	
+	<!-- 插入审计日志信息 -->	
+	<insert id="insert_LogSetting" parameterType="com.deya.wcm.bean.logs.SettingLogsBean">
+		insert into cs_log_setting(audit_id,user_id,user_name,audit_des,audit_time,ip,app_id,site_id)
+		values(#{audit_id},#{user_id},#{user_name},#{audit_des},#{audit_time},#{ip},#{app_id},#{site_id})
+	</insert>
+	
+	<!-- 修改审计日志信息 -->
+	<update id="update_LogSetting" parameterType="com.deya.wcm.bean.logs.SettingLogsBean">
+		update cs_log_setting set user_id = #{user_id},user_name = #{user_name},audit_des = #{audit_des}, 
+		audit_time = #{audit_time},ip = #{ip},app_id = #{app_id},site_id = #{site_id} 
+		where audit_id = #{audit_id}
+	</update>
+	
+	<!-- 删除审计日志信息 -->
+	<delete id="delete_LogSetting" parameterType="Map">
+		delete from cs_log_setting where audit_id in (${audit_ids})
+	</delete>
+	
+	
+<!-- *****   李奇__添加 begin  ***** -->
+	<!-- ****************取得检索到的审计日志条数**************** -->
+	<select id="searchLogSettingCount" parameterType="Map" resultType="String">
+		
+			select count(audit_id) from cs_log_setting
+			where user_id != 1
+			<if test="con_value != null">
+				and ${con_name} like '%${con_value}%'
+			</if>
+			<if test="start_day != null">
+			<![CDATA[ 
+				and audit_time >= #{start_day}
+			]]>
+			</if>
+			<if test="end_day != null">
+			<![CDATA[ 
+				and audit_time <= #{end_day}
+			]]>
+			</if>		
+		
+	</select>
+	
+	<!-- 根据条件检索审计日志信息 -->
+	<select id="searchLogSetting" parameterType="Map" resultType="com.deya.wcm.bean.logs.SettingLogsBean">
+		select * from (
+	       select row_.*, rownum rownum_ from (   
+	       select * from cs_log_setting
+			where user_id != 1
+			<if test="con_value != null">
+				and ${con_name} like '%${con_value}%'
+			</if>
+			<if test="start_day != null">
+			<![CDATA[ 
+				and audit_time >= #{start_day}
+			]]>
+			</if>
+			<if test="end_day != null">
+			<![CDATA[ 
+				and audit_time <= #{end_day}
+			]]>
+			</if>
+			order by ${sort_name} ${sort_type}
+	<![CDATA[ 
+	    ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
+  	) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+    ]]>	    
+	</select>
+	
+	<select id="searchLogSetting_mysql" parameterType="Map" resultType="com.deya.wcm.bean.logs.SettingLogsBean">		 
+	       select * from cs_log_setting
+			where user_id != 1
+			<if test="con_value != null">
+				and ${con_name} like '%${con_value}%'
+			</if>
+			<if test="start_day != null">
+			<![CDATA[ 
+				and audit_time >= #{start_day}
+			]]>
+			</if>
+			<if test="end_day != null">
+			<![CDATA[ 
+				and audit_time <= #{end_day}
+			]]>
+			</if>
+			order by ${sort_name} ${sort_type}
+			
+			limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
+	</select>
+	
+	<select id="searchLogSetting_mssql" parameterType="Map" resultType="com.deya.wcm.bean.logs.SettingLogsBean">		 
+	      select top ${page_size} *  
+		  from cs_log_setting 
+		  where user_id != 1 
+	       <if test="con_value != null">
+				and ${con_name} like '%${con_value}%'
+			</if>
+			<if test="start_day != null">
+			<![CDATA[ 
+				and audit_time >= #{start_day}
+			]]>
+			</if>
+			<if test="end_day != null">
+			<![CDATA[ 
+				and audit_time <= #{end_day}
+			]]>
+			</if>
+			and audit_id not in
+			  (select top ${start_num} audit_id
+				 from cs_log_setting where 1=1 
+	        <if test="con_value != null">
+				and ${con_name} like '%${con_value}%'
+			</if>
+			<if test="start_day != null">
+			<![CDATA[ 
+				and audit_time >= #{start_day}
+			]]>
+			</if>
+			<if test="end_day != null">
+			<![CDATA[ 
+				and audit_time <= #{end_day}
+			]]>
+			</if>
+				 order by ${sort_name} ${sort_type} )
+		order by ${sort_name} ${sort_type}
+	</select>
+	
+	<!-- ********************登录日志处理开始  -TODO- ******************** -->
+	<!-- 取得指定的登录日志信息 -->
+	<select id="getLogLoginBean" parameterType="java.lang.String" resultType="com.deya.wcm.bean.logs.LoginLogsBean">
+		select * from cs_log_login where audit_id = #{audit_id}
+	</select>
+	
+	<!-- 得到所有登录日志列表  -->
+	<select id="searchLogLoginBeanCnt" resultType="java.lang.String">
+	 	select count(*) from cs_log_login
+			where user_id != 1
+			<if test="con_value != null">
+				and ${con_name} like '%${con_value}%'
+			</if>
+			<if test="start_day != null">
+			<![CDATA[ 
+				and audit_time >= #{start_day}
+			]]>
+			</if>
+			<if test="end_day != null">
+			<![CDATA[ 
+				and audit_time <= #{end_day}
+			]]>
+			</if>
+	</select>
+	
+	
+	<!-- 插入审计日志信息 -->
+	<insert id="insert_LogLogin" parameterType="com.deya.wcm.bean.logs.LoginLogsBean">
+		insert into cs_log_login(audit_id,user_id,user_name,audit_des,audit_time,ip,app_id,site_id)
+		values(#{audit_id},#{user_id},#{user_name},#{audit_des},#{audit_time},#{ip},#{app_id},#{site_id})
+	</insert>
+	
+	<!-- 修改审计日志信息 -->
+	<update id="update_LogLogin" parameterType="com.deya.wcm.bean.logs.LoginLogsBean">
+		update cs_log_login set user_id = #{user_id},user_name = #{user_name},audit_des = #{audit_des}, 
+		audit_time = #{audit_time},ip = #{ip},app_id = #{app_id},site_id = #{site_id} 
+		where audit_id = #{audit_id}
+	</update>
+	
+	<!-- 删除审计日志信息 -->
+	<delete id="delete_LogLogin" parameterType="Map">
+		delete from cs_log_login where audit_id in (${audit_ids})
+	</delete>
+	
+	
+	<!-- ********************登录日志处理结束*********************** -->
+	
+<!-- *****   李奇__添加 end ***** -->
+	
+	<!-- **************************** 翻页　 ************************************************* -->
+	
+	<select id="getLogSettingCount" parameterType="Map" resultType="java.lang.String">
+		select count(audit_id) from cs_log_setting  where user_id != 1
+	    <if test="con_value != null">
+				and ${con_name} like '%${con_value}%'
+		</if>	
+	</select>
+	
+	<select id="getAllLogSetting" resultType="com.deya.wcm.bean.logs.SettingLogsBean" parameterType="Map">
+	select * from (
+	       select row_.*, rownum rownum_ from (
+	            	select * from cs_log_setting where user_id != 1 
+	        <if test="con_value != null">
+				and ${con_name} like '%${con_value}%'
+			</if>
+			order by ${sort_name} ${sort_type}
+	<![CDATA[   
+	        ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
+    	) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+    ]]>	
+	</select>
+	
+	<select id="getAllLogSetting_mysql" resultType="com.deya.wcm.bean.logs.SettingLogsBean" parameterType="Map">
+		select * from cs_log_setting where user_id != 1 
+	        <if test="con_value != null">
+				and ${con_name} like '%${con_value}%'
+			</if>
+			order by ${sort_name} ${sort_type} limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
+	</select>
+	
+	<select id="getAllLogSetting_mssql" resultType="com.deya.wcm.bean.logs.SettingLogsBean" parameterType="Map">
+		select top ${page_size} *  
+		  from cs_log_setting 
+		  where user_id != 1 
+	        <if test="con_value != null">
+				and ${con_name} like '%${con_value}%'
+			</if>
+			and audit_id not in
+			  (select top ${start_num} audit_id
+				 from cs_log_setting where 1=1 
+	        <if test="con_value != null">
+				and ${con_name} like '%${con_value}%'
+			</if>
+				 order by ${sort_name} ${sort_type} )
+		order by ${sort_name} ${sort_type}
+	</select>
+	
+	<!-- 检索登录日志对象**当传进来的参数中没有条件时,则取得全部的登录日志 -->	
+	<select id="searchLogLoginBean" parameterType="Map" resultType="com.deya.wcm.bean.logs.LoginLogsBean">
+	 		select * from (
+	       select row_.*, rownum rownum_ from (   
+	       select * from cs_log_login
+			where user_id != 1
+			<if test="con_value != null">
+				and ${con_name} like '%${con_value}%'
+			</if>
+			<if test="start_day != null">
+			<![CDATA[ 
+				and audit_time >= #{start_day}
+			]]>
+			</if>
+			<if test="end_day != null">
+			<![CDATA[ 
+				and audit_time <= #{end_day}
+			]]>
+			</if>
+			order by ${sort_name} ${sort_type}
+	<![CDATA[ 
+	    ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
+  	) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+    ]]>	
+	</select>
+	
+	<select id="searchLogLoginBean_mysql" parameterType="Map" resultType="com.deya.wcm.bean.logs.LoginLogsBean">
+		select * from cs_log_login
+			where user_id != 1
+			<if test="con_value != null">
+				and ${con_name} like '%${con_value}%'
+			</if>
+			<if test="start_day != null">
+			<![CDATA[ 
+				and audit_time >= #{start_day}
+			]]>
+			</if>
+			<if test="end_day != null">
+			<![CDATA[ 
+				and audit_time <= #{end_day}
+			]]>
+			</if>
+			order by ${sort_name} ${sort_type}
+			
+			limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
+	</select>
+	
+	<select id="searchLogLoginBean_mssql" parameterType="Map" resultType="com.deya.wcm.bean.logs.LoginLogsBean">
+		select top ${page_size} *  
+		  from cs_log_login 
+		  where user_id != 1 
+	       <if test="con_value != null">
+				and ${con_name} like '%${con_value}%'
+			</if>
+			<if test="start_day != null">
+			<![CDATA[ 
+				and audit_time >= #{start_day}
+			]]>
+			</if>
+			<if test="end_day != null">
+			<![CDATA[ 
+				and audit_time <= #{end_day}
+			]]>
+			</if>
+			and audit_id not in
+			  (select top ${start_num} audit_id
+				 from cs_log_login where 1=1 
+	        <if test="con_value != null">
+				and ${con_name} like '%${con_value}%'
+			</if>
+			<if test="start_day != null">
+			<![CDATA[ 
+				and audit_time >= #{start_day}
+			]]>
+			</if>
+			<if test="end_day != null">
+			<![CDATA[ 
+				and audit_time <= #{end_day}
+			]]>
+			</if>
+				 order by ${sort_name} ${sort_type} )
+		order by ${sort_name} ${sort_type}
+	</select>
+</mapper>

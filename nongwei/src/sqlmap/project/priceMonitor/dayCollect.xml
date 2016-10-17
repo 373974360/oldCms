@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="priceMonitor">
+    <sql id="getDayCollectList_sql_conn">
+        where 1=1
+        <if test="marketId != null">
+            and marketId = #{marketId}
+        </if>
+        <if test="typeId != null">
+            and typeId = #{typeId}
+        </if>
+        <if test="productId != null">
+            and productId = #{productId}
+        </if>
+        <if test="collectDate != null">
+            and collectDate like '${collectDate}%'
+        </if>
+    </sql>
+
+    <select id="getDayCollectList" parameterType="Map" resultType="com.deya.project.priceMonitor.DayCollectData" >
+        select marketId,typeId,productId,price,collectDate,isSell from dz_daycollect
+        <include refid="getDayCollectList_sql_conn"/>
+    </select>
+
+    <insert id="collectByDay" parameterType="Map" >
+        insert into dz_daycollect
+        select marketId,typeId,productId,round(AVG(price),2) price, left(addTime,10),isSell from dz_priceInfo
+        where addTime like '%${collectDate}%' GROUP BY marketId,typeId,productId,isSell,left(addTime,10)
+    </insert>
+
+    <select id="getWeekCollectList" parameterType="Map" resultType="com.deya.project.priceMonitor.DayCollectData" >
+        select marketId,typeId,productId,round(avg(price),2) price from dz_daycollect
+        where isSell = 1
+        <if test="marketId != null">
+            and marketId = #{marketId}
+        </if>
+        <if test="typeId != null">
+            and typeId = #{typeId}
+        </if>
+        <if test="productId != null">
+            and productId = #{productId}
+        </if>
+        <if test="collectDateStart != null">
+            and collectDate >= #{collectDateStart}
+        </if>
+        <if test="collectDateEnd != null">
+            <![CDATA[	and collectDate <= #{collectDateEnd} ]]>
+        </if>
+        group by marketId,typeId,productId
+    </select>
+
+    <select id="getTenCollectList" parameterType="Map" resultType="com.deya.project.priceMonitor.TenCollectBean" >
+        select marketId,typeId,productId, round(max(price),2) maxPrice,round(min(price),2) minPrice,round(avg(price),2) avgPrice,isSell from dz_daycollect
+        where 1=1
+        <if test="marketId != null">
+            and marketId = #{marketId}
+        </if>
+        <if test="typeId != null">
+            and typeId = #{typeId}
+        </if>
+        <if test="productId != null">
+            and productId = #{productId}
+        </if>
+        <if test="collectDateStart != null">
+            and collectDate >= #{collectDateStart}
+        </if>
+        <if test="collectDateEnd != null">
+            <![CDATA[	and collectDate <= #{collectDateEnd} ]]>
+        </if>
+        group by marketId,typeId,productId,isSell
+    </select>
+
+    <select id="getPriceCollectList" parameterType="Map" resultType="com.deya.project.priceMonitor.PriceCollectBean" >
+        select marketId,typeId,productId,round(avg(price),2) avgPrice,isSell from dz_daycollect
+        where 1=1
+        <if test="isSell != null">
+            and isSell = #{isSell}
+        </if>
+        <if test="marketId != null">
+            and marketId = #{marketId}
+        </if>
+        <if test="typeId != null">
+            and typeId = #{typeId}
+        </if>
+        <if test="productId != null">
+            and productId = #{productId}
+        </if>
+        <if test="collectDateStart != null">
+            and collectDate >= #{collectDateStart}
+        </if>
+        <if test="collectDateEnd != null">
+            <![CDATA[	and collectDate <= #{collectDateEnd} ]]>
+        </if>
+        group by marketId,typeId,productId,isSell
+        order by ${orderby}
+    </select>
+
+    <delete id="deleteByDay">
+        delete from dz_daycollect
+        <include refid="getDayCollectList_sql_conn"/>
+    </delete>
+
+
+</mapper>

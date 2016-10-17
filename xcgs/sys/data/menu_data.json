@@ -1,0 +1,43 @@
+[
+{"id":1,"text":"内容统计","attributes":{"p1":"value11","p2":"http://www.sogo.com","asyn":"static"},
+	"children":[
+		{"id":11,"text":"综合统计","attributes":{"p1":"value11","p2":"http://www.baidu.com"}},
+		{"id":12,"text":"按栏目统计12","attributes":{"p1":"value11","p2":"info_list.html"}},
+		{"id":13,"text":"按模型统计","attributes":{"p1":"value11","p2":"info_list.html"}},
+		{"id":14,"text":"按部门统计","attributes":{"p1":"value11","p2":"info_list.html"}},
+		{"id":15,"text":"按人员统计","attributes":{"p1":"value11","p2":"http://www.google.com"},
+			"children":[
+					{"id":111,"text":"全站排行","attributes":{"p1":"value11","p2":"http://www.baidu.com"}},
+					{"id":112,"text":"按栏目排行","attributes":{"p1":"value11","p2":"info_list.html"}},
+					{"id":113,"text":"按模型排行","attributes":{"p1":"value11","p2":"info_list.html"}},
+					{"id":114,"text":"按编辑排行","attributes":{"p1":"value11","p2":"info_list.html"}}
+				]
+		}
+	]
+},
+{"id":2,"text":"访问统计","attributes":{"p1":"value21","p2":"http://www.baidu.com"},
+	"children":[
+		{"id":21,"text":"全站排行11","attributes":{"p1":"value11","p2":"info_list.html"}},
+		{"id":22,"text":"按栏目排行22","attributes":{"p1":"value11","p2":"info_list.html"}},
+		{"id":23,"text":"按模型排行33","attributes":{"p1":"value11","p2":"info_list.html"}},
+		{"id":24,"text":"按编辑排行44","attributes":{"p1":"value11","p2":"info_list.html"}}
+	]
+},
+{"id":3,"text":"点击排行","attributes":{"p1":"value11","p2":"info_list.html"},
+	"children":[
+		{"id":31,"text":"全站排行","attributes":{"p1":"value11","p2":"info_list.html"}},
+		{"id":32,"text":"按栏目排行","attributes":{"p1":"value11","p2":"info_list.html"}},
+		{"id":33,"text":"按模型排行","attributes":{"p1":"value11","p2":"info_list.html"}},
+		{"id":34,"text":"按编辑排行","attributes":{"p1":"value11","p2":"info_list.html"}}
+	]
+},
+{"id":4,"text":"Digg排行","attributes":{"p1":"value11","p2":"info_list.html"},
+	"children":[
+		{"id":41,"text":"全站排行","attributes":{"p1":"value11","p2":"info_list.html"}},
+		{"id":42,"text":"按栏目排行55","attributes":{"p1":"value11","p2":"info_list.html"}},
+		{"id":43,"text":"按模型排行55","attributes":{"p1":"value11","p2":"info_list.html"}},
+		{"id":44,"text":"按编辑排行","attributes":{"p1":"value11","p2":"info_list.html"}}
+	]
+},
+{"id":5,"text":"信息添加","attributes":{"p1":"value11","p2":"info_add.html"}}
+]

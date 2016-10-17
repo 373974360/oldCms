@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+
+    <table>
+
+    	<sql>
+
+          <![CDATA[
+
+				create table cs_org_app(
+
+				app_id VARCHAR2(250) default '',
+
+				app_name VARCHAR2(250) default '',
+
+				app_sort NUMBER(20),
+
+				app_ico VARCHAR2(250) default '',
+
+				app_memo VARCHAR2(1000) default '')
+
+		   ]]> 
+
+       </sql>
+
+       <sql>
+
+          <![CDATA[
+
+				create table cs_org_dept(
+
+				dept_id NUMBER(20) not null PRIMARY KEY,
+
+				parent_id NUMBER(20),
+
+				deptlevel_value NUMBER(4),
+
+				dept_fullname VARCHAR2(250) default '',
+
+				dept_name VARCHAR2(250) default '',
+
+				area_code VARCHAR2(250) default '',
+
+				dept_code VARCHAR2(250) default '',
+
+				functions VARCHAR2(500) default '',
+
+				tel VARCHAR2(250) default '',
+
+				fax VARCHAR2(250) default '',
+
+				email VARCHAR2(250) default '',
+
+				address VARCHAR2(250) default '',
+
+				dept_memo VARCHAR2(1000) default '',
+
+				tree_position VARCHAR2(250) default '',
+
+				is_delete NUMBER(1) default 0,
+
+				dept_sort NUMBER(20) default 0,
+				
+				is_publish NUMBER(4) default 0,
+				
+				postcode VARCHAR2(20) default ''
+
+				)
+
+		   ]]> 
+
+       </sql> 
+
+       <sql>
+
+          <![CDATA[
+
+				create table cs_org_dept_manager(dept_manager_id NUMBER(20) not null PRIMARY KEY,
+
+				dept_id NUMBER(20),
+
+				user_id NUMBER(20)
+
+				)
+
+		   ]]> 
+
+       </sql>       
+
+       <sql>
+
+          <![CDATA[
+
+				create table cs_org_deptlevel(deptlevel_id NUMBER(20) not null PRIMARY KEY,deptlevel_name VARCHAR2(250) default '',
+
+				deptlevel_value NUMBER(4),deptlevel_memo VARCHAR2(1000) default '',is_delete NUMBER(1) default 0)
+
+		   ]]> 
+
+       </sql>       
+
+       <sql>
+
+          <![CDATA[
+
+				create table cs_org_user(
+
+				user_id NUMBER(20) not null PRIMARY KEY,
+
+				dept_id NUMBER(20),
+
+				userlevel_value NUMBER(4),
+
+				user_realname  VARCHAR2(250) default '',
+
+				user_aliasname VARCHAR2(250) default '',
+
+				user_photo  VARCHAR2(250) default '',
+
+				sex NUMBER(4),
+
+				birthday  VARCHAR2(250) default '',
+
+				nation  VARCHAR2(250) default '',
+
+				age NUMBER(4),
+
+				is_marriage NUMBER(4),
+
+				natives  VARCHAR2(250) default '',
+
+				functions  VARCHAR2(250) default '',
+
+				degree  VARCHAR2(250) default '',
+
+				colleges  VARCHAR2(250) default '',
+
+				graduation_time  VARCHAR2(250) default '',
+
+				professional  VARCHAR2(250) default '',
+
+				health  VARCHAR2(250) default '',
+
+				tel  VARCHAR2(250) default '',
+
+				phone  VARCHAR2(250) default '',
+
+				email  VARCHAR2(250) default '',
+
+				address  VARCHAR2(250) default '',
+
+				postcode  VARCHAR2(250) default '',
+
+				idcard  VARCHAR2(250) default '',
+
+				user_status NUMBER(4),
+
+				resume  clob default '', 
+
+				user_memo  clob default '',
+				
+				is_publish NUMBER(4) default 0,
+				
+				photo VARCHAR2(250) default '',
+				
+				politics_status VARCHAR2(250) default '',
+				
+				dept_name VARCHAR2(250) default '',
+				
+				to_work_time VARCHAR2(250) default '',
+				
+				work_desc clob default '',
+				
+				summary clob default '',
+				
+				sort NUMBER(4) default 999,
+				
+				bein_dept VARCHAR2(250) default ''
+				)
+				
+		   ]]> 
+
+       </sql>         
+
+       <sql>
+
+          <![CDATA[
+
+				create table cs_org_userlevel(
+
+				userlevel_id NUMBER(20) not null PRIMARY KEY,
+
+				userlevel_name VARCHAR2(250) default '',
+
+				userlevel_value NUMBER(4),
+
+				userlevel_memo VARCHAR2(1000) default '',
+
+				is_delete NUMBER(1) default 0)
+
+		   ]]> 
+
+       </sql>       
+
+       <sql>
+
+          <![CDATA[
+
+				create table cs_org_register(
+
+				register_id NUMBER(20) not null PRIMARY KEY,
+
+				user_id NUMBER(20),				
+
+				username VARCHAR2(250) default '',				
+
+				password VARCHAR2(250) default '',
+
+				register_status NUMBER(4) default 0)
+
+		   ]]> 
+
+       </sql>       
+
+       <sql>
+
+          <![CDATA[
+
+				create table cs_org_group(
+
+				group_id NUMBER(20) not null PRIMARY KEY,
+
+				parent_id NUMBER(20),				
+
+				group_name VARCHAR2(250) default '',				
+
+				app_id VARCHAR2(250) default '',
+
+				site_id VARCHAR2(250) default '',
+
+				group_memo VARCHAR2(1000) default '')
+
+		   ]]> 
+
+       </sql>
+
+       
+
+       <sql>
+
+          <![CDATA[
+
+				create table cs_org_group_user(
+
+				group_user_id NUMBER(20) not null PRIMARY KEY,
+
+				group_id NUMBER(20),	
+
+				user_id NUMBER(20),
+
+				app_id VARCHAR2(250) default '',
+
+				site_id VARCHAR2(250) default '')
+
+		   ]]> 
+
+       </sql>       
+
+       <sql>
+
+          <![CDATA[
+
+				create table cs_org_role(
+
+				role_id NUMBER(20) not null PRIMARY KEY,
+
+				role_name VARCHAR2(250) default '',
+
+				rele_shared NUMBER(4),
+
+				app_id VARCHAR2(250) default '',
+
+				site_id VARCHAR2(250) default '',
+
+				role_memo VARCHAR2(1000) default '')
+
+		   ]]> 
+
+       </sql>       
+
+       <sql>
+
+          <![CDATA[
+
+				create table cs_org_role_app(
+
+				role_app_id NUMBER(20) not null PRIMARY KEY,
+
+				role_id NUMBER(20),				
+
+				app_id VARCHAR2(250) default '',
+
+				site_id VARCHAR2(250) default '')
+
+		   ]]> 
+
+       </sql>       
+
+       <sql>
+
+          <![CDATA[
+
+				create table cs_org_user_role(
+
+				user_role_id NUMBER(20) not null PRIMARY KEY,
+
+				role_id NUMBER(20),	
+
+				user_id NUMBER(20),			
+
+				app_id VARCHAR2(250) default '',
+
+				site_id VARCHAR2(250) default '')
+
+		   ]]> 
+
+       </sql>       
+
+       <sql>
+
+          <![CDATA[
+
+				create table cs_org_group_role(
+
+				group_role_id NUMBER(20) not null PRIMARY KEY,
+
+				role_id NUMBER(20),	
+
+				group_id NUMBER(20),			
+
+				app_id VARCHAR2(250) default '',
+
+				site_id VARCHAR2(250) default '')
+
+		   ]]> 
+
+       </sql>       
+
+       <sql>
+
+          <![CDATA[
+
+				create table cs_org_opt(
+
+				opt_id NUMBER(20) not null PRIMARY KEY,
+
+				parent_id NUMBER(20),
+
+				tree_position VARCHAR2(250) default '',	
+
+				opt_name VARCHAR2(250) default '',			
+
+				app_id VARCHAR2(250) default '',
+
+				controller VARCHAR2(250) default '',
+
+				action VARCHAR2(250) default '',
+
+				opt_flag VARCHAR2(250) default '',
+
+				opt_memo VARCHAR2(1000) default ''				
+
+				)
+
+		   ]]> 
+
+       </sql>
+
+       <sql>
+
+          <![CDATA[
+
+				create table cs_org_menu(
+
+				menu_id NUMBER(20) not null PRIMARY KEY,
+
+				parent_id NUMBER(20),				
+
+				menu_name VARCHAR2(250) default '',			
+
+				menu_url VARCHAR2(250) default '',
+
+				handls VARCHAR2(250) default '',
+
+				opt_id NUMBER(20),
+
+				menu_level NUMBER(20),
+
+				menu_position VARCHAR2(250) default '',
+
+				menu_sort NUMBER(20) default 0,
+
+				menu_memo VARCHAR2(1000) default ''				
+
+				)
+
+		   ]]> 
+
+       </sql>       
+
+       <sql>
+
+          <![CDATA[
+
+				create table cs_org_role_opt(
+
+				role_opt_id NUMBER(20) not null PRIMARY KEY,
+
+				role_id NUMBER(20),
+
+				opt_id NUMBER(20)			
+
+				)
+
+		   ]]> 
+
+       </sql>
+
+       
+
+       <sql>
+
+       <![CDATA[
+
+       create table cs_site_user(
+
+      		user_id NUMBER(20) not null,
+
+      		app_id varchar2(250) default '',
+
+      		site_id varchar2(250) default ''
+
+		)
+
+       ]]>
+
+       </sql>
+		<!-- 公务员名录关联模板表 -->
+	   <sql>
+	   	 <![CDATA[
+	   	 	create table cs_org_minlu_template(
+	   	 		id NUMBER(20) not null PRIMARY KEY,
+	   	 		template_index NUMBER(20) default 0,
+	   	 		template_list NUMBER(20) default 0,
+	   	 		template_content NUMBER(20) default 0,
+	   	 		reinfo_temp_list NUMBER(20) default 0,
+	   	 		reinfo_temp_content NUMBER(20) default 0,
+	   	 		reinfo_temp_pic_list NUMBER(20) default 0,
+	   	 		reinfo_temp_pic_content NUMBER(20) default 0,
+	   	 		app_id varchar2(250) default '',
+      			site_id varchar2(250) default ''
+	   	 	)
+	   	 ]]>
+	   </sql>
+	   <!-- 用户桌面设置表 -->
+	   <sql>
+          <![CDATA[
+          	create table cs_user_desktop(
+          		id NUMBER(20) not null PRIMARY KEY,
+          		user_id NUMBER(20) not null,
+          		app_type varchar2(250) default '',
+          		k_v varchar2(250) default '' 
+          	)
+		   ]]> 
+       </sql>
+    </table>	
+
+    
+
+</root>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="query">	
+	<!-- 得到字段 -->
+	<select id="getAllQueryDicList" resultType="com.deya.wcm.bean.query.QueryDicBean">
+		select * from cs_dz_chaxun_dic  order by  sort_id
+	</select>
+	
+	<!-- 插入字段 -->
+	<insert id="insert_QueryDic" parameterType="com.deya.wcm.bean.query.QueryDicBean">
+		 insert into cs_dz_chaxun_dic(dic_id,conf_id,field_cname,is_selected,is_query,is_result,sort_id,site_id)
+		 values(#{dic_id},#{conf_id},#{field_cname},#{is_selected},#{is_query},#{is_result},#{sort_id},#{site_id})	 
+	</insert>
+	
+	<!-- 删除字段 -->
+	<delete id="delete_QueryDic" parameterType="Map">
+		delete from cs_dz_chaxun_dic where conf_id in (${conf_id})
+	</delete>	
+	
+	<select id="getTypeDicList_browser"  parameterType="Map" resultType="com.deya.wcm.bean.query.QueryDicBean">
+	    select * from cs_dz_chaxun_dic where 1=1  ${con} order by dic_id
+    </select>
+</mapper>

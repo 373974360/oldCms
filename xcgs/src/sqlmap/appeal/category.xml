@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="category">
+	
+	<!-- *******************************诉求分类管理开始******************************* -->
+	<!-- 得到诉求分类信息 -->
+	<select id="getAllApp_categroyList" resultType="com.deya.wcm.bean.appeal.category.CategoryBean">
+		select * from cp_category  order by parent_id,sort_id 
+	</select>
+	
+	<!-- 根据ID得到诉求分类信息 -->
+	<select id="getApp_CategoryBean" parameterType="java.lang.String" resultType="com.deya.wcm.bean.appeal.category.CategoryBean">
+		select * from cp_category where cat_id = #{cat_id}
+	</select>
+	
+	<!-- 插入诉求分类信息 -->
+	<insert id="insert_app_categroy" parameterType="com.deya.wcm.bean.appeal.category.CategoryBean">
+		 insert into cp_category(cat_id,parent_id,cat_cname,cat_position,cat_level,sort_id)
+		 values(#{cat_id},#{parent_id},#{cat_cname},#{cat_position},#{cat_level},#{sort_id})
+	</insert>
+	
+	<!-- 修改诉求分类信息 -->
+	<update id="update_app_categroy" parameterType="com.deya.wcm.bean.appeal.category.CategoryBean">
+		update cp_category set cat_cname = #{cat_cname} where cat_id = #{cat_id}
+	</update>
+	
+	<!-- 保存诉求分类排序 -->
+	<update id="update_cat_id_sort" parameterType="Map">
+		update cp_category set sort_id = #{sort_id} where cat_id = #{cat_id}
+	</update>
+	
+	<!-- 移动诉求分类 -->	
+	<update id="moveApp_categroy" parameterType="Map">
+		update cp_category set parent_id = #{parent_id},cat_position=#{cat_position} where cat_id = #{cat_id}
+	</update>
+	
+	<!-- 删除诉求分类信息 -->
+	<delete id="delete_app_categroy" parameterType="Map">
+		delete from cp_category where cat_id in (${cat_id})
+	</delete>
+</mapper>

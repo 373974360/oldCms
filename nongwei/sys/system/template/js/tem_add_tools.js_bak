@@ -1,0 +1,235 @@
+var info_item = [["$!{InfoData.info_id}","ID"],["$!{InfoData.pre_title}","标题前缀"],["$!{InfoData.title}","标题"],["$!{InfoData.top_title}","上标题"],["$!{InfoData.subtitle}","副标题"],["$!{InfoData.author}","作者"],["$!{InfoData.editor}","编辑"],["$!{InfoData.source}","来源"],["$!{InfoData.title_color}","标题颜色"],["$!{InfoData.description}","摘要"],["$!{InfoData.info_keywords}","META关键词"],["$!{InfoData.info_description}","META网页描述"],["$!{InfoData.thumb_url}","缩略图地址"]];
+var info_item_last = [["$!{InfoData.tags}","Tags"],["$!{InfoData.hits}","总点击数"],["$!{InfoData.day_hits}","日点击数"],["$!{InfoData.week_hits}","周点击数"],["$!{InfoData.month_hits}","月点击数"],["$!{InfoData.released_dtime}","发布时间"]];
+var cms_article_item = [["$!{InfoData.info_content}","内容"],["$!{InfoData.word_count}","字数"]];
+var cms_pic_item = [["$!{InfoData.pic_path}","图片路径"],["$!{InfoData.pic_title}","图片标题"],["$!{InfoData.pic_note}","图片描述"],["$!{InfoData.pic_content}","详细内容"]];
+var cms_video_item = [["$!{InfoData.video_path}","视频路径"],["$!{InfoData.info_content}","内容"]];
+
+var gk_info_item = [["$!{InfoData.gk_index}","索引号"],["$!{InfoData.doc_no}","文号"],["$!{InfoData.generate_dtime}","生成日期"],["$!{InfoData.effect_dtime}","生效日期"],["$!{InfoData.aboli_dtime}","废止日期"],["$!{InfoData.topic_id}","主题分类ID"],["$!{InfoData.topic_name}","主题分类名称"],["$!{InfoData.theme_id}","体裁分类ID"],["$!{InfoData.theme_name}","体裁分类名称"],["$!{InfoData.serve_id}","服务对象分类ID"],["$!{InfoData.服务对象分类ID}","服务对象分类名称"],["$!{InfoData.topic_key}","主题关键词"],["$!{InfoData.place_key}","位置关键词"],["$!{InfoData.language}","语种"],["$!{InfoData.carrier_type}","载体类型"],["$!{InfoData.gk_validity}","信息有效性"],["$!{InfoData.gk_format}","记录形式"],["$!{InfoData.gk_way}","公开形式"],["$!{InfoData.gk_type}","公开方式"],["$!{InfoData.gk_no_reason}","不公开理由"],["$!{InfoData.gk_time_limit}","公开时限"],["$!{InfoData.gk_range}","公开范围"],["$!{InfoData.gk_proc}","公开程序"],["$!{InfoData.gk_duty_dept}","责任部门"],["$!{InfoData.gk_input_dept}","发布机构"]];
+var gk_tygs_item = [["$!{InfoData.gk_content}","内容"]];
+var gk_gkzy_item = [["$!{InfoData.info_content}","内容"]];
+var gk_gkzn_item = [["$!{InfoData.info_content}","内容"]];
+var gk_gknb_item = [["$!{InfoData.info_content}","内容"]];
+var gk_flgw_item = [["$!{InfoData.gk_uniform_num}","统一登记号"],["$!{InfoData.gk_qsrq}","签署日期"],["$!{InfoData.gk_djrq}","登记日期"],["$!{InfoData.gk_xxsxx}","信息时效性"],["$!{InfoData.gk_content}","信息内容"]];
+var gk_jggk_item = [["$!{InfoData.gk_nsjg}","内设机构"],["$!{InfoData.gk_gzzz}","工作职责"],["$!{InfoData.gk_xmzw}","姓名职务"],["$!{InfoData.gk_dz}","地址"],["$!{InfoData.gk_yzbm}","邮政编码"],["$!{InfoData.gk_zbdh}","值班电话"],["$!{InfoData.gk_chzh}","传真"],["$!{InfoData.gk_email}","Email"],["$!{InfoData.gk_weburl}","网站地址"],["$!{InfoData.gk_sltsbm}","受理投诉部门"],["$!{InfoData.gk_sltsdh}","受理投诉电话"]];
+var gk_ldcy_item = [["$!{InfoData.gk_ldzw}","领导职务"],["$!{InfoData.gk_grjl}","个人简历"],["$!{InfoData.gk_gzfg}","工作分工"],["$!{InfoData.gk_dz}","地址"],["$!{InfoData.gk_tel}","电话"],["$!{InfoData.gk_email}","Email"],["$!{InfoData.gk_pic}","照片"]];
+var gk_xsjg_item = [["$!{InfoData.gk_gzzz}","工作职责"],["$!{InfoData.gk_fzr}","负责人"],["$!{InfoData.gk_bgdz}","办公地址"],["$!{InfoData.gk_yzbm}","邮政编码"],["$!{InfoData.gk_gkdh}","公开电话"],["$!{InfoData.gk_chzh}","传真"],["$!{InfoData.gk_email}","电子邮件"]];
+var gk_xzzf_item = [["$!{InfoData.gk_zflb}","执法类别"],["$!{InfoData.gk_xzxw}","行政行为"],["$!{InfoData.gk_xzcl}","行政处理"],["$!{InfoData.gk_flyj}","法律依据"],["$!{InfoData.gk_nrfj}","内容附件"]];
+var gk_bszn_item = [["$!{InfoData.gk_fwlb}","服务类别"],["$!{InfoData.gk_bsjg}","办事机构"],["$!{InfoData.gk_sxyj}","事项依据"],["$!{InfoData.gk_bldx}","办理对象及范围"],["$!{InfoData.gk_bltj}","办理条件"],["$!{InfoData.gk_blsx}","办理手续"],["$!{InfoData.gk_bllc}","办理流程"],["$!{InfoData.gk_gsfs}","公示方式"],["$!{InfoData.gk_blshixian}","办理时限"],["$!{InfoData.gk_sfbz}","收费标准"],["$!{InfoData.gk_sfyj}","收费依据"],["$!{InfoData.gk_zxqd}","咨询渠道"],["$!{InfoData.gk_bgsj}","办公时间及地址"],["$!{InfoData.gk_cclx}","乘车路线"],["$!{InfoData.gk_jgwz}","机构网址"],["$!{InfoData.gk_jdjc}","监督检查"],["$!{InfoData.gk_zrzj}","责任追究"],["$!{InfoData.gk_wszx}","网上咨询"],["$!{InfoData.gk_wsbl}","网上办理"],["$!{InfoData.gk_ztcx}","状态查询"],["$!{InfoData.gk_wsts}","网上投诉"],["$!{InfoData.gk_memo}","备注"]];
+var sq_item = [["$!{sq.sq_realname}","来信人"],["#if($sq.sq_sex==0) 女 #else 男 #end","性别"],["$!{sq.sq_vocation}","职业"],["$!{sq.submit_name}","收信单位"],["$!{sq.model_cname}","递交渠道"],["$!{sq.pur_name}","写信目的"],["#if($sq.is_open==0) 不公开 #else 公开 #end","公开意愿"],["$!{sq.sq_dtime}","写信时间"],["$!{sq.sq_title2}","来信标题"],["$!{sq.sq_content2}","来信内容"],["$!{sq.do_dept_name}","回复单位"],["$!{sq.over_dtime}","回复时间"],["$!{sq.sq_reply}","回复内容"]];
+
+//var gk_tygs_item = [["$!{InfoData.}",""],["$!{InfoData.}",""],["$!{InfoData.}",""],["$!{InfoData.}",""],["$!{InfoData.}",""],["$!{InfoData.}",""],["$!{InfoData.}",""],["$!{InfoData.}",""],["$!{InfoData.}",""],["$!{InfoData.}",""],["$!{InfoData.}",""],["$!{InfoData.}",""],["$!{InfoData.}",""]];
+
+//加载代码编辑器
+function initEditArea(textareaID)
+{
+	/*
+	editAreaLoader.init({
+			id: textareaID	// id of the textarea to transform		
+			,start_highlight: true	// if start with highlight
+			,allow_resize: "both"
+			,font_size: "12"
+			,allow_toggle: true
+			,word_wrap: true
+			,language: "zh"
+			,syntax: "html"	
+			,plugins: "creaList"
+			,display: "later"
+			,toolbar: "new_document, save, load, |,creaList,hotList,creaLink,selFile,|,search, go_to_line, |, undo, redo, |, select_font, |, word_wrap, |, help"
+		});	
+	*/
+	editAreaLoader = CodeMirror.fromTextArea(textareaID, {
+		height: "413px",
+		width: "97%",
+		//parserfile: "/sys/js/mCodeArea/js/parsexml.js",
+		//stylesheet: "/sys/js/mCodeArea/css/xmlcolors.css",
+		parserfile: ["/sys/js/mCodeArea/js/parsexml.js", "/sys/js/mCodeArea/js/parsecss.js", "/sys/js/mCodeArea/js/tokenizejavascript.js", "/sys/js/mCodeArea/js/parsejavascript.js", "/sys/js/mCodeArea/js/parsehtmlmixed.js"],
+		stylesheet: ["/sys/js/mCodeArea/css/xmlcolors.css", "/sys/js/mCodeArea/css/jscolors.css", "/sys/js/mCodeArea/css/csscolors.css"],
+		path: "js/",
+		continuousScanning: 500,
+		lineNumbers: true
+	  });
+}
+
+function setValue(value){
+	//editAreaLoader.setValue(areaId, value);	
+	editAreaLoader.setCode(value);
+}
+
+function insertWareTag(id,ware_name){
+	var text = "<!-- ---------"+ware_name+" 开始------------- -->\n<!"+"--"+"#"+"include virtual='/include/ware_"+id+".htm'-->\n<!-- ---------"+ware_name+" 结束------------- -->\n";//wareMap.get(id).ware_content;
+	//editAreaLoader.insertTags(areaId, text, "");
+	editAreaLoader.replaceSelection(text);
+}
+
+function insertCodeTag(id){
+	var text = codeMap.get(id).sni_content;
+	//editAreaLoader.insertTags(areaId, text, "");
+	editAreaLoader.replaceSelection(text);
+}
+
+function showCodeBeanList(){
+	var codeBeanList = SnippetRPC.getSnippetList();
+	if(codeBeanList != null){
+		codeBeanList =  List.toJSList(codeBeanList);
+	}else{
+		return;
+	}
+	var liStr = "";
+	for(var i=0; i<codeBeanList.size(); i++){
+		codeMap.put(codeBeanList.get(i).sni_id,codeBeanList.get(i));
+		liStr += "<li class='code' onclick='insertCodeTag(\""+codeBeanList.get(i).sni_id+"\")'>"+codeBeanList.get(i).sni_name+"</li>";
+	}
+	$("#codeListData").html(liStr);
+}
+
+//显示标签列表
+function showWareBeanList(wid){
+	if(wid == null || wid == ""){
+		wBeanList = WareRPC.getAllWareList(con_m);
+	}else{
+		wBeanList = WareRPC.getWareList(wid, con_m);
+	}
+	if(wBeanList != null){
+		wBeanList =  List.toJSList(wBeanList);
+	}else{
+		return;
+	}
+	var liStr = "";
+	for(var i=0; i<wBeanList.size(); i++){
+		wareMap.put(wBeanList.get(i).ware_id,wBeanList.get(i));
+		if(wBeanList.get(i).ware_type == "0"){
+			liStr += "<li class='static' onclick='insertWareTag(\""+wBeanList.get(i).ware_id+"\",\""+wBeanList.get(i).ware_name+"\")'>"+wBeanList.get(i).ware_name+"</li>";
+		}else if(wBeanList.get(i).ware_type == "1"){
+			liStr += "<li class='auto' onclick='insertWareTag(\""+wBeanList.get(i).ware_id+"\",\""+wBeanList.get(i).ware_name+"\")'>"+wBeanList.get(i).ware_name+"</li>";
+		}else if(wBeanList.get(i).ware_type == "2"){
+			liStr += "<li class='opt' onclick='insertWareTag(\""+wBeanList.get(i).ware_id+"\",\""+wBeanList.get(i).ware_name+"\")'>"+wBeanList.get(i).ware_name+"</li>";
+		}else if(wBeanList.get(i).ware_type == "3"){
+			liStr += "<li class='rss' onclick='insertWareTag(\""+wBeanList.get(i).ware_id+"\",\""+wBeanList.get(i).ware_name+"\")'>"+wBeanList.get(i).ware_name+"</li>";
+		}
+	}
+	$("#wareListData").html(liStr);
+}
+//显示标签分类树
+function showWareCateTree(){
+	json_data = eval(WareRPC.getJSONTreeStr(con_m));
+	setLeftMenuTreeJsonData(json_data);
+	initMenuTree();
+	//alert($('#leftMenuTree').html());
+	//treeNodeSelected(0);
+}
+
+function initMenuTree()
+{
+	$('#leftMenuTree').tree({		
+		onClick:function(node){
+			selectedCat(node.id,node.text);            
+		}
+	});
+}
+
+//点击树节点,修改菜单列表数据 内容
+function selectedCat(id,text){
+	$("#wcat_name").val(text);
+	wcat_id = id;
+	$("#cat_tree_div").hide();
+	showWareBeanList(id);
+}
+
+//显示模板树
+var is_show_template_tree = false
+function showTemplateCategoryTree()
+{
+	if(is_show_template_tree == false)
+	{
+		initTemplateMenuTree();
+		is_show_template_tree == true
+		var cat_jdata = eval(TemplateRPC.templateCategoryListToJsonStr(0,site_id,"cms"));
+		setAppointTreeJsonData("leftMenuTree2",cat_jdata);
+	}
+}
+
+//点击模板分类触发事件
+function initTemplateMenuTree()
+{
+	$('#leftMenuTree2').tree({		
+		onClick:function(node){
+			showTemplateList(node.id);            
+		}
+	});
+}
+//根据模板分类ID显示模板列表
+function showTemplateList(template_id)
+{
+	$("#templateList").empty();
+	var m = new Map();	
+	m.put("site_id", site_id);
+	m.put("start_num", 0);	
+	m.put("page_size", 999);
+	m.put("sort_name", "tcat_id");
+	m.put("sort_type", "desc");
+	m.put("tcat_id", template_id);
+	var template_list = TemplateRPC.getTemplateEditList(m);
+	template_list = List.toJSList(template_list);
+	if(template_list != null && template_list.size() > 0)
+	{
+		for(var i=0;i<template_list.size();i++)
+		{
+			if(template_list.get(i).t_id != t_id)
+			{
+				$("#templateList").append("<li class='templage' onclick='insertTemplate("+template_id+","+template_list.get(i).t_id+",\""+template_list.get(i).t_ename+"\",\""+template_list.get(i).t_cname+"\")'>"+template_list.get(i).t_cname+"</li>");				
+			}
+		}
+	}
+}
+
+//添加模板到编辑器中
+function insertTemplate(template_id,t_id,t_ename,t_cname)
+{
+	var tcatBean = TemplateRPC.getTemplateCategoryById(template_id,site_id,app_id);
+	var tcat_position = tcatBean.tcat_position;
+	if(tcat_position.indexOf("/") == -1)
+		tcat_position = "/"+tcat_position;
+	
+	//editAreaLoader.insertTags(areaId, '<!-- ---------引用模板 '+t_cname+' 开始------------- -->\n#parse ("$FormatUtil.getTemplatePathForSiteID($site_id)'+tcat_position+"/"+t_id+"_"+t_ename+'.vm")\n<!-- ---------引用模板 '+t_cname+' 结束------------- -->\n', "");
+	editAreaLoader.replaceSelection('<!-- ---------引用模板 '+t_cname+' 开始------------- -->\n#parse ("$FormatUtil.getTemplatePathForSiteID($site_id)'+tcat_position+"/"+t_id+"_"+t_ename+'.vm")\n<!-- ---------引用模板 '+t_cname+' 结束------------- -->\n');
+}
+
+//选择内容模型触发事件
+function changeFormModel(val)
+{
+	$("#formModelList").empty();
+	var arr = eval(val);
+	if(val.indexOf("cms") == 0 || val.indexOf("gk") == 0)
+	{
+		setArrayInFormModelList(info_item);
+	}
+	if(val.indexOf("gk") == 0)
+	{
+		setArrayInFormModelList(gk_info_item);
+	}
+	setArrayInFormModelList(arr);
+	if(val.indexOf("cms") == 0 || val.indexOf("gk") == 0)
+	{
+		setArrayInFormModelList(info_item_last);
+	}
+}
+//将数组内容写入到模板列表中
+function setArrayInFormModelList(arr)
+{
+	for(var i=0;i<arr.length;i++)
+	{
+		$("#formModelList").append('<li class="templage" onclick="insertContentItem(\''+arr[i][0]+'\')">'+arr[i][1]+'</li>');
+	}
+}
+//将内容写入到编辑器中
+function insertContentItem(val)
+{
+	//editAreaLoader.insertTags(areaId, val, "");
+	editAreaLoader.replaceSelection(val);
+}
+
+//将选择的图片写入到编辑器中
+function uploadReturnHandl(path)
+{
+	insertContentItem('<img src="'+path+'">');
+}

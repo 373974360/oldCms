@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>EditArea - the code editor in a textarea</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=8" />
+	<script language="Javascript" type="text/javascript" src="edit_area_full.js"></script>
+	<script language="Javascript" type="text/javascript">
+		// initialisation
+		editAreaLoader.init({
+			id: "example_1"	// id of the textarea to transform		
+			,start_highlight: true	// if start with highlight
+			,allow_resize: "both"
+			,font_size: "12"
+			,allow_toggle: true
+			,word_wrap: true
+			,language: "zh"
+			,syntax: "html"	
+			//,plugins: "test"
+			,toolbar: "new_document, save, load, |,test_but,|,search, go_to_line, |, undo, redo, |, select_font, |, word_wrap, |, help"
+		});	
+
+		
+				
+		function test_setSelectionRange(id){
+			editAreaLoader.setSelectionRange(id, 1, 10);
+		}
+		
+		function test_getSelectionRange(id){
+			var sel =editAreaLoader.getSelectionRange(id);
+			alert("start: "+sel["start"]+"\nend: "+sel["end"]); 
+		}
+		
+		function test_setSelectedText(id){
+			text= "[REPLACED SELECTION]"; 
+			editAreaLoader.setSelectedText(id, text);
+		}
+		
+		function test_getSelectedText(id){
+			alert(editAreaLoader.getSelectedText(id)); 
+		}
+		
+		function editAreaLoaded(id){
+			if(id=="example_2")
+			{
+				open_file1();
+				open_file2();
+			}
+		}
+		
+		function open_file1()
+		{
+			var new_file= {id: "to\\ é # € to", text: "$authors= array();\n$news= array();", syntax: 'php', title: 'beautiful title'};
+			editAreaLoader.openFile('example_2', new_file);
+		}
+		
+		function open_file2()
+		{
+			var new_file= {id: "Filename", text: "<a href=\"toto\">\n\tbouh\n</a>\n<!-- it's a comment -->", syntax: 'html'};
+			editAreaLoader.openFile('example_2', new_file);
+		}
+		
+		function close_file1()
+		{
+			editAreaLoader.closeFile('example_2', "to\\ é # € to");
+		}
+		
+		function toogle_editable(id)
+		{
+			editAreaLoader.execCommand(id, 'set_editable', !editAreaLoader.execCommand(id, 'is_editable'));
+		}
+	
+	</script>
+</head>
+<body>
+
+<form action='' method='post'>
+	<fieldset>
+		<legend>Example 1</legend>
+		<p>Test in English with php syntax, highlighted, toggle enabled, word-wrap enabled, resize enabled and default toolbar. Also offer the possibility to switch on/off the readonly mode.</p>
+		<textarea id="example_1" style="height: 350px; width: 100%;" name="test_1">
+<a href="xxxx.html">aaaaaaaaa</a>
+		</textarea>
+		<p>Custom controls:<br />
+			<input type='button' onclick='alert(editAreaLoader.getValue("example_1"));' value='get value' />
+			<input type='button' onclick='editAreaLoader.setValue("example_1", "new_value");' value='set value' />
+			<input type='button' onclick='test_getSelectionRange("example_1");' value='getSelectionRange' />
+			<input type='button' onclick='test_setSelectionRange("example_1");' value='setSelectionRange' />
+			<input type='button' onclick='test_getSelectedText("example_1");' value='getSelectedText' />
+			<input type='button' onclick='test_setSelectedText("example_1");' value='setSelectedText' />
+			<input type='button' onclick='editAreaLoader.insertTags("example_1", "[OPEN]", "[CLOSE]");' value='insertTags' />
+			<input type='button' onclick='toogle_editable("example_1");' value='Toggle readonly mode' />
+		</p>
+	</fieldset>
+	
+</form>
+</body>
+</html>

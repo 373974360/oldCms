@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="Comment_Moderation">	
+	<select id="getCommentcontent"  parameterType="Map" resultType="com.deya.wcm.bean.comment.CommentBean">
+		select com.*,info.title from cs_comment_main com,cs_info info where com.site_id = #{site_id} and com.info_id = info.info_id and com.info_type = 1 and com.is_delete=0
+		<if test="ip != null"> and com.ip = #{ip}</if>
+		<if test="info_id != null"> and com.info_id = #{info_id}</if>
+		<if test="info_uuid != null"> and com.info_uuid = #{info_uuid}</if>
+		<if test="is_status != null"> and com.is_status = #{is_status}</if>
+		<if test="is_quest != null"> and com.is_quest = #{is_quest}</if>
+		<if test="start_day != null">
+			<![CDATA[ and com.add_time >= #{start_day}]]>
+		</if>
+		<if test="end_day != null">
+			<![CDATA[ and com.add_time <= #{end_day}]]>
+		</if>
+		<if test="is_status != null">
+			and com.is_status = ${is_status}
+		</if>
+		<if test="keyword != null">
+			and (info.title like '%${keyword}%')
+		</if>
+	</select>
+</mapper>

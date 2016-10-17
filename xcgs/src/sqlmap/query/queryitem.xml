@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="query">
+	
+	<!-- 得到查询信息总数 -->
+	<select id="getQueryItemCount"  parameterType="Map" resultType="java.lang.String">
+		select count(item_id) from cs_dz_chaxun_item
+	</select>
+	
+	<!-- 根据ID得到查询信息 -->
+	<select id="getQueryItemBeans" parameterType="Map"  resultType="com.deya.wcm.bean.query.QueryItemBean">
+		select * from cs_dz_chaxun_item where item_id = #{item_id} and conf_id = #{conf_id}  order by item_key
+	</select>
+	
+	<!-- 插入查询信息 -->
+	<insert id="insert_QueryItem" parameterType="com.deya.wcm.bean.query.QueryItemBean">
+		 insert into cs_dz_chaxun_item(item_id,conf_id,item_key,item_value,site_id)
+		 values(#{item_id},#{conf_id},#{item_key},#{item_value},#{site_id})
+	</insert>
+	
+	<!-- 修改查询信息 -->
+	<update id="update_QueryItem" parameterType="com.deya.wcm.bean.query.QueryItemBean">
+		update cs_dz_chaxun_item set item_value = #{item_value} where item_id = #{item_id} and conf_id = #{conf_id} and item_key =#{item_key}
+	</update>
+	
+	<!-- 删除单业务查询信息 -->
+	<delete id="delete_QueryItem_ByConfId" parameterType="java.lang.String">
+		delete from cs_dz_chaxun_item where conf_id = #{conf_id}
+	</delete>
+	
+	<!-- 按照item_id删除信息 -->
+	<delete id="delete_QueryItem" parameterType="Map">
+		delete from cs_dz_chaxun_item where item_id in (${item_id}) and conf_id = #{conf_id}
+	</delete>
+	
+	<!-- 根据业务ID得到字段总数 -->
+	<select id="getQueryCellCount" parameterType="java.lang.String" resultType="java.lang.String">
+		select count(item_id) from cs_dz_chaxun_item where conf_id=#{conf_id} and item_id=1
+	</select>
+	
+	<select id="getQueryItemList" parameterType="Map" resultType="com.deya.wcm.bean.query.QueryItemBean">
+		<![CDATA[  
+	    select * from (
+	       select row_.*, rownum rownum_ from (       
+	            select * from cs_dz_chaxun_item where conf_id = #{conf_id} order by item_id,item_key
+	        ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}* #{cell_count,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER} * #{cell_count,,jdbcType=INTEGER}       
+    	) where rownum_ >=#{start_num,,jdbcType=INTEGER} * #{cell_count,,jdbcType=INTEGER} + 1
+    ]]>	
+	</select>
+	
+	<select id="getQueryItemList_mysql" parameterType="Map" resultType="com.deya.wcm.bean.query.QueryItemBean">
+		select * from cs_dz_chaxun_item  where conf_id = #{conf_id} 
+	          order by item_id,item_key  limit #{start_num,,jdbcType=INTEGER} * #{cell_count,,jdbcType=INTEGER}
+	</select>
+	
+	<!--  后台使用   	-->
+	<select id="getQueryItemLists" parameterType="Map" resultType="Map">
+		<![CDATA[
+	    select * from (
+	       select row_.*, rownum rownum_ from (select *  ${table_name} order by item_id
+	         ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
+	    	) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+	    ]]>	
+	</select>
+	
+	<select id="getQueryItemLists_mysql" parameterType="Map" resultType="Map">
+		 <![CDATA[
+		  select * ${table_name} order by item_id asc limit #{start_num,,jdbcType=INTEGER}, #{cell_count,,jdbcType=INTEGER}
+	    ]]>	
+	</select>
+	
+	<select id="getQueryItemCounts" parameterType="java.lang.String" resultType="java.lang.String">
+		<![CDATA[ 
+		   	select count(item_id) ${table_name}
+		]]>
+	</select>
+	
+	<!--前台使用		 根据业务ID得到字段总数   -->
+	<select id="getQueryListCount_Browser" parameterType="Map"  resultType="java.lang.String">
+		<![CDATA[ 	
+		   select count(item_id) ${con}
+		 ]]>
+	</select>
+	
+	<select id="getQueryList_Browser" parameterType="Map" resultType="Map">
+		<![CDATA[
+	    select * from (
+	       select row_.*, rownum rownum_ from (select * ${con}
+	         ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
+	    	) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+	    ]]>	
+	</select>
+	
+	<select id="getQueryList_Browser_mysql" parameterType="Map" resultType="Map">
+		<![CDATA[
+	      select * ${con} limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
+	    ]]>	
+	</select>
+</mapper>

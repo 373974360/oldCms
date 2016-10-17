@@ -1,0 +1,140 @@
+@charset "utf-8";
+html{overflow-x:hidden; }
+body{text-align:left; background:#f7f7f7; margin-top:2px; margin-right:3px; margin-left:3px; }
+body,html{scrollbar-face-color:#e1eef8;scrollbar-track-color:#e1eef8;scrollbar-arrow-color:#1a477d;scrollbar-shadow-color:#fff;scrollbar-highlight-color:#fff;scrollbar-3dlight-color:#a7cae5;scrollbar-darkshadow-color:#a7cae5;}
+
+.width10{width:10px;}
+.width20{width:20px;}
+.width25{width:20px;}
+.width30{width:30px;}
+.width40{width:40px;}
+.width50{width:50px;}
+.width60{width:60px;}
+.width70{width:70px;}
+.width80{width:80px;}
+.width90{width:90px;}
+.width100{width:100px;}
+.width130{width:130px;}
+.width150{width:150px;}
+.width200{width:200px;}
+.width250{width:250px;}
+.width300{width:300px;}
+
+/*操作按钮区域*/
+.table_option{width:100%;}
+.table_option tr{height:25px;}
+.table_option td{padding:0px 0px; line-height:12px;}
+
+
+/*页面内面签*/
+.fromTabs{ height:27px; background:url(../images/list_tab_bg.gif) repeat-x; border-collapse:collapse;}
+.list_tab{ height:27px; margin:0 2px; float:left; background:none;}
+.list_tab .tab_left{height:27px; background:none;}
+.list_tab .tab_right{height:27px; background:none; line-height:27px; padding:0 7px; cursor:default;}
+
+.list_tab_cur{ height:27px; margin:0 2px; float:left; background:url(../images/list_tab_cur_bg.gif) repeat-x;}
+.list_tab_cur .tab_left{height:27px; background:url(../images/list_tab_cur_left.gif) no-repeat left;}
+.list_tab_cur .tab_right{height:27px; background:url(../images/list_tab_cur_right.gif) no-repeat right; line-height:27px; padding:0 7px; cursor:default;}
+
+.list_tab_over{ height:27px; margin:0 2px; float:left; background:url(../images/list_tab_over_bg.gif) repeat-x;}
+.list_tab_over .tab_left{height:27px; background:url(../images/list_tab_over_left.gif) no-repeat left;}
+.list_tab_over .tab_right{height:27px; background:url(../images/list_tab_over_right.gif) no-repeat right; line-height:27px; padding:0 7px; cursor:default;}
+
+
+.infoListTable{}
+
+/*信息列表区域*/
+.table_border{ width:100%; border:1px solid #bfbfbf; border-collapse:collapse;}
+.table_border thead tr{ height:25px; background-color:#F7F6F2;}
+.table_border thead td{ border-bottom:1px solid #BBCCDE; color:#4F80AB; cursor:default;}
+.table_border td{ padding:0px 4px;}
+.table_border tbody td{ height:25px; border-bottom:1px solid #EFEFEF;}
+.tr_odd{ height:25px; background-color:#efefef;}
+.tr_even{ height:25px; background-color:#FFFFFF;}
+.tr_hover{ height:25px; background-color:#5199E6;}
+.tr_selected{height:25px; background-color:#FEFDD7;}
+
+
+/*表单区域*/
+.table_form{ width:100%; border-collapse:collapse;}
+.table_form tr{}
+.table_form th{ width:100px; text-align:right; color:#32609E; border-collapse:collapse; vertical-align:middle; padding:4px 4px;}
+.table_form td{ text-align:left; color:#32609E; border-collapse:collapse; vertical-align:middle; vertical-align:middle; padding:4px 4px;}
+.table_form td li{ float:left; padding-right:20px;}
+.table_form td label{vertical-align:middle}
+
+/*列表翻页区域*/
+.table_pageing{width:100%; }
+.table_pageing tr{height:31px; }
+.table_pageing td{padding:0px 7px; color:#5180AC;}
+.table_pageing td a {color:#5180AC;text-decoration:none;}
+.table_pageing td a:visited {color:#5180AC;text-decoration:none;}
+.table_pageing td a:hover {color:#ba2636;text-decoration:underline;}
+.table_pageing td a:active {color:#5180AC;}
+
+/*列表区操作按扭*/
+.optUL{}
+.optUL li{width:16px; height:16px;display:block; float:left; padding:0 3px; }
+.optUL li.ico_up{ background:url(../images/move_up.gif) no-repeat;}
+.optUL li.ico_down{background:url(../images/move_down.gif) no-repeat;}
+.optUL li.ico_delete{background:url(../images/del.gif) no-repeat;}
+
+
+
+/* jquery.treeTable--------------------------------------- */
+.treeTable thead th{padding: 0em 1.5em; border-bottom:1px solid #bfbfbf;}
+
+.treeTable tr td .expander {
+  background-position: left center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  padding: 0;
+  zoom: 1; /* IE7 Hack */
+}
+
+.treeTable tr.collapsed td .expander {
+  background-image: url(../images/toggle-expand-dark.png);
+}
+
+.treeTable tr.expanded td .expander {
+  background-image: url(../images/toggle-collapse-dark.png);
+}
+
+.treeTable tr{
+  background-color:#FFF;
+}
+
+.treeTable tr.selected, .treeTable tr.accept {
+  background-color: #3875d7;color: #fff;
+}
+
+.treeTable tr.selected, .treeTable tr.accept {
+  background-color: #3875d7;color: #fff;
+}
+
+.treeTable tr.collapsed.selected td .expander, .treeTable tr.collapsed.accept td .expander {
+  background-image: url(../images/toggle-expand-light.png);
+}
+
+.treeTable tr.expanded.selected td .expander, .treeTable tr.expanded.accept td .expander {
+  background-image: url(../images/toggle-collapse-light.png);
+}
+
+.treeTable .ui-draggable-dragging {color: #000;z-index: 1;
+}
+
+table.treeTableCSS tbody tr td {cursor: default;padding: 0em 1.5em;}
+
+table.treeTableCSS span {
+  background-position: center left;
+  background-repeat: no-repeat;
+  padding: .2em 0 .2em 1.5em;
+}
+
+table.treeTableCSS span.file {
+  background-image: url(../images/page_white_text.png);
+}
+
+table.treeTableCSS span.folder {
+  background-image: url(../images/folder.png);
+}

@@ -1,0 +1,19 @@
+.input_text{ height:18px; line-height:18px; font-size:12px; vertical-align:middle; border:1px solid #9DBFDD; background-color:#FFF; padding-left:3px; margin:0 4px 0 0; }
+.input_text_focus{border:1px solid #63C21C;}
+.input_checkbox{ vertical-align:middle; margin:0 4px 0 0;}
+.input_radio{ vertical-align:middle; margin:0 4px 0 0;}
+.input_textarea{line-height:18px; font-size:12px; vertical-align:middle; border:1px solid #9DBFDD; background-color:#FFF; padding-left:3px; margin:0 4px 0 0;}
+.input_textarea_focus{border:1px solid #63C21C;}
+.input_select{ height:20px; line-height:20px; font-size:12px;vertical-align:middle; border:1px solid #9DBFDD; background-color:#FFF;}
+.input_select option{font-size:12px; line-height:19px;}
+
+/*各种大小按钮*/
+.btn{border:0px; font-size:12px; letter-spacing:2px; vertical-align:middle;}
+.x2{width:41px;height:21px; background:url(../images/btn_x2.gif) 0 0 no-repeat;}
+.x3{width:56px;height:21px; background:url(../images/btn_x3.gif) 0 0 no-repeat;}
+.x4{width:71px;height:21px; background:url(../images/btn_x4.gif) 0 0 no-repeat;}
+.x5{width:86px;height:21px; background:url(../images/btn_x5.gif) 0 0 no-repeat;}
+.x6{width:101px;height:21px; background:url(../images/btn_x6.gif) 0 0 no-repeat;}
+.x_add{width:67px; height:21px; border:0px; font-size:12px; letter-spacing:2px; vertical-align:middle; background:url(../images/btn_add.png) no-repeat;}
+.btn-over{background-position:left -21px;}
+.btn-click{background-position:left -42px;}

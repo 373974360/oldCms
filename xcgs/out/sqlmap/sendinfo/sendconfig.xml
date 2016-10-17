@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="sendinfo">
+	<!-- **********************站点接收栏目配置  开始********************** -->
+	<select id="getReceiveConfigList" resultType="com.deya.wcm.bean.sendInfo.ReceiveConfigBean">
+		select * from cs_receive_config order by sort_id,id desc
+	</select>
+	
+	<insert id="insert_receive_config" parameterType="com.deya.wcm.bean.sendInfo.ReceiveConfigBean">
+		insert into cs_receive_config(id,site_id,user_name,pass_word,receive_status)
+		values(#{id},#{site_id},#{user_name},#{pass_word},#{receive_status})
+	</insert>
+	
+	<update id="update_receive_config" parameterType="com.deya.wcm.bean.sendInfo.ReceiveConfigBean">
+		update cs_receive_config set user_name=#{user_name},pass_word=#{pass_word},receive_status=#{receive_status} 
+		where id = #{id}
+	</update>
+	
+	<update id="update_receive_config_status" parameterType="Map">
+		update cs_receive_config set receive_status=#{receive_status} where id in (${ids})
+	</update>
+	
+	<delete id="delete_receive_config" parameterType="java.lang.String">
+		delete from cs_receive_config where site_id = #{site_id}
+	</delete>
+	
+	<select id="getReceiveCatConfList" resultType="com.deya.wcm.bean.sendInfo.ReceiveCatConf">
+		select * from cs_receive_cat order by sort_id,site_id
+	</select>
+	
+	<insert id="insert_receive_cat_conf" parameterType="com.deya.wcm.bean.sendInfo.ReceiveCatConf">
+		insert into cs_receive_cat(id,site_id,cat_id,sort_id)values(#{id},#{site_id},#{cat_id},#{sort_id})
+	</insert>
+	
+	<delete id="delete_receive_cat_conf" parameterType="java.lang.String">
+		delete from cs_receive_cat where site_id = #{site_id}
+	</delete>
+	<!-- **********************站点接收栏目配置  结束********************** -->
+	
+	<!-- **********************报送配置  开始********************** -->
+	<select id="getSendConfigList" resultType="com.deya.wcm.bean.sendInfo.SendConfigBean">
+		select id,site_id,site_domain,site_name,range_type from cs_send_config order by id desc
+	</select>
+	
+	<select id="getSendConfigBean" parameterType="java.lang.String" resultType="com.deya.wcm.bean.sendInfo.SendConfigBean">
+		select * from cs_send_config where site_id=#{site_id}
+	</select>
+	
+	<insert id="insert_send_conf" parameterType="com.deya.wcm.bean.sendInfo.SendConfigBean">
+		insert into cs_send_config(id,site_id,site_domain,site_name,range_type,allow_site_id,is_zwgk)
+		values(#{id},#{site_id},#{site_domain},#{site_name},#{range_type},#{allow_site_id},#{is_zwgk})
+	</insert>
+	
+	<update id="update_send_conf" parameterType="com.deya.wcm.bean.sendInfo.SendConfigBean">
+		update cs_send_config set site_domain=#{site_domain},site_name=#{site_name},range_type=#{range_type},allow_site_id=#{allow_site_id},
+		is_zwgk=#{is_zwgk} 
+		where id=${id}
+	</update>
+	
+	<delete id="delete_send_conf" parameterType="Map">
+		delete from cs_send_config where id in (${ids})
+	</delete>
+	<!-- **********************报送配置  结束********************** -->
+</mapper>

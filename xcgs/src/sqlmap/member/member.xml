@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="member">
+	<!-- ******************** 会员配置表 开始 ****************************** -->
+	<!-- 得到会员配置信息列表 -->
+	<select id="getAllMemberConfigList" resultType="com.deya.wcm.bean.member.MemberConfigBean">
+		select * from cs_member_config order by config_id 
+	</select>
+	
+	<!-- 插入会员配置信息 -->
+	<insert id="insertMemberConfig" parameterType="com.deya.wcm.bean.member.MemberConfigBean">
+		insert into cd_member_config(config_id, is_allow, is_check, reg_pro, close_pro, forbidden_name) 
+		values(#{config_id}, #{is_allow}, #{is_check}, #{reg_pro}, #{close_pro}, #{forbidden_name})
+	</insert>
+	
+	<!-- 修改会员配置信息 -->
+	<update id="updateMemberConfig" parameterType="com.deya.wcm.bean.member.MemberConfigBean">
+		update cs_member_config 
+		set
+			is_allow = #{is_allow},
+			is_check = #{is_check},
+			reg_pro = #{reg_pro},
+			close_pro = #{close_pro},
+			forbidden_name = #{forbidden_name}
+		where 
+			config_id = #{config_id}
+	</update>
+	
+	<!-- 删除会员信息 -->
+	<delete id="deleteMemberConfig" parameterType="Map">
+		delete from cs_member_config 
+		where config_id in ${config_ids}
+	</delete>
+	
+	<!-- ******************** 会员分类表 开始 ****************************** -->
+	<!-- 得到会员分类信息列表 -->
+	<select id="getAllMemberCategoryList" resultType="com.deya.wcm.bean.member.MemberCategoryBean">
+		select * from cs_member_category order by sort_id DESC, mcat_id DESC
+	</select>
+	
+	<!-- 插入会员分类信息 -->
+	<insert id="insertMemberCategory" parameterType="com.deya.wcm.bean.member.MemberCategoryBean">
+		insert into cs_member_category(mcat_id, mcat_name, mcat_memo, sort_id)
+		values(#{mcat_id}, #{mcat_name}, #{mcat_memo}, #{sort_id})
+	</insert>
+	
+	<!-- 修改会员分类信息 -->
+	<update id="updateMemberCategory" parameterType="com.deya.wcm.bean.member.MemberCategoryBean">
+		update cs_member_category 
+		set
+			mcat_name = #{mcat_name},
+			mcat_memo = #{mcat_memo},
+			sort_id = #{sort_id}
+		where
+			mcat_id = #{mcat_id}
+	</update>
+	
+	<!-- 保存会员分类排序 -->
+	<update id="update_memberCategory_sort" parameterType="Map">
+		update cs_member_category 
+		set
+			sort_id = #{sort_id}
+		where
+			mcat_id = #{mcat_id}
+	</update>
+	
+	<!-- 删除会员信息 -->
+	<delete id="deleteMemberCategory" parameterType="Map">
+		delete from cs_member_category 
+			where mcat_id in (${mcat_ids})
+	</delete>
+	
+	<!-- ******************** 会员主表 开始 ****************************** -->
+	<!-- 得到会员信息列表 -->
+	<select id="getAllMemberList" resultType="com.deya.wcm.bean.member.MemberBean">
+		select * from cs_member where me_status != -2
+	</select>
+	
+	<!-- 通过会员ID得到会员信息 -->
+	<select id="getMemberBeanByID" parameterType="java.lang.String" resultType="com.deya.wcm.bean.member.MemberBean">
+		select * from cs_member where me_id = #{me_id} and me_status != -2
+	</select>
+	
+	<!-- 取得会员信息条数 -->
+	<select id="getMemberCount" parameterType="Map" resultType="java.lang.String">
+		select count(cs_member.me_id) from cs_member join cs_member_register 
+			on cs_member.me_id=cs_member_register.me_id
+			where me_status != -2 
+			<if test="app_id != null">
+				and app_id = #{app_id}
+			</if>
+			<if test="site_id != null">
+				and site_id = #{site_id}
+			</if>
+			<if test="me_status != null">
+				and me_status = #{me_status}
+			</if>
+			<if test="search_name != null">
+				and ${search_name} like '%${search_value}%'
+			</if>
+		
+	</select>
+	
+	<!-- 得到停用会员信息列表 -->
+	<select id="getForbiddenMemberList" resultType="com.deya.wcm.bean.member.MemberBean">
+		select * from cs_member where me_status = -1 order by me_id desc
+	</select>
+	
+	<!-- 插入会员信息 -->
+	<insert id="insertMember" parameterType="com.deya.wcm.bean.member.MemberBean">
+		insert into cs_member(me_id, mcat_id, me_realname, me_nickname, me_card_id, me_sex, me_vocation, me_age,
+			me_address, me_email, me_tel, me_phone, me_status, app_id, site_id )
+		values(#{me_id}, #{mcat_id}, #{me_realname}, #{me_nickname}, #{me_card_id}, #{me_sex}, #{me_vocation}, #{me_age},
+			#{me_address}, #{me_email}, #{me_tel}, #{me_phone}, #{me_status}, #{app_id}, #{site_id})
+	</insert>
+	
+	<!-- 修改会员信息 -->
+	<update id="updateMember" parameterType="com.deya.wcm.bean.member.MemberBean">
+		update cs_member set
+			me_realname = #{me_realname}, me_nickname = #{me_nickname},mcat_id=#{mcat_id}, me_card_id = #{me_card_id},
+			me_sex = #{me_sex}, me_vocation = #{me_vocation}, me_age = #{me_age}, me_address = #{me_address}, me_email = #{me_email}, 
+			me_tel = #{me_tel}, me_phone = #{me_phone}, me_status = #{me_status}, app_id = #{app_id}, site_id = #{site_id} 
+		where 
+			me_id = #{me_id}
+	</update>
+	
+	<!-- 修改会员信息 -->
+	<update id="updateMember_browser" parameterType="com.deya.wcm.bean.member.MemberBean">
+		update cs_member set
+			me_realname = #{me_realname}, me_nickname = #{me_nickname}, me_card_id = #{me_card_id},
+			me_sex = #{me_sex}, me_vocation = #{me_vocation}, me_age = #{me_age}, me_address = #{me_address}, me_email = #{me_email}, 
+			me_tel = #{me_tel}, me_phone = #{me_phone}
+		where 
+			me_id = #{me_id}
+	</update>
+	
+	<!-- 会员审核SQL -->
+	<update id="checkMemberByIDS" parameterType="Map">
+		update cs_member set
+			me_status = #{me_status}
+		where 
+			me_id in (${ids})
+	</update>
+	
+	<!-- 删除会员信息 -->
+	<delete id="deleteMember" parameterType="Map">
+	<!--	delete from cs_member 
+			where me_id in (${me_ids})  -->
+			update cs_member set me_status = -2 
+			where me_id in (${me_ids})
+	</delete>
+	
+	<!-- ******************会员帐号表 开始******************* -->
+	<!-- 得到所有会员帐号信息列表 -->
+	<select id="getAllMemberRegisterList" resultType="com.deya.wcm.bean.member.MemberRegisterBean">
+		select * from cs_member_register order by register_id desc
+	</select>
+	
+	<!-- 根据登录名取得会员帐号信息 -->
+	<select id="getMemberRegisterByID" parameterType="java.lang.String" resultType="com.deya.wcm.bean.member.MemberRegisterBean">
+		select * from cs_member_register where me_id = #{me_id}
+	</select>
+	
+	<!-- 取得会员帐号信息条数 -->
+	<select id="getMemberRegisterCount" resultType="java.lang.String">
+		select count(register_id) from cs_member_register
+	</select>
+	
+	<!-- 插入会员帐号信息 -->
+	<insert id="insertMemberRegister" parameterType="com.deya.wcm.bean.member.MemberRegisterBean">
+		insert into cs_member_register(register_id, me_id, me_account, me_password, register_type)
+		values(#{register_id}, #{me_id}, #{me_account}, #{me_password}, #{register_type})
+	</insert>
+	
+	<!-- 修改会员帐号信息 -->
+	<update id="updateMemberRegister" parameterType="com.deya.wcm.bean.member.MemberRegisterBean">
+		update cs_member_register set
+			me_account = #{me_account}, 
+			me_password = #{me_password}, register_type = #{register_type}
+		where 
+			register_id = #{register_id}
+	</update>
+	
+	<!-- 修改会员密码 -->
+	<update id="update_member_password" parameterType="Map">
+		update cs_member_register set 		
+			me_password = #{me_password}
+		where 
+			register_id = #{register_id}
+	</update>		
+	
+	<!-- 删除会员帐号信息 -->
+	<delete id="deleteMemberRegister" parameterType="Map">
+		delete from cs_member_register where
+			register_id in (${register_ids})
+	</delete>
+	
+	<!-- *********************** 需要替换 SQL ************************* -->
+	<!-- 会员主表信息分页取得 -->
+	<select id="getMemberListByDB" parameterType="Map" resultType="com.deya.wcm.bean.member.MemberBean">
+		<![CDATA[  
+		select * from (
+		       select row_.*, rownum rownum_ from ( 
+		 ]]>
+		 			select * from 
+		 			(
+		 				select cs_member.* from cs_member join cs_member_register 
+		 				on cs_member.me_id=cs_member_register.me_id		 			
+		 			where me_status != -2 
+		 				<if test="app_id != null">
+		 					and app_id = #{app_id}
+		 				</if>
+		 				<if test="site_id != null">
+		 					and site_id = #{site_id}
+		 				</if>
+		 				<if test="me_status != null">
+		 					and me_status = #{me_status}
+		 				</if>
+		 				<if test="search_name != null">
+		 					and ${search_name} like '%${search_value}%'
+		 				</if>
+		 			
+		 			) 
+		 			<if test="sort_name != null">
+		 				order by ${sort_name} ${sort_type}
+		 			</if>
+		 <![CDATA[ 
+		        ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
+   			) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+   		]]>	
+   	</select>
+   	
+   	<select id="getMemberListByDB_mysql" parameterType="Map" resultType="com.deya.wcm.bean.member.MemberBean">   		
+		select cs_member.* from cs_member join cs_member_register 
+		on cs_member.me_id=cs_member_register.me_id		 			
+	where me_status != -2 
+		<if test="app_id != null">
+			and app_id = #{app_id}
+		</if>
+		<if test="site_id != null">
+			and site_id = #{site_id}
+		</if>
+		<if test="me_status != null">
+			and me_status = #{me_status}
+		</if>
+		<if test="search_name != null">
+			and ${search_name} like '%${search_value}%'
+		</if>
+		 			 
+		<if test="sort_name != null">
+			order by ${sort_name} ${sort_type}
+		</if>
+		limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
+   	</select>
+   	
+   	<select id="getMemberListByDB_mssql" parameterType="Map" resultType="com.deya.wcm.bean.member.MemberBean">
+   	</select>
+   	
+   	<!-- 会员帐号信息分页取得 -->
+	<select id="getMemberRegisterListByDB" parameterType="Map" resultType="com.deya.wcm.bean.member.MemberRegisterBean">
+		<![CDATA[  
+		select * from (
+		       select row_.*, rownum rownum_ from ( 
+		 ]]>
+		 			select * from cs_member_register 
+		 <![CDATA[ 
+		        ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
+    		) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+    	]]>	
+    </select>
+    
+    <select id="getMemberRegisterListByDB_mysql" parameterType="Map" resultType="com.deya.wcm.bean.member.MemberRegisterBean">
+    	select * from cs_member_register limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
+	</select>
+	
+	<select id="getMemberRegisterListByDB_mssql" parameterType="Map" resultType="com.deya.wcm.bean.member.MemberRegisterBean">
+    	select top ${page_size} * 
+			  from cs_member_register 
+			 	where register_id not in
+				  (select top ${start_num} register_id
+					 from cs_member_register )
+	</select>
+</mapper>

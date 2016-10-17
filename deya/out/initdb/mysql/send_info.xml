@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <table>
+		<sql>
+          <![CDATA[
+				create table cs_receive_config(
+					id bigint(20) not null PRIMARY KEY,	
+					site_id varchar(250) default '',
+					user_name varchar(250) default '',
+					pass_word varchar(250) default '',
+					receive_status int(4) default 0, 
+					sort_id int(4) default 999
+				)
+		   ]]> 
+       </sql>
+	   <sql>
+          <![CDATA[
+				create table cs_receive_cat(
+					id bigint(20) not null PRIMARY KEY,	
+					site_id varchar(250) default '',
+					cat_id int(4) default 0, 
+					sort_id int(4) default 999
+				)
+		   ]]> 
+       </sql>
+		<sql>
+          <![CDATA[
+				create table cs_send_config(
+					id bigint(20) not null PRIMARY KEY,	
+					site_id varchar(250) default '',
+					site_domain varchar(250) default '',
+					site_name varchar(250) default '',
+					range_type int(4) default 0, 
+					allow_site_id varchar(1000) default '',
+					is_zwgk int(4) default 0
+				)
+		   ]]> 
+       </sql>
+	   <sql>
+          <![CDATA[
+				create table cs_receive_info(
+					id	bigint(20) not null PRIMARY KEY,	
+					cat_id	bigint(20) default 0,
+					model_id	bigint(20) default 0,
+					top_title	varchar(250) default '',
+					pre_title	varchar(250) default '',
+					title	varchar(250) default '',
+					subtitle	varchar(250) default '',
+					title_color	varchar(250) default '',
+					thumb_url	varchar(250) default '',
+					description	varchar(1000) default '',
+					author varchar(250) default '',
+					editor varchar(250) default '',
+					source varchar(250) default '',
+					info_keywords varchar(250) default '',
+					info_description	varchar(250) default '',
+					tags varchar(250) default '',
+					input_user bigint(20) default 0,
+					input_dtime varchar(20) default '',
+					app_id varchar(20) default '',
+					site_id varchar(20) default '',
+					page_count int(4) default 0,
+					is_pic	int(4) default 0, 
+					is_am_tupage	int(4) default 0,
+					tupage_num	int(7) default 1000,
+					content longtext,
+					s_info_id	varchar(250) default '',
+					s_site_id	varchar(250) default '',
+					s_site_domain	varchar(250) default '',
+					s_site_name	varchar(250) default '',
+					s_user_id	bigint(20) default 0,
+					s_user_name	varchar(250) default '',
+					s_send_dtime	varchar(20) default '',
+					s_content_url varchar(250) default '',
+					send_record_id bigint(20) default 0,	
+					is_record	int(4) default 0,
+					adopt_status	int(4) default 0,
+					adopt_dtime	varchar(20) default '',
+					adopt_user	bigint(20) default 0,	
+					is_delete	int(4) default 0,
+					adopt_desc	longtext,
+					score	int(4) default 0
+				)
+		   ]]> 
+       </sql>
+	   <sql>
+          <![CDATA[
+				create table cs_send_record(
+					id bigint(20) not null PRIMARY KEY,	
+					send_info_id	bigint(20) default 0,
+					send_cat_id	bigint(20) default 0,
+					send_site_id	varchar(250) default '',
+					send_app_id	varchar(250) default '',
+					send_time	varchar(20) default '',
+					send_user_id	bigint(20) default 0,
+					t_site_id	varchar(250) default '',
+					t_site_name	varchar(250) default '',
+					t_cat_id	bigint(20) default 0,
+					t_cat_cname	varchar(250) default '',
+					adopt_status	int(4) default 0,
+					adopt_dtime	varchar(20) default '',
+					adopt_desc	longtext
+				)
+		   ]]> 
+       </sql>
+		<sql>
+          <![CDATA[
+				create table cs_adopt_record(
+					id bigint(20) not null PRIMARY KEY,	
+					receive_info_id bigint(20) default 0,
+					cat_id bigint(20) default 0,
+					adopt_dtime	varchar(20) default '',
+					adopt_user bigint(20) default 0,
+					new_info_id bigint(20) default 0
+				)
+		   ]]> 
+       </sql>
+    </table>	
+</root>
+ 

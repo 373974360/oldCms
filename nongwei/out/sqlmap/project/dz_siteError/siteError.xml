@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="siteError">
+    <sql id="getSiteErrorList_sql_conn">
+        where 1=1
+        <if test="typeId != null">
+            and typeId = #{typeId}
+        </if>
+        <if test="siteId != null">
+            and siteId = #{siteId}
+        </if>
+        <if test="status != null">
+            and status = #{status}
+        </if>
+    </sql>
+    <select id="getSiteErrorCount" parameterType="Map" resultType="java.lang.String" >
+        select count(id) from dz_siteerror
+        <include refid="getSiteErrorList_sql_conn"/>
+    </select>
+
+    <insert id="insertSiteError" parameterType="com.deya.project.dz_siteError.SiteErrorBean">
+		insert into dz_siteerror(
+			id,
+			typeId,
+			siteId,
+			submitSiteName,
+			submitUser,
+			submitUserPhone,
+			submitUserEmail,
+			submitDescription,
+			errorTitle,
+			errorCatName,
+			errorUrl,
+			errorDescription,
+			addTime,
+			handleTime,
+			status
+		) values(
+			#{id},
+			#{typeId},
+			#{siteId},
+			#{submitSiteName},
+			#{submitUser},
+			#{submitUserPhone},
+			#{submitUserEmail},
+			#{submitDescription},
+			#{errorTitle},
+			#{errorCatName},
+			#{errorUrl},
+			#{errorDescription},
+			#{addTime},
+			#{handleTime},
+			#{status}
+		)
+	</insert>
+
+    <update id="updateSiteError"  parameterType="com.deya.project.dz_siteError.SiteErrorBean">
+		update dz_siteerror set
+				typeId=#{typeId},
+				siteId=#{siteId},
+				submitSiteName=#{submitSiteName},
+				submitUser=#{submitUser},
+				submitUserPhone=#{submitUserPhone},
+				submitUserEmail=#{submitUserEmail},
+				submitDescription=#{submitDescription},
+				errorTitle=#{errorTitle},
+				errorCatName=#{errorCatName},
+				errorUrl=#{errorUrl},
+				errorDescription=#{errorDescription},
+				handleTime=#{handleTime},
+				status=#{status}
+		where id=#{id}
+	</update>
+
+
+
+    <update id="publishSiteError" parameterType="Map" >
+        update dz_siteerror set
+		status = #{status},
+		handleTime=#{handleTime}
+		where 1=1
+        <if test="id != null">
+            and id in (#{id})
+        </if>
+    </update>
+
+    <!-- 根据条件删除纠错信息 -->
+    <update id="deleteSiteError" parameterType="Map" >
+        update dz_siteerror set status = '-1' where 1=1
+		<if test="id != null">
+			and id in (#{id})
+		</if>
+		<if test="siteId != null">
+			and siteId=#{siteId}
+		</if>
+		<if test="typeId != null">
+			and typeId=#{typeId}
+		</if>
+		<if test="status != null">
+			and status=#{status}
+		</if>
+    </update>
+
+    <select id="getAllSiteError" parameterType="Map" resultType="com.deya.project.dz_siteError.SiteErrorBean" >
+        select id,typeId,siteId,submitSiteName,submitUser,submitUserPhone,submitUserEmail,submitDescription,errorTitle,errorCatName,errorUrl,errorDescription,addTime,handleTime,status from dz_siteerror <include refid="getSiteErrorList_sql_conn"/>
+    </select>
+
+    <select id="getSiteErrorList" parameterType="Map" resultType="com.deya.project.dz_siteError.SiteErrorBean" >
+        select * from (
+        select row_.*, rownum rownum_ from (
+        select id,typeId,siteId,submitSiteName,submitUser,submitUserPhone,submitUserEmail,submitDescription,errorTitle,errorCatName,errorUrl,errorDescription,addTime,handleTime,status from dz_siteerror <include refid="getSiteErrorList_sql_conn"/>
+        order by #{sort_name} #{sort_type}
+        <![CDATA[
+		        ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}
+	    	) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+	    ]]>
+    </select>
+
+    <select id="getSiteErrorList_mysql" parameterType="Map" resultType="com.deya.project.dz_siteError.SiteErrorBean" >
+        select id,typeId,siteId,submitSiteName,submitUser,submitUserPhone,submitUserEmail,submitDescription,errorTitle,errorCatName,errorUrl,errorDescription,addTime,handleTime,status from dz_siteerror <include refid="getSiteErrorList_sql_conn"/>
+        order by #{sort_name} #{sort_type} limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
+    </select>
+
+    <select id="getSiteErrorList_mssql" parameterType="Map" resultType="com.deya.project.dz_siteError.SiteErrorBean" >
+        select top #{page_size} id,typeId,siteId,submitSiteName,submitUser,submitUserPhone,submitUserEmail,submitDescription,errorTitle,errorCatName,errorUrl,errorDescription,addTime,handleTime,status
+        from dz_siteerror
+        <include refid="getSiteErrorList_sql_conn"/>
+        and id not in
+        (select top #{start_num} id
+        from dz_siteError
+        <include refid="getSiteErrorList_sql_conn"/>
+        order by #{sort_name} #{sort_type} )
+        order by #{sort_name} #{sort_type}
+    </select>
+
+	<select id="getSiteErrorBean"  parameterType="Map" resultType="com.deya.project.dz_siteError.SiteErrorBean" >
+		select id,typeId,siteId,submitSiteName,submitUser,submitUserPhone,submitUserEmail,submitDescription,errorTitle,errorCatName,errorUrl,errorDescription,addTime,handleTime,status from dz_siteerror where id=#{id}
+	</select>
+
+
+	<!--*****************************************纠错处理人员**********************************************-->
+
+	<sql id="getErrorHandleUserList_sql_conn">
+        where 1=1
+        <if test="userName != null">
+            and userName like '%#{userName}%'
+        </if>
+        <if test="isSendMsg != null">
+            and isSendMsg = #{isSendMsg}
+        </if>
+        <if test="status != null">
+            and status = #{status}
+        </if>
+    </sql>
+
+	<select id="getAllErrorHandleUserList" parameterType="Map" resultType="com.deya.project.dz_siteError.ErrorHandleUserBean" >
+        select id,userName,phone,isSendMsg,addTime,status from dz_erroruser <include refid="getErrorHandleUserList_sql_conn"/> order by #{sort_name} #{sort_type}
+    </select>
+
+	<select id="getErrorHandleUserBean"  parameterType="Map" resultType="com.deya.project.dz_siteError.ErrorHandleUserBean" >
+		select id,userName,phone,isSendMsg,addTime,status from dz_erroruser where id=#{id}
+	</select>
+
+	<insert id="insertErrorHandleUser" parameterType="com.deya.project.dz_siteError.SiteErrorBean">
+		insert into dz_erroruser(id,userName,phone,isSendMsg,addTime,status) values(#{id},#{userName},#{phone},#{isSendMsg},#{addTime},#{status})
+	</insert>
+
+    <update id="updateErrorHandleUser"  parameterType="com.deya.project.dz_siteError.SiteErrorBean">
+		update dz_erroruser set
+				userName=#{userName},
+				phone=#{phone},
+				isSendMsg=#{isSendMsg},
+				status=#{status}
+		where id=#{id}
+	</update>
+
+    <!-- 根据条件删除纠错信息 -->
+    <update id="deleteErrorHandleUser" parameterType="Map" >
+        update dz_erroruser set status = '-1' where 1=1
+		<if test="id != null">
+			and id in (#{id})
+		</if>
+		<if test="status != null">
+			and status=#{status}
+		</if>
+    </update>
+
+
+	<!--*****************************************纠错站点**********************************************-->
+
+	<sql id="getErrorSiteList_sql_conn">
+        where 1=1
+        <if test="siteName != null">
+            and siteName like '%#{siteName}%'
+        </if>
+		<if test="siteType != null">
+			and siteType = #{siteType}
+		</if>
+        <if test="url != null">
+            and url like '%#{url}%'
+        </if>
+        <if test="status != null">
+            and status = #{status}
+        </if>
+    </sql>
+
+	<select id="getAllErrorSiteList" parameterType="Map" resultType="com.deya.project.dz_siteError.ErrorSiteBean" >
+        select id,siteName,siteType,url,addTime,status from dz_errorsite <include refid="getErrorSiteList_sql_conn"/> order by #{sort_name} #{sort_type}
+    </select>
+
+	<select id="getErrorSiteBean"  parameterType="Map" resultType="com.deya.project.dz_siteError.ErrorSiteBean" >
+		select id,siteName,siteType,url,addTime,status from dz_errorsite where id=#{id}
+	</select>
+
+	<insert id="insertErrorSite" parameterType="com.deya.project.dz_siteError.ErrorSiteBean">
+		insert into dz_errorsite(id,siteName,siteType,url,addTime,status) values(#{id},#{siteName},#{siteType},#{url},#{addTime},#{status})
+	</insert>
+
+    <update id="updateErrorSite"  parameterType="com.deya.project.dz_siteError.ErrorSiteBean">
+		update dz_errorsite set
+				siteName=#{siteName},
+				siteType=#{siteType},
+				url=#{url},
+				status=#{status}
+		where id=#{id}
+	</update>
+
+    <!-- 根据条件删除纠错信息 -->
+    <update id="deleteErrorSite" parameterType="Map" >
+        update dz_errorsite set status = '-1' where 1=1
+		<if test="id != null">
+			and id in (#{id})
+		</if>
+		<if test="status != null">
+			and status=#{status}
+		</if>
+    </update>
+
+
+	<!--*****************************************纠错类别**********************************************-->
+
+	<sql id="getErrorTypeList_sql_conn">
+        where 1=1
+        <if test="typeName != null">
+            and typeName like '%#{typeName}%'
+        </if>
+        <if test="status != null">
+            and status = #{status}
+        </if>
+    </sql>
+
+	<select id="getAllErrorTypeList" parameterType="Map" resultType="com.deya.project.dz_siteError.ErrorTypeBean" >
+        select id,typeName,sort,addTime,status from dz_errortype <include refid="getErrorTypeList_sql_conn"/> order by #{sort_name} #{sort_type}
+    </select>
+
+	<select id="getErrorTypeBean"  parameterType="Map" resultType="com.deya.project.dz_siteError.ErrorTypeBean" >
+		select id,typeName,sort,addTime,status from dz_errortype where id=#{id}
+	</select>
+
+	<insert id="insertErrorType" parameterType="com.deya.project.dz_siteError.ErrorTypeBean">
+		insert into dz_errortype(id,typeName,sort,addTime,status) values(#{id},#{typeName},#{sort},#{addTime},#{status})
+	</insert>
+
+    <update id="updateErrorType"  parameterType="com.deya.project.dz_siteError.ErrorTypeBean">
+		update dz_errortype set 
+				typeName=#{typeName},
+				sort=#{sort},
+				status=#{status}
+		where id=#{id}
+	</update>
+
+    <!-- 根据条件删除纠错信息 -->
+    <update id="deleteErrorType" parameterType="Map" >
+        update dz_errortype set status = '-1' where 1=1 
+		<if test="id != null">
+			and id in (#{id})
+		</if>
+		<if test="status != null">
+			and status=#{status}
+		</if>
+    </update>
+	
+</mapper>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="searchInfo">
+    <sql id="getSyjyqyList_sql_conn">
+        where status != '-1'
+        <if test="keyword != null">
+            and ( qx like '%${keyword}%' or qymc like '%${keyword}%' or jydz like '%${keyword}%' or fr like '%${keyword}%' or lxdh like '%${keyword}%')
+        </if>
+        <if test="qx != null">
+            and qx like '%${qx}%'
+        </if>
+        <if test="qymc != null">
+            and qymc like '%${qymc}%'
+        </if>
+        <if test="jydz != null">
+            and jydz like '%${jydz}%'
+        </if>
+        <if test="fr != null">
+            and fr like '%${fr}%'
+        </if>
+        <if test="lxdh != null">
+            and lxdh like '%${lxdh}%'
+        </if>
+        <if test="status != null">
+            and status = #{status}
+        </if>
+    </sql>
+
+    <select id="getAllSyjyqy" resultType="com.deya.project.searchInfo.SyjyqyBean" >
+        select id,qx,qymc,jydz,fr,lxdh,bz,addTime,status from dz_syjyqy where status != '-1' order by id desc
+    </select>
+
+    <select id="getSyjyqyCount" parameterType="Map" resultType="java.lang.String" >
+        select count(id) from dz_syjyqy
+        <include refid="getSyjyqyList_sql_conn"/>
+    </select>
+
+    <select id="getSyjyqyList" parameterType="Map" resultType="com.deya.project.searchInfo.SyjyqyBean" >
+        select * from (
+        select row_.*, rownum rownum_ from (
+        select id,qx,qymc,jydz,fr,lxdh,bz,addTime,status from dz_syjyqy <include refid="getSyjyqyList_sql_conn"/>
+        order by ${orderby}
+        <![CDATA[
+		        ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}
+	    	) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+	    ]]>
+    </select>
+
+    <select id="getSyjyqyList_mysql" parameterType="Map" resultType="com.deya.project.searchInfo.SyjyqyBean" >
+        select id,qx,qymc,jydz,fr,lxdh,bz,addTime,status from dz_syjyqy <include refid="getSyjyqyList_sql_conn"/>
+        order by ${orderby} limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
+    </select>
+
+    <select id="getSyjyqyList_mssql" parameterType="Map" resultType="com.deya.project.searchInfo.SyjyqyBean" >
+        select top #{page_size} id,qx,qymc,jydz,fr,lxdh,bz,addTime,status
+        from dz_syjyqy
+        <include refid="getSyjyqyList_sql_conn"/>
+        and id not in
+        (select top #{start_num} id
+        from dz_syjyqy
+        <include refid="getSyjyqyList_sql_conn"/>
+        order by ${orderby} )
+        order by ${orderby}
+    </select>
+
+    <select id="getSyjyqyBean"  parameterType="Map" resultType="com.deya.project.searchInfo.SyjyqyBean" >
+        select id,qx,qymc,jydz,fr,lxdh,bz,addTime,status from dz_syjyqy where id=#{id}
+    </select>
+
+    <insert id="insertSyjyqy" parameterType="com.deya.project.searchInfo.SyjyqyBean">
+        insert into dz_syjyqy(
+        id,
+        qx,
+        qymc,
+        jydz,
+        fr,
+        lxdh,
+        bz,
+        addTime,
+        status
+        ) values(
+        #{id},
+        #{qx},
+        #{qymc},
+        #{jydz},
+        #{fr},
+        #{lxdh},
+        #{bz},
+        #{addTime},
+        #{status}
+        )
+    </insert>
+
+    <update id="updateSyjyqy"  parameterType="com.deya.project.searchInfo.SyjyqyBean">
+        update dz_syjyqy set
+        qx=#{qx},
+        qymc=#{qymc},
+        jydz=#{jydz},
+        fr=#{fr},
+        lxdh=#{lxdh},
+        bz=#{bz},
+        addTime=#{addTime},
+        status=#{status}
+        where id=#{id}
+    </update>
+
+    <update id="changeSyjyqyStatus" parameterType="Map" >
+        update dz_syjyqy set status = #{status}  where id in (${ids})
+    </update>
+
+    <update id="deleteSyjyqy" parameterType="Map" >
+        update dz_syjyqy set status = '-1' where id in (${ids})
+    </update>
+
+</mapper>

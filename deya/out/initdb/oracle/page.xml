@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <table>
+		<sql>
+          <![CDATA[
+				create table cs_page(
+					id NUMBER(20) not null PRIMARY KEY,					
+					page_id NUMBER(20) default 0,
+					parent_id NUMBER(20) default 0,
+					page_ename VARCHAR2(250) default '',
+					page_cname VARCHAR2(250) default '',
+					template_id NUMBER(20) default 0,					
+					page_path VARCHAR2(250) default '',
+					page_interval NUMBER(20) default 0,
+					last_dtime VARCHAR2(20) default '',
+					next_dtime VARCHAR2(20) default '',
+					sort_id NUMBER(4) default 0,
+					page_memo VARCHAR2(1000) default '',
+					app_id VARCHAR2(250) default '',
+					site_id VARCHAR2(250) default ''
+				)
+		   ]]> 
+       </sql>	   
+    </table>	
+</root>
+ 

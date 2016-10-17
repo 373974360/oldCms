@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <table>
+		<sql>
+          <![CDATA[
+				create table cp_model(
+					model_id bigint not null PRIMARY KEY,					
+					model_cname varchar(250) default '',
+					relevance_type int default 0,
+					is_sort int default 0,
+					time_limit int default 15,
+					warn_num int default 0,
+					yellow_num int default 0,
+					red_num int default 0,
+					code_pre varchar(20) default 'GPPS',
+					code_rule varchar(20) default 'YYYYMMDD',
+					code_num int default 4,
+					query_num int default 4,
+					must_member int default 0,
+					wf_id int default 0,
+					remind_type varchar(20) default '',
+					user_secret int default 0,
+					is_auto_publish int default 0,
+					template_form bigint default 0,
+					template_list bigint default 0,
+					template_content bigint default 0,
+					template_comment bigint default 0,
+					template_search_list bigint default 0,
+					model_memo varchar(1000) default '',
+					hits bigint default 0,
+					day_hits bigint default 0,
+					week_hits bigint default 0,
+					month_hits bigint default 0,
+					lasthit_dtime varchar(20) default '',
+					template_print bigint default 0,
+					is_comment_checked int default 0,
+					is_allow_comment int default 0
+				)
+		   ]]> 
+       </sql>
+	   <sql>
+          <![CDATA[
+				create table cp_from(
+					field_id int not null,
+					model_id bigint not null,
+					field_ename varchar(250) not null,
+					field_cname varchar(250) default ''
+				)
+		   ]]> 
+       </sql>
+	   <sql>
+          <![CDATA[
+				create table cp_sq_custom(
+					cu_id bigint not null PRIMARY KEY,
+					model_id bigint not null,
+					sq_id bigint not null,
+					cu_key varchar(250) not null,
+					cu_value ntext 
+				)
+		   ]]> 
+       </sql>
+	   <sql>
+          <![CDATA[
+				create table cp_model_dept(
+					model_id bigint not null,
+					dept_id bigint
+				)
+		   ]]> 
+       </sql>
+       <sql>
+          <![CDATA[
+				create table cp_model_user(
+					model_id bigint not null,
+					user_id bigint
+				)
+		   ]]> 
+       </sql>
+    	<sql>
+          <![CDATA[
+				create table cp_area(
+					area_id bigint not null PRIMARY KEY,
+					parent_id bigint default '0',
+					area_cname varchar(250),
+					area_position varchar(250),
+					area_level int,
+                                        sort_id int default '0'
+				)
+		   ]]> 
+       </sql>
+<sql>
+          <![CDATA[
+				create table cp_calendar(
+					ca_id bigint not null PRIMARY KEY,
+					ca_name varchar(250),
+					start_dtime varchar(20),
+					end_dtime varchar(20),
+				    ca_flag int default '0',
+				    ca_type int default '0'
+				)
+		   ]]> 
+       </sql>
+	   <sql>
+          <![CDATA[
+				create table cp_sq(
+					sq_id bigint not null PRIMARY KEY,
+					sq_code varchar(250) default '',
+					model_id bigint,
+					me_id bigint default 0,
+					sq_realname varchar(250) default '',
+					sq_sex int,
+					sq_vocation varchar(250) default '',
+					sq_age int,
+					sq_address varchar(250) default '',
+					sq_email varchar(250) default '',
+					sq_tel varchar(250) default '',
+					sq_phone varchar(250) default '',
+					sq_card_id varchar(250) default '',
+					sq_dtime varchar(20) default '',
+					is_open int default 0,
+					sq_ip varchar(50) default '',
+					sq_title varchar(250) default '',
+					sq_title2 varchar(250) default '',
+					sq_content ntext ,
+					sq_content2 ntext ,
+					sq_reply ntext ,
+					sq_type int  default 0,
+					query_code varchar(50) default '',
+					cat_id bigint,
+					area_id bigint,
+					pur_id bigint,
+					accept_dtime varchar(50) default '',
+					over_dtime  varchar(50) default '',
+					sq_flag int default 0,
+					initial_sq_id bigint default 0,
+					sq_status int default 0,
+					step_id int default 0,
+					publish_status int default 0,
+					supervise_flag int default 0,
+					is_back int default 0,
+					time_limit int default 0,
+					limit_flag int default 0,
+					alarm_flag int default 0,
+					timeout_flag int default 0,
+					prove_type int default 1,
+					people_num int default 1,
+					do_dept bigint,
+					submit_name varchar(250) default '',
+					publish_user bigint,
+					publish_dtime varchar(20) default '',
+					sat_score int default 0,
+					hits bigint,
+					day_hits bigint,
+					week_hits bigint,
+					month_hits bigint,
+					weight int default 60,
+					lasthit_dtime varchar(20) default '',
+					sq_all_number bigint default 0,
+					sq_number bigint default 0,
+					submit_dept_id bigint default 0
+					
+				)
+		   ]]> 
+       </sql>
+	   <sql>
+          <![CDATA[
+				create table cp_process(
+					pro_id bigint not null PRIMARY KEY,
+					sq_id bigint,
+					user_id bigint,
+					user_realname varchar(250) default '',
+					do_dept bigint,
+					dept_name varchar(250) default '',
+					pro_dtime varchar(20) default '',
+					pro_type int,
+					pro_note ntext,
+					to_dept_name varchar(250) default '',
+					old_dept_id bigint default 0,
+					old_sq_status int default 0,
+					old_prove_type int default 0
+				)
+		   ]]> 
+       </sql>
+	   <sql>
+          <![CDATA[
+				create table cp_sq_attachment(
+					sq_id bigint not null,
+					att_name varchar(255),
+					att_path varchar(255),
+					relevance_type int
+				)
+		   ]]> 
+       </sql>
+       <sql>
+          <![CDATA[
+				create table cp_dept(
+					dept_id bigint not null PRIMARY KEY,
+					parent_id bigint default '0',
+					dept_name varchar(250),
+					dept_position varchar(250),
+					dept_level int,
+					dept_memo varchar(1000),
+					sort_id int
+				)
+		   ]]> 
+       </sql>
+       <sql>
+          <![CDATA[
+				create table cp_lead(
+					  lead_id bigint not null PRIMARY KEY,					
+					  lead_name varchar(250) default '',
+				      lead_job varchar(250) default '',
+				      lead_img varchar(250) default '',
+				      lead_url varchar(250) default '', 
+				      lead_memo varchar(1000)  default '',
+				      sort_id int default 999,
+				      dept_id bigint 
+				)
+		   ]]> 
+       </sql>
+       <sql>
+          <![CDATA[
+				create table cp_user(
+					user_id bigint not null PRIMARY KEY,
+					dept_id bigint default '0'
+				)
+		   ]]> 
+       </sql> 
+       <sql>
+          <![CDATA[
+       create table cp_phrasal
+		(
+     		 ph_id bigint primary key,
+     		 ph_title varchar(255) default '',
+     		 ph_content varchar(2000) default '',
+     		 ph_type int default 0,
+     		 sort_id int default 0
+		)
+        ]]> 
+       </sql> 
+       <sql>
+          <![CDATA[
+				create table cp_satisfaction(
+					sat_id bigint not null PRIMARY KEY,
+					sat_item varchar(250),
+					sat_score int
+				)
+		   ]]> 
+       </sql>
+	   <sql>
+          <![CDATA[
+				create table cp_purpose(
+					pur_id bigint not null PRIMARY KEY,
+					pur_name varchar(250),
+					sort_id int
+				)
+		   ]]> 
+       </sql>
+	   <sql>
+          <![CDATA[
+				create table cp_category(
+					cat_id bigint not null PRIMARY KEY,
+					parent_id bigint default '0',
+					cat_cname varchar(250),
+					cat_position varchar(250),
+					cat_level int,
+					sort_id int
+				)
+		   ]]> 
+       </sql>
+	   <sql>
+          <![CDATA[
+				create table cp_sat_record(
+					rec_id bigint not null PRIMARY KEY,
+					sq_id bigint default '0',
+					sat_id bigint default '0',					
+					sat_score int default '0',
+					add_dtime varchar(250) default ''
+				)
+		   ]]> 
+       </sql>
+       <!-- 诉求tags -->
+       <sql>
+          <![CDATA[
+				create table cp_sq_tag(
+					sq_id bigint not null,
+					tag_id bigint not null
+				)
+		   ]]> 
+       </sql>
+    </table>	
+</root>
+ 

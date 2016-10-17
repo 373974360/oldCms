@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="cp_lead">	
+	<!-- 得到所有领导 -->
+	<select id="getAllCpLeadList" parameterType="Map" resultType="com.deya.wcm.bean.appeal.cpLead.CpLeadBean">
+		select * from cp_lead order by sort_id asc
+	</select>
+	<!-- 添加领导 -->
+	<insert id="insert_cpLead" parameterType="com.deya.wcm.bean.appeal.cpLead.CpLeadBean">
+		insert into cp_lead (lead_id,lead_name,lead_job,lead_img,lead_url,lead_memo,dept_id,sort_id) 
+		values(#{lead_id},#{lead_name},#{lead_job},#{lead_img},#{lead_url},#{lead_memo},#{dept_id},#{sort_id}) 
+	</insert>
+	
+	<!-- 修改领导 -->
+	<update id="update_cpLead" parameterType="com.deya.wcm.bean.appeal.cpLead.CpLeadBean">
+		update cp_lead set lead_name = #{lead_name},lead_job = #{lead_job},lead_img = #{lead_img},
+		lead_url = #{lead_url},lead_memo = #{lead_memo},dept_id = #{dept_id} where lead_id = #{lead_id}
+	</update>	
+	
+	<!-- 删除领导 -->
+	<delete id="delete_cpLead" parameterType="Map">
+		delete from cp_lead where lead_id in (${lead_ids})
+	</delete>
+	
+	<!-- 保存领导排序 -->	
+	<update id="savesort_cpLead" parameterType="Map">
+	   update cp_lead set sort_id = #{sort_id} where lead_id = #{lead_id}
+	</update>
+	
+	<!-- 根据ID得到领导信息 -->
+	<select id="getCpLeadBean" parameterType="java.lang.String" resultType="com.deya.wcm.bean.appeal.cpLead.CpLeadBean">
+		select * from cp_lead where lead_id = #{lead_id} 
+	</select>
+	
+	<!-- 得到领导总数 -->
+	<select id="getCpLeadCount" parameterType="Map" resultType="java.lang.String">
+		select count(lead_id) from cp_lead where 1=1
+		<if test="con_value != null">
+			and ${con_name} like '%${con_value}%'
+		</if>
+	</select>
+	<!-- *****************************需要替换的部分******************************************* -->
+	<!-- 得到领导列表 -->
+	<select id="getCpLeadList" parameterType="Map" resultType="com.deya.wcm.bean.appeal.cpLead.CpLeadBean">
+	<![CDATA[
+		select * from (
+			select row_.*,rownum rownum_ from(				
+					select * from cp_lead  
+	]]>	
+	            <if test="con_value != null">
+					where ${con_name} like '%${con_value}%'
+				</if>
+	<![CDATA[
+				 order by ${sort_name} ${sort_type}
+			) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
+    	) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+	]]>
+	</select>
+	
+	<select id="getCpLeadList_mysql" parameterType="Map" resultType="com.deya.wcm.bean.appeal.cpLead.CpLeadBean">
+		select * from cp_lead 
+		<if test="con_value != null">
+			where ${con_name} like '%${con_value}%'
+		</if>
+		order by ${sort_name} ${sort_type} limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
+	</select>
+	
+	<select id="getCpLeadList_mssql" parameterType="Map" resultType="com.deya.wcm.bean.appeal.cpLead.CpLeadBean">
+	select top ${page_size} *
+			  from cp_lead 
+			    where lead_id not in 			
+				  (select top ${start_num} lead_id
+					 from cp_lead
+					 <if test="con_value != null">
+						where ${con_name} like '%${con_value}%'
+					</if>					 
+					 order by ${sort_name} ${sort_type} )
+					 <if test="con_value != null">
+						and ${con_name} like '%${con_value}%'
+					</if>
+			order by ${sort_name} ${sort_type}
+	</select>
+</mapper>

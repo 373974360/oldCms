@@ -1,0 +1,544 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+
+    <table>
+
+    	<sql>
+
+          <![CDATA[
+
+				create table cs_workflow(
+
+					wf_id NUMBER(20) not null PRIMARY KEY,
+
+					wf_name VARCHAR2(250) default '',
+
+					wf_memo VARCHAR2(1000) default '',
+
+					wf_steps NUMBER(4)
+
+				)
+
+		   ]]> 
+
+       </sql>
+
+	   <sql>
+
+          <![CDATA[
+
+				create table cs_workflow_step(
+
+					wf_id NUMBER(20) not null,
+
+					step_id NUMBER(4) default 1,
+
+					step_name VARCHAR2(250) default '',
+
+					role_id VARCHAR2(250) default '',
+
+					required NUMBER(4) default 1
+
+				)
+
+		   ]]> 
+
+       </sql>
+
+       <sql>
+
+          <![CDATA[
+
+				create table cs_workflow_log(
+
+					log_id NUMBER(20) not null PRIMARY KEY,
+
+					content_id NUMBER(20),
+
+					wf_before NUMBER(4),
+
+					wf_after NUMBER(4),
+
+					wf_action VARCHAR2(250) default '',
+
+					wf_reason VARCHAR2(1000) default '',
+
+					opt_time VARCHAR2(250) default '',
+
+					user_id VARCHAR2(250) default '',		
+
+					ip VARCHAR2(250) default ''
+
+				)
+
+		   ]]> 
+
+       </sql>
+
+	    <sql>
+
+          <![CDATA[
+
+				create table cs_info_status(
+
+					status_id NUMBER(20) not null PRIMARY KEY,
+
+					status_name VARCHAR2(250) default '',
+
+					status_memo VARCHAR2(1000) default ''
+
+				)
+
+		   ]]> 
+
+       </sql>
+
+       
+
+        <sql>
+
+          <![CDATA[
+
+				create table cs_info_class(
+
+					class_id NUMBER(20) not null PRIMARY KEY,					
+
+					class_ename VARCHAR2(250) default '',
+
+					class_cname VARCHAR2(250) default '',
+
+					class_codo VARCHAR2(250) default '',		
+
+					class_define VARCHAR2(1000) default '',
+
+					class_type NUMBER(4),
+
+					app_ids VARCHAR2(250) default ''
+
+				)
+
+		   ]]> 
+
+       </sql>
+
+       
+
+       <sql>
+
+          <![CDATA[
+
+				create table cs_info_category(
+
+					id                 NUMBER(20) not null,
+
+					  cat_id             NUMBER(20) not null,
+					
+					  class_id           NUMBER(20),
+					
+					  parent_id          NUMBER(20),
+					
+					  wf_id              NUMBER(20),
+					
+					  is_wf_publish      NUMBER(4),
+					
+					  cat_code           varchar2(250) default '',
+					
+					  cat_ename          varchar2(250) default '',
+					
+					  cat_cname          varchar2(250) default '',
+					
+					  cat_position       varchar2(250) default '',
+					
+					  cat_level          NUMBER(4),
+					
+					  is_mutilpage       NUMBER(4),
+					
+					  template_index     NUMBER(20),
+					
+					  template_list      NUMBER(20),
+					
+					  is_generate_index  NUMBER(4) default 1,
+					
+					  urlrule_index      varchar2(250) default '',
+					
+					  urlrule_list       varchar2(250) default '',
+					
+					  urlrule_content    varchar2(250) default '',
+					
+					  is_allow_submit    NUMBER(4) default 0,
+					
+					  is_allow_comment   NUMBER(4) default 0,
+					
+					  is_comment_checked NUMBER(4) default 0,
+					
+					  is_show            NUMBER(4) default 1,
+					
+					  cat_keywords       varchar2(1000) default '',
+					
+					  cat_description    varchar2(1000) default '',
+					
+					  cat_sort           NUMBER(4) default 999,
+					
+					  is_sync            NUMBER(4) default 0,
+					
+					  cat_source_id      NUMBER(20) default 0,
+					
+					  cat_class_id       NUMBER(20) default 0,
+					
+					  is_disabled        NUMBER(4) default 1,
+					
+					  cat_type           NUMBER(4) default 0,
+					
+					  zt_cat_id          NUMBER(4) default 0,
+					
+					  is_archive         NUMBER(4) default 0,
+					
+					  cat_memo           varchar2(1000) default '',
+					
+					  app_id             varchar2(250) default '',
+					
+					  site_id            varchar2(250) default '',
+					
+					  jump_url           varchar2(250),
+					
+					  hj_sql             varchar2(1000) default '',
+					
+					  is_show_tree       NUMBER(4) default 1				
+
+				)
+
+		   ]]> 
+
+       </sql>
+
+	   <sql>
+
+          <![CDATA[
+
+				create table cs_info_digg(
+
+					info_id NUMBER(20) not null PRIMARY KEY,
+
+					supports NUMBER(20),
+
+					againsts NUMBER(20),
+
+					app_id  VARCHAR2(250),
+
+					site_id VARCHAR2(250)
+
+				)
+
+		   ]]> 
+
+       </sql>
+
+	   <sql>
+
+          <![CDATA[
+
+				create table cs_info_digg_log(
+
+					info_id NUMBER(20),
+
+					flag NUMBER(4),
+
+					user_id NUMBER(20),
+
+					username VARCHAR2(250),
+
+					ip varchar(250),
+
+					digg_dtime VARCHAR2(250),
+
+					app_id VARCHAR2(250),
+
+					site_id VARCHAR2(250)
+
+				)
+
+		   ]]> 
+
+       </sql>       
+
+	    <sql>
+
+          <![CDATA[
+
+				create table cs_info_category_shared(									
+
+					s_site_id VARCHAR2(250) default '',
+
+					cat_id NUMBER(20),
+
+					t_site_id VARCHAR2(250) default '',
+
+					shared_type NUMBER(4),		
+
+					range_type NUMBER(4)
+
+				)
+
+		   ]]> 
+
+       </sql>
+
+	   <sql>
+
+          <![CDATA[
+
+				create table cs_zt_category(
+
+					id NUMBER(20) not null PRIMARY KEY,					
+
+					zt_cat_id NUMBER(20) not null,
+
+					zt_cat_name VARCHAR2(250) default '',					
+
+					sort_id NUMBER(4) default 999,
+
+					site_id VARCHAR2(250) default '',
+
+					app_id VARCHAR2(250) default ''
+
+					
+
+				)
+
+	   ]]> 
+
+       </sql>       
+
+       <sql>
+
+          <![CDATA[
+
+				create table cs_category_rele(	
+
+					cat_id NUMBER(20),
+
+					prv_id NUMBER(20),
+
+					priv_type NUMBER(4),
+
+					app_id VARCHAR2(250) default '',
+
+					site_id VARCHAR2(250) default ''
+
+				)
+
+		   ]]> 
+
+       </sql>
+	   
+	   <sql>
+          <![CDATA[
+				create table cs_info_pic(	
+					pic_id NUMBER(20) not null PRIMARY KEY,	
+					info_id NUMBER(20),
+					att_id NUMBER(4),
+					pic_path VARCHAR2(250) default '',
+					pic_note clob default '',
+					pic_url VARCHAR2(250) default '',
+					pic_sort NUMBER(4) default 999,
+					pic_title varchar2(250),
+					pic_content clob default ''
+				)
+		   ]]> 
+       </sql>
+       <sql>
+          <![CDATA[
+				create table cs_info_pic_group(	
+					pic_id   NUMBER(20) not null,
+					  info_id  NUMBER(4),
+					  att_id   NUMBER(20),
+					  pic_path varchar2(250) default '',
+					  pic_note clob,
+					  pic_url  varchar2(250) default '',
+					  pic_sort NUMBER(4)
+				)
+		   ]]> 
+       </sql>
+      
+	   <sql>
+          
+			<![CDATA[
+				
+					create table cs_info_video
+				
+					(
+			       
+						info_id number(20) not null primary key,
+			       
+						att_id number(20),
+			       
+						video_path varchar2(250),
+			       
+						play_time number(20),
+ 				  
+						info_content clob
+				
+					)
+		   
+			]]> 
+      
+	   </sql>
+	   <sql>
+          <![CDATA[
+				create table cs_info(
+					id  number(20) not null PRIMARY KEY,
+					info_id               number(20),
+					cat_id               number(20),
+					model_id               number(20),
+					from_id               number(20),
+					top_title               varchar2(250),
+					pre_title               varchar2(250),
+					title               varchar2(250),
+					subtitle               varchar2(500),
+					title_color               varchar2(250)  default '#000',
+					thumb_url               varchar2(250),
+					description               varchar2(1000),
+					author               varchar2(250)   default '',
+					editor               varchar2(250)   default '',
+					source               varchar2(250) default '',
+					info_keywords               varchar2(250),
+					info_description               varchar2(250),
+					tags               varchar2(250),
+					content_url               varchar2(250),
+					wf_id               number(20),
+					step_id               number(4)   default 0,
+					info_status               number(4)  default 0,
+					final_status               number(4)  default 0,
+					page_count               number(4)  default 1,
+					weight               number(4)  default 60,
+					hits               number(20),
+					day_hits               number(20),
+					week_hits               number(20),
+					month_hits               number(20),
+					lasthit_dtime               varchar2(20),
+					is_allow_comment               number(4),
+					comment_num               number(20)  default 0,
+					released_dtime               varchar2(20),
+					input_user               number(20),
+					input_dtime               varchar2(20),
+					modify_user               number(20),
+					modify_dtime               varchar2(20),
+					opt_dtime               varchar2(20),
+					is_auto_up               number(4)  default 0,
+					up_dtime               varchar2(20),
+					is_auto_down               number(4)  default 0,
+					down_dtime               varchar2(20),
+					is_host               number(4)  default 0,
+					title_hashkey               number(20),
+					app_id               varchar2(250),
+					site_id               varchar2(250),
+					i_ver               number(4),
+					is_pic               number(4) default 0,
+					auto_desc varchar2(1000) default'',
+					is_am_tupage		NUMBER(4) default 0,
+					tupage_num			NUMBER(7) default 1000,
+					istop      number(4) default 0,
+					info_level varchar2(4),
+					isIpLimit varchar2(4)
+				)
+
+		   ]]> 
+       </sql>
+	   <sql>          
+			<![CDATA[				
+					create table cs_info_article(
+						id  number(20) not null PRIMARY KEY,
+						info_id               number(20),
+						info_content          clob,
+						page_count            number(20),
+						prepage_wcount        number(20),
+						word_count            number(20)
+					)		   
+			]]>       
+	   </sql>
+	   <sql>          
+			<![CDATA[				
+					create table cs_info_info(
+						info_id                    number(20),
+						related_info_id            number(20),
+						title                      varchar2(255),
+						thumb_url                  varchar2(255),
+						content_url                varchar2(255),
+						sort_id                    number(20),
+						model_id                   number(20)
+					)		   
+			]]>       
+	   </sql>
+		<!-- 栏目获取规则表 -->
+       <sql>
+          <![CDATA[
+				create table cs_info_category_regu(
+					id NUMBER(20) not null,
+					cat_id NUMBER(20) not null,
+					regu_type NUMBER(4) default 0,
+					site_ids VARCHAR2(1000) default '',
+					cat_ids	VARCHAR2(1000) default '',
+					site_id VARCHAR2(250) default '',
+					app_id VARCHAR2(250) default ''
+				)
+		   ]]> 
+       </sql>
+       <sql>
+          <![CDATA[
+				create table cs_info_category_model(
+					cat_model_id     NUMBER(20) not null,
+					  cat_id           NUMBER(20) default 0,
+					  model_id         NUMBER(20) default 0,
+					  template_content NUMBER(20) default 0,
+					  app_id           varchar2(250) default '',
+					  site_id          varchar2(250) default '',
+					  isAdd           NUMBER(4) default 0
+				)
+		   ]]> 
+       </sql>
+       <sql>
+          <![CDATA[
+				create table cs_info_sync(
+					s_site_id       varchar2(250) default '',
+					  s_cat_id        NUMBER(20),
+					  t_site_id       varchar2(250) default '',
+					  t_cat_id        NUMBER(20),
+					  is_auto_publish NUMBER(4) default 0,
+					  cite_type       NUMBER(4) default 1,
+					  orientation     NUMBER(4) default 0
+				)
+		   ]]> 
+       </sql>
+       <sql>
+          <![CDATA[
+				create table cs_info_tag(
+					info_id NUMBER(20),
+ 					tag_id  NUMBER(20)
+				)
+		   ]]> 
+       </sql>
+        <sql>
+            <![CDATA[
+				create table cs_info_access(
+					    id  NUMBER(20) not null PRIMARY KEY,
+						info_id           NUMBER(20),
+						cat_id            NUMBER(20),
+						info_title        varchar2(255),
+						app_id            varchar2(255),
+						access_ip         varchar2(255),
+						access_url        varchar2(255),
+						access_time       varchar2(255),
+						access_day        varchar2(255),
+						access_month      varchar2(255),
+						access_year       varchar2(255),
+						site_domain       varchar2(255),
+						site_id           varchar2(255)
+					)
+		   ]]>
+        </sql>
+    </table>	
+
+    
+
+</root>

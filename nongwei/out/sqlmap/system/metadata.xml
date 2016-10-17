@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="metadata">	
+	<!-- 得所有元数据信息列表 -->	
+	<select id="getAllMetaDataList" resultType="com.deya.wcm.bean.system.metadata.MetaDataBean">
+		select * from cs_info_meta order by meta_id
+	</select>
+	
+	<!-- 根据条件查到总数 -->	
+	<select id="getMetaDataCountForDB" parameterType="Map" resultType="java.lang.String">
+		select count(meta_id) from cs_info_meta
+		<if test="con_value != null">
+			where ${con_name} like '%${con_value}%'
+		</if>
+	</select>
+	
+	<!-- 得到元数据对象 -->	
+	<select id="getMetaDataBean" parameterType="java.lang.String" resultType="com.deya.wcm.bean.system.metadata.MetaDataBean">
+		select * from cs_info_meta where meta_id = #{meta_id}
+	</select>
+	
+	<!-- 插入元数据信息 -->
+	<insert id="insert_metadata" parameterType="com.deya.wcm.bean.system.metadata.MetaDataBean">
+		insert into cs_info_meta(meta_id,meta_ename,meta_sname,meta_cname,meta_define,meta_datatype,meta_codomain,meta_iselect,meta_maxtimes,meta_sample,meta_type,parent_id,is_core)
+		values(#{meta_id},#{meta_ename},#{meta_sname},#{meta_cname},#{meta_define},#{meta_datatype},#{meta_codomain},#{meta_iselect},#{meta_maxtimes},#{meta_sample},#{meta_type},#{parent_id},#{is_core})
+	</insert>	
+	
+	<!-- 修改元数据信息 -->
+	<update id="update_metadata" parameterType="com.deya.wcm.bean.system.metadata.MetaDataBean">
+		update cs_info_meta set meta_ename = #{meta_ename},meta_sname=#{meta_sname},meta_cname=#{meta_cname},meta_define=#{meta_define},meta_datatype=#{meta_datatype},meta_codomain=#{meta_codomain},meta_iselect=#{meta_iselect},meta_maxtimes=#{meta_maxtimes},meta_sample=#{meta_sample},meta_type=#{meta_type},parent_id=#{parent_id},is_core=#{is_core} where meta_id = #{meta_id}
+	</update>
+	
+	<!-- 删除元数据信息 -->
+	<delete id="delete_metadata" parameterType="Map">
+		delete from cs_info_meta where meta_id in ${meta_id}
+	</delete>
+		
+	<!-- **************************** 翻页　需更换部分 ************************************************* -->
+	<select id="getMetaDataListForDB" resultType="com.deya.wcm.bean.system.metadata.MetaDataBean" parameterType="Map">
+	select * from (
+	       select row_.*, rownum rownum_ from (       
+	            select * from cs_info_meta 
+				<if test="con_value != null">
+					where ${con_name} like '%${con_value}%'
+				</if>	
+	             order by ${sort_name} ${sort_type}
+	<![CDATA[ 
+	        ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
+    	) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+    ]]>	
+	</select>
+	
+	<select id="getMetaDataListForDB_mysql" resultType="com.deya.wcm.bean.system.metadata.MetaDataBean" parameterType="Map">
+		select * from cs_info_meta 
+				<if test="con_value != null">
+					where ${con_name} like '%${con_value}%'
+				</if>	
+	             order by ${sort_name} ${sort_type} limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER} 
+	</select>
+	
+	<select id="getMetaDataListForDB_mssql" resultType="com.deya.wcm.bean.system.metadata.MetaDataBean" parameterType="Map">
+		select top ${page_size} *  
+		  from cs_info_meta 		 
+			where meta_id not in
+			  (select top ${start_num} meta_id
+				 from cs_info_meta
+				 <if test="con_value != null">
+					where ${con_name} like '%${con_value}%'
+				 </if> 
+				 order by ${sort_name} ${sort_type} )
+				 <if test="con_value != null">
+					and ${con_name} like '%${con_value}%'
+				</if>
+				order by ${sort_name} ${sort_type}
+	</select>
+</mapper>

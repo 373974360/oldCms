@@ -1,0 +1,58 @@
+
+创建规则表
+create table cs_collection
+(
+	id NUMBER(20) not null PRIMARY KEY,	
+	rule_id NUMBER(20) default 0,							
+	title VARCHAR2(100) default '',
+	listUrl_start VARCHAR2(100) default '',
+	listUrl_end VARCHAR2(100) default '',
+	infotitle_start VARCHAR2(50) default '',
+	infotitle_end VARCHAR2(50) default '',
+	description_start VARCHAR2(50) default '',
+	description_end VARCHAR2(50) default '',
+	content_start VARCHAR2(50) default '',
+	content_end VARCHAR2(50) default '',
+	source_start VARCHAR2(50) default '',
+	source_end VARCHAR2(50) default '',
+	addTime_start VARCHAR2(50) default '',
+	addTime_end VARCHAR2(50) default '',
+	keywords_start VARCHAR2(50) default '',
+	keywords_end VARCHAR2(50) default '',
+	hits_start VARCHAR2(50) default '',
+	hits_end VARCHAR2(50) default '',
+	author_start VARCHAR2(50) default '',
+	author_end VARCHAR2(50) default '',
+	site_id VARCHAR2(20) default '',
+	cate_ids VARCHAR2(20) default '',
+	stop_time NUMBER(4) default 0,
+	pic_isGet NUMBER(4) default 0,
+	timeFormatType VARCHAR2(20) default '',
+	pageEncoding VARCHAR2(10) default '',
+	coll_url VARCHAR2(1000) default '',
+	contentUrl_start VARCHAR2(200) default '',
+	contentUrl_end VARCHAR2(200) default '',
+	cat_id VARCHAR2(30) default '',
+	cat_name VARCHAR2(100) default '',
+	coll_intervalNUMBER(4) default 0,
+	last_dtime VARCHAR2(20) default '',
+	next_dtime VARCHAR2(20) default ''	
+)
+
+
+
+文章信息表
+create table cs_artInfo
+(
+	id NUMBER(20) not null PRIMARY KEY,	
+	rule_id NUMBER(20) default 0,
+	art_title VARCHAR2(1000) default '',
+	art_content clob default '',
+	art_pubTime VARCHAR2(100) default '',
+	art_source VARCHAR2(50) default '',
+	art_author VARCHAR2(100) default '',
+	art_keyWords VARCHAR2(2000) default '',
+	art_hits NUMBER(4) default 0,
+	cat_id VARCHAR2(10) default '',
+	artis_user NUMBER(4) default 0
+)

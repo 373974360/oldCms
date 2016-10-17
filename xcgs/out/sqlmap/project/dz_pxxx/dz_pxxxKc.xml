@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="project">
+	<select id="getPxxxKcCount" parameterType="Map" resultType="java.lang.String">
+		select count(id) from dz_pxxx_kc
+		<where>						
+			<if test="pxmc != null">and pxmc like '%${pxmc}%' </if>
+			<if test="pxsj != null">and pxsj like '%${pxsj}%' </if>
+			<if test="pxdd != null">and pxdd like '%${pxdd}%' </if>
+			<if test="zjr != null">and zjr like '%${zjr}%' </if>
+			<if test="keyword != null">and (pxmc like '%${keyword}%' or pxsj like '%${keyword}%' or pxdd like '%${keyword}%' or zjr like '%${keyword}%' )</if>
+			and status != '-1'
+		</where>
+	</select>
+
+	<select id="getPxxxKcList_oracle" parameterType="Map" resultType="com.cicro.project.dz_pxxx.PxxxKcBean">
+		select * from (
+		       select row_.*, rownum rownum_ from (   
+		            select id,pxid,pxmc,pxsj,pxdd,zjr,status from dz_pxxx_kc
+		            <where>						
+						<if test="pxmc != null">and pxmc like '%${pxmc}%' </if>
+						<if test="pxsj != null">and pxsj like '%${pxsj}%' </if>
+						<if test="pxdd != null">and pxdd like '%${pxdd}%' </if>
+						<if test="zjr != null">and zjr like '%${zjr}%' </if>
+						<if test="keyword != null">and (pxmc like '%${keyword}%' or pxsj like '%${keyword}%' or pxdd like '%${keyword}%' or zjr like '%${keyword}%' )</if>
+						and status != '-1'
+					</where>
+		           order by ${orderby}	
+		<![CDATA[
+		        ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
+	    	) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+	    ]]>			
+	</select>	
+
+	<select id="getAllPxxxKcList" resultType="com.cicro.project.dz_pxxx.PxxxKcBean">
+		select * from dz_pxxx_kc where status != '-1'
+	</select>
+
+	<select id="getAllPxxxKcByPxID" parameterType="Map" resultType="com.cicro.project.dz_pxxx.PxxxKcBean"> 
+			select id,pxid,pxmc,pxsj,pxdd,zjr,status from dz_pxxx_kc
+			where pxid = #{pxid} and status != '-1'
+	</select>	
+
+	<select id="getPxxxKcList" parameterType="Map" resultType="com.cicro.project.dz_pxxx.PxxxKcBean"> 
+			select id,pxid,pxmc,pxsj,pxdd,zjr,status from dz_pxxx_kc
+			<where>						
+				<if test="pxmc != null">and pxmc like '%${pxmc}%' </if>
+				<if test="pxsj != null">and pxsj like '%${pxsj}%' </if>
+				<if test="pxdd != null">and pxdd like '%${pxdd}%' </if>
+				<if test="zjr != null">and zjr like '%${zjr}%' </if>
+				<if test="keyword != null">and (pxmc like '%${keyword}%' or pxsj like '%${keyword}%' or pxdd like '%${keyword}%' or zjr like '%${keyword}%' )</if>
+				and status != '-1'
+			</where>
+		    order by ${orderby} limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}	
+		
+	</select>	
+	
+	<select id="getPxxxKcBean" parameterType="Map" resultType="com.cicro.project.dz_pxxx.PxxxKcBean">
+		select * from dz_pxxx_kc where id = #{id} 
+	</select>
+	
+	<insert id="insertPxxxKc" parameterType="com.cicro.project.dz_pxxx.PxxxKcBean">
+	 	insert into dz_pxxx_kc(id,pxid,pxmc,pxsj,pxdd,zjr,status)
+	 	values(#{id},#{pxid},#{pxmc},#{pxsj},#{pxdd},#{zjr},#{status})
+	</insert>
+	
+	<update id="updatePxxxKc" parameterType="com.cicro.project.dz_pxxx.PxxxKcBean">
+	 	update dz_pxxx_kc set pxid= #{pxid},pxmc= #{pxmc},pxsj= #{pxsj},
+	 	pxdd= #{pxdd},zjr= #{zjr},status= #{status}
+	 	where id = #{id}
+	</update>
+	
+	<delete id="deletePxxxKc" parameterType="Map">
+		update dz_pxxx_kc set status = '-1'  where id in (${ids})
+	</delete>
+</mapper>

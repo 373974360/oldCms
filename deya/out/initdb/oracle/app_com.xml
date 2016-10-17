@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 小应用组件表 -->
+<root>
+    <table>
+    	<sql>
+		<!-- 留言分类表 -->
+          <![CDATA[
+				create table cs_guestbook_cat(
+					id NUMBER(20) not null PRIMARY KEY,					
+					cat_id NUMBER(20) default 0,
+					title VARCHAR2(250) default '',
+					publish_status NUMBER(4) default 0,
+					direct_publish NUMBER(4) default 0,
+					is_member NUMBER(4) default 0,
+					is_receive_show NUMBER(4) default 0,
+					is_auth_code NUMBER(4) default 0,
+					sort_id	NUMBER(4) default 999,				
+					template_index NUMBER(20) default 0,
+					template_list NUMBER(20) default 0,
+					template_form NUMBER(20) default 0,
+					template_content NUMBER(20) default 0,
+					site_id VARCHAR2(250) default '',
+					description clob default ''
+				)
+		   ]]> 
+       </sql>
+       <sql>
+		<!-- 留言类型表 -->
+          <![CDATA[
+				create table cs_guestbook_class(
+					id NUMBER(20) not null PRIMARY KEY,		
+					class_id NUMBER(20) default 0,			
+					cat_id NUMBER(20) default 0,
+					name VARCHAR2(250) default '',
+					description VARCHAR2(1000) default '',
+					site_id VARCHAR2(250) default '',
+					sort_id	NUMBER(4) default 999
+				)
+		   ]]> 
+       </sql>	
+		<sql>
+		<!-- 留言板主题表 -->
+          <![CDATA[
+				create table cs_guestbook_sub(
+					id NUMBER(20) not null PRIMARY KEY,					
+					gbs_id NUMBER(20) default 0,
+					cat_id NUMBER(20) default 0,
+					title VARCHAR2(250) default '',
+					publish_status NUMBER(4) default 0,
+					publish_time VARCHAR2(20) default '',
+					direct_publish NUMBER(4) default 0,
+					is_member NUMBER(4) default 0,
+					is_receive_show NUMBER(4) default 0,
+					is_auth_code NUMBER(4) default 0,
+					template_index NUMBER(20) default 0,
+					template_list NUMBER(20) default 0,
+					template_form NUMBER(20) default 0,
+					template_content NUMBER(20) default 0,
+					site_id VARCHAR2(250) default '',
+					add_time VARCHAR2(20) default '',
+					description clob default '',
+					remark VARCHAR2(1000) default ''
+				)
+		   ]]> 
+       </sql>	   
+	   <sql>
+		<!-- 留言板数据表 -->
+          <![CDATA[
+				create table cs_guestbook(
+					id NUMBER(20) not null PRIMARY KEY,	
+					gbs_id NUMBER(20) default 0,				
+					nickname  VARCHAR2(250) default '',					
+					title  VARCHAR2(250) default '',
+					address  VARCHAR2(250) default '',
+					content clob default '',
+					member_id NUMBER(20) default 0,
+					ip  VARCHAR2(250) default '',
+					class_id VARCHAR2(250) default '', 
+					publish_status NUMBER(4) default 0,
+					reply_status NUMBER(4) default 0,
+					add_time VARCHAR2(20) default '',
+					reply_time VARCHAR2(20) default '',
+					reply_content clob default '',					
+					realname VARCHAR2(250) default '',
+					phone VARCHAR2(250) default '',
+					tel VARCHAR2(250) default '',
+					post_code VARCHAR2(250) default '',
+					idcard  varchar(250) default '',
+					vocation VARCHAR2(250)  DEFAULT '',
+					age VARCHAR2(250)  DEFAULT '',
+					sex NUMBER(4) DEFAULT 0,
+					hits NUMBER(20) DEFAULT 0,					
+					site_id VARCHAR2(250) default ''
+				)
+		   ]]> 
+       </sql> 
+       <sql>
+		<!-- 留言分类管理员表 -->
+          <![CDATA[
+				create table cs_guestbook_user(
+					id NUMBER(20) not null PRIMARY KEY,					
+					cat_id NUMBER(20) default 0,
+					user_id NUMBER(20) default 0,
+					site_id VARCHAR2(250) default '',
+					app_id VARCHAR2(250) default ''
+				)
+		   ]]> 
+       </sql>      	   
+    </table>	
+</root>
+ 

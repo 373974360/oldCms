@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <table>
+    	<sql>
+          <![CDATA[
+				create table cs_dz_chaxun_conf(
+					conf_id NUMBER(20) not null PRIMARY KEY,
+					conf_title VARCHAR2(1000) default '',
+					conf_description VARCHAR2(2000) default '',
+					t_list_id NUMBER(20),
+					t_content_id NUMBER(20),
+					site_id VARCHAR2(250) default '',
+					app_id VARCHAR2(250) default ''
+				)
+		   ]]> 
+       </sql>
+	   <sql>
+          <![CDATA[
+				create table cs_dz_chaxun_dic(
+					dic_id NUMBER(4) not null,
+					conf_id NUMBER(20) not null,
+					field_cname VARCHAR2(250) default '',
+					is_selected NUMBER(20) not null,
+					is_query NUMBER(20) not null,
+					is_result NUMBER(20) not null,
+					sort_id NUMBER(20) not null,
+					site_id VARCHAR2(250) default ''
+				)
+		   ]]> 
+       </sql>  
+       <sql>
+          <![CDATA[
+				create table cs_dz_chaxun_item(
+					item_id NUMBER(20) not null,
+					conf_id NUMBER(20) not null,
+					item_key NUMBER(20) not null,
+					item_value VARCHAR2(250) default '',
+					site_id VARCHAR2(250) default ''
+				)
+		   ]]> 
+       </sql>
+        <sql>
+            <![CDATA[
+				create table dz_search_customkeys(
+					id NUMBER(20) not null PRIMARY KEY,
+					title VARCHAR2(1000) default '',
+					site_id VARCHAR2(20) DEFAULT '',
+					countnum bigint(250) DEFAULT '0'
+				)
+		   ]]>
+        </sql>
+
+        <sql>
+            <![CDATA[
+				create table dz_search_keys(
+					  id NUMBER(20) not null PRIMARY KEY,
+					  title VARCHAR2(1000) DEFAULT '',
+					  add_time VARCHAR2(20) DEFAULT '',
+					  site_id VARCHAR2(20) DEFAULT '',
+					  sort_id NUMBER(20) DEFAULT '0'
+				)
+		   ]]>
+        </sql>
+    </table>
+</root>

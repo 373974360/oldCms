@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="searchInfo">
+    <sql id="getLsspzsList_sql_conn">
+        where status != '-1'
+        <if test="keyword != null">
+            and ( scs like '%${keyword}%' or cpmc like '%${keyword}%' or cpbh like '%${keyword}%' or qyxxm like '%${keyword}%' or hzcl like '%${keyword}%' or xkqx like '%${keyword}%')
+        </if>
+        <if test="scs != null">
+            and scs like '%${scs}%'
+        </if>
+        <if test="cpmc != null">
+            and cpmc like '%${cpmc}%'
+        </if>
+        <if test="cpbh != null">
+            and cpbh like '%${cpbh}%'
+        </if>
+        <if test="qyxxm != null">
+            and qyxxm like '%${qyxxm}%'
+        </if>
+        <if test="hzcl != null">
+            and hzcl like '%${hzcl}%'
+        </if>
+        <if test="mj != null">
+            and mj like '%${mj}%'
+        </if>
+        <if test="xkqx != null">
+            and xkqx like '%${xkqx}%'
+        </if>
+        <if test="status != null">
+            and status = #{status}
+        </if>
+    </sql>
+
+    <select id="getAllLsspzs" resultType="com.deya.project.searchInfo.LsspzsBean" >
+        select id,scs,cpmc,cpbh,qyxxm,hzcl,mj,xkqx,bz,addTime,status from dz_lsspzs where status != '-1' order by id desc
+    </select>
+
+    <select id="getLsspzsCount" parameterType="Map" resultType="java.lang.String" >
+        select count(id) from dz_lsspzs
+        <include refid="getLsspzsList_sql_conn"/>
+    </select>
+
+    <select id="getLsspzsList" parameterType="Map" resultType="com.deya.project.searchInfo.LsspzsBean" >
+        select * qyxxmom (
+        select row_.*, rownum rownum_ qyxxmom (
+        select id,scs,cpmc,cpbh,qyxxm,hzcl,mj,xkqx,bz,addTime,status from dz_lsspzs <include refid="getLsspzsList_sql_conn"/>
+        order by ${orderby}
+        <![CDATA[
+		        ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}
+	    	) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+	    ]]>
+    </select>
+
+    <select id="getLsspzsList_mysql" parameterType="Map" resultType="com.deya.project.searchInfo.LsspzsBean" >
+        select id,scs,cpmc,cpbh,qyxxm,hzcl,mj,xkqx,bz,addTime,status from dz_lsspzs <include refid="getLsspzsList_sql_conn"/>
+        order by ${orderby} limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
+    </select>
+
+    <select id="getLsspzsList_mssql" parameterType="Map" resultType="com.deya.project.searchInfo.LsspzsBean" >
+        select top #{page_size} id,scs,cpmc,cpbh,qyxxm,hzcl,mj,xkqx,bz,addTime,status
+        from dz_lsspzs
+        <include refid="getLsspzsList_sql_conn"/>
+        and id not in
+        (select top #{start_num} id
+        from dz_lsspzs
+        <include refid="getLsspzsList_sql_conn"/>
+        order by ${orderby} )
+        order by ${orderby}
+    </select>
+
+    <select id="getLsspzsBean"  parameterType="Map" resultType="com.deya.project.searchInfo.LsspzsBean" >
+        select id,scs,cpmc,cpbh,qyxxm,hzcl,mj,xkqx,bz,addTime,status from dz_lsspzs where id=#{id}
+    </select>
+
+    <insert id="insertLsspzs" parameterType="com.deya.project.searchInfo.LsspzsBean">
+        insert into dz_lsspzs(
+        id,
+        scs,
+        cpmc,
+        cpbh,
+        qyxxm,
+        hzcl,
+        mj,
+        xkqx,
+        bz,
+        addTime,
+        status
+        ) values(
+        #{id},
+        #{scs},
+        #{cpmc},
+        #{cpbh},
+        #{qyxxm},
+        #{hzcl},
+        #{mj},
+        #{xkqx},
+        #{bz},
+        #{addTime},
+        #{status}
+        )
+    </insert>
+
+    <update id="updateLsspzs"  parameterType="com.deya.project.searchInfo.LsspzsBean">
+        update dz_lsspzs set
+        scs=#{scs},
+        cpmc=#{cpmc},
+        cpbh=#{cpbh},
+        qyxxm=#{qyxxm},
+        hzcl=#{hzcl},
+        mj=#{mj},
+        xkqx=#{xkqx},
+        bz=#{bz},
+        addTime=#{addTime},
+        status=#{status}
+        where id=#{id}
+    </update>
+
+    <update id="changeLsspzsStatus" parameterType="Map" >
+        update dz_lsspzs set status = #{status}  where id in (${ids})
+    </update>
+
+    <update id="deleteLsspzs" parameterType="Map" >
+        update dz_lsspzs set status = '-1' where id in (${ids})
+    </update>
+
+</mapper>

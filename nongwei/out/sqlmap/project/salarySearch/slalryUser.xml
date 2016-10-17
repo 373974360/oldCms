@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="salarySearch">
+    <sql id="getSalaryUser_sql_conn">
+        where status != '-1'
+        <if test="name != null">
+            and name = #{name}
+        </if>
+        <if test="department != null">
+            and department = #{department}
+        </if>
+        <if test="identify != null">
+            and identify = #{identify}
+        </if>
+        <if test="status != null">
+            and status = #{status}
+        </if>
+    </sql>
+
+    <insert id="insertSalaryUser" parameterType="com.deya.project.salarySearch.SalaryUserBean">
+        insert into dz_salaryUser(
+        id,
+        name,
+        department,
+        identify,
+        password,
+        addTime,
+        updateTime,
+        status
+        ) values(
+        #{id},
+        #{name},
+        #{department},
+        #{identify},
+        #{password},
+        #{addTime},
+        #{updateTime},
+        #{status}
+        )
+    </insert>
+
+    <update id="updateSalaryUser"  parameterType="com.deya.project.salarySearch.SalaryUserBean">
+        update dz_salaryUser set
+        name=#{name},
+        department=#{department},
+        identify=#{identify},
+        password=#{password},
+        updateTime=#{updateTime},
+        status=#{status}
+        where id=#{id}
+    </update>
+
+    <!-- 根据条件删除Excel表头信息 -->
+    <update id="deleteSalaryUser" parameterType="Map" >
+        update dz_salaryUser set status = '-1' where id in (${ids})
+    </update>
+
+    <select id="getAllSalaryUserList" resultType="com.deya.project.salarySearch.SalaryUserBean" >
+        select id,name,department,identify,password,addTime,updateTime,status from dz_salaryUser where status != '-1' order by id desc
+    </select>
+
+    <select id="getSalaryUserList" parameterType="Map" resultType="com.deya.project.salarySearch.SalaryUserBean" >
+        select id,name,department,identify,password,addTime,updateTime,status from dz_salaryUser <include refid="getSalaryUser_sql_conn"/>
+        order by id desc
+    </select>
+
+    <select id="getSalaryUserList_mysql" parameterType="Map" resultType="com.deya.project.salarySearch.SalaryUserBean" >
+        select id,name,department,identify,password,addTime,updateTime,status from dz_salaryUser <include refid="getSalaryUser_sql_conn"/>
+        order by id desc
+    </select>
+
+    <select id="getSalaryUserList_mssql" parameterType="Map" resultType="com.deya.project.salarySearch.SalaryUserBean" >
+        select id,name,department,identify,password,addTime,updateTime,status
+        from dz_salaryUser
+        <include refid="getSalaryUser_sql_conn"/>
+        order by id desc
+    </select>
+
+    <select id="getSalaryUserBean"  parameterType="Map" resultType="com.deya.project.salarySearch.SalaryUserBean" >
+        select id,name,department,identify,password,addTime,updateTime,status from dz_salaryUser where id=#{id}
+    </select>
+
+</mapper>

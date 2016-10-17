@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<properties>	
+   <!-- 诉求系统中发送短信的实现类,此参数为公用 -->
+   <category name="sqsms">  
+   	<property name="sq_sms_class" value=""/>
+   	<property name="sqlmap_name" value=""/>   	
+   </category>  
+</properties>

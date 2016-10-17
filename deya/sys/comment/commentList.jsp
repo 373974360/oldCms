@@ -1,0 +1,210 @@
+<%@ page contentType="text/html; charset=utf-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>待审页面</title>
+
+
+<jsp:include page="../include/include_tools.jsp"/>
+<script type="text/javascript" src="../js/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="js/commentList.js"></script>
+<script src="../js/My97DatePicker/WdatePicker.js" type="text/javascript" ></script>
+<script type="text/javascript">
+var info_id = "${param.info_id}";
+var ip = "${param.ip}";
+var info_type = "${param.info_type}";
+var site_id = "${param.site_id}";
+var app_id = "${param.app_id}";
+
+$(document).ready(function(){
+	reloadBefore();
+	initButtomStyle();
+	init_FromTabsStyle();
+	init_input();
+	reloadList();
+	reloadAfter();
+});
+
+var beanList = null;
+
+function getOutPutList()
+{
+	var out_m = new Map();
+		out_m.remove("start_day");
+		out_m.remove("end_day");
+		out_m.remove("is_status");
+		out_m.remove("keyword");
+
+	var start_day = $("#start_day").val();
+	if(start_day != "" && start_day != null)
+		out_m.put("start_day", start_day);
+
+	var end_day = $("#end_day").val();
+	if(end_day != "" && end_day != null)
+		out_m.put("end_day", end_day);
+
+	var search_status = $("#search_status").val();
+	if(search_status != "" && search_status != null)
+		out_m.put("is_status", search_status);
+
+	var searchkey = $("#searchkey").val();
+	if(searchkey != "" && searchkey != null)
+		out_m.put("keyword", searchkey);
+	out_m.put("site_id", site_id);
+
+	
+	var m  = CommRPC.getComCount(out_m);
+    if(m != null)
+	{
+    	m = Map.toJSMap(m);
+		beanList =  new List();  
+		for(var i=0;i<m.keySet().length;i++)
+		{
+			if(m.keySet()[i] != "file_path")
+				beanList.add(m.get(m.keySet()[i]));
+		}	
+			
+		window.open(m.get("file_path")); 
+	}
+	
+}
+ 
+//取消了Init_InfoTable的鼠标移动行时样式变化
+function Init_InfoTable_page(tableName)
+{
+	//奇偶行不同颜色
+	$("#"+tableName+".odd_even_list tbody tr:odd").removeClass().addClass("tr_odd");
+    $("#"+tableName+".odd_even_list tbody tr:even").removeClass().addClass("tr_even");
+	
+	$("#"+tableName+" tbody tr").each(function(){
+		var $_tr=$(this);
+		//alterRowColor($_tr);
+		if($(this).find(".inputHeadCol:checkbox").is(':checked'))
+		{
+			$(this).addClass("tr_selected");
+		}		
+		//行单击事件
+		$(this).click( 
+			function (event) {
+				if(!(("INPUT,A,SPAN,IMG,TEXTAREA").indexOf($(event.target)[0].tagName.toUpperCase())>-1))
+				{
+					$(this).find(".inputHeadCol:checkbox").attr("checked",!($(this).find(".inputHeadCol:checkbox").is(':checked')));
+					
+				}
+				
+				if($(this).find(".inputHeadCol:checkbox").is(':checked'))
+				{
+					$(this).addClass("tr_selected");
+				}
+				else
+				{
+					$(this).removeClass("tr_selected");
+				}
+				clickInputCheckBox(tableName);
+			}
+		);
+
+	})
+	//行头checkbox单击事件
+	$("#"+tableName+" tbody .inputHeadCol:checkbox").each(function(){	
+		$(this).click( 
+			function () { 
+				clickInputCheckBox(tableName);
+			}
+		);
+	})
+	
+	//全选checkbox事件
+	$("#"+tableName+" thead :checkbox").click(
+		function () { 
+			if($(this).is(':checked')){
+				//alert($("#"+tableName+" tbody .inputHeadCol").txt());
+				$("#"+tableName+" tbody .inputHeadCol:checkbox").attr("checked",true);
+				$("#"+tableName+" tbody tr").addClass("tr_selected");
+			}
+			else
+			{
+				$("#"+tableName+" tbody .inputHeadCol:checkbox").attr("checked",false);
+				$("#"+tableName+" tbody tr").removeClass("tr_selected");
+			}
+		}				  
+	);
+}
+
+</script>
+<style>
+.comment_opt{}
+.comment_opt li{ height:22px; display:block;}
+</style>
+</head>
+<body>
+
+<div>
+<table class="table_option" border="0" cellpadding="0" cellspacing="0" >
+	<tr>
+		<td align="left" class="fromTabs width230" style="">
+			<input id="btn1" name="btn1" type="button" onclick="multiSelect('passComment(1)')" value="通过" />
+			<input id="btn1" name="btn1" type="button" onclick="multiSelect('passComment(-1)')" value="撤消" />
+			<input id="btn2" name="btn2" type="button" onclick="deleteSelect('batchDeleteComment()')" value="删除"/>
+		<span class="blank3"></span>
+		</td>
+		<td align="right" valign="middle" class="fromTabs">
+			检索
+			<input id="start_day" type="text" style="height:18px" class="Wdate" size="11" value="" 
+				onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd'})" />至
+			<input id="end_day" type="text" style="height:18px" class="Wdate" size="11" value="" 
+				onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'yyyy-MM-dd'})"/>
+			<select id="search_status" class="input_select">
+				<option selected="selected" value="">审核状态</option>
+				<option value="1">审核已通过</option>
+				<option value="0">未审核</option>
+				<option value="0">审核未通过</option>
+			</select>			
+			<input id="searchkey" type="text" class="input_text" value=""  />
+			<input id="btnSearch" type="button" class="btn x2" value="搜索" onclick="searchList()"/>
+			<input id="excel_out" name="btn1" type="button" onclick="getOutPutList()" value="导出" />
+			<span class="blank3"></span>
+		</td>
+	</tr>
+</table>
+</div>
+<span class="blank3"></span>
+
+<div>
+<table id="com_table" class="table_border odd_even_list"  border="0" cellpadding="0" cellspacing="0">
+	<thead>
+		<tr>
+			<td width="25" align="center"><input id="selectAll" name="selectAll" type="checkbox" onclick="" /></td>
+			<td width="585" align="left"></td>
+			<td width="50"></td>
+			<td width="25"></td>
+			<td></td>
+		</tr>
+	</thead>
+	<tbody id="com_tbody">
+	</tbody>
+	<tfoot>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+	</tfoot>
+</table>
+</div>
+<div id="turn"></div>
+<table class="table_option" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td align="left" valign="middle">
+			<input id="btn1" name="btn1" type="button" onclick="multiSelect('passComment(1)')" value="通过" />
+			<input id="btn1" name="btn1" type="button" onclick="multiSelect('passComment(-1)')" value="撤消" />
+			<input id="btn2" name="btn2" type="button" onclick="deleteSelect('batchDeleteComment()')" value="删除" />
+			<input id="excel_out" name="btn1" onclick="getOutPutList()" type="button"  value="导出" />	
+		</td>
+	</tr>
+</table>
+</body>
+</html>
