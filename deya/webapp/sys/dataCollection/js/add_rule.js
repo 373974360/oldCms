@@ -134,6 +134,8 @@ function getCollRuleValue()
 	collRuleBean.source_end= $("#source_end").val();
 	collRuleBean.keywords_start=$("#keywords_start").val();
 	collRuleBean.keywords_end=$("#keywords_end").val();
+    collRuleBean.docNo_start=$("#docNo_start").val();
+    collRuleBean.docNo_end=$("#docNo_end").val();
 	
 	if($("#cat_cname").val()!=""){
 		collRuleBean.cat_name = $("#cat_cname").val();

@@ -11,6 +11,7 @@ public class ArticleInfoBean
     private String art_source = "";
     private String art_author = "";
     private String art_keyWords = "";
+    private String art_docNo = "";
     private int art_hits = 0;
     private String cat_id = "";
     private String model_id = "";
@@ -127,4 +128,11 @@ public class ArticleInfoBean
         this.model_id = model_id;
     }
 
+    public String getArt_docNo() {
+        return art_docNo;
+    }
+
+    public void setArt_docNo(String art_docNo) {
+        this.art_docNo = art_docNo;
+    }
 }

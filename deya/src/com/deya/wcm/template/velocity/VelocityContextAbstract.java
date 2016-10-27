@@ -112,7 +112,6 @@ public abstract class VelocityContextAbstract {
 						vcontext.put(tempA[i].substring(0,index_num), Integer.parseInt(vals));
 					}catch(NumberFormatException n)
 					{
-						n.printStackTrace();
 						vcontext.put(tempA[i].substring(0,index_num), vals);
 					}
 				}

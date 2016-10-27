@@ -22,6 +22,8 @@
 				addTime_end,
 				keywords_start,
 				keywords_end,
+				docNo_start,
+				docNo_end,
 				hits_start,
 				hits_end,
 				author_start,
@@ -58,6 +60,8 @@
 				#{addTime_end},
 				#{keywords_start},
 				#{keywords_end},
+				#{docNo_start},
+				#{docNo_end},
 				#{hits_start},
 				#{hits_end},
 				#{author_start},
@@ -80,8 +84,8 @@
 
 	<sql id="getRuleListForDB_sql_item">
 		id,rule_id,rcat_id,title,infotitle_start,infotitle_end,listUrl_start,listUrl_end,description_start,description_end,
-		content_start,content_end,source_start,source_end,addTime_start,addTime_end,keywords_start,keywords_end,
-		hits_start,hits_end,author_start,author_end,site_id,cate_ids,stop_time,pic_isGet,timeFormatType,
+		content_start,content_end,source_start,source_end,addTime_start,addTime_end,keywords_start,keywords_end,docNo_start,
+		docNo_end,hits_start,hits_end,author_start,author_end,site_id,cate_ids,stop_time,pic_isGet,timeFormatType,
 		pageEncoding,coll_url,contentUrl_start,contentUrl_end,cat_id,cat_name,model_id,coll_interval
 	</sql>
 
@@ -156,6 +160,8 @@
 				addTime_end                  = #{addTime_end},
 				keywords_start               = #{keywords_start},
 				keywords_end                 = #{keywords_end},
+				docNo_start                  = #{docNo_start},
+				docNo_end,                   = #{docNo_end},
 				hits_start                   = #{hits_start},
 				hits_end                     = #{hits_end},
 				author_start                 = #{author_start},
@@ -205,6 +211,7 @@
 				art_source,
 				art_author,
 				art_keyWords,
+				art_docNo,
 				art_hits,
 				cat_id,
 				artis_user,
@@ -220,6 +227,7 @@
 				#{art_source},
 				#{art_author},
 				#{art_keyWords},
+				#{art_docNo},
 				#{art_hits},
 				#{cat_id},
 				#{artis_user},
@@ -231,7 +239,7 @@
 	</insert>
 	
 	<sql id="getCollInfoListForDB_sql_item">
-		id,rule_id,art_title,art_content,art_pubTime,art_source,art_author,art_keyWords,art_hits,cat_id,artis_user,model_id,url
+		id,rule_id,art_title,art_content,art_pubTime,art_source,art_author,art_keyWords,art_docNo,art_hits,cat_id,artis_user,model_id,url
 	</sql>
 	
 	<sql id="getCollInfoListForDB_sql_conn">
@@ -321,7 +329,8 @@
 			   art_content             =#{art_content},
 			   art_source              =#{art_source},
 			   art_author              =#{art_author},
-			   art_keyWords            =#{art_keyWords}
+			   art_keyWords            =#{art_keyWords},
+			   art_docNo               =#{art_docNo}
 		where id=#{id}
 	</update>
 

@@ -8,17 +8,18 @@
 
           <![CDATA[
 				CREATE TABLE cs_artInfo (
-				  id bigint(20) not null PRIMARY KEY,
-				  rule_id int(20) DEFAULT '0',
+				  id bigint not null PRIMARY KEY,
+				  rule_id bigint DEFAULT '0',
 				  art_title varchar(2000) DEFAULT '',
-				  art_content longtext,
+				  art_content ntext,
 				  art_pubTime varchar(100) DEFAULT '',
 				  art_source varchar(2000) DEFAULT '',
 				  art_author varchar(2000) DEFAULT '',
 				  art_keyWords varchar(2000) DEFAULT '',
-				  art_hits int(4) DEFAULT '0',
+				  art_docNo varchar(2000) DEFAULT '',
+				  art_hits int DEFAULT '0',
 				  cat_id varchar(10) DEFAULT '',
-				  artis_user int(4) DEFAULT '0',
+				  artis_user int DEFAULT '0',
 				  coll_time varchar(30) DEFAULT '',
 				  model_id varchar(50) DEFAULT '',
 				  url varchar(200) DEFAULT NULL
@@ -33,9 +34,9 @@
           <![CDATA[
 
 				CREATE TABLE cs_collection (
-				  id bigint(20) not null PRIMARY KEY,
-				  rule_id bigint(20) DEFAULT '0',
-				  rcat_id bigint(20) DEFAULT '0',
+				  id bigint not null PRIMARY KEY,
+				  rule_id bigint DEFAULT '0',
+				  rcat_id bigint DEFAULT '0',
 				  title varchar(250) DEFAULT '',
 				  listUrl_start varchar(250) DEFAULT '',
 				  listUrl_end varchar(250) DEFAULT '',
@@ -51,14 +52,16 @@
 				  addTime_end varchar(250) DEFAULT '',
 				  keywords_start varchar(250) DEFAULT '',
 				  keywords_end varchar(250) DEFAULT '',
+				  docNo_start varchar(250) DEFAULT '',
+				  docNo_end varchar(250) DEFAULT '',
 				  hits_start varchar(250) DEFAULT '',
 				  hits_end varchar(250) DEFAULT '',
 				  author_start varchar(250) DEFAULT '',
 				  author_end varchar(250) DEFAULT '',
 				  site_id varchar(250) DEFAULT '',
 				  cate_ids varchar(250) DEFAULT '',
-				  stop_time bigint(20) DEFAULT '0',
-				  pic_isGet bigint(20) DEFAULT '0',
+				  stop_time bigint DEFAULT '0',
+				  pic_isGet bigint DEFAULT '0',
 				  timeFormatType varchar(250) DEFAULT '',
 				  pageEncoding varchar(250) DEFAULT '',
 				  coll_url varchar(250) DEFAULT '',
@@ -79,26 +82,26 @@
 
 				create table cs_rule_category(
 
-					id bigint(20) not null PRIMARY KEY,
+					id bigint not null PRIMARY KEY,
 
-					rcat_id bigint(20) default 0,
+					rcat_id bigint default 0,
 
-					parent_id bigint(20) default 0,
+					parent_id bigint default 0,
 
 					rcat_name varchar(250) default '',
 
 					rcat_position varchar(250) default '',
 
-					rcat_level int(4) default 0,
+					rcat_level int default 0,
 
 					rcat_memo varchar(1000) default '',
 
-					sort_id int(4) default 0,
+					sort_id int default 0,
 
 					app_id varchar(250) default '',
 
 					site_id varchar(250) default '',
-					receive_recom int(4) default 0
+					receive_recom int default 0
 
 				)
 
@@ -109,15 +112,14 @@
         <sql>
             <![CDATA[
 				create table cs_rule_priv(
-					id        bigint(20) not null,
-					rcat_id   bigint(20) default 0,
-					prv_id    bigint(20) default 0,
-					priv_type int(4) default 0,
+					id        bigint not null,
+					rcat_id   bigint default 0,
+					prv_id    bigint default 0,
+					priv_type int default 0,
 					app_id    varchar(250) default '',
 					site_id   varchar(250) default ''
 				)
 		   ]]>
         </sql>
-
     </table>	
 </root>

@@ -55,6 +55,8 @@ $(document).ready(function(){
 			$("#content_end").val(defaultBean.content_end);
 			$("#author_start").val(defaultBean.author_start);
 			$("#author_end").val(defaultBean.author_end);
+            $("#docNo_start").val(defaultBean.docNo_start);
+            $("#docNo_end").val(defaultBean.docNo_end);
 			$("#addTime_start").val(defaultBean.addTime_start);
 			$("#addTime_end").val(defaultBean.addTime_end);
 			$("#source_start").val(defaultBean.source_start);
@@ -227,6 +229,11 @@ function initHandName()
 					<td><textarea style="width:300px; height:40px; resize:none;overflow-y:visible;" id="author_start" name="author_start" class="input_textarea"></textarea></td>
 					<td><textarea style="width:300px; height:40px; resize:none;overflow-y:visible;" id="author_end" name="author_end" class="input_textarea"></textarea></td>
 				</tr>
+                <tr>
+                    <th style="text-align:left">文&nbsp;&nbsp;&nbsp;号:</th>
+                    <td><textarea style="width:300px; height:40px; resize:none;overflow-y:visible;" id="docNo_start" name="docNo_start" class="input_textarea"></textarea></td>
+                    <td><textarea style="width:300px; height:40px; resize:none;overflow-y:visible;" id="docNo_end" name="docNo_end" class="input_textarea"></textarea></td>
+                </tr>
 				<tr>
 					<th style="text-align:left">时&nbsp;&nbsp;&nbsp;间:</th>
 					<td><textarea style="width:300px; height:40px; resize:none;overflow-y:visible;" id="addTime_start" name="addTime_start" class="input_textarea"></textarea></td>

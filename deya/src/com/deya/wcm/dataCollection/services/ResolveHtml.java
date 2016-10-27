@@ -184,6 +184,19 @@ public class ResolveHtml {
 
             }
 
+            String docNo = "";
+            if ((FormatString.strIsNull(collBean.getDocNo_start())) && (FormatString.strIsNull(collBean.getDocNo_end()))) {
+                docNo = StringUtils.substringBetween(contentHtmlStr, collBean.getDocNo_start().trim(),
+                        collBean.getDocNo_end().trim());
+                if (FormatString.strIsNull(docNo)) {
+                    docNo = FormatString.filterHtmlTag(docNo);
+                    docNo = FormatString.filterStrForKeyword(docNo);
+                    articleBean.setArt_docNo(docNo);
+                    articleBean.setArt_keyWords(docNo.trim());
+                }
+
+            }
+
             String artContent = "";
             if ((FormatString.strIsNull(collBean.getContent_start())) && (FormatString.strIsNull(collBean.getContent_end()))) {
                 artContent = StringUtils.substringBetween(contentHtmlStr, collBean.getContent_start().trim(),
