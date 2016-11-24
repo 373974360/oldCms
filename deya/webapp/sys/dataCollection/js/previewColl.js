@@ -306,7 +306,7 @@ function pubCollDataInfotoCat()
 			tygs_bean.source = artBeanList.get(i).art_source;
 			tygs_bean.info_keywords = artBeanList.get(i).art_keyWords;
             tygs_bean.doc_no = artBeanList.get(i).art_docNo;
-			tygs_bean.app_id = "cms";
+			tygs_bean.app_id = "zwgk";
 			tygs_bean.site_id = site_id;
 			tygs_bean.model_id= "14";
 			tygs_bean.released_dtime = artBeanList.get(i).art_pubTime;

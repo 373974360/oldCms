@@ -1,12 +1,11 @@
 ﻿<%@ page contentType="application/json; charset=utf-8"%>
-<%@ page language="java" import="com.deya.util.Encode,com.deya.wcm.dataCollection.util.FormatString,com.deya.wcm.services.org.user.SessionManager" %>
-<%@page import="org.jdom.Document,org.jdom.Element,org.jdom.JDOMException,org.jdom.Namespace,org.jdom.input.SAXBuilder,org.xml.sax.InputSource"%>
-<%@page import="javax.servlet.ServletException,javax.servlet.http.HttpServlet,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse"%>
-<%@page import="java.io.IOException,java.io.StringReader,java.net.URL,java.io.InputStream,java.io.OutputStream,java.net.HttpURLConnection,java.net.URLDecoder"%>
-<%@page import="java.util.ArrayList,java.util.List"%>
+<%@ page language="java" import="org.jdom.Document,org.jdom.Element,org.jdom.JDOMException" %>
+<%@page import="org.jdom.input.SAXBuilder,org.xml.sax.InputSource,javax.servlet.ServletException,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse,java.io.IOException"%>
+<%@page import="java.io.InputStream,java.io.OutputStream,java.io.StringReader,java.net.HttpURLConnection"%>
+<%@page import="java.net.URL,java.util.ArrayList,java.util.List"%>
 <%!
 	private static String wsdlUrl = "http://172.18.1.252:7005/trader/services/TraderService?wsdl";
-    private static String targetNamespace = "http://service.cs.yinhai.com/";
+    private static String targetNamespace = "http://service.core.trader.yinhai.com/";
     private static String txcode = "";
     private static String percode = "";
     private static String pertype = "";
@@ -46,35 +45,39 @@
             {
                 conn = (HttpURLConnection) wsUrl.openConnection();
 
-                conn.setConnectTimeout(30000);
-                conn.setReadTimeout(30000);
+				if(conn != null){
+					conn.setConnectTimeout(30000);
+					conn.setReadTimeout(30000);
 
-                conn.setDoInput(true);
-                conn.setDoOutput(true);
-                conn.setRequestMethod("POST");
-                conn.setRequestProperty("Content-Type", "text/xml;charset=UTF-8");
+					conn.setDoInput(true);
+					conn.setDoOutput(true);
+					conn.setRequestMethod("POST");
+					conn.setRequestProperty("Content-Type", "text/xml;charset=UTF-8");
 
-                os = conn.getOutputStream();
+					os = conn.getOutputStream();
+					//请求体
+					String soap = getSoapStr();
 
-                //请求体
-                String soap = getSoapStr();
+					//ystem.out.println("********soap******" + soap);
 
-                os.write(soap.getBytes());
+					os.write(soap.getBytes());
 
-                is = conn.getInputStream();
+					is = conn.getInputStream();
 
-                byte[] b = new byte[1024];
-                int len = 0;
-                String s = "";
-                while((len = is.read(b)) != -1){
-                    String ss = new String(b,0,len,"UTF-8");
-                    s += ss;
-                }
-                s = s.replaceAll("&lt;","<").replaceAll("&gt;",">");
-                jsonStr = getPersonResult(s);
-                is.close();
-                os.close();
-                conn.disconnect();
+					byte[] b = new byte[1024];
+					int len = 0;
+					String s = "";
+					while((len = is.read(b)) != -1){
+						String ss = new String(b,0,len,"UTF-8");
+						s += ss;
+					}
+					s = s.replaceAll("&lt;","<").replaceAll("&gt;",">");
+					//System.out.println("**********ssssssss*****************"+s);
+					jsonStr = getPersonResult(s);
+					if(is != null){is.close();}
+					if(os != null){os.close();}
+					if(conn != null){conn.disconnect();}
+				}
             }
             else {
                 jsonStr = "{\"status\":\"0\"}";
@@ -86,15 +89,15 @@
             response.getWriter().close();
 		} catch (Exception e) {
 		    e.printStackTrace();
-		    is.close();
-            os.close();
-            conn.disconnect();
+			if(is != null){is.close();}
+		    if(os != null){os.close();}
+            if(conn != null){conn.disconnect();}
             response.getWriter().flush();
             response.getWriter().close();
 		} finally{
-		    is.close();
-            os.close();
-            conn.disconnect();
+		    if(is != null){is.close();}
+		    if(os != null){os.close();}
+            if(conn != null){conn.disconnect();}
             response.getWriter().flush();
             response.getWriter().close();
 		}
@@ -121,34 +124,35 @@
             if(sessionCode != null) {
                 if (sessionCode.equals(validateCode)) {
                     conn = (HttpURLConnection) wsUrl.openConnection();
-                    conn.setConnectTimeout(30000);
-                    conn.setReadTimeout(30000);
-                    conn.setDoInput(true);
-                    conn.setDoOutput(true);
-                    conn.setRequestMethod("POST");
-                    conn.setRequestProperty("Content-Type", "text/xml;charset=UTF-8");
+					if(conn != null){
+						conn.setConnectTimeout(30000);
+						conn.setReadTimeout(30000);
+						conn.setDoInput(true);
+						conn.setDoOutput(true);
+						conn.setRequestMethod("POST");
+						conn.setRequestProperty("Content-Type", "text/xml;charset=UTF-8");
 
-                    os = conn.getOutputStream();
+						os = conn.getOutputStream();
 
-                    //请求体
-                    String soap = getSoapStr();
-                    System.out.println(soap);
-                    os.write(soap.getBytes());
+						//请求体
+						String soap = getSoapStr();
+						os.write(soap.getBytes());
 
-                    is = conn.getInputStream();
+						is = conn.getInputStream();
 
-                    byte[] b = new byte[1024];
-                    int len = 0;
-                    String s = "";
-                    while ((len = is.read(b)) != -1) {
-                        String ss = new String(b, 0, len, "UTF-8");
-                        s += ss;
-                    }
-                    s = s.replaceAll("&lt;", "<").replaceAll("&gt;", ">");
-                    jsonStr = getHouseResult(s);
-                    is.close();
-                    os.close();
-                    conn.disconnect();
+						byte[] b = new byte[1024];
+						int len = 0;
+						String s = "";
+						while ((len = is.read(b)) != -1) {
+							String ss = new String(b, 0, len, "UTF-8");
+							s += ss;
+						}
+						s = s.replaceAll("&lt;", "<").replaceAll("&gt;", ">");
+						jsonStr = getHouseResult(s);
+						if(is != null){is.close();}
+						if(os != null){os.close();}
+						if(conn != null){conn.disconnect();}
+					}
                 } else {
                     jsonStr = "{\"status\":\"0\"}";
                 }
@@ -161,15 +165,15 @@
             response.getWriter().print(jsonStr);
 		} catch (Exception e) {
 		    e.printStackTrace();
-		    is.close();
-            os.close();
-            conn.disconnect();
+		    if(is != null){is.close();}
+		    if(os != null){os.close();}
+            if(conn != null){conn.disconnect();}
             response.getWriter().flush();
             response.getWriter().close();
 		} finally{
-		    is.close();
-            os.close();
-            conn.disconnect();
+		    if(is != null){is.close();}
+		    if(os != null){os.close();}
+            if(conn != null){conn.disconnect();}
             response.getWriter().flush();
             response.getWriter().close();
 		}
@@ -179,33 +183,36 @@
         StringBuilder _xmlstr = new StringBuilder();
         _xmlstr.append("<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"  xmlns:ser=\"");
         _xmlstr.append(targetNamespace).append("\">");
-        _xmlstr.append("<soapenv:Header/><soapenv:Body><ser:doProtal><reqXml>");
-        _xmlstr.append("<![CDATA[<data> <txcode><![CDATA[").append(txcode).append("]]]]>><![CDATA[</txcode>");
-        _xmlstr.append("<source><![CDATA[04]]]]>><![CDATA[</source>");
-		_xmlstr.append("<forgcode><![CDATA[19ceb94366931d8e2017]]]]>><![CDATA[</forgcode>");
-        _xmlstr.append("<certcode><![CDATA[3b0184454f8cb24147d7]]]]>><![CDATA[</certcode>");
+        _xmlstr.append("<soapenv:Header/><soapenv:Body><ser:doTrader><paramXml>");
+        _xmlstr.append("<![CDATA[<data><txcode>").append(txcode).append("</txcode>");
+        _xmlstr.append("<source>04</source>");
+		_xmlstr.append("<torgcode>5510gjj</torgcode>");
+		_xmlstr.append("<forgcode>19ceb94366931d8e2017</forgcode>");
+        _xmlstr.append("<certcode>3b0184454f8cb24147d7</certcode>");
+        _xmlstr.append("<txchannel>1</txchannel>");
+        _xmlstr.append("<reqident>19274635</reqident>");
         if(percode != null && !"".equals(percode))
         {
-            _xmlstr.append("<percode><![CDATA[").append(percode).append("]]]]>><![CDATA[</percode>");
+            _xmlstr.append("<percode>").append(percode).append("</percode>");
         }
         if(pertype != null && !"".equals(pertype))
         {
-            _xmlstr.append("<pertype><![CDATA[").append(pertype).append("]]]]>><![CDATA[</pertype>");
+            _xmlstr.append("<pertype>").append(pertype).append("</pertype>");
         }
         if(proname != null && !"".equals(proname))
         {
-            _xmlstr.append("<proname><![CDATA[").append(proname).append("]]]]>><![CDATA[</proname>");
-        }
+            _xmlstr.append("<proname>").append(proname).append("</proname>");
+		}
         if(depcode != null && !"".equals(depcode))
         {
-            _xmlstr.append("<depcode><![CDATA[").append(depcode).append("]]]]>><![CDATA[</depcode>");
+            _xmlstr.append("<depcode>").append(depcode).append("</depcode>");
         }
         if(corpname != null && !"".equals(corpname))
         {
-            _xmlstr.append("<corpname><![CDATA[").append(corpname).append("]]]]>><![CDATA[</corpname>");
+            _xmlstr.append("<corpname>").append(corpname).append("</corpname>");
         }
         _xmlstr.append("</data>]]>");
-        _xmlstr.append("</reqXml></ser:doProtal> </soapenv:Body> </soapenv:Envelope>");
+        _xmlstr.append("</paramXml></ser:doTrader> </soapenv:Body> </soapenv:Envelope>");
 
         return _xmlstr.toString();
     }
@@ -214,7 +221,6 @@
     {
         String json_str = "";
         StringReader read = new StringReader(xmlDoc);
-        System.out.println(read.toString());
         //创建新的输入源SAX 解析器将使用 InputSource 对象来确定如何读取 XML 输入
         InputSource source = new InputSource(read);
         //创建一个新的SAXBuilder

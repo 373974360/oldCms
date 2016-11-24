@@ -166,7 +166,7 @@ public class AppealData{
 			}			
 		}		
 		order_by += " ,sq_dtime desc";
-		return SQManager.getBrowserSQList(con,current_page,page_sizes,order_by);		
+		return SQManager.getBrowserSQList(con,current_page,page_sizes,order_by);
 	}
 	
 	//得到流程列表

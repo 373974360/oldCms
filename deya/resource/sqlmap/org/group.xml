@@ -98,8 +98,8 @@
 	<select id="getAllGroupListForDB_mssql" parameterType="Map" resultType="com.deya.wcm.bean.org.group.GroupBean">
 		select top ${page_size} * 
 			  from cs_org_group 
-			  where sq_id not in
-				  (select top ${start_num} sq_id
+			  where group_id not in
+				  (select top ${start_num} group_id
 					 from cs_org_group	<include refid="getAllGroupListForDB_sql_conn"/> 
 					 order by group_id desc  )
 					 <include refid="getAllGroupListForDB_sql_conn"/>

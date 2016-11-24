@@ -61,6 +61,8 @@
 
         ,zIndex : 9999     //编辑器层级的基数,默认是900
 
+        ,catchRemoteImageEnable:false   //远程图片本地化，默认开启
+
         //针对getAllHtml方法，会在对应的head标签中增加该编码设置。
         //,charset:"utf-8"
 

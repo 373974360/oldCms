@@ -88,10 +88,15 @@ $(document).ready(function(){
 function setUserOperate()
 {
 	$("#btn299").hide();
+    $("#btnzpxx").hide();
 	$(":button[id!='btn']").hide();
 	
 	if(opt_ids.indexOf(",299,") > -1)
 		$("#btn299").show();
+
+    if(opt_ids.indexOf(",531,") > -1){
+        $("#btnzpxx").show();
+    }
 
 	$(":button[id!='btn']").each(function(){
 		var o_id = ","+$(this).attr("id").replace("btn","")+",";
@@ -251,8 +256,8 @@ function getSelectInfoBeans()
 			<input id="btn307" name="btn5" type="button" onclick="cancleInfo()" value="撤销" /> 
 			<input id="btn332" name="btn4" type="button" onclick="deleteRecord(table,'info_id','deleteInfoData()');" value="删除" /> 			
 			<input id="btn" name="btn6" type="button" onclick="publicSelectCheckbox(table,'info_id','createStaticContentHtml()');" value="生成静态页" />
-			
-		</td> 
+            <input id="btnzpxx" name="btnzpxx" type="button" onclick="viewJl()" value="查看简历" />
+        </td>
 	</tr> 
 </table> 
 </div>

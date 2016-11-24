@@ -190,7 +190,7 @@ public class CategorySharedManager implements ISyncCatch{
 				if(cs_list.get(i).getShared_type() == shared_type && s_site_id.equals(cs_list.get(i).getS_site_id()))
 				{//如果是全部共享或共享站点等于目标站点，插入
 					if(cs_list.get(i).getRange_type() == 1 || t_site_id.equals(cs_list.get(i).getT_site_id()))
-						cat_set.add(CategoryManager.getCategoryBean(cs_list.get(i).getCat_id()));
+						cat_set.add(CategoryManager.getCategoryBeanCatID(cs_list.get(i).getCat_id(),s_site_id));
 				}
 			}
 			cat_list.addAll(cat_set);			

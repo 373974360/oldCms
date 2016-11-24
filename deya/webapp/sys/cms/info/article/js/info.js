@@ -1166,3 +1166,21 @@ function getAllocateInfo()
 	is_save_first_page = true;
 	top.OpenModalWindow("信息获取","/sys/cms/info/article/getAllocateInfo.jsp?cat_id="+cid+"&site_id="+site_id+"&app_id="+app,800,530);	
 }
+
+
+
+//不通过
+function viewJl(){
+    var selectIDS = "";
+    selectIDS = table.getSelecteCheckboxValue("info_id");
+
+    if(selectIDS == ""){
+        top.msgWargin(WCMLang.Select_empty);
+        return;
+    }
+    if(selectIDS.split(",").length > 1){
+        top.msgWargin(WCMLang.Select_singl);
+        return;
+    }
+    top.addTab(true,"/sys/cms/info/article/jlList.jsp?info_id="+selectIDS+"&topnum="+top.curTabIndex,"查看简历");
+}

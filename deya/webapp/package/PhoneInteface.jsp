@@ -1,8 +1,8 @@
 <%@ page contentType="application/json; charset=utf-8"%>
 <%@ page language="java" import="java.util.*,com.deya.wcm.services.cms.info.*,org.w3c.dom.Node,com.deya.util.xml.*,com.deya.wcm.bean.template.TurnPageBean" %>
-<%@page import="com.deya.wcm.bean.cms.info.*,com.deya.wcm.services.system.formodel.*,com.deya.wcm.services.zwgk.info.*"%>
+<%@page import="com.deya.wcm.bean.cms.info.*,com.deya.wcm.services.system.formodel.*,com.deya.wcm.services.zwgk.info.*,com.deya.wcm.bean.cms.category.CategoryBean"%>
 <%@page import="com.deya.util.*,com.deya.wcm.template.velocity.data.*,com.deya.wcm.bean.appeal.sq.*,com.deya.wcm.services.appeal.sq.*"%>
-<%@page import="org.apache.ibatis.session.SqlSession,java.net.*,java.io.*,com.deya.wcm.bean.system.formodel.*,com.deya.wcm.bean.interview.*"%>
+<%@page import="org.apache.ibatis.session.SqlSession,java.net.*,java.io.*,com.deya.wcm.bean.system.formodel.*,com.deya.wcm.bean.interview.*,com.deya.wcm.services.cms.category.CategoryManager"%><%@ page import="com.deya.wcm.services.model.services.InfoCustomService"%><%@ page import="org.json.JSONObject"%><%@ page import="org.json.JSONException"%>
 <%
 String action_type = request.getParameter("action_type");
 String result = "";
@@ -58,6 +58,14 @@ if("ft_list".equals(action_type))
 {
 	result = getFTInfoList(request);
 }
+if("cat_list".equals(action_type))
+{
+	result = getChildCategoryList(request);
+}
+if("custom_info".equals(action_type))
+{
+	result = getCustomInfoMap(request);
+}
 
 out.println(result);
 
@@ -71,13 +79,13 @@ public String getNewsList(HttpServletRequest request)
 	String cat_id = FormatUtil.formatNullString(request.getParameter("cat_id"));
 	String page = FormatUtil.formatNullString(request.getParameter("page"));
 	String size = FormatUtil.formatNullString(request.getParameter("size"));
-	String params = "site_id=" + site_id + ";cat_id="+cat_id+";size="+size+";cur_page="+page+";orderby=ci.released_dtime desc;";
+	String params = "site_id=" + site_id + ";cat_id="+cat_id+";size="+size+";cur_page="+page+";orderby=ci.weight desc,ci.released_dtime desc;";
 	List<InfoBean> info_list = InfoUtilData.getInfoList(params);
 	if(info_list != null && info_list.size() > 0)
 	{
 		for(InfoBean info : info_list)
 		{
-			json += ",{\"info_id\":\""+info.getInfo_id()+"\",\"title\":\""+info.getTitle()+"\",\"description\":\""+replaceStr(info.getDescription())+"\",\"source\":\""+info.getSource()+"\",\"released_dtime\":\""+info.getReleased_dtime()+"\"}";
+			json += ",{\"info_id\":\""+info.getInfo_id()+"\",\"title\":\""+info.getTitle()+"\",\"model_id\":\""+info.getModel_id()+"\",\"content_url\":\""+info.getContent_url()+"\",\"description\":\""+replaceStr(info.getDescription())+"\",\"source\":\""+info.getSource()+"\",\"released_dtime\":\""+info.getReleased_dtime()+"\"}";
 		}
 		json = json.substring(1);
 	}
@@ -376,6 +384,44 @@ public String getFTInfoList(HttpServletRequest request)
 	}
 	return "["+json+"]";
 }
+
+public String getChildCategoryList(HttpServletRequest request){
+	String json = "";
+	String site_id = FormatUtil.formatNullString(request.getParameter("site_id"));
+	String cat_id = FormatUtil.formatNullString(request.getParameter("cat_id"));
+	List<CategoryBean> info_list = CategoryManager.getChildCategoryList(Integer.parseInt(cat_id),site_id);
+	if(info_list != null && info_list.size() > 0)
+	{
+		for(CategoryBean info : info_list)
+		{
+			json += ",{\"cat_id\":\""+info.getCat_id()+"\",\"cat_cname\":\""+info.getCat_cname()+"\"";
+			json += "}";
+		}
+		json = json.substring(1);
+	}
+	return "["+json+"]";
+}
+
+public String getCustomInfoMap(HttpServletRequest request){
+	String json = "";
+	String model_id = FormatUtil.formatNullString(request.getParameter("model_id"));
+	String info_id = FormatUtil.formatNullString(request.getParameter("info_id"));
+	Map customInfoMap = InfoCustomService.getCustomInfoMap(model_id,info_id);
+	JSONObject jsonObject = new JSONObject();
+    Set set = customInfoMap.keySet();
+    Iterator iterator = set.iterator();
+    while (iterator.hasNext()){
+        Object next = iterator.next();
+        try {
+            jsonObject.put((String) next,customInfoMap.get(next));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+	return jsonObject.toString();
+}
+
+
 
 public static String replaceStr(String str)
 {

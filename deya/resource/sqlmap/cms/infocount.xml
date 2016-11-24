@@ -444,7 +444,7 @@
     <!-- ****************取得所选栏目下的信息更新情况************************* -->
     <select id="getInfoUpdateListByCate" parameterType="Map" resultType="Map">
         select i.lasttime, i.cat_id, g.cat_cname from
-        (select cat_id,max(input_dtime) lasttime from cs_info where 1=1
+        (select cat_id,max(released_dtime) lasttime from cs_info where 1=1
         <if test="info_status != null">
             and info_status = #{info_status}
         </if>

@@ -83,24 +83,24 @@ public class UserLogin {
 	 */
 	public static void setWCmSession(LoginUserBean lub,HttpServletRequest request)
 	{
-        int user_id = lub.getUser_id();
-        if ( null != MySessionListener.sessionMap.get(user_id)) {
-            //第一次登录的用户session销毁
-            //将第一次登录用户的信息从map中移除
-            HttpSession hs = (HttpSession) MySessionListener.sessionMap.get(user_id);
-            MySessionListener.sessionMap.remove(user_id);
-            Enumeration e = hs.getAttributeNames();
-            while (e.hasMoreElements()) {
-                String sessionName = (String) e.nextElement();
-                // 清空session
-                hs.removeAttribute(sessionName);
-            }
-            MySessionContext myc = MySessionContext.getInstance();
-            myc.DelSession(hs);
-        }else{
-            //以用户id为key键存入map中，以判断下一次登录的人
-            MySessionListener.sessionMap.put(user_id, request.getSession());
-        }
+        //int user_id = lub.getUser_id();
+        //if ( null != MySessionListener.sessionMap.get(user_id)) {
+        //    //第一次登录的用户session销毁
+        //    //将第一次登录用户的信息从map中移除
+        //    HttpSession hs = (HttpSession) MySessionListener.sessionMap.get(user_id);
+        //    MySessionListener.sessionMap.remove(user_id);
+        //    Enumeration e = hs.getAttributeNames();
+        //    while (e.hasMoreElements()) {
+        //        String sessionName = (String) e.nextElement();
+        //        // 清空session
+        //        hs.removeAttribute(sessionName);
+        //    }
+        //    //MySessionContext myc = MySessionContext.getInstance();
+        //    //myc.DelSession(hs);
+        //}else{
+        //    //以用户id为key键存入map中，以判断下一次登录的人
+        //    MySessionListener.sessionMap.put(user_id, request.getSession());
+        //}
 
 		SessionManager.set(request, "cicro_wcm_user", lub);
 	}

@@ -214,10 +214,10 @@
 		select top ${page_size} * 
 			  from cs_org_role 			  
 				where role_id not in
-				  (select top ${start_num} sq_id
-					 from cs_org_group	where role_id in (select a.role_id from cs_org_role cor,cs_org_role_app a
+				  (select top ${start_num} role_id
+					 from cs_org_role	where role_id in (select a.role_id from cs_org_role cor,cs_org_role_app a
           				 <include refid="getRoleListByDB_sql_conn"/>
-					 order by group_id desc  )
-			order by group_id desc
+					 order by role_id desc  )
+			order by role_id desc
 	</select>
 </mapper>

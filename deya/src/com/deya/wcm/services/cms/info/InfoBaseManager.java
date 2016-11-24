@@ -1260,8 +1260,8 @@ public class InfoBaseManager {
                     }
                     else
                     {
-                        BeanUtils.setProperty(o, "info_status", 4);
-                        BeanUtils.setProperty(o, "step_id", 100);
+                        BeanUtils.setProperty(o, "info_status", 2);
+                        BeanUtils.setProperty(o, "step_id", 0);
                     }
                     ModelUtil.insert(o, model_ename, null);
                 }

@@ -30,7 +30,7 @@ $(document).ready(function(){
 function formResouSet()
 {
 	if(path != "" && path != "null" && path != null)
-	{	
+	{
 		if(path.indexOf("\\") > -1)
 			$("#file_name").val(path.substring(path.lastIndexOf("\\")+1));	
 		else

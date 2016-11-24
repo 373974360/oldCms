@@ -64,7 +64,14 @@ public class TemplateRPC {
 	
 	public static String getResourcesFileContent(String file_path,String site_id) throws IOException
 	{
-		return FileRmiFactory.getResourcesFileContent(file_path,site_id);
+        if(site_id == null || "".equals(site_id) || "null".equals(site_id)){
+            return null;
+        }
+        String extName = file_path.substring(file_path.lastIndexOf(".")).toLowerCase();
+        if(".js".equals(extName) || ".css".equals(extName)){
+            return FileRmiFactory.getResourcesFileContent(file_path,site_id);
+        }
+        return null;
 	}
 	
 	//TemplateEdit

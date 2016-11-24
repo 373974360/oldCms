@@ -70,9 +70,9 @@ public class SiteRPC
 	 }
 	 
 	 public static SiteAppBean getSiteAppBean(String app_id)
-	{
+	 {
 		 return SiteAppRele.getSiteAppBean(app_id);
-	}
+	 }
 	 
 	 /**
      * 插入站点与应用的关联关系
