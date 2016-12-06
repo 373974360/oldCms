@@ -28,24 +28,28 @@ public class CPUInfo {
         return str;
     }
 
-    private String getLinuxCPUID() {
-        String cpuInfo = "";
-        String[] LinuxCmd = {"/bin/sh", "-c", "dmidecode |grep -A42 \"Processor\"|more"};
-        try {
-            Process proc = Runtime.getRuntime().exec(LinuxCmd);
-            InputStreamReader ir = new InputStreamReader(proc.getInputStream());
-            LineNumberReader input = new LineNumberReader(ir);
-            int i = 0;
-            while (i++ < 6) {
-                cpuInfo = input.readLine();
-            }
-            input.close();
-            ir.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return proceesID(cpuInfo.trim().substring(4, 15));
+  private String getLinuxCPUID()
+  {
+    String cpuInfo = "";
+    String[] LinuxCmd = { "/bin/sh", "-c", "dmidecode |grep -A42 \"Processor\"|more" };
+     String[] SourceCmd = { "source /etc/profile" };
+    try {
+        Process proc2 = Runtime.getRuntime().exec(SourceCmd);
+      Process proc = Runtime.getRuntime().exec(LinuxCmd);
+      InputStreamReader ir = new InputStreamReader(proc.getInputStream());
+      LineNumberReader input = new LineNumberReader(ir);
+      int i = 0;
+      while (i++ < 6) {
+        cpuInfo = input.readLine();
+      }
+      input.close();
+      ir.close();
     }
+    catch (IOException e) {
+      e.printStackTrace();
+    }
+    return proceesID(cpuInfo.trim().substring(4, 15));
+  }
 
     private String proceesID(String cpuID) {
         String[] id = cpuID.split(" ");

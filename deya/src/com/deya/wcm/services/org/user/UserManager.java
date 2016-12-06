@@ -18,6 +18,7 @@ import com.deya.wcm.catchs.ISyncCatch;
 import com.deya.wcm.catchs.SyncCatchHandl;
 import com.deya.wcm.dao.org.OrgDAOFactory;
 import com.deya.wcm.dao.org.user.IUserDAO;
+import com.deya.wcm.dao.org.user.UserDAODBImpl;
 import com.deya.wcm.services.org.dept.DeptManager;
 import com.deya.wcm.services.org.desktop.DesktopManager;
 import com.deya.wcm.services.org.group.GroupManager;
@@ -543,6 +544,26 @@ public class UserManager implements ISyncCatch{
 		     }
 		    }
 		}
+	}
+
+	/**
+	 * 插入同步人员信息
+	 * @param UserBean ub
+	 * @param UserRegisterBean urb 帐号对象
+	 * @param boolean isAddReg　是否添加帐号
+	 * @param SettingLogsBean stl
+	 * @return boolean
+	 * */
+	public static boolean insertSyncUser(UserBean ub,UserRegisterBean urb)
+	{
+		UserDAODBImpl userDAODB = new UserDAODBImpl();
+		if(userDAODB.insertSyncUser(ub,urb))
+		{
+			reloadUser();
+			UserRegisterManager.reloadUserRegister();
+			return true;
+		}else
+			return false;
 	}
 	
 	public static void main(String[] args)

@@ -190,8 +190,8 @@ function initHandName()
 	<tr>
 		<th><span style="color: red">*</span>列表页地址规则:</th>
 		<td colspan="3">
-			<textarea style="width:300px; height:40px; resize:none;overflow-y:visible;" id="listUrl_start" name="listUrl_start" class="input_textarea"></textarea>
-			<textarea style="width:300px; height:40px; resize:none;overflow-y:visible;" id="listUrl_end" name="listUrl_end" class="input_textarea"></textarea>
+			<textarea style="width:300px; height:40px; resize:none;overflow-y:visible;" id="listUrl_start" name="listUrl_start" class="input_textarea" placeholder="请输入包含列表的容器 selector"></textarea>
+			<textarea style="width:300px; height:40px; resize:none;overflow-y:visible;" id="listUrl_end" name="listUrl_end" class="input_textarea" placeholder="请输入容器中列表项的 selector，一般情况输入a"></textarea>
 		</td>
 	</tr>
 	<tr>
@@ -229,7 +229,7 @@ function initHandName()
 					<td><textarea style="width:300px; height:40px; resize:none;overflow-y:visible;" id="author_start" name="author_start" class="input_textarea"></textarea></td>
 					<td><textarea style="width:300px; height:40px; resize:none;overflow-y:visible;" id="author_end" name="author_end" class="input_textarea"></textarea></td>
 				</tr>
-                <tr>
+				<tr>
                     <th style="text-align:left">文&nbsp;&nbsp;&nbsp;号:</th>
                     <td><textarea style="width:300px; height:40px; resize:none;overflow-y:visible;" id="docNo_start" name="docNo_start" class="input_textarea"></textarea></td>
                     <td><textarea style="width:300px; height:40px; resize:none;overflow-y:visible;" id="docNo_end" name="docNo_end" class="input_textarea"></textarea></td>

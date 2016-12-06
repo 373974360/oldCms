@@ -126,7 +126,8 @@ public class CollectionDataRPC {
     }
 
     public static String readCollLogByRuleID(String rule_id, int lineNum) {
-        return CollectionDataManager.readCollLogByRuleID(rule_id, lineNum);
+//        return CollectionDataManager.readCollLogByRuleID(rule_id, lineNum);
+        return "请到数据采集记录查看结果";
     }
 
     public static String getJSONTreeBySiteUser(int user_id,String site_id){

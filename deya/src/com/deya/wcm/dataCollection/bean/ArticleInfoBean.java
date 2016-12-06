@@ -131,7 +131,6 @@ public class ArticleInfoBean
     public String getArt_docNo() {
         return art_docNo;
     }
-
     public void setArt_docNo(String art_docNo) {
         this.art_docNo = art_docNo;
     }

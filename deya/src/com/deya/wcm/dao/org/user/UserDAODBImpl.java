@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.deya.util.CryptoTools;
+import com.deya.util.RandomStrg;
 import com.deya.wcm.bean.logs.SettingLogsBean;
 import com.deya.wcm.bean.org.user.UserBean;
 import com.deya.wcm.bean.org.user.UserLevelBean;
@@ -449,4 +450,21 @@ public class UserDAODBImpl implements IUserDAO{
 			return false; 
 	}
 	/* **********************帐号管理　结束******************************** */
+
+	public boolean insertSyncUser(UserBean ub, UserRegisterBean urb) {
+		if(DBManager.insert("insert_user", ub))
+		{
+			PublicTableDAO.insertSettingLogs("添加","用户",ub.getUser_id()+"",null);
+			int id = PublicTableDAO.getIDByTableName(PublicTableDAO.USERREGISTER_TABLE_NAME);
+			urb.setRegister_id(id);
+			CryptoTools ct = new CryptoTools();
+			urb.setPassword(ct.encode(RandomStrg.getRandomStr(null,"10")));
+			if(DBManager.insert("insert_register", urb))
+			{
+				PublicTableDAO.insertSettingLogs("添加","帐号",id+"",null);
+			}
+			return true;
+		}else
+			return false;
+	}
 }

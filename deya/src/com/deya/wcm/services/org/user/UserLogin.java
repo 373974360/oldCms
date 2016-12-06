@@ -13,6 +13,7 @@ import com.deya.wcm.bean.org.operate.MenuBean;
 import com.deya.wcm.bean.org.operate.OperateBean;
 import com.deya.wcm.bean.org.role.RoleBean;
 import com.deya.wcm.bean.org.user.LoginUserBean;
+import com.deya.wcm.bean.org.user.UserBean;
 import com.deya.wcm.bean.zwgk.node.GKNodeBean;
 import com.deya.wcm.bean.zwgk.node.GKNodeCategory;
 import com.deya.wcm.jsonlistener.MySessionContext;
@@ -744,6 +745,29 @@ public class UserLogin {
 	public static String getMyPlatformTreeStr()
 	{
 		return "["+menuListToStrHandl(MenuManager.getMyPlatform())+"]";
+	}
+
+	/**
+	 * 用于单点登录用户验证，只要匹配数据库中的用户名即可
+	 *
+	 * @param String user_name
+	 * @param String pass_word
+	 * @param HttpServletRequest request
+	 * @return boolean
+	 */
+	public static boolean checkUserLogin(String user_name,HttpServletRequest request)
+	{
+		UserBean userBean = UserRegisterManager.getUserBeanByUname(user_name);
+		if(userBean != null)
+		{
+			LoginUserBean lub = UserRegisterManager.getLoginUserBeanByUname(user_name);
+			lub.setIp(request.getRemoteAddr());
+			setWCmSession(lub,request);
+			LogManager.insertLoginLog(lub);
+			return true;
+		}else{
+			return false;
+		}
 	}
 	
 	public static void main(String args[])

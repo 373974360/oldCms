@@ -21,8 +21,6 @@ public class CollRuleBean
     private String source_end = "";
     private String addTime_start = "";
     private String addTime_end = "";
-    private String docNo_start = "";
-    private String docNo_end = "";
     private String keywords_start = "";
     private String keywords_end = "";
     private String hits_start = "";
@@ -44,6 +42,28 @@ public class CollRuleBean
     private String cat_name = "";
     private String model_id = "";
     private String rcat_id = "";
+
+    private String docNo_start;
+    private String docNo_end;
+
+
+    public void setDocNo_end(String docNo_end) {
+        this.docNo_end = docNo_end;
+    }
+
+    public String getDocNo_end() {
+        return docNo_end;
+    }
+
+    public void setDocNo_start(String docNo_start) {
+        this.docNo_start = docNo_start;
+    }
+
+    public String getDocNo_start() {
+        return docNo_start;
+    }
+
+
 
     public int getId() {
         return this.id;
@@ -255,21 +275,5 @@ public class CollRuleBean
     }
     public void setRcat_id(String rcat_id) {
         this.rcat_id = rcat_id;
-    }
-
-    public String getDocNo_start() {
-        return docNo_start;
-    }
-
-    public void setDocNo_start(String docNo_start) {
-        this.docNo_start = docNo_start;
-    }
-
-    public String getDocNo_end() {
-        return docNo_end;
-    }
-
-    public void setDocNo_end(String docNo_end) {
-        this.docNo_end = docNo_end;
     }
 }

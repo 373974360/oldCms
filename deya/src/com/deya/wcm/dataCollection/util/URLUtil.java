@@ -1,16 +1,21 @@
 package com.deya.wcm.dataCollection.util;
 
-import java.io.PrintStream;
-
 public class URLUtil {
-    public static String formatLink(String aLink, String domain) {
-        if (aLink.startsWith("http://"))
+    public static String formatLink(String parentUrl, String aLink, String domain) {
+        if (aLink.startsWith("http://")) {
             return aLink;
-        if (aLink.startsWith("./")) {
-            return "";
+        } else {
+
+            String link = "";
+            if (aLink.startsWith("/")) {
+                link = domain + aLink;
+            } else {
+                link = parentUrl.substring(0, parentUrl.lastIndexOf("/")) + "/" + aLink;
+
+            }
+//            String link = domain + "/" + aLink;
+            return link;
         }
-        String link = domain +"/" + aLink;
-        return link;
     }
 
     public static String getDomainUrl(String url) {

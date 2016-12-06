@@ -183,8 +183,8 @@ function checkCollUrl()
 {
 	getCollTabValue();
 	var collURL = encodeURIComponent(encodeURIComponent(collRuleBean.coll_url));
-	var listUrlstart= $("#listUrl_start").val();
-	var listUrlend= $("#listUrl_end").val();
+	var listUrlstart= encodeURIComponent($("#listUrl_start").val());
+	var listUrlend= encodeURIComponent($("#listUrl_end").val());
 	var encode = $("#pageEncoding").val();
 
 	if(collURL == ""){

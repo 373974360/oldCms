@@ -1,6 +1,8 @@
 package com.deya.wcm.dataCollection.services;
 
 import com.deya.wcm.dataCollection.util.FormatString;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -10,6 +12,8 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 
 public class CollectionThread extends Thread {
+
+    Logger logger = LoggerFactory.getLogger(this.getClass());
     private String id = "";
 
     public CollectionThread(String id) {
@@ -18,23 +22,18 @@ public class CollectionThread extends Thread {
 
 
     public void run() {
-        //System.out.println("CollDateThreadStart.........start....");
+        logger.info("CollDateThreadStart.........start....");
         CollectionDataManager.CollectionData(this.id);
-
-        String filePath = FormatString.getManagerPath();
-        File file = new File(filePath + File.separator + this.id + ".txt");
+//        String filePath = FormatString.getManagerPath();
+//        File file = new File(filePath + File.separator + this.id + ".txt");
         try {
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true)));
-            bw.write("collOver");
-            bw.flush();
-            bw.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+//            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true)));
+//            bw.write("collOver");
+//            bw.flush();
+//            bw.close();
         } finally {
             CaijiBean.removeMapString(this.id);
-            //System.out.println("-----------coll  over-------------" + CaijiBean.map.toString());
+            logger.info("-----------coll  over-------------" + CaijiBean.map.toString());
         }
     }
 }

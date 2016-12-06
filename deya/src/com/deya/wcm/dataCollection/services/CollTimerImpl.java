@@ -17,7 +17,7 @@ public class CollTimerImpl
     public void timingTask() {
         List<CollRuleBean> col_list = CollectionDataDAO.getAllCollRuleBeanList();
         if ((col_list != null) && (col_list.size() > 0)) {
-            //System.out.println("------------Timer caollDate start....  ---------");
+            System.out.println("------------Timer caollDate start....  ---------");
             for (CollRuleBean collBean : col_list) {
                 String collinterval = collBean.getColl_interval();
                 if ((FormatString.strIsNull(collinterval)) &&

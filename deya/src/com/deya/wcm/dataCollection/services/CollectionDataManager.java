@@ -67,7 +67,7 @@ public class CollectionDataManager {
         return CollectionDataDAO.updateRuleInfo(collBean);
     }
 
-    public static String getCollUrlJsonStr(String urlStr, String beginTag, String endTag, String Encode) {
+    public static String getCollUrlJsonStr(String urlStr, String containerSelector, String linkSelector, String Encode) {
         String domain = URLUtil.getDomainUrl(urlStr);
         LinkedHashSet set = initPageUrl(urlStr);
         String json_str = "[";
@@ -79,7 +79,7 @@ public class CollectionDataManager {
             set.remove(url);
 
             if (FormatString.strIsNull(strHtml)) {
-                LinkedHashSet SetURL = ResolveHtml.ResolveHtmlForLink(strHtml, domain, beginTag, endTag);
+                LinkedHashSet SetURL = ResolveHtml.ResolveHtmlForLink(strHtml, domain, containerSelector, linkSelector, url);
                 if ((SetURL.size() > 0) && (SetURL != null)) {
                     String child_str = getchildUrlStr(SetURL);
                     if ((child_str != null) && (!"".equals(child_str))) {
@@ -118,15 +118,15 @@ public class CollectionDataManager {
     }
 
     public static void CollectionData(String rule_id) {
-        String filePath = FormatString.getManagerPath();
-        File file = new File(filePath + File.separator + rule_id + ".txt");
-        if (file.exists())
-            file.delete();
-        try {
-            file.createNewFile();
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
+//        String filePath = FormatString.getManagerPath();
+//        File file = new File(filePath + File.separator + rule_id + ".txt");
+//        if (file.exists())
+//            file.delete();
+//        try {
+//            file.createNewFile();
+//        } catch (IOException e1) {
+//            e1.printStackTrace();
+//        }
         CollRuleBean collBean = getCollRuleBeanByID(rule_id);
 
         LinkedHashSet urlSet = initCollRule(collBean);
@@ -135,12 +135,13 @@ public class CollectionDataManager {
 
         while (urlSet.size() > 0) {
             String url = (String) urlSet.iterator().next();
-            try {
-                BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true)));
-                bw.write("开始采集链接地址为: " + url + " 的列表");
-                bw.newLine();
-                bw.flush();
-                bw.close();
+            //                BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true)));
+//                bw.write("开始采集链接地址为: " + url + " 的列表");
+//                bw.newLine();
+//                bw.flush();
+//                bw.close();
+
+            System.out.println("开始采集链接地址为: " + url + " 的列表");
 
                 String listPagehStr = DownHtmlUtil.downLoadHtml(url, collBean.getPageEncoding());
                 urlSet.remove(url);
@@ -148,17 +149,12 @@ public class CollectionDataManager {
                 if (FormatString.strIsNull(listPagehStr))
                     try {
                         LinkedHashSet waitgetArtInfoSet =
-                                ResolveHtml.ResolveHtmlForLink(listPagehStr, domain, collBean.getListUrl_start(), collBean.getListUrl_end());
+                                ResolveHtml.ResolveHtmlForLink(listPagehStr, domain,collBean.getListUrl_start(), collBean.getListUrl_end(),url);
 
                         ResolveHtml.getArticleInfoHtml(collBean, waitgetArtInfoSet);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-            } catch (FileNotFoundException e1) {
-                e1.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
     }
 
@@ -324,7 +320,5 @@ public class CollectionDataManager {
 
 
     public static void main(String[] args) {
-
-        String strHtml = DownHtmlUtil.downLoadHtml("http://www.jbepb.gov.cn/show.asp?id=449", "utf-8");
     }
 }

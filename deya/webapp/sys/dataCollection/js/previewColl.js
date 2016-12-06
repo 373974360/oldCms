@@ -256,7 +256,6 @@ function pubCollDataInfotoCat()
 		artBeanList = List.toJSList(artBeanList);
 	
 	var infoNextId = 0;
-
 	for(var i=0;i<artBeanList.size();i++)
 	{
 		if(infoIdGoble == 0){

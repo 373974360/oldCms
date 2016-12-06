@@ -58,7 +58,7 @@ function showList(){
 	mp.put("start_day",start_day + " 00:00:00");
 	mp.put("end_day",end_day + " 23:59:59");
 	
-	beanList = CmsCountRPC.getInputCountList(mp);
+	beanList = CmsCountRPC.getAuthorCountList(mp);
 	beanList = List.toJSList(beanList);
 	
 	createTable();

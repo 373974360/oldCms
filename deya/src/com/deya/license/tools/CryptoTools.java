@@ -104,10 +104,10 @@ public class CryptoTools {
     }
 
     public static void main(String[] args) {
-        //CryptoTools ct = new CryptoTools();
-        //System.out.println(ct.license("=#=rU65f7rwo/hbgq1f9ppf0sHj62sF65b2URQ0ee8Xth2FyHm8+SqaOL/Ca87j1EbBG8TqgkNs5eo="));
+        CryptoTools ct = new CryptoTools();
+        System.out.println(ct.license("=#=rU65f7rwo/hbgq1f9ppf0sHj62sF65b2URQ0ee8Xth2FyHm8+SqaOL/Ca87j1EbBG8TqgkNs5eo="));
 
-        //System.out.println(ct.decode("=#=KDDG+LKyz/A="));
+        //System.out.println(ct.decode("=#=ODzJPka+2bU="));
 
 
         /*System.out.println(ct.decode("=#=NVgDPsTZx1u8mkVkWu4qP7LYnMswb2Zvy77R8udeaag8GrsDF2Wi1dMLGOZ3pbg/zm6ilcMfB+3j\n" +
