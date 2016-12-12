@@ -166,6 +166,16 @@ public interface IDeptDAO {
      * */
 	public boolean deleteDeptLevel(String ids,SettingLogsBean stl);
 
+
+    /**
+     * 同步银海部门信息
+     *
+     * @param List<DeptBean>
+     *            deptList
+     * @return boolean
+     */
+    public boolean inserSynctDept(List<DeptBean> deptList);
+
 		
 	/* **********************部门级别管理　结束******************************** */
 	

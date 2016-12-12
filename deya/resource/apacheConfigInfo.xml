@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <properties>
-	<category name="apache_config">
-		<property name="value" value="
+    <category name="apache_config">
+        <property name="value" value="
 &lt;VirtualHost *&gt;LINE_SEPARATOR
         ServerName $domain$ LINE_SEPARATOR
         DocumentRoot $site_path$ LINE_SEPARATOR LINE_SEPARATOR
@@ -9,17 +9,17 @@
         Alias /cms.files/ '${rootPath}/cms.files//' LINE_SEPARATOR
         JkMountFile   $apache_path$/conf/uriworkermap.properties LINE_SEPARATOR
 &lt;/VirtualHost&gt; LINE_SEPARATOR LINE_SEPARATOR"/>
-	</category>
-	<category name="apache_config_stop">
-		<property name="value" value="
+    </category>
+    <category name="apache_config_stop">
+        <property name="value" value="
 &lt;VirtualHost *&gt;LINE_SEPARATOR
         ServerName $domain$ LINE_SEPARATOR
         DocumentRoot ${rootPath}/vhosts/common/errorpage LINE_SEPARATOR LINE_SEPARATOR        
 &lt;/VirtualHost&gt; LINE_SEPARATOR LINE_SEPARATOR"/>
-	</category>
+    </category>
 
-	<category name="nginx_config">
-		<property name="value" value="	server {  LINE_SEPARATOR
+    <category name="nginx_config">
+        <property name="value" value="	server {  LINE_SEPARATOR
 			listen       80;  LINE_SEPARATOR
 			server_name  $domain$;  LINE_SEPARATOR
 			#add_header Set-Cookie 'HttpOnly=true';   LINE_SEPARATOR
@@ -58,10 +58,10 @@
 			}  LINE_SEPARATOR
 	}#end  LINE_SEPARATOR LINE_SEPARATOR
 #replace_content_flag# LINE_SEPARATOR "
-				/>
-	</category>
-	<category name="nginx_config_stop">
-		<property name="value" value="	server {  LINE_SEPARATOR
+        />
+    </category>
+    <category name="nginx_config_stop">
+        <property name="value" value="	server {  LINE_SEPARATOR
 			listen       80;  LINE_SEPARATOR
 			server_name  $domain$;  LINE_SEPARATOR
 			#$site_id$   LINE_SEPARATOR
@@ -76,7 +76,7 @@
 			}  LINE_SEPARATOR
 	}#end  LINE_SEPARATOR LINE_SEPARATOR
 #replace_content_flag# LINE_SEPARATOR LINE_SEPARATOR "
-				/>
-	</category>
+        />
+    </category>
 
 </properties>

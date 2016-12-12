@@ -451,5 +451,18 @@ public class UserDAORMIImpl implements IUserDAO{
 			return false;
 		}
 	}
+
 	/* **********************帐号管理　结束******************************** */
+
+
+    @Override
+    public boolean insertSyncUser(List<UserBean> ubList, List<UserRegisterBean> urbList) {
+        try{
+            return GetOrgRmi.getorgRmi().insertSyncUser(ubList,urbList);
+        }catch(RemoteException re)
+        {
+            re.printStackTrace();
+            return false;
+        }
+    }
 }

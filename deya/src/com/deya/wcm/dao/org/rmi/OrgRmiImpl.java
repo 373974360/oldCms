@@ -612,7 +612,18 @@ public class OrgRmiImpl extends UnicastRemoteObject implements IOrgRmi{
 		// TODO Auto-generated method stub
 		return Long.valueOf((getUserRegisterBeanByUname(username)).getUser_id());
 	}
-	
-	// 外部调用 使用  ----- 结束
+
+    // 外部调用 使用  ----- 结束
+
+
+    @Override
+    public boolean inserSynctDept(List<DeptBean> deptList) throws RemoteException {
+        return OrgDAOFactory.getDeptDao().inserSynctDept(deptList);
+    }
+
+    @Override
+    public boolean insertSyncUser(List<UserBean> ubList, List<UserRegisterBean> urbList) throws RemoteException {
+        return OrgDAOFactory.getUserDao().insertSyncUser(ubList,urbList);
+    }
 	
 }

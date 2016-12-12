@@ -554,10 +554,9 @@ public class UserManager implements ISyncCatch{
 	 * @param SettingLogsBean stl
 	 * @return boolean
 	 * */
-	public static boolean insertSyncUser(UserBean ub,UserRegisterBean urb)
+	public static boolean insertSyncUser(List<UserBean> ubList, List<UserRegisterBean> urbList)
 	{
-		UserDAODBImpl userDAODB = new UserDAODBImpl();
-		if(userDAODB.insertSyncUser(ub,urb))
+		if(userDao.insertSyncUser(ubList,urbList))
 		{
 			reloadUser();
 			UserRegisterManager.reloadUserRegister();

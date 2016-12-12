@@ -129,7 +129,7 @@ public class UserLogin {
 	public static LoginUserBean getUserBySession(HttpServletRequest request)
 	{
 		return (LoginUserBean)SessionManager.get(request, "cicro_wcm_user");
-	}	
+	}
 	
 	/**
 	 * 根据用户ID得到他能管理的所有菜单对象列表

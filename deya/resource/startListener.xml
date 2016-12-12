@@ -1,25 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <properties>
-   <category name="startloadclass">    	   
-     <property name="1" value="com.deya.wcm.services.init.InitSystem"/>
-     <property name="2" value="com.deya.wcm.jsonlistener.JSON_RPC_Listener"/>
-	 <property name="3" value="com.deya.wcm.timer.StartUpTask"/>
-   </category>
-   <category name="timerlistenerclass">    	   
-     <property name="1" value="com.deya.wcm.services.page.PageTimerImpl"/>
-     <property name="2" value="com.deya.wcm.services.system.ware.WareTimerImpl"/>
-     <property name="3" value="com.deya.wcm.services.cms.info.InfoTimerImpl"/>
-   </category>
-    <category name="timerlistener_day_class">
-        <property name="4" value="com.deya.wcm.dataCollection.services.CollTimerImpl"/>
+    <category name="startloadclass">
+        <property name="1" value="com.deya.wcm.services.init.InitSystem"/>
+        <property name="2" value="com.deya.wcm.jsonlistener.JSON_RPC_Listener"/>
+        <property name="3" value="com.deya.wcm.timer.StartUpTask"/>
     </category>
-   <category name="clonesiteclass">    	   
-     <property name="1" value="com.deya.wcm.services.system.ware.WareCloneImpl"/>
-     <property name="2" value="com.deya.wcm.services.system.template.TemplateCloneImpl"/>
-     <property name="3" value="com.deya.wcm.services.cms.category.CategoryCloneImpl"/>
-     <property name="4" value="com.deya.wcm.services.page.PageCloneImpl"/>
-     <property name="5" value="com.deya.wcm.services.org.role.RoleCloneImpl"/>
-     <property name="6" value="com.deya.wcm.services.system.config.ConfigCloneImpl"/>
-     <property name="7" value="com.deya.wcm.services.control.site.CloneResourceFile"/>
-   </category>
+    <category name="timerlistenerclass">
+        <property name="com.deya.wcm.timer.PageTimerImpl" value="0 0/1 * * * ?"/>
+        <property name="com.deya.wcm.timer.WareTimerImpl" value="0 0/1 * * * ?"/>
+        <property name="com.deya.wcm.timer.InfoTimerImpl" value="0 0/1 * * * ?"/>
+        <property name="com.sso.SyncOrgTimerImpl" value="0 0 0/1 * * ?"/>
+        <property name="com.deya.wcm.timer.InfoTimerForDayImpl" value="0 0 0 * * ?"/>
+        <property name="com.deya.wcm.timer.SQTimerImpl" value="0 0 0 * * ?"/>
+        <property name="com.deya.wcm.timer.CollTimerImpl" value="0 0 0 * * ?"/>
+    </category>
+    <category name="clonesiteclass">
+        <property name="1" value="com.deya.wcm.services.system.ware.WareCloneImpl"/>
+        <property name="2" value="com.deya.wcm.services.system.template.TemplateCloneImpl"/>
+        <property name="3" value="com.deya.wcm.services.cms.category.CategoryCloneImpl"/>
+        <property name="4" value="com.deya.wcm.services.page.PageCloneImpl"/>
+        <property name="5" value="com.deya.wcm.services.org.role.RoleCloneImpl"/>
+        <property name="6" value="com.deya.wcm.services.system.config.ConfigCloneImpl"/>
+        <property name="7" value="com.deya.wcm.services.control.site.CloneResourceFile"/>
+    </category>
 </properties>

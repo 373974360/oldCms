@@ -1,35 +1,21 @@
-package com.sso;
-
-import com.deya.wcm.bean.org.dept.DeptBean;
-import com.deya.wcm.bean.org.user.UserBean;
-import com.deya.wcm.bean.org.user.UserRegisterBean;
-import com.deya.wcm.services.org.dept.DeptManager;
-import com.deya.wcm.services.org.user.UserManager;
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.DocumentHelper;
-import org.dom4j.Element;
-
-import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Iterator;
-
-/**
- * @Description:
- * @User: program
- * @Date: 2016/11/29
- */
-public class SyncOrgDept {
-
+<%@ page contentType="application/json; charset=utf-8"%>
+<%@ page language="java" import="org.apache.commons.httpclient.HttpClient,org.apache.commons.httpclient.methods.PostMethod,org.apache.commons.httpclient.params.HttpMethodParams" %><%@ page import="org.apache.commons.httpclient.methods.GetMethod"%><%@ page import="net.sf.json.JSONObject"%><%@ page import="org.dom4j.Document"%><%@ page import="org.dom4j.DocumentHelper"%><%@ page import="org.dom4j.Element"%><%@ page import="java.util.Iterator"%><%@ page import="com.deya.wcm.bean.org.dept.DeptBean"%><%@ page import="com.deya.wcm.services.org.dept.DeptManager"%><%@ page import="com.deya.wcm.bean.org.user.UserBean"%><%@ page import="com.deya.wcm.bean.org.user.UserRegisterBean"%><%@ page import="com.deya.wcm.services.org.user.UserManager"%><%@ page import="org.dom4j.DocumentException"%><%@ page import="java.net.URL"%><%@ page import="java.net.HttpURLConnection"%><%@ page import="java.net.MalformedURLException"%><%@ page import="java.io.*"%><%@ page import="java.util.List"%><%@ page import="java.util.ArrayList"%><%@ page import="com.deya.util.CryptoTools"%><%@ page import="com.deya.util.RandomStrg"%>
+<%!
     private static String wsdlUrl = "http://118.112.188.111:6537/Portal/services/syncOrgOrUserService?wsdl";
     private static String targetNamespace = "http://service.deliverdata2oa.oa.subSystem.yinhai.com/";
     private static String methodName = "doSync";
     private static String paramName = "paramXml";
     private static String syncType = "dept";
 
-    public static String getparamValue() {
+%>
+
+<%
+    syncOrgDeptOrUser("dept");
+    //syncOrgDeptOrUser("user");
+%>
+
+<%!
+    public String getparamValue() {
         StringBuilder _xmlstr = new StringBuilder();
         _xmlstr.append("<![CDATA[<data><reqident>").append("TD96358447").append("</reqident>");
         if(syncType.equals("dept")){
@@ -55,11 +41,16 @@ public class SyncOrgDept {
         return _xmlstr.toString();
     }
 
+%>
+
+
+<%!
     /**
      * 用http方式调用webservices
      */
-    public static void syncOrgDeptOrUser(String type) {
+    public void syncOrgDeptOrUser(String type) {
         syncType = type;
+        System.out.println("***********************同步" + syncType + "开始**************************");
         try {
             //服务的地址
             URL wsUrl = new URL(wsdlUrl);
@@ -122,6 +113,7 @@ public class SyncOrgDept {
                     conn.disconnect();
                 }
             }
+            System.out.println("***********************同步" + syncType + "结束**************************");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -129,7 +121,10 @@ public class SyncOrgDept {
         }
     }
 
-    public static String getSoapStr() {
+%>
+
+<%!
+    public String getSoapStr() {
         StringBuilder _xmlstr = new StringBuilder();
         _xmlstr.append("<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"  xmlns:ser=\"");
         _xmlstr.append(targetNamespace).append("\">");
@@ -142,14 +137,17 @@ public class SyncOrgDept {
         _xmlstr.append("</soapenv:Body> </soapenv:Envelope>");
         return _xmlstr.toString();
     }
+%>
 
-    public static void getResult(String s) {
+<%!
+    public void getResult(String s) {
         try {
             s = s.substring(s.indexOf("<?xml"), s.indexOf("</return>"));
             Document xmlDoc = DocumentHelper.parseText(s);
             Element rootElement = xmlDoc.getRootElement();
             if(syncType.equals("dept")){
                 Iterator departs = rootElement.elementIterator("depart");
+                List<DeptBean> deptBeanList = new ArrayList<>();
                 if (departs != null && departs.hasNext()) {
                     while (departs.hasNext()) {
                         Element depart = (Element) departs.next();
@@ -183,11 +181,17 @@ public class SyncOrgDept {
                         if(orgidpath != null && !"".equals(orgidpath) && !"null".equals(orgidpath)){
                             deptBean.setArea_code(orgidpath);
                         }
-                        DeptManager.insertDept(deptBean, null);
+                        if(deptBean.getDept_id() == 1){
+                            deptBean.setParent_id(0);
+                        }
+                        deptBeanList.add(deptBean);
                     }
+                    DeptManager.inserSynctDept(deptBeanList);
                 }
             }else{
                 Iterator users = rootElement.elementIterator("user");
+                List<UserBean> userBeanList = new ArrayList<UserBean>();
+                List<UserRegisterBean> userRegisterBeanList = new ArrayList<UserRegisterBean>();
                 if (users != null && users.hasNext()) {
                     while (users.hasNext()) {
                         Element user = (Element) users.next();
@@ -207,6 +211,7 @@ public class SyncOrgDept {
                         if(userid != null && !"".equals(userid) && !"null".equals(userid)){
                             userBean.setUser_id(Integer.parseInt(userid));
                             userRegisterBean.setUser_id(Integer.parseInt(userid));
+                            userRegisterBean.setRegister_id(Integer.parseInt(userid));
                         }
                         if(name != null && !"".equals(name) && !"null".equals(name)){
                             userBean.setUser_realname(name);
@@ -230,13 +235,17 @@ public class SyncOrgDept {
                         if(loginid != null && !"".equals(loginid) && !"null".equals(loginid)){
                             userRegisterBean.setUsername(loginid);
                         }
-                        UserManager.insertSyncUser(userBean,userRegisterBean);
+                        CryptoTools ct = new CryptoTools();
+                        userRegisterBean.setPassword(ct.encode(RandomStrg.getRandomStr(null,"10")));
+                        userRegisterBean.setRegister_status(0);
+                        userBeanList.add(userBean);
+                        userRegisterBeanList.add(userRegisterBean);
                     }
+                    UserManager.insertSyncUser(userBeanList,userRegisterBeanList);
                 }
             }
         } catch (DocumentException e) {
             e.printStackTrace();
         }
     }
-
-}
+%>

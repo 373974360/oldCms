@@ -8,7 +8,7 @@ public class UserBean implements java.io.Serializable {
 	private int user_id = 0;
 	private int dept_id;//部门ID
 	private String dept_name = "";
-	private String userlevel_value = "";//级别数值	
+	private int userlevel_value = 0;//级别数值
 	private String user_realname = "";//用户真实姓名
 	private String user_aliasname = "";//别名/曾用名
 	private String user_photo = "";//照片
@@ -255,10 +255,10 @@ public class UserBean implements java.io.Serializable {
 	public void setUser_status(int user_status) {
 		this.user_status = user_status;
 	}
-	public String getUserlevel_value() {
+	public int getUserlevel_value() {
 		return userlevel_value;
 	}
-	public void setUserlevel_value(String userlevelValue) {
+	public void setUserlevel_value(int userlevelValue) {
 		userlevel_value = userlevelValue;
 	}	
 }

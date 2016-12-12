@@ -402,5 +402,22 @@ public interface IOrgRmi extends Remote{
 	public boolean updatePassword(Long userid, String password) throws RemoteException;//修改密码
 	public Long getUserId(String username) throws RemoteException;//通过用户登录名得到用户ID
 	// 外部调用 使用  ----- 结束
-	
+
+
+    /**
+     * 同步银海部门信息
+     *
+     * @param List<DeptBean>
+     *            deptList
+     * @return boolean
+     */
+    public boolean inserSynctDept(List<DeptBean> deptList) throws RemoteException;
+
+    /**
+     * 同步银海人员信息
+     * @param List<UserBean> ubList
+     * @param List<UserRegisterBean> urbList 帐号对象
+     * @return boolean
+     * */
+    public boolean insertSyncUser(List<UserBean> ubList, List<UserRegisterBean> urbList) throws RemoteException;
 }

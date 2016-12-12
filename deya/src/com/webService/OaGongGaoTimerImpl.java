@@ -1,16 +1,13 @@
 package com.webService;
 
-import com.deya.wcm.timer.TimerListener;
-import com.deya.wcm.timer.TimerTaskJob;
+import org.quartz.Job;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
 
-public class OaGongGaoTimerImpl implements TimerListener{
-	static{
-		TimerTaskJob.registerPublishListener(new OaGongGaoTimerImpl());
-	}
-	
-	public void timingTask()
-	{
-		OaGongGaoManager.getOaData();
-	}
-	
+public class OaGongGaoTimerImpl implements Job{
+
+    @Override
+    public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
+        OaGongGaoManager.getOaData();
+    }
 }

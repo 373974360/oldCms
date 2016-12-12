@@ -15,7 +15,6 @@
                 <property name="poolMaximumIdleConnections" value="0"/>
                 <!--
                 <property name="alias" value="${dbtype}"/>
-
                     <property name="minPoolSize" value="1" />
                     <property name="maxPoolSize" value="20"/>
                     <property name="initialPoolSize" value="1"/>

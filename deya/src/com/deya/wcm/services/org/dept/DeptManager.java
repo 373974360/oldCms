@@ -310,7 +310,10 @@ public class DeptManager implements ISyncCatch{
 	 * @return boolean
 	 */
 	public static boolean insertDept(DeptBean db,SettingLogsBean stl) {
-		db.setTree_position(getDeptBeanByID(db.getParent_id() + "").getTree_position());
+        DeptBean deptBean = getDeptBeanByID(db.getParent_id() + "");
+        if(deptBean != null){
+            db.setTree_position(deptBean.getTree_position());
+        }
 		if (deptDao.insertDept(db,stl)) {
 			reloadDept();
 			return true;
@@ -805,6 +808,37 @@ public class DeptManager implements ISyncCatch{
 		    }
 		}
 	}
+
+
+    /**
+     * 同步银海部门信息
+     *
+     * @param DeptBean
+     *            db
+     * @param SettingLogsBean
+     *            stl 操作日志对象
+     * @return boolean
+     */
+    public static boolean inserSynctDept(List<DeptBean> deptList) {
+        DeptBean parent = null;
+        Map<Integer,DeptBean> map = new HashMap<>();
+        for (DeptBean bean : deptList) {
+            map.put(bean.getDept_id(),bean);
+        }
+        for (DeptBean bean : deptList) {
+            parent = map.get(bean.getParent_id());
+            if(parent != null){
+                bean.setTree_position(parent.getTree_position());
+            }
+        }
+
+        if (deptDao.inserSynctDept(deptList)) {
+            reloadDept();
+            return true;
+        } else {
+            return false;
+        }
+    }
 	
 		
 	public static void main(String args[]) {

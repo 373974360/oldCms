@@ -242,7 +242,7 @@ public class UserRegisterManager implements ISyncCatch{
 			lub.setUser_id(ub.getUser_id());
 			lub.setUser_name(user_name);			
 			lub.setUser_realname(ub.getUser_realname());
-			lub.setUserlevel_value(ub.getUserlevel_value());
+			lub.setUserlevel_value(String.valueOf(ub.getUserlevel_value()));
 			return lub;
 		}else
 			return null;

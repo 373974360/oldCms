@@ -73,8 +73,13 @@ public class DeptDAODBImpl implements IDeptDAO{
      * @return boolean
      * */
 	public boolean insertDept(DeptBean db,SettingLogsBean stl)
-	{		
-		db.setTree_position(db.getTree_position()+ db.getDept_id() + "$");
+	{
+        if(db.getTree_position() != null && !"".equals(db.getTree_position())){
+            db.setTree_position(db.getTree_position()+ db.getDept_id() + "$");
+        }else{
+            db.setTree_position("$" + db.getDept_id() + "$");
+        }
+
 		if(DBManager.insert("insert_dept", db))
 		{
 			//添加管理员(暂时不要,加部门时不加管理员)
@@ -356,6 +361,27 @@ public class DeptDAODBImpl implements IDeptDAO{
 		}else
 			return false;
 	}
+
+    @Override
+    public boolean inserSynctDept(List<DeptBean> deptList) {
+        if(deptList != null && deptList.size() > 0 ){
+            for (DeptBean deptBean : deptList) {
+                if(deptBean.getTree_position() != null && !"".equals(deptBean.getTree_position())){
+                    deptBean.setTree_position(deptBean.getTree_position()+ deptBean.getDept_id() + "$");
+                }else{
+                    deptBean.setTree_position("$" + deptBean.getDept_id() + "$");
+                }
+            }
+        }
+        if(DBManager.delete("deleteDept",null)){
+            if(DBManager.insert("insertDeptBatch", deptList))
+            {
+                System.out.println("**********************同步银海部门成功***********************");
+                return true;
+            }
+        }
+        return false;
+    }
 	/* **********************部门级别管理　结束******************************** */
 
 }

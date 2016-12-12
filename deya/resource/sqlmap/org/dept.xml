@@ -24,7 +24,10 @@
 	<!-- 插入部门信息 -->	
 	<insert id="insert_dept" parameterType="com.deya.wcm.bean.org.dept.DeptBean">
 	 	insert into cs_org_dept(dept_id,parent_id,dept_fullname,dept_name,tree_position,deptlevel_value,area_code,dept_code,functions,tel,fax,email,address,dept_memo,dept_sort)
-		values(#{dept_id},#{parent_id},#{dept_fullname},#{dept_name},#{tree_position},#{deptlevel_value},#{area_code},#{dept_code},#{functions},#{tel},#{fax},#{email},#{address},#{dept_memo},#{dept_sort})
+		values(#{dept_id,,jdbcType=INTEGER},#{parent_id,,jdbcType=INTEGER},#{dept_fullname,,jdbcType=VARCHAR},#{dept_name,,jdbcType=VARCHAR},
+		#{tree_position,,jdbcType=VARCHAR},#{deptlevel_value,,jdbcType=INTEGER},#{area_code,,jdbcType=VARCHAR},#{dept_code,,jdbcType=VARCHAR},
+		#{functions,,jdbcType=VARCHAR},#{tel,,jdbcType=VARCHAR},#{fax,,jdbcType=VARCHAR},#{email,,jdbcType=VARCHAR},#{address,,jdbcType=VARCHAR},
+		#{dept_memo,,jdbcType=VARCHAR},#{dept_sort,,jdbcType=INTEGER})
 	</insert>
 	
 	<!-- 修改部门信息 -->	
@@ -102,4 +105,27 @@
 	   update cs_org_deptlevel set is_delete = '-1' where deptlevel_id in (${ids})
 	</update>
 	<!-- *******************************部门级别处理 结束******************************* -->
+
+
+    <!--********************************同步银海组织机构sql开始**********************************************-->
+
+
+    <!-- 插入部门 -->
+    <insert id="insertDeptBatch" parameterType="List">
+        insert into cs_org_dept(dept_id,parent_id,dept_fullname,dept_name,tree_position,deptlevel_value,
+        area_code,dept_code,functions,tel,fax,email,address,dept_memo,dept_sort) values
+        <foreach collection ="list" item ="item" index ="index" separator =",">
+            (#{item.dept_id,,jdbcType=INTEGER},#{item.parent_id,,jdbcType=INTEGER},#{item.dept_fullname,,jdbcType=VARCHAR},#{item.dept_name,,jdbcType=VARCHAR},
+            #{item.tree_position,,jdbcType=VARCHAR},#{item.deptlevel_value,,jdbcType=INTEGER},#{item.area_code,,jdbcType=VARCHAR},#{item.dept_code,,jdbcType=VARCHAR},
+            #{item.functions,,jdbcType=VARCHAR},#{item.tel,,jdbcType=VARCHAR},#{item.fax,,jdbcType=VARCHAR},#{item.email,,jdbcType=VARCHAR},#{item.address,,jdbcType=VARCHAR},
+            #{item.dept_memo,,jdbcType=VARCHAR},#{item.dept_sort,,jdbcType=INTEGER})
+        </foreach>
+    </insert>
+
+    <delete id="deleteDept">
+        delete from cs_org_dept
+    </delete>
+
+    <!--********************************同步银海组织机构sql结束**********************************************-->
+
 </mapper>

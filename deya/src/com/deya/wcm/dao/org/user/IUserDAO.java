@@ -229,4 +229,12 @@ public interface IUserDAO {
      * */
 	public boolean updatePasswordByUserID(UserRegisterBean urb,SettingLogsBean stl);
 	/* **********************帐号管理　结束******************************** */
+
+    /**
+     * 插入同步人员信息
+     * @param List<UserBean> ubList
+     * @param List<UserRegisterBean> urbList 帐号对象
+     * @return boolean
+     * */
+    public boolean insertSyncUser(List<UserBean> ubList, List<UserRegisterBean> urbList);
 }

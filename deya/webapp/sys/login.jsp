@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=utf-8"%>
 <%@page import="com.deya.wcm.server.LicenseCheck,com.deya.util.CryptoTools"%>
+<%@ page import="com.deya.wcm.services.org.user.UserLogin" %>
 <%
     /*
     String key = request.getParameter("key"); 
@@ -16,7 +17,13 @@
 	    	return;
 	    }
 	}
-    */
+    */p;.
+
+    boolean isLogin = UserLogin.checkLoginBySession(request);
+    if(isLogin){
+        out.println("<script>top.location.href = 'index.jsp';</script>");
+    }
+
 	String user_name = request.getParameter("username");
 	String pass_word = request.getParameter("password");
 	String auth_code = request.getParameter("auth_code");
@@ -235,8 +242,7 @@ input,img a{vertical-align:middle; magrin-right:10px;}
 						<span class="left"><input id="password" name="password" type="password" class="loginInput"  maxlength="20" value="" /></span>
 						<span class="left tp_name">验证码：</span>
 						<span class="left "><input id="auth_code" name="auth_code" type="text" class="loginInput" style="width:52px;" maxlength="6" value="" />&nbsp;&nbsp;<img id="img" width="60" height="26" src="createImage.jsp"  style=" height:26px; line-height:26px; overflow:hidden;vertical-align:middle;"/><!--&nbsp;&nbsp;<a href="javascript:changeCreateImage()">看不清，换一个</a>--></span>
-						<span class="left"><input id="btnSubmit" name="btnSubmit" type="submit" onClick="loginWCM()" class="btn" value="登 录" />
-						
+						<span class="left"><input id="btnSubmit" name="btnSubmit" type="submit" onClick="loginWCM()" class="btn" value="登 录" /></span>
 					</form>
 				</div>
 			</div>

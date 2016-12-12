@@ -451,20 +451,18 @@ public class UserDAODBImpl implements IUserDAO{
 	}
 	/* **********************帐号管理　结束******************************** */
 
-	public boolean insertSyncUser(UserBean ub, UserRegisterBean urb) {
-		if(DBManager.insert("insert_user", ub))
-		{
-			PublicTableDAO.insertSettingLogs("添加","用户",ub.getUser_id()+"",null);
-			int id = PublicTableDAO.getIDByTableName(PublicTableDAO.USERREGISTER_TABLE_NAME);
-			urb.setRegister_id(id);
-			CryptoTools ct = new CryptoTools();
-			urb.setPassword(ct.encode(RandomStrg.getRandomStr(null,"10")));
-			if(DBManager.insert("insert_register", urb))
-			{
-				PublicTableDAO.insertSettingLogs("添加","帐号",id+"",null);
-			}
-			return true;
-		}else
-			return false;
+	public boolean insertSyncUser(List<UserBean> ubList, List<UserRegisterBean> urbList) {
+        if(DBManager.delete("deleteUser",null)){
+            if(DBManager.insert("insertUserBatch", ubList)){
+                if(DBManager.delete("deleteRegisterUser",null)){
+                    if(DBManager.insert("insertUserRegisterBatch", urbList))
+                    {
+                        System.out.println("**********************同步银海用户成功***********************");
+                        return true;
+                    }
+                }
+            }
+        }
+		return false;
 	}
 }
