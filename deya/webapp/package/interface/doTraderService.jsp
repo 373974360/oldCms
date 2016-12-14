@@ -1,16 +1,18 @@
 ﻿<%@ page contentType="application/json; charset=utf-8"%>
-<%@ page language="java" import="org.jdom.input.SAXBuilder,org.xml.sax.InputSource,javax.servlet.ServletException,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse"%>
-<%@page import="java.net.HttpURLConnection"%>
-<%@page import="java.net.URL,java.util.ArrayList,java.util.List"%><%@ page import="com.deya.util.DateUtil"%><%@ page import="java.io.*"%><%@ page import="java.net.MalformedURLException"%><%@ page import="java.util.Iterator"%><%@ page import="com.deya.wcm.bean.org.dept.DeptBean"%><%@ page import="com.deya.wcm.services.org.dept.DeptManager"%><%@ page import="org.dom4j.DocumentHelper"%><%@ page import="org.dom4j.DocumentException"%><%@ page import="org.dom4j.Document"%><%@ page import="org.dom4j.Element"%>
+<%@ page language="java" import="com.deya.util.DateUtil,org.dom4j.Document,org.dom4j.DocumentException,org.dom4j.DocumentHelper,org.dom4j.Element"%>
+<%@page import="java.io.*"%>
+<%@page import="java.net.HttpURLConnection,java.net.URL,java.util.Iterator"%>
 <%!
-	private static String wsdlUrl = "http://172.18.1.252:7005/trader/services/TraderService?wsdl";
+	private static String wsdlUrl = "http://118.112.188.111:6504/extrader/services/TraderService?wsdl";
     private static String targetNamespace = "http://service.core.trader.yinhai.com/";
     private static String methodName = "doTrader";
     private static String paramName = "paramXml";
+    private static String forgcode = "19ceb94366931d8e2017";
+    private static String certcode = "3b0184454f8cb24147d7";
     private static String type = "";
     private static String txcode = "";
     private static String percode = "";
-    private static String pertype = "";
+    private static String idcard = "";
     private static String proname = "";
     private static String depcode = "";
     private static String corpname = "";
@@ -22,20 +24,20 @@
     String jsonStr = "";
     if(sessionCode != null && sessionCode.equals(validateCode))
     {
-        type = request.getParameter("method"); //type=2 查找个人信息，为空的话 查找楼盘信息
+        type = request.getParameter("type"); //type=2 查找个人信息，为空的话 查找楼盘信息
         if(type != null && !"".equals(type) && "2".equals(type))
         {
-            txcode = "pmc002";
+            txcode = "1PMS001";
             percode = request.getParameter("percode");
-            pertype = "01";
+            idcard = request.getParameter("idcard");
             proname = "";
             depcode = "";
             corpname = "";
         }
         else {
-            txcode = "ELC0001";
+            txcode = "ELC001";
             percode = "";
-            pertype = "";
+            idcard = "";
             proname = request.getParameter("proname");
             depcode = request.getParameter("depcode");
             corpname = request.getParameter("corpname");
@@ -68,20 +70,27 @@
 
     public static String getparamValue() {
         StringBuilder _xmlstr = new StringBuilder();
-        _xmlstr.append("<![CDATA[<data><txcode>").append(txcode).append("</txcode>");
-        _xmlstr.append("<source>04</source>");
-		_xmlstr.append("<torgcode>5510gjj</torgcode>");
-		_xmlstr.append("<forgcode>19ceb94366931d8e2017</forgcode>");
-        _xmlstr.append("<certcode>3b0184454f8cb24147d7</certcode>");
+        _xmlstr.append("<![CDATA[<data><txcode>" + txcode + "</txcode>");
+        _xmlstr.append("<source>02</source>");
+		_xmlstr.append("<torgcode>cdgjj</torgcode>");
+		_xmlstr.append("<forgcode>" + forgcode + "</forgcode>");
+		_xmlstr.append("<certcode>" + certcode + "</certcode>");
         _xmlstr.append("<txchannel>1</txchannel>");
-        _xmlstr.append("<reqident>19274635</reqident>");
+        _xmlstr.append("<reqident>nt_ident1480583303863</reqident>");
+        _xmlstr.append("<syspostcode>999999998</syspostcode>");
+        _xmlstr.append("<usertype>2</usertype>");
+        _xmlstr.append("<txtime>171541</txtime>");
+        _xmlstr.append("<prepicnt1>1</prepicnt1>");
+        _xmlstr.append("<enccode></enccode>");
+        _xmlstr.append("<logintype>1</logintype>");
+        _xmlstr.append("<txdate>" + DateUtil.getCurrentDateTime("yyyyMMdd") +"</txdate>");
         if(percode != null && !"".equals(percode))
         {
             _xmlstr.append("<percode>").append(percode).append("</percode>");
         }
-        if(pertype != null && !"".equals(pertype))
+        if(idcard != null && !"".equals(idcard))
         {
-            _xmlstr.append("<pertype>").append(pertype).append("</pertype>");
+            _xmlstr.append("<idcard>").append(idcard).append("</idcard>");
         }
         if(proname != null && !"".equals(proname))
         {
@@ -104,11 +113,11 @@
         String jsonStr = "{\"status\":\"0\"}";
         try {
             String s = doHttpPost();
-            s = s.substring(s.indexOf("<?xml"), s.indexOf("</return>"));
+            s = s.substring(s.indexOf("<data>"), s.indexOf("</return>"));
             Document xmlDoc = DocumentHelper.parseText(s);
             Element rootElement = xmlDoc.getRootElement();
             if(type != null && !"".equals(type) && "2".equals(type)){
-                Iterator personInfos = rootElement.elementIterator("personInfo");
+                Iterator personInfos = rootElement.elementIterator("list");
                 String pername = "";
                 String percode = "";
                 String accstate = ""; //账户状态
@@ -116,16 +125,26 @@
                 String accbal = "";    //账户余额
                 if (personInfos != null && personInfos.hasNext()) {
                     Element personInfo = (Element) personInfos.next();
-                    pername = personInfo.element("pername").getTextTrim();
-                    percode = personInfo.element("percode").getTextTrim();
-                    accstate = personInfo.element("accstate").getTextTrim();
-                    payendmnh = personInfo.element("payendmnh").getTextTrim();
-                    accbal = personInfo.element("accbal").getTextTrim();
+                    if(personInfo.element("pername") != null){
+                        pername = personInfo.element("pername").getTextTrim();
+                    }
+                    if(personInfo.element("percode") != null){
+                        percode = personInfo.element("percode").getTextTrim();
+                    }
+                    if(personInfo.element("accstate") != null){
+                        accstate = personInfo.element("accstate").getTextTrim();
+                    }
+                    if(personInfo.element("payendmnh") != null){
+                        payendmnh = personInfo.element("payendmnh").getTextTrim();
+                    }
+                    if(personInfo.element("accmny") != null){
+                        accbal = personInfo.element("accmny").getTextTrim();
+                    }
                     jsonStr = "{\"status\":\"1\",\"pername\":\""+pername+"\",\"percode\":\""+percode+"\"," +
-                    "\"accstate\":\""+accstate+"\",\"payendmnh\":\""+payendmnh+"\",\"accbal\":\""+accbal+"\"}";
+                            "\"accstate\":\""+accstate+"\",\"payendmnh\":\""+payendmnh+"\",\"accbal\":\""+accbal+"\"}";
                 }
             }else{
-                Iterator houseInfos = rootElement.elementIterator("houseInfo");
+                Iterator houseInfos = rootElement.elementIterator("list");
                 String proname = "";    //楼盘信息
                 String corpname = "";   //开发商
                 String pername = "";    //法人
@@ -138,14 +157,26 @@
                     while (houseInfos.hasNext()){
                         hasResult = true;
                         Element houseInfo = (Element) houseInfos.next();
-                        proname = houseInfo.element("proname").getTextTrim();
-                        corpname = houseInfo.element("corpname").getTextTrim();
-                        pername = houseInfo.element("pername").getTextTrim();
-                        perphone = houseInfo.element("perphone").getTextTrim();
-                        address = houseInfo.element("address").getTextTrim();
-                        depname = houseInfo.element("depname").getTextTrim();
+                        if(houseInfo.element("coophousesname") != null){
+                            proname = houseInfo.element("coophousesname").getTextTrim();
+                        }
+                        if(houseInfo.element("corpname") != null){
+                            corpname = houseInfo.element("corpname").getTextTrim();
+                        }
+                        if(houseInfo.element("pername") != null){
+                            pername = houseInfo.element("pername").getTextTrim();
+                        }
+                        if(houseInfo.element("perphone") != null){
+                            perphone = houseInfo.element("perphone").getTextTrim();
+                        }
+                        if(houseInfo.element("coophousesaddr") != null){
+                            address = houseInfo.element("coophousesaddr").getTextTrim();
+                        }
+                        if(houseInfo.element("depcode") != null){
+                            depname = houseInfo.element("depcode").getTextTrim();
+                        }
                         jsonStr += "{\"proname\":\""+proname+"\",\"corpname\":\""+corpname+"\",\"pername\":\""+pername+"\"," +
-                         "\"perphone\":\""+perphone+"\",\"address\":\""+address+"\",\"depname\":\""+depname+"\"},";
+                                "\"perphone\":\""+perphone+"\",\"address\":\""+address+"\",\"depname\":\""+depname+"\"},";
                     }
                     if(hasResult){
                         jsonStr = jsonStr.substring(0,jsonStr.length() - 1) + "]}";

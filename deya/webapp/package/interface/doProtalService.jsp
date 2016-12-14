@@ -1,7 +1,7 @@
 ﻿<%@ page contentType="application/json; charset=utf-8"%>
-<%@ page language="java" import="org.jdom.input.SAXBuilder,org.xml.sax.InputSource,javax.servlet.ServletException,javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse"%>
+<%@ page language="java" import="org.dom4j.Document,org.dom4j.DocumentException,org.dom4j.DocumentHelper,org.dom4j.Element,java.io.*"%>
 <%@page import="java.net.HttpURLConnection"%>
-<%@page import="java.net.URL,java.util.ArrayList,java.util.List"%><%@ page import="com.deya.util.DateUtil"%><%@ page import="java.io.*"%><%@ page import="java.net.MalformedURLException"%><%@ page import="java.util.Iterator"%><%@ page import="com.deya.wcm.bean.org.dept.DeptBean"%><%@ page import="com.deya.wcm.services.org.dept.DeptManager"%><%@ page import="org.dom4j.DocumentHelper"%><%@ page import="org.dom4j.DocumentException"%><%@ page import="org.dom4j.Document"%><%@ page import="org.dom4j.Element"%>
+<%@page import="java.net.URL,java.util.Iterator"%>
 <%!
 	private static String wsdlUrl = "http://172.18.1.252:7005/trader/services/TraderService?wsdl";
     private static String targetNamespace = "http://service.core.trader.yinhai.com/";
@@ -78,7 +78,7 @@
         }
         if(pertype != null && !"".equals(pertype))
         {
-            _xmlstr.append("<pertype>").append(pertype).append("</pertype>");
+            _xmlstr.append("<idcard>").append(pertype).append("</idcard>");
         }
         if(proname != null && !"".equals(proname))
         {
@@ -101,11 +101,11 @@
         String jsonStr = "{\"status\":\"0\"}";
         try {
             String s = doHttpPost();
-            s = s.substring(s.indexOf("<?xml"), s.indexOf("</return>"));
+            s = s.substring(s.indexOf("<data>"), s.indexOf("</return>"));
             Document xmlDoc = DocumentHelper.parseText(s);
             Element rootElement = xmlDoc.getRootElement();
             if(type != null && !"".equals(type) && "2".equals(type)){
-                Iterator personInfos = rootElement.elementIterator("personInfo");
+                Iterator personInfos = rootElement.elementIterator("list");
                 String pername = "";
                 String percode = "";
                 String accstate = ""; //账户状态
@@ -113,16 +113,26 @@
                 String accbal = "";    //账户余额
                 if (personInfos != null && personInfos.hasNext()) {
                     Element personInfo = (Element) personInfos.next();
-                    pername = personInfo.element("pername").getTextTrim();
-                    percode = personInfo.element("percode").getTextTrim();
-                    accstate = personInfo.element("accstate").getTextTrim();
-                    payendmnh = personInfo.element("payendmnh").getTextTrim();
-                    accbal = personInfo.element("accbal").getTextTrim();
+                    if(personInfo.element("pername") != null){
+                        pername = personInfo.element("pername").getTextTrim();
+                    }
+                    if(personInfo.element("percode") != null){
+                        percode = personInfo.element("percode").getTextTrim();
+                    }
+                    if(personInfo.element("accstate") != null){
+                        accstate = personInfo.element("accstate").getTextTrim();
+                    }
+                    if(personInfo.element("payendmnh") != null){
+                        payendmnh = personInfo.element("payendmnh").getTextTrim();
+                    }
+                    if(personInfo.element("accbal") != null){
+                        accbal = personInfo.element("accbal").getTextTrim();
+                    }
                     jsonStr = "{\"status\":\"1\",\"pername\":\""+pername+"\",\"percode\":\""+percode+"\"," +
-                    "\"accstate\":\""+accstate+"\",\"payendmnh\":\""+payendmnh+"\",\"accbal\":\""+accbal+"\"}";
+                            "\"accstate\":\""+accstate+"\",\"payendmnh\":\""+payendmnh+"\",\"accbal\":\""+accbal+"\"}";
                 }
             }else{
-                Iterator houseInfos = rootElement.elementIterator("houseInfo");
+                Iterator houseInfos = rootElement.elementIterator("list");
                 String proname = "";    //楼盘信息
                 String corpname = "";   //开发商
                 String pername = "";    //法人
@@ -135,14 +145,26 @@
                     while (houseInfos.hasNext()){
                         hasResult = true;
                         Element houseInfo = (Element) houseInfos.next();
-                        proname = houseInfo.element("proname").getTextTrim();
-                        corpname = houseInfo.element("corpname").getTextTrim();
-                        pername = houseInfo.element("pername").getTextTrim();
-                        perphone = houseInfo.element("perphone").getTextTrim();
-                        address = houseInfo.element("address").getTextTrim();
-                        depname = houseInfo.element("depname").getTextTrim();
+                        if(houseInfo.element("proname") != null){
+                            proname = houseInfo.element("proname").getTextTrim();
+                        }
+                        if(houseInfo.element("corpname") != null){
+                            corpname = houseInfo.element("corpname").getTextTrim();
+                        }
+                        if(houseInfo.element("pername") != null){
+                            pername = houseInfo.element("pername").getTextTrim();
+                        }
+                        if(houseInfo.element("perphone") != null){
+                            perphone = houseInfo.element("perphone").getTextTrim();
+                        }
+                        if(houseInfo.element("address") != null){
+                            address = houseInfo.element("address").getTextTrim();
+                        }
+                        if(houseInfo.element("depname") != null){
+                            depname = houseInfo.element("depname").getTextTrim();
+                        }
                         jsonStr += "{\"proname\":\""+proname+"\",\"corpname\":\""+corpname+"\",\"pername\":\""+pername+"\"," +
-                         "\"perphone\":\""+perphone+"\",\"address\":\""+address+"\",\"depname\":\""+depname+"\"},";
+                                "\"perphone\":\""+perphone+"\",\"address\":\""+address+"\",\"depname\":\""+depname+"\"},";
                     }
                     if(hasResult){
                         jsonStr = jsonStr.substring(0,jsonStr.length() - 1) + "]}";

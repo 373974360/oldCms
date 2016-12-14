@@ -66,6 +66,10 @@ if("custom_info".equals(action_type))
 {
 	result = getCustomInfoMap(request);
 }
+if("isToudi".equals(action_type))
+{
+	result = isToudi(request);
+}
 
 out.println(result);
 
@@ -389,11 +393,26 @@ public String getChildCategoryList(HttpServletRequest request){
 	String json = "";
 	String site_id = FormatUtil.formatNullString(request.getParameter("site_id"));
 	String cat_id = FormatUtil.formatNullString(request.getParameter("cat_id"));
+	String size = FormatUtil.formatNullString(request.getParameter("size"));
+	String page = FormatUtil.formatNullString(request.getParameter("page"));
 	List<CategoryBean> info_list = CategoryManager.getChildCategoryList(Integer.parseInt(cat_id),site_id);
 	if(info_list != null && info_list.size() > 0)
 	{
-		for(CategoryBean info : info_list)
-		{
+		int index = 0;
+		int pageInt = 1;
+		int sizeInt = 5;
+		int i=0;
+		if(page != null && !"".equals(page)){
+			pageInt = Integer.parseInt(page);
+		}
+		if(size != null && !"".equals(size)){
+			sizeInt = Integer.parseInt(size);
+		}
+		//if(page != null && !"".equals(page)){
+		//	i = ( - 1 ) * Integer.parseInt(size);
+		//}
+		for(i = (pageInt - 1) * sizeInt; i <= ((pageInt - 1) * sizeInt + sizeInt) && i < info_list.size(); i++){
+			CategoryBean info = info_list.get(i);
 			json += ",{\"cat_id\":\""+info.getCat_id()+"\",\"cat_cname\":\""+info.getCat_cname()+"\"";
 			json += "}";
 		}
@@ -422,6 +441,16 @@ public String getCustomInfoMap(HttpServletRequest request){
 }
 
 
+public String isToudi(HttpServletRequest request){
+	String json = "";
+	String info_id = FormatUtil.formatNullString(request.getParameter("info_id"));
+	boolean isToudi = com.deya.project.dz_recruit.UserInfoRPC.isToudi(Integer.parseInt(info_id),request);
+	JSONObject jsonObject = new JSONObject();
+    jsonObject.put("isToudi",isToudi);
+	return jsonObject.toString();
+}
+
+
 
 public static String replaceStr(String str)
 {
@@ -430,3 +459,4 @@ public static String replaceStr(String str)
 }
 
 %>
+

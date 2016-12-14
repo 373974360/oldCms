@@ -182,7 +182,7 @@ public class CsgjjSearchManager extends HttpServlet {
         }
         if(pertype != null && !"".equals(pertype))
         {
-            _xmlstr.append("<pertype><![CDATA[").append(pertype).append("]]]]>><![CDATA[</pertype>");
+            _xmlstr.append("<idcard><![CDATA[").append(pertype).append("]]]]>><![CDATA[</idcard>");
         }
         if(proname != null && !"".equals(proname))
         {
