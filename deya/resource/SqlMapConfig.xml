@@ -124,5 +124,6 @@
         <mapper resource="sqlmap/project/dz_siteError/siteError.xml"/>
         <mapper resource="sqlmap/project/searchkeys.xml"/>
         <mapper resource="sqlmap/system/rmiserverconf.xml"/>
+        <mapper resource="sqlmap/appeal/sqmyddc.xml"/>
     </mappers>
 </configuration>

@@ -1,5 +1,6 @@
 package com.deya.wcm.services.appeal.sq;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +14,8 @@ import com.deya.wcm.bean.logs.SettingLogsBean;
 import com.deya.wcm.bean.org.user.LoginUserBean;
 import com.deya.wcm.bean.system.assist.TagsBean;
 import com.deya.wcm.services.Log.LogManager;
+import com.deya.wcm.services.appeal.myddc.SqMyddcBean;
+import com.deya.wcm.services.appeal.myddc.SqMyddcManager;
 import com.deya.wcm.services.org.user.UserLogin;
 
 public class SQRPC {
@@ -275,5 +278,17 @@ public class SQRPC {
 	public static List<SQAttachment> getSQAttachmentList(String sq_ids,String relevance_type)
 	{
 		return SQManager.getSQAttachmentList(sq_ids, relevance_type);
+	}
+
+	/**
+	 * 得到附件信息
+	 * @param String sq_ids
+	 * @param String relevance_type
+	 * @return List
+	 */
+	public static List<SqMyddcBean> getSqMyddcList(Map<String,String> m)
+	{
+		List<SqMyddcBean> sqMyddcList = SqMyddcManager.getSqMyddcList(m);
+		return sqMyddcList;
 	}
 }

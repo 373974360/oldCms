@@ -3,6 +3,8 @@
 <%@page import="com.deya.wcm.bean.appeal.model.*,com.deya.wcm.services.appeal.model.*"%>
 <%@page import="com.deya.wcm.bean.appeal.sq.*,com.deya.wcm.services.appeal.sq.*"%>
 <%@page import="com.deya.wcm.template.velocity.*,com.deya.wcm.template.velocity.impl.*,com.deya.util.FormatUtil"%>
+<%@ page import="com.deya.wcm.services.appeal.myddc.SqMyddcBean" %>
+<%@ page import="com.deya.wcm.services.appeal.myddc.SqMyddcManager" %>
 <%
 	String action_type = request.getParameter("action_type"); 
 	if("insertSQ".equals(action_type))
@@ -148,7 +150,7 @@
 			}
 		}
 	}
-	if("saveScore".equals(action_type))
+	/*if("saveScore".equals(action_type))
 	{
         String sq_code = FormatUtil.formatNullString(request.getParameter("sq_code"));
         String query_code = FormatUtil.formatNullString(request.getParameter("query_code"));
@@ -201,5 +203,40 @@
             out.println("</script>");
             return;
         }
+	}*/
+
+	if("saveScore".equals(action_type))
+	{
+		String codeSession = (String)request.getSession().getAttribute("valiCode");
+		String auth_code = request.getParameter("auth_code");
+		if(!auth_code.equals(codeSession))
+		{
+			out.println("<script>");
+			out.println("top.alert('验证码不正确')");
+			out.println("top.changeCreateImage()");
+			out.println("</script>");
+			return;
+		}
+		String sq_id = FormatUtil.formatNullString(request.getParameter("sq_id"));
+		String myd = FormatUtil.formatNullString(request.getParameter("myd"));
+		SqMyddcBean sqMyddcBean = new SqMyddcBean();
+		sqMyddcBean.setSq_id(Integer.parseInt(sq_id));
+		sqMyddcBean.setMyd(myd);
+		boolean insertSqMyddc = SqMyddcManager.insertSqMyddc(sqMyddcBean, null);
+		if(insertSqMyddc)
+		{
+			out.println("<script>");
+			out.println("top.alert('投票成功')");
+			out.println("top.changeCreateImage()");
+			out.println("</script>");
+			return;
+		}else
+		{
+			out.println("<script>");
+			out.println("top.alert('投票失败')");
+			out.println("top.changeCreateImage()");
+			out.println("</script>");
+			return;
+		}
 	}
 %>
