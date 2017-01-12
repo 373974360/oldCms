@@ -15,9 +15,9 @@ function initCatTree(s_id){
 			$('#leftMenuTree').tree({   
 				 checkbox: true,   
 				 onlyLeafCheck: true,   
-				 url: '/servlet/Category?site_id=' + site_id + '&user_id=0&pid=0',   
+				 url: '/sys/servlet/Category?site_id=' + site_id + '&user_id=0&pid=0',
 				 onBeforeExpand:function(node,param){
-					 $('#leftMenuTree').tree('options').url = '/servlet/Category?site_id=' + site_id + '&user_id=0&pid=' + node.id;	// change the url                       
+					 $('#leftMenuTree').tree('options').url = '/sys/servlet/Category?site_id=' + site_id + '&user_id=0&pid=' + node.id;	// change the url
 					 //param.myattr = 'test';    // or change request parameter
 				 },               
 				 onClick:function(node){

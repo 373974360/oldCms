@@ -236,6 +236,17 @@ function addInfoData()
 	var no1 = infoNextId;
 	bean.id = infoNextId;
 	bean.info_id = infoNextId;
+	var publish_source = "";
+	$("input[name='publish_source']:checked").each(function(){
+        publish_source += "," + $(this).val() ;
+	});
+	if(publish_source.length > 1){
+        publish_source = publish_source.substr(1);
+	}else{
+		alert("发布渠道不能为空！");
+		return;
+	}
+
 	if(ArticleRPC.addArticle(bean))
 	{
 		var catIds = showSelectIds1();
@@ -286,6 +297,18 @@ function updateInfoData()
 	if(bean.down_dtime != null && bean.down_dtime != "" && bean.down_dtime != "0"){
 		bean.is_auto_down = 1;
 	}
+
+    var publish_source = "";
+    $("input[name='publish_source']:checked").each(function(){
+        publish_source += "," + $(this).val() ;
+    });
+    if(publish_source.length > 1){
+        publish_source = publish_source.substr(1);
+    }else{
+        alert("发布渠道不能为空！");
+        return;
+    }
+
 	if(ArticleRPC.updateArticle(bean))
 	{
 		updateRelatedInfoAsSort(bean.info_id,bean.site_id);

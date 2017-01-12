@@ -311,9 +311,9 @@ function showCategoryTree()
 	$('#leftMenuTree1').tree({   
 		 checkbox: true,   
 		 onlyLeafCheck: true,   
-		 url: '/servlet/Category?site_id=' + site_id + '&user_id=' + LoginUserBean.user_id + '&pid=0',   
+		 url: '/sys/servlet/Category?site_id=' + site_id + '&user_id=' + LoginUserBean.user_id + '&pid=0',
 		 onBeforeExpand:function(node,param){
-			 $('#leftMenuTree1').tree('options').url = '/servlet/Category?site_id=' + site_id + '&user_id=' + LoginUserBean.user_id + '&pid=' + node.id;	// change the url                       
+			 $('#leftMenuTree1').tree('options').url = '/sys/servlet/Category?site_id=' + site_id + '&user_id=' + LoginUserBean.user_id + '&pid=' + node.id;	// change the url
 			 //param.myattr = 'test';    // or change request parameter
 		 },               
 		 onClick:function(node){
