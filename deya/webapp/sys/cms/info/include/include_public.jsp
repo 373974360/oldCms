@@ -160,6 +160,14 @@
 </table>
 <table id="" class="table_form" border="0" cellpadding="0" cellspacing="0">
 	<tbody>
+	    <tr>
+            <th><span class="f_red">*</span>发布渠道：</th>
+            <td>
+                <input  name="publish_source" type="checkbox" class="width350" value="pc" checked="checked"  />网站
+                <input  name="publish_source" type="checkbox" class="width350" value="wx" checked="checked" />微信
+                <input  name="publish_source" type="checkbox" class="width350" value="app" checked="checked" />APP
+            </td>
+        </tr>
 		<tr>
 			<th><span class="f_red">*</span>标题：</th>
 			<td>

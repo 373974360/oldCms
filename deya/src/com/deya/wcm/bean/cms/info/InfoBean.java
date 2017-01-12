@@ -70,6 +70,16 @@ public class InfoBean  implements java.io.Serializable,Cloneable{
 	private String modify_user_name = "";
     protected String info_level = "";//稿件评级
     protected String isIpLimit = "";//是否IP限制
+	protected String publish_source = "";//发布渠道
+	protected int wxhits = 0;// bigint 20
+	protected int wxday_hits = 0;// bigint 20
+	protected int wxweek_hits = 0;// bigint 20
+	protected int wxmonth_hits = 0;// bigint 20
+
+	protected int apphits = 0;// bigint 20
+	protected int appday_hits = 0;// bigint 20
+	protected int appweek_hits = 0;// bigint 20
+	protected int appmonth_hits = 0;// bigint 20
 	
 	public int getIs_am_tupage() {
 		return is_am_tupage;
@@ -451,4 +461,76 @@ public class InfoBean  implements java.io.Serializable,Cloneable{
     public void setIsIpLimit(String isIpLimit) {
         this.isIpLimit = isIpLimit;
     }
+
+	public String getPublish_source() {
+		return publish_source;
+	}
+
+	public void setPublish_source(String publish_source) {
+		this.publish_source = publish_source;
+	}
+
+	public int getWxhits() {
+		return wxhits;
+	}
+
+	public void setWxhits(int wxhits) {
+		this.wxhits = wxhits;
+	}
+
+	public int getApphits() {
+		return apphits;
+	}
+
+	public void setApphits(int apphits) {
+		this.apphits = apphits;
+	}
+
+	public int getWxday_hits() {
+		return wxday_hits;
+	}
+
+	public void setWxday_hits(int wxday_hits) {
+		this.wxday_hits = wxday_hits;
+	}
+
+	public int getWxweek_hits() {
+		return wxweek_hits;
+	}
+
+	public void setWxweek_hits(int wxweek_hits) {
+		this.wxweek_hits = wxweek_hits;
+	}
+
+	public int getWxmonth_hits() {
+		return wxmonth_hits;
+	}
+
+	public void setWxmonth_hits(int wxmonth_hits) {
+		this.wxmonth_hits = wxmonth_hits;
+	}
+
+	public int getAppday_hits() {
+		return appday_hits;
+	}
+
+	public void setAppday_hits(int appday_hits) {
+		this.appday_hits = appday_hits;
+	}
+
+	public int getAppweek_hits() {
+		return appweek_hits;
+	}
+
+	public void setAppweek_hits(int appweek_hits) {
+		this.appweek_hits = appweek_hits;
+	}
+
+	public int getAppmonth_hits() {
+		return appmonth_hits;
+	}
+
+	public void setAppmonth_hits(int appmonth_hits) {
+		this.appmonth_hits = appmonth_hits;
+	}
 }

@@ -58,6 +58,9 @@
         <if test="is_host != null">
             and ci.is_host = ${is_host}
         </if>
+        <if test="publish_source != null">
+            and ci.publish_source like '%${publish_source}%'
+        </if>
         and ci.info_status = 8 and ci.final_status = 0
     </sql>
     <!-- 前台信息列表总数查询sql -->
@@ -206,7 +209,8 @@
         is_am_tupage,
         tupage_num,
         info_level,
-        isIpLimit
+        isIpLimit,
+        publish_source
         ) values(
         ${id},
         ${info_id},
@@ -259,7 +263,8 @@
         ${is_am_tupage},
         ${tupage_num},
         #{info_level},
-        #{isIpLimit}
+        #{isIpLimit},
+        #{publish_source}
         )
     </insert>
 
@@ -304,6 +309,7 @@
         tupage_num =${tupage_num},
         info_level =#{info_level},
         isIpLimit=#{isIpLimit}
+        publish_source=#{publish_source}
         where info_id=${info_id}
     </update>
 
@@ -327,6 +333,16 @@
     <!-- 得到点击次数 -->
     <select id="getInfoClickCount" parameterType="java.lang.String" resultType="java.lang.String">
         select hits from cs_info where info_id = #{info_id}
+    </select>
+
+    <!-- 得到微信点击次数 -->
+    <select id="getWxInfoClickCount" parameterType="java.lang.String" resultType="java.lang.String">
+        select wxhits from cs_info where info_id = #{info_id}
+    </select>
+
+    <!-- 得到App点击次数 -->
+    <select id="getAppInfoClickCount" parameterType="java.lang.String" resultType="java.lang.String">
+        select apphits from cs_info where info_id = #{info_id}
     </select>
 
     <!-- 得到需要自动发布或撤消的信息 -->
@@ -356,6 +372,28 @@
         day_hits = ${d_num},
         week_hits = ${w_num},
         month_hits = ${m_num},
+        lasthit_dtime = #{lasthit_dtime}
+        where info_id = ${info_id}
+    </update>
+
+    <!-- 添加点击次数 -->
+    <update id="add_wxinfo_hits" parameterType="Map">
+        update cs_info set
+        wxhits = wxhits + ${num},
+        wxday_hits = ${d_num},
+        wxweek_hits = ${w_num},
+        wxmonth_hits = ${m_num},
+        lasthit_dtime = #{lasthit_dtime}
+        where info_id = ${info_id}
+    </update>
+
+    <!-- 添加点击次数 -->
+    <update id="add_appinfo_hits" parameterType="Map">
+        update cs_info set
+        apphits = apphits + ${num},
+        appday_hits = ${d_num},
+        appweek_hits = ${w_num},
+        appmonth_hits = ${m_num},
         lasthit_dtime = #{lasthit_dtime}
         where info_id = ${info_id}
     </update>

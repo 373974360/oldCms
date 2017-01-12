@@ -81,6 +81,26 @@ public class InfoBaseRPC {
 	{
 		return InfoBaseManager.getInfoClickCount(info_id);
 	}
+
+	/**
+	 * 根据信息ID得到点击次数
+	 * @param String info_id
+	 * @return String
+	 */
+	public static String getWxInfoClickCount(String info_id)
+	{
+		return InfoBaseManager.getWxInfoClickCount(info_id);
+	}
+
+	/**
+	 * 根据信息ID得到点击次数
+	 * @param String info_id
+	 * @return String
+	 */
+	public static String getAppInfoClickCount(String info_id)
+	{
+		return InfoBaseManager.getAppInfoClickCount(info_id);
+	}
 	
 	/**
 	 * 批量发布静态内容页,根据栏目,站点和发布时间得到信息
@@ -427,6 +447,30 @@ public class InfoBaseRPC {
 	{
 		// TODO 处理点击事件
 		InfoBaseManager.addInfoHits(info_id,num,"");
+	}
+
+	/**
+	 * 添加内容的点击次数
+	 * @param String info_id
+	 * @param String num 递增增加数
+	 * @return boolean
+	 */
+	public static void addWxInfoHits(String info_id,String num)
+	{
+		// TODO 处理点击事件
+		InfoBaseManager.addWxInfoHits(info_id,num,"");
+	}
+
+	/**
+	 * 添加内容的点击次数
+	 * @param String info_id
+	 * @param String num 递增增加数
+	 * @return boolean
+	 */
+	public static void addAppInfoHits(String info_id,String num)
+	{
+		// TODO 处理点击事件
+		InfoBaseManager.addAppInfoHits(info_id,num,"");
 	}
 	
 	/**

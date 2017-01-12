@@ -567,6 +567,26 @@ public class InfoDAO {
 	{
 		 DBManager.update("add_info_hits", m);
 	}
+
+	/**
+	 * 添加内容的点击次数
+	 * @param Map<String,String> m 包含info_id,num 递增增加数,时间
+	 * @return
+	 */
+	public static void addWxInfoHits(Map<String,String> m)
+	{
+		DBManager.update("add_wxinfo_hits", m);
+	}
+
+	/**
+	 * 添加内容的点击次数
+	 * @param Map<String,String> m 包含info_id,num 递增增加数,时间
+	 * @return
+	 */
+	public static void addAppInfoHits(Map<String,String> m)
+	{
+		DBManager.update("add_appinfo_hits", m);
+	}
 	
 	/**
 	 * 清空点击次数
@@ -586,6 +606,26 @@ public class InfoDAO {
 	public static String getInfoClickCount(String info_id)
 	{
 		return DBManager.getString("getInfoClickCount", info_id);
+	}
+
+	/**
+	 * 根据信息ID得到点击次数
+	 * @param String info_id
+	 * @return String
+	 */
+	public static String getWxInfoClickCount(String info_id)
+	{
+		return DBManager.getString("getWxInfoClickCount", info_id);
+	}
+
+	/**
+	 * 根据信息ID得到点击次数
+	 * @param String info_id
+	 * @return String
+	 */
+	public static String getAppInfoClickCount(String info_id)
+	{
+		return DBManager.getString("getAppInfoClickCount", info_id);
 	}
 	
 	/**

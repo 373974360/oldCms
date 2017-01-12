@@ -1595,6 +1595,94 @@ public class InfoBaseManager {
     }
 
     /**
+     * 添加内容的点击次数
+     * @param String info_id
+     * @param String num 递增增加数
+     * @return boolean
+     */
+    public static void addWxInfoHits(String info_id,String num, String lastHit_date)
+    {
+        Calendar cal = GregorianCalendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar currentCal = GregorianCalendar.getInstance();
+        try{
+            Date date = sdf.parse(lastHit_date);
+            cal.setTime(date);
+        } catch (ParseException e) {
+            // 解析失败后,默认最后修改时间为当前时间
+            cal.setTime(currentCal.getTime());
+        }
+
+        Map<String,String> m = new HashMap<String,String>();
+        m.put("info_id", info_id);
+        m.put("num", num); // 总点击增加数目
+
+        String month_num = num; // 月点击设置
+        if(currentCal.get(Calendar.MONTH) == cal.get(Calendar.MONTH) ){
+            month_num = "month_hits + " + num;
+        }
+        m.put("m_num", month_num);
+
+        String week_num = num; //周点击设置
+        if(currentCal.get(Calendar.WEEK_OF_YEAR) == cal.get(Calendar.WEEK_OF_YEAR)) {
+            week_num = "week_hits + " + num;
+        }
+        m.put("w_num", week_num);
+
+        String day_num = num; // 日点击设置
+        if(currentCal.get(Calendar.DAY_OF_YEAR) == cal.get(Calendar.DAY_OF_YEAR)) {
+            day_num = "day_hits + " + num;
+        }
+        m.put("d_num", day_num);
+        m.put("lasthit_dtime", DateUtil.getDateTimeString(currentCal.getTime()));
+        InfoDAO.addInfoHits(m);
+    }
+
+    /**
+     * 添加内容的点击次数
+     * @param String info_id
+     * @param String num 递增增加数
+     * @return boolean
+     */
+    public static void addAppInfoHits(String info_id,String num, String lastHit_date)
+    {
+        Calendar cal = GregorianCalendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar currentCal = GregorianCalendar.getInstance();
+        try{
+            Date date = sdf.parse(lastHit_date);
+            cal.setTime(date);
+        } catch (ParseException e) {
+            // 解析失败后,默认最后修改时间为当前时间
+            cal.setTime(currentCal.getTime());
+        }
+
+        Map<String,String> m = new HashMap<String,String>();
+        m.put("info_id", info_id);
+        m.put("num", num); // 总点击增加数目
+
+        String month_num = num; // 月点击设置
+        if(currentCal.get(Calendar.MONTH) == cal.get(Calendar.MONTH) ){
+            month_num = "month_hits + " + num;
+        }
+        m.put("m_num", month_num);
+
+        String week_num = num; //周点击设置
+        if(currentCal.get(Calendar.WEEK_OF_YEAR) == cal.get(Calendar.WEEK_OF_YEAR)) {
+            week_num = "week_hits + " + num;
+        }
+        m.put("w_num", week_num);
+
+        String day_num = num; // 日点击设置
+        if(currentCal.get(Calendar.DAY_OF_YEAR) == cal.get(Calendar.DAY_OF_YEAR)) {
+            day_num = "day_hits + " + num;
+        }
+        m.put("d_num", day_num);
+        m.put("lasthit_dtime", DateUtil.getDateTimeString(currentCal.getTime()));
+        InfoDAO.addInfoHits(m);
+    }
+
+    /**
      * 根据站点删除所有信息
      * @param String site_id
      * @param String delete_cat_id 要删除的栏目ID，用于根据栏目ID删除信息
@@ -1669,6 +1757,26 @@ public class InfoBaseManager {
     public static String getInfoClickCount(String info_id)
     {
         return InfoDAO.getInfoClickCount(info_id);
+    }
+
+    /**
+     * 根据信息ID得到点击次数
+     * @param String info_id
+     * @return String
+     */
+    public static String getWxInfoClickCount(String info_id)
+    {
+        return InfoDAO.getWxInfoClickCount(info_id);
+    }
+
+    /**
+     * 根据信息ID得到点击次数
+     * @param String info_id
+     * @return String
+     */
+    public static String getAppInfoClickCount(String info_id)
+    {
+        return InfoDAO.getAppInfoClickCount(info_id);
     }
 
     /**
