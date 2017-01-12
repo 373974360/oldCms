@@ -7,6 +7,7 @@ import org.jasig.cas.client.validation.Cas20ProxyReceivingTicketValidationFilter
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.security.Principal;
 
 /**
  * @Description:
@@ -19,6 +20,9 @@ public class MyCasProxy extends Cas20ProxyReceivingTicketValidationFilter {
     protected void onFailedValidation(HttpServletRequest request,
                                       HttpServletResponse response) {
         System.out.println("ticket 验证失败");
+        String remoteUser = request.getRemoteUser();
+        Principal userPrincipal = request.getUserPrincipal();
+        System.out.println(userPrincipal.getName() +"***********************");
         super.onFailedValidation(request, response);
     }
 

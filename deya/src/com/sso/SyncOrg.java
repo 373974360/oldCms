@@ -15,20 +15,19 @@ import org.dom4j.Element;
 
 import java.io.*;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 /**
- * @Description:
+ * @Description: 同步银海组织机构跟用户
  * @User: program
  * @Date: 2016/11/29
  */
 public class SyncOrg {
 
-    private static String wsdlUrl = "http://118.112.188.111:6537/Portal/services/syncOrgOrUserService?wsdl";
+    private static String wsdlUrl = "http://10.190.5.15:7009/cdplat/services/syncOrgOrUserService?wsdl";
     private static String targetNamespace = "http://service.deliverdata2oa.oa.subSystem.yinhai.com/";
     private static String methodName = "doSync";
     private static String paramName = "paramXml";
@@ -37,9 +36,9 @@ public class SyncOrg {
     public static String getparamValue() {
         StringBuilder _xmlstr = new StringBuilder();
         _xmlstr.append("<![CDATA[<data><reqident>").append("TD96358447").append("</reqident>");
-        if(syncType.equals("dept")){
+        if (syncType.equals("dept")) {
             _xmlstr.append("<txcode>SYSNC_DEPART</txcode>");
-        }else{
+        } else {
             _xmlstr.append("<txcode>SYSNC_USER</txcode>");
         }
         _xmlstr.append("<txdate/>");
@@ -64,7 +63,7 @@ public class SyncOrg {
      * 用http方式调用webservices
      */
     public static void syncOrgDeptOrUser(String type) {
-        System.out.println("***********************同步" + syncType + "开始***"+ DateUtil.getCurrentDateTime()+"***********************");
+        System.out.println("***********************同步" + syncType + "开始***" + DateUtil.getCurrentDateTime() + "***********************");
         //服务的地址
         URL wsUrl = null;
         HttpURLConnection conn = null;
@@ -94,16 +93,16 @@ public class SyncOrg {
                 }
                 String s = sb.toString();
                 s = s.replaceAll("&lt;", "<").replaceAll("&gt;", ">");
-                closeConnect(conn,is,os);
+                closeConnect(conn, is, os);
                 getResult(s);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            closeConnect(conn,is,os);
+            closeConnect(conn, is, os);
         } finally {
-            closeConnect(conn,is,os);
+            closeConnect(conn, is, os);
         }
-        System.out.println("***********************同步" + syncType + "结束****"+ DateUtil.getCurrentDateTime()+"****************************");
+        System.out.println("***********************同步" + syncType + "结束****" + DateUtil.getCurrentDateTime() + "****************************");
     }
 
     public static String getSoapStr() {
@@ -125,7 +124,7 @@ public class SyncOrg {
             s = s.substring(s.indexOf("<?xml"), s.indexOf("</return>"));
             Document xmlDoc = DocumentHelper.parseText(s);
             Element rootElement = xmlDoc.getRootElement();
-            if(syncType.equals("dept")){
+            if (syncType.equals("dept")) {
                 Iterator departs = rootElement.elementIterator("depart");
                 List<DeptBean> deptBeanList = new ArrayList<>();
                 if (departs != null) {
@@ -143,32 +142,32 @@ public class SyncOrg {
                         String orgidpath = depart.element("orgidpath").getTextTrim();
 
                         DeptBean deptBean = new DeptBean();
-                        if(orgid != null && !"".equals(orgid) && !"null".equals(orgid)){
+                        if (orgid != null && !"".equals(orgid) && !"null".equals(orgid)) {
                             deptBean.setDept_id(Integer.parseInt(orgid));
                         }
-                        if(orgname != null && !"".equals(orgname) && !"null".equals(orgname)){
+                        if (orgname != null && !"".equals(orgname) && !"null".equals(orgname)) {
                             deptBean.setDept_name(orgname);
                         }
-                        if(orgpid != null && !"".equals(orgpid) && !"null".equals(orgpid)){
+                        if (orgpid != null && !"".equals(orgpid) && !"null".equals(orgpid)) {
                             deptBean.setParent_id(Integer.parseInt(orgpid));
                         }
-                        if(orgtype != null && !"".equals(orgtype) && !"null".equals(orgtype)){
+                        if (orgtype != null && !"".equals(orgtype) && !"null".equals(orgtype)) {
                             deptBean.setDept_code(orgtype);
                         }
-                        if(orgnamepath != null && !"".equals(orgnamepath) && !"null".equals(orgnamepath)){
+                        if (orgnamepath != null && !"".equals(orgnamepath) && !"null".equals(orgnamepath)) {
                             deptBean.setAddress(orgnamepath);
                         }
-                        if(orgidpath != null && !"".equals(orgidpath) && !"null".equals(orgidpath)){
+                        if (orgidpath != null && !"".equals(orgidpath) && !"null".equals(orgidpath)) {
                             deptBean.setArea_code(orgidpath);
                         }
-                        if(deptBean.getDept_id() == 1){
+                        if (deptBean.getDept_id() == 1) {
                             deptBean.setParent_id(0);
                         }
                         deptBeanList.add(deptBean);
                     }
                     DeptManager.inserSynctDept(deptBeanList);
                 }
-            }else{
+            } else {
                 Iterator users = rootElement.elementIterator("user");
                 List<UserBean> userBeanList = new ArrayList<UserBean>();
                 List<UserRegisterBean> userRegisterBeanList = new ArrayList<UserRegisterBean>();
@@ -188,40 +187,40 @@ public class SyncOrg {
 
                         UserBean userBean = new UserBean();
                         UserRegisterBean userRegisterBean = new UserRegisterBean();
-                        if(userid != null && !"".equals(userid) && !"null".equals(userid)){
+                        if (userid != null && !"".equals(userid) && !"null".equals(userid)) {
                             userBean.setUser_id(Integer.parseInt(userid));
                             userRegisterBean.setUser_id(Integer.parseInt(userid));
                             userRegisterBean.setRegister_id(Integer.parseInt(userid));
                         }
-                        if(name != null && !"".equals(name) && !"null".equals(name)){
+                        if (name != null && !"".equals(name) && !"null".equals(name)) {
                             userBean.setUser_realname(name);
                             userRegisterBean.setUser_realname(name);
                         }
-                        if(sex != null && !"".equals(sex) && !"null".equals(sex)){
-                            if("男".equals(sex)){
+                        if (sex != null && !"".equals(sex) && !"null".equals(sex)) {
+                            if ("男".equals(sex)) {
                                 userBean.setSex(1);
-                            }else if("女".equals(sex)){
+                            } else if ("女".equals(sex)) {
                                 userBean.setSex(0);
-                            }else{
+                            } else {
                                 userBean.setSex(Integer.parseInt(sex));
                             }
                         }
-                        if(tel != null && !"".equals(tel) && !"null".equals(tel)){
+                        if (tel != null && !"".equals(tel) && !"null".equals(tel)) {
                             userBean.setTel(tel);
                         }
-                        if(directorgid != null && !"".equals(directorgid) && !"null".equals(directorgid)){
+                        if (directorgid != null && !"".equals(directorgid) && !"null".equals(directorgid)) {
                             userBean.setDept_id(Integer.parseInt(directorgid));
                         }
-                        if(loginid != null && !"".equals(loginid) && !"null".equals(loginid)){
+                        if (loginid != null && !"".equals(loginid) && !"null".equals(loginid)) {
                             userRegisterBean.setUsername(loginid);
                         }
                         CryptoTools ct = new CryptoTools();
-                        userRegisterBean.setPassword(ct.encode(RandomStrg.getRandomStr(null,"10")));
+                        userRegisterBean.setPassword(ct.encode(RandomStrg.getRandomStr(null, "10")));
                         userRegisterBean.setRegister_status(0);
                         userBeanList.add(userBean);
                         userRegisterBeanList.add(userRegisterBean);
                     }
-                    UserManager.insertSyncUser(userBeanList,userRegisterBeanList);
+                    UserManager.insertSyncUser(userBeanList, userRegisterBeanList);
                 }
             }
         } catch (DocumentException e) {
@@ -229,7 +228,7 @@ public class SyncOrg {
         }
     }
 
-    public static void closeConnect(HttpURLConnection conn,InputStream is,OutputStream os){
+    public static void closeConnect(HttpURLConnection conn, InputStream is, OutputStream os) {
         try {
             if (is != null) {
                 is.close();
@@ -240,8 +239,7 @@ public class SyncOrg {
             if (conn != null) {
                 conn.disconnect();
             }
-        }
-        catch (IOException e1) {
+        } catch (IOException e1) {
             e1.printStackTrace();
         }
     }

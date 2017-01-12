@@ -283,6 +283,7 @@ public class SurveyService implements ISyncCatch{
 		String survey_id = UUID.randomUUID().toString();
 		sb.setAdd_time(DateUtil.getCurrentDateTime());
 		sb.setS_id(survey_id);
+		sb.setIs_delete(0);
 		
 		//首先插入问卷主表
 		if(SurveyDAO.insertSurvey(sb,stl))

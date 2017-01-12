@@ -28,7 +28,7 @@
 			getSurveyCategoryName();//得到问卷分类名称
 			var defaultSurveyBean = SurveyRPC.getSurveyBean(s_id);			
 			$("#survey").autoFill(defaultSurveyBean);	
-			KE.html("verdict",defaultSurveyBean.verdict);
+			//KE.html("verdict",defaultSurveyBean.verdict);
 			if(defaultSurveyBean.spacing_interval != "")
 			{
 				$("#spacing_type").val(defaultSurveyBean.spacing_interval.substring(0,1));
@@ -45,7 +45,7 @@
 			init_input();
 			init_FromTabsStyle();
 		}); 
-    init_editer("verdict");
+    //init_editer("verdict");
 		function showCommitTD(flag)
 		{
 			if(flag == 1)

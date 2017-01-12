@@ -2,22 +2,17 @@
 package com.deya.license.tools;
 
 
-import java.security.Key;
-import java.security.spec.AlgorithmParameterSpec;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
 
 import javax.crypto.Cipher;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
 import javax.crypto.spec.IvParameterSpec;
-
-import org.apache.commons.lang3.RandomStringUtils;
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
-
-import com.deya.util.DateUtil;
-import com.deya.util.RandomStrg;
+import java.security.Key;
+import java.security.spec.AlgorithmParameterSpec;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class CryptoTools {
@@ -107,7 +102,8 @@ public class CryptoTools {
         CryptoTools ct = new CryptoTools();
         System.out.println(ct.license("=#=rU65f7rwo/hbgq1f9ppf0sHj62sF65b2URQ0ee8Xth2FyHm8+SqaOL/Ca87j1EbBG8TqgkNs5eo="));
 
-        //System.out.println(ct.decode("=#=ODzJPka+2bU="));
+        System.out.println(ct.decode("=#=52PcmA02CGbKk9Bj3GATNw=="));
+        System.out.println(ct.encode("ywshuiteiLKb."));
 
 
         /*System.out.println(ct.decode("=#=NVgDPsTZx1u8mkVkWu4qP7LYnMswb2Zvy77R8udeaag8GrsDF2Wi1dMLGOZ3pbg/zm6ilcMfB+3j\n" +

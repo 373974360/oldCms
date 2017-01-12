@@ -618,7 +618,7 @@ function getFckeditorValue()
 	var oEditor = FCKeditorAPI.GetInstance('verdict'); 
 	var c = oEditor.GetXHTML(true);
 	$("#verdict").val(c);*/
-	$("#verdict").val(KE.html("verdict"));
+	//$("#verdict").val(KE.html("verdict"));
 }
 
 /**********************属性设置操作　结束*************************************/

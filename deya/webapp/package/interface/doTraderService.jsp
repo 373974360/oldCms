@@ -3,7 +3,7 @@
 <%@page import="java.io.*"%>
 <%@page import="java.net.HttpURLConnection,java.net.URL,java.util.Iterator"%>
 <%!
-	private static String wsdlUrl = "http://118.112.188.111:6504/extrader/services/TraderService?wsdl";
+	private static String wsdlUrl = "http://10.190.5.17:7003/trader/services/TraderService?wsdl";
     private static String targetNamespace = "http://service.core.trader.yinhai.com/";
     private static String methodName = "doTrader";
     private static String paramName = "paramXml";
