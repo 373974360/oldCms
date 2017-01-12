@@ -239,9 +239,9 @@ function initCMSTreeClick()
 				$("#leftMenuTree2").empty();
 				$('#leftMenuTree2').tree({   
 					 checkbox: false,   
-					 url: '/sys/servlet/Category?site_id=' + site_id + '&user_id=0&pid=0',
+					 url: '/sys/cms/category/category.jsp?site_id=' + site_id + '&user_id=0&pid=0',
 					 onBeforeExpand:function(node,param){
-						 $('#leftMenuTree2').tree('options').url = '/sys/servlet/Category?site_id=' + site_id + '&user_id=0&pid=' + node.id;	// change the url
+						 $('#leftMenuTree2').tree('options').url = '/sys/cms/category/category.jsp?site_id=' + site_id + '&user_id=0&pid=' + node.id;	// change the url
 						 //param.myattr = 'test';    // or change request parameter
 					 },               
 					 onClick:function(node){
@@ -484,9 +484,9 @@ function changeSiteId(val){
 		$("#leftMenuTree2").empty();
 		$('#leftMenuTree2').tree({   
 			 checkbox: false,   
-			 url: '/sys/servlet/Category?site_id=' + site_id + '&user_id=0&pid=0',
+			 url: '/sys/cms/category/category.jsp?site_id=' + site_id + '&user_id=0&pid=0',
 			 onBeforeExpand:function(node,param){
-				 $('#leftMenuTree2').tree('options').url = '/sys/servlet/Category?site_id=' + site_id + '&user_id=0&pid=' + node.id;	// change the url
+				 $('#leftMenuTree2').tree('options').url = '/sys/cms/category/category.jsp?site_id=' + site_id + '&user_id=0&pid=' + node.id;	// change the url
 				 //param.myattr = 'test';    // or change request parameter
 			 },               
 			 onClick:function(node){
