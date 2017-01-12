@@ -111,7 +111,7 @@
 
 
     <!-- 插入部门 -->
-    <insert id="insertDeptBatch" parameterType="List">
+    <!--<insert id="insertDeptBatch" parameterType="List">
         insert into cs_org_dept(dept_id,parent_id,dept_fullname,dept_name,tree_position,deptlevel_value,
         area_code,dept_code,functions,tel,fax,email,address,dept_memo,dept_sort) values
         <foreach collection ="list" item ="item" index ="index" separator =",">
@@ -120,7 +120,31 @@
             #{item.functions,,jdbcType=VARCHAR},#{item.tel,,jdbcType=VARCHAR},#{item.fax,,jdbcType=VARCHAR},#{item.email,,jdbcType=VARCHAR},#{item.address,,jdbcType=VARCHAR},
             #{item.dept_memo,,jdbcType=VARCHAR},#{item.dept_sort,,jdbcType=INTEGER})
         </foreach>
-    </insert>
+    </insert>-->
+
+	<insert id="insertDeptBatch" parameterType="java.util.List">
+		insert into cs_org_dept(dept_id,parent_id,dept_fullname,dept_name,tree_position,deptlevel_value,
+		area_code,dept_code,functions,tel,fax,email,address,dept_memo,dept_sort)
+		<foreach collection="list" item="item" index="index" separator="union all" >
+			(select
+			#{item.dept_id,,jdbcType=INTEGER},#{item.parent_id,,jdbcType=INTEGER},#{item.dept_fullname,,jdbcType=VARCHAR},#{item.dept_name,,jdbcType=VARCHAR},
+			#{item.tree_position,,jdbcType=VARCHAR},#{item.deptlevel_value,,jdbcType=INTEGER},#{item.area_code,,jdbcType=VARCHAR},#{item.dept_code,,jdbcType=VARCHAR},
+			#{item.functions,,jdbcType=VARCHAR},#{item.tel,,jdbcType=VARCHAR},#{item.fax,,jdbcType=VARCHAR},#{item.email,,jdbcType=VARCHAR},#{item.address,,jdbcType=VARCHAR},
+			#{item.dept_memo,,jdbcType=VARCHAR},#{item.dept_sort,,jdbcType=INTEGER}
+			from dual)
+		</foreach>
+	</insert>
+
+
+	<!--<insert id="insertDeptBatch" parameterType="List">
+		insert into cs_org_dept(dept_id,parent_id,dept_name,tree_position
+		area_code,dept_code,address) values
+		<foreach collection ="list" item ="item" index ="index" separator =",">
+			(#{item.dept_id,,jdbcType=INTEGER},#{item.parent_id,,jdbcType=INTEGER},#{item.dept_name,,jdbcType=VARCHAR},
+			#{item.tree_position,,jdbcType=VARCHAR},#{item.area_code,,jdbcType=VARCHAR},#{item.dept_code,,jdbcType=VARCHAR},
+			#{item.address,,jdbcType=VARCHAR})
+		</foreach>
+	</insert>-->
 
     <delete id="deleteDept">
         delete from cs_org_dept

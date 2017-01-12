@@ -301,7 +301,7 @@
     <!--********************************同步银海组织机构sql开始**********************************************-->
 
     <!-- 插入人员 -->
-    <insert id="insertUserBatch" parameterType="List">
+    <!--<insert id="insertUserBatch" parameterType="List">
         insert into cs_org_user(user_id,dept_id,userlevel_value,user_realname,user_aliasname,user_photo,sex,birthday,
         nation,age,is_marriage,natives,functions,degree,colleges,graduation_time,professional,health,tel,phone,email,
         address,postcode,idcard,user_status,resume,user_memo) values
@@ -313,7 +313,28 @@
             #{item.health,,jdbcType=VARCHAR},#{item.tel,,jdbcType=VARCHAR},#{item.phone,,jdbcType=VARCHAR},#{item.email,,jdbcType=VARCHAR},#{item.address,,jdbcType=VARCHAR},
             #{item.postcode,,jdbcType=VARCHAR},#{item.idcard,,jdbcType=VARCHAR},#{item.user_status,,jdbcType=INTEGER},#{item.resume,,jdbcType=VARCHAR},#{item.user_memo,,jdbcType=VARCHAR})
         </foreach>
-    </insert>
+    </insert>-->
+	<insert id="insertUserBatch" parameterType="List">
+		insert into cs_org_user(user_id,dept_id,userlevel_value,user_realname,user_aliasname,user_photo,sex,birthday,
+		nation,age,is_marriage,natives,functions,degree,colleges,graduation_time,professional,health,tel,phone,email,
+		address,postcode,idcard,user_status,resume,user_memo)
+		<foreach collection ="list" item ="item" index ="index" separator ="union all">
+			(select
+			#{item.user_id,,jdbcType=INTEGER},#{item.dept_id,,jdbcType=INTEGER},#{item.userlevel_value,,jdbcType=INTEGER},#{item.user_realname,,jdbcType=VARCHAR},
+			#{item.user_aliasname,,jdbcType=VARCHAR},#{item.user_photo,,jdbcType=VARCHAR},#{item.sex,,jdbcType=INTEGER},#{item.birthday,,jdbcType=VARCHAR},
+			#{item.nation,,jdbcType=VARCHAR},#{item.age,,jdbcType=INTEGER},#{item.is_marriage,,jdbcType=INTEGER},#{item.natives,,jdbcType=VARCHAR},#{item.functions,,jdbcType=VARCHAR},
+			#{item.degree,,jdbcType=VARCHAR},#{item.colleges,,jdbcType=VARCHAR},#{item.graduation_time,,jdbcType=VARCHAR},#{item.professional,,jdbcType=VARCHAR},
+			#{item.health,,jdbcType=VARCHAR},#{item.tel,,jdbcType=VARCHAR},#{item.phone,,jdbcType=VARCHAR},#{item.email,,jdbcType=VARCHAR},#{item.address,,jdbcType=VARCHAR},
+			#{item.postcode,,jdbcType=VARCHAR},#{item.idcard,,jdbcType=VARCHAR},#{item.user_status,,jdbcType=INTEGER},#{item.resume,,jdbcType=VARCHAR},#{item.user_memo,,jdbcType=VARCHAR}
+			 from dual)
+		</foreach>
+	</insert>
+	<!--<insert id="insertUserBatch" parameterType="List">
+		insert into cs_org_user(user_id,dept_id,user_realname,sex) values
+		<foreach collection ="list" item ="item" index ="index" separator =",">
+			(#{item.user_id,,jdbcType=INTEGER},#{item.dept_id,,jdbcType=INTEGER},#{item.user_realname,,jdbcType=VARCHAR},#{item.sex,,jdbcType=INTEGER})
+		</foreach>
+	</insert>-->
 
     <delete id="deleteUser">
         delete from cs_org_user
@@ -323,10 +344,12 @@
 
 
     <insert id="insertUserRegisterBatch" parameterType="List">
-        insert into cs_org_register(register_id,user_id,username,password,register_status) values
-        <foreach collection ="list" item ="item" index ="index" separator =",">
-            (#{item.register_id,,jdbcType=INTEGER},#{item.user_id,,jdbcType=INTEGER},#{item.username,,jdbcType=VARCHAR},
-            #{item.password,,jdbcType=VARCHAR},#{item.register_status,,jdbcType=INTEGER})
+        insert into cs_org_register(register_id,user_id,username,password,register_status)
+        <foreach collection ="list" item ="item" index ="index" separator ="union all">
+			(select
+            #{item.register_id,,jdbcType=INTEGER},#{item.user_id,,jdbcType=INTEGER},#{item.username,,jdbcType=VARCHAR},
+            #{item.password,,jdbcType=VARCHAR},#{item.register_status,,jdbcType=INTEGER}
+			from dual)
         </foreach >
     </insert>
 

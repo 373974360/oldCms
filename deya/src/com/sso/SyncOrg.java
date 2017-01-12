@@ -27,7 +27,7 @@ import java.util.List;
  */
 public class SyncOrg {
 
-    private static String wsdlUrl = "http://10.190.5.15:7009/cdplat/services/syncOrgOrUserService?wsdl";
+    private static String wsdlUrl = "http://10.190.5.15:12345/cdplat/services/syncOrgOrUserService?wsdl";
     private static String targetNamespace = "http://service.deliverdata2oa.oa.subSystem.yinhai.com/";
     private static String methodName = "doSync";
     private static String paramName = "paramXml";
@@ -186,15 +186,59 @@ public class SyncOrg {
                         String directorgid = user.element("directorgid").getTextTrim();
 
                         UserBean userBean = new UserBean();
+                        /*userBean.setAddress("");
+                        userBean.setAge(20+"");
+                        userBean.setBirthday("");
+                        userBean.setColleges("");
+                        userBean.setDegree("");
+                        userBean.setEmail("");
+                        userBean.setFunctions("");
+                        userBean.setGraduation_time("");
+                        userBean.setHealth("");
+                        userBean.setIdcard("");
+                        userBean.setIs_marriage(0);
+                        userBean.setIs_publish(1);
+                        userBean.setNation("");
+                        userBean.setNatives("");
+                        userBean.setPhone("");
+                        userBean.setPhoto("");
+                        userBean.setPolitics_status("");
+                        userBean.setPostcode("");
+                        userBean.setProfessional("");
+                        userBean.setResume("");
+                        userBean.setSex(0);
+                        userBean.setSort(999);
+                        userBean.setSummary("");
+                        userBean.setTel("");
+                        userBean.setTo_work_time("");
+                        userBean.setUser_aliasname("");
+                        userBean.setUser_memo("");
+                        userBean.setUser_photo("");
+                        userBean.setUser_realname("");
+                        userBean.setUser_status(0);
+                        userBean.setUserlevel_value(1);
+                        userBean.setWork_desc("");*/
                         UserRegisterBean userRegisterBean = new UserRegisterBean();
+                        /*userRegisterBean.setUser_realname("");
+                        userRegisterBean.setPassword("");
+                        userRegisterBean.setRegister_id(0);
+                        userRegisterBean.setRegister_status(0);
+                        userRegisterBean.setUser_id(0);
+                        userRegisterBean.setUsername("");*/
                         if (userid != null && !"".equals(userid) && !"null".equals(userid)) {
                             userBean.setUser_id(Integer.parseInt(userid));
                             userRegisterBean.setUser_id(Integer.parseInt(userid));
                             userRegisterBean.setRegister_id(Integer.parseInt(userid));
+                        }else{
+                            System.out.println("用户ID不能为空！！！");
+                            break;
                         }
                         if (name != null && !"".equals(name) && !"null".equals(name)) {
                             userBean.setUser_realname(name);
                             userRegisterBean.setUser_realname(name);
+                        }else{
+                            userBean.setUser_realname("");
+                            userRegisterBean.setUser_realname("");
                         }
                         if (sex != null && !"".equals(sex) && !"null".equals(sex)) {
                             if ("男".equals(sex)) {
@@ -207,12 +251,19 @@ public class SyncOrg {
                         }
                         if (tel != null && !"".equals(tel) && !"null".equals(tel)) {
                             userBean.setTel(tel);
+                        }else{
+                            userBean.setTel("");
                         }
                         if (directorgid != null && !"".equals(directorgid) && !"null".equals(directorgid)) {
                             userBean.setDept_id(Integer.parseInt(directorgid));
+                        }else{
+                            userBean.setDept_id(1);
                         }
                         if (loginid != null && !"".equals(loginid) && !"null".equals(loginid)) {
                             userRegisterBean.setUsername(loginid);
+                        }else{
+                            System.out.println("登录名不能为空！！！");
+                            break;
                         }
                         CryptoTools ct = new CryptoTools();
                         userRegisterBean.setPassword(ct.encode(RandomStrg.getRandomStr(null, "10")));
@@ -220,6 +271,10 @@ public class SyncOrg {
                         userBeanList.add(userBean);
                         userRegisterBeanList.add(userRegisterBean);
                     }
+                    System.out.println(userBeanList.size() + "***************");
+                    System.out.println(userRegisterBeanList.size()+"********************");
+                    //userBeanList = userBeanList.subList(0,1);
+                    //userRegisterBeanList = userRegisterBeanList.subList(0,1);
                     UserManager.insertSyncUser(userBeanList, userRegisterBeanList);
                 }
             }
