@@ -21,6 +21,18 @@ function addInfoData()
 	no1 = infoNextId;
 	bean.id = infoNextId;
 	bean.info_id = infoNextId;
+
+    var publish_source = "";
+    $("input[name='publish_source']:checked").each(function(){
+        publish_source += "," + $(this).val() ;
+    });
+    if(publish_source.length > 1){
+        publish_source = publish_source.substr(1);
+    }else{
+        alert("发布渠道不能为空！");
+        return;
+    }
+    bean.publish_source = publish_source;
 	
 	setCateClassToBean(bean);
 	if(setGKNumHandlForInsert(bean) == false)
@@ -48,6 +60,18 @@ function updateInfoData()
 	}else{
 		bean.step_id = 0;
 	}
+
+    var publish_source = "";
+    $("input[name='publish_source']:checked").each(function(){
+        publish_source += "," + $(this).val() ;
+    });
+    if(publish_source.length > 1){
+        publish_source = publish_source.substr(1);
+    }else{
+        alert("发布渠道不能为空！");
+        return;
+    }
+    bean.publish_source = publish_source;
 	setCateClassToBean(bean);
 	
 	publicSaveInfoEvent(bean,"link","update");	

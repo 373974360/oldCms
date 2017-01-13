@@ -23,6 +23,18 @@ function addInfoData()
 
     var isIpLimit = $(":radio[name='isIpLimit'][checked]").val();
     bean.isIpLimit = (isIpLimit == null ? "0" : isIpLimit);
+
+    var publish_source = "";
+    $("input[name='publish_source']:checked").each(function(){
+        publish_source += "," + $(this).val() ;
+    });
+    if(publish_source.length > 1){
+        publish_source = publish_source.substr(1);
+    }else{
+        alert("发布渠道不能为空！");
+        return;
+    }
+    bean.publish_source = publish_source;
 	
 	infoNextId = 0;
 	if(infoIdGoble == 0){
@@ -70,6 +82,18 @@ function updateInfoData()
 	}else{
 		bean.step_id = 0;
 	}
+
+    var publish_source = "";
+    $("input[name='publish_source']:checked").each(function(){
+        publish_source += "," + $(this).val() ;
+    });
+    if(publish_source.length > 1){
+        publish_source = publish_source.substr(1);
+    }else{
+        alert("发布渠道不能为空！");
+        return;
+    }
+    bean.publish_source = publish_source;
 	
 	// 视频的格式和非空检查
 	if(check_videoPath()==0)

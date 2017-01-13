@@ -1,20 +1,12 @@
 package com.deya.wcm.template.velocity.data;
 //最新的和cvs上同步
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import com.deya.util.DateUtil;
 import com.deya.util.FormatUtil;
 import com.deya.wcm.bean.cms.category.CateCurPositionBean;
 import com.deya.wcm.bean.cms.category.CategoryBean;
 import com.deya.wcm.bean.cms.category.SMCategoryBean;
-import com.deya.wcm.bean.cms.count.CmsCountBean;
-import com.deya.wcm.bean.cms.count.InfoAccessBean;
-import com.deya.wcm.bean.cms.count.InfoCountBean;
-import com.deya.wcm.bean.cms.count.SiteCountBean;
-import com.deya.wcm.bean.cms.count.SiteInfoTuisongBean;
+import com.deya.wcm.bean.cms.count.*;
 import com.deya.wcm.bean.cms.info.*;
 import com.deya.wcm.bean.control.SiteBean;
 import com.deya.wcm.bean.template.TurnPageBean;
@@ -43,6 +35,11 @@ import com.deya.wcm.services.zwgk.info.GKInfoManager;
 import com.deya.wcm.services.zwgk.node.GKNodeCateManager;
 import com.deya.wcm.services.zwgk.node.GKNodeManager;
 import com.deya.wcm.services.zwgk.ysqgk.YsqgkInfoManager;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class InfoUtilData {
 
@@ -759,6 +756,15 @@ public class InfoUtilData {
                 if(!"".equals(sort_type) && !sort_type.startsWith("$sort_type") && FormatUtil.isValiditySQL(sort_type))
                 {
                     con_map.put("sort_type", sort_type);
+                }
+            }
+            if(tempA[i].toLowerCase().startsWith("publish_source="))
+            {
+                String publish_source = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=")+1));
+
+                if(!"".equals(publish_source) && !publish_source.startsWith("$publish_source") && FormatUtil.isValiditySQL(publish_source))
+                {
+                    con_map.put("publish_source", publish_source);
                 }
             }
         }

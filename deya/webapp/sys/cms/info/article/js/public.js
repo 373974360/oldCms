@@ -50,6 +50,7 @@ function reloadPublicInfo()
 	setPreTitle();
 	iniSQbox();
 	iniOpt();
+    setPublishSource();
 	
 	getFirstChileCateID();//如果点击的是枝节点，默认找到第一个叶节点
 	
@@ -100,6 +101,33 @@ function titleColorKey()
 			$(this).css("background","");
 		}
 	});
+}
+
+function setPublishSource(){
+    if(defaultBean.publish_source != "")
+    {
+		if(defaultBean.publish_source.indexOf('pc') < 0 ){
+            $("input[name='publish_source']").each(function(){
+                if($(this).val() == "pc"){
+                	$(this).removeAttr("checked");
+				}
+            });
+		}
+        if(defaultBean.publish_source.indexOf('wx') < 0 ){
+            $("input[name='publish_source']").each(function(){
+                if($(this).val() == "wx"){
+                    $(this).removeAttr("checked");
+                }
+            });
+        }
+        if(defaultBean.publish_source.indexOf('app') < 0 ){
+            $("input[name='publish_source']").each(function(){
+                if($(this).val() == "app"){
+                    $(this).removeAttr("checked");
+                }
+            });
+        }
+    }
 }
 
 function getTagsForTitle()

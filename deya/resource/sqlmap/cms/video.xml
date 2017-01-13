@@ -51,6 +51,7 @@
 			i.site_id,
 			i.i_ver,
 			i.is_pic,
+			i.publish_source,
 			v.att_id,
 			v.video_path,
 			v.play_time,

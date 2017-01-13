@@ -308,7 +308,7 @@
         is_am_tupage = ${is_am_tupage},
         tupage_num =${tupage_num},
         info_level =#{info_level},
-        isIpLimit=#{isIpLimit}
+        isIpLimit=#{isIpLimit},
         publish_source=#{publish_source}
         where info_id=${info_id}
     </update>

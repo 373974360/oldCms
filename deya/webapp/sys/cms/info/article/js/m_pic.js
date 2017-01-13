@@ -22,6 +22,17 @@ function addPicInfo()
     var isIpLimit = $(":radio[name='isIpLimit'][checked]").val();
     bean.isIpLimit = (isIpLimit == null ? "0" : isIpLimit);
 
+    var publish_source = "";
+    $("input[name='publish_source']:checked").each(function(){
+        publish_source += "," + $(this).val() ;
+    });
+    if(publish_source.length > 1){
+        publish_source = publish_source.substr(1);
+    }else{
+        alert("发布渠道不能为空！");
+        return;
+    }
+    bean.publish_source = publish_source;
 	infoNextId = 0;
 	if(infoIdGoble == 0){
 		infoNextId = InfoBaseRPC.getInfoId();
@@ -69,6 +80,19 @@ function updatePicInfo()
     bean.info_level = (info_level == null ? "B" : info_level);
     var isIpLimit = $(":radio[name='isIpLimit'][checked]").val();
     bean.isIpLimit = (isIpLimit == null ? "0" : isIpLimit);
+
+    var publish_source = "";
+    $("input[name='publish_source']:checked").each(function(){
+        publish_source += "," + $(this).val() ;
+    });
+    if(publish_source.length > 1){
+        publish_source = publish_source.substr(1);
+    }else{
+        alert("发布渠道不能为空！");
+        return;
+    }
+    bean.publish_source = publish_source;
+
 	setCateClassToBean(bean);
 	publicSaveInfoEvent(bean,"pic","update");	
 }

@@ -81,6 +81,14 @@ if(model == null || !model.matches("[0-9]*")){
 
 <table id="" class="table_form" border="0" cellpadding="0" cellspacing="0">
 	<tbody>
+	    <tr>
+            <th><span class="f_red">*</span>发布渠道：</th>
+            <td>
+                <input  name="publish_source" type="checkbox" class="" value="pc" checked="checked"  />网站&nbsp;&nbsp;&nbsp;&nbsp;
+                <input  name="publish_source" type="checkbox" class="" value="wx" checked="checked" />微信&nbsp;&nbsp;&nbsp;&nbsp;
+                <input  name="publish_source" type="checkbox" class="" value="app" checked="checked" />APP&nbsp;&nbsp;&nbsp;&nbsp;
+            </td>
+        </tr>
 		<tr>
 			<th><span class="f_red">*</span>信息标题：</th>
 			<td>

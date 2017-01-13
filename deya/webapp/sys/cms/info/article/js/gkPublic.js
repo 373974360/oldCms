@@ -67,6 +67,33 @@ function reloadPublicGKInfo()
 	});
 }
 
+function setPublishSource(){
+    if(defaultBean.publish_source != "")
+    {
+        if(defaultBean.publish_source.indexOf('pc') < 0 ){
+            $("input[name='publish_source']").each(function(){
+                if($(this).val() == "pc"){
+                    $(this).removeAttr("checked");
+                }
+            });
+        }
+        if(defaultBean.publish_source.indexOf('wx') < 0 ){
+            $("input[name='publish_source']").each(function(){
+                if($(this).val() == "wx"){
+                    $(this).removeAttr("checked");
+                }
+            });
+        }
+        if(defaultBean.publish_source.indexOf('app') < 0 ){
+            $("input[name='publish_source']").each(function(){
+                if($(this).val() == "app"){
+                    $(this).removeAttr("checked");
+                }
+            });
+        }
+    }
+}
+
 //修改信息时页面加载方法
 function publicReloadUpdateGKInfos()
 {	
@@ -100,6 +127,7 @@ function publicReloadUpdateGKInfos()
 	showFocusWares(infoid);
 	getGKResFileList(infoid);
 	showCatId(defaultBean.cat_id);
+    setPublishSource();
 }
 
 //加载数据字典项

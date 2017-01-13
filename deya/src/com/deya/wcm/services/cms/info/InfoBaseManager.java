@@ -1635,7 +1635,7 @@ public class InfoBaseManager {
         }
         m.put("d_num", day_num);
         m.put("lasthit_dtime", DateUtil.getDateTimeString(currentCal.getTime()));
-        InfoDAO.addInfoHits(m);
+        InfoDAO.addWxInfoHits(m);
     }
 
     /**
@@ -1679,7 +1679,7 @@ public class InfoBaseManager {
         }
         m.put("d_num", day_num);
         m.put("lasthit_dtime", DateUtil.getDateTimeString(currentCal.getTime()));
-        InfoDAO.addInfoHits(m);
+        InfoDAO.addAppInfoHits(m);
     }
 
     /**
