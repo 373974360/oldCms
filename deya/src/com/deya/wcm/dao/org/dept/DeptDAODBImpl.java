@@ -364,15 +364,6 @@ public class DeptDAODBImpl implements IDeptDAO{
 
     @Override
     public boolean inserSynctDept(List<DeptBean> deptList) {
-        if(deptList != null && deptList.size() > 0 ){
-            for (DeptBean deptBean : deptList) {
-                if(deptBean.getTree_position() != null && !"".equals(deptBean.getTree_position())){
-                    deptBean.setTree_position(deptBean.getTree_position()+ deptBean.getDept_id() + "$");
-                }else{
-                    deptBean.setTree_position("$" + deptBean.getDept_id() + "$");
-                }
-            }
-        }
         if(DBManager.delete("deleteDept",null)){
             if(DBManager.insert("insertDeptBatch", deptList))
             {

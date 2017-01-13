@@ -26,8 +26,10 @@ var lab_num = "<%=lab_num%>";
 if(dept_id == "null" || dept_id == "")
 {
 	var json_data = eval(DeptRPC.getDeptTreeByUser());	
-	if(json_data != null)
-		dept_id = json_data[0].id;
+	if(json_data != null && json_data.length != 0){
+        dept_id = json_data[0].id;
+	}
+
 }
 
 $(document).ready(function(){

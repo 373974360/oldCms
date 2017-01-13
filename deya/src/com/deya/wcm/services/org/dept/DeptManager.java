@@ -820,18 +820,6 @@ public class DeptManager implements ISyncCatch{
      * @return boolean
      */
     public static boolean inserSynctDept(List<DeptBean> deptList) {
-        DeptBean parent = null;
-        Map<Integer,DeptBean> map = new HashMap<>();
-        for (DeptBean bean : deptList) {
-            map.put(bean.getDept_id(),bean);
-        }
-        for (DeptBean bean : deptList) {
-            parent = map.get(bean.getParent_id());
-            if(parent != null){
-                bean.setTree_position(parent.getTree_position());
-            }
-        }
-
         if (deptDao.inserSynctDept(deptList)) {
             reloadDept();
             return true;
