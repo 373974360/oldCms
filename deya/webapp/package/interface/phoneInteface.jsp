@@ -1,8 +1,8 @@
 <%@ page contentType="application/json; charset=utf-8"%>
-<%@ page language="java" import="java.util.*,com.deya.wcm.services.cms.info.*,org.w3c.dom.Node,com.deya.util.xml.*,com.deya.wcm.bean.template.TurnPageBean" %>
-<%@page import="com.deya.wcm.bean.cms.info.*,com.deya.wcm.services.system.formodel.*,com.deya.wcm.services.zwgk.info.*,com.deya.wcm.bean.cms.category.CategoryBean"%>
-<%@page import="com.deya.util.*,com.deya.wcm.template.velocity.data.*,com.deya.wcm.bean.appeal.sq.*,com.deya.wcm.services.appeal.sq.*"%>
-<%@page import="org.apache.ibatis.session.SqlSession,java.net.*,java.io.*,com.deya.wcm.bean.system.formodel.*,com.deya.wcm.bean.interview.*,com.deya.wcm.services.cms.category.CategoryManager"%><%@ page import="com.deya.wcm.services.model.services.InfoCustomService"%><%@ page import="org.json.JSONObject"%><%@ page import="org.json.JSONException"%>
+<%@ page language="java" import="com.deya.util.FormatUtil,com.deya.wcm.bean.appeal.sq.SQBean,com.deya.wcm.bean.cms.category.CategoryBean,com.deya.wcm.bean.cms.info.*,com.deya.wcm.bean.interview.SubjectActor" %>
+<%@page import="com.deya.wcm.bean.interview.SubjectBean,com.deya.wcm.bean.system.formodel.ModelBean,com.deya.wcm.bean.template.TurnPageBean,com.deya.wcm.services.appeal.sq.SQManager"%>
+<%@page import="com.deya.wcm.services.cms.category.CategoryManager,com.deya.wcm.services.cms.info.InfoBaseManager,com.deya.wcm.services.cms.info.ModelUtil,com.deya.wcm.services.model.services.InfoCustomService"%>
+<%@page import="com.deya.wcm.services.system.formodel.ModelManager,com.deya.wcm.services.zwgk.info.GKInfoManager,com.deya.wcm.template.velocity.data.AppealData,com.deya.wcm.template.velocity.data.InfoUtilData,com.deya.wcm.template.velocity.data.InterViewData,org.json.JSONException"%><%@ page import="org.json.JSONObject"%><%@ page import="java.util.Iterator"%><%@ page import="java.util.List"%><%@ page import="java.util.Map"%><%@ page import="java.util.Set"%>
 <%
 String action_type = request.getParameter("action_type");
 String result = "";
@@ -66,10 +66,6 @@ if("custom_info".equals(action_type))
 {
 	result = getCustomInfoMap(request);
 }
-if("isToudi".equals(action_type))
-{
-	result = isToudi(request);
-}
 
 out.println(result);
 
@@ -78,22 +74,30 @@ out.println(result);
 
 public String getNewsList(HttpServletRequest request)
 {
-	String json = "";
+	String json = "{\"cat_cname\":\"";
 	String site_id = FormatUtil.formatNullString(request.getParameter("site_id"));
 	String cat_id = FormatUtil.formatNullString(request.getParameter("cat_id"));
 	String page = FormatUtil.formatNullString(request.getParameter("page"));
 	String size = FormatUtil.formatNullString(request.getParameter("size"));
-	String params = "site_id=" + site_id + ";cat_id="+cat_id+";size="+size+";cur_page="+page+";orderby=ci.weight desc,ci.released_dtime desc;";
+	String publish_source = FormatUtil.formatNullString(request.getParameter("publish_source"));
+	if(cat_id != null && !"".equals(cat_id)){
+	    CategoryBean categoryBean = CategoryManager.getCategoryBean(Integer.parseInt(cat_id));
+	    json += categoryBean.getCat_cname() + "\"";
+	}
+	String params = "site_id=" + site_id + ";cat_id="+cat_id+";size="+size+";cur_page="+page+";publish_source="+publish_source+";orderby=ci.weight desc,ci.released_dtime desc;";
 	List<InfoBean> info_list = InfoUtilData.getInfoList(params);
 	if(info_list != null && info_list.size() > 0)
 	{
+	    json += ",\"list\":[";
+	    String list = "";
 		for(InfoBean info : info_list)
 		{
-			json += ",{\"info_id\":\""+info.getInfo_id()+"\",\"title\":\""+info.getTitle()+"\",\"model_id\":\""+info.getModel_id()+"\",\"content_url\":\""+info.getContent_url()+"\",\"description\":\""+replaceStr(info.getDescription())+"\",\"source\":\""+info.getSource()+"\",\"released_dtime\":\""+info.getReleased_dtime()+"\"}";
+			list += ",{\"info_id\":\""+info.getInfo_id()+"\",\"title\":\""+info.getTitle()+"\",\"model_id\":\""+info.getModel_id()+"\",\"content_url\":\""+info.getContent_url()+"\",\"description\":\""+replaceStr(info.getDescription())+"\",\"source\":\""+info.getSource()+"\",\"released_dtime\":\""+info.getReleased_dtime()+"\"}";
 		}
-		json = json.substring(1);
+		list = list.substring(1);
+		json += list + "]}";
 	}
-	return "["+json+"]";
+	return json;
 }
 
 public String getNewsListCount(HttpServletRequest request)
@@ -103,7 +107,8 @@ public String getNewsListCount(HttpServletRequest request)
 	String cat_id = FormatUtil.formatNullString(request.getParameter("cat_id"));
 	String page = FormatUtil.formatNullString(request.getParameter("page"));
 	String size = FormatUtil.formatNullString(request.getParameter("size"));
-	String params = "site_id=" + site_id + ";cat_id="+cat_id+";size="+size+";cur_page="+page+";orderby=ci.weight desc,ci.released_dtime desc;";
+	String publish_source = FormatUtil.formatNullString(request.getParameter("publish_source"));
+	String params = "site_id=" + site_id + ";cat_id="+cat_id+";size="+size+";cur_page="+page+";publish_source="+publish_source+";orderby=ci.weight desc,ci.released_dtime desc;";
 	TurnPageBean tpb = InfoUtilData.getInfoCount(params);
 	if(tpb != null)
 	{
@@ -119,7 +124,8 @@ public String getNewsPicCount(HttpServletRequest request)
 	String cat_id = FormatUtil.formatNullString(request.getParameter("cat_id"));
 	String page = FormatUtil.formatNullString(request.getParameter("page"));
 	String size = FormatUtil.formatNullString(request.getParameter("size"));
-	String params = "site_id=" + site_id + ";cat_id="+cat_id+";is_show_thumb=true;size="+size+";cur_page="+page+";orderby=ci.weight desc,ci.released_dtime desc;";
+	String publish_source = FormatUtil.formatNullString(request.getParameter("publish_source"));
+	String params = "site_id=" + site_id + ";cat_id="+cat_id+";is_show_thumb=true;size="+size+";cur_page="+page+";publish_source="+publish_source+";orderby=ci.weight desc,ci.released_dtime desc;";
 	TurnPageBean tpb = InfoUtilData.getInfoCount(params);
 	if(tpb != null)
 	{
@@ -135,7 +141,8 @@ public String getNewsPicList(HttpServletRequest request)
 	String cat_id = FormatUtil.formatNullString(request.getParameter("cat_id"));
 	String page = FormatUtil.formatNullString(request.getParameter("page"));
 	String size = FormatUtil.formatNullString(request.getParameter("size"));
-	String params = "site_id=" + site_id + ";cat_id="+cat_id+";is_show_thumb=true;size="+size+";cur_page="+page+";orderby=ci.weight desc,ci.released_dtime desc;";
+	String publish_source = FormatUtil.formatNullString(request.getParameter("publish_source"));
+	String params = "site_id=" + site_id + ";cat_id="+cat_id+";is_show_thumb=true;size="+size+";publish_source="+publish_source+";cur_page="+page+";orderby=ci.weight desc,ci.released_dtime desc;";
 	List<InfoBean> info_list = InfoUtilData.getInfoList(params);
 	if(info_list != null && info_list.size() > 0)
 	{
@@ -152,12 +159,19 @@ public String getNewsContent(HttpServletRequest request)
 {
 	String json = "";
 	String id = FormatUtil.formatNullString(request.getParameter("id"));
+	String publish_source = FormatUtil.formatNullString(request.getParameter("publish_source"));
 	InfoBean bean = null;
 	if(id != null && !"".equals(id))
 	{
 		bean = InfoBaseManager.getInfoById(id);
 	}
 	if(bean != null){
+	    if(publish_source != null && "wx".equals(publish_source)){
+	        InfoBaseManager.addWxInfoHits(id,String.valueOf(1),"");
+	    }
+	    if(publish_source != null && "app".equals(publish_source)){
+            InfoBaseManager.addAppInfoHits(id,String.valueOf(1),"");
+	    }
 		ModelBean mb = ModelManager.getModelBean(bean.getModel_id());
 		Object obj = ModelUtil.select(bean.getInfo_id()+"",bean.getSite_id(),mb.getModel_ename());
 		if(obj != null)
@@ -220,7 +234,8 @@ public String getNewsContent(HttpServletRequest request)
 			}
 		}
 	}
-	return "["+json+"]";
+	//return "["+json+"]";
+	return "["+json.substring(0,json.length() - 3)+"\"}]";
 }
 
 public String getGkSharedInfoList(HttpServletRequest request)
@@ -393,26 +408,11 @@ public String getChildCategoryList(HttpServletRequest request){
 	String json = "";
 	String site_id = FormatUtil.formatNullString(request.getParameter("site_id"));
 	String cat_id = FormatUtil.formatNullString(request.getParameter("cat_id"));
-	String size = FormatUtil.formatNullString(request.getParameter("size"));
-	String page = FormatUtil.formatNullString(request.getParameter("page"));
 	List<CategoryBean> info_list = CategoryManager.getChildCategoryList(Integer.parseInt(cat_id),site_id);
 	if(info_list != null && info_list.size() > 0)
 	{
-		int index = 0;
-		int pageInt = 1;
-		int sizeInt = 5;
-		int i=0;
-		if(page != null && !"".equals(page)){
-			pageInt = Integer.parseInt(page);
-		}
-		if(size != null && !"".equals(size)){
-			sizeInt = Integer.parseInt(size);
-		}
-		//if(page != null && !"".equals(page)){
-		//	i = ( - 1 ) * Integer.parseInt(size);
-		//}
-		for(i = (pageInt - 1) * sizeInt; i <= ((pageInt - 1) * sizeInt + sizeInt) && i < info_list.size(); i++){
-			CategoryBean info = info_list.get(i);
+		for(CategoryBean info : info_list)
+		{
 			json += ",{\"cat_id\":\""+info.getCat_id()+"\",\"cat_cname\":\""+info.getCat_cname()+"\"";
 			json += "}";
 		}
@@ -441,16 +441,6 @@ public String getCustomInfoMap(HttpServletRequest request){
 }
 
 
-public String isToudi(HttpServletRequest request){
-	String json = "";
-	String info_id = FormatUtil.formatNullString(request.getParameter("info_id"));
-	boolean isToudi = com.deya.project.dz_recruit.UserInfoRPC.isToudi(Integer.parseInt(info_id),request);
-	JSONObject jsonObject = new JSONObject();
-    jsonObject.put("isToudi",isToudi);
-	return jsonObject.toString();
-}
-
-
 
 public static String replaceStr(String str)
 {
@@ -459,4 +449,3 @@ public static String replaceStr(String str)
 }
 
 %>
-
