@@ -455,6 +455,8 @@ public class UserDAORMIImpl implements IUserDAO{
 	/* **********************帐号管理　结束******************************** */
 
 
+	/* **********************同步银海组织机构 开始******************************** */
+
     @Override
     public boolean insertSyncUser(List<UserBean> ubList, List<UserRegisterBean> urbList) {
         try{
@@ -465,4 +467,13 @@ public class UserDAORMIImpl implements IUserDAO{
             return false;
         }
     }
+
+	@Override
+	public int getMaxUserId() {
+		return GetOrgRmi.getorgRmi().getMaxUserId();
+    }
+
+    /* **********************同步银海组织机构 结束******************************** */
+
+
 }

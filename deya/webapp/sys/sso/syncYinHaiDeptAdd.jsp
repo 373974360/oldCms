@@ -1,8 +1,14 @@
-<%@ page import="com.sso.SyncOrg"%><%@ page contentType="application/json; charset=utf-8"%>
+<%@ page import="com.sso.SyncOrg"%><%@ page import="java.util.List"%><%@ page import="com.deya.wcm.bean.org.dept.DeptBean"%><%@ page contentType="application/json; charset=utf-8"%>
 <%@ page language="java"%>
 <%
-    SyncOrg.syncOrgDeptOrUser("dept",0);
-    out.println("<script>");
-    out.println("top.alert('增量同步组织机构成功！')");
-    out.println("</script>");
+    out.println("-------------------开始增量同步组织机构-----------------");
+    List deptList = SyncOrg.syncOrgDeptOrUser("dept",0);
+    if(deptList != null && deptList.size() > 0){
+        out.println("-------------------总共有" + deptList.size() + "个组织机构需要同步 -----------------");
+        for (Object o : deptList) {
+            DeptBean deptBean = (DeptBean)o;
+            out.println("************同步组织机构："+ deptBean.getDept_name());
+        }
+    }
+    out.println("-------------------增量同步组织机构成功-----------------");
 %>

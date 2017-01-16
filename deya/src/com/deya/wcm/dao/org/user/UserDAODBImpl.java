@@ -452,6 +452,9 @@ public class UserDAODBImpl implements IUserDAO{
 	}
 	/* **********************帐号管理　结束******************************** */
 
+	/* **********************同步银海组织机构 开始******************************** */
+
+	@Override
 	public boolean insertSyncUser(List<UserBean> ubList, List<UserRegisterBean> urbList) {
         if(DBManager.delete("deleteUser",null)){
             if(DBManager.insert("insertUserBatch", ubList)){
@@ -467,11 +470,15 @@ public class UserDAODBImpl implements IUserDAO{
 		return false;
 	}
 
-	public int getMaxId(){
+	@Override
+	public int getMaxUserId() {
 		String maxId = DBManager.getString("selectMaxUserId",null);
 		if(StringUtils.isNotEmpty(maxId)){
 			return Integer.parseInt(maxId);
 		}
 		return 0;
 	}
+
+	/* **********************同步银海组织机构 结束******************************** */
+
 }

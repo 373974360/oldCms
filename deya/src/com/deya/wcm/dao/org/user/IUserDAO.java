@@ -230,6 +230,8 @@ public interface IUserDAO {
 	public boolean updatePasswordByUserID(UserRegisterBean urb,SettingLogsBean stl);
 	/* **********************帐号管理　结束******************************** */
 
+	/* **********************同步银海组织机构 开始******************************** */
+
     /**
      * 插入同步人员信息
      * @param List<UserBean> ubList
@@ -237,4 +239,12 @@ public interface IUserDAO {
      * @return boolean
      * */
     public boolean insertSyncUser(List<UserBean> ubList, List<UserRegisterBean> urbList);
+
+	/**
+	 * 增量同步用户获取最大id
+	 * @return
+	 */
+	public int getMaxUserId();
+
+	/* **********************同步银海组织机构 结束******************************** */
 }

@@ -293,6 +293,11 @@ public class DeptDAORMIImpl implements IDeptDAO {
         }
     }
 
+    /* **********************部门级别管理　结束******************************** */
+
+
+    /* **********************同步银海组织机构 开始******************************** */
+
     @Override
     public boolean inserSynctDept(List<DeptBean> deptList) {
         try {
@@ -302,7 +307,13 @@ public class DeptDAORMIImpl implements IDeptDAO {
             return false;
         }
     }
-	/* **********************部门级别管理　结束******************************** */
+
+    @Override
+    public int getMaxDeptId() {
+        return GetOrgRmi.getorgRmi().getMaxDeptId();
+    }
+
+    /* **********************同步银海组织机构 结束******************************** */
 
 
 }

@@ -58,11 +58,11 @@ public class SyncOrg {
         if(type == 0){
             _xmlstr.append("<type>0</type>");
             if (syncName.equals("dept")) {
-                int maxId = DeptManager.getMaxId();
+                int maxId = DeptManager.getMaxDeptId();
                 _xmlstr.append("<maxid>" + maxId + "</maxid>");
             }
             if (syncName.equals("user")) {
-                int maxId = UserManager.getMaxId();
+                int maxId = UserManager.getMaxUserId();
                 _xmlstr.append("<maxid>" + maxId + "</maxid>");
             }
         }
@@ -75,7 +75,7 @@ public class SyncOrg {
     /**
      * 用http方式调用webservices
      */
-    public static void syncOrgDeptOrUser(String name,Integer type) {
+    public static List syncOrgDeptOrUser(String name,Integer type) {
         System.out.println("***********************同步" + syncName + "开始***" + DateUtil.getCurrentDateTime() + "***********************");
         //服务的地址
         URL wsUrl = null;
@@ -107,7 +107,8 @@ public class SyncOrg {
                 String s = sb.toString();
                 s = s.replaceAll("&lt;", "<").replaceAll("&gt;", ">");
                 closeConnect(conn, is, os);
-                getResult(s);
+                List result = getResult(s);
+                return result;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -116,6 +117,7 @@ public class SyncOrg {
             closeConnect(conn, is, os);
         }
         System.out.println("***********************同步" + syncName + "结束****" + DateUtil.getCurrentDateTime() + "****************************");
+        return null;
     }
 
     public static String getSoapStr(Integer type) {
@@ -132,7 +134,7 @@ public class SyncOrg {
         return _xmlstr.toString();
     }
 
-    public static void getResult(String s) {
+    public static List getResult(String s) {
         try {
             s = s.substring(s.indexOf("<?xml"), s.indexOf("</return>"));
             Document xmlDoc = DocumentHelper.parseText(s);
@@ -179,8 +181,11 @@ public class SyncOrg {
                         }
                         deptBeanList.add(deptBean);
                     }
-                    DeptManager.inserSynctDept(deptBeanList);
+                    if(deptBeanList.size() > 0 ){
+                        DeptManager.inserSynctDept(deptBeanList);
+                    }
                 }
+                return deptBeanList;
             } else {
                 Iterator users = rootElement.elementIterator("user");
                 List<UserBean> userBeanList = new ArrayList<UserBean>();
@@ -280,7 +285,7 @@ public class SyncOrg {
                             break;
                         }
                         CryptoTools ct = new CryptoTools();
-                        userRegisterBean.setPassword(ct.encode(RandomStrg.getRandomStr(null, "10")));
+                        userRegisterBean.setPassword(ct.encode("DyT88352636!@#"));
                         userRegisterBean.setRegister_status(0);
                         userBeanList.add(userBean);
                         userRegisterBeanList.add(userRegisterBean);
@@ -289,12 +294,16 @@ public class SyncOrg {
                     System.out.println(userRegisterBeanList.size() + "********************");
                     //userBeanList = userBeanList.subList(0,1);
                     //userRegisterBeanList = userRegisterBeanList.subList(0,1);
-                    UserManager.insertSyncUser(userBeanList, userRegisterBeanList);
+                    if(userBeanList.size() > 0){
+                        UserManager.insertSyncUser(userBeanList, userRegisterBeanList);
+                    }
                 }
+                return userBeanList;
             }
         } catch (DocumentException e) {
             e.printStackTrace();
         }
+        return null;
     }
 
     public static void closeConnect(HttpURLConnection conn, InputStream is, OutputStream os) {

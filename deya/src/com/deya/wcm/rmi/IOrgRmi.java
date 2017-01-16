@@ -404,6 +404,8 @@ public interface IOrgRmi extends Remote{
 	// 外部调用 使用  ----- 结束
 
 
+	/* **********************同步银海组织机构 开始******************************** */
+
     /**
      * 同步银海部门信息
      *
@@ -420,4 +422,19 @@ public interface IOrgRmi extends Remote{
      * @return boolean
      * */
     public boolean insertSyncUser(List<UserBean> ubList, List<UserRegisterBean> urbList) throws RemoteException;
+
+	/**
+	 * 增量同步用户获取最大id
+	 * @return
+	 */
+	public int getMaxUserId();
+
+	/**
+	 * 增量同步组织机构获取最大id
+	 * @return
+	 */
+	public int getMaxDeptId();
+
+	/* **********************同步银海组织机构 结束******************************** */
+
 }

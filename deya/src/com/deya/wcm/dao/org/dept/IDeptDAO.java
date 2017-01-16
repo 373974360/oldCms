@@ -166,6 +166,10 @@ public interface IDeptDAO {
      * */
 	public boolean deleteDeptLevel(String ids,SettingLogsBean stl);
 
+	/* **********************部门级别管理　结束******************************** */
+
+
+	/* **********************同步银海组织机构 开始******************************** */
 
     /**
      * 同步银海部门信息
@@ -176,7 +180,13 @@ public interface IDeptDAO {
      */
     public boolean inserSynctDept(List<DeptBean> deptList);
 
+
+	/**
+	 * 增量同步组织机构获取最大id
+	 * @return
+	 */
+	public int getMaxDeptId();
 		
-	/* **********************部门级别管理　结束******************************** */
+	/* **********************同步银海组织机构 结束******************************** */
 	
 }

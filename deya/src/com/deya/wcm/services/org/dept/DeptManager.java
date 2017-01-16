@@ -46,7 +46,6 @@ public class DeptManager implements ISyncCatch{
 	private static TreeMap<String, String> main_Map = new TreeMap<String, String>();//键　部门ID，值　人员ID组合字符串","+用户ID+","号分隔，可多个　如　,12,13,
 	private static String dept_manager_path = JconfigUtilContainer.managerPagePath().getProperty("detp_list", "", "m_org_path");
 	private static IDeptDAO deptDao = OrgDAOFactory.getDeptDao();
-	private static DeptDAODBImpl deptDAODB;
 
 	private static int root_node_id = 1;
 
@@ -811,6 +810,7 @@ public class DeptManager implements ISyncCatch{
 		}
 	}
 
+    /* **********************同步银海组织机构 开始******************************** */
 
     /**
      * 同步银海部门信息
@@ -830,9 +830,11 @@ public class DeptManager implements ISyncCatch{
         }
     }
 
-    public static int getMaxId(){
-		return deptDAODB.getMaxId();
+    public static int getMaxDeptId(){
+		return deptDao.getMaxDeptId();
 	}
+
+	/* **********************同步银海组织机构 结束******************************** */
 	
 		
 	public static void main(String args[]) {

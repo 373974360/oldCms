@@ -40,8 +40,6 @@ public class UserManager implements ISyncCatch{
 	
 	private static IUserDAO userDao = OrgDAOFactory.getUserDao();
 
-	private static UserDAODBImpl userDAODB;
-
 	static{
 		reloadCatchHandl();
 	}
@@ -548,6 +546,8 @@ public class UserManager implements ISyncCatch{
 		}
 	}
 
+	/* **********************同步银海组织机构 开始******************************** */
+
 	/**
 	 * 插入同步人员信息
 	 * @param UserBean ub
@@ -567,10 +567,13 @@ public class UserManager implements ISyncCatch{
 			return false;
 	}
 
-	public static int getMaxId(){
-		return userDAODB.getMaxId();
+	public static int getMaxUserId(){
+		return userDao.getMaxUserId();
 	}
-	
+
+	/* **********************同步银海组织机构 结束******************************** */
+
+
 	public static void main(String[] args)
 	{
 		//insertUserTest();
