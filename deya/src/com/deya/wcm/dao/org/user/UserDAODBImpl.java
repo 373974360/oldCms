@@ -13,6 +13,7 @@ import com.deya.wcm.bean.org.user.UserRegisterBean;
 import com.deya.wcm.dao.PublicTableDAO;
 import com.deya.wcm.dao.org.dept.DeptDAODBImpl;
 import com.deya.wcm.db.DBManager;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  *  组织机构用户管理数据处理类.
@@ -464,5 +465,13 @@ public class UserDAODBImpl implements IUserDAO{
             }
         }
 		return false;
+	}
+
+	public int getMaxId(){
+		String maxId = DBManager.getString("selectMaxUserId",null);
+		if(StringUtils.isNotEmpty(maxId)){
+			return Integer.parseInt(maxId);
+		}
+		return 0;
 	}
 }

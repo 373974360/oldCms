@@ -39,7 +39,9 @@ public class UserManager implements ISyncCatch{
 	private static Map<String, UserBean> user_Map = new HashMap<String, UserBean>();	
 	
 	private static IUserDAO userDao = OrgDAOFactory.getUserDao();
-	
+
+	private static UserDAODBImpl userDAODB;
+
 	static{
 		reloadCatchHandl();
 	}
@@ -563,6 +565,10 @@ public class UserManager implements ISyncCatch{
 			return true;
 		}else
 			return false;
+	}
+
+	public static int getMaxId(){
+		return userDAODB.getMaxId();
 	}
 	
 	public static void main(String[] args)

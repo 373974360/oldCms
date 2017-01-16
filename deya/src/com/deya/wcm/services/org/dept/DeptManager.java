@@ -17,6 +17,7 @@ import com.deya.wcm.bean.org.user.UserBean;
 import com.deya.wcm.catchs.ISyncCatch;
 import com.deya.wcm.catchs.SyncCatchHandl;
 import com.deya.wcm.dao.org.OrgDAOFactory;
+import com.deya.wcm.dao.org.dept.DeptDAODBImpl;
 import com.deya.wcm.dao.org.dept.IDeptDAO;
 import com.deya.wcm.services.org.user.UserManager;
 
@@ -45,7 +46,8 @@ public class DeptManager implements ISyncCatch{
 	private static TreeMap<String, String> main_Map = new TreeMap<String, String>();//键　部门ID，值　人员ID组合字符串","+用户ID+","号分隔，可多个　如　,12,13,
 	private static String dept_manager_path = JconfigUtilContainer.managerPagePath().getProperty("detp_list", "", "m_org_path");
 	private static IDeptDAO deptDao = OrgDAOFactory.getDeptDao();
-	
+	private static DeptDAODBImpl deptDAODB;
+
 	private static int root_node_id = 1;
 
 	static {
@@ -827,6 +829,10 @@ public class DeptManager implements ISyncCatch{
             return false;
         }
     }
+
+    public static int getMaxId(){
+		return deptDAODB.getMaxId();
+	}
 	
 		
 	public static void main(String args[]) {

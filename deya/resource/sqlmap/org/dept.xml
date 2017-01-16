@@ -150,6 +150,10 @@
         delete from cs_org_dept
     </delete>
 
+	<select id="selectMaxDeptId" resultType="java.lang.String">
+		select max(dept_id) from cs_org_dept;
+	</select>
+
     <!--********************************同步银海组织机构sql结束**********************************************-->
 
 </mapper>

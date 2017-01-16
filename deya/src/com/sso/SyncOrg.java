@@ -31,12 +31,12 @@ public class SyncOrg {
     private static String targetNamespace = "http://service.deliverdata2oa.oa.subSystem.yinhai.com/";
     private static String methodName = "doSync";
     private static String paramName = "paramXml";
-    private static String syncType = "dept";
+    private static String syncName = "dept";
 
-    public static String getparamValue() {
+    public static String getparamValue(Integer type) {
         StringBuilder _xmlstr = new StringBuilder();
         _xmlstr.append("<![CDATA[<data><reqident>").append("TD96358447").append("</reqident>");
-        if (syncType.equals("dept")) {
+        if (syncName.equals("dept")) {
             _xmlstr.append("<txcode>SYSNC_DEPART</txcode>");
         } else {
             _xmlstr.append("<txcode>SYSNC_USER</txcode>");
@@ -51,8 +51,21 @@ public class SyncOrg {
         _xmlstr.append("<txchannel>0</txchannel>");
         _xmlstr.append("<enccode/>");
         _xmlstr.append("<certcode>yhadmin</certcode>");
-        _xmlstr.append("<type>1</type>");
-        _xmlstr.append("<maxid/>");
+        if(type == 1){
+            _xmlstr.append("<type>1</type>");
+            _xmlstr.append("<maxid/>");
+        }
+        if(type == 0){
+            _xmlstr.append("<type>0</type>");
+            if (syncName.equals("dept")) {
+                int maxId = DeptManager.getMaxId();
+                _xmlstr.append("<maxid>" + maxId + "</maxid>");
+            }
+            if (syncName.equals("user")) {
+                int maxId = UserManager.getMaxId();
+                _xmlstr.append("<maxid>" + maxId + "</maxid>");
+            }
+        }
         _xmlstr.append("<startno>1</startno>");
         _xmlstr.append("<pagesize>500</pagesize>");
         _xmlstr.append("</data>]]>");
@@ -62,15 +75,15 @@ public class SyncOrg {
     /**
      * 用http方式调用webservices
      */
-    public static void syncOrgDeptOrUser(String type) {
-        System.out.println("***********************同步" + syncType + "开始***" + DateUtil.getCurrentDateTime() + "***********************");
+    public static void syncOrgDeptOrUser(String name,Integer type) {
+        System.out.println("***********************同步" + syncName + "开始***" + DateUtil.getCurrentDateTime() + "***********************");
         //服务的地址
         URL wsUrl = null;
         HttpURLConnection conn = null;
         InputStream is = null;
         OutputStream os = null;
         try {
-            syncType = type;
+            syncName = name;
             wsUrl = new URL(wsdlUrl);
             conn = (HttpURLConnection) wsUrl.openConnection();
             if (conn != null) {
@@ -82,7 +95,7 @@ public class SyncOrg {
                 conn.setRequestProperty("Content-Type", "text/xml;charset=UTF-8");
                 os = conn.getOutputStream();
                 //请求体
-                String soap = getSoapStr();
+                String soap = getSoapStr(type);
                 os.write(soap.getBytes());
                 is = conn.getInputStream();
                 StringBuilder sb = new StringBuilder();
@@ -102,17 +115,17 @@ public class SyncOrg {
         } finally {
             closeConnect(conn, is, os);
         }
-        System.out.println("***********************同步" + syncType + "结束****" + DateUtil.getCurrentDateTime() + "****************************");
+        System.out.println("***********************同步" + syncName + "结束****" + DateUtil.getCurrentDateTime() + "****************************");
     }
 
-    public static String getSoapStr() {
+    public static String getSoapStr(Integer type) {
         StringBuilder _xmlstr = new StringBuilder();
         _xmlstr.append("<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"  xmlns:ser=\"");
         _xmlstr.append(targetNamespace).append("\">");
         _xmlstr.append("<soapenv:Header/><soapenv:Body>");
         _xmlstr.append("<ser:").append(methodName).append(">");
         _xmlstr.append("<").append(paramName).append(">");
-        _xmlstr.append(getparamValue());
+        _xmlstr.append(getparamValue(type));
         _xmlstr.append("</").append(paramName).append(">");
         _xmlstr.append("</ser:").append(methodName).append(">");
         _xmlstr.append("</soapenv:Body> </soapenv:Envelope>");
@@ -124,7 +137,7 @@ public class SyncOrg {
             s = s.substring(s.indexOf("<?xml"), s.indexOf("</return>"));
             Document xmlDoc = DocumentHelper.parseText(s);
             Element rootElement = xmlDoc.getRootElement();
-            if (syncType.equals("dept")) {
+            if (syncName.equals("dept")) {
                 Iterator departs = rootElement.elementIterator("depart");
                 List<DeptBean> deptBeanList = new ArrayList<>();
                 if (departs != null) {
@@ -159,6 +172,7 @@ public class SyncOrg {
                         }
                         if (orgidpath != null && !"".equals(orgidpath) && !"null".equals(orgidpath)) {
                             deptBean.setArea_code(orgidpath);
+                            deptBean.setTree_position("$" + orgidpath.replaceAll("\\/\\/", "\\$").replaceAll("\\/", "\\$") + "$");
                         }
                         if (deptBean.getDept_id() == 1) {
                             deptBean.setParent_id(0);
@@ -229,14 +243,14 @@ public class SyncOrg {
                             userBean.setUser_id(Integer.parseInt(userid));
                             userRegisterBean.setUser_id(Integer.parseInt(userid));
                             userRegisterBean.setRegister_id(Integer.parseInt(userid));
-                        }else{
+                        } else {
                             System.out.println("用户ID不能为空！！！");
                             break;
                         }
                         if (name != null && !"".equals(name) && !"null".equals(name)) {
                             userBean.setUser_realname(name);
                             userRegisterBean.setUser_realname(name);
-                        }else{
+                        } else {
                             userBean.setUser_realname("");
                             userRegisterBean.setUser_realname("");
                         }
@@ -251,17 +265,17 @@ public class SyncOrg {
                         }
                         if (tel != null && !"".equals(tel) && !"null".equals(tel)) {
                             userBean.setTel(tel);
-                        }else{
+                        } else {
                             userBean.setTel("");
                         }
                         if (directorgid != null && !"".equals(directorgid) && !"null".equals(directorgid)) {
                             userBean.setDept_id(Integer.parseInt(directorgid));
-                        }else{
+                        } else {
                             userBean.setDept_id(1);
                         }
                         if (loginid != null && !"".equals(loginid) && !"null".equals(loginid)) {
                             userRegisterBean.setUsername(loginid);
-                        }else{
+                        } else {
                             System.out.println("登录名不能为空！！！");
                             break;
                         }
@@ -272,7 +286,7 @@ public class SyncOrg {
                         userRegisterBeanList.add(userRegisterBean);
                     }
                     System.out.println(userBeanList.size() + "***************");
-                    System.out.println(userRegisterBeanList.size()+"********************");
+                    System.out.println(userRegisterBeanList.size() + "********************");
                     //userBeanList = userBeanList.subList(0,1);
                     //userRegisterBeanList = userRegisterBeanList.subList(0,1);
                     UserManager.insertSyncUser(userBeanList, userRegisterBeanList);
@@ -297,6 +311,10 @@ public class SyncOrg {
         } catch (IOException e1) {
             e1.printStackTrace();
         }
+    }
+
+    public static void main(String[] args) {
+        System.out.println("1//24779/24781/25794");
     }
 
 }

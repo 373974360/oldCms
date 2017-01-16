@@ -14,8 +14,8 @@ import org.quartz.JobExecutionException;
 public class SyncOrgTimerImpl implements Job{
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        SyncOrg.syncOrgDeptOrUser("user");
-        SyncOrg.syncOrgDeptOrUser("dept");
+        SyncOrg.syncOrgDeptOrUser("user",1);
+        SyncOrg.syncOrgDeptOrUser("dept",1);
     }
 }
 

@@ -11,6 +11,7 @@ import com.deya.wcm.dao.PublicTableDAO;
 import com.deya.wcm.dao.org.user.IUserDAO;
 import com.deya.wcm.dao.org.user.UserDAODBImpl;
 import com.deya.wcm.db.DBManager;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  *  组织机构部门管理数据处理类.
@@ -362,17 +363,26 @@ public class DeptDAODBImpl implements IDeptDAO{
 			return false;
 	}
 
-    @Override
-    public boolean inserSynctDept(List<DeptBean> deptList) {
-        if(DBManager.delete("deleteDept",null)){
-            if(DBManager.insert("insertDeptBatch", deptList))
-            {
-                System.out.println("**********************同步银海部门成功***********************");
-                return true;
-            }
-        }
-        return false;
-    }
 	/* **********************部门级别管理　结束******************************** */
 
+
+
+	public boolean inserSynctDept(List<DeptBean> deptList) {
+		if(DBManager.delete("deleteDept",null)){
+			if(DBManager.insert("insertDeptBatch", deptList))
+			{
+				System.out.println("**********************同步银海部门成功***********************");
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public int getMaxId(){
+		String maxId = DBManager.getString("selectMaxDeptId",null);
+		if(StringUtils.isNotEmpty(maxId)){
+			return Integer.parseInt(maxId);
+		}
+		return 0;
+	}
 }

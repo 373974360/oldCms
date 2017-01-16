@@ -102,7 +102,7 @@ public class CryptoTools {
         CryptoTools ct = new CryptoTools();
         System.out.println(ct.license("=#=rU65f7rwo/hbgq1f9ppf0sHj62sF65b2URQ0ee8Xth2FyHm8+SqaOL/Ca87j1EbBG8TqgkNs5eo="));
 
-        System.out.println(ct.decode("=#=52PcmA02CGbKk9Bj3GATNw=="));
+        System.out.println(ct.decode("=#=kV8WUuxcc7M="));
         System.out.println(ct.encode("ywshuiteiLKb."));
 
 
