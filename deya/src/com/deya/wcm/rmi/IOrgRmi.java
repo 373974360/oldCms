@@ -427,13 +427,13 @@ public interface IOrgRmi extends Remote{
 	 * 增量同步用户获取最大id
 	 * @return
 	 */
-	public int getMaxUserId();
+	public int getMaxUserId() throws RemoteException;
 
 	/**
 	 * 增量同步组织机构获取最大id
 	 * @return
 	 */
-	public int getMaxDeptId();
+	public int getMaxDeptId() throws RemoteException;
 
 	/* **********************同步银海组织机构 结束******************************** */
 

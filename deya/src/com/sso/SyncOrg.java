@@ -75,8 +75,8 @@ public class SyncOrg {
     /**
      * 用http方式调用webservices
      */
-    public static List syncOrgDeptOrUser(String name,Integer type) {
-        System.out.println("***********************同步" + syncName + "开始***" + DateUtil.getCurrentDateTime() + "***********************");
+    public static List syncOrgDeptOrUser(String name,int type) {
+        System.out.println("***********************同步" + syncName + " 开始***" + DateUtil.getCurrentDateTime() + "***********************");
         //服务的地址
         URL wsUrl = null;
         HttpURLConnection conn = null;

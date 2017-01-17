@@ -310,7 +310,12 @@ public class DeptDAORMIImpl implements IDeptDAO {
 
     @Override
     public int getMaxDeptId() {
-        return GetOrgRmi.getorgRmi().getMaxDeptId();
+        try {
+            return GetOrgRmi.getorgRmi().getMaxDeptId();
+        } catch (RemoteException re) {
+            re.printStackTrace();
+            return 0;
+        }
     }
 
     /* **********************同步银海组织机构 结束******************************** */

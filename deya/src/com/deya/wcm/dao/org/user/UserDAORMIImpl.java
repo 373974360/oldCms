@@ -470,7 +470,13 @@ public class UserDAORMIImpl implements IUserDAO{
 
 	@Override
 	public int getMaxUserId() {
-		return GetOrgRmi.getorgRmi().getMaxUserId();
+		try{
+			return GetOrgRmi.getorgRmi().getMaxUserId();
+		}catch(RemoteException re)
+		{
+			re.printStackTrace();
+			return 0;
+		}
     }
 
     /* **********************同步银海组织机构 结束******************************** */

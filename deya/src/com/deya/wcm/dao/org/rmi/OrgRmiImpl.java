@@ -628,12 +628,12 @@ public class OrgRmiImpl extends UnicastRemoteObject implements IOrgRmi{
     }
 
 	@Override
-	public int getMaxUserId() {
+	public int getMaxUserId() throws RemoteException  {
 		return OrgDAOFactory.getUserDao().getMaxUserId();
 	}
 
 	@Override
-	public int getMaxDeptId() {
+	public int getMaxDeptId() throws RemoteException {
 		return OrgDAOFactory.getDeptDao().getMaxDeptId();
 	}
 
