@@ -55,7 +55,8 @@ public class ManagerLoginFilter implements javax.servlet.Filter{
         }
 
         //对前台的jsp进行xss漏洞过滤
-        if(!requestUri.startsWith("/sys"))
+        //if(!requestUri.startsWith("/sys"))
+        if(requestUri.indexOf("/sys/") < 0)
         {
             if(!jspFilterHandl.isRightParam(request,requestUri))
             {
@@ -76,7 +77,7 @@ public class ManagerLoginFilter implements javax.servlet.Filter{
             {
                 //response.sendRedirect(loginPage);
                 response.setContentType("text/html; charset=utf-8");
-                if(requestUri.contains("/sys/JSON-RPC"))
+                if(requestUri.indexOf("/sys/JSON-RPC") >= 0)
                 {
                     response.getWriter().write("top.location.href='" + loginPage +"'");
                 }

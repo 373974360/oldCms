@@ -26,6 +26,10 @@ if("news_content".equals(action_type))
 {
 	result = getNewsContent(request);
 }
+if("cmsLd_list".equals(action_type))
+{
+	result = getCmsLdInfoList(request);
+}
 if("gkShared_list".equals(action_type))
 {
 	result = getGkSharedInfoList(request);
@@ -37,6 +41,10 @@ if("gkShared_count".equals(action_type))
 if("gk_list".equals(action_type))
 {
 	result = getGkInfoList(request);
+}
+if("ld_list".equals(action_type))
+{
+	result = getLdInfoList(request);
 }
 if("gk_count".equals(action_type))
 {
@@ -90,6 +98,27 @@ public String getNewsList(HttpServletRequest request)
 		for(InfoBean info : info_list)
 		{
 			json += ",{\"info_id\":\""+info.getInfo_id()+"\",\"title\":\""+info.getTitle()+"\",\"model_id\":\""+info.getModel_id()+"\",\"content_url\":\""+info.getContent_url()+"\",\"description\":\""+replaceStr(info.getDescription())+"\",\"source\":\""+info.getSource()+"\",\"released_dtime\":\""+info.getReleased_dtime()+"\"}";
+		}
+		json = json.substring(1);
+	}
+	return "["+json+"]";
+}
+
+public String getCmsLdInfoList(HttpServletRequest request)
+{
+    String json = "";
+	String site_id = FormatUtil.formatNullString(request.getParameter("site_id"));
+	String cat_id = FormatUtil.formatNullString(request.getParameter("cat_id"));
+	String page = FormatUtil.formatNullString(request.getParameter("page"));
+	String size = FormatUtil.formatNullString(request.getParameter("size"));
+	String params = "site_id=" + site_id + ";cat_id="+cat_id+";size="+size+";cur_page="+page+";orderby=ci.weight desc,ci.released_dtime desc;";
+	List<InfoBean> info_list = InfoUtilData.getInfoList(params);
+	if(info_list != null && info_list.size() > 0)
+	{
+	    for(InfoBean info : info_list)
+		{
+		    GKFldcyBean ldcy = (GKFldcyBean)ModelUtil.select(String.valueOf(info.getInfo_id()), info.getSite_id(), ModelManager.getModelEName(info.getModel_id()));
+			json += ",{\"info_id\":\""+ldcy.getInfo_id()+"\",\"title\":\""+ldcy.getTitle()+"\",\"model_id\":\""+info.getModel_id()+"\",\"content_url\":\""+info.getContent_url()+"\",\"description\":\""+replaceStr(info.getDescription())+"\",\"source\":\""+ldcy.getSource()+"\",\"pic\":\""+ldcy.getGk_pic()+"\",\"ldzw\":\""+ldcy.getGk_ldzw()+"\",\"gzfg\":\""+ldcy.getGk_gzfg()+"\",\"released_dtime\":\""+info.getReleased_dtime()+"\"}";
 		}
 		json = json.substring(1);
 	}
@@ -279,6 +308,29 @@ public String getGkInfoList(HttpServletRequest request)
 		for(GKInfoBean info : info_list)
 		{
 			json += ",{\"info_id\":\""+info.getInfo_id()+"\",\"title\":\""+info.getTitle()+"\",\"source\":\""+info.getSource()+"\",\"released_dtime\":\""+info.getReleased_dtime()+"\"}";
+		}
+		json = json.substring(1);
+	}
+	return "["+json+"]";
+}
+
+public String getLdInfoList(HttpServletRequest request)
+{
+	String json = "";
+	String node_id = FormatUtil.formatNullString(request.getParameter("node_id"));
+	String cat_id = FormatUtil.formatNullString(request.getParameter("cat_id"));
+	String gk_index = FormatUtil.formatNullString(request.getParameter("gk_index"));
+	String title = FormatUtil.formatNullString(request.getParameter("title"));
+	String page = FormatUtil.formatNullString(request.getParameter("page"));
+	String size = FormatUtil.formatNullString(request.getParameter("size"));
+	String params = "node_id=" + node_id + ";cat_id="+cat_id+";size="+size+";cur_page="+page+";orderby=ci.weight desc,ci.released_dtime desc;";
+	List<GKInfoBean> info_list = InfoUtilData.getGKInfoList(params);
+	if(info_list != null && info_list.size() > 0)
+	{
+		for(GKInfoBean info : info_list)
+		{
+		    GKFldcyBean ldcy = (GKFldcyBean)ModelUtil.select(String.valueOf(info.getInfo_id()), info.getSite_id(), ModelManager.getModelEName(info.getModel_id()));
+			json += ",{\"info_id\":\""+ldcy.getInfo_id()+"\",\"title\":\""+ldcy.getTitle()+"\",\"source\":\""+ldcy.getSource()+"\",\"pic\":\""+ldcy.getGk_pic()+"\",\"ldzw\":\""+ldcy.getGk_ldzw()+"\",\"gzfg\":\""+ldcy.getGk_gzfg()+"\",\"released_dtime\":\""+info.getReleased_dtime()+"\"}";
 		}
 		json = json.substring(1);
 	}
