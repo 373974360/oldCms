@@ -119,8 +119,8 @@ public class SyncOrg {
                     sb.append(line);
                 }
                 String s = sb.toString();
-                s = s.replaceAll("&lt;", "<").replaceAll("&gt;", ">");
-                System.out.println("*****************返回报文************" + s);
+                s = s.replaceAll("&lt;", "<").replaceAll("&gt;", ">").replaceAll("&quot;","\"");
+                //System.out.println("*****************返回报文************" + s);
                 closeConnect(conn, is, os);
                 List result = getResult(s);
                 return result;
