@@ -433,16 +433,20 @@ public class CategoryManager implements ISyncCatch{
 		CategoryBean cgb = getCategoryBeanCatID(cat_id,site_id);
 		if(cgb != null)
 		{
+			System.out.println("********************"+cgb.getCat_position());
 			String cat_position = cgb.getCat_position();
 			Set<Integer> set = category_m.keySet();
 			String cat_ids = "";
 			for(int i : set){
 				cgb = category_m.get(i);
-				if(cgb.getCat_position().startsWith(cat_position) && !cat_position.equals(cgb.getCat_position()) && site_id.equals(cgb.getSite_id()))
+				if(cgb.getCat_position().startsWith(cat_position) && !cat_position.equals(cgb.getCat_position()) && site_id.equals(cgb.getSite_id())){
+					System.out.println("**********************"+cgb.getCat_id());
 					cat_ids += ","+cgb.getCat_id();
-			}			
-			if(cat_ids.length() > 0)
+				}
+			}
+			if(cat_ids.length() > 0){
 				cat_ids = cat_ids.substring(1);
+			}
 			return cat_ids;
 		}else
 			return null;

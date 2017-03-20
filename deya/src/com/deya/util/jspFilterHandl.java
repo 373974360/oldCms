@@ -61,14 +61,12 @@ public class jspFilterHandl {
         String basePath = request.getScheme() + "://" + request.getServerName()
                 + path + "/";
         // HTTP 头设置 Referer过滤
-        /*
         String referer = ((HttpServletRequest) request).getHeader("Referer"); // REFRESH
         if(referer != null){
             if(isTureKey(referer)){
                 return true;  //包含要过滤的关键字
             }
         }
-        */
         try{
             String servletPath = request.getServletPath();
             String queryString = request.getQueryString();
