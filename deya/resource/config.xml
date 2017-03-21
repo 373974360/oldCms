@@ -111,4 +111,12 @@
         <property name="3" value="/guestbook/submit.jsp"/>
     </category>
 
+    <category name="sso">
+        <property name="syncOrgOrUserUrl" value="http://10.190.5.15:12345/cdplat/services/syncOrgOrUserService?wsdl"/>
+        <property name="reqident" value="TD96358447"/>
+        <property name="forgcode" value="3110102"/>
+        <property name="torgcode" value="3110gjj"/>
+        <property name="certcode" value="yhadmin"/>
+    </category>
+
 </properties>

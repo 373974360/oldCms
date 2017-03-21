@@ -66,7 +66,7 @@
             if (loginErrorTimes != null && loginErrorTimes >= 3) {
                 var errorDate = $.cookie("loginErrorDate-" + username);
                 var now = new Date();
-                if(now.getTime() - parseInt(errorDate) > 60*1000){
+                if(now.getTime() - parseInt(errorDate) > 60*60*1000){
                     $.cookie("loginErrorTimes-" + username,null,{expires:now});
                     $.cookie("loginErrorDate-" + username,null,{expires:now});
                     login();

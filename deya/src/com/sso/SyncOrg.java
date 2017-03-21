@@ -3,6 +3,7 @@ package com.sso;
 import com.deya.util.CryptoTools;
 import com.deya.util.DateUtil;
 import com.deya.util.RandomStrg;
+import com.deya.util.jconfig.JconfigUtilContainer;
 import com.deya.wcm.bean.org.dept.DeptBean;
 import com.deya.wcm.bean.org.user.UserBean;
 import com.deya.wcm.bean.org.user.UserRegisterBean;
@@ -27,15 +28,27 @@ import java.util.List;
  */
 public class SyncOrg {
 
-    private static String wsdlUrl = "http://10.190.5.15:12345/cdplat/services/syncOrgOrUserService?wsdl";
+    private static String wsdlUrl = "";
     private static String targetNamespace = "http://service.deliverdata2oa.oa.subSystem.yinhai.com/";
     private static String methodName = "doSync";
     private static String paramName = "paramXml";
     private static String syncName = "dept";
+    private static String reqident = "";
+    private static String forgcode = "";
+    private static String torgcode = "";
+    private static String certcode = "";
+
+    public static void initParams(){
+        wsdlUrl = JconfigUtilContainer.bashConfig().getProperty("syncOrgOrUserUrl", "", "sso");
+        reqident = JconfigUtilContainer.bashConfig().getProperty("reqident", "", "sso");;
+        forgcode = JconfigUtilContainer.bashConfig().getProperty("forgcode", "", "sso");;
+        torgcode = JconfigUtilContainer.bashConfig().getProperty("torgcode", "", "sso");;
+        certcode = JconfigUtilContainer.bashConfig().getProperty("certcode", "", "sso");;
+    }
 
     public static String getparamValue(Integer type) {
         StringBuilder _xmlstr = new StringBuilder();
-        _xmlstr.append("<![CDATA[<data><reqident>").append("TD96358447").append("</reqident>");
+        _xmlstr.append("<![CDATA[<data><reqident>").append(reqident).append("</reqident>");
         if (syncName.equals("dept")) {
             _xmlstr.append("<txcode>SYSNC_DEPART</txcode>");
         } else {
@@ -43,14 +56,14 @@ public class SyncOrg {
         }
         _xmlstr.append("<txdate/>");
         _xmlstr.append("<txtime/>");
-        _xmlstr.append("<forgcode>3110102</forgcode>");
-        _xmlstr.append("<torgcode>3110gjj</torgcode>");
+        _xmlstr.append("<forgcode>"+forgcode+"</forgcode>");
+        _xmlstr.append("<torgcode>"+torgcode+"</torgcode>");
         _xmlstr.append("<reqfilerows/>");
         _xmlstr.append("<reqtxfile/>");
         _xmlstr.append("<reqfilemny/>");
         _xmlstr.append("<txchannel>0</txchannel>");
         _xmlstr.append("<enccode/>");
-        _xmlstr.append("<certcode>yhadmin</certcode>");
+        _xmlstr.append("<certcode>"+certcode+"</certcode>");
         if(type == 1){
             _xmlstr.append("<type>1</type>");
             _xmlstr.append("<maxid/>");
@@ -76,6 +89,7 @@ public class SyncOrg {
      * 用http方式调用webservices
      */
     public static List syncOrgDeptOrUser(String name,int type) {
+        initParams();
         System.out.println("***********************同步" + syncName + " 开始***" + DateUtil.getCurrentDateTime() + "***********************");
         //服务的地址
         URL wsUrl = null;
@@ -105,7 +119,8 @@ public class SyncOrg {
                     sb.append(line);
                 }
                 String s = sb.toString();
-                s = s.replaceAll("&lt;", "<").replaceAll("&gt;", ">");
+                s = s.replaceAll("&lt;", "<").replaceAll("&gt;", ">").replaceAll("&quot;","\"");
+                //System.out.println("*****************返回报文************" + s);
                 closeConnect(conn, is, os);
                 List result = getResult(s);
                 return result;
@@ -285,7 +300,7 @@ public class SyncOrg {
                             break;
                         }
                         CryptoTools ct = new CryptoTools();
-                        userRegisterBean.setPassword(ct.encode("DyT88352636!@#"));
+                        userRegisterBean.setPassword(ct.encode("111111"));
                         userRegisterBean.setRegister_status(0);
                         userBeanList.add(userBean);
                         userRegisterBeanList.add(userRegisterBean);

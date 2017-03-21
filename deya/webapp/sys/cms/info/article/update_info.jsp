@@ -39,13 +39,12 @@ var mFlag = false;
 $(document).ready(function(){
 	initButtomStyle();
 	init_input();
-	reloadPublicInfo();
 	publicUploadButtomLoad("uploadify",true,false,"",0,5,site_id,"savePicUrl");
 
 	if(infoid != "" && infoid != "null" && infoid != null){		
 		defaultBean = InfoBaseRPC.getInfoById(infoid,site_id);
 		if(defaultBean){
-			$("#info_article_table").autoFill(defaultBean);			
+			$("#info_article_table").autoFill(defaultBean);
 			publicReloadUpdateInfos();			
 		}
 		$("#addButton").click(updateInfoData);		
@@ -55,7 +54,8 @@ $(document).ready(function(){
 		{//引用的信息显示编辑源信息按钮
 			$("#from_info_button").show();
 		}
-	}	
+	}
+    reloadPublicInfo();
 });
 
 //修改
