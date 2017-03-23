@@ -4,12 +4,12 @@ var val=new Validator();
 
 function openAddPage(parent_id)
 {	
-	addTab(true,"/sys/page/page_add.jsp?parent_id="+parent_id+"&app_id="+app_id+"&site_id="+site_id+"&cur_indexid="+curTabIndex,'维护页面');
+	parent.addTab(true,"/sys/page/page_add.jsp?parent_id="+parent_id+"&app_id="+app_id+"&site_id="+site_id+"&cur_indexid="+parent.curTabIndex,'维护页面');
 }
 
 function openUpdatePage(id)
-{	
-	addTab(true,"/sys/page/page_add.jsp?id="+id+"&cur_indexid="+curTabIndex,'维护页面');
+{
+    parent.addTab(true,"/sys/page/page_add.jsp?id="+id+"&cur_indexid="+parent.curTabIndex,'维护页面');
 }
 
 function addPage()
@@ -23,7 +23,7 @@ function addPage()
 
 	if(PageRPC.pageIsExist(bean.page_path,bean.page_ename,site_id))
 	{
-		msgWargin("该文件名已存在此目录下");
+        parent.msgWargin("该文件名已存在此目录下");
 		return;
 	}
 
@@ -35,12 +35,12 @@ function addPage()
 
 	if(PageRPC.insertPage(bean))
 	{
-		msgAlert("页面信息"+WCMLang.Add_success);
-		getCurrentFrameObj(top_index_id).initPageTree();
-		tab_colseOnclick(curTabIndex)
+        parent.msgAlert("页面信息"+WCMLang.Add_success);
+        parent.getCurrentFrameObj(top_index_id).initPageTree();
+        parent.tab_colseOnclick(parent.curTabIndex)
 	}else
 	{
-		msgWargin("页面信息"+WCMLang.Add_fail);
+        parent.msgWargin("页面信息"+WCMLang.Add_fail);
 	}
 }
 
@@ -59,7 +59,7 @@ function updatePage()
 		//if(PageRPC.pageIsExist("",bean.page_path,bean.page_ename,app_id,site_id))
 		if(PageRPC.pageIsExist(bean.page_path,bean.page_ename,site_id))
 		{
-			msgWargin("该文件名已存在此目录下");
+            parent.msgWargin("该文件名已存在此目录下");
 			return;
 		}
 	}
@@ -67,12 +67,12 @@ function updatePage()
 	bean.id = id;
 	if(PageRPC.updatePage(bean))
 	{
-		msgAlert("页面信息"+WCMLang.Add_success);
-		getCurrentFrameObj(top_index_id).initPageTree();
-		tab_colseOnclick(curTabIndex)
+        parent.msgAlert("页面信息"+WCMLang.Add_success);
+        parent.getCurrentFrameObj(top_index_id).initPageTree();
+        parent.tab_colseOnclick(parent.curTabIndex)
 	}else
 	{
-		msgWargin("页面信息"+WCMLang.Add_fail);
+        parent.msgWargin("页面信息"+WCMLang.Add_fail);
 	}
 }
 
@@ -80,18 +80,18 @@ function updatePage()
 
 function deletePage(id)
 {
-	msgConfirm(WCMLang.Delete_confirm,"deletePageHandl("+id+")");
+    parent.msgConfirm(WCMLang.Delete_confirm,"deletePageHandl("+id+")");
 }
 
 function deletePageHandl(id)
 {
 	if(PageRPC.deletePage(id))
 	{
-		msgAlert("页面信息"+WCMLang.Delete_success);
+        parent.msgAlert("页面信息"+WCMLang.Delete_success);
 		initPageTree();
 	}else
 	{
-		msgWargin("页面信息"+WCMLang.Delete_fail);
+        parent.msgWargin("页面信息"+WCMLang.Delete_fail);
 	}
 }
 
@@ -99,10 +99,10 @@ function createHtmlPage(id)
 {
 	if(PageRPC.createHtmlPage(id))
 	{
-		msgAlert("静态页面生成成功");
+        parent.msgAlert("静态页面生成成功");
 		initPageTree();
 	}else
 	{
-		msgWargin("静态页面生成失败");
+        parent.msgWargin("静态页面生成失败");
 	}
 }

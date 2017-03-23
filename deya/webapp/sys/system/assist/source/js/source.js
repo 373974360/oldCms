@@ -119,24 +119,24 @@ function showTurnPage(){
 //打开查看窗口
 function openViewSourceDataPage(source_id)
 {	//OpenModalWindow
-	OpenModalWindow("来源查看","/sys/system/assist/source/source_view.jsp?source_id="+source_id,380,215);
+	parent.OpenModalWindow("来源查看","/sys/system/assist/source/source_view.jsp?source_id="+source_id,380,215);
 }
 
 //打开添加窗口
 function openAddSourcePage()
 {
-	OpenModalWindow("维护来源","/sys/system/assist/source/source_add.jsp?app="+app+"&site_id="+site_id,380,215);
+    parent.OpenModalWindow("维护来源","/sys/system/assist/source/source_add.jsp?app="+app+"&site_id="+site_id,380,215);
 }
 
 //打开修改窗口
 function openUpdateSourceDataPage()
 {
 	var selectIDS = table.getSelecteCheckboxValue("source_id");
-	OpenModalWindow("维护来源","/sys/system/assist/source/source_add.jsp?source_id="+selectIDS,380,215);
+    parent.OpenModalWindow("维护来源","/sys/system/assist/source/source_add.jsp?source_id="+selectIDS,380,215);
 }
 
 function openUpdatePage(sourceid){
-	OpenModalWindow("维护来源","/sys/system/assist/source/source_add.jsp?source_id="+sourceid,380,215);
+    parent.OpenModalWindow("维护来源","/sys/system/assist/source/source_add.jsp?source_id="+sourceid,380,215);
 }
 
 //添加Source
@@ -152,13 +152,13 @@ function addSourceData()
 
 	if(AssistRPC.addSourceById(bean))
 	{
-		msgAlert("来源"+WCMLang.Add_success);
-		CloseModalWindow();
-		getCurrentFrameObj().reloadSourceDataList();
+        parent.msgAlert("来源"+WCMLang.Add_success);
+        parent.CloseModalWindow();
+        parent.getCurrentFrameObj().reloadSourceDataList();
 	}
 	else
 	{
-		msgWargin("来源"+WCMLang.Add_fail);
+        parent.msgWargin("来源"+WCMLang.Add_fail);
 	}
 }
 //修改Source
@@ -174,13 +174,13 @@ function updateSourceData()
   
 	if(AssistRPC.updateSourceById(bean))
 	{
-		msgAlert("来源"+WCMLang.Add_success);
-		CloseModalWindow();
-		getCurrentFrameObj().reloadSourceDataList();
+        parent.msgAlert("来源"+WCMLang.Add_success);
+        parent.CloseModalWindow();
+        parent.getCurrentFrameObj().reloadSourceDataList();
 	}
 	else
 	{
-		msgWargin("来源"+WCMLang.Add_fail);
+        parent.msgWargin("来源"+WCMLang.Add_fail);
 	}
 }
 
@@ -190,17 +190,17 @@ function deleteSourceData()
 	var selectIDS = table.getSelecteCheckboxValue("source_id");
 	if(AssistRPC.delSourceById(selectIDS))
 	{
-		msgAlert("来源"+WCMLang.Delete_success);
-		CloseModalWindow();
-		getCurrentFrameObj().reloadSourceDataList();
+        parent.msgAlert("来源"+WCMLang.Delete_success);
+        parent.CloseModalWindow();
+        parent.getCurrentFrameObj().reloadSourceDataList();
 	}else
 	{
-		msgWargin("来源"+WCMLang.Delete_fail);
+        parent.msgWargin("来源"+WCMLang.Delete_fail);
 	}
 }
 
 function closePage(){
-	CloseModalWindow();
+    parent.CloseModalWindow();
 }
 
 //搜索

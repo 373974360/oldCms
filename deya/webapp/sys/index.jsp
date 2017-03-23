@@ -197,7 +197,7 @@
 
 <!--主体区域开始-->
 
-<div id="area_main">
+<div id="area_main" style="height:100%;">
 	<table id="area_main_table" border="0" cellpadding="0" cellspacing="0" width="100%" height="100%" >
 		<tr>
 			<td class="area_main_space">&nbsp;</td>

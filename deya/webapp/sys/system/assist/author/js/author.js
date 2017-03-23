@@ -105,25 +105,25 @@ function showTurnPage(){
 //打开查看窗口
 function openViewAuthorDataPage(author_id)
 {	//OpenModalWindow
-	OpenModalWindow("查看","/sys/system/assist/author/author_view.jsp?author_id="+author_id,380,195);
+	parent.OpenModalWindow("查看","/sys/system/assist/author/author_view.jsp?author_id="+author_id,380,195);
 }
 
 //打开添加窗口
 function openAddAuthorPage()
 {
-	OpenModalWindow("维护","/sys/system/assist/author/author_add.jsp?app="+app+"&site_id="+site_id,380,195);
+    parent.OpenModalWindow("维护","/sys/system/assist/author/author_add.jsp?app="+app+"&site_id="+site_id,380,195);
 }
 
 //打开修改窗口
 function openUpdateAuthorDataPage()
 {
 	var selectIDS = table.getSelecteCheckboxValue("author_id");
-	OpenModalWindow("维护","/sys/system/assist/author/author_add.jsp?author_id="+selectIDS,380,195);
+    parent.OpenModalWindow("维护","/sys/system/assist/author/author_add.jsp?author_id="+selectIDS,380,195);
 }
 
 function openUpdatePage(authorid)
 {
-	OpenModalWindow("维护","/sys/system/assist/author/author_add.jsp?author_id="+authorid,380,195);
+    parent.OpenModalWindow("维护","/sys/system/assist/author/author_add.jsp?author_id="+authorid,380,195);
 }
 
 //添加Author
@@ -139,13 +139,13 @@ function addAuthorData()
 
 	if(AssistRPC.addAuthorById(bean))
 	{
-		msgAlert(""+WCMLang.Add_success);
-		CloseModalWindow();
-		getCurrentFrameObj().reloadAuthorDataList();
+        parent.msgAlert(""+WCMLang.Add_success);
+        parent.CloseModalWindow();
+        parent.getCurrentFrameObj().reloadAuthorDataList();
 	}
 	else
 	{
-		msgWargin(""+WCMLang.Add_fail);
+        parent.msgWargin(""+WCMLang.Add_fail);
 	}
 }
 //修改Author
@@ -161,13 +161,13 @@ function updateAuthorData()
   
 	if(AssistRPC.updateAuthorById(bean))
 	{
-		msgAlert(""+WCMLang.Add_success);
-		CloseModalWindow();
-		getCurrentFrameObj().reloadAuthorDataList();
+        parent.msgAlert(""+WCMLang.Add_success);
+        parent.CloseModalWindow();
+        parent.getCurrentFrameObj().reloadAuthorDataList();
 	}
 	else
 	{
-		msgWargin(""+WCMLang.Add_fail);
+        parent.msgWargin(""+WCMLang.Add_fail);
 	}
 }
 
@@ -177,17 +177,17 @@ function deleteAuthorData()
 	var selectIDS = table.getSelecteCheckboxValue("author_id");
 	if(AssistRPC.delAuthorById(selectIDS))
 	{
-		msgAlert(""+WCMLang.Delete_success);
-		CloseModalWindow();
-		getCurrentFrameObj().reloadAuthorDataList();
+        parent.msgAlert(""+WCMLang.Delete_success);
+        parent.CloseModalWindow();
+        parent.getCurrentFrameObj().reloadAuthorDataList();
 	}else
 	{
-		msgWargin(""+WCMLang.Delete_fail);
+        parent.msgWargin(""+WCMLang.Delete_fail);
 	}
 }
 
 function closePage(){
-	CloseModalWindow();
+    parent.CloseModalWindow();
 }
 
 //搜索

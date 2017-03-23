@@ -38,13 +38,13 @@ $(document).ready(function(){
 //得到已选过的用户
 function getSelectedUserIDS()
 {	
-	setIDSINList(getCurrentFrameObj().getSelectedUserIDS(),"user_list");
+	setIDSINList(parent.getCurrentFrameObj().getSelectedUserIDS(),"user_list");
 	
 }
 //得到已选过的用户组
 function getSelectedGroupIDS()
 {
-	setIDSINList(getCurrentFrameObj().getSelectedGroupIDS(),"group_list");
+	setIDSINList(parent.getCurrentFrameObj().getSelectedGroupIDS(),"group_list");
 }
 
 function setIDSINList(ids,div_list_name)
@@ -168,8 +168,12 @@ function getSelectUserIDS(div_name)
 function returnUserID()
 {
 	eval("getCurrentFrameObj()."+handl_name+"('"+getSelectUserIDS("user_list")+"','"+getSelectUserIDS("group_list")+"')");
-	CloseModalWindow();
+	parent.CloseModalWindow();
 }
+
+    function closeTab() {
+        parent.CloseModalWindow();
+    }
 
 </script>
 </head>
@@ -222,7 +226,7 @@ function returnUserID()
 	<tr>
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="returnUserID()" value="保存" />				
-			<input id="userAddCancel" name="btn1" type="button" onclick="CloseModalWindow();" value="取消" />
+			<input id="userAddCancel" name="btn1" type="button" onclick="closeTab()" value="取消" />
 		</td>
 	</tr>
 </table>

@@ -124,7 +124,7 @@ function openViewRolePage(r_id)
 	var height = 190;
 	if(app_id == "system"|| app_id == "control")
 		height = 360;
-	OpenModalWindow("维护角色","/sys/org/role/role_add.jsp?app="+app_id+"&role_id="+r_id,450,height);
+	parent.OpenModalWindow("维护角色","/sys/org/role/role_add.jsp?app="+app_id+"&role_id="+r_id,450,height);
 }
 
 //打开添加窗口
@@ -133,7 +133,7 @@ function openAddRolePage()
 	var height = 190;
 	if(app_id == "system" || app_id == "control")
 		height = 360;
-	OpenModalWindow("维护角色","/sys/org/role/role_add.jsp?app="+app_id+"&site_id="+site_id,450,height);
+    parent.OpenModalWindow("维护角色","/sys/org/role/role_add.jsp?app="+app_id+"&site_id="+site_id,450,height);
 }
 
 //打开修改窗口
@@ -143,7 +143,7 @@ function openUpdateRolePage()
 
 	if(role_names != "")
 	{
-		msgWargin(role_names.substring(1)+" 角色为系统角色,不允许修改");
+        parent.msgWargin(role_names.substring(1)+" 角色为系统角色,不允许修改");
 		return;
 	}else
 	{
@@ -151,7 +151,7 @@ function openUpdateRolePage()
 		if(app_id == "system" || app_id == "control")
 			height = 360;
 		var selectIDS = table.getSelecteCheckboxValue("role_id");
-		OpenModalWindow("维护角色","/sys/org/role/role_add.jsp?app="+app_id+"&role_id="+selectIDS,450,height);
+        parent.OpenModalWindow("维护角色","/sys/org/role/role_add.jsp?app="+app_id+"&role_id="+selectIDS,450,height);
 	}
 }
 
@@ -181,17 +181,17 @@ function addRole()
 
 	bean.a_app_id = getAppIDS();
 	bean.app_id = app_id;
-	bean.site_id = getCurrentFrameObj().site_id;
+	bean.site_id = parent.getCurrentFrameObj().site_id;
 	if(RoleRPC.insertRole(bean))
 	{
-		msgAlert("角色信息"+WCMLang.Add_success);
-		CloseModalWindow();
-		getCurrentFrameObj().reloadTurnPage();
-		getCurrentFrameObj().reloadRoleList();
+        parent.msgAlert("角色信息"+WCMLang.Add_success);
+        parent.CloseModalWindow();
+        parent.getCurrentFrameObj().reloadTurnPage();
+        parent.getCurrentFrameObj().reloadRoleList();
 	}
 	else
 	{
-		msgWargin("角色信息"+WCMLang.Add_fail);
+        parent.msgWargin("角色信息"+WCMLang.Add_fail);
 	}
 }
 //修改角色
@@ -207,16 +207,16 @@ function updateRole()
 	bean.a_app_id = getAppIDS();
 	bean.app_id = app_id;
 	bean.role_id = role_id;
-	bean.site_id = getCurrentFrameObj().site_id;
+	bean.site_id = parent.getCurrentFrameObj().site_id;
 	if(RoleRPC.updateRole(bean))
 	{
-		msgAlert("角色信息"+WCMLang.Add_success);
-		CloseModalWindow();
-		getCurrentFrameObj().reloadRoleList();
+        parent.msgAlert("角色信息"+WCMLang.Add_success);
+        parent.CloseModalWindow();
+        parent.getCurrentFrameObj().reloadRoleList();
 	}
 	else
 	{
-		msgWargin("角色信息"+WCMLang.Add_fail);
+        parent.msgWargin("角色信息"+WCMLang.Add_fail);
 	}
 }
 
@@ -248,7 +248,7 @@ function deleteRole()
 
 	if(role_names != "")
 	{
-		msgWargin(role_names.substring(1)+" 角色为系统角色,不允许删除");
+        parent.msgWargin(role_names.substring(1)+" 角色为系统角色,不允许删除");
 		return;
 	}
 	else
@@ -260,17 +260,17 @@ function deleteRole()
 		{	
 			delCheckStr = delCheckStr.substring(0,delCheckStr.length-1);
 			delCheckStr = delCheckStr.replace("user","用户").replace("group","用户组").replace("workflow","工作流")
-			msgWargin("该角色还关联 "+delCheckStr+" 信息,请先删除与其关联关系");
+            parent.msgWargin("该角色还关联 "+delCheckStr+" 信息,请先删除与其关联关系");
 			return;
 		}
 		
 		if(RoleRPC.deleteRole(selectIDS))
 		{
-			msgAlert("角色信息"+WCMLang.Delete_success);
+            parent.msgAlert("角色信息"+WCMLang.Delete_success);
 			reloadRoleList();
 		}else
 		{
-			msgWargin("角色信息"+WCMLang.Delete_fail);
+            parent.msgWargin("角色信息"+WCMLang.Delete_fail);
 		}
 	}
 }
@@ -281,7 +281,7 @@ function roleSearchHandl(obj)
 	var con_value = $(obj).parent().find("#searchkey").val();
 	if(con_value.trim() == "" ||  con_value == null)
 	{
-		msgAlert(WCMLang.Search_empty);
+        parent.msgAlert(WCMLang.Search_empty);
 		return;
 	}
 	table.con_name = "role_name"; 
@@ -341,11 +341,11 @@ function saveRoleUserGroup(user_ids,group_ids)
 
 	if(RoleRPC.insertRoleUserByRole(bean,delete_user_ids) && RoleRPC.insertRoleUGroupByRole(group_bean,delete_group_ids))
 	{
-		msgAlert("角色用户关联"+WCMLang.Add_success);
+        parent.msgAlert("角色用户关联"+WCMLang.Add_success);
 		table.unChekcbox();
 	}else
 	{
-		msgWargin("角色用户关联"+WCMLang.Add_fail);
+        parent.msgWargin("角色用户关联"+WCMLang.Add_fail);
 	}
 }
 
@@ -363,11 +363,11 @@ function saveRoleUser(user_ids)
 
 	if(RoleRPC.insertRoleUserByRole(bean,delete_user_ids))
 	{
-		msgAlert("角色用户关联"+WCMLang.Add_success);
+        parent.msgAlert("角色用户关联"+WCMLang.Add_success);
 		table.unChekcbox();
 	}else
 	{
-		msgWargin("角色用户关联"+WCMLang.Add_fail);
+        parent.msgWargin("角色用户关联"+WCMLang.Add_fail);
 	}
 }
 
@@ -390,10 +390,10 @@ function saveRoleOperate(opt_ids)
 
 	if(RoleRPC.insertOptReleRole(role_id,opt_ids))
 	{
-		msgAlert("角色权限关联"+WCMLang.Add_success);
+        parent.msgAlert("角色权限关联"+WCMLang.Add_success);
 		table.unChekcbox();
 	}else{
-		msgWargin("角色权限关联"+WCMLang.Add_fail);
+        parent.msgWargin("角色权限关联"+WCMLang.Add_fail);
 	}
 }
 

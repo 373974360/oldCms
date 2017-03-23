@@ -375,50 +375,82 @@ function openSelectMaterialPage(handl_name,site_id,i_type)
  */
 function openSelectSingleDept(title,handl_name,show_type)
 {
-	OpenModalWindow(title,"/sys/org/dept/select_single_dept.jsp?handl_name="+handl_name+"&stype="+show_type,450,510);
+	try{
+        OpenModalWindow(title,"/sys/org/dept/select_single_dept.jsp?handl_name="+handl_name+"&stype="+show_type,450,510);
+	}catch (e){
+        parent.OpenModalWindow(title,"/sys/org/dept/select_single_dept.jsp?handl_name="+handl_name+"&stype="+show_type,450,510);
+	}
 }
 
 //打开站点选择窗口
 function openSelectSingleSite(title,handl_name)
 {
-	OpenModalWindow(title,"/sys/control/site/select_single_site.jsp?handl_name="+handl_name,450,510);
+    try{
+    	OpenModalWindow(title,"/sys/control/site/select_single_site.jsp?handl_name="+handl_name,450,510);
+    }catch (e){
+        parent.OpenModalWindow(title,"/sys/control/site/select_single_site.jsp?handl_name="+handl_name,450,510);
+    }
 }
 
 //打开人员选择窗口
 function openSelectUserPage(title,handl_name)
 {
-	OpenModalWindow(title,"/sys/org/dept/select_user.jsp?handl_name="+handl_name,720,515);
+    try{
+    	OpenModalWindow(title,"/sys/org/dept/select_user.jsp?handl_name="+handl_name,720,515);
+    }catch (e){
+		parent.OpenModalWindow(title,"/sys/org/dept/select_user.jsp?handl_name="+handl_name,720,515);
+    }
 }
 
 //打开站点下的用户和用户组选择窗口
 function openSelectSiteUserPage(title,handl_name,site_id)
 {
-	OpenModalWindow(title,"/sys/org/siteUser/select_site_user.jsp?app_id="+app_id+"&site_id="+site_id+"&handl_name="+handl_name,520,515);
+    try{
+    	OpenModalWindow(title,"/sys/org/siteUser/select_site_user.jsp?app_id="+app_id+"&site_id="+site_id+"&handl_name="+handl_name,520,515);
+    }catch (e){
+		parent.OpenModalWindow(title,"/sys/org/siteUser/select_site_user.jsp?app_id="+app_id+"&site_id="+site_id+"&handl_name="+handl_name,520,515);
+    }
 }
 
 //打开站点下的用户
 function openSelectOnlySiteUserPage(title,handl_name,site_id)
 {
-	OpenModalWindow(title,"/sys/org/siteUser/select_site_only_user.jsp?site_id="+site_id+"&handl_name="+handl_name,520,505);
+    try{
+    	OpenModalWindow(title,"/sys/org/siteUser/select_site_only_user.jsp?site_id="+site_id+"&handl_name="+handl_name,520,505);
+    }catch (e){
+		parent.OpenModalWindow(title,"/sys/org/siteUser/select_site_only_user.jsp?site_id="+site_id+"&handl_name="+handl_name,520,505);
+    }
 }
 
 
 //打开诉求人员选择窗口
 function openSelectSQUserPage(title,handl_name)
 {
-	OpenModalWindow(title,"/sys/appeal/cpUser/select_user.jsp?handl_name="+handl_name,720,515);
+    try{
+    	OpenModalWindow(title,"/sys/appeal/cpUser/select_user.jsp?handl_name="+handl_name,720,515);
+    }catch (e){
+		parents.OpenModalWindow(title,"/sys/appeal/cpUser/select_user.jsp?handl_name="+handl_name,720,515);
+    }
 }
 
 //打开诉求部门选择窗口
 function openSelectCpDeptPage(title,handl_name)
 {
-	OpenModalWindow(title,"/sys/appeal/cpDept/select_cpDept.jsp?handl_name="+handl_name,610,510);
+    try{
+    	OpenModalWindow(title,"/sys/appeal/cpDept/select_cpDept.jsp?handl_name="+handl_name,610,510);
+    }catch (e){
+		parent.OpenModalWindow(title,"/sys/appeal/cpDept/select_cpDept.jsp?handl_name="+handl_name,610,510);
+    }
 }
 
 //打开权限选择窗口
 function openSelectOperatePage(title,handl_name,update_status)
-{	
-	OpenModalWindow(title,"/sys/org/operate/select_operate.jsp?handl_name="+handl_name+"&update_status="+update_status,450,510);
+{
+    try{
+    	OpenModalWindow(title,"/sys/org/operate/select_operate.jsp?handl_name="+handl_name+"&update_status="+update_status,450,510);
+    }catch (e){
+		parent.OpenModalWindow(title,"/sys/org/operate/select_operate.jsp?handl_name="+handl_name+"&update_status="+update_status,450,510);
+    }
 }
 
 /*
@@ -430,7 +462,11 @@ function openSelectOperatePage(title,handl_name,update_status)
  */
 function openSelectRolePage(title,handl_name,app_id,site_id)
 {
-	OpenModalWindow(title,"/sys/org/role/select_role.jsp?app_id="+app_id+"&site_id="+site_id+"&handl_name="+handl_name,450,510);
+    try{
+    	OpenModalWindow(title,"/sys/org/role/select_role.jsp?app_id="+app_id+"&site_id="+site_id+"&handl_name="+handl_name,450,510);
+    }catch (e){
+		parent.OpenModalWindow(title,"/sys/org/role/select_role.jsp?app_id="+app_id+"&site_id="+site_id+"&handl_name="+handl_name,450,510);
+    }
 }
 
 /*
@@ -451,38 +487,62 @@ function openSetOperate(title,handl_name,app_id,site_id,priv_type,u_id)
 		if(priv_type == 1)
 			var user_id = table.getSelecteCheckboxValue("group_id");
 	}else
-		user_id = u_id; 
-	OpenModalWindow(title,"/sys/org/siteUser/set_operate.jsp?app_id="+app_id+"&priv_type="+priv_type+"&user_id="+user_id+"&handl_name="+handl_name,550,530);
+		user_id = u_id;
+    try{
+    	OpenModalWindow(title,"/sys/org/siteUser/set_operate.jsp?app_id="+app_id+"&priv_type="+priv_type+"&user_id="+user_id+"&handl_name="+handl_name,550,530);
+    }catch (e){
+		parent.OpenModalWindow(title,"/sys/org/siteUser/set_operate.jsp?app_id="+app_id+"&priv_type="+priv_type+"&user_id="+user_id+"&handl_name="+handl_name,550,530);
+    }
 }
 
 //打开目录选择窗口
 function openSelectSingleCategory(title,handl_name,site_id)
 {
-	OpenModalWindow(title,"/sys/cms/category/select_single_category.jsp?site_id="+site_id+"&handl_name="+handl_name,450,510);
+    try{
+    	OpenModalWindow(title,"/sys/cms/category/select_single_category.jsp?site_id="+site_id+"&handl_name="+handl_name,450,510);
+    }catch (e){
+		parent.OpenModalWindow(title,"/sys/cms/category/select_single_category.jsp?site_id="+site_id+"&handl_name="+handl_name,450,510);
+    }
 }
 
 //打开基础分类法分类方式类目选择窗口
 function openSelectSingleCateClass(title,handl_name)
 {
-	OpenModalWindow(title,"/sys/cms/cateClass/select_single_cateClass.jsp?class_type=0&handl_name="+handl_name,450,510);
+    try{
+    	OpenModalWindow(title,"/sys/cms/cateClass/select_single_cateClass.jsp?class_type=0&handl_name="+handl_name,450,510);
+    }catch (e){
+		parent.OpenModalWindow(title,"/sys/cms/cateClass/select_single_cateClass.jsp?class_type=0&handl_name="+handl_name,450,510);
+    }
 }
 
 //打开共享目录分类方式类目选择窗口
 function openSelectSingleShareCateClass(title,handl_name,app_id)
 {
-	OpenModalWindow(title,"/sys/cms/cateClass/select_single_cateClass.jsp?class_type=1&app_id="+app_id+"&handl_name="+handl_name,450,510);
+    try{
+    	OpenModalWindow(title,"/sys/cms/cateClass/select_single_cateClass.jsp?class_type=1&app_id="+app_id+"&handl_name="+handl_name,450,510);
+    }catch (e){
+		parent.OpenModalWindow(title,"/sys/cms/cateClass/select_single_cateClass.jsp?class_type=1&app_id="+app_id+"&handl_name="+handl_name,450,510);
+    }
 }
 
 //打开共享目录分类方式类目选择窗口
 function openSelectShareCateClass(title,handl_name,app_id)
 {
-	OpenModalWindow(title,"/sys/cms/cateClass/select_cateClass.jsp?app_id="+app_id+"&handl_name="+handl_name,450,500);
+    try{
+    	OpenModalWindow(title,"/sys/cms/cateClass/select_cateClass.jsp?app_id="+app_id+"&handl_name="+handl_name,450,500);
+    }catch (e){
+		parent.OpenModalWindow(title,"/sys/cms/cateClass/select_cateClass.jsp?app_id="+app_id+"&handl_name="+handl_name,450,500);
+    }
 }
 
 //打开公开节点分类选择窗口
 function openSelectGKNodeCategory(title,handl_name,show_tree_type)
 {
-	OpenModalWindow(title,"/sys/zwgk/node/select_node_category.jsp?stt="+show_tree_type+"&handl_name="+handl_name,450,500);
+    try{
+    	OpenModalWindow(title,"/sys/zwgk/node/select_node_category.jsp?stt="+show_tree_type+"&handl_name="+handl_name,450,500);
+    }catch (e){
+    	parent.OpenModalWindow(title,"/sys/zwgk/node/select_node_category.jsp?stt="+show_tree_type+"&handl_name="+handl_name,450,500);
+    }
 }
 
 
