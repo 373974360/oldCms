@@ -26,8 +26,8 @@ var TemplateRPC = jsonrpc.TemplateRPC;
 $(document).ready(function(){
 	if(site_id == "")
 	{
-		site_id = top.current_site_id;
-		$("#cancel").click(function(){top.CloseModalWindow()});
+		site_id = current_site_id;
+		$("#cancel").click(function(){CloseModalWindow()});
 		$("#addButton").click(saveImg);
 	}else
 	{//从标签编辑器过来的是用showModalDialog方式打开的，所以这里得特殊处理一下
@@ -88,13 +88,13 @@ function saveImg()
 	var path = $(":checked").val();
 	if(path == "" || path == null)
 	{
-		top.msgWargin("请选择图片");
+		msgWargin("请选择图片");
 		return;
 	}else
 	{
-		top.CloseModalWindow();
-		top.getCurrentFrameObj().uploadReturnHandl(path);
-		//top.CloseModalWindow();
+		CloseModalWindow();
+		getCurrentFrameObj().uploadReturnHandl(path);
+		//CloseModalWindow();
 	}	
 	
 }
@@ -104,7 +104,7 @@ function returnValueHandl()
 	var path = $(":checked").val();
 	if(path == "" || path == null)
 	{
-		top.msgWargin("请选择图片");
+		msgWargin("请选择图片");
 		return;
 	}else
 	{

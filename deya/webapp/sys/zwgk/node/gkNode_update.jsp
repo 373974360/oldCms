@@ -46,10 +46,10 @@ function updateNode()
 	
 	if(!GKNodeRPC.updateGKNodeSimple(addBean))
 	{
-		top.msgWargin("公开节点"+WCMLang.Add_fail);
+		msgWargin("公开节点"+WCMLang.Add_fail);
 		return;
 	}
-	top.msgAlert("公开节点"+WCMLang.Add_success);
+	msgAlert("公开节点"+WCMLang.Add_success);
 }
 
 // 修改状态下的重置
@@ -152,7 +152,7 @@ function resetTable()
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="" value="保存" />	
 			<input id="btnReset" name="btn1" type="button" onclick="formReSet('add_table',node_id);resetTable()" value="重置" />	
-			<input id="btnCancel" name="btn1" type="button" onclick="top.CloseModalWindow();" value="取消" />	
+			<input id="btnCancel" name="btn1" type="button" onclick="CloseModalWindow();" value="取消" />
 		</td>
 	</tr>
 </table>

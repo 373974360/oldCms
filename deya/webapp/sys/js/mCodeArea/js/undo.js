@@ -52,8 +52,8 @@ UndoHistory.prototype = {
   // milliseconds).
   scheduleCommit: function() {
     var self = this;
-    parent.clearTimeout(this.commitTimeout);
-    this.commitTimeout = parent.setTimeout(function(){self.tryCommit();}, this.commitDelay);
+    clearTimeout(this.commitTimeout);
+    this.commitTimeout = setTimeout(function(){self.tryCommit();}, this.commitDelay);
   },
 
   // Mark a node as touched. Null is a valid argument.
@@ -146,7 +146,7 @@ UndoHistory.prototype = {
 
   // Commit unless there are pending dirty nodes.
   tryCommit: function() {
-    if (!window || !window.parent || !window.UndoHistory) return; // Stop when frame has been unloaded
+    if (!window || !|| !window.UndoHistory) return; // Stop when frame has been unloaded
     if (this.editor.highlightDirty()) this.commit(true);
     else this.scheduleCommit();
   },
@@ -154,7 +154,7 @@ UndoHistory.prototype = {
   // Check whether the touched nodes hold any changes, if so, commit
   // them.
   commit: function(doNotHighlight) {
-    parent.clearTimeout(this.commitTimeout);
+    clearTimeout(this.commitTimeout);
     // Make sure there are no pending dirty nodes.
     if (!doNotHighlight) this.editor.highlightDirty(true);
     // Build set of chains.

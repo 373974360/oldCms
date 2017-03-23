@@ -6,7 +6,7 @@ var UserManRPC = jsonrpc.UserManRPC;
 var YsqgkConfigBean = new Bean("com.deya.wcm.bean.zwgk.ysqgk.YsqgkConfigBean",true);
 var YsqgkBean = new Bean("com.deya.wcm.bean.zwgk.ysqgk.YsqgkBean",true);
 var YsqgkListBean = new Bean("com.deya.wcm.bean.zwgk.ysqgk.YsqgkListBean",true);
-var user_id=top.LoginUserBean.user_id;
+var user_id=LoginUserBean.user_id;
 
 var orderFeilds = null;//排序 
 var highSearchString = null;
@@ -45,11 +45,11 @@ function addYsqgkConfig()
 	}
 	if(YsqgkRPC.insertYsqgkConfig(bean))
 	{
-		top.msgAlert("依申请公开业务"+WCMLang.Add_success+"!");
+		msgAlert("依申请公开业务"+WCMLang.Add_success+"!");
 	}
 	else
 	{
-		top.msgWargin("依申请公开业务"+WCMLang.Add_fail+"!");
+		msgWargin("依申请公开业务"+WCMLang.Add_fail+"!");
 	}
 }
 
@@ -75,13 +75,13 @@ function addYsqgkInfo(node_id)
 	ysqgk_bean.node_id = node_id;
 	if($("#gk_index").val() == "")
 	{
-		top.msgAlert("索引号不能为空!");
+		msgAlert("索引号不能为空!");
 		return;
 	}else{
 		ysqgk_bean.gk_index = $("#gk_index").val(); 
 	}
 	if(getV("content") == ""){
-		top.msgAlert("内容不能为空!");
+		msgAlert("内容不能为空!");
 		return;
 	}else{
 		ysqgk_bean.content= getV("content");
@@ -92,12 +92,12 @@ function addYsqgkInfo(node_id)
 	
 	if(YsqgkRPC.insertYsqgkInfo(ysqgk_bean))
 	{
-		top.msgAlert("依申请公开信息"+WCMLang.Add_success+"!");
+		msgAlert("依申请公开信息"+WCMLang.Add_success+"!");
 		window.location.href = "/sys/zwgk/ysqgk/operate/ysqgk_list.jsp?app_id=zwgk&site_id="+node_id;
 	}
 	else
 	{
-		top.msgWargin("依申请公开信息"+WCMLang.Add_fail+"!");
+		msgWargin("依申请公开信息"+WCMLang.Add_fail+"!");
 	}
 }
 
@@ -292,11 +292,11 @@ function searchInfo()
 	var selectval = $('#searchType').val();
 	var keywords =  $("#searchkey").val();
 	if(selectval ==0){
-		top.msgAlert("	请选择类别	");
+		msgAlert("	请选择类别	");
 		return;	
 	}
 	if(keywords.trim() == "" ||  keywords == null){
-		top.msgAlert(WCMLang.Search_empty);
+		msgAlert(WCMLang.Search_empty);
 		return;
 	}
 	if(selectval == 1)
@@ -366,7 +366,7 @@ function reloadInfoDataList()
 //置为无效件
 function setWuxiao(node_id,ysq_id)
 {
-	top.msgConfirm("确定要将此信件置为无效？",insertProcess(2,node_id,ysq_id));
+	msgConfirm("确定要将此信件置为无效？",insertProcess(2,node_id,ysq_id));
 }
 //过程处理
 
@@ -400,7 +400,7 @@ function insertProcess(pro_type,node_id,ysq_id)
 	{
 		if(deal_content == "")
 		{
-				top.msgWargin("受理内容不能为空!");
+				msgWargin("受理内容不能为空!");
 				return;
 		}else{
 				dealMap.put("accept_content",deal_content);	
@@ -420,7 +420,7 @@ function insertProcess(pro_type,node_id,ysq_id)
 	{
 		if(deal_content == "")
 		{
-				top.msgWargin("回复内容不能为空!");
+				msgWargin("回复内容不能为空!");
 				return;
 		}else{
 				dealMap.put("reply_content",deal_content);
@@ -451,12 +451,12 @@ function insertProcess(pro_type,node_id,ysq_id)
 	}
 	if(YsqgkRPC.updateStatus(dealMap))
 	{
-		top.msgAlert("操作成功!");
+		msgAlert("操作成功!");
 		window.location.href="/sys/zwgk/ysqgk/operate/ysqgk_list.jsp?app_id=zwgk&site_id="+node_id;
 		reloadInfoDataList();
 	}else
 	{
-		top.msgAlert("操作失败!");
+		msgAlert("操作失败!");
 	}
 }
 
@@ -469,31 +469,31 @@ function deleteInfoData(type)
 	{
 		if(YsqgkRPC.setDeleteState(m))//置为无效信件
 		{
-			top.msgAlert("信息"+WCMLang.Delete_success);
+			msgAlert("信息"+WCMLang.Delete_success);
 			reloadInfoDataList();
 		}else
 		{
-			top.msgWargin("信息"+WCMLang.Delete_fail);		
+			msgWargin("信息"+WCMLang.Delete_fail);
 		}	
 	}else if(type == -2)//彻底删除信息
 	{
 		if(YsqgkRPC.deleteYsqgkInfo(m))
 		{
-			top.msgAlert("信息"+WCMLang.Delete_success);
+			msgAlert("信息"+WCMLang.Delete_success);
 			reloadInfoDataList();
 		}else
 		{
-			top.msgWargin("信息"+WCMLang.Delete_fail);		
+			msgWargin("信息"+WCMLang.Delete_fail);
 		}	
 	}else if(type == -3)//清除回收站信息
 	{
 		if(YsqgkRPC.clearDeleteYsqgkInfos())
 		{
-			top.msgAlert("信息"+WCMLang.Delete_success);
+			msgAlert("信息"+WCMLang.Delete_success);
 			reloadInfoDataList();
 		}else
 		{
-			top.msgWargin("信息"+WCMLang.Delete_fail);		
+			msgWargin("信息"+WCMLang.Delete_fail);
 		}	
 	}
 }
@@ -507,45 +507,45 @@ function reBackInfos()
 		m.put("ysq_id",id+"");
 		if(YsqgkRPC.reBackInfos(m))
 		{
-			top.msgAlert("信息还原成功！");
+			msgAlert("信息还原成功！");
 			reloadInfoDataList();
 		}else
 		{
-			top.msgWargin("信息还原失败！");		
+			msgWargin("信息还原失败！");
 		}	
 	}else{
-		top.msgAlert("请选择要操作的记录！");
+		msgAlert("请选择要操作的记录！");
 		return;
 	}
 }
 
 function portOut(){
-	//top.msgAlert("		导出	数据！	");
+	//msgAlert("		导出	数据！	");
 }
 function openInfoPage(ysq_id,node_id)
 {
-	top.addTab(true,"/sys/zwgk/ysqgk/operate/ysqgk_info.jsp?ysq_id="+ysq_id+"&node_id="+node_id,"依申请公开");
+	addTab(true,"/sys/zwgk/ysqgk/operate/ysqgk_info.jsp?ysq_id="+ysq_id+"&node_id="+node_id,"依申请公开");
 }
 
 function openReplyInfoPage(ysq_id,node_id)
 {
-	top.addTab(true,"/sys/zwgk/ysqgk/operate/ysqgk_Replayinfo.jsp?ysq_id="+ysq_id+"&node_id="+node_id,"依申请公开");
+	addTab(true,"/sys/zwgk/ysqgk/operate/ysqgk_Replayinfo.jsp?ysq_id="+ysq_id+"&node_id="+node_id,"依申请公开");
 }
 
 function openAddPage(node_id)
 {
-	top.addTab(true,"/sys/zwgk/ysqgk/operate/ysqgk_infoAdd.jsp?node_id="+node_id,"依申请公开");
+	addTab(true,"/sys/zwgk/ysqgk/operate/ysqgk_infoAdd.jsp?node_id="+node_id,"依申请公开");
 }
 //高级搜索页面
 function openHighSearchPage(node_id)
 {
-	top.OpenModalWindow("高级搜索","/sys/zwgk/ysqgk/operate/hightSearch.jsp?node_id="+node_id,510,500);
+	OpenModalWindow("高级搜索","/sys/zwgk/ysqgk/operate/hightSearch.jsp?node_id="+node_id,510,500);
 }
 
 function openUpdatePage(node_id)
 {
 	var ysq_id = table.getSelecteCheckboxValue("ysq_id");
-	top.addTab(true,"/sys/zwgk/ysqgk/operate/ysqgk_infoUpdate.jsp?ysq_id="+ysq_id+"&node_id="+node_id,"依申请公开");	
+	addTab(true,"/sys/zwgk/ysqgk/operate/ysqgk_infoUpdate.jsp?ysq_id="+ysq_id+"&node_id="+node_id,"依申请公开");
 }
 
 //修改信息
@@ -559,26 +559,26 @@ function updateYsqInfo(ysq_id,node_id)
 //	}
 	updateBean.ysq_id = ysq_id;
 	if($("#gk_index").val() == ""){
-		top.msgAlert("索引号不能为空!");
+		msgAlert("索引号不能为空!");
 		return;
 	}else{
 		updateBean.gk_index = $("#gk_index").val(); 
 	}
 	if(getV("content") == ""){
-		top.msgAlert("内容不能为空!");
+		msgAlert("内容不能为空!");
 		return;
 	}else{
 		updateBean.content= getV("content");
 	}
 	if(YsqgkRPC.updateYsqgkInfo(updateBean))
 	{
-		top.msgAlert("信息"+WCMLang.Set_success);
+		msgAlert("信息"+WCMLang.Set_success);
 		reloadInfoDataList();
-		top.CloseModalWindow();
+		CloseModalWindow();
 	}
 	else
 	{
-		top.msgWargin("信息"+WCMLang.Set_fail);
+		msgWargin("信息"+WCMLang.Set_fail);
 		return;
 	}
 }
@@ -723,7 +723,7 @@ function insertAddress(){
 		}
 		if(tmp == "" || tmp == null)
 		{
-			top.msgAlert("暂无联系方式!");
+			msgAlert("暂无联系方式!");
 		}else{
 			KE.util.focus("deal_content");
 		    KE.util.selection("deal_content");

@@ -127,9 +127,9 @@ function setScrollHandl()
 
 function setUserPublishOperate()	
 {
-	var opt_ids = ","+top.getOptIDSByUser(app_id,site_id)+",";
+	var opt_ids = ","+getOptIDSByUser(app_id,site_id)+",";
 	//判断是否是站点管理员或超级管理员
-	if(top.isSiteManager(app_id,site_id) == true || opt_ids.indexOf(",302,") > -1)
+	if(isSiteManager(app_id,site_id) == true || opt_ids.indexOf(",302,") > -1)
 	{
 		$("#table_id #opt_302").show();		
 	}
@@ -171,21 +171,21 @@ function related_ok()
 		i_list.add(info_map.get($(this).val()));
 	});
 
-	if(jsonrpc.InfoBaseRPC.infoGet(i_list,site_id,app_id,cat_id_for_get,idsTmp,isPublish,top.LoginUserBean.user_id))
+	if(jsonrpc.InfoBaseRPC.infoGet(i_list,site_id,app_id,cat_id_for_get,idsTmp,isPublish,LoginUserBean.user_id))
 	{
-		top.msgAlert("获取成功");
-		top.getCurrentFrameObj().reloadInfoDataList();
-		top.CloseModalWindow();
+		msgAlert("获取成功");
+		getCurrentFrameObj().reloadInfoDataList();
+		CloseModalWindow();
 	}
 	else
 	{
-		top.msgWargin("获取失败,请重新操作");
+		msgWargin("获取失败,请重新操作");
 	}
 }
 
 //取消
 function related_cancel(){
-	top.CloseModalWindow();
+	CloseModalWindow();
 }
 </script>
 <style type="text/css">

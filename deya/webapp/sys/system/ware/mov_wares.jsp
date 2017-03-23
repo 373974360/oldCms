@@ -40,13 +40,13 @@ function returnWareCategoryID()
 	var node = $('#leftMenuTree').tree('getSelected');
 	if(node == null)
 	{
-		top.msgWargin(WCMLang.selected_ware_category);
+		msgWargin(WCMLang.selected_ware_category);
 		return;
 	}else
 	{		
 		//alert(node.id+"|==="+ids);
-		eval("top.getCurrentFrameObj().updateMove('"+ids+"','"+node.id+"')");
-		top.CloseModalWindow();
+		eval("getCurrentFrameObj().updateMove('"+ids+"','"+node.id+"')");
+		CloseModalWindow();
 	}	
 }
 </script>
@@ -77,7 +77,7 @@ function returnWareCategoryID()
 	<tr>
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="returnWareCategoryID()" value="保存" />
-			<input id="userAddCancel" name="btn1" type="button" onclick="top.CloseModalWindow();" value="取消" />	
+			<input id="userAddCancel" name="btn1" type="button" onclick="CloseModalWindow();" value="取消" />
 		</td>
 	</tr>
 </table>

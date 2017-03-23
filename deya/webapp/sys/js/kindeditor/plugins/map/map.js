@@ -86,7 +86,7 @@ KindEditor.plugin('map', function(K) {
 			'	geocoder.geocode({latLng: latlng}, function(results, status) {',
 			'		if (status == google.maps.GeocoderStatus.OK) {',
 			'			if (results[3]) {',
-			'				parent.document.getElementById("kindeditor_plugin_map_address").value = results[3].formatted_address;',
+			'				document.getElementById("kindeditor_plugin_map_address").value = results[3].formatted_address;',
 			'			}',
 			'		}',
 			'	});',

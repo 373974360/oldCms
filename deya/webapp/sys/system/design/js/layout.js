@@ -75,7 +75,7 @@ function showTurnPage(){
 //打开添加窗口
 function openAddDesignLayoutPage()
 {		
-	top.addTab(true,"/sys/system/design/layout_add.jsp?app_id="+app_id+"&top_index="+top.curTabIndex,"维护布局");
+	addTab(true,"/sys/system/design/layout_add.jsp?app_id="+app_id+"&top_index="+curTabIndex,"维护布局");
 }
 
 function openUpdateDesignLayoutPage(c_id)
@@ -87,7 +87,7 @@ function openUpdateDesignLayoutPage(c_id)
 	}else
 		id = table.getSelecteCheckboxValue("layout_id");
 	
-	top.addTab(true,"/sys/system/design/layout_add.jsp?app_id="+app_id+"&top_index="+top.curTabIndex+"&layout_id="+id,"维护布局");
+	addTab(true,"/sys/system/design/layout_add.jsp?app_id="+app_id+"&top_index="+curTabIndex+"&layout_id="+id,"维护布局");
 }
 
 
@@ -104,13 +104,13 @@ function addLayout()
 
 	if(DesignRPC.insertDesignLayout(bean))
 	{
-		top.msgAlert("布局"+WCMLang.Add_success);
-		top.getCurrentFrameObj(top_index).reloadList();
-		top.tab_colseOnclick(top.curTabIndex);
+		msgAlert("布局"+WCMLang.Add_success);
+		getCurrentFrameObj(top_index).reloadList();
+		tab_colseOnclick(curTabIndex);
 	}
 	else
 	{
-		top.msgWargin("布局"+WCMLang.Add_fail);
+		msgWargin("布局"+WCMLang.Add_fail);
 	}
 }
 
@@ -126,13 +126,13 @@ function updateLayout()
 
 	if(DesignRPC.updateDesignLayout(bean))
 	{
-		top.msgAlert("布局"+WCMLang.Add_success);
-		top.getCurrentFrameObj(top_index).reloadList();
-		top.tab_colseOnclick(top.curTabIndex);
+		msgAlert("布局"+WCMLang.Add_success);
+		getCurrentFrameObj(top_index).reloadList();
+		tab_colseOnclick(curTabIndex);
 	}
 	else
 	{
-		top.msgWargin("布局"+WCMLang.Add_fail);
+		msgWargin("布局"+WCMLang.Add_fail);
 	}
 }
 
@@ -141,10 +141,10 @@ function deleteDesignLayout()
 	var selectIDS = table.getSelecteCheckboxValue("layout_id");
 	if(DesignRPC.deleteDesignLayout(selectIDS))
 	{
-		top.msgAlert("布局"+WCMLang.Delete_success);
+		msgAlert("布局"+WCMLang.Delete_success);
 		reloadList();
 	}else
 	{
-		top.msgWargin("布局"+WCMLang.Delete_fail);
+		msgWargin("布局"+WCMLang.Delete_fail);
 	}
 }

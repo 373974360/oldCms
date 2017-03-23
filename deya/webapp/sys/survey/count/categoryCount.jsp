@@ -100,7 +100,7 @@
 		}
 		else
 		{
-			top.msgWargin("请输入时间范围");
+			msgWargin("请输入时间范围");
 		}
 	}
 	//-->

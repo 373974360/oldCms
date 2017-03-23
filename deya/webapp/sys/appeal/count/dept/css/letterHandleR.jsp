@@ -91,7 +91,7 @@ $(document).ready(function(){
 	if($.browser.msie&&$.browser.version=="6.0"&&$("html")[0].scrollHeight>$("html").height()) $("html").css("overflowY","scroll"); 
 	Init_InfoTable("infoList");
  
-    window.parent.setExcelOutUrl('${url}');
+    window.setExcelOutUrl('${url}');
 	//alert($("body").width());
 }); 
 

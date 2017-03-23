@@ -153,8 +153,8 @@ function showTurnPage(){
 //保存
 function saveCateIDS(){
 	var selectIDS = table.getSelecteCheckboxValue("id");
-	top.getCurrentFrameObj().setFormFields(selectIDS);
-	top.CloseModalWindow();
+	getCurrentFrameObj().setFormFields(selectIDS);
+	CloseModalWindow();
 }
 
 

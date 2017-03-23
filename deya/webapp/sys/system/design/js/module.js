@@ -74,7 +74,7 @@ function showTurnPage(){
 //打开添加窗口
 function openAddDesignModulePage()
 {		
-	top.addTab(true,"/sys/system/design/module_add.jsp?app_id="+app_id+"&top_index="+top.curTabIndex,"维护模块");
+	addTab(true,"/sys/system/design/module_add.jsp?app_id="+app_id+"&top_index="+curTabIndex,"维护模块");
 }
 
 function openUpdateDesignModulePage(c_id)
@@ -86,7 +86,7 @@ function openUpdateDesignModulePage(c_id)
 	}else
 		id = table.getSelecteCheckboxValue("module_id");
 	
-	top.addTab(true,"/sys/system/design/module_add.jsp?app_id="+app_id+"&top_index="+top.curTabIndex+"&module_id="+id,"维护模块");
+	addTab(true,"/sys/system/design/module_add.jsp?app_id="+app_id+"&top_index="+curTabIndex+"&module_id="+id,"维护模块");
 }
 
 function getAttrIDS()
@@ -116,13 +116,13 @@ function addModule()
 
 	if(DesignRPC.insertDesignModule(bean))
 	{
-		top.msgAlert("模块"+WCMLang.Add_success);
-		top.getCurrentFrameObj(top_index).reloadList();
-		top.tab_colseOnclick(top.curTabIndex);
+		msgAlert("模块"+WCMLang.Add_success);
+		getCurrentFrameObj(top_index).reloadList();
+		tab_colseOnclick(curTabIndex);
 	}
 	else
 	{
-		top.msgWargin("模块"+WCMLang.Add_fail);
+		msgWargin("模块"+WCMLang.Add_fail);
 	}
 }
 
@@ -140,13 +140,13 @@ function updateModule()
 
 	if(DesignRPC.updateDesignModule(bean))
 	{
-		top.msgAlert("模块"+WCMLang.Add_success);
-		top.getCurrentFrameObj(top_index).reloadList();
-		top.tab_colseOnclick(top.curTabIndex);
+		msgAlert("模块"+WCMLang.Add_success);
+		getCurrentFrameObj(top_index).reloadList();
+		tab_colseOnclick(curTabIndex);
 	}
 	else
 	{
-		top.msgWargin("模块"+WCMLang.Add_fail);
+		msgWargin("模块"+WCMLang.Add_fail);
 	}
 }
 
@@ -155,11 +155,11 @@ function deleteDesignModule()
 	var selectIDS = table.getSelecteCheckboxValue("module_id");
 	if(DesignRPC.deleteDesignModule(selectIDS))
 	{
-		top.msgAlert("模块"+WCMLang.Delete_success);
+		msgAlert("模块"+WCMLang.Delete_success);
 		reloadList();
 	}else
 	{
-		top.msgWargin("模块"+WCMLang.Delete_fail);
+		msgWargin("模块"+WCMLang.Delete_fail);
 	}
 }
 

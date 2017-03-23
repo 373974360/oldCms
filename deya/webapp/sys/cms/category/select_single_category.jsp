@@ -25,7 +25,7 @@ $(document).ready(function(){
 	initButtomStyle();
 	//var CategoryRPC = jsonrpc.CategoryRPC;
 	//json_data = eval(CategoryRPC.getCategoryTreeBySiteID(site_id));	
-	json_data = top.getCurrentFrameObj().json_data;//直接取父窗口里的树对象
+	json_data = getCurrentFrameObj().json_data;//直接取父窗口里的树对象
 	setLeftMenuTreeJsonData(json_data);
 		
 });
@@ -36,12 +36,12 @@ function returnCatID()
 	var node = $('#leftMenuTree').tree('getSelected');
 	if(node == null)
 	{
-		top.msgWargin(WCMLang.selected_category);
+		msgWargin(WCMLang.selected_category);
 		return;
 	}else
 	{			
-		eval("top.getCurrentFrameObj()."+handl_name+"('"+node.id+"')");
-		top.CloseModalWindow();
+		eval("getCurrentFrameObj()."+handl_name+"('"+node.id+"')");
+		CloseModalWindow();
 	}
 }
 </script>
@@ -72,7 +72,7 @@ function returnCatID()
 	<tr>
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="returnCatID()" value="保存" />
-			<input id="userAddCancel" name="btn1" type="button" onclick="top.CloseModalWindow();" value="取消" />	
+			<input id="userAddCancel" name="btn1" type="button" onclick="CloseModalWindow();" value="取消" />
 		</td>
 	</tr>
 </table>

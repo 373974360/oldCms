@@ -1902,7 +1902,7 @@ if(!Array.prototype.indexOf){
 			if (this.style('stop-opacity').hasValue()) stopColor = stopColor.Color.addOpacity(this.style('stop-opacity').value);
 			this.color = stopColor.value;
 		}
-		svg.Element.stop.prototype = new svg.Element.ElementBase;
+		svg.Element.sprototype = new svg.Element.ElementBase;
 		
 		// animation base element
 		svg.Element.AnimateBase = function(node) {
@@ -1920,9 +1920,9 @@ if(!Array.prototype.indexOf){
 				var attributeName = this.attribute('attributeName').value;
 				
 				if (attributeType == 'CSS') {
-					return this.parent.style(attributeName, true);
+					return this.style(attributeName, true);
 				}
-				return this.parent.attribute(attributeName, true);			
+				return this.attribute(attributeName, true);			
 			};
 			
 			this.initialValue = null;
@@ -2186,14 +2186,14 @@ if(!Array.prototype.indexOf){
 			}
 			
 			this.renderChildren = function(ctx) {
-				var customFont = this.parent.style('font-family').Definition.getDefinition();
+				var customFont = this.style('font-family').Definition.getDefinition();
 				if (customFont != null) {
-					var fontSize = this.parent.style('font-size').numValueOrDefault(svg.Font.Parse(svg.ctx.font).fontSize);
-					var fontStyle = this.parent.style('font-style').valueOrDefault(svg.Font.Parse(svg.ctx.font).fontStyle);
+					var fontSize = this.style('font-size').numValueOrDefault(svg.Font.Parse(svg.ctx.font).fontSize);
+					var fontStyle = this.style('font-style').valueOrDefault(svg.Font.Parse(svg.ctx.font).fontStyle);
 					var text = this.getText();
 					if (customFont.isRTL) text = text.split("").reverse().join("");
 					
-					var dx = svg.ToNumberArray(this.parent.attribute('dx').value);
+					var dx = svg.ToNumberArray(this.attribute('dx').value);
 					for (var i=0; i<text.length; i++) {
 						var glyph = this.getGlyph(customFont, text, i);
 						var scale = fontSize / customFont.fontFace.unitsPerEm;
@@ -2225,13 +2225,13 @@ if(!Array.prototype.indexOf){
 			}
 			
 			this.measureText = function(ctx) {
-				var customFont = this.parent.style('font-family').Definition.getDefinition();
+				var customFont = this.style('font-family').Definition.getDefinition();
 				if (customFont != null) {
-					var fontSize = this.parent.style('font-size').numValueOrDefault(svg.Font.Parse(svg.ctx.font).fontSize);
+					var fontSize = this.style('font-size').numValueOrDefault(svg.Font.Parse(svg.ctx.font).fontSize);
 					var measure = 0;
 					var text = this.getText();
 					if (customFont.isRTL) text = text.split("").reverse().join("");
-					var dx = svg.ToNumberArray(this.parent.attribute('dx').value);
+					var dx = svg.ToNumberArray(this.attribute('dx').value);
 					for (var i=0; i<text.length; i++) {
 						var glyph = this.getGlyph(customFont, text, i);
 						measure += (glyph.horizAdvX || customFont.horizAdvX) * fontSize / customFont.fontFace.unitsPerEm;

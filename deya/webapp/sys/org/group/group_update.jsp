@@ -38,12 +38,12 @@ function checkUpdate()
 	
 	if(!GroupManRPC.updateGroup(updateBean))
 	{
-		top.msgWargin("用户组"+WCMLang.Add_fail);
+		msgWargin("用户组"+WCMLang.Add_fail);
 		return;
 	}
-	top.msgAlert("用户组"+WCMLang.Add_success);
-	top.getCurrentFrameObj().reloadGroupList();
-	top.CloseModalWindow();
+	msgAlert("用户组"+WCMLang.Add_success);
+	getCurrentFrameObj().reloadGroupList();
+	CloseModalWindow();
 }
 
 function initPage()
@@ -86,7 +86,7 @@ function initPage()
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="saveButton" name="btn1" type="submit" onclick="checkUpdate()" value="保存" />	
 			<input id="Reset" name="btn2" type="button" onclick="initPage()" value="重置" />	
-			<input id="Cancel" name="btn3" type="button" onclick="top.CloseModalWindow();" value="取消" />
+			<input id="Cancel" name="btn3" type="button" onclick="CloseModalWindow();" value="取消" />
 		</td>
 	</tr>
 </table>

@@ -19,7 +19,7 @@ $(document).ready(function() {
 	
 	if(type == -1)
 	{
-		$("#auto_desc").val(top.getCurrentFrameObj().adopt_desc).attr("readOnly","readOnly");
+		$("#auto_desc").val(getCurrentFrameObj().adopt_desc).attr("readOnly","readOnly");
 		$("#ok_button").remove();
 	}
 });
@@ -27,11 +27,11 @@ $(document).ready(function() {
 
 
 function related_cancel(){
-	top.CloseModalWindow();
+	CloseModalWindow();
 }
 
 function related_ok(){
-	top.getCurrentFrameObj().dontAdoptRInfoHandl($("#auto_desc").val());
+	getCurrentFrameObj().dontAdoptRInfoHandl($("#auto_desc").val());
 	related_cancel();
 }
 

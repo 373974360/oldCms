@@ -816,7 +816,7 @@ Validator = function(){
 		var reString4=/^[^%\'\_]*$/;
 		if(!reString4.test(value))
 		{
-			parent.alertN("<div style='line-height:20px'>"+name+"不能输入%号，单引号和下划线特殊符号");
+			alertN("<div style='line-height:20px'>"+name+"不能输入%号，单引号和下划线特殊符号");
 			return false;
 		}
 		else

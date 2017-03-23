@@ -58,9 +58,9 @@ $(document).ready(function() {
 
 function setUserPublishOperate()	
 {
-	var opt_ids = ","+top.getOptIDSByUser(app_id,site_id)+",";
+	var opt_ids = ","+getOptIDSByUser(app_id,site_id)+",";
 	//判断是否是站点管理员或超级管理员
-	if(top.isSiteManager(app_id,site_id) == true || opt_ids.indexOf(",302,") > -1)
+	if(isSiteManager(app_id,site_id) == true || opt_ids.indexOf(",302,") > -1)
 	{
 		$("#table_id #opt_302").show();		
 	}

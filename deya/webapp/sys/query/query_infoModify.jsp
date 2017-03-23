@@ -64,7 +64,7 @@ function insertQueryDicBean()
 		Bean.item_id = item_id;
 		Bean.item_key = $(this).find("td").attr("id");
 		if($(this).find("td input").val() == ""){
-			top.msgAlert("信息不能为空!");
+			msgAlert("信息不能为空!");
 			return;
 		}else{
 			Bean.item_value = $(this).find("td input").val();
@@ -73,11 +73,11 @@ function insertQueryDicBean()
 	});
 	if(QueryItemRPC.updateQueryItem(list))
 	{
-			top.msgAlert("信息"+WCMLang.Add_success);
+			msgAlert("信息"+WCMLang.Add_success);
 			window.history.go(-1);
 	}else
 	{
-			top.msgWargin("信息"+WCMLang.Add_fail);
+			msgWargin("信息"+WCMLang.Add_fail);
 	}
 }
 </script>

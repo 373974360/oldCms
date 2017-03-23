@@ -43,7 +43,7 @@ function showList()
 	table.getCol("wcat_name").each(function(i){	
 		if(i>0)
 		{
-			$(this).html('<a href="javascript:top.OpenModalWindow(\'新建标签分类\',\'/sys/system/ware/wareCategoryAdd.jsp?type=update&id='+beanList.get(i-1).id+'\',450,230)">'+beanList.get(i-1).wcat_name+'</a>');
+			$(this).html('<a href="javascript:OpenModalWindow(\'新建标签分类\',\'/sys/system/ware/wareCategoryAdd.jsp?type=update&id='+beanList.get(i-1).id+'\',450,230)">'+beanList.get(i-1).wcat_name+'</a>');
 		}
 	});
 
@@ -119,10 +119,10 @@ function insertWareReleUserByCat(user_ids,group_ids)
 {	
 	if(WareRPC.insertWareReleUserByCat(temp_wcat_id,user_ids,group_ids,app_id,site_id))
 	{
-		top.msgAlert("标签分类用户关联"+WCMLang.Add_success);
+		msgAlert("标签分类用户关联"+WCMLang.Add_success);
 	}else
 	{
-		top.msgWargin("标签分类用户关联"+WCMLang.Add_fail);
+		msgWargin("标签分类用户关联"+WCMLang.Add_fail);
 	}
 }
 /********** 关联用户 结束 **********/
@@ -130,14 +130,14 @@ function insertWareReleUserByCat(user_ids,group_ids)
 // 新建button事件
 function openAddPage()
 {
-	top.OpenModalWindow("新建标签分类","/sys/system/ware/wareCategoryAdd.jsp?type=add&id="+id,450,230);
+	OpenModalWindow("新建标签分类","/sys/system/ware/wareCategoryAdd.jsp?type=add&id="+id,450,230);
 }
 
 // 修改button事件
 function openUpdatePage()
 {
 	var selectID = table.getSelecteCheckboxValue("id");
-	top.OpenModalWindow("新建标签分类","/sys/system/ware/wareCategoryAdd.jsp?type=update&id="+selectID,450,230);
+	OpenModalWindow("新建标签分类","/sys/system/ware/wareCategoryAdd.jsp?type=update&id="+selectID,450,230);
 }
 
 // 保存排序button事件
@@ -146,12 +146,12 @@ function saveSort()
 	var ids = table.getAllCheckboxValue("id");;
 	if(WareRPC.saveSort(ids))
 	{
-		top.msgAlert(WCMLang.Sort_success);
+		msgAlert(WCMLang.Sort_success);
 		showWareCateTree();
 	}
 	else
 	{
-		top.msgWargin(WCMLang.Sort_fail);
+		msgWargin(WCMLang.Sort_fail);
 	}
 }
 
@@ -163,13 +163,13 @@ function deleteWareCategory()
 	con_m.put("site_id", site_id);
 	if(WareRPC.deleteWareCategory(con_m))
 	{
-		top.msgAlert("信息分类"+WCMLang.Delete_success);
+		msgAlert("信息分类"+WCMLang.Delete_success);
 		deleteTreeNode(ids+"");
 		loadWareCategoryTable();
 	}
 	else
 	{
-		top.msgWargin("信息分类"+WCMLang.Delete_fail);
+		msgWargin("信息分类"+WCMLang.Delete_fail);
 		showWareCateTree();
 	}
 	con_m.remove("id");
@@ -192,20 +192,20 @@ function saveAddWareCategory()
 	var addBean = BeanUtil.getCopy(WareCategoryBean);
 	$("#wareCate_table").autoBind(addBean);
 	
-	addBean.site_id = top.getCurrentFrameObj().site_id;
-	addBean.app_id = top.getCurrentFrameObj().app_id;
-	addBean.parent_id = id;//top.getCurrentFrameObj().wcat_id;
+	addBean.site_id = getCurrentFrameObj().site_id;
+	addBean.app_id = getCurrentFrameObj().app_id;
+	addBean.parent_id = id;//getCurrentFrameObj().wcat_id;
 
 	if(WareRPC.insertWareCate(addBean))
 	{
-		top.msgAlert("信息标签分类"+WCMLang.Add_success);
-		top.getCurrentFrameObj().showWareCateTree();
-		top.getCurrentFrameObj().loadWareCategoryTable();
-		top.CloseModalWindow();
+		msgAlert("信息标签分类"+WCMLang.Add_success);
+		getCurrentFrameObj().showWareCateTree();
+		getCurrentFrameObj().loadWareCategoryTable();
+		CloseModalWindow();
 	}
 	else
 	{
-		top.msgWargin("信息标签分类"+WCMLang.Add_fail);
+		msgWargin("信息标签分类"+WCMLang.Add_fail);
 	}
 }
 
@@ -219,14 +219,14 @@ function saveUpdateWareCategory()
 	$("#wareCate_table").autoBind(updateBean);
 	if(WareRPC.updateWareCate(updateBean))
 	{
-		top.msgAlert("信息标签分类"+WCMLang.Set_success);
-		top.getCurrentFrameObj().updateWareCateTree(updateBean.id, updateBean.wcat_name);
-		top.getCurrentFrameObj().loadWareCategoryTable();
-		top.CloseModalWindow();
+		msgAlert("信息标签分类"+WCMLang.Set_success);
+		getCurrentFrameObj().updateWareCateTree(updateBean.id, updateBean.wcat_name);
+		getCurrentFrameObj().loadWareCategoryTable();
+		CloseModalWindow();
 	}
 	else
 	{
-		top.msgWargin("信息标签分类"+WCMLang.Set_fail);
+		msgWargin("信息标签分类"+WCMLang.Set_fail);
 	}
 }
 

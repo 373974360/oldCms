@@ -13,7 +13,7 @@ function createTableAllSite()
 	beanList = List.toJSList(beanList);
 	
 	//传给父页面list
-	parent.beanListResult = beanList;
+	beanListResult = beanList;
 	
 	var treeHtmls = "<thead>" +
     "<tr> " +
@@ -118,7 +118,7 @@ function setHandlListAllSite(bean, index)
 // 跳转到站点下的栏目详细统计页面
 function redirectURL(bean_site_id,site_name)
 {
-	top.addTab(true ,"/sys/zwgk/count/gkCountList.jsp?start_day="+start_day+"&end_day="+end_day+"&site_id="
+	addTab(true ,"/sys/zwgk/count/gkCountList.jsp?start_day="+start_day+"&end_day="+end_day+"&site_id="
 		+bean_site_id+"&app_id=\"\"&type=back",site_name+"栏目统计");
 }
 //**************************************所有站点公开信息统计***********************************************/
@@ -148,10 +148,10 @@ function createTable()
   if(beanList.size() != 0) {
 	  
 	//传给父页面list
-	//parent.beanListResult = beanList;
-	parent.site_id = site_id;
-	parent.startDate = start_day;
-	parent.endDate = end_day;
+	//beanListResult = beanList;
+	site_id = site_id;
+	startDate = start_day;
+	endDate = end_day;
 	  
 	 // 清理pie图的json字符串 缓存
 	pieChartDataList.clear();
@@ -229,8 +229,8 @@ function setHandlList(bean,index)
 
 // *****************生成pie图的js代码段******************************
 function openPieChart(index) {
-	top.getCurrentFrameObj().pieJsonData = 	pieChartDataList.get(index);
-	top.OpenModalWindow("饼状图","/sys/zwgk/count/chart.html",475,470);
+	getCurrentFrameObj().pieJsonData = 	pieChartDataList.get(index);
+	OpenModalWindow("饼状图","/sys/zwgk/count/chart.html",475,470);
 	
 }
 

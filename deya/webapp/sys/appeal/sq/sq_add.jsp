@@ -22,12 +22,12 @@
 var sq_id = "<%=sq_id%>";
 var top_index = "<%=top_index%>";
 var site_id = "<%=site_id%>";
-var is_admin = SQRPC.isAppealManager(top.LoginUserBean.user_id); //是否是管理员
-var current_dept_id = CpUserRPC.getSQDeptIDbyUserID(top.LoginUserBean.user_id);//当前用户所在的部门
+var is_admin = SQRPC.isAppealManager(LoginUserBean.user_id); //是否是管理员
+var current_dept_id = CpUserRPC.getSQDeptIDbyUserID(LoginUserBean.user_id);//当前用户所在的部门
 var defaultBean;
 var model_bean;
 var	dept_name="";
-var opt_ids = ","+jsonrpc.UserLoginRPC.getOptIDSByUserAPPSite(top.LoginUserBean.user_id,"appeal","")+",";
+var opt_ids = ","+jsonrpc.UserLoginRPC.getOptIDSByUserAPPSite(LoginUserBean.user_id,"appeal","")+",";
 $(document).ready(function(){
 	initButtomStyle();
 	init_input();
@@ -54,12 +54,12 @@ $(document).ready(function(){
 			  var str = "</tr>";
 				str += '<tr class="trList">';
 				str += '<td align="right" style="width:80px;">回复时间:</td>';
-				str += '<td style="text-align:left;">'+defaultBean.over_dtime+'</td>';
+				str += '<td style="float:left;text-align:left;">'+defaultBean.over_dtime+'</td>';
 				str += "</tr>";
 				str += '<td align="right" style="width:80px;">回复部门:</td>';
-				str += '<td style="text-align:left;">'+dept_name+'</td>';
+				str += '<td style="float:left;text-align:left;">'+dept_name+'</td>';
 				str += "</tr>";
-				str += '<td align="right" >回复内容:</td>';
+				str += '<td style="float:left;text-align:left;">回复内容:</td>';
 				str += '<td >'+defaultBean.sq_reply+'</td>';
 				str += "</tr>";
 			$("#sq_reply").append(str);
@@ -196,7 +196,7 @@ function updateShowText()
 	{
 		$("#sq_status_text").text("已办结");
 	}
-	$(":radio[id='publish_status'][value="+defaultBean.publish_status+"]").attr("checked",true);
+	//$(":radio[id='publish_status'][value="+defaultBean.publish_status+"]").attr("checked",true);
 	if(defaultBean.publish_status == 0)
 	{
 		$("#publish_status_text").text("未发布");
@@ -212,6 +212,7 @@ function updateShowText()
 //得到该登录人所具有的权限ID，显示操作按钮
 function getOptIDSByUser()
 {
+	var opt_ids = jsonrpc.UserLoginRPC.getOptIDSByUserAPPSite(LoginUserBean.user_id,"appeal","");
 	if(opt_ids != "" && opt_ids != null)
 	{
 		var tempA = opt_ids.split(",");
@@ -251,11 +252,11 @@ function getProcessList()
 			//str += '<div><input id="" name="btn2" class="" type="button" onclick="openUpdateProcessPage('+pl.get(i).pro_id+')" value="编辑" /></div>';
 			str += '</td>';
 			str += '</tr>';
-			//str += '<tr>';
-			//str += '<td width="80" align="right">附件:</td>';
-			//str += '<td id="pro_attr_td_'+pl.get(i).pro_id+'">';
-			//str += '</td>';
-			//str += '</tr>';
+			str += '<tr>';
+			str += '<td width="80" align="right">附件:</td>';
+			str += '<td id="pro_attr_td_'+pl.get(i).pro_id+'">';			
+			str += '</td>';
+			str += '</tr>';
 			str += '</table>';
 			str += '</td>';
 			str += '</tr>';
@@ -272,7 +273,7 @@ function getProcessList()
 //打开审核内容修改窗口
 function openUpdateProcessPage(pro_id)
 {
-	top.OpenModalWindow("内容编辑","/sys/appeal/sq/update_process.jsp?pro_id="+pro_id+"&top_index="+top.curTabIndex,650,340);
+	OpenModalWindow("内容编辑","/sys/appeal/sq/update_process.jsp?pro_id="+pro_id+"&top_index="+curTabIndex,650,340);
 }
 
 function getProNoteValue(pro_id)
@@ -387,11 +388,7 @@ function doVoid(id,pro_type)
 		case 1:$("#pro_title_th").text("回复内容：");				
 			　 $("div #sq_title_div").text("回复信件");
 			   if(opt_ids.indexOf(",175,") > -1)
-               {
-                   $("#publish_status_tr").show();
-                   $("#over_dtime_tr").show();
-               }
-
+				 $("#publish_status_tr").show();
 			   if(opt_ids.indexOf(",178,") > -1)
 				 $("#gzyy_open_tr").show();
 			   setV("pro_note", defaultBean.sq_reply);
@@ -462,7 +459,7 @@ function doVoid(id,pro_type)
 			   $("#gzyy_open_tr").show();
 			   setV("sq_content2_r", defaultBean.sq_content2);
 			   setV("pro_note", defaultBean.sq_reply);
-			   $(":radio[id='publish_status'][value="+defaultBean.publish_status+"]").attr("checked",true);
+			   //$(":radio[id='publish_status'][value="+defaultBean.publish_status+"]").attr("checked",true);
 			   $("#sq_title2_r").val(defaultBean.sq_title2);
 			   $("#weight_tr").show();
 				break;
@@ -480,11 +477,11 @@ function getDisposeDeptList(dis_name)
 {	
 	var dept_list;
 	if(dis_name == "zb")//转办
-		dept_list= CpUserRPC.getBrotherDeptListByUserID(top.LoginUserBean.user_id);
+		dept_list= CpUserRPC.getBrotherDeptListByUserID(LoginUserBean.user_id);
 	if(dis_name == "jb")//交办
-		dept_list= CpUserRPC.getChildDeptListByUserID(top.LoginUserBean.user_id);
+		dept_list= CpUserRPC.getChildDeptListByUserID(LoginUserBean.user_id);
 	if(dis_name == "cb")//呈办
-		dept_list= CpUserRPC.getParentDeptListByUserID(top.LoginUserBean.user_id);
+		dept_list= CpUserRPC.getParentDeptListByUserID(LoginUserBean.user_id);
 
 		//dept_list= CpDeptRPC.getAllCpDeptBySort();
 
@@ -514,19 +511,19 @@ function setCpDept(id,name){
 //信息判重
 function isReduplicate()
 {
-	top.addTab(true,"/sys/appeal/sq/sq_panchong.jsp?top_index="+top.curTabIndex,"信件判重");
+	addTab(true,"/sys/appeal/sq/sq_panchong.jsp?top_index="+curTabIndex,"信件判重");
 }
 
 //置为无效件
 function setWuxiao()
 {		
-	top.msgConfirm("确定要将此信件置为无效？","insertProcess(6)");
+	msgConfirm("确定要将此信件置为无效？","insertProcess(6)");
 }
 
 //信件编辑
 function updateSQ()
 {		
-	top.addTab(true,"/sys/appeal/sq/sq_update.jsp?sq_id="+sq_id+"&top_index="+top.curTabIndex,"信件编辑");
+	addTab(true,"/sys/appeal/sq/sq_update.jsp?sq_id="+sq_id+"&top_index="+curTabIndex,"信件编辑");
 }
 
 function openPrintPage()
@@ -558,25 +555,23 @@ function creatWord()
 			<tr>
 				<th>姓名：</th>
 				<td id="sq_realname"></td>
-				<!--<th>性别：</th>
-				<td id="sq_sex"></td>-->
+				<th>性别：</th>
+				<td id="sq_sex"></td>
 				<th>身份证：</th>
 				<td id="sq_card_id"></td>
+				<th>手机：</th>
+				<td id="sq_phone"></td>
 			</tr>
 			<tr>
-                <th>手机：</th>
-                <td id="sq_phone"></td>
-				<!--<th>职业：</th>
+				<th>职业：</th>
 				<td id="sq_vocation"></td>
 				<th>年龄：</th>
 				<td id="sq_age"></td>
-				<th>固话：</th>
-				<td id="sq_tel"></td>-->
 				<th>邮箱：</th>
 				<td id="sq_email"></td>
-
+				<th>固话：</th>
+				<td id="sq_tel"></td>
 			</tr>
-
 			<tr>
 				<th>住址：</th>
 				<td colspan="7"  id="sq_address">
@@ -614,20 +609,17 @@ function creatWord()
 				<td id="submit_name"></td>
 				<th>来信时间：</th>
 				<td id="sq_dtime"></td>
-                <th>诉求目的：</th>
-                <td id="pur_id"></td>
-				<!--<th>信件ID：</th>
-				<td id="sq_id"></td>-->
+				<th>信件ID：</th>
+				<td id="sq_id"></td>
 			</tr>
-            <!--
 			<tr>
-
+				<th>诉求目的：</th>
+				<td id="pur_id"></td>
 				<th>发生地区：</th>
 				<td id="area_id"></td>
 				<th>内容分类：</th>
 				<td id="cat_id"></td>
 			</tr>
-			-->
 			<tr>
 				<th>递交渠道：</th>
 				<td id="model_id"></td>
@@ -650,24 +642,23 @@ function creatWord()
 		<tbody>
 			<tr>
 				<th style="vertical-align:top;">内容：</th>
-				<td >
-                    <div id="sq_content2"  style="width: 100%;height:150px;line-height: 25px;"></div>
-                </td>
+				<td style="line-height:20px;font-size:14px" id="sq_content2"></td>
 			</tr>
-            <!--
 			<tr>
 				<th>附件：</th>
 				<td id="sq_att_td">
 				</td>
 			</tr>
-
 			<tr>
 				<th>&nbsp;</th>
 				<td>
-
+					<input id="btn176" name="btn1" class="hidden" type="button" onclick="isReduplicate()" value="信件判重" />
+					<input id="btn177" name="btn2" class="hidden" type="button" onclick="setWuxiao();" value="置为无效" />
+					<input id="btn178" name="btn3" class="hidden" type="button" onclick="updateSQ()" value="信件编辑" />
+					<input id="btn408" name="btn3" type="button" onclick="creatWord()" value="生成Word" />
+					<input id="btn180" name="btn3" class="hidden" type="button" onclick="openPrintPage()" value="信件打印" />
 				</td>
 			</tr>
-			-->
 		</tbody>
 	</table>
 	</div>
@@ -675,7 +666,7 @@ function creatWord()
 </div>
 
 <span class="blank6"></span>
-<!--相关信件
+<!--相关信件-->
 <div class="sq_box">
 	<div class="sq_title_box" >
 		<div class="sq_title sq_title_minus">相关信件</div>
@@ -698,9 +689,8 @@ function creatWord()
 </table>
 	</div>
 </div>
-<span class="blank6"></span>
--->
 
+<span class="blank6"></span>
 <!--处理记录-->
 <div class="sq_box">
 	<div class="sq_title_box" >
@@ -747,27 +737,17 @@ function creatWord()
 <table class="table_option" border="0" cellpadding="0" cellspacing="0">
 	<tr>
 		<td align="left" valign="middle" style="text-indent:10px;">
-            <input id="btn165" name="btn1" class="hidden" type="button" onclick="doVoid('do_0',0)" value="受理信件" />
-            <input id="btn166" name="btn2" class="hidden" type="button" onclick="doVoid('do_0',1);" value="回复信件" />
-            <input id="btn167" name="btn3" class="hidden" type="button" onclick="doVoid('do_0',2);" value="转办信件" />
-            <!--<input id="btn168" name="btn4" class="hidden" type="button" onclick="doVoid('do_0',3);" value="交办" />-->
-            <input id="btn169" name="btn5" class="hidden" type="button" onclick="doVoid('do_0',4);" value="退回信件" />
-            <input id="btn176" name="btn1" class="hidden" type="button" onclick="isReduplicate()" value="信件判重" />
-            <input id="btn177" name="btn2" class="hidden" type="button" onclick="setWuxiao();" value="置为无效" />
-            <input id="btn175" name="btn6" class="hidden" type="button" onclick="doVoid('do_0',102);" value="发布信件" />
-            <input id="btn178" name="btn3" class="hidden" type="button" onclick="updateSQ()" value="信件编辑" />
-            <input id="btn180" name="btn3" class="hidden" type="button" onclick="openPrintPage()" value="信件打印" />
-            <!--
-            <input id="btn408" name="btn3" type="button" onclick="creatWord()" value="生成Word" />
-            -->
-            <!--
+			<input id="btn165" name="btn1" class="hidden" type="button" onclick="doVoid('do_0',0)" value="受理" />
+			<input id="btn166" name="btn2" class="hidden" type="button" onclick="doVoid('do_0',1);" value="回复" />
+			<input id="btn167" name="btn3" class="hidden" type="button" onclick="doVoid('do_0',2);" value="转办" />
+			<input id="btn168" name="btn4" class="hidden" type="button" onclick="doVoid('do_0',3);" value="交办" />
+			<input id="btn169" name="btn5" class="hidden" type="button" onclick="doVoid('do_0',4);" value="呈办" />
 			<input id="btn170" name="btn6" class="hidden" type="button" onclick="doVoid('do_0',7);" value="不予受理" />
-			<input id="btn171" name="btn6" class="hidden" type="button" onclick="doVoid('do_0',100);" value="内容审核" />
+			<input id="btn171" name="btn6" class="hidden" type="button" onclick="doVoid('do_0',100);" value="内容审核" />			
 			<input id="btn172" name="btn6" class="hidden" type="button" onclick="doVoid('do_0',8);" value="申请延期" />
 			<input id="btn173" name="btn6" class="hidden" type="button" onclick="doVoid('do_0',101);" value="延期审核" />
 			<input id="btn174" name="btn6" class="hidden" type="button" onclick="doVoid('do_0',13);" value="督办" />
-			-->
-
+			<input id="btn175" name="btn6" class="hidden" type="button" onclick="doVoid('do_0',102);" value="发布" />
 		</td>
 	</tr>
 </table>
@@ -789,6 +769,24 @@ function creatWord()
 					<ul>
 					<li><input id="auto_status" name="auto_status" type="radio" checked="true" value="11" onclick="getCommonLangListByType(this.value)"/><label>通过</label></li>
 					<li><input id="auto_status" name="auto_status" type="radio" value="12"  onclick="getCommonLangListByType(this.value)"/><label>未通过</label></li>
+				</ul>
+				</td>
+			</tr>
+			<tr id="gzyy_open_tr">
+				<th>公开意愿：</th>
+				<td>
+				<ul>
+					<li><input id="is_open_r" name="is_open_r" type="radio"  value="1"/><label>公开</label></li>
+					<li><input id="is_open_r" name="is_open_r" type="radio" checked="checked"  value="0" /><label>不公开</label></li>
+				</ul>
+				</td>
+			</tr>
+			<tr id="publish_status_tr">
+				<th>发布状态：</th>
+				<td>
+				<ul>					
+					<li><input id="publish_status" name="publish_status" type="radio"  value="0" /><label>未发布</label></li>
+					<li><input id="publish_status" name="publish_status" type="radio" checked="checked"  value="1"/><label>发布</label></li>
 				</ul>
 				</td>
 			</tr>
@@ -823,12 +821,12 @@ function creatWord()
 			</tr>
 			<tr id="sq_title2_tr">
 				<th>信件标题 ：</th>
-				<td><input id="sq_title2_r" name="sq_title2_r" type="text" class="width500" value="" /></td>
+				<td><input id="sq_title2_r" name="sq_title2_r" type="text" class="width200" value="" /></td>
 			</tr>
 			<tr id="sq_content2_tr">
 				<th>信件内容 ：</th>
 				<td>
-                    <script id="sq_content2_r" type="text/plain" style="width:100%;height:200px;"></script>
+                    <script id="sq_content2_r" type="text/plain" style="width:620px;height:200px;"></script>
 				</td>
 			</tr>
 			<tr>
@@ -837,47 +835,21 @@ function creatWord()
 					<select id="quick_content" style="width:200px;" onchange="setSelectedCommonLang(this.value)" >
 					</select>
 					<span class="blank3"></span>
-                    <script id="pro_note" type="text/plain" style="width:100%;height:200px;"></script>
+                    <script id="pro_note" type="text/plain" style="width:620px;height:200px;"></script>
 				</td>
 			</tr>
-            <tr id="over_dtime_tr" class="hidden">
-                <th>回复时间：</th>
-                <td>
-                    <input id="over_dtime" name="released_dtime" type="text"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:true,readOnly:true})" readonly="readonly" />
-                </td>
-            </tr>
-            <tr id="gzyy_open_tr">
-                <th>公开意愿：</th>
-                <td>
-                    <ul>
-                        <li><input id="is_open_r" name="is_open_r" type="radio"  value="1"/><label>公开</label></li>
-                        <li><input id="is_open_r" name="is_open_r" type="radio" checked="checked"  value="0" /><label>不公开</label></li>
-                    </ul>
-                </td>
-            </tr>
-            <tr id="publish_status_tr">
-                <th>发布状态：</th>
-                <td>
-                    <ul>
-                        <li><input id="publish_status" name="publish_status" type="radio" checked="checked"  value="0" /><label>未发布</label></li>
-                        <li><input id="publish_status" name="publish_status" type="radio"  value="1"/><label>发布</label></li>
-                    </ul>
-                </td>
-            </tr>
-            <!--
 			<tr id="affix_tr">
 				<th>附件：</th>
 				<td>
 					<div id="fileQueue"></div>
 					<input type="file" name="uploadify" id="uploadify" />
 				</td>
-			</tr>
-			-->
+			</tr>			
 			<tr>
 				<th></th>
 				<td>
 					<input id="submitButton" name="btn1" type="button" onclick="javascript:void(0);" value="提交" />
-					<input id="btn2" name="btn2" type="button" onclick="top.tab_colseOnclick(top.curTabIndex)" value="取消" />
+					<input id="btn2" name="btn2" type="button" onclick="tab_colseOnclick(curTabIndex)" value="取消" />
 				</td>
 			</tr>			
 		</tbody>

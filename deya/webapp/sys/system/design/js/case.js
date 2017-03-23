@@ -75,7 +75,7 @@ function showTurnPage(){
 //打开添加窗口
 function openAddDesignCasePage()
 {		
-	top.addTab(true,"/sys/system/design/case_add.jsp?app_id="+app_id+"&top_index="+top.curTabIndex,"维护方案套餐");
+	addTab(true,"/sys/system/design/case_add.jsp?app_id="+app_id+"&top_index="+curTabIndex,"维护方案套餐");
 }
 
 function openUpdateDesignCasePage(c_id)
@@ -87,7 +87,7 @@ function openUpdateDesignCasePage(c_id)
 	}else
 		id = table.getSelecteCheckboxValue("case_id");
 	
-	top.addTab(true,"/sys/system/design/case_add.jsp?app_id="+app_id+"&top_index="+top.curTabIndex+"&case_id="+id,"维护方案套餐");
+	addTab(true,"/sys/system/design/case_add.jsp?app_id="+app_id+"&top_index="+curTabIndex+"&case_id="+id,"维护方案套餐");
 }
 
 
@@ -104,13 +104,13 @@ function addCase()
 
 	if(DesignRPC.insertDesignCase(bean))
 	{
-		top.msgAlert("方案套餐"+WCMLang.Add_success);
-		top.getCurrentFrameObj(top_index).reloadList();
-		top.tab_colseOnclick(top.curTabIndex);
+		msgAlert("方案套餐"+WCMLang.Add_success);
+		getCurrentFrameObj(top_index).reloadList();
+		tab_colseOnclick(curTabIndex);
 	}
 	else
 	{
-		top.msgWargin("方案套餐"+WCMLang.Add_fail);
+		msgWargin("方案套餐"+WCMLang.Add_fail);
 	}
 }
 
@@ -126,13 +126,13 @@ function updateCase()
 
 	if(DesignRPC.updateDesignCase(bean))
 	{
-		top.msgAlert("方案套餐"+WCMLang.Add_success);
-		top.getCurrentFrameObj(top_index).reloadList();
-		top.tab_colseOnclick(top.curTabIndex);
+		msgAlert("方案套餐"+WCMLang.Add_success);
+		getCurrentFrameObj(top_index).reloadList();
+		tab_colseOnclick(curTabIndex);
 	}
 	else
 	{
-		top.msgWargin("方案套餐"+WCMLang.Add_fail);
+		msgWargin("方案套餐"+WCMLang.Add_fail);
 	}
 }
 
@@ -141,11 +141,11 @@ function deleteDesignCase()
 	var selectIDS = table.getSelecteCheckboxValue("case_id");
 	if(DesignRPC.deleteDesignCase(selectIDS))
 	{
-		top.msgAlert("方案套餐"+WCMLang.Delete_success);
+		msgAlert("方案套餐"+WCMLang.Delete_success);
 		reloadList();
 	}else
 	{
-		top.msgWargin("方案套餐"+WCMLang.Delete_fail);
+		msgWargin("方案套餐"+WCMLang.Delete_fail);
 	}
 }
 

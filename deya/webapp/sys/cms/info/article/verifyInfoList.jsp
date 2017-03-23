@@ -33,7 +33,7 @@
 
         var site_id = "<%=siteid%>";
         var app = "<%=app_id%>";
-        var opt_ids = ","+top.getOptIDSByUser(app,site_id)+",";//登录人所拥有管理权限ID
+        var opt_ids = ","+getOptIDSByUser(app,site_id)+",";//登录人所拥有管理权限ID
         var gk_article = false;//特殊栏目标识，在政务公开中使用的是内容管理中的文章模型
 
         var UserManRPC = jsonrpc.UserManRPC;
@@ -224,16 +224,16 @@
         function openViewPage(i_id)
         {
             //window.location.href = "/sys/cms/info/article/infoView.jsp?info_id="+i_id+"&site_id="+site_id+"&snum="+snum;
-            top.addTab(true,"/sys/cms/info/article/infoView.jsp?info_id="+i_id+"&site_id="+site_id+"&topnum="+top.curTabIndex,"查看信息");
+            addTab(true,"/sys/cms/info/article/infoView.jsp?info_id="+i_id+"&site_id="+site_id+"&topnum="+curTabIndex,"查看信息");
         }
 
         //通过
         function onPass(){
             var selectList = table.getSelecteBeans();
             if(InfoBaseRPC.passInfoStatus(selectList,LoginUserBean.user_id)){
-                top.msgAlert("审核操作成功");
+                msgAlert("审核操作成功");
             }else{
-                top.msgWargin("审核操作失败");
+                msgWargin("审核操作失败");
             }
             reloadInfoDataList();
         }
@@ -247,9 +247,9 @@
                 selectIDS = table.getSelecteCheckboxValue("info_id");
 
             if(InfoBaseRPC.noPassInfoStatus(selectIDS,desc)){
-                top.msgAlert("退回操作成功");
+                msgAlert("退回操作成功");
             }else{
-                top.msgWargin("退回操作失败");
+                msgWargin("退回操作失败");
             }
             temp_info_id = null;
             reloadInfoDataList();
@@ -260,7 +260,7 @@
         {
             if(id != null && id != "")
                 temp_info_id = id;
-            top.OpenModalWindow("退稿意见","/sys/cms/info/article/noPassDesc.jsp",520,235);
+            OpenModalWindow("退稿意见","/sys/cms/info/article/noPassDesc.jsp",520,235);
         }
 
         //单条信息通过
@@ -268,9 +268,9 @@
             var list = new List();
             list.add(beanList.get(num));
             if(InfoBaseRPC.passInfoStatus(list,LoginUserBean.user_id)){
-                top.msgAlert("审核操作成功");
+                msgAlert("审核操作成功");
             }else{
-                top.msgWargin("审核操作失败");
+                msgWargin("审核操作失败");
             }
             reloadInfoDataList();
         }
@@ -279,9 +279,9 @@
         function doNoPass(id){
 
             if(InfoBaseRPC.noPassInfoStatus(id)){
-                top.msgAlert("退回操作成功");
+                msgAlert("退回操作成功");
             }else{
-                top.msgWargin("退回操作失败");
+                msgWargin("退回操作失败");
             }
             reloadInfoDataList();
         }
@@ -290,10 +290,10 @@
         function rebackInfo(){
             var selectList = table.getSelecteBeans();
             if(InfoBaseRPC.goBackInfo(selectList)){
-                top.msgAlert("还原操作成功");
+                msgAlert("还原操作成功");
                 reloadInfoDataList();
             }else{
-                top.msgWargin("还原操作失败");
+                msgWargin("还原操作失败");
             }
         }
 
@@ -302,10 +302,10 @@
             var selectList = table.getSelecteBeans();
 
             if(InfoBaseRPC.deleteInfo(selectList)){
-                top.msgAlert("信息"+WCMLang.Delete_success);
+                msgAlert("信息"+WCMLang.Delete_success);
                 reloadInfoDataList();
             }else{
-                top.msgWargin("信息"+WCMLang.Delete_fail);
+                msgWargin("信息"+WCMLang.Delete_fail);
             }
         }
 	</script>

@@ -161,7 +161,7 @@ function showTurnPage(){
 //打开相关信息选择窗口
 function openLinkInfoDataPage(Info_id)
 {	//OpenModalWindow
-	top.OpenModalWindow("选择相关信息","/sys/cms/info/article/chooseInfoPage.jsp?info_id="+Info_id+"&site_id="+site_id,825,500);	
+	OpenModalWindow("选择相关信息","/sys/cms/info/article/chooseInfoPage.jsp?info_id="+Info_id+"&site_id="+site_id,825,500);
 }
 
 //打开相关信息选择窗口
@@ -173,7 +173,7 @@ function openFocusPage(Info_id)
 	}else{
 		tmp = "a";
 	}
-	top.OpenModalWindow("选择相关信息","/sys/cms/info/article/focusInfo.jsp?info_id="+Info_id+"&site_id="+site_id+"&t="+tmp,660,500);	
+	OpenModalWindow("选择相关信息","/sys/cms/info/article/focusInfo.jsp?info_id="+Info_id+"&site_id="+site_id+"&t="+tmp,660,500);
 }
 
 //打开添加窗口
@@ -192,9 +192,9 @@ function openUpdateInfoDataPage()
 {
 	var selectIDS = table.getSelecteCheckboxValue("info_id");
 	if(selectIDS == ""){
-		top.msgAlert("请选择要修改的信息");return;
+		msgAlert("请选择要修改的信息");return;
 	}else if(selectIDS.indexOf(",") != -1){
-		top.msgAlert("一次只能修改一条信息");return;
+		msgAlert("一次只能修改一条信息");return;
 	}else{
 		var mtBean = InfoBaseRPC.getInfoById(selectIDS,site_id);
 		if(mtBean.is_host == 2){
@@ -211,7 +211,7 @@ function openUpdatePage(Infoid)
 
 function openUpdatePage2(Infoid)
 {
-	top.OpenModalWindow("修改信息","/sys/cms/info/article/infoAdd2.jsp?cid="+cid+"&info_id="+Infoid+"&site_id="+site_id,620,220);	
+	OpenModalWindow("修改信息","/sys/cms/info/article/infoAdd2.jsp?cid="+cid+"&info_id="+Infoid+"&site_id="+site_id,620,220);
 }
 
 //添加Info
@@ -267,14 +267,14 @@ function addInfoData()
 			}
 		}
 		updateRelatedInfoAsSort(no1,bean.site_id);
-		top.msgAlert("信息"+WCMLang.Add_success);			
-		//top.CloseModalWindow();
-		//top.getCurrentFrameObj().reloadInfoDataList();
+		msgAlert("信息"+WCMLang.Add_success);
+		//CloseModalWindow();
+		//getCurrentFrameObj().reloadInfoDataList();
 		window.location.href = "/sys/cms/info/article/articleDataList.jsp?cat_id="+cid+"&app="+bean.app_id+"&site_id="+bean.site_id;
 	}
 	else
 	{
-		top.msgAlert("信息"+WCMLang.Add_fail);
+		msgAlert("信息"+WCMLang.Add_fail);
 	}
 }
 //修改
@@ -312,18 +312,18 @@ function updateInfoData()
 	if(ArticleRPC.updateArticle(bean))
 	{
 		updateRelatedInfoAsSort(bean.info_id,bean.site_id);
-		top.msgAlert("信息"+WCMLang.Add_success);			
+		msgAlert("信息"+WCMLang.Add_success);
 		window.location.href = "/sys/cms/info/article/articleDataList.jsp?cat_id="+bean.cat_id+"&app="+bean.app_id+"&site_id="+bean.site_id;
 	}
 	else
 	{
-		top.msgAlert("信息"+WCMLang.Add_fail);
+		msgAlert("信息"+WCMLang.Add_fail);
 	}
 }
 
 
 function closePage(){
-	top.CloseModalWindow();
+	CloseModalWindow();
 }
 
 function showSelectDiv2(input_name,div_name,height,tree_div_name)
@@ -422,30 +422,30 @@ function resetNum(){
 function publishInfo(){
 	var selectIDS = table.getSelecteCheckboxValue("info_id");
 	if(InfoBaseRPC.updateInfoStatus(selectIDS,"8")){
-		top.msgAlert("信息发布成功");
-		top.getCurrentFrameObj().reloadInfoDataList();
+		msgAlert("信息发布成功");
+		getCurrentFrameObj().reloadInfoDataList();
 	}else{
-		top.msgAlert("信息发布失败");
+		msgAlert("信息发布失败");
 	}
 }
 
 function cancleInfo(){
 	var selectIDS = table.getSelecteCheckboxValue("info_id");
 	if(InfoBaseRPC.updateInfoStatus(selectIDS,"3")){
-		top.msgAlert("信息撤销成功");
-		top.getCurrentFrameObj().reloadInfoDataList();
+		msgAlert("信息撤销成功");
+		getCurrentFrameObj().reloadInfoDataList();
 	}else{
-		top.msgAlert("信息撤销失败");
+		msgAlert("信息撤销失败");
 	}
 }
 
 function backInfo(){
 	var selectIDS = table.getSelecteCheckboxValue("info_id");
 	if(InfoBaseRPC.backInfo(selectIDS)){
-		top.msgAlert("信息归档成功");
-		top.getCurrentFrameObj().reloadInfoDataList();
+		msgAlert("信息归档成功");
+		getCurrentFrameObj().reloadInfoDataList();
 	}else{
-		top.msgAlert("信息归档失败");
+		msgAlert("信息归档失败");
 	}
 }
 
@@ -458,10 +458,10 @@ function goBackInfo(){
 function deleteInfoData(){
 	var selectIDS = table.getSelecteCheckboxValue("info_id");
 	if(InfoBaseRPC.deleteInfo(selectIDS)){
-		top.msgAlert("信息删除成功");
-		top.getCurrentFrameObj().reloadInfoDataList();
+		msgAlert("信息删除成功");
+		getCurrentFrameObj().reloadInfoDataList();
 	}else{
-		top.msgAlert("信息删除失败");
+		msgAlert("信息删除失败");
 	}
 }
 
@@ -472,7 +472,7 @@ function authorDataSearchHandl(obj)
 //	var con_value = $(obj).parent().find("#searchkey").val();
 //	if(con_value.trim() == "" ||  con_value == null)
 //	{
-//		top.msgAlert(WCMLang.Search_empty);
+//		msgAlert(WCMLang.Search_empty);
 //		return;
 //	}
 //	table.con_name = $(obj).parent().find("#searchFields").val(); 

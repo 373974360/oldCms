@@ -41,7 +41,7 @@ function getModelList()
 
 function getSelectedModelID()
 {
-	var model_ids = top.getCurrentFrameObj().getSelectedModelID();
+	var model_ids = getCurrentFrameObj().getSelectedModelID();
 	
 	if(model_ids != "" && model_ids != null)
 	{
@@ -62,8 +62,8 @@ function returnModelID()
 	if(model_ids != "")
 		model_ids = model_ids.substring(1);
 
-	eval("top.getCurrentFrameObj()."+handl_name+"('"+model_ids+"')");
-	top.CloseModalWindow();
+	eval("getCurrentFrameObj()."+handl_name+"('"+model_ids+"')");
+	CloseModalWindow();
 }
 
 </script>
@@ -91,7 +91,7 @@ function returnModelID()
 	<tr>
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="returnModelID()" value="保存" />
-			<input id="userAddCancel" name="btn1" type="button" onclick="top.CloseModalWindow();" value="取消" />	
+			<input id="userAddCancel" name="btn1" type="button" onclick="CloseModalWindow();" value="取消" />
 		</td>
 	</tr>
 </table>

@@ -37,9 +37,9 @@ function saveZWGKConfig()
 	bean.app_id = app_id;
 	bean.site_id = $("#rela_site_id").val();
 	if(jsonrpc.SiteRPC.insertSiteReleApp(bean)){		
-		top.msgAlert(WCMLang.Add_success);
+		msgAlert(WCMLang.Add_success);
 	}else{		
-			top.msgAlert(WCMLang.Add_fail);
+			msgAlert(WCMLang.Add_fail);
 	}
 }
 

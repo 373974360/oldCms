@@ -120,11 +120,11 @@ function adoptReceiveInfo(flag)
 
 		if(SendInfoRPC.adoptReceiveInfo(adopt_map))
 		{
-			top.msgAlert("信息采用成功");
+			msgAlert("信息采用成功");
 			reloadList();
 		}else
 		{
-			top.msgAlert("信息采用失败，请重新操作");
+			msgAlert("信息采用失败，请重新操作");
 		}
 	}
 }
@@ -134,7 +134,7 @@ var adopt_desc = "";
 function openAdoptDescPage(desc)
 {
 	adopt_desc = desc;
-	top.OpenModalWindow("不采用意见","/sys/sendinfo/reivinfo/adopt_desc.jsp?type=-1",520,235);
+	OpenModalWindow("不采用意见","/sys/sendinfo/reivinfo/adopt_desc.jsp?type=-1",520,235);
 }
 
 //删除
@@ -145,10 +145,10 @@ function deleteRecordInfo()
 	map.put("ids",selectIDS);
 	if(SendInfoRPC.deleteSendRecord(map))
 	{
-		top.msgAlert("信息"+WCMLang.Delete_success);
+		msgAlert("信息"+WCMLang.Delete_success);
 		reloadList();
 	}else
 	{
-		top.msgWargin("信息"+WCMLang.Delete_fail);
+		msgWargin("信息"+WCMLang.Delete_fail);
 	}
 }

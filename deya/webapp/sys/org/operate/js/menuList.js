@@ -71,7 +71,7 @@ function showList(){
 
 function openViewMengPage(m_id)
 {
-	top.OpenModalWindow("查看菜单信息","/sys/org/operate/menu_view.jsp?menu_id="+m_id,500,300);
+	OpenModalWindow("查看菜单信息","/sys/org/operate/menu_view.jsp?menu_id="+m_id,500,300);
 }
 
 function showTurnPage(){	
@@ -83,7 +83,7 @@ function showTurnPage(){
 
 function openAddMenuPage()
 {
-	top.OpenModalWindow("维护菜单","/sys/org/operate/menu_add.jsp?parentID="+menu_id,500,300);
+	OpenModalWindow("维护菜单","/sys/org/operate/menu_add.jsp?parentID="+menu_id,500,300);
 }
 
 function addMenu()
@@ -100,14 +100,14 @@ function addMenu()
 	bean.parent_id = parent_id;
 	if(MenuRPC.insertMenu(bean))
 	{
-		top.msgAlert("菜单信息"+WCMLang.Add_success);	
-		top.getCurrentFrameObj().changeMemuListTable(parent_id);
-		top.getCurrentFrameObj().insertMenuTree(bean.menu_id,bean.menu_name);
-		top.CloseModalWindow();
+		msgAlert("菜单信息"+WCMLang.Add_success);
+		getCurrentFrameObj().changeMemuListTable(parent_id);
+		getCurrentFrameObj().insertMenuTree(bean.menu_id,bean.menu_name);
+		CloseModalWindow();
 	}
 	else
 	{
-		top.msgWargin("菜单信息"+WCMLang.Add_fail);
+		msgWargin("菜单信息"+WCMLang.Add_fail);
 	}
 }
 
@@ -120,7 +120,7 @@ function insertMenuTree(id,dept_name)
 function openUpdateMenuPage()
 {
 	var selectIDS = table.getSelecteCheckboxValue("menu_id");
-	top.OpenModalWindow("维护菜单","/sys/org/operate/menu_add.jsp?parentID="+menu_id+"&menu_id="+selectIDS,500,300);
+	OpenModalWindow("维护菜单","/sys/org/operate/menu_add.jsp?parentID="+menu_id+"&menu_id="+selectIDS,500,300);
 }
 
 function updateMenu()
@@ -136,14 +136,14 @@ function updateMenu()
 	bean.menu_level = 0;
 	if(MenuRPC.updateMenu(bean))
 	{
-		top.msgAlert("菜单信息"+WCMLang.Add_success);	
-		top.getCurrentFrameObj().changeMemuListTable(parent_id);
-		top.getCurrentFrameObj().updateMenuTree(bean.menu_id,bean.menu_name);
-		top.CloseModalWindow();
+		msgAlert("菜单信息"+WCMLang.Add_success);
+		getCurrentFrameObj().changeMemuListTable(parent_id);
+		getCurrentFrameObj().updateMenuTree(bean.menu_id,bean.menu_name);
+		CloseModalWindow();
 	}
 	else
 	{
-		top.msgWargin("菜单信息"+WCMLang.Add_fail);
+		msgWargin("菜单信息"+WCMLang.Add_fail);
 	}
 }
 
@@ -158,12 +158,12 @@ function deleteMenu()
 	var selectIDS = table.getSelecteCheckboxValue("menu_id");
 	if(MenuRPC.deleteMenu(selectIDS))
 	{
-		top.msgAlert("菜单信息"+WCMLang.Delete_success);
-		top.getCurrentFrameObj().changeMemuListTable(menu_id);
-		top.getCurrentFrameObj().deleteTreeNode(selectIDS);
+		msgAlert("菜单信息"+WCMLang.Delete_success);
+		getCurrentFrameObj().changeMemuListTable(menu_id);
+		getCurrentFrameObj().deleteTreeNode(selectIDS);
 	}else
 	{
-		top.msgWargin("菜单信息"+WCMLang.Delete_fail);
+		msgWargin("菜单信息"+WCMLang.Delete_fail);
 	}
 }
 
@@ -172,11 +172,11 @@ function sortMenu()
 	var selectIDS = table.getAllCheckboxValue("menu_id");
 	if(MenuRPC.saveMenuSort(selectIDS))
 	{
-		top.msgAlert(WCMLang.Sort_success);
+		msgAlert(WCMLang.Sort_success);
 		showMenuTree();
 	}else
 	{
-		top.msgWargin(WCMLang.Sort_fail);
+		msgWargin(WCMLang.Sort_fail);
 	}
 }
 
@@ -203,12 +203,12 @@ function moveMenu(parent_id)
 	{
 		var selectIDS = table.getSelecteCheckboxValue("menu_id");			
 		if(MenuRPC.moveMenu(parent_id,selectIDS)){
-			top.msgAlert("菜单"+WCMLang.Move_success);
+			msgAlert("菜单"+WCMLang.Move_success);
 			loadMenuTable()
 			showMenuTree();
 		}else
 		{
-			top.msgWargin("菜单"+WCMLang.Move_fail);
+			msgWargin("菜单"+WCMLang.Move_fail);
 			return;
 		}
 	}
@@ -216,5 +216,5 @@ function moveMenu(parent_id)
 
 function openSelectMenu(title,handl_name)
 {
-	top.OpenModalWindow(title,"/sys/org/operate/select_menu.jsp?handl_name="+handl_name,610,510);
+	OpenModalWindow(title,"/sys/org/operate/select_menu.jsp?handl_name="+handl_name,610,510);
 }

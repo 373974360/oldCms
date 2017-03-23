@@ -20,7 +20,7 @@
      * window.UEDITOR_HOME_URL = "/xxxx/xxxx/";
      */
     //var URL = window.UEDITOR_HOME_URL || getUEBasePath();
-    var URL = "/sys/ueditor/";
+	var URL = "/sys/ueditor/";
 
     /**
      * 配置项主体。注意，此处所有涉及到路径的配置别遗漏URL变量。
@@ -60,8 +60,6 @@
         //,themePath:URL +"themes/"
 
         ,zIndex : 9999     //编辑器层级的基数,默认是900
-
-        ,catchRemoteImageEnable:false   //远程图片本地化，默认开启
 
         //针对getAllHtml方法，会在对应的head标签中增加该编码设置。
         //,charset:"utf-8"

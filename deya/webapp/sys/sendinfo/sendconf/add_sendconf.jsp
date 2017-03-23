@@ -17,7 +17,7 @@ $(document).ready(function(){
 	reloadBefore();
 	initButtomStyle();
 	init_input();
-	site_ids = top.getCurrentFrameObj(topnum).site_ids;
+	site_ids = getCurrentFrameObj(topnum).site_ids;
 	if($.browser.msie&&$.browser.version=="6.0"&&$("html")[0].scrollHeight>$("html").height()) $("html").css("overflowY","scroll");
 	
 	reloadAfter();
@@ -47,7 +47,7 @@ function getReceiveSiteList(site_domain)
 		init_input();
 	}else
 	{
-		top.msgWargin("未获取到站点信息，请确认域名是否正确，或目标站点已设置接收站点");
+		msgWargin("未获取到站点信息，请确认域名是否正确，或目标站点已设置接收站点");
 		return;
 	}
 }
@@ -137,7 +137,7 @@ function lableClickSite(obj)
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="insertSendConfig()" value="保存" />	
 			<input id="userAddReset" name="btn1" type="button" onclick="formReSet('sendConfig_table',id)" value="重置" />	
-			<input id="userAddCancel" name="btn1" type="button" onclick="top.tab_colseOnclick(top.curTabIndex);" value="取消" />	
+			<input id="userAddCancel" name="btn1" type="button" onclick="tab_colseOnclick(curTabIndex);" value="取消" />
 		</td>
 	</tr>
 </table>

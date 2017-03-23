@@ -73,13 +73,13 @@ function initData()
 //打开选择部门窗口
 function openSelectCPDept(title,handl_name)
 {
-	top.OpenModalWindow(title,"/sys/appeal/cpDept/select_dept.jsp?handl_name="+handl_name,450,510);
+	OpenModalWindow(title,"/sys/appeal/cpDept/select_dept.jsp?handl_name="+handl_name,450,510);
 }
 
 //打开选择领导人窗口
 function openSelectCPLead(title,handl_name)
 {
-	top.OpenModalWindow(title,"/sys/appeal/cpLead/select_lead.jsp?handl_name="+handl_name,450,510);
+	OpenModalWindow(title,"/sys/appeal/cpLead/select_lead.jsp?handl_name="+handl_name,450,510);
 }
 
 //获取选择的部门并写入控件

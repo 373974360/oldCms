@@ -130,7 +130,7 @@
 				<tr>
 					<td align="left" valign="middle" style="text-indent: 100px;">
 						<input id="userAddCancel" name="btn1" type="button"
-							onclick="top.CloseModalWindow();" value="关闭" />
+							onclick="CloseModalWindow();" value="关闭" />
 					</td>
 				</tr>
 			</table>

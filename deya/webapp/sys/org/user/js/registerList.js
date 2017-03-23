@@ -102,7 +102,7 @@ function activitingUserPage()
 		reloadRoleList();
 	}else
 	{
-		parent.msgAlert("开通失败，请重试！");
+		msgAlert("开通失败，请重试！");
 		return;
 	}
 }
@@ -116,7 +116,7 @@ function stopUserPage()
 		reloadRoleList();
 	}else
 	{
-		parent.msgAlert("停用失败，请重试！");
+		msgAlert("停用失败，请重试！");
 		return;
 	}
 }
@@ -130,7 +130,7 @@ function delUserPage()
 		reloadRoleList();
 	}else
 	{
-		parent.msgAlert("删除失败，请重试！");
+		msgAlert("删除失败，请重试！");
 		return;
 	}
 }
@@ -139,7 +139,7 @@ function delUserPage()
 function updateUserPage()
 {
 	var userId = table.getSelecteCheckboxValue("user_id");
-	top.OpenModalWindow("用户维护","/sys/org/user/user_update.jsp?user_id="+userId,465,210);
+	OpenModalWindow("用户维护","/sys/org/user/user_update.jsp?user_id="+userId,465,210);
 }
 
 // 初始化用户修改页面
@@ -177,7 +177,7 @@ function userSearchHandl(obj)
 	var conn_value = $(obj).parent().find("#searchkey").val();
 	if(conn_value.trim() == "" ||  conn_value == null)
 	{
-		parent.msgAlert("请输入搜索条件");
+		msgAlert("请输入搜索条件");
 		return;
 	}
 	table.con_name = $(obj).parent().find("#searchFields").val(); 

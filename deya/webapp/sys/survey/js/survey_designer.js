@@ -1660,7 +1660,7 @@ sDesigner = function(){
 			if(!rUnsignedInt.test(vals) || vals == 0)
 			{
 				$(obj).val("");
-				parent.alertN("该输入框只能输入大于0的整数，请重新输入");
+				alertN("该输入框只能输入大于0的整数，请重新输入");
 				return;
 			}
 			else
@@ -1668,13 +1668,13 @@ sDesigner = function(){
 				if(parseInt(vals) > this.current_designer_obj.find("li").length)
 				{
 					$(obj).val("");
-					parent.alertN("填写的数字不能大于选项个数，请重新输入");
+					alertN("填写的数字不能大于选项个数，请重新输入");
 					return;
 				}
 				if($("#checkbox_least").val().trim() != "" && $("#checkbox_maximum").val().trim() != "" && parseInt($("#checkbox_maximum").val()) < parseInt($("#checkbox_least").val()) )
 				{
 					$(obj).val("");
-					parent.alertN("最大数不能小于最小数，请重新输入");
+					alertN("最大数不能小于最小数，请重新输入");
 					return;
 				}
 			}
@@ -1875,7 +1875,7 @@ sDesigner = function(){
 			if(!rDigit.test(vals))
 			{
 				$(obj).addClass("error_input_back");
-				parent.alertN("分值只能是整数，请修改红色输入区域!");
+				alertN("分值只能是整数，请修改红色输入区域!");
 				return false;
 			}
 		}
@@ -2245,7 +2245,7 @@ sDesigner = function(){
 			}
 			else
 			{
-				this.current_designer_obj.find("ul li:nth-child("+(this.current_item_num+1)+")").prepend('<div id="item_img_div"><img onmouseover="showImgDescribe(this)" onmouseout="closeImgDescribe()" src="'+img_path+'" width="'+img_width+'px" height="'+img_height+'px"/><div id="item_img_describe"></div></div>');
+				this.current_designer_obj.find("ul li:nth-child("+(this.current_item_num+1)+")").prepend('<div id="item_img_div"><img onmouseover="showImgDescribe(this)" onmouseout="closeImgDescribe()" src="'+img_path+'" width="'+img_width+'px" height="'+img_height+'px"/><div style="display:none" id="item_img_describe"></div></div>');  
 				//this.current_designer_obj.find("ul li:nth-child("+(this.current_item_num+1)+")").prepend('<div id="item_img_div"><img src="'+img_path+'" width="'+img_width+'px" height="'+img_height+'px"/><div style="display:none" id="item_img_describe"></div></div>');  
 				this.current_designer_obj.find("ul li:nth-child("+(this.current_item_num+1)+") div").addClass("item_div_img");
 			}
@@ -2431,7 +2431,7 @@ function returnUploadValue(furl)
 		$("#img_path").val(furl);		
 	}
 	else
-		parent.alertWar("上传失败，请重新提交");
+		alertWar("上传失败，请重新提交");
 }
 //编辑器代码保存
 function subHTMLEditor()

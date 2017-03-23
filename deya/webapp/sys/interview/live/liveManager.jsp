@@ -18,7 +18,7 @@ String site_id = request.getParameter("site_id");
 		var sub_id = request.getParameter("sub_id");
 		var page_height = 600;
 		var window_width = $(window).height();
-		var site_id = parent.site_id;
+		var site_id = site_id;
 		$(document).ready(function () {	
 			page_height = document.body.clientHeight-55;
 

@@ -68,11 +68,11 @@ function fuOK(){
 	if(jsonrpc.CommentSetRPC.updateCommentSet(commentSet))
 	//if(true)
 	{
-		top.msgAlert("信息修改成功！");
+		msgAlert("信息修改成功！");
 	}
 	else
 	{
-		top.msgWargin("信息修改失败！");
+		msgWargin("信息修改失败！");
 	}
 
 }

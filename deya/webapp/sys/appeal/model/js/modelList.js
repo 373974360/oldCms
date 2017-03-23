@@ -125,7 +125,7 @@ function openViewModelPage(r_id)
 	var height = 190;
 	if(app_id == "system")
 		height = 360;
-	top.OpenModalWindow("查看业务","/sys/appeal/model/model_view.jsp?app="+app_id+"&model_id="+r_id,450,height);	
+	OpenModalWindow("查看业务","/sys/appeal/model/model_view.jsp?app="+app_id+"&model_id="+r_id,450,height);
 }
 
 //打开添加窗口
@@ -178,12 +178,12 @@ function insertModel()
 		bean.remind_type = "";
 	if(SQModelRPC.insertModel(bean,$("#dept_ids").val()))
 	{
-		top.msgAlert("业务"+WCMLang.Add_success);
+		msgAlert("业务"+WCMLang.Add_success);
 		window.location.href = "modelList.jsp";
 	}
 	else
 	{
-		top.msgWargin("业务"+WCMLang.Add_fail);
+		msgWargin("业务"+WCMLang.Add_fail);
 	}
 }
 //修改业务
@@ -205,12 +205,12 @@ function updateModel()
 		bean.remind_type = "";
 	if(SQModelRPC.updateModel(bean,$("#dept_ids").val()))
 	{
-		top.msgAlert("业务"+WCMLang.Add_success);			
+		msgAlert("业务"+WCMLang.Add_success);
 		window.location.href = "modelList.jsp";
 	}
 	else
 	{
-		top.msgWargin("业务"+WCMLang.Add_fail);
+		msgWargin("业务"+WCMLang.Add_fail);
 	}
 }
 
@@ -222,11 +222,11 @@ function deleteModel()
 	var selectIDS = table.getSelecteCheckboxValue("model_id");
 	if(SQModelRPC.deleteModel(selectIDS))
 	{
-		top.msgAlert("业务"+WCMLang.Delete_success);
+		msgAlert("业务"+WCMLang.Delete_success);
 		reloadModelList();
 	}else
 	{
-		top.msgWargin("业务"+WCMLang.Delete_fail);
+		msgWargin("业务"+WCMLang.Delete_fail);
 	}	
 }
 
@@ -238,12 +238,12 @@ function saveModelUser(user_ids)
 	var model_ids = table.getSelecteCheckboxValue("model_id");
 	if(SQModelRPC.insertModelReleUserByModel(model_ids,user_ids))
 	{
-		top.msgAlert("业务与用户关联"+WCMLang.Add_success);		
+		msgAlert("业务与用户关联"+WCMLang.Add_success);
 		table.unChekcbox();
 	}
 	else
 	{
-		top.msgWargin("业务与用户关联"+WCMLang.Add_fail);
+		msgWargin("业务与用户关联"+WCMLang.Add_fail);
 	}
 }
 
@@ -261,7 +261,7 @@ function getexportDataId()
 	var selectIDS = table.getSelecteCheckboxValue("model_id");
 	if(selectIDS == "" || selectIDS == "null")
 	{
-		top.msgAlert("请选择需要的操作记录");
+		msgAlert("请选择需要的操作记录");
 	}else{
 		exportData(selectIDS);
 	}	
@@ -269,7 +269,7 @@ function getexportDataId()
 
 function exportData(modelId)
 {
-	top.OpenModalWindow("导出数据","/sys/appeal/model/exportData.jsp?model_id="+modelId+"",330,220);
+	OpenModalWindow("导出数据","/sys/appeal/model/exportData.jsp?model_id="+modelId+"",330,220);
 }
 
 function getexportData(m)
@@ -306,7 +306,7 @@ function getbatchIsNotOpenID()
 	var selectIDS = table.getSelecteCheckboxValue("model_id");
 	if(selectIDS == "" || selectIDS == "null")
 	{
-		top.msgAlert("请选择需要的操作记录");
+		msgAlert("请选择需要的操作记录");
 	}else{
 		batchIsNotOpen(selectIDS);
 	}	
@@ -314,6 +314,6 @@ function getbatchIsNotOpenID()
 
 function batchIsNotOpen(model_ids)
 {
-	top.OpenModalWindow("批量不公开","/sys/appeal/model/bachIsNotOpen.jsp?model_id="+model_ids+"",400,150);
+	OpenModalWindow("批量不公开","/sys/appeal/model/bachIsNotOpen.jsp?model_id="+model_ids+"",400,150);
 }
 

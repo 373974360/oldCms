@@ -34,10 +34,10 @@ function updateWareContent()
 	defaultBean.ware_content = getV(contentId);
 	if(WareRPC.updateWareContent(defaultBean))
 	{
-		top.msgAlert("信息标签"+WCMLang.Add_success);
+		msgAlert("信息标签"+WCMLang.Add_success);
 	}
 	else{
-		top.msgAlert("信息标签"+WCMLang.Add_fail);
+		msgAlert("信息标签"+WCMLang.Add_fail);
 	}
 }
 
@@ -154,7 +154,7 @@ function addInfo(obj)
 		sort_id = parseInt(winfos_map.get(infos_id).sort_id);
 	}
 	sort_id += 1;
-	top.OpenModalWindow("选择信息","/sys/system/ware/select_info_ref.jsp?winfo_id="+winfo_id+"&sort_id="+sort_id,630,460);
+	OpenModalWindow("选择信息","/sys/system/ware/select_info_ref.jsp?winfo_id="+winfo_id+"&sort_id="+sort_id,630,460);
 }
 
 //删除
@@ -169,7 +169,7 @@ function deleteTr(obj)
 		resetNum();
 	}else
 	{
-		top.msgWargin(WCMLang.Delete_fail);
+		msgWargin(WCMLang.Delete_fail);
 	}
 }
 //上移
@@ -239,7 +239,7 @@ function addWareInfo()
 		Init_InfoTable("ware_info_table");
 	}else
 	{
-		top.msgWargin("新建行失败，请重新新建");
+		msgWargin("新建行失败，请重新新建");
 	}
 }
 
@@ -254,11 +254,11 @@ function sortWareInfo()
 		ware_infos = ware_infos.substring(1);
 		if(WareRPC.sortWareInfo(ware_infos))
 		{
-			top.msgAlert(WCMLang.Sort_success);
+			msgAlert(WCMLang.Sort_success);
 		}
 		else
 		{
-			top.msgWargin(WCMLang.Sort_fail);
+			msgWargin(WCMLang.Sort_fail);
 		}
 	}
 }
@@ -291,14 +291,14 @@ function openView()
 //编辑操作
 function updateWareInfos()
 {
-	top.OpenModalWindow("编辑信息","/sys/system/ware/update_ware_infos.jsp?id="+currnet_info_id,630,340);
+	OpenModalWindow("编辑信息","/sys/system/ware/update_ware_infos.jsp?id="+currnet_info_id,630,340);
 }
 
 //替换操作
 function changeWareInfos()
 {		
 	var sort_id = winfos_map.get(currnet_info_id).sort_id;
-	top.OpenModalWindow("选择信息","/sys/system/ware/select_info_ref.jsp?action_type=change&winfo_id="+currnet_winfo_id+"&sort_id="+sort_id,630,460);
+	OpenModalWindow("选择信息","/sys/system/ware/select_info_ref.jsp?action_type=change&winfo_id="+currnet_winfo_id+"&sort_id="+sort_id,630,460);
 }
 
 //删除信息
@@ -336,8 +336,8 @@ function createWarePage()
 {
 	if(WareRPC.createHtmlPage(ware_id,site_id))
 	{
-		top.msgAlert("页面生成成功");	
+		msgAlert("页面生成成功");
 	}else{
-		top.msgWargin("静态页面生成失败");
+		msgWargin("静态页面生成失败");
 	}
 }

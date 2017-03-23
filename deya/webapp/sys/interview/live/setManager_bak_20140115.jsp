@@ -20,12 +20,12 @@
 	</style>
 	<SCRIPT LANGUAGE="JavaScript">
 	<!--
-		var id = parent.id;
-		var sub_id = parent.sub_id;		
-		var site_id = parent.site_id;
+		var id = id;
+		var sub_id = sub_id;
+		var site_id = site_id;
 		$(document).ready(function () {	
-			subjectBean = parent.subjectBean;
-			subjectCategory = parent.subjectCategory;
+			subjectBean = subjectBean;
+			subjectCategory = subjectCategory;
 			initUPLoadMedia("s_history_video_file","history_video");
 			//主题状态为直播状态
 			if(subjectBean.status == 1)
@@ -190,7 +190,7 @@
 
 			if(!checkVideoFile(str))
 			{ 
-				parent.alertWar("<span style='color:red'>上传的视频文件格式不对，只允许上传 asf，avi，mpg，mpeg，mpe，mov，wmv，wav，mid，midi，mp3，mpa，mp2，ra，wma 等格式的文件，请重新上传！</span>"); 
+				alertWar("<span style='color:red'>上传的视频文件格式不对，只允许上传 asf，avi，mpg，mpeg，mpe，mov，wmv，wav，mid，midi，mp3，mpa，mp2，ra，wma 等格式的文件，请重新上传！</span>");
 				return; 
 			}
 

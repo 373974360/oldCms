@@ -48,17 +48,17 @@ function updatePassword()
 		val.showError("password","两次输入密码不一致，请重新输入");
 		return;
 	}
-	if(!UserManRPC.checkUserLogin2(top.LoginUserBean.user_name,old_password)){		
+	if(!UserManRPC.checkUserLogin2(LoginUserBean.user_name,old_password)){
 		val.showError("old_password","原始密码不正确，请重新输入");
 		return;
 	}
-	if(UserManRPC.updatePasswordByUserID(top.LoginUserBean.user_id,password))
+	if(UserManRPC.updatePasswordByUserID(LoginUserBean.user_id,password))
 	{		
-		top.msgAlert("密码"+WCMLang.Add_success);
+		msgAlert("密码"+WCMLang.Add_success);
 		return;
 	}else
 	{		
-		top.msgWargin("密码"+WCMLang.Add_fail);
+		msgWargin("密码"+WCMLang.Add_fail);
 		return;
 	}
 

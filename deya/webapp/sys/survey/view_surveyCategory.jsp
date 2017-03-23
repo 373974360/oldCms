@@ -96,7 +96,7 @@
 		   <td class="b_bottom_c" align="center">
 			<!-- 按钮区域 开始-->
 			 <div style="width:80px;height:24px">				
-				 <a class="button" href="#" onclick="this.blur(); return false;" hidefocus="true"><span onclick="parent.closeModelWin()">&nbsp;关闭</span></a>
+				 <a class="button" href="#" onclick="this.blur(); return false;" hidefocus="true"><span onclick="closeModelWin()">&nbsp;关闭</span></a>
 			 </div>
 		   <!-- 按钮区域 结束-->
 		   </td>

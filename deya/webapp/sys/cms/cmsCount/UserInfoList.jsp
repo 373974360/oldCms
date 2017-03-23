@@ -60,9 +60,8 @@ function createTable()
 	$("#treeTableCount").empty();
 	var treeHtmls = "<thead>" +
     "<tr>" +
-    "   <th width='65%'>信息标题</th>"+
+    "   <th width='80%'>信息标题</th>"+
     "   <th width='20%'>添加时间</th>"+
-    "   <th width='15%'>信息状态</th>"+
     "</tr>" +
     "</thead>" +
     "<tbody>" ;
@@ -90,28 +89,6 @@ function setHandlList(bean)
 	{
 	    	str+="<td><a href="+bean.content_url+" target=\"_blank\">"+bean.title+"</a></td>";
 	    	str+="<td>"+bean.input_dtime+"</td>";
-        var status = "";
-        if(bean.info_status == "8")
-        {
-            status = "已发";
-        }
-        if(bean.info_status == "4")
-        {
-            status = "待发";
-        }
-        if(bean.info_status == "2")
-        {
-            status = "待审";
-        }
-        if(bean.info_status == "1")
-        {
-            status = "退稿";
-        }
-        if(bean.info_status == "0")
-        {
-            status = "草稿";
-        }
-        str+="<td>"+status+"</td>";
 	}
 	str+="</tr>";
 	return str;

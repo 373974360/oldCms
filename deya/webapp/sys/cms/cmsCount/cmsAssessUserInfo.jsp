@@ -66,7 +66,7 @@ $(document).ready(function(){
 	initButtomStyle();
 	init_FromTabsStyle();
 	if($.browser.msie&&$.browser.version=="6.0"&&$("html")[0].scrollHeight>$("html").height()) $("html").css("overflowY","scroll"); 
-	//alert(top.getCurrentFrameObj().$("#start_day").val());
+	//alert(getCurrentFrameObj().$("#start_day").val());
 	//得到父页面中设置的参数
 	showList();
 });

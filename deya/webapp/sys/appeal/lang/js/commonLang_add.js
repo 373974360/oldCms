@@ -40,12 +40,12 @@ function saveAdd()
 	addCommomLang.ph_content = getV("ph_content");
 	if(CommonLangRPC.insertCommonLang(addCommomLang))
 	{	
-		top.msgAlert("常用语"+WCMLang.Add_success);
+		msgAlert("常用语"+WCMLang.Add_success);
 		backCommonLang();
 	}
 	else
 	{
-		top.msgWargin("常用语"+WCMLang.Add_fail);
+		msgWargin("常用语"+WCMLang.Add_fail);
 	}
 		
 }
@@ -63,12 +63,12 @@ function saveUpdate()
 	updateCommomLang.ph_content = getV("ph_content");
 	if(CommonLangRPC.updateCommonLang(updateCommomLang))
 	{
-		top.msgAlert("常用语"+WCMLang.Set_success);
+		msgAlert("常用语"+WCMLang.Set_success);
 		backCommonLang();
 	}
 	else
 	{
-		top.msgWargin("常用语"+WCMLang.Set_fail);
+		msgWargin("常用语"+WCMLang.Set_fail);
 	}
 }
 
@@ -104,7 +104,7 @@ function check_commonLang()
 	
 	if( getV("ph_content").trim() == "")
 	{
-		top.msgAlert("【详细内容】项不能为空");
+		msgAlert("【详细内容】项不能为空");
 		return ;
 	}
 	return true;

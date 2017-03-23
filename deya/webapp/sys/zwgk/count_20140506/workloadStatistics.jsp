@@ -64,7 +64,7 @@ $(document).ready(function(){
 
 // 打开选择节点的弹出窗口
 function openPage() {
-	top.OpenModalWindow("选择公开节点","/sys/zwgk/count/nodeSelected.jsp",725,525);
+	OpenModalWindow("选择公开节点","/sys/zwgk/count/nodeSelected.jsp",725,525);
 }
 
 // 设置选中的节点名称

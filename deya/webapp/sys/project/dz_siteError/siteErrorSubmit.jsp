@@ -17,8 +17,8 @@
 	if(!auth_code.equals(codeSession))
 	{
 		response.getWriter().println("<script>");
-		response.getWriter().println("top.alert('验证码不正确')");
-		response.getWriter().println("top.changeCreateImage()");
+		response.getWriter().println("alert('验证码不正确')");
+		response.getWriter().println("changeCreateImage()");
 		response.getWriter().println("</script>");
 		return;
 	}
@@ -33,7 +33,7 @@
 	seb.setStatus("0");
 	if(SiteErrorManager.insertSiteError(seb,null))
 	{
-		if(errorUrl != null && (errorUrl.contains("www.weinan") || errorUrl.contains("top.weinan") || errorUrl.contains("njsz.weinan") || errorUrl.contains("jjzb.weinan") || errorUrl.contains("ms.weinan") || errorUrl.contains("en.weinan")))
+		if(errorUrl != null && (errorUrl.contains("www.weinan") || errorUrl.contains("weinan") || errorUrl.contains("njsz.weinan") || errorUrl.contains("jjzb.weinan") || errorUrl.contains("ms.weinan") || errorUrl.contains("en.weinan")))
 		{
 			Map<String,String> m = new HashMap<String, String>();
 			List<ErrorHandleUserBean> allErrorHandleUserList = ErrorHandleUserManager.getAllErrorHandleUserList(m);
@@ -56,7 +56,7 @@
 						post.addParameter("f", "1");
 						httpclient.executeMethod(post);
 						String info = new String(post.getResponseBody(),"gbk");
-						//System.out.println(info);
+						System.out.println(info);
 					}
 				}
 			}

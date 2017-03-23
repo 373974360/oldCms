@@ -7,7 +7,7 @@
 <%@page import="com.deya.util.Encode"%>
 <%	
 	String ie=request.getHeader("User-Agent"); //得到浏览器等相关信息
-	//System.out.println("ie==="+ie);
+	System.out.println("ie==="+ie);
     String sq_id = FormatUtil.formatNullString(request.getParameter("sq_id"));
     SQBean bean = SQManager.getSqBean(Integer.parseInt(sq_id));
     String fileName = bean.getSq_title();  

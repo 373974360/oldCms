@@ -25,7 +25,7 @@ $(document).ready(function(){
 
 function openSearchPage()
 {
-	top.OpenModalWindow("接收信息搜索","/sys/sendinfo/reivinfo/receiveSearch.jsp?site_id="+site_id,400,395);	
+	OpenModalWindow("接收信息搜索","/sys/sendinfo/reivinfo/receiveSearch.jsp?site_id="+site_id,400,395);
 }
 </script>
 </head>

@@ -31,10 +31,10 @@ $(document).ready(function(){
 	var obj;
 	if(action_type == "layout")
 	{
-		obj = top.currnet_module.find(".module_body");		
+		obj = currnet_module.find(".module_body");
 	}else
 	{
-		obj = top.$("body");		
+		obj = $("body");
 	}
 	
 	img_url = obj.css("background-image");		
@@ -74,8 +74,8 @@ function clearImg()
 
 function returnValues()
 {
-	top.setBacgground(img_url,$(":radio[id='repeat_radio'][checked]").val(),$(":radio[id='positionX_radio'][checked]").val(),$(":radio[id='positionY_radio'][checked]").val(),action_type);
-	top.CloseModalWindow();
+	setBacgground(img_url,$(":radio[id='repeat_radio'][checked]").val(),$(":radio[id='positionX_radio'][checked]").val(),$(":radio[id='positionY_radio'][checked]").val(),action_type);
+	CloseModalWindow();
 }
 
 function setDivBackgoundAttr(name,val)
@@ -123,7 +123,7 @@ function setDivBackgoundAttr(name,val)
 	<tr>
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="returnValues()" value="保存" />
-			<input id="userAddCancel" name="btn1" type="button" onclick="top.CloseModalWindow();" value="取消" />	
+			<input id="userAddCancel" name="btn1" type="button" onclick="CloseModalWindow();" value="取消" />
 		</td>
 	</tr>
 </table>

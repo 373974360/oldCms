@@ -427,12 +427,12 @@ function addMateInfo(att_id,f_id,site_id,serverUrl,hd_url,thum_url,att_ename,old
 	
 	if(MateInfoRPC.insertMateInfoBean(bean))
 	{	
-		//top.msgAlert("素材信息"+WCMLang.Add_success);	
-		//top.CloseModalWindow();
+		//msgAlert("素材信息"+WCMLang.Add_success);
+		//CloseModalWindow();
 	}
 	else
 	{
-		top.msgWargin("素材信息"+WCMLang.Add_fail);
+		msgWargin("素材信息"+WCMLang.Add_fail);
 	}
 }
 

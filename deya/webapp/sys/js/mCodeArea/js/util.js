@@ -47,7 +47,7 @@ function removeClass(element, className) {
 // Insert a DOM node after another node.
 function insertAfter(newNode, oldNode) {
   var parent = oldNode.parentNode;
-  parent.insertBefore(newNode, oldNode.nextSibling);
+  insertBefore(newNode, oldNode.nextSibling);
   return newNode;
 }
 

@@ -59,12 +59,12 @@ function returnCatID()
 	var node = $('#leftMenuTree').tree('getSelected');
 	if(node == null)
 	{
-		top.msgWargin(WCMLang.selected_category);
+		msgWargin(WCMLang.selected_category);
 		return;
 	}else
 	{			
-		eval("top.getCurrentFrameObj()."+handl_name+"('"+node.id+"','"+node.text+"')");
-		top.CloseModalWindow();
+		eval("getCurrentFrameObj()."+handl_name+"('"+node.id+"','"+node.text+"')");
+		CloseModalWindow();
 	}
 }
 </script>
@@ -102,7 +102,7 @@ function returnCatID()
 	<tr>
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="returnCatID()" value="保存" />
-			<input id="userAddCancel" name="btn1" type="button" onclick="top.CloseModalWindow();" value="取消" />	
+			<input id="userAddCancel" name="btn1" type="button" onclick="CloseModalWindow();" value="取消" />
 		</td>
 	</tr>
 </table>

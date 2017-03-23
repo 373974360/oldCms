@@ -92,11 +92,11 @@ function deleteFun()
 	if(jsonrpc.ErrorReportRPC.deleteErrorReports(selectIDS))
 	//if(true)
 	{  
-		top.msgAlert("信息"+WCMLang.Delete_success);
+		msgAlert("信息"+WCMLang.Delete_success);
 		reloadList();
 	}else
 	{
-		top.msgWargin("信息"+WCMLang.Delete_fail);
+		msgWargin("信息"+WCMLang.Delete_fail);
 	}
 }
 
@@ -104,7 +104,7 @@ function deleteFun()
 function operateFun()
 {
 	var selectIDS = table.getSelecteCheckboxValue("id");
-	top.OpenModalWindow("操作信息","/sys/system/error/error_opt.jsp?id="+selectIDS,700,450);
+	OpenModalWindow("操作信息","/sys/system/error/error_opt.jsp?id="+selectIDS,700,450);
 }
 
 //查看
@@ -112,7 +112,7 @@ function viewFun()
 {
 	var selectIDS = table.getSelecteCheckboxValue("id");
 	var selectIDS = table.getSelecteCheckboxValue("id");
-	top.OpenModalWindow("查看详细信息","/sys/system/error/error_view.jsp?id="+selectIDS,700,450);
+	OpenModalWindow("查看详细信息","/sys/system/error/error_view.jsp?id="+selectIDS,700,450);
 }
 
 function initViewData(){
@@ -188,11 +188,11 @@ function handleFun(){
 	ErrorReportBean.err_note = $("#err_note").val();
 	ErrorReportBean.err_state = "3";
 	if(jsonrpc.ErrorReportRPC.updateErrorReportById(ErrorReportBean)){
-		top.msgAlert("操作成功！");
-		top.CloseModalWindow();
-		top.getCurrentFrameObj().reloadList();
+		msgAlert("操作成功！");
+		CloseModalWindow();
+		getCurrentFrameObj().reloadList();
 	}else{
-		top.msgAlert("操作失败！");
+		msgAlert("操作失败！");
 	}
 }
 function noHandleFun(){
@@ -200,11 +200,11 @@ function noHandleFun(){
 	ErrorReportBean.err_note = $("#err_note").val();
 	ErrorReportBean.err_state = "2";
 	if(jsonrpc.ErrorReportRPC.updateErrorReportById(ErrorReportBean)){
-		top.msgAlert("操作成功！");
-		top.CloseModalWindow();
-		top.getCurrentFrameObj().reloadList();
+		msgAlert("操作成功！");
+		CloseModalWindow();
+		getCurrentFrameObj().reloadList();
 	}else{
-		top.msgAlert("操作失败！");
+		msgAlert("操作失败！");
 	}
 }
 

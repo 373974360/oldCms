@@ -118,24 +118,24 @@ function showTurnPage(){
 //打开查看窗口
 function openViewTagDataPage(tag_id)
 {	//OpenModalWindow
-	top.OpenModalWindow("Tag查看","/sys/system/assist/tags/tags_view.jsp?tag_id="+tag_id,385,215);	
+	OpenModalWindow("Tag查看","/sys/system/assist/tags/tags_view.jsp?tag_id="+tag_id,385,215);
 }
 
 //打开添加窗口
 function openAddTagPage()
 {
-	top.OpenModalWindow("维护Tag","/sys/system/assist/tags/tags_add.jsp?app="+app+"&site_id="+site_id,385,215);	
+	OpenModalWindow("维护Tag","/sys/system/assist/tags/tags_add.jsp?app="+app+"&site_id="+site_id,385,215);
 }
 
 //打开修改窗口
 function openUpdateTagDataPage()
 {
 	var selectIDS = table.getSelecteCheckboxValue("tag_id");
-	top.OpenModalWindow("维护Tag","/sys/system/assist/tags/tags_add.jsp?tag_id="+selectIDS,385,215);
+	OpenModalWindow("维护Tag","/sys/system/assist/tags/tags_add.jsp?tag_id="+selectIDS,385,215);
 }
 
 function openUpdataPage(tagid){
-	top.OpenModalWindow("维护Tag","/sys/system/assist/tags/tags_add.jsp?tag_id="+tagid,385,215);
+	OpenModalWindow("维护Tag","/sys/system/assist/tags/tags_add.jsp?tag_id="+tagid,385,215);
 }
 
 //添加Tag
@@ -156,13 +156,13 @@ function addTagData()
 
 	if(AssistRPC.addTagsById(bean))
 	{
-		top.msgAlert("Tag"+WCMLang.Add_success);			
-		top.CloseModalWindow();
-		top.getCurrentFrameObj().reloadTagDataList();
+		msgAlert("Tag"+WCMLang.Add_success);
+		CloseModalWindow();
+		getCurrentFrameObj().reloadTagDataList();
 	}
 	else
 	{
-		top.msgWargin("Tag"+WCMLang.Add_fail);
+		msgWargin("Tag"+WCMLang.Add_fail);
 	}
 }
 //修改Tag
@@ -178,13 +178,13 @@ function updateTagData()
   
 	if(AssistRPC.updateTagsById(bean))
 	{
-		top.msgAlert("Tag"+WCMLang.Add_success);			
-		top.CloseModalWindow();
-		top.getCurrentFrameObj().reloadTagDataList();
+		msgAlert("Tag"+WCMLang.Add_success);
+		CloseModalWindow();
+		getCurrentFrameObj().reloadTagDataList();
 	}
 	else
 	{
-		top.msgWargin("Tag"+WCMLang.Add_fail);
+		msgWargin("Tag"+WCMLang.Add_fail);
 	}
 }
 
@@ -194,17 +194,17 @@ function deleteTagData()
 	var selectIDS = table.getSelecteCheckboxValue("tag_id");
 	if(AssistRPC.delTagsById(selectIDS))
 	{
-		top.msgAlert("Tag"+WCMLang.Delete_success);
-		top.CloseModalWindow();
-		top.getCurrentFrameObj().reloadTagDataList();
+		msgAlert("Tag"+WCMLang.Delete_success);
+		CloseModalWindow();
+		getCurrentFrameObj().reloadTagDataList();
 	}else
 	{
-		top.msgWargin("Tag"+WCMLang.Delete_fail);
+		msgWargin("Tag"+WCMLang.Delete_fail);
 	}
 }
 
 function closePage(){
-	top.CloseModalWindow();
+	CloseModalWindow();
 }
 
 //搜索
@@ -214,7 +214,7 @@ function tagDataSearchHandl(obj)
 //	var con_value = $(obj).parent().find("#searchkey").val();
 //	if(con_value.trim() == "" ||  con_value == null)
 //	{
-//		top.msgAlert(WCMLang.Search_empty);
+//		msgAlert(WCMLang.Search_empty);
 //		return;
 //	}
 //	table.con_name = $(obj).parent().find("#searchFields").val(); 

@@ -248,11 +248,11 @@ function getNewGKIndex()
 			$("#gk_num").attr("readOnly","readOnly");
 		}else
 		{
-			top.msgWargin("索引码"+index_map.get("gk_index")+"已重复，请重新输入顺序号,或清空索引号自动获取");
+			msgWargin("索引码"+index_map.get("gk_index")+"已重复，请重新输入顺序号,或清空索引号自动获取");
 		}
 	}else
 	{
-		top.msgWargin("索引码生成失败，请重新尝试生成");
+		msgWargin("索引码生成失败，请重新尝试生成");
 	}
 }
 
@@ -308,7 +308,7 @@ function getGKIndexAuto()
 		{
             return index_map;
             //getGKIndex();
-            //top.msgWargin("该目录没有设置类目编号，请先设置类目编号");
+            //msgWargin("该目录没有设置类目编号，请先设置类目编号");
 		}
 	}
 	else

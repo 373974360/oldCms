@@ -66,5 +66,5 @@ function showTurnPage(){
 
 //打开修改窗口
 function openUserInfoPage(id) {
-    top.addTab(true,"/sys/cms/info/article/viewUserInfo.jsp?id=" + id +"&topnum="+top.curTabIndex,"个人简历");
+    addTab(true,"/sys/cms/info/article/viewUserInfo.jsp?id=" + id +"&topnum="+curTabIndex,"个人简历");
 }

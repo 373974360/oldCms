@@ -54,7 +54,7 @@ function showList()
 	table.getCol("class_cname").each(function(i){
 		if(i>0)
 		{
-			$(this).html('<a href="javascript:top.OpenModalWindow(\'分类方法信息\',\'/sys/cms/cateClass/cateClass_add.jsp?type=update&class_id='+beanList.get(i-1).class_id +'\',460,385)">'+beanList.get(i-1).class_cname+'</a>');	
+			$(this).html('<a href="javascript:OpenModalWindow(\'分类方法信息\',\'/sys/cms/cateClass/cateClass_add.jsp?type=update&class_id='+beanList.get(i-1).class_id +'\',460,385)">'+beanList.get(i-1).class_cname+'</a>');
 		}
 	});
 
@@ -68,7 +68,7 @@ function showList()
 	table.getCol("cat_handl").each(function(i){
 		if(i>0)
 		{
-			$(this).html('<a href="javascript:top.addTab(true,\'/sys/cms/category/categoryShareList.jsp?class_id='+beanList.get(i-1).class_id+'\',\'目录管理\')">目录管理</a>');	
+			$(this).html('<a href="javascript:addTab(true,\'/sys/cms/category/categoryShareList.jsp?class_id='+beanList.get(i-1).class_id+'\',\'目录管理\')">目录管理</a>');
 		}
 	});
 	
@@ -100,14 +100,14 @@ function showTurnPage()
 // 新建分类
 function addCateClass()
 {
-	top.OpenModalWindow("新建分类","/sys/cms/cateClass/cateClass_add.jsp?type=add&class_id=",460,385);
+	OpenModalWindow("新建分类","/sys/cms/cateClass/cateClass_add.jsp?type=add&class_id=",460,385);
 }
 
 // 修改分类
 function updateCateClass()
 {
 	var class_id = table.getSelecteCheckboxValue("class_id");
-	top.OpenModalWindow("修改分类","/sys/cms/cateClass/cateClass_add.jsp?type=update&class_id="+class_id,460,385);
+	OpenModalWindow("修改分类","/sys/cms/cateClass/cateClass_add.jsp?type=update&class_id="+class_id,460,385);
 }
 
 // 删除分类
@@ -116,16 +116,16 @@ function deleteCateClass()
 	var selectIDS = table.getSelecteCheckboxValue("class_id");
 	if(CategoryRPC.getCategoryCountByClassID(selectIDS) > 1)
 	{
-		top.msgWargin("该分类下还存在目录，请先清空目录后再进行删除操作");
+		msgWargin("该分类下还存在目录，请先清空目录后再进行删除操作");
 		return;
 	}else
 	{
 		if(CategoryRPC.deleteCateClass(selectIDS)){
-			top.msgAlert("分类"+WCMLang.Delete_success);
+			msgAlert("分类"+WCMLang.Delete_success);
 			reloadCateClassList();
 		}else
 		{
-			top.msgWargin("分类"+WCMLang.Delete_fail);
+			msgWargin("分类"+WCMLang.Delete_fail);
 			return;
 		}
 		

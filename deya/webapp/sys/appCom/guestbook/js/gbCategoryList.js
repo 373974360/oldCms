@@ -103,7 +103,7 @@ function showList(){
 //打开主题添加窗口
 function openAddGuestBookSubPage(cat_id)
 {
-	top.addTab(true,"/sys/appCom/guestbook/add_gbSub.jsp?cat_id="+cat_id+"&site_id="+site_id+"&topnum="+top.curTabIndex,"新建主题");
+	addTab(true,"/sys/appCom/guestbook/add_gbSub.jsp?cat_id="+cat_id+"&site_id="+site_id+"&topnum="+curTabIndex,"新建主题");
 }
 
 function showTurnPage(){					
@@ -114,7 +114,7 @@ function showTurnPage(){
 //打开添加窗口
 function openAddGuestBookCategoryPage()
 {
-	top.addTab(true,"/sys/appCom/guestbook/add_gbCategory.jsp?site_id="+site_id+"&topnum="+top.curTabIndex,"新建分类");
+	addTab(true,"/sys/appCom/guestbook/add_gbCategory.jsp?site_id="+site_id+"&topnum="+curTabIndex,"新建分类");
 }
 
 //打开修改窗口
@@ -125,13 +125,13 @@ function openUpdateGuestBookCategoryPage(s_id)
 		id = s_id;
 	else
 		id = table.getSelecteCheckboxValue("cat_id");
-	top.addTab(true,"/sys/appCom/guestbook/add_gbCategory.jsp?site_id="+site_id+"&topnum="+top.curTabIndex+"&cat_id="+id,"新建分类");
+	addTab(true,"/sys/appCom/guestbook/add_gbCategory.jsp?site_id="+site_id+"&topnum="+curTabIndex+"&cat_id="+id,"新建分类");
 }
 
 //打开查看类别管理窗口
 function openGuestBookPage(s_id)
 {
-	top.addTab(true,"/sys/appCom/guestbook/gbClassList.jsp?site_id="+site_id+"&topnum="+top.curTabIndex+"&cat_id="+s_id,"类别管理");
+	addTab(true,"/sys/appCom/guestbook/gbClassList.jsp?site_id="+site_id+"&topnum="+curTabIndex+"&cat_id="+s_id,"类别管理");
 }
 
 //打开设置管理员窗口
@@ -151,11 +151,11 @@ function insertGuestBookReleUser(user_ids)
 {
 	if(GuestBookRPC.insertGuestBookReleUser(cur_cat_id,user_ids,site_id))
 	{
-		top.msgAlert("留言分类管理员"+WCMLang.Add_success);
+		msgAlert("留言分类管理员"+WCMLang.Add_success);
 	}
 	else
 	{
-		top.msgWargin("留言分类管理员"+WCMLang.Add_fail);
+		msgWargin("留言分类管理员"+WCMLang.Add_fail);
 	}
 }
 
@@ -171,13 +171,13 @@ function insertGuestbookCategory()
 	bean.site_id = site_id;
 	if(GuestBookRPC.insertGuestBookCategory(bean))
 	{
-		top.msgAlert("留言分类"+WCMLang.Add_success);
-		top.getCurrentFrameObj(topnum).reloadList();
-		top.tab_colseOnclick(top.curTabIndex);
+		msgAlert("留言分类"+WCMLang.Add_success);
+		getCurrentFrameObj(topnum).reloadList();
+		tab_colseOnclick(curTabIndex);
 	}
 	else
 	{
-		top.msgWargin("留言分类"+WCMLang.Add_fail);
+		msgWargin("留言分类"+WCMLang.Add_fail);
 	}
 }
 
@@ -194,13 +194,13 @@ function updateGuestbookCategory()
 	bean.cat_id = cat_id;
 	if(GuestBookRPC.updateGuestBookCategory(bean))
 	{
-		top.msgAlert("留言分类"+WCMLang.Add_success);
-		top.getCurrentFrameObj(topnum).reloadList();
-		top.tab_colseOnclick(top.curTabIndex);
+		msgAlert("留言分类"+WCMLang.Add_success);
+		getCurrentFrameObj(topnum).reloadList();
+		tab_colseOnclick(curTabIndex);
 	}
 	else
 	{
-		top.msgWargin("留言分类"+WCMLang.Add_fail);
+		msgWargin("留言分类"+WCMLang.Add_fail);
 	}
 }
 
@@ -212,11 +212,11 @@ function deleteGuestBookCategory()
 	
 	if(GuestBookRPC.deleteGuestBookCategory(m))
 	{
-		top.msgAlert("留言分类"+WCMLang.Delete_success);
+		msgAlert("留言分类"+WCMLang.Delete_success);
 		reloadList();
 	}else
 	{
-		top.msgWargin("留言分类"+WCMLang.Delete_fail);
+		msgWargin("留言分类"+WCMLang.Delete_fail);
 	}
 }
 
@@ -229,11 +229,11 @@ function publishGuestBookCategory(publish_status)
 	m.put("publish_status",publish_status);
 	if(GuestBookRPC.publishGuestBookCategory(m))
 	{
-		top.msgAlert("留言分类"+WCMLang.Publish_success);
+		msgAlert("留言分类"+WCMLang.Publish_success);
 		reloadList();
 	}else
 	{
-		top.msgWargin("留言分类"+WCMLang.Publish_fail);
+		msgWargin("留言分类"+WCMLang.Publish_fail);
 	}
 }
 
@@ -242,10 +242,10 @@ function sortGuestBookCategory()
 	var selectIDS = table.getAllCheckboxValue("cat_id");
 	if(GuestBookRPC.sortGuestBookCategory(selectIDS))
 	{
-		top.msgAlert(WCMLang.Sort_success);
+		msgAlert(WCMLang.Sort_success);
 		reloadList();
 	}else
 	{
-		top.msgWargin(WCMLang.Sort_fail);
+		msgWargin(WCMLang.Sort_fail);
 	}
 }

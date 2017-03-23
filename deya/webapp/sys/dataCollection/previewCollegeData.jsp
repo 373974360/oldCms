@@ -77,7 +77,7 @@ $(document).ready(function(){
 				<input id="userAndPub" type="button" name="btn1" onclick="publicSelectCheckbox(table,'id','useAndpublishInfo()')" value="采用并发布" />
 				<input id="userNoPub" type="button" name="btn1" onclick="publicSelectCheckbox(table,'id','useNopublishInfo()')" value="采用待发" />
 				<input id="deleteCollInfo" name="btn1" type="button" onclick="deleteRecord(table,'id','deleteCollInfoByid()');" value="删除" />
-				<input id="userAddCancel" type="button" name="btn1" onclick="top.tab_colseOnclick(top.curTabIndex);" value="取消">
+				<input id="userAddCancel" type="button" name="btn1" onclick="tab_colseOnclick(curTabIndex);" value="取消">
 			</td> 
 		</tr> 
 	</table> 

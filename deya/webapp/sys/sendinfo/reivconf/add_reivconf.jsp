@@ -55,7 +55,7 @@ function getAllSiteList()
 {
 	var sitelist = jsonrpc.SiteRPC.getSiteList();
 	sitelist = List.toJSList(sitelist);
-	var site_ids = top.getCurrentFrameObj(topnum).site_ids;
+	var site_ids = getCurrentFrameObj(topnum).site_ids;
 	if(sitelist != null && sitelist.size() > 0)
 	{
 		for(var i=0;i<sitelist.size();i++)
@@ -203,7 +203,7 @@ function deleteSharedCategoryList(obj,shared_cat_id,tree_div_id)
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="insertSendConfig()" value="保存" />	
 			<input id="userAddReset" name="btn1" type="button" onclick="formReSet('receiveConfig_table',id)" value="重置" />	
-			<input id="userAddCancel" name="btn1" type="button" onclick="top.tab_colseOnclick(top.curTabIndex);" value="取消" />	
+			<input id="userAddCancel" name="btn1" type="button" onclick="tab_colseOnclick(curTabIndex);" value="取消" />
 		</td>
 	</tr>
 </table>

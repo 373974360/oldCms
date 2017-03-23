@@ -64,7 +64,7 @@ function showList()
 			var nameList = nameMap.get(key);
 			nameList = List.toJSList(nameList);
 			var name = nameList.get(0);
-			$(this).html('<a href="javascript:top.addTab(true,\'/sys/org/dept/user_view.jsp?user_id='+beanList.get(i-1).user_id+'\',\'用户信息\')">'+name+'</a>');	
+			$(this).html('<a href="javascript:addTab(true,\'/sys/org/dept/user_view.jsp?user_id='+beanList.get(i-1).user_id+'\',\'用户信息\')">'+name+'</a>');
 		}
 	});
 	
@@ -122,11 +122,11 @@ function saveSiteUser(user_ids)
 	if(SiteUserRPC.linkSiteUser(insert_user_ids,delete_user_ids, siteId, appId))
 	{
 		reloadSiteUserList();
-		top.msgAlert("站点用户关联"+WCMLang.Add_success);
+		msgAlert("站点用户关联"+WCMLang.Add_success);
 		table.unChekcbox();
 	}else
 	{
-		top.msgWargin("站点用户关联"+WCMLang.Add_fail);
+		msgWargin("站点用户关联"+WCMLang.Add_fail);
 	}
 }
 
@@ -137,10 +137,10 @@ function deleteSiteUser()
 	var user_ids = table.getSelecteCheckboxValue("user_id");
 	if( !SiteUserRPC.deleteSiteUser(user_ids, siteId, appId))
 	{
-		top.msgWargin("站点用户"+WCMLang.Delete_fail);
+		msgWargin("站点用户"+WCMLang.Delete_fail);
 		return;
 	}
-	parent.msgAlert("站点用户"+WCMLang.Delete_success);
+	msgAlert("站点用户"+WCMLang.Delete_success);
 	reloadSiteUserList();
 }
 
@@ -157,13 +157,13 @@ function saveRoleUser(role_ids)
 
 	if(jsonrpc.RoleRPC.insertRoleUserByUser(bean))
 	{
-		top.msgAlert("角色用户关联"+WCMLang.Add_success);
-		top.CloseModalWindow();
-		top.getCurrentFrameObj().reloadSiteUserList();
+		msgAlert("角色用户关联"+WCMLang.Add_success);
+		CloseModalWindow();
+		getCurrentFrameObj().reloadSiteUserList();
 		table.unChekcbox();
 	}else
 	{
-		top.msgWargin("角色用户关联"+WCMLang.Add_fail);
+		msgWargin("角色用户关联"+WCMLang.Add_fail);
 	}
 }
 
@@ -175,6 +175,6 @@ function getCurrentSelectedRoleID(user_id)
 
 function setUserOperate()
 {
-	top.getCurrentFrameObj().reloadSiteUserList();
+	getCurrentFrameObj().reloadSiteUserList();
 }
 

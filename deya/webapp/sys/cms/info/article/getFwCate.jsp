@@ -49,7 +49,7 @@ function related_ok(){
 	{
 	    doAddInfos(c_ids,ids);			
 	}else
-		top.msgWargin("请选择要推送的节点");
+		msgWargin("请选择要推送的节点");
 }
 
 function getSelectIds(){
@@ -66,19 +66,19 @@ function getSelectIds(){
 function  doAddInfos(cat_ids,ids){
 //	    alert("doAddInfos========="+cat_ids+"==="+ids+"====="+is_Publich);
 	    
-	if(infoToFwRPC.infoToFwCate(ids,site_id,app_id,cat_ids,1,is_Publich,top.LoginUserBean.user_id))
+	if(infoToFwRPC.infoToFwCate(ids,site_id,app_id,cat_ids,1,is_Publich,LoginUserBean.user_id))
 	{
-		top.msgAlert("操作成功！");
+		msgAlert("操作成功！");
 		related_cancel();
-		//top.getCurrentFrameObj().reloadInfoDataList();
+		//getCurrentFrameObj().reloadInfoDataList();
 	}else
 	{
-		top.msgWargin("操作失败,请重新操作");
+		msgWargin("操作失败,请重新操作");
 	}
 }
 
 function related_cancel(){
-	top.CloseModalWindow();
+	CloseModalWindow();
 }
 </script>
 	</head>

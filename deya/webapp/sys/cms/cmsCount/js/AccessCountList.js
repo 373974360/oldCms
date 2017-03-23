@@ -173,7 +173,7 @@ function setTreeNodeUser(bean)
 }
 
 function openCateAccessInfos(cat_id,site_id,cateCname) { 
-	top.OpenModalWindow("查看"+cateCname+" 栏目详细信息","/sys/cms/cmsCount/CateAccessInfoList.jsp?site_id="+site_id+"&cat_id="+cat_id,1000,530);
+	OpenModalWindow("查看"+cateCname+" 栏目详细信息","/sys/cms/cmsCount/CateAccessInfoList.jsp?site_id="+site_id+"&cat_id="+cat_id,1000,530);
 }
 
 //添加目录树的点击事件

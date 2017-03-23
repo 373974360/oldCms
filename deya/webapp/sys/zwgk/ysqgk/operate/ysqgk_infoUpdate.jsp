@@ -64,7 +64,7 @@ function insertAddress(){
 	GKNodeBean = GKNodeRPC.getGKNodeBeanByNodeID(node_id);
 	var address = GKNodeBean.address;
 	if(address ==""){
-		top.msgAlert("暂无联系方式!");
+		msgAlert("暂无联系方式!");
 	}else{
 	  KE.util.insertHtml("deal_content",address);
 	}
@@ -326,7 +326,7 @@ function doVoid(id,pro_type)
 			-->
 			<td>
 					<input id="submitButton" name="submitButton" type="button" onclick="updateYsqInfo(ysq_id,node_id)" value="提交" />					
-                    <input id="btn2" name="btn2" type="button" onclick="top.tab_colseOnclick(top.curTabIndex)" value="取消" />
+                    <input id="btn2" name="btn2" type="button" onclick="tab_colseOnclick(curTabIndex)" value="取消" />
 			</td>
 		</td>
 	</tr>
@@ -405,7 +405,7 @@ function doVoid(id,pro_type)
 				<th></th>
 				<td>
 					<input id="submitButton" name="submitButton" type="button" onclick="javascript:void(0);" value="提交" />					
-                    <input id="btn2" name="btn2" type="button" onclick="top.tab_colseOnclick(top.curTabIndex)" value="取消" />
+                    <input id="btn2" name="btn2" type="button" onclick="tab_colseOnclick(curTabIndex)" value="取消" />
 				</td>
 			</tr>
 		</tbody>

@@ -7,7 +7,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 %>
 <%
        List<Map> list = SearchForManager.getSiteList();
-       //System.out.println("list====" + list);
+       System.out.println("list====" + list);
        pageContext.setAttribute("list",list);
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">

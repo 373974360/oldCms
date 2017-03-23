@@ -14,7 +14,7 @@
 <script type="text/javascript" src="js/hot_list.js"></script>
 <script type="text/javascript">
 
-var site_id = top.current_site_id;
+var site_id = current_site_id;
 var app_id = "cms";
 var CategoryRPC = jsonrpc.CategoryRPC;
 var GKNodeRPC = jsonrpc.GKNodeRPC;
@@ -414,7 +414,7 @@ function clickZWGKTreeEvent(node)
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="saveHotList()" value="插入" />	
 			<input id="userAddReset" name="btn1" type="button" onclick="resetForm()" value="重置" />	
-			<input id="userAddCancel" name="btn1" type="button" onclick="top.CloseModalWindow();" value="取消" />	
+			<input id="userAddCancel" name="btn1" type="button" onclick="CloseModalWindow();" value="取消" />
 		</td>
 	</tr>
 </table>

@@ -62,7 +62,7 @@ function showList(){
 		$(this).css({"text-align":"left"});
 		if(i>0)
 		{			
-			//$(this).html('<a href="javascript:top.addTab(true,\'/sys/system/template/template_view.jsp?t_id='+beanList.get(i-1).t_id+'\',\'模板信息\')">'+beanList.get(i-1).t_cname+'</a>');
+			//$(this).html('<a href="javascript:addTab(true,\'/sys/system/template/template_view.jsp?t_id='+beanList.get(i-1).t_id+'\',\'模板信息\')">'+beanList.get(i-1).t_cname+'</a>');
 		}
 	});
 	table.getCol("t_ename").each(function(i){
@@ -114,20 +114,20 @@ function showTurnPage(){
 function recoveryTemplateVer(templateId,siteId,ver){
 	if(TemplateRPC.recoveryTemplateVer(templateId,siteId,ver))
 	{
-		top.msgAlert("模板恢复成功");			
-		top.CloseModalWindow();
+		msgAlert("模板恢复成功");
+		CloseModalWindow();
 		//window.location.reload();
-		top.getCurrentFrameObj().reloadTemplateDataList();
+		getCurrentFrameObj().reloadTemplateDataList();
 		//window.location.href = "templateCategoryList.jsp?tid="+tc_id+"&site_id="+siteId;
 	}
 	else
 	{
-		top.msgWargin("模板恢复失败");
+		msgWargin("模板恢复失败");
 	}
 }
 
 function closePage(){
-	top.CloseModalWindow();
+	CloseModalWindow();
 }
 
 function showTEBean(bean){

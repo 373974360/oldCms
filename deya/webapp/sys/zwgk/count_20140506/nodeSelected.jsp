@@ -15,7 +15,7 @@
 // 调用这个节点选择jsp时,调用页面要有一个setNodeName(str_node_name)方法和一个node_ids属性
 // setNodeName(str_node_name)方法用来保存选取的节点名称.
 // node_ids属性属性放置选中的节点id
-var str_sel_node = top.getCurrentFrameObj().node_ids; // 选中的节点ID
+var str_sel_node = getCurrentFrameObj().node_ids; // 选中的节点ID
 var str_node_name = ""; // 选中的节点名称
 
 var json_node_cat; // 节点分类json对象
@@ -33,9 +33,9 @@ $(document).ready(function(){
 // setNodeName(str_node_name)方法用来保存选取的节点名称.
 // node_ids属性属性放置选中的节点id
 function saveNode(){
-	top.getCurrentFrameObj().node_ids = str_sel_node;
-	top.getCurrentFrameObj().setNodeName(str_node_name);
-	top.CloseModalWindow();
+	getCurrentFrameObj().node_ids = str_sel_node;
+	getCurrentFrameObj().setNodeName(str_node_name);
+	CloseModalWindow();
 }
 
 </script>
@@ -82,7 +82,7 @@ function saveNode(){
 	<tr>
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="saveNode()" value="保存" />				
-			<input id="userAddCancel" name="btn1" type="button" onclick="top.CloseModalWindow();" value="取消" />	
+			<input id="userAddCancel" name="btn1" type="button" onclick="CloseModalWindow();" value="取消" />
 		</td>
 	</tr>
 </table>

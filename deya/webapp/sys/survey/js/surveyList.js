@@ -180,20 +180,20 @@ function saveSurvey()
 
 	if(bean.s_id.trim() == "")
 	{
-		bean.add_user = top.LoginUserBean.user_id;
+		bean.add_user = LoginUserBean.user_id;
 		bean.site_id = site_id;
 		if(SurveyRPC.insertSurvey(bean,getSurveySubList()))
 		{
-			top.msgAlert("保存成功");	
+			msgAlert("保存成功");
 			window.location.href="surveyList.jsp?site_id="+site_id
 		}
 	}
 	else
 	{
-		bean.update_user = top.LoginUserBean.user_id;
+		bean.update_user = LoginUserBean.user_id;
 		if(SurveyRPC.updateSurvey(bean,getSurveySubList()))
 		{
-			top.msgAlert("保存成功");	
+			msgAlert("保存成功");
 			window.location.href="surveyList.jsp?site_id="+site_id
 		}
 	}
@@ -404,13 +404,13 @@ function publishSurvey(publish_status)
 	if(publish_status == -1)
 		message = "撤销";
 
-	if(SurveyRPC.publishSurvey(beanList.get(carent_cell_num).id,publish_status,top.LoginUserBean.user_id))
+	if(SurveyRPC.publishSurvey(beanList.get(carent_cell_num).id,publish_status,LoginUserBean.user_id))
 	{
-		top.msgAlert(message+"成功");		
+		msgAlert(message+"成功");
 		showList();	
 	}
 	else
-		top.msgWargin(message+"失败，请重新"+message);
+		msgWargin(message+"失败，请重新"+message);
 }
 
 function batchPublishSurvey(publish_status)
@@ -422,63 +422,63 @@ function batchPublishSurvey(publish_status)
 	var selectIDS = table.getSelecteCheckboxValue("id");
 	if(selectIDS == "")
 	{
-		top.msgWargin("请选择要"+message+"的记录");
+		msgWargin("请选择要"+message+"的记录");
 		return;
 	}
 
 	var selectIDS = table.getSelecteCheckboxValue("id");
 	
-	if(SurveyRPC.publishSurvey(selectIDS,publish_status,top.LoginUserBean.user_id))
+	if(SurveyRPC.publishSurvey(selectIDS,publish_status,LoginUserBean.user_id))
 	{
-		top.msgAlert(WCMLang.Publish_success);
+		msgAlert(WCMLang.Publish_success);
 		
 		showList();	
 	}
 	else
-		top.msgWargin(WCMLang.Publish_success);
+		msgWargin(WCMLang.Publish_success);
 }
 /**********************发布操作　结束*************************************/
 
 /**********************删除操作　开始*************************************/
 function deleteSurveyA(id)
 {
-	top.msgConfirm("确认删除选中记录？","deleteSurvey("+id+")");
+	msgConfirm("确认删除选中记录？","deleteSurvey("+id+")");
 }
 
 function deleteSurvey(id)
 {
-	if(SurveyRPC.deleteSurvey(id,top.LoginUserBean.user_id))
+	if(SurveyRPC.deleteSurvey(id,LoginUserBean.user_id))
 	{
-		top.msgAlert("问卷调查主题"+WCMLang.Delete_success);		
+		msgAlert("问卷调查主题"+WCMLang.Delete_success);
 		showTurnPage();
 		showList();		
 	}
 	else
-		top.msgWargin("问卷调查主题"+WCMLang.Delete_fail);
+		msgWargin("问卷调查主题"+WCMLang.Delete_fail);
 }
 
 function batchDelSurvey()
 {
 	if (table.getSelecteCount() < 1) {
-			top.msgWargin("请选择要删除的记录！");
+			msgWargin("请选择要删除的记录！");
 			return;
 	}
 
-	top.msgConfirm("确认删除选中记录？","batchDelSurveyHandl()");
+	msgConfirm("确认删除选中记录？","batchDelSurveyHandl()");
 }
 
 function batchDelSurveyHandl()
 {
 	var selectIDS = table.getSelecteCheckboxValue("id");
 	
-	if(SurveyRPC.deleteSurvey(selectIDS,top.LoginUserBean.user_id))
+	if(SurveyRPC.deleteSurvey(selectIDS,LoginUserBean.user_id))
 	{
-		top.msgAlert("问卷调查主题"+WCMLang.Delete_success);		
+		msgAlert("问卷调查主题"+WCMLang.Delete_success);
 		showTurnPage();
 		showList();	
 	}
 	else
-		top.msgWargin("问卷调查主题"+WCMLang.Delete_fail);
+		msgWargin("问卷调查主题"+WCMLang.Delete_fail);
 }
 /**********************删除操作　结束*************************************/
 
@@ -493,14 +493,14 @@ function fnUpdateSurvey()
 	var selectIDS = table.getSelecteCheckboxValue("s_id");
 	if(selectIDS == "")
 	{
-		top.msgWargin("请选择要修改的记录");
+		msgWargin("请选择要修改的记录");
 		return;
 	}
 	else
 	{
 		if(selectIDS.split(",").length > 1)
 		{
-			top.msgWargin("只能选择一条记录进行修改操作");
+			msgWargin("只能选择一条记录进行修改操作");
 			return;
 		}
 		else
@@ -527,14 +527,14 @@ function openSubject()
 {
 	//window.location.href = "statisticsSubject.jsp?sid="+beanList.get(carent_cell_num).s_id;
 	var selectIDS = table.getSelecteCheckboxValue("s_id");
-	top.addTab(true,'/sys/survey/statisticsSubject.jsp?sid='+selectIDS,'数据统计');
+	addTab(true,'/sys/survey/statisticsSubject.jsp?sid='+selectIDS,'数据统计');
 }
 
 function openAnswer()
 {
 	//window.location.href = "answerList.jsp?sid="+beanList.get(carent_cell_num).s_id;
 	var selectIDS = table.getSelecteCheckboxValue("s_id");
-	top.addTab(true,'/sys/survey/answerList.jsp?sid='+selectIDS,'查看答卷');
+	addTab(true,'/sys/survey/answerList.jsp?sid='+selectIDS,'查看答卷');
 }
 /**********************属性设置操作　开始*************************************/
 function showSurveyAttr(flag)
@@ -542,7 +542,7 @@ function showSurveyAttr(flag)
 	if(flag == "bath")
 	{
 		var selectIDS = table.getSelecteCheckboxValue("s_id");
-		top.addTab(true,'/sys/survey/setSurveyAttr.jsp?s_id='+selectIDS+"&top_index="+top.curTabIndex,'问卷调查属性设置');	
+		addTab(true,'/sys/survey/setSurveyAttr.jsp?s_id='+selectIDS+"&top_index="+curTabIndex,'问卷调查属性设置');
 	}	
 }
 
@@ -600,15 +600,15 @@ function setSurveyAttrHandl()
 	}
 
 	//bean.verdict = $("#verdict").val();
-	bean.update_user = top.LoginUserBean.user_id;
+	bean.update_user = LoginUserBean.user_id;
 	if(SurveyRPC.setSurveyAttr(bean))
 	{
-		top.msgAlert("保存成功");
-		top.getCurrentFrameObj(top_index).showList();
-		top.tab_colseOnclick(top.curTabIndex)
+		msgAlert("保存成功");
+		getCurrentFrameObj(top_index).showList();
+		tab_colseOnclick(curTabIndex)
 	}else
 	{
-		top.msgAlert("保存失败,请重新提交");
+		msgAlert("保存失败,请重新提交");
 		return;
 	}	
 }
@@ -634,7 +634,7 @@ function getSurveyCategoryName()
 	else
 	{
 		history.go(-1);
-		top.msgWargin("请先添加问卷调查分类");
+		msgWargin("请先添加问卷调查分类");
 		
 	}
 }
@@ -642,8 +642,8 @@ function getSurveyCategoryName()
 /**********************查询操作　开始*************************************/
 function fnSearch()
 {	
-	//top.addTab(true,'/sys/survey/search_survey.jsp','问卷调查查询');	
-	top.OpenModalWindow("问卷调查查询","/sys/survey/search_survey.jsp",455,245);	
+	//addTab(true,'/sys/survey/search_survey.jsp','问卷调查查询');
+	OpenModalWindow("问卷调查查询","/sys/survey/search_survey.jsp",455,245);
 }
 
 function searchHandl(str)
@@ -659,11 +659,11 @@ function updateRecommend(flag)
 	var selectIDS = table.getSelecteCheckboxValue("id");
 	if(SurveyRPC.updateSurveyRecommend(selectIDS,flag))
 	{
-		top.msgAlert("推荐状态设置成功");
+		msgAlert("推荐状态设置成功");
 		showList();	
 	}
 	else
-		top.msgWargin("推荐状态设置失败，请重新设置");
+		msgWargin("推荐状态设置失败，请重新设置");
 }
 /**********************推荐操作　结束*************************************/
 
@@ -673,7 +673,7 @@ function roleSearchHandl(obj)
 	var con_value = $(obj).parent().find("#searchkey").val();
 	if(con_value.trim() == "" ||  con_value == null)
 	{
-		top.msgAlert(WCMLang.Search_empty);
+		msgAlert(WCMLang.Search_empty);
 		return;
 	}
 	search_con = " and cs.s_name like '%"+con_value+"%'";	

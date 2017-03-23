@@ -22,9 +22,9 @@
 <script type="text/javascript" src="js/wareInfo.js"></script>
 <script type="text/javascript">
 
-var ware_id = top.getCurrentFrameObj().ware_id;
-var app_id = top.getCurrentFrameObj().app_id;
-var site_id = top.getCurrentFrameObj().site_id;
+var ware_id = getCurrentFrameObj().ware_id;
+var app_id = getCurrentFrameObj().app_id;
+var site_id = getCurrentFrameObj().site_id;
 var winfo_id = <%=winfo_id%>;
 var sort_id = "<%=sort_id%>";
 var action_type = "<%=action_type%>";
@@ -134,15 +134,15 @@ function saveWareInfos()
 		bean.sort_id = parseInt(sort_id);
 	if(WareRPC.insertWareInfos(bean))
 	{
-		top.msgAlert("信息"+WCMLang.Add_success);
+		msgAlert("信息"+WCMLang.Add_success);
 		if(action_type == "change")
-			top.getCurrentFrameObj().changeInfoToUL(bean);
+			getCurrentFrameObj().changeInfoToUL(bean);
 		else
-			top.getCurrentFrameObj().setInfoToUL(bean,winfo_id);
-		top.CloseModalWindow();
+			getCurrentFrameObj().setInfoToUL(bean,winfo_id);
+		CloseModalWindow();
 	}else
 	{
-		top.msgWargin("信息"+WCMLang.Add_fail);
+		msgWargin("信息"+WCMLang.Add_fail);
 	}
 }
 
@@ -393,7 +393,7 @@ function savePicUrl(url)
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="saveWareInfos()" value="保存" />	
 			<input id="userAddReset" name="btn1" type="button" onclick="form1.reset()" value="重置" />	
-			<input id="userAddCancel" name="btn1" type="button" onclick="top.CloseModalWindow();" value="取消" />	
+			<input id="userAddCancel" name="btn1" type="button" onclick="CloseModalWindow();" value="取消" />
 		</td>
 	</tr>
 </table>

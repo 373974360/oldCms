@@ -88,7 +88,7 @@ function fillBean()
 		
 		strTable += '<td align="left" valign="middle" class=""><ul class="comment_opt">';
 		
-		strTable += '<li><img src="../images/del.gif" onclick="parent.msgConfirm(WCMLang.Delete_confirm,\'deleteComment('+bean.id+')\')" class="pointer" title="删除"/></li>';
+		strTable += '<li><img src="../images/del.gif" onclick="msgConfirm(WCMLang.Delete_confirm,\'deleteComment('+bean.id+')\')" class="pointer" title="删除"/></li>';
 		strTable += '<li><img src="../images/edit.gif" onclick="updateCommentMain(this,'+bean.id+');" class="pointer" title="编辑"/></li></td>';
 			
 		strTable += '<td class="">&#160;</td></tr>';
@@ -108,7 +108,7 @@ function showTurnPage()
 //打开查询窗口
 function openCommentSearch(param)
 {
-	top.addTab(true,"/sys/comment/commentList.jsp?info_type="+info_type+"&"+param,"评论管理");
+	addTab(true,"/sys/comment/commentList.jsp?info_type="+info_type+"&"+param,"评论管理");
 }
 
 function passComment(is_status)
@@ -131,11 +131,11 @@ function passComment(is_status)
 	
 	if(CommentSetRPC.updateCommentStatus(selectIDS,l,is_status))
 	{
-		top.msgAlert("评论审核状态"+WCMLang.Set_success);
+		msgAlert("评论审核状态"+WCMLang.Set_success);
 		reloadList();
 	}else
 	{
-		top.msgWargin("评论审核状态"+WCMLang.Set_fail);
+		msgWargin("评论审核状态"+WCMLang.Set_fail);
 	}
 }
 
@@ -152,10 +152,10 @@ function deleteComment(id)
 	m.put("ids",id+"");
 	if(CommentSetRPC.deleteCommentMain(m))
 	{
-		top.msgAlert("评论"+WCMLang.Delete_success);
+		msgAlert("评论"+WCMLang.Delete_success);
 		reloadList();
 	}else
-		top.msgWargin("评论"+WCMLang.Delete_fail);
+		msgWargin("评论"+WCMLang.Delete_fail);
 }
 
 
@@ -186,9 +186,9 @@ function updateCommentMain(obj,id)
 	m.put("content2",$(obj).parent().parent().parent().parent().find("#content").val());		
 	if(CommentSetRPC.updateCommentMain(m))
 	{
-		top.msgAlert("评论"+WCMLang.Add_success);		
+		msgAlert("评论"+WCMLang.Add_success);
 	}else
-		top.msgWargin("评论"+WCMLang.Add_fail);
+		msgWargin("评论"+WCMLang.Add_fail);
 }
 
 
@@ -196,14 +196,14 @@ function updateCommentMain(obj,id)
 
 function openUpdateGuestbookPage(id)
 {
-	top.addTab(true,"/sys/appCom/guestbook/reply_gb.jsp?site_id="+site_id+"&topnum="+top.curTabIndex+"&id="+id+"&gbs_id="+gbs_id+"&cat_id="+cat_id,"编辑留言");
+	addTab(true,"/sys/appCom/guestbook/reply_gb.jsp?site_id="+site_id+"&topnum="+curTabIndex+"&id="+id+"&gbs_id="+gbs_id+"&cat_id="+cat_id,"编辑留言");
 }
 
 
 
 function viewGuestBook(id)
 {
-	top.addTab(true,"/sys/appCom/guestbook/view_gb.jsp?site_id="+site_id+"&topnum="+top.curTabIndex+"&id="+id+"&gbs_id="+gbs_id+"&cat_id="+cat_id,"查看留言");
+	addTab(true,"/sys/appCom/guestbook/view_gb.jsp?site_id="+site_id+"&topnum="+curTabIndex+"&id="+id+"&gbs_id="+gbs_id+"&cat_id="+cat_id,"查看留言");
 }
 
 
@@ -215,11 +215,11 @@ function deleteSelect(handl_name)
 	
 	if(selectIDS == "" || selectIDS == null)
 	{
-		parent.msgWargin(WCMLang.Select_empty);
+		msgWargin(WCMLang.Select_empty);
 		return;
 	}else
 	{		
-		parent.msgConfirm(WCMLang.Delete_confirm,handl_name);
+		msgConfirm(WCMLang.Delete_confirm,handl_name);
 	}
 }
 
@@ -230,7 +230,7 @@ function multiSelect(handl_name)
 	var selectIDS = getSelecteCheckboxValue();
 	if(selectIDS == "" || selectIDS == null)
 	{
-		parent.msgWargin(WCMLang.Select_empty);
+		msgWargin(WCMLang.Select_empty);
 		return;
 	}else
 	{

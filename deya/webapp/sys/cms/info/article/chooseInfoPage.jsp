@@ -67,13 +67,13 @@ function related_ok(){
 	if(ids.indexOf(",") != -1){
 		ids = ids.substring(1);
 	}
-	top.getCurrentFrameObj().setLinkInfoIds(ids,"<%=type%>");
-	//top.msgAlert("信息关联成功");
-	top.CloseModalWindow();
+	getCurrentFrameObj().setLinkInfoIds(ids,"<%=type%>");
+	//msgAlert("信息关联成功");
+	CloseModalWindow();
 }
 
 function related_cancel(){
-	top.CloseModalWindow();
+	CloseModalWindow();
 }
 
 function searchInfo(){

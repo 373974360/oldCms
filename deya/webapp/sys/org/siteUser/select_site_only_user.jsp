@@ -32,7 +32,7 @@ $(document).ready(function(){
 //得到已选过的用户
 function getSelectedUserIDS()
 {	
-	setIDSINList(top.getCurrentFrameObj().getSelectedUserIDS(),"user_list");	
+	setIDSINList(getCurrentFrameObj().getSelectedUserIDS(),"user_list");
 }
 
 function setIDSINList(ids,div_list_name)
@@ -123,8 +123,8 @@ function getSelectUserIDS(div_name)
 
 function returnUserID()
 {
-	eval("top.getCurrentFrameObj()."+handl_name+"('"+getSelectUserIDS("user_list")+"')");	
-	top.CloseModalWindow();
+	eval("getCurrentFrameObj()."+handl_name+"('"+getSelectUserIDS("user_list")+"')");
+	CloseModalWindow();
 }
 
 </script>
@@ -165,7 +165,7 @@ function returnUserID()
 	<tr>
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="returnUserID()" value="保存" />				
-			<input id="userAddCancel" name="btn1" type="button" onclick="top.CloseModalWindow();" value="取消" />	
+			<input id="userAddCancel" name="btn1" type="button" onclick="CloseModalWindow();" value="取消" />
 		</td>
 	</tr>
 </table>

@@ -91,11 +91,11 @@ function addActor()
 {
 	if(subm_sta == 1 && (tn == "" || tn == null))
 	{
-		top.msgWargin("该主题已通过审核，不能再进行操作！");
+		msgWargin("该主题已通过审核，不能再进行操作！");
 		return;
 	}
 	//window.location.href = "add_actor.jsp?sub_id="+sub_id;
-	top.addTab(true,"/sys/interview/subject/add_actor.jsp?sub_id="+sub_id+"&topnum="+top.curTabIndex,"维护嘉宾信息");
+	addTab(true,"/sys/interview/subject/add_actor.jsp?sub_id="+sub_id+"&topnum="+curTabIndex,"维护嘉宾信息");
 }
 
 
@@ -125,7 +125,7 @@ function returnUploadValue(furl)
 			updateActor();
 	}
 	else
-		top.alertWar("上传失败，请重新提交");
+		alertWar("上传失败，请重新提交");
 }
 
 //判断图片格式
@@ -135,7 +135,7 @@ function checkImgFile(files)
 	{ 
 		if(files.indexOf(".") == -1) 
 		{ 			
-			top.msgWargin("上传的文档图片格式不对，只允许上传 jpg，jpeg，gif，png 等格式的文件，请重新上传！"); 
+			msgWargin("上传的文档图片格式不对，只允许上传 jpg，jpeg，gif，png 等格式的文件，请重新上传！");
 			return false; 
 		}
 		var strtype = files.match(/\.([^\.]+)(\?|$)/)[1];
@@ -146,7 +146,7 @@ function checkImgFile(files)
 		} 
 		else
 		{ 		
-			top.msgWargin("上传的文档图片格式不对，只允许上传 jpg，jpeg，gif，png 等格式的文件，请重新上传！"); 
+			msgWargin("上传的文档图片格式不对，只允许上传 jpg，jpeg，gif，png 等格式的文件，请重新上传！");
 			return false;
 		}
 	}
@@ -164,17 +164,17 @@ function saveActor()
 		return;
 	}
 
-	bean.add_user = top.LoginUserBean.user_id;
+	bean.add_user = LoginUserBean.user_id;
 	if(SubjectRPC.insertSubActor(bean))
 	{
-		top.msgAlert("嘉宾资料"+WCMLang.Add_success);
-		top.getCurrentFrameObj(topnum).showTurnPage();
-		top.getCurrentFrameObj(topnum).showList();
-		top.tab_colseOnclick(top.curTabIndex);
+		msgAlert("嘉宾资料"+WCMLang.Add_success);
+		getCurrentFrameObj(topnum).showTurnPage();
+		getCurrentFrameObj(topnum).showList();
+		tab_colseOnclick(curTabIndex);
 	}
 	else
 	{
-		top.msgWargin("嘉宾资料"+WCMLang.Add_fail);
+		msgWargin("嘉宾资料"+WCMLang.Add_fail);
 	}
 }
 /**********************添加操作　结束*************************************/
@@ -185,25 +185,25 @@ function fnUpdateActor()
 {
 	if(subm_sta == 1 && (tn == "" || tn == null))
 	{
-		top.msgWargin("该主题已通过审核，不能再进行操作！");
+		msgWargin("该主题已通过审核，不能再进行操作！");
 		return;
 	}
 
 	var selectIDS = table.getSelecteCheckboxValue("id");
 	
 	//window.location.href = "add_actor.jsp?id="+selectIDS;
-	top.addTab(true,"/sys/interview/subject/add_actor.jsp?id="+selectIDS+"&topnum="+top.curTabIndex,"维护嘉宾信息");
+	addTab(true,"/sys/interview/subject/add_actor.jsp?id="+selectIDS+"&topnum="+curTabIndex,"维护嘉宾信息");
 }
 
 function showUpdatePate(id)
 {	
 	if(subm_sta == 1 && (tn == "" || tn == null))
 	{
-		top.msgWargin("该主题已通过审核，不能再进行操作！");
+		msgWargin("该主题已通过审核，不能再进行操作！");
 		return;
 	}
 	//window.location.href = "add_actor.jsp?id="+id;
-	top.addTab(true,"/sys/interview/subject/add_actor.jsp?id="+id+"&topnum="+top.curTabIndex,"维护嘉宾信息");
+	addTab(true,"/sys/interview/subject/add_actor.jsp?id="+id+"&topnum="+curTabIndex,"维护嘉宾信息");
 }
 
 function updateActor()
@@ -217,17 +217,17 @@ function updateActor()
 		return;
 	}
 	
-	bean.update_user = top.LoginUserBean.user_id;
+	bean.update_user = LoginUserBean.user_id;
 	if(SubjectRPC.updateSubActor(bean))
 	{
-		top.msgAlert("嘉宾资料"+WCMLang.Add_success);
-		top.getCurrentFrameObj(topnum).showTurnPage();
-		top.getCurrentFrameObj(topnum).showList();
-		top.tab_colseOnclick(top.curTabIndex);
+		msgAlert("嘉宾资料"+WCMLang.Add_success);
+		getCurrentFrameObj(topnum).showTurnPage();
+		getCurrentFrameObj(topnum).showList();
+		tab_colseOnclick(curTabIndex);
 	}
 	else
 	{
-		top.msgWargin("嘉宾资料"+WCMLang.Add_fail);
+		msgWargin("嘉宾资料"+WCMLang.Add_fail);
 	}
 }
 /**********************修改操作　结束*************************************/
@@ -238,15 +238,15 @@ function batchDelSubActor()
 {
 	if(subm_sta == 1 && (tn == "" || tn == null))
 	{
-		top.alertN("该主题已通过审核，不能再进行操作！");
+		alertN("该主题已通过审核，不能再进行操作！");
 		return;
 	}
 	if (table.getSelecteCount() < 1) {
-			top.alertN("请选择要删除的记录！");
+			alertN("请选择要删除的记录！");
 			return;
 	}
 
-	top.msgConfirm("确认删除选中记录？","batchDelSubActors()");
+	msgConfirm("确认删除选中记录？","batchDelSubActors()");
 	
 }
 
@@ -254,14 +254,14 @@ function batchDelSubActors()
 {
 	var selectIDS = table.getSelecteCheckboxValue("id");
 	
-	if(SubjectRPC.deleteSubActor(selectIDS,top.LoginUserBean.user_id))
+	if(SubjectRPC.deleteSubActor(selectIDS,LoginUserBean.user_id))
 	{
-		top.msgAlert("嘉宾资料"+WCMLang.Delete_success);		
+		msgAlert("嘉宾资料"+WCMLang.Delete_success);
 		showList();	
 		showTurnPage();
 	}
 	else
-		top.msgWargin("嘉宾资料"+WCMLang.Delete_fail);
+		msgWargin("嘉宾资料"+WCMLang.Delete_fail);
 }
 
 //删除分类
@@ -269,22 +269,22 @@ function deleteSubActor(id)
 {
 	if(subm_sta == 1 && (tn == "" || tn == null))
 	{
-		top.msgWargin("该主题已通过审核，不能再进行操作！");
+		msgWargin("该主题已通过审核，不能再进行操作！");
 		return;
 	}
-	top.msgConfirm("确认删除选中记录？","deleteSubActors("+id+")")
+	msgConfirm("确认删除选中记录？","deleteSubActors("+id+")")
 }
 
 function deleteSubActors(id)
 {
-	if(SubjectRPC.deleteSubActor(id,top.LoginUserBean.user_id))
+	if(SubjectRPC.deleteSubActor(id,LoginUserBean.user_id))
 	{
-		top.msgAlert("嘉宾资料"+WCMLang.Delete_success);
+		msgAlert("嘉宾资料"+WCMLang.Delete_success);
 		showList();	
 		showTurnPage();
 	}
 	else
-		top.msgWargin("嘉宾资料"+WCMLang.Delete_fail);
+		msgWargin("嘉宾资料"+WCMLang.Delete_fail);
 }
 /**********************删除操作　结束*************************************/
 
@@ -294,7 +294,7 @@ function saveSort()
 {
 	if(subm_sta == 1 && (tn == "" || tn == null))
 	{
-		top.msgWargin("该主题已通过审核，不能再进行操作！");
+		msgWargin("该主题已通过审核，不能再进行操作！");
 		return;
 	}
 
@@ -303,11 +303,11 @@ function saveSort()
 	{
 		if(SubjectRPC.saveSubActorSort(ids))
 		{
-			top.msgAlert(WCMLang.Sort_success);			
+			msgAlert(WCMLang.Sort_success);
 		}
 		else
 		{
-			top.msgWargin(WCMLang.Sort_fail);
+			msgWargin(WCMLang.Sort_fail);
 			return;
 		}
 	}
@@ -316,7 +316,7 @@ function saveSort()
 //查看参与者
 function view_actor2(id)
 {	
-	//top.addTab(true,'/sys/interview/subject/view_actor.jsp?id='+id,'查看嘉宾信息');
+	//addTab(true,'/sys/interview/subject/view_actor.jsp?id='+id,'查看嘉宾信息');
 	//window.location.href = '/sys/interview/subject/add_actor.jsp?id='+id;
-	top.addTab(true,"/sys/interview/subject/add_actor.jsp?id="+id+"&topnum="+top.curTabIndex,"查看嘉宾信息");
+	addTab(true,"/sys/interview/subject/add_actor.jsp?id="+id+"&topnum="+curTabIndex,"查看嘉宾信息");
 }

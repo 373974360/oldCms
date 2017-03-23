@@ -28,8 +28,8 @@
 	</style>
 	<SCRIPT LANGUAGE="JavaScript">
 	<!--
-		var id = parent.id;
-		var sub_id = parent.sub_id;
+		var id = id;
+		var sub_id = sub_id;
 		var text_start_num = 0;
 		var pic_start_num = 0;
 		$(document).ready(function () {	
@@ -48,7 +48,7 @@
 
 			//得到在线人数
 			try{
-			$("#c_user_count").html(parent.zbgl_frame.getCurrentUserCount());
+			$("#c_user_count").html(zbgl_frame.getCurrentUserCount());
 			}catch(e)
 			{}
 		}

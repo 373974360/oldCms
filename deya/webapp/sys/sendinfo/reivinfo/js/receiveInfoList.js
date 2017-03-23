@@ -108,7 +108,7 @@ function showTurnPage(){
 
 function openViewPage(id)
 {
-	top.addTab(true,"/sys/sendinfo/reivinfo/sendinfoView.jsp?id="+id,"查看信息");
+	addTab(true,"/sys/sendinfo/reivinfo/sendinfoView.jsp?id="+id,"查看信息");
 }
 
 //打开意见窗口
@@ -116,7 +116,7 @@ var adopt_desc = "";
 function openAdoptDescPage(desc)
 {
 	adopt_desc = desc;
-	top.OpenModalWindow("不采用意见","/sys/sendinfo/reivinfo/adopt_desc.jsp?type=-1",520,235);
+	OpenModalWindow("不采用意见","/sys/sendinfo/reivinfo/adopt_desc.jsp?type=-1",520,235);
 }
 
 //采用操作
@@ -134,15 +134,15 @@ function adoptReceiveInfo(flag,info_status)
 
 		if(SendInfoRPC.adoptReceiveInfo(adopt_map))
 		{
-			top.msgAlert("采用设置操作成功");
+			msgAlert("采用设置操作成功");
 			reloadList();
 		}else
 		{
-			top.msgAlert("采用操作失败，请重新操作");
+			msgAlert("采用操作失败，请重新操作");
 		}
 	}else
 	{
-		top.OpenModalWindow("不采用意见","/sys/sendinfo/reivinfo/adopt_desc.jsp",520,235);
+		OpenModalWindow("不采用意见","/sys/sendinfo/reivinfo/adopt_desc.jsp",520,235);
 	}
 }
 
@@ -156,11 +156,11 @@ function dontAdoptRInfoHandl(desc)
 	adopt_map.put("adopt_desc",desc);
 	if(SendInfoRPC.adoptReceiveInfo(adopt_map))
 	{
-		top.msgAlert("不采用设置操作成功");
+		msgAlert("不采用设置操作成功");
 		reloadList();
 	}else
 	{
-		top.msgAlert("不采用操作失败，请重新操作");
+		msgAlert("不采用操作失败，请重新操作");
 	}
 }
 
@@ -172,11 +172,11 @@ function deleteReceiveInfo()
 	map.put("ids",selectIDS);
 	if(SendInfoRPC.deleteReceiveInfo(map))
 	{
-		top.msgAlert("信息"+WCMLang.Delete_success);
+		msgAlert("信息"+WCMLang.Delete_success);
 		reloadList();
 	}else
 	{
-		top.msgWargin("信息"+WCMLang.Delete_fail);
+		msgWargin("信息"+WCMLang.Delete_fail);
 	}
 }
 

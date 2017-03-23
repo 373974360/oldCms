@@ -78,7 +78,7 @@ function showList(){
 	table.getCol("action_Col").each(function(i){
 		if(i>0)
 		{			
-			$(this).html('<a href="javascript:top.addTab(true,\'/sys/system/formodel/fieldList.jsp?model_id='+beanList.get(i-1).model_id+'\',\'内容模型字段\')">字段维护</a>');
+			$(this).html('<a href="javascript:addTab(true,\'/sys/system/formodel/fieldList.jsp?model_id='+beanList.get(i-1).model_id+'\',\'内容模型字段\')">字段维护</a>');
 		}
 	});	
 	
@@ -89,10 +89,10 @@ function showList(){
 			if(beanList.get(i-1).model_type == "0"){
 				$(this).html("系统默认");
 			}else if(beanList.get(i-1).model_type == "1"){
-				$(this).html('<a href="javascript:top.addTab(true,\'/sys/model/form/form_list.jsp?model_id='+beanList.get(i-1).model_id+'\',\'内容模型字段\')">字段维护</a>');
+				$(this).html('<a href="javascript:addTab(true,\'/sys/model/form/form_list.jsp?model_id='+beanList.get(i-1).model_id+'\',\'内容模型字段\')">字段维护</a>');
 			}else if(beanList.get(i-1).model_type == "2"){
 				//$(this).html("第三方");
-				$(this).html('<a href="javascript:top.addTab(true,\'/sys/model/form/form_list3.jsp?model_id='+beanList.get(i-1).model_id+'\',\'内容模型字段\')">资源库字段设置</a>');
+				$(this).html('<a href="javascript:addTab(true,\'/sys/model/form/form_list3.jsp?model_id='+beanList.get(i-1).model_id+'\',\'内容模型字段\')">资源库字段设置</a>');
 			}
 		}
 	});
@@ -171,12 +171,12 @@ function addModel()
 
 	if(ModelRPC.insertModel(bean))
 	{
-		top.msgAlert("内容模型信息"+WCMLang.Add_success);			
+		msgAlert("内容模型信息"+WCMLang.Add_success);
 		locationModel();
 	}
 	else
 	{
-		top.msgWargin("内容模型信息"+WCMLang.Add_fail);
+		msgWargin("内容模型信息"+WCMLang.Add_fail);
 	}
 }
 //修改内容模型
@@ -197,12 +197,12 @@ function updateModel()
   
 	if(ModelRPC.updateModel(bean))
 	{
-		top.msgAlert("内容模型信息"+WCMLang.Add_success);			
+		msgAlert("内容模型信息"+WCMLang.Add_success);
 		locationModel();
 	}
 	else
 	{
-		top.msgWargin("内容模型信息"+WCMLang.Add_fail);
+		msgWargin("内容模型信息"+WCMLang.Add_fail);
 	}
 }
 
@@ -214,12 +214,12 @@ function saveModelSort()
 	{
 		if(ModelRPC.saveModelSort(model_ids))
 		{
-			top.msgAlert(WCMLang.Sort_success);
+			msgAlert(WCMLang.Sort_success);
 			reloadModelList();
 		}
 		else
 		{
-			top.msgWargin(WCMLang.Sort_fail);
+			msgWargin(WCMLang.Sort_fail);
 			return;
 		}
 	}
@@ -230,11 +230,11 @@ function updateModelDisabled(disabled_flag)
 	var selectIDS = table.getSelecteCheckboxValue("model_id");
 	if(ModelRPC.updateModelDisabled(selectIDS,disabled_flag))
 	{
-		top.msgAlert("模型状态"+WCMLang.Set_success);
+		msgAlert("模型状态"+WCMLang.Set_success);
 		reloadModelList();
 	}else
 	{
-		top.msgWargin("模型状态"+WCMLang.Set_fail);
+		msgWargin("模型状态"+WCMLang.Set_fail);
 		return;
 	}
 }
@@ -259,10 +259,10 @@ function deleteInfo()
 	if(jsonrpc.ModelRPC.deleteModel(selectIDS))
 	//if(true)
 	{
-		top.msgAlert("信息"+WCMLang.Delete_success);
+		msgAlert("信息"+WCMLang.Delete_success);
 		reloadModelList();
 	}else
 	{
-		top.msgWargin("信息"+WCMLang.Delete_fail);
+		msgWargin("信息"+WCMLang.Delete_fail);
 	}
 }

@@ -61,7 +61,7 @@ function showList(){
 
 function openViewMengPage(o_id)
 {
-	top.OpenModalWindow("查看权限信息","/sys/org/operate/operate_view.jsp?opt_id="+o_id,500,308);
+	OpenModalWindow("查看权限信息","/sys/org/operate/operate_view.jsp?opt_id="+o_id,500,308);
 }
 
 function showTurnPage(){	
@@ -73,13 +73,13 @@ function showTurnPage(){
 
 function openAddOperatePage()
 {
-	top.OpenModalWindow("维护权限","/sys/org/operate/operate_add.jsp?parentID="+opt_id,500,308);
+	OpenModalWindow("维护权限","/sys/org/operate/operate_add.jsp?parentID="+opt_id,500,308);
 }
 
 function openUpdateOperatePage()
 {
 	var selectIDS = table.getSelecteCheckboxValue("opt_id");
-	top.OpenModalWindow("维护权限","/sys/org/operate/operate_add.jsp?parentID="+opt_id+"&opt_id="+selectIDS,500,308);
+	OpenModalWindow("维护权限","/sys/org/operate/operate_add.jsp?parentID="+opt_id+"&opt_id="+selectIDS,500,308);
 }
 
 function addOperate()
@@ -96,14 +96,14 @@ function addOperate()
 	bean.parent_id = parent_id;
 	if(OperateRPC.insertOperate(bean))
 	{
-		top.msgAlert("权限信息"+WCMLang.Add_success);	
-		top.getCurrentFrameObj().changeOperateListTable(parent_id);
-		top.getCurrentFrameObj().insertOperateTree(bean.opt_id,bean.opt_name);
-		top.CloseModalWindow();
+		msgAlert("权限信息"+WCMLang.Add_success);
+		getCurrentFrameObj().changeOperateListTable(parent_id);
+		getCurrentFrameObj().insertOperateTree(bean.opt_id,bean.opt_name);
+		CloseModalWindow();
 	}
 	else
 	{
-		top.msgWargin("权限信息"+WCMLang.Add_fail);
+		msgWargin("权限信息"+WCMLang.Add_fail);
 	}
 }
 
@@ -127,14 +127,14 @@ function updateOperate()
 	
 	if(OperateRPC.updateOperate(bean))
 	{
-		top.msgAlert("权限信息"+WCMLang.Add_success);	
-		top.getCurrentFrameObj().changeOperateListTable(parent_id);
-		top.getCurrentFrameObj().updateOperateTree(bean.opt_id,bean.opt_name);
-		top.CloseModalWindow();
+		msgAlert("权限信息"+WCMLang.Add_success);
+		getCurrentFrameObj().changeOperateListTable(parent_id);
+		getCurrentFrameObj().updateOperateTree(bean.opt_id,bean.opt_name);
+		CloseModalWindow();
 	}
 	else
 	{
-		top.msgWargin("权限信息"+WCMLang.Add_fail);
+		msgWargin("权限信息"+WCMLang.Add_fail);
 	}
 }
 
@@ -149,12 +149,12 @@ function deleteOperate()
 	var selectIDS = table.getSelecteCheckboxValue("opt_id");
 	if(OperateRPC.deleteOperate(selectIDS))
 	{
-		top.msgAlert("权限信息"+WCMLang.Delete_success);
-		top.getCurrentFrameObj().changeOperateListTable(opt_id);
-		top.getCurrentFrameObj().deleteTreeNode(selectIDS);
+		msgAlert("权限信息"+WCMLang.Delete_success);
+		getCurrentFrameObj().changeOperateListTable(opt_id);
+		getCurrentFrameObj().deleteTreeNode(selectIDS);
 	}else
 	{
-		top.msgWargin("权限信息"+WCMLang.Delete_fail);
+		msgWargin("权限信息"+WCMLang.Delete_fail);
 	}
 }
 
@@ -181,12 +181,12 @@ function moveOperate(parent_id)
 	{
 		var selectIDS = table.getSelecteCheckboxValue("opt_id");			
 		if(OperateRPC.moveOperate(parent_id,selectIDS)){
-			top.msgAlert("权限"+WCMLang.Move_success);
+			msgAlert("权限"+WCMLang.Move_success);
 			loadOperateTable()
 			showOperateTree();
 		}else
 		{
-			top.msgWargin("权限"+WCMLang.Move_fail);
+			msgWargin("权限"+WCMLang.Move_fail);
 			return;
 		}
 	}
@@ -195,5 +195,5 @@ function moveOperate(parent_id)
 //打开权限选择窗口
 function openSelectSinglOperatePage(title,handl_name)
 {
-	top.OpenModalWindow(title,"/sys/org/operate/select_singl_operate.jsp?handl_name="+handl_name,450,510);
+	OpenModalWindow(title,"/sys/org/operate/select_singl_operate.jsp?handl_name="+handl_name,450,510);
 }

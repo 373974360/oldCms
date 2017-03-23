@@ -79,14 +79,14 @@ function showCategoryTree()
 {  
 	if(cat_type == "0")
 	{
-		json_data = eval(top.jsonrpc.CategoryRPC.getCategoryTreeBySiteID(site_id));
+		json_data = eval(jsonrpc.CategoryRPC.getCategoryTreeBySiteID(site_id));
 	}
 	else
 	{
-		json_data = eval(top.jsonrpc.CategoryRPC.getCategoryTreeByCategoryID(cat_id,site_id));
+		json_data = eval(jsonrpc.CategoryRPC.getCategoryTreeByCategoryID(cat_id,site_id));
 	}
 	
-	json_data = eval(top.jsonrpc.CategoryRPC.getCategoryTreeBySiteID(site_id));
+	json_data = eval(jsonrpc.CategoryRPC.getCategoryTreeBySiteID(site_id));
 	setLeftMenuTreeJsonData(json_data);
 	treeNodeSelected(cat_id);
 }

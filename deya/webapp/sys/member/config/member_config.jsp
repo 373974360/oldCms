@@ -17,8 +17,8 @@ $(document).ready(function(){
 	initButtomStyle();
 	init_input();
 	init();
-	init_editer_min("reg_pro");
-	init_editer_min("close_pro");
+	//init_editer_min("reg_pro");
+	//init_editer_min("close_pro");
 });
 
 </script>

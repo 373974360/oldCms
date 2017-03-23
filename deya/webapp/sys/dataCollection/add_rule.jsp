@@ -15,7 +15,7 @@
 <head>
 <title>数据采集-添加规则</title>
 <style type="text/css">
-.hover{ cursor: default;}	 
+.hover{ cursor: default;}
 </style>
 <link rel="stylesheet" type="text/css" href="../styles/themes/default/tree.css">
 <jsp:include page="../include/include_tools.jsp"/>
@@ -39,7 +39,7 @@ $(document).ready(function(){
 	initButtomStyle();
 	init_input();
 	init_FromTabsStyle();
-	
+
 	if(id != "" && id != "null" && id != null)
 	{
 		defaultBean = CollectionDataRPC.getCollRuleBeanByID(id);
@@ -68,9 +68,9 @@ $(document).ready(function(){
 
 //			$("#coll_interval").val(defaultBean.coll_interval);
 			if(defaultBean.coll_interval!=null&&defaultBean.coll_interval!="0"&&defaultBean.coll_interval!=""){
-				$("input[name='coll_intervalBox']").attr("checked",true); 
+				$("input[name='coll_intervalBox']").attr("checked",true);
 			}
-			
+
 			if(defaultBean.coll_url != "")
 			{
 				appendCollURL();
@@ -78,9 +78,9 @@ $(document).ready(function(){
 			$("input[type=radio][value="+defaultBean.pic_isGet+"]").attr("checked",'checked');
 			$("select[name=pageEncoding] option[value="+defaultBean.pageEncoding+"]").attr("selected","selected");
 			$("select[name=model_id] option[value="+defaultBean.model_id+"]").attr("selected","selected");
-//			$("select[name=timeFormatType] option[value="+defaultBean.timeFormatType+"]").attr("selected","selected");  
+//			$("select[name=timeFormatType] option[value="+defaultBean.timeFormatType+"]").attr("selected","selected");
 		}
-		$("#addButton").click(updateCollectionRule);	
+		$("#addButton").click(updateCollectionRule);
 	}else{
 		$("#addButton").click(addCollectionRule);
 	}
@@ -135,9 +135,9 @@ function initHandName()
 	addStartURL("saveStartURL");
 }
 
-</script> 
+</script>
 </head>
-  
+
 <body>
 <form id="form1" name="form1" action="#" method="post">
 <table class="table_form" id="collRuleTab">
@@ -212,22 +212,22 @@ function initHandName()
 				<tr>
 					<td style="font-size:13px;color:#32609E; text-align:left; width:15%">标签名</td>
 					<td style="font-size:13px;color:#32609E; text-align:center; width:20%">开始标签</td>
-					<td style="font-size:13px;color:#32609E; text-align:center; width:20%">结束标签</td>
+					<td style="font-size:13px;color:#32609E; text-align:center; width:20%">解析格式</td>
 				</tr>
 				<tr>
 					<th style="text-align:left">标&nbsp;&nbsp;&nbsp;题:</th>
 					<td><textarea style="width:300px; height:40px; resize:none;overflow-y:visible;" id="infotitle_start" name="infotitle_start" class="input_textarea" onblur="checkInputValue('infotitle_start',false,200,'标题开始规则','')"></textarea></td>
-					<td><textarea style="width:300px; height:40px; resize:none;overflow-y:visible;" id="infotitle_end" name="infotitle_end" class="input_textarea" onblur="checkInputValue('infotitle_end',false,200,'标题结束规则','')"></textarea></td>
+					<td><textarea style="width:300px; height:40px; resize:none;overflow-y:visible;" id="infotitle_end" name="infotitle_end" class="input_textarea" onblur="checkInputValue('infotitle_end',false,200,'标题结束规则','')" readonly>无需填写</textarea></td>
 				</tr>
 				<tr>
 					<th style="text-align:left">内&nbsp;&nbsp;&nbsp;容:</th>
 					<td><textarea style="width:300px; height:40px; resize:none;overflow-y:visible;" id="content_start" name="content_start" class="input_textarea" onblur="checkInputValue('content_start',false,200,'内容开始规则','')"></textarea></td>
-					<td><textarea style="width:300px; height:40px; resize:none;overflow-y:visible;" id="content_end" name="content_end" class="input_textarea" onblur="checkInputValue('content_end',false,200,'内容结束规则','')"></textarea></td>
+					<td><textarea style="width:300px; height:40px; resize:none;overflow-y:visible;" id="content_end" name="content_end" class="input_textarea" onblur="checkInputValue('content_end',false,200,'内容结束规则','')" readonly>无需填写</textarea></td>
 				</tr>
 				<tr>
 					<th style="text-align:left">作&nbsp;&nbsp;&nbsp;者:</th>
-					<td><textarea style="width:300px; height:40px; resize:none;overflow-y:visible;" id="author_start" name="author_start" class="input_textarea"></textarea></td>
-					<td><textarea style="width:300px; height:40px; resize:none;overflow-y:visible;" id="author_end" name="author_end" class="input_textarea"></textarea></td>
+					<td><textarea style="width:300px; height:40px; resize:none;overflow-y:visible;" id="author_start" name="author_start" class="input_textarea" placeholder="填写包含作者的最小Selector"></textarea></td>
+					<td><textarea style="width:300px; height:40px; resize:none;overflow-y:visible;" id="author_end" name="author_end" class="input_textarea" placeholder="用XXX 隔开前缀和后缀，如果没有前缀和后缀，写 XXX"></textarea></td>
 				</tr>
 				<tr>
                     <th style="text-align:left">文&nbsp;&nbsp;&nbsp;号:</th>
@@ -241,8 +241,8 @@ function initHandName()
 				</tr>
 				<tr>
 					<th style="text-align:left">来&nbsp;&nbsp;&nbsp;源:</th>
-					<td><textarea style="width:300px; height:40px; resize:none;overflow-y:visible;" id="source_start" name="source_start" class="input_textarea"></textarea></td>
-					<td><textarea style="width:300px; height:40px; resize:none;overflow-y:visible;" id="source_end" name="source_end" class="input_textarea"></textarea></td>
+					<td><textarea style="width:300px; height:40px; resize:none;overflow-y:visible;" id="source_start" name="source_start" class="input_textarea" placeholder="填写包含来源的最小Selector"></textarea></td>
+					<td><textarea style="width:300px; height:40px; resize:none;overflow-y:visible;" id="source_end" name="source_end" class="input_textarea" placeholder="用XXX 隔开前缀和后缀，如果没有前缀和后缀，写 XXX"></textarea></td>
 				</tr>
 				<tr>
 					<th style="text-align:left">关键字:</th>
@@ -268,7 +268,7 @@ function initHandName()
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" type="button" name="btn1" onclick="" value="保存" />
 			<input id="userAddReset" type="reset" name="btn1" value="重置" />
-			<input id="userAddCancel" type="button" name="btn1" onclick="top.tab_colseOnclick(top.curTabIndex);" value="取消">
+			<input id="userAddCancel" type="button" name="btn1" onclick="tab_colseOnclick(curTabIndex);" value="取消">
 		</td>
 	</tr>
 </table>

@@ -108,7 +108,7 @@
 function fnAddSurveyCategory()
 {
 	window.location.href = "add_surveyCategory.jsp?site_id="+site_id;
-	//top.OpenModalWindow("维护问卷分类","/sys/survey/add_surveyCategory.jsp",440,305);	
+	//OpenModalWindow("维护问卷分类","/sys/survey/add_surveyCategory.jsp",440,305);
 }
 
 function saveSurveyCategory()
@@ -145,27 +145,27 @@ function saveSurveyCategory()
 
 	if(bean.category_id.trim() == "")
 	{		
-		bean.add_user = top.LoginUserBean.user_id;
+		bean.add_user = LoginUserBean.user_id;
 		bean.site_id = site_id;
 		if(SurveyCategoryRPC.insertSurveyCategory(bean))
 		{
-			top.msgAlert("问卷分类"+WCMLang.Add_success);			
+			msgAlert("问卷分类"+WCMLang.Add_success);
 			window.location.href='surveyCategoryList.jsp?site_id='+site_id
 		}else
 		{
-			top.msgWargin("问卷分类"+WCMLang.Add_fail);
+			msgWargin("问卷分类"+WCMLang.Add_fail);
 		}
 	}
 	else
 	{
-		bean.update_user = top.LoginUserBean.user_id;
+		bean.update_user = LoginUserBean.user_id;
 		if(SurveyCategoryRPC.updateSurveyCategory(bean))
 		{
-			top.msgAlert("问卷分类"+WCMLang.Add_success);			
+			msgAlert("问卷分类"+WCMLang.Add_success);
 			window.location.href='surveyCategoryList.jsp?site_id='+site_id
 		}else
 		{
-			top.msgWargin("问卷分类"+WCMLang.Add_fail);
+			msgWargin("问卷分类"+WCMLang.Add_fail);
 		}
 	}
 }
@@ -180,13 +180,13 @@ function publishSurveyCategory(publish_status)
 	if(publish_status == -1)
 		message = "撤销";
 
-	if(SurveyCategoryRPC.updateSurveyCategoryPublishStatus(beanList.get(carent_cell_num).id,publish_status,top.LoginUserBean.user_id))
+	if(SurveyCategoryRPC.updateSurveyCategoryPublishStatus(beanList.get(carent_cell_num).id,publish_status,LoginUserBean.user_id))
 	{
-		top.msgAlert(message+"成功");		
+		msgAlert(message+"成功");
 		showList();	
 	}
 	else
-		top.msgWargin(message+"失败，请重新"+message);
+		msgWargin(message+"失败，请重新"+message);
 }
 
 function batchPublishSurveyCategory(publish_status)
@@ -197,13 +197,13 @@ function batchPublishSurveyCategory(publish_status)
 
 	var selectIDS = table.getSelecteCheckboxValue("id");
 	
-	if(SurveyCategoryRPC.updateSurveyCategoryPublishStatus(selectIDS,publish_status,top.LoginUserBean.user_id))
+	if(SurveyCategoryRPC.updateSurveyCategoryPublishStatus(selectIDS,publish_status,LoginUserBean.user_id))
 	{
-		top.msgAlert(WCMLang.Publish_success);		
+		msgAlert(WCMLang.Publish_success);
 		showList();	
 	}
 	else
-		top.msgWargin(WCMLang.Publish_fail);
+		msgWargin(WCMLang.Publish_fail);
 }
 /**********************发布操作　结束*************************************/
 
@@ -212,17 +212,17 @@ function deleteSurveyCategory(id)
 {
 	if(SurveyCategoryRPC.getSurveyCountByCategoryID(id) != 0)
 	{
-		top.msgWargin("该分类下有问卷记录<br>请先删除问卷记录再删除分类");
+		msgWargin("该分类下有问卷记录<br>请先删除问卷记录再删除分类");
 		return;
 	}
 
-	if(SurveyCategoryRPC.deleteSurveyCategory(id,top.LoginUserBean.user_id))
+	if(SurveyCategoryRPC.deleteSurveyCategory(id,LoginUserBean.user_id))
 	{
-		top.msgAlert("删除成功");		
+		msgAlert("删除成功");
 		reloadCategoryList();	
 	}
 	else
-		top.msgWargin("删除失败，请重新删除");
+		msgWargin("删除失败，请重新删除");
 }
 
 function batchDelSurveyCategory()
@@ -234,18 +234,18 @@ function batchDelSurveyCategory()
 	{
 		if(SurveyCategoryRPC.getSurveyCountByCategoryID(tempA[i]) != 0)
 		{
-			top.msgWargin("该分类下有问卷记录<br>请先删除问卷记录再删除分类");
+			msgWargin("该分类下有问卷记录<br>请先删除问卷记录再删除分类");
 			return;
 		}
 	}
 
 	if(selectIDS == "")
 	{
-		top.msgAlert("请选择要删除的记录");
+		msgAlert("请选择要删除的记录");
 		return;
 	}
 
-	parent.confirmN("确认删除选中记录？","batchDelSurveyCategoryHandl()");
+	confirmN("确认删除选中记录？","batchDelSurveyCategoryHandl()");
 }
 
 function batchDelSurveyCategoryHandl()
@@ -256,32 +256,32 @@ function batchDelSurveyCategoryHandl()
 	{
 		if(SurveyCategoryRPC.getSurveyCountByCategoryID(tempA[i]) != 0)
 		{
-			top.msgWargin("该分类下有问卷记录<br>请先删除问卷记录再删除分类");
+			msgWargin("该分类下有问卷记录<br>请先删除问卷记录再删除分类");
 			return;
 		}
 	}
 
-	if(SurveyCategoryRPC.deleteSurveyCategory(selectIDS,top.LoginUserBean.user_id))
+	if(SurveyCategoryRPC.deleteSurveyCategory(selectIDS,LoginUserBean.user_id))
 	{
-		top.msgAlert("问卷分类"+WCMLang.Delete_success);		
+		msgAlert("问卷分类"+WCMLang.Delete_success);
 		reloadCategoryList();	
 	}
 	else
-		top.msgWargin("问卷分类"+WCMLang.Delete_fail);
+		msgWargin("问卷分类"+WCMLang.Delete_fail);
 }
 /**********************删除操作　结束*************************************/
 
 /**********************修改操作　开始*************************************/
 function showUpdatePage(c_id)
 {
-	//top.OpenModalWindow("维护问卷分类","/sys/survey/add_surveyCategory.jsp?c_id="+c_id,440,305);
+	//OpenModalWindow("维护问卷分类","/sys/survey/add_surveyCategory.jsp?c_id="+c_id,440,305);
 	window.location.href = "/sys/survey/add_surveyCategory.jsp?c_id="+c_id+"&site_id="+site_id;
 }
 
 function fnUpdateSurveyCategory()
 {
 	var selectIDS = table.getSelecteCheckboxValue("category_id");	
-	//top.OpenModalWindow("维护问卷分类","/sys/survey/add_surveyCategory.jsp?c_id="+selectIDS,440,305);
+	//OpenModalWindow("维护问卷分类","/sys/survey/add_surveyCategory.jsp?c_id="+selectIDS,440,305);
 	window.location.href = "/sys/survey/add_surveyCategory.jsp?c_id="+selectIDS+"&site_id="+site_id;
 }
 /**********************修改操作　结束*************************************/

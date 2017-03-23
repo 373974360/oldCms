@@ -36,7 +36,7 @@
         var app = "<%=app_id%>";
         var cid = "<%=cid%>";
         var snum = "<%=snum%>";
-        var opt_ids = ","+top.getOptIDSByUser(app,site_id)+",";//登录人所拥有管理权限ID
+        var opt_ids = ","+getOptIDSByUser(app,site_id)+",";//登录人所拥有管理权限ID
         var gk_article = false;//特殊栏目标识，在政务公开中使用的是内容管理中的文章模型
 
         $(document).ready(function(){
@@ -187,7 +187,7 @@
 
         function openSendInfoPage()
         {
-            top.OpenModalWindow("信息报送","/sys/cms/info/article/getReceiveSite.jsp?site_id="+site_id+"&app_id="+app,570,420);
+            OpenModalWindow("信息报送","/sys/cms/info/article/getReceiveSite.jsp?site_id="+site_id+"&app_id="+app,570,420);
         }
 
         function getSelectInfoBeans()

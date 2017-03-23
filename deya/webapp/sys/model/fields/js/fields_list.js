@@ -140,16 +140,16 @@ function showTurnPage(){
 
 function openTabPage() 
 {  
-	//top.OpenModalWindow("维护站点","/sys/control/site/site_add.jsp?parentID="+site_id,500,360);
-	//alert('/sys/member2/onlinebook/bookList_add.jsp?parentID='+site_id+"&tab_index="+top.curTabIndex);
-	top.addTab(true,'/sys/model/fields/fields_add.jsp?tab_index='+top.curTabIndex,'添加元数据');
+	//OpenModalWindow("维护站点","/sys/control/site/site_add.jsp?parentID="+site_id,500,360);
+	//alert('/sys/member2/onlinebook/bookList_add.jsp?parentID='+site_id+"&tab_index="+curTabIndex);
+	addTab(true,'/sys/model/fields/fields_add.jsp?tab_index='+curTabIndex,'添加元数据');
 }
 
 function openTabPageUpdate(id) 
 {    
-	//top.OpenModalWindow("维护站点","/sys/control/site/site_add.jsp?parentID="+site_id,500,360);
-	//alert('/sys/member2/onlinebook/bookList_add.jsp?parentID='+site_id+"&tab_index="+top.curTabIndex);
-	top.addTab(true,'/sys/model/fields/fields_add.jsp?tab_index='+top.curTabIndex+"&id="+id+"&type=mod",'修改元数据');
+	//OpenModalWindow("维护站点","/sys/control/site/site_add.jsp?parentID="+site_id,500,360);
+	//alert('/sys/member2/onlinebook/bookList_add.jsp?parentID='+site_id+"&tab_index="+curTabIndex);
+	addTab(true,'/sys/model/fields/fields_add.jsp?tab_index='+curTabIndex+"&id="+id+"&type=mod",'修改元数据');
 }
 
 
@@ -160,12 +160,12 @@ function deleteInfo()
 	if(jsonrpc.FieldsRPC.deleteFields(selectIDS))
 	//if(true)
 	{
-		top.msgAlert("信息"+WCMLang.Delete_success);
+		msgAlert("信息"+WCMLang.Delete_success);
 		reloadList();
 	}else
 	{
-		//top.msgWargin("信息"+WCMLang.Delete_fail);
-		top.msgWargin("该元数据已被关联，不能删除");
+		//msgWargin("信息"+WCMLang.Delete_fail);
+		msgWargin("该元数据已被关联，不能删除");
 	}
 }
 

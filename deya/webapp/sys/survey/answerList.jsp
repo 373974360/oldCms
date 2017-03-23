@@ -31,7 +31,7 @@ function goOtherPage()
 
 function openSearch()
 {
-	top.OpenModalWindow("数据统计查询","/sys/survey/search_statistics.jsp?s_id="+s_id,800,490);
+	OpenModalWindow("数据统计查询","/sys/survey/search_statistics.jsp?s_id="+s_id,800,490);
 }
 
 

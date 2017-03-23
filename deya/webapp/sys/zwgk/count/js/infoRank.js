@@ -4,7 +4,7 @@ var pieJsonData = ""; // 点击选中的pie图的data数据
 
 // 打开选择节点的弹出窗口
 function openPage() {
-	top.OpenModalWindow("选择公开节点","/sys/zwgk/count/nodeSelected.jsp",725,525);
+	OpenModalWindow("选择公开节点","/sys/zwgk/count/nodeSelected.jsp",725,525);
 }
 
 // 设置选中的节点名称
@@ -49,17 +49,17 @@ function search()
 	start_day = $("#start_day").val();
 	end_day = $("#end_day").val();
 	if(start_day > end_day){
-	   top.msgWargin("结束时间不能在开始时间前!");
+	   msgWargin("结束时间不能在开始时间前!");
 	   return ;
 	}
 	if(start_day=="" || start_day==null || start_day=="null")
 	{
-		top.msgWargin("开始时间不能为空!");
+		msgWargin("开始时间不能为空!");
 		return;
 	}
 	if(end_day=="" || end_day==null || end_day=="null")
 	{
-		top.msgWargin("结束时间不能为空!");
+		msgWargin("结束时间不能为空!");
 		return;
 	}
 	end_day = end_day + " 23:59:59"
@@ -68,7 +68,7 @@ function search()
 	if(!is_all_node)
 	{
 		if(node_ids == "") {
-			top.msgWargin("公开节点不能为空,请选择公开节点!");
+			msgWargin("公开节点不能为空,请选择公开节点!");
 			return;
 		} 
 		mp.put("site_ids",node_ids);
@@ -221,7 +221,7 @@ function open_flash_chart_data() {
 // str+="<td><span onclick='openPieChart("+index+")'>"+"---"+"</span></td>"
 function openPieChart(index) {
 	pieJsonData = 	pieChartDataList.get(index);
-	top.OpenModalWindow("饼状图","/sys/zwgk/count/chart.html",475,470);
+	OpenModalWindow("饼状图","/sys/zwgk/count/chart.html",475,470);
 	
 }
 

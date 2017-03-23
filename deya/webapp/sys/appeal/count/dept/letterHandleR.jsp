@@ -99,7 +99,7 @@ $(document).ready(function(){
 	init_input();
 	if($.browser.msie&&$.browser.version=="6.0"&&$("html")[0].scrollHeight>$("html").height()) $("html").css("overflowY","scroll"); 
  
-    window.parent.setExcelOutUrl('${url}');
+    window.setExcelOutUrl('${url}');
 	//alert($("body").width());
 }); 
 
@@ -217,8 +217,8 @@ $(document).ready(function(){
 		}
 
 		function openCateInfo(dep_id,type) { 
-			//top.getCurrentFrameObj().pieJsonData = 	pieChartDataList.get(index);
-			top.OpenModalWindow("查看详细信息","/sys/appeal/count/dept/letter_list.jsp?dep_id="+dep_id+"&type="+type+"&b_ids="+list_b_ids+"&s="+list_s+"&e="+list_e,1000,600);	
+			//getCurrentFrameObj().pieJsonData = 	pieChartDataList.get(index);
+			OpenModalWindow("查看详细信息","/sys/appeal/count/dept/letter_list.jsp?dep_id="+dep_id+"&type="+type+"&b_ids="+list_b_ids+"&s="+list_s+"&e="+list_e,1000,600);
 		} 
 		
 </script>

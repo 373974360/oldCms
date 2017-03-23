@@ -56,9 +56,9 @@
 	</style>
 	<SCRIPT LANGUAGE="JavaScript">
 	<!--
-		var site_id = parent.site_id;
-		var id = parent.id;
-		var sub_id = parent.sub_id;
+		var site_id = site_id;
+		var id = id;
+		var sub_id = sub_id;
 		
 		var current_sysDialog = "";//需要修改记录的编辑器名称
 		var current_index_num = 0;//需要修改记录的集合下标
@@ -74,8 +74,8 @@
 			setDivHeight();
 
 			setActorSelect();
-			subjectBean = parent.subjectBean;
-			subjectCategory = parent.subjectCategory;			
+			subjectBean = subjectBean;
+			subjectCategory = subjectCategory;
 
 			isShowText();
 			getMessage();
@@ -88,7 +88,7 @@
 		function setDivHeight()
 		{
 			//首先得到网页可见高度
-			var page_height = parent.window_width-320;
+			var page_height = window_width-320;
 			
 			//如果高度太小，设置内容区域高最小为15px			
 			//if(page_height < 150)
@@ -99,7 +99,7 @@
 			$("#pic_text_editor").css("height",current_textarea_height);
 			
 			//加载完后，再得到内容区的高度，并计算出在线人员列表的高度
-			page_height = parent.window_width-418;
+			page_height = window_width-418;
 			
 			$("#c_user_list").css("height",page_height);			
 			setTimeout("setParentFrameHeight()",300);			
@@ -110,7 +110,7 @@
 			if(document.body.scrollHeight > document.body.clientHeight-55)
 			{
 				//高度太小，必须改变外层Iframe的高度，让IE出现滚动条
-				parent.setFrameHeight(window.name,parent.window_width-60);
+				setFrameHeight(window.name,window_width-60);
 			}
 		}
 		//修改文字显示窗口样式
@@ -177,7 +177,7 @@
 		//预告状态下，按发送按钮提示信息
 		function pointWargin()
 		{
-			parent.alertN("只有直播状态下的访谈主题才能执行发送操作");
+			alertN("只有直播状态下的访谈主题才能执行发送操作");
 		}
 
 		//得到历史视频

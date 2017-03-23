@@ -189,7 +189,7 @@ function showTurnPage(){
 //打开修改窗口
 function openUpdatePage(info_id,cat_id,site_ids)
 {
-	top.addTab(true,"/sys/cms/info/article/m_gk_gkzn.jsp?info_id="+info_id+"&cid="+cat_id+"&site_id="+site_ids+"&app_id="+app+"&topnum="+top.curTabIndex,"维护信息");	
+	addTab(true,"/sys/cms/info/article/m_gk_gkzn.jsp?info_id="+info_id+"&cid="+cat_id+"&site_id="+site_ids+"&app_id="+app+"&topnum="+curTabIndex,"维护信息");
 }
 
 function initTabAndStatus()
@@ -257,16 +257,16 @@ function clickLabelHandl(num)
 function openViewPage(i_id,site_ids)
 {
 	//window.location.href = "/sys/cms/info/article/infoView.jsp?info_id="+i_id+"&site_id="+site_id+"&snum="+snum;
-	top.addTab(true,"/sys/cms/info/article/infoView.jsp?info_id="+i_id+"&site_id="+site_ids+"&topnum="+top.curTabIndex,"查看信息");
+	addTab(true,"/sys/cms/info/article/infoView.jsp?info_id="+i_id+"&site_id="+site_ids+"&topnum="+curTabIndex,"查看信息");
 }
 
 //生成静态页面
 function createStaticContentHtml(){
 	var selectList = table.getSelecteBeans();
 	if(InfoBaseRPC.createContentHTML(selectList)){
-		top.msgAlert("静态页生成成功");		
+		msgAlert("静态页生成成功");
 	}else{
-		top.msgWargin("静态页生成失败");
+		msgWargin("静态页生成失败");
 	}
 }
 
@@ -274,10 +274,10 @@ function createStaticContentHtml(){
 function publishInfo(){
 	var selectList = table.getSelecteBeans();
 	if(InfoBaseRPC.updateInfoStatus(selectList,"8")){
-		top.msgAlert("信息发布成功");
+		msgAlert("信息发布成功");
 		reloadInfoDataList();
 	}else{
-		top.msgWargin("信息发布失败");
+		msgWargin("信息发布失败");
 	}
 }
 
@@ -285,10 +285,10 @@ function publishInfo(){
 function cancleInfo(){
 	var selectList = table.getSelecteBeans();
 	if(InfoBaseRPC.updateInfoStatus(selectList,"3")){
-		top.msgAlert("信息撤销成功");
+		msgAlert("信息撤销成功");
 		reloadInfoDataList();
 	}else{
-		top.msgWargin("信息撤销失败");
+		msgWargin("信息撤销失败");
 	}
 }
 
@@ -297,7 +297,7 @@ function searchInfo()
 {
 	var keywords = $("#searchkey").val();
 	if(keywords.trim() == "" ||  keywords == null){
-		top.msgAlert(WCMLang.Search_empty);
+		msgAlert(WCMLang.Search_empty);
 		return;
 	}
 	var orderFeilds = $("#orderByFields").val();
@@ -385,10 +385,10 @@ function doPublish(num){
 	var list = new List();
 	list.add(beanList.get(num));
 	if(InfoBaseRPC.updateInfoStatus(list,"8")){
-		top.msgAlert("信息发布成功");
+		msgAlert("信息发布成功");
 		reloadInfoDataList();
 	}else{
-		top.msgWargin("信息发布失败");
+		msgWargin("信息发布失败");
 	}
 }
 
@@ -397,9 +397,9 @@ function doCancel(num){
 	var list = new List();
 	list.add(beanList.get(num));
 	if(InfoBaseRPC.updateInfoStatus(list,"3")){
-		top.msgAlert("信息撤销成功");
+		msgAlert("信息撤销成功");
 		reloadInfoDataList();
 	}else{
-		top.msgWargin("信息撤销失败");
+		msgWargin("信息撤销失败");
 	}
 }

@@ -67,7 +67,7 @@ function showTurnPage(){
 //打开添加窗口
 function openAddGuestBookClassPage()
 {
-	top.OpenModalWindow("维护类别","/sys/appCom/guestbook/add_gbClass.jsp?cat_id="+cat_id+"&site_id="+site_id+"&="+top.curTabIndex,550,250);
+	OpenModalWindow("维护类别","/sys/appCom/guestbook/add_gbClass.jsp?cat_id="+cat_id+"&site_id="+site_id+"&="+curTabIndex,550,250);
 }
 
 //打开修改窗口
@@ -78,7 +78,7 @@ function openUpdateGuestBookClassPage(s_id)
 		id = s_id;
 	else
 		id = table.getSelecteCheckboxValue("class_id");
-	top.OpenModalWindow("维护类别","/sys/appCom/guestbook/add_gbClass.jsp?class_id="+id,550,250);
+	OpenModalWindow("维护类别","/sys/appCom/guestbook/add_gbClass.jsp?class_id="+id,550,250);
 }
 
 function insertGuestbookClass()
@@ -94,13 +94,13 @@ function insertGuestbookClass()
 	bean.cat_id = cat_id;
 	if(GuestBookRPC.insertGuestBookClass(bean))
 	{
-		top.msgAlert("留言类别"+WCMLang.Add_success);
-		top.getCurrentFrameObj().reloadList();
-		top.CloseModalWindow();
+		msgAlert("留言类别"+WCMLang.Add_success);
+		getCurrentFrameObj().reloadList();
+		CloseModalWindow();
 	}
 	else
 	{
-		top.msgWargin("留言类别"+WCMLang.Add_fail);
+		msgWargin("留言类别"+WCMLang.Add_fail);
 	}
 }
 
@@ -117,13 +117,13 @@ function updateGuestbookClass()
 	bean.class_id = class_id;
 	if(GuestBookRPC.updateGuestBookClass(bean))
 	{
-		top.msgAlert("留言类别"+WCMLang.Add_success);
-		top.getCurrentFrameObj().reloadList();
-		top.CloseModalWindow();
+		msgAlert("留言类别"+WCMLang.Add_success);
+		getCurrentFrameObj().reloadList();
+		CloseModalWindow();
 	}
 	else
 	{
-		top.msgWargin("留言类别"+WCMLang.Add_fail);
+		msgWargin("留言类别"+WCMLang.Add_fail);
 	}
 }
 
@@ -135,11 +135,11 @@ function deleteGuestBookClass()
 	
 	if(GuestBookRPC.deleteGuestBookClass(m))
 	{
-		top.msgAlert("留言类别"+WCMLang.Delete_success);
+		msgAlert("留言类别"+WCMLang.Delete_success);
 		reloadList();
 	}else
 	{
-		top.msgWargin("留言类别"+WCMLang.Delete_fail);
+		msgWargin("留言类别"+WCMLang.Delete_fail);
 	}
 }
 
@@ -152,11 +152,11 @@ function publishGuestBookClass(publish_status)
 	m.put("publish_status",publish_status);
 	if(GuestBookRPC.publishGuestBookClass(m))
 	{
-		top.msgAlert("留言类别"+WCMLang.Publish_success);
+		msgAlert("留言类别"+WCMLang.Publish_success);
 		reloadList();
 	}else
 	{
-		top.msgWargin("留言类别"+WCMLang.Publish_fail);
+		msgWargin("留言类别"+WCMLang.Publish_fail);
 	}
 }
 
@@ -165,10 +165,10 @@ function sortGuestBookClass()
 	var selectIDS = table.getAllCheckboxValue("class_id");
 	if(GuestBookRPC.sortGuestBookClass(selectIDS))
 	{
-		top.msgAlert(WCMLang.Sort_success);
+		msgAlert(WCMLang.Sort_success);
 		reloadList();
 	}else
 	{
-		top.msgWargin(WCMLang.Sort_fail);
+		msgWargin(WCMLang.Sort_fail);
 	}
 }

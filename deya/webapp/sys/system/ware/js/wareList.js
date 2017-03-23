@@ -87,7 +87,7 @@ function showList()
 		if(i>0)
 		{
 			var str = "";
-			str += '<span onclick="javascript:top.msgConfirm(WCMLang.Delete_confirm, \'deleteWareByIndex('+(i-1)+')\')" style="cursor : pointer"> 删除</span>&#160;&#160;';
+			str += '<span onclick="javascript:msgConfirm(WCMLang.Delete_confirm, \'deleteWareByIndex('+(i-1)+')\')" style="cursor : pointer"> 删除</span>&#160;&#160;';
 			str += '<span onclick="openHistoryWareVer(\''+beanList.get(i-1).ware_id+'\',\''+beanList.get(i-1).site_id+'\')" style="cursor:pointer;">历史版本</span>&#160;&#160;&#160;';
 			$(this).html(getSortColStr()+str);
 		}
@@ -112,7 +112,7 @@ function showTurnPage()
 
 function openHistoryWareVer(ware_id,site_id)
 {
-	top.OpenModalWindow("标签历史版本","/sys/system/ware/wareDataVerList.jsp?wareid="+ware_id+"&siteid="+site_id+"&appid="+app_id,1000,530);
+	OpenModalWindow("标签历史版本","/sys/system/ware/wareDataVerList.jsp?wareid="+ware_id+"&siteid="+site_id+"&appid="+app_id,1000,530);
 }
 
 // 保存排序button事件
@@ -121,11 +121,11 @@ function saveSort()
 	var ids = table.getAllCheckboxValue("id");
 	if(WareRPC.savaWareSort(ids))
 	{
-		top.msgAlert(WCMLang.Sort_success);
+		msgAlert(WCMLang.Sort_success);
 	}
 	else
 	{
-		top.msgWargin(WCMLang.Sort_fail);
+		msgWargin(WCMLang.Sort_fail);
 	}
 }
 
@@ -137,12 +137,12 @@ function deleteWareByIndex(index)
 	con_m.put("site_id", site_id);
 	if(WareRPC.deleteWare(con_m))
 	{
-		top.msgAlert("信息标签"+WCMLang.Delete_success);
+		msgAlert("信息标签"+WCMLang.Delete_success);
 		loadWareTable();
 	}
 	else
 	{
-		top.msgWargin("信息标签"+WCMLang.Delete_fail);
+		msgWargin("信息标签"+WCMLang.Delete_fail);
 	}
 	con_m.remove("id");
 }
@@ -155,12 +155,12 @@ function deleteWareByIDS()
 	con_m.put("site_id", site_id);
 	if(WareRPC.deleteWare(con_m))
 	{
-		top.msgAlert("信息标签"+WCMLang.Delete_success);
+		msgAlert("信息标签"+WCMLang.Delete_success);
 		loadWareTable();
 	}
 	else
 	{
-		top.msgWargin("信息标签"+WCMLang.Delete_fail);
+		msgWargin("信息标签"+WCMLang.Delete_fail);
 	}
 	con_m.remove("id");
 }
@@ -170,7 +170,7 @@ function openAddPage()
 {
 	if(id == 0)
 	{
-		top.msgWargin("请先选择标签分类");
+		msgWargin("请先选择标签分类");
 		return;
 	}
 	window.location.href  = "/sys/system/ware/wareAdd.jsp?site_id="+site_id+"&type=add&app_id="+app_id+"&wcat_id="+id;
@@ -212,12 +212,12 @@ function saveAddWare()
 	addBean.ware_content = editAreaLoader.getValue();
 	if(WareRPC.insertWare(addBean))
 	{
-		top.msgAlert("信息标签"+WCMLang.Add_success);
+		msgAlert("信息标签"+WCMLang.Add_success);
 		backWareList();
 	}
 	else
 	{
-		top.msgWargin("信息标签"+WCMLang.Add_fail);
+		msgWargin("信息标签"+WCMLang.Add_fail);
 	}
 }
 
@@ -236,19 +236,19 @@ function saveUpdateWare()
 	//var recoveryType="update";
 	if(WareRPC.updateWare(updateBean))
 	{
-		top.msgAlert("信息标签"+WCMLang.Set_success);
+		msgAlert("信息标签"+WCMLang.Set_success);
 		backWareList();
 	}
 	else
 	{
-		top.msgWargin("信息标签"+WCMLang.Set_fail);
+		msgWargin("信息标签"+WCMLang.Set_fail);
 	}
 }
 
 function movWares(){
 	var arrIDS = table.getSelecteCheckboxValue("id");
 	
-	top.OpenModalWindow("新建标签分类","/sys/system/ware/mov_wares.jsp?ids="+arrIDS+"&site_id="+site_id,500,508);
+	OpenModalWindow("新建标签分类","/sys/system/ware/mov_wares.jsp?ids="+arrIDS+"&site_id="+site_id,500,508);
 }
 
 function updateMove(ids,cid){
@@ -258,11 +258,11 @@ function updateMove(ids,cid){
 	
 	if(WareRPC.moveWareToOtherCategory(tmap))
 	{
-		top.msgAlert("标签转移成功");
+		msgAlert("标签转移成功");
 	}
 	else
 	{
-		top.msgWargin("标签转移失败");
+		msgWargin("标签转移失败");
 	}
 }
 
@@ -271,8 +271,8 @@ function createWareContentHtml()
 	var arrIDS = table.getSelecteCheckboxValue("ware_id");
 	if(WareRPC.createHtmlPageMutil(arrIDS,site_id))
 	{
-		top.msgAlert("静态页生成成功");		
+		msgAlert("静态页生成成功");
 	}else{
-		top.msgWargin("静态页生成失败,请重新生成");
+		msgWargin("静态页生成失败,请重新生成");
 	}
 }

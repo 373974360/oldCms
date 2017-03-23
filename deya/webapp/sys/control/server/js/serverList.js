@@ -89,7 +89,7 @@ function showTurnPage(){
 
 //打开添加页面
 function openAddPage(){ 
-	top.OpenModalWindow("维护服务器","/sys/control/server/server_add.jsp",500,320);
+	OpenModalWindow("维护服务器","/sys/control/server/server_add.jsp",500,320);
 }
 
 
@@ -104,13 +104,13 @@ function funAdd(){
 	
 	if(SiteServerRPC.insertSiteServer(SiteServerBean))
 	{
-		top.msgAlert("服务器信息"+WCMLang.Add_success);
-		top.CloseModalWindow();
-		top.getCurrentFrameObj().reloadServerDataList();
+		msgAlert("服务器信息"+WCMLang.Add_success);
+		CloseModalWindow();
+		getCurrentFrameObj().reloadServerDataList();
 	}
 	else
 	{
-		top.msgWargin("服务器信息"+WCMLang.Add_fail);
+		msgWargin("服务器信息"+WCMLang.Add_fail);
 	}
 }
 
@@ -118,13 +118,13 @@ function funAdd(){
 //打开修改页面
 function openUpdatePage(){
 	var selectIDS = table.getSelecteCheckboxValue("server_id");
-	top.OpenModalWindow("维护服务器","/sys/control/server/server_add.jsp?server_id="+selectIDS,500,320);
+	OpenModalWindow("维护服务器","/sys/control/server/server_add.jsp?server_id="+selectIDS,500,320);
 }
 
 //打开查看页面
 function openViewPage(s_id)
 {  
-	top.OpenModalWindow("查看服务器信息","/sys/control/server/server_view.jsp?server_id="+s_id,500,320);
+	OpenModalWindow("查看服务器信息","/sys/control/server/server_view.jsp?server_id="+s_id,500,320);
 }
 
 //修改
@@ -139,13 +139,13 @@ function funUpdate(){
 	
 	if(SiteServerRPC.updateSiteServer(SiteServerBean))
 	{
-		top.msgAlert("服务器信息"+WCMLang.Add_success);
-		top.CloseModalWindow();
-		top.getCurrentFrameObj().reloadServerDataList();
+		msgAlert("服务器信息"+WCMLang.Add_success);
+		CloseModalWindow();
+		getCurrentFrameObj().reloadServerDataList();
 	}
 	else
 	{
-		top.msgWargin("服务器信息"+WCMLang.Add_fail);
+		msgWargin("服务器信息"+WCMLang.Add_fail);
 	}
 }
 
@@ -155,11 +155,11 @@ function funDelete(){
 	var selectIDS = table.getSelecteCheckboxValue("server_id");
 	
 	if(SiteServerRPC.deleteSiteServer(selectIDS)){
-		top.msgAlert("服务器信息"+WCMLang.Delete_success);
-		top.getCurrentFrameObj().reloadServerDataList(); 
+		msgAlert("服务器信息"+WCMLang.Delete_success);
+		getCurrentFrameObj().reloadServerDataList();
 	}else
 	{
-		top.msgWargin("服务器信息"+WCMLang.Delete_fail);
+		msgWargin("服务器信息"+WCMLang.Delete_fail);
 	}
 }
 

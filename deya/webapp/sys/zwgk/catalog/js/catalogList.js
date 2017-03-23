@@ -81,17 +81,17 @@ function showTurnPage(){
 
 function openCatalogAction(c_id)
 {
-	top.addTab(true,"/sys/zwgk/catalog/catalogMain.jsp?top_index="+top.curTabIndex+"&parentID="+c_id,"目录管理");
+	addTab(true,"/sys/zwgk/catalog/catalogMain.jsp?top_index="+curTabIndex+"&parentID="+c_id,"目录管理");
 }
 
 function openAddCatalogPage()
 {
-	top.addTab(true,"/sys/zwgk/catalog/catalog_add.jsp?top_index="+top.curTabIndex+"&parentID="+cata_id,"维护目录");
+	addTab(true,"/sys/zwgk/catalog/catalog_add.jsp?top_index="+curTabIndex+"&parentID="+cata_id,"维护目录");
 }
 //打开规则选择窗口
 function openSelectRegulation(c_id)
 {
-	top.OpenModalWindow("信息汇聚规则设置","/sys/zwgk/catalog/set_regulation.jsp?cata_id="+c_id,860,600);
+	OpenModalWindow("信息汇聚规则设置","/sys/zwgk/catalog/set_regulation.jsp?cata_id="+c_id,860,600);
 }
 
 function openUpdateCatalogPage(cid)
@@ -102,7 +102,7 @@ function openUpdateCatalogPage(cid)
 	else
 		id = table.getSelecteCheckboxValue("cata_id");
 
-	top.addTab(true,"/sys/zwgk/catalog/catalog_add.jsp?top_index="+top.curTabIndex+"&parentID="+cata_id+"&cata_id="+id,"维护目录");
+	addTab(true,"/sys/zwgk/catalog/catalog_add.jsp?top_index="+curTabIndex+"&parentID="+cata_id+"&cata_id="+id,"维护目录");
 }
 
 //添加目录
@@ -122,19 +122,19 @@ function addCatalog()
 	
 	if(AppCatalogRPC.insertGKAppCatelog(bean))
 	{	
-		top.msgAlert("目录信息"+WCMLang.Add_success);		
-		top.getCurrentFrameObj(top_index).reloadCatalogList();	
+		msgAlert("目录信息"+WCMLang.Add_success);
+		getCurrentFrameObj(top_index).reloadCatalogList();
 		if(page_type == "")
 		{
 			try{
-				top.getCurrentFrameObj(top_index).insertCatalogTree(bean.cata_id,bean.cata_cname);
+				getCurrentFrameObj(top_index).insertCatalogTree(bean.cata_id,bean.cata_cname);
 			}catch(e){}
 		}
-		top.tab_colseOnclick(top.curTabIndex);
+		tab_colseOnclick(curTabIndex);
 	}
 	else
 	{
-		top.msgWargin("目录信息"+WCMLang.Add_fail);
+		msgWargin("目录信息"+WCMLang.Add_fail);
 	}
 }
 
@@ -152,17 +152,17 @@ function updateCatalog()
 		
 	if(AppCatalogRPC.updateGKAppCatelog(bean))
 	{	
-		top.msgAlert("目录信息"+WCMLang.Add_success);		
-		top.getCurrentFrameObj(top_index).reloadCatalogList();	
+		msgAlert("目录信息"+WCMLang.Add_success);
+		getCurrentFrameObj(top_index).reloadCatalogList();
 		if(page_type == "")
 		{
-			top.getCurrentFrameObj(top_index).updateCatalogTree(bean.cata_id,bean.cata_cname);
+			getCurrentFrameObj(top_index).updateCatalogTree(bean.cata_id,bean.cata_cname);
 		}
-		top.tab_colseOnclick(top.curTabIndex);
+		tab_colseOnclick(curTabIndex);
 	}
 	else
 	{
-		top.msgWargin("目录信息"+WCMLang.Add_fail);
+		msgWargin("目录信息"+WCMLang.Add_fail);
 	}
 }
 
@@ -171,11 +171,11 @@ function sortCatalog()
 	var selectIDS = table.getAllCheckboxValue("cata_id");
 	if(AppCatalogRPC.sortGKAppCatelog(selectIDS))
 	{
-		top.msgAlert(WCMLang.Sort_success);
+		msgAlert(WCMLang.Sort_success);
 		//showCatalogTree();
 	}else
 	{
-		top.msgWargin(WCMLang.Sort_fail);
+		msgWargin(WCMLang.Sort_fail);
 	}
 }
 
@@ -185,12 +185,12 @@ function deleteCatalog()
 
 	if(AppCatalogRPC.deleteGKAppCatelog(selectIDS))
 	{
-		top.msgAlert("目录信息"+WCMLang.Delete_success);
+		msgAlert("目录信息"+WCMLang.Delete_success);
 		reloadCatalogList();
 		deleteTreeNode(selectIDS);
 	}else
 	{
-		top.msgWargin("目录信息"+WCMLang.Delete_fail);
+		msgWargin("目录信息"+WCMLang.Delete_fail);
 	}
 }
 
@@ -200,12 +200,12 @@ function copyShareCategory(c_id)
 {
 	if(AppCatalogRPC.copyShareCategory(cata_id,c_id))
 	{
-		top.msgAlert("目录"+WCMLang.Add_success);
+		msgAlert("目录"+WCMLang.Add_success);
 		reloadCatalogList();
 		showCatalogTree();
 	}else
 	{
-		top.msgWargin("目录"+WCMLang.Add_fail);
+		msgWargin("目录"+WCMLang.Add_fail);
 		return;
 	}
 } 
@@ -217,13 +217,13 @@ function moveCatalog(parent_id)
 	{
 		var selectIDS = table.getSelecteCheckboxValue("cata_id");			
 		if(AppCatalogRPC.moveGKAppCatelog(parent_id,selectIDS)){
-			top.msgAlert("目录"+WCMLang.Move_success);
+			msgAlert("目录"+WCMLang.Move_success);
 			cata_id = root_cata_id;
 			reloadCatalogList();
 			showCatalogTree();
 		}else
 		{
-			top.msgWargin("目录"+WCMLang.Move_fail);
+			msgWargin("目录"+WCMLang.Move_fail);
 			return;
 		}
 	}

@@ -101,16 +101,16 @@ creat_dtime=creat_dtime.replaceAll("%20"," ");
 		 var isCorrect = jsonrpc.TemplateRPC.updateUploadTemplateFile(objPath.att_path,t_id,site_id,t_cname,modify_dtime,t_ename,creat_dtime,id,modify_user,tcat_id,t_path,app_id,t_ver,creat_user);
 						if(isCorrect)
 						{ 
-							 top.msgAlert("模板"+WCMLang.Add_success);			
-							 top.CloseModalWindow();  // 模态用此方法 关闭模态窗口
-							 top.getCurrentFrameObj().reloadTemplateDataList();// 模态用此方法刷新父窗口
+							 msgAlert("模板"+WCMLang.Add_success);
+							 CloseModalWindow();  // 模态用此方法 关闭模态窗口
+							 getCurrentFrameObj().reloadTemplateDataList();// 模态用此方法刷新父窗口
                             // 本页面刷新窗口
 							//window.location.href = "/sys/system/template/templateCategoryList.jsp?tid="+tcat_id+"&site_id="+site_id;
 						     
 						}
 						else
 						{ 
-							top.msgWargin("请重新上传！模板"+WCMLang.Add_fail);
+							msgWargin("请重新上传！模板"+WCMLang.Add_fail);
 						} 
 			}
 	   });  
@@ -140,7 +140,7 @@ creat_dtime=creat_dtime.replaceAll("%20"," ");
 <table class="table_option" border="0" cellpadding="0" cellspacing="0">
 	<tr>
 		<td align="left" valign="middle" style="text-indent:100px;">
-			<input id="addButton" name="btn1" type="button" onclick="top.CloseModalWindow();" value="关闭" />	
+			<input id="addButton" name="btn1" type="button" onclick="CloseModalWindow();" value="关闭" />
 		</td>
 	</tr>
 </table>

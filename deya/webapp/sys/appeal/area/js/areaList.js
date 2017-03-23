@@ -49,7 +49,7 @@ function showList(){
 //修改页面
 function openNameUpdateAreaPage(area_id,parent_id)
 {
-	  top.OpenModalWindow("维护地区","/sys/appeal/area/area_add.jsp?parentID="+parent_id+"&area_id="+area_id,450,130);
+	  OpenModalWindow("维护地区","/sys/appeal/area/area_add.jsp?parentID="+parent_id+"&area_id="+area_id,450,130);
 }
 function showTurnPage(){					
 	tp.show("turn","simple");	
@@ -58,7 +58,7 @@ function showTurnPage(){
 //新增页面
 function openAddAreaPage()
 {
-	top.OpenModalWindow("维护地区","/sys/appeal/area/area_add.jsp?parentID="+area_id,450,130);
+	OpenModalWindow("维护地区","/sys/appeal/area/area_add.jsp?parentID="+area_id,450,130);
 }
 
 //执行新增
@@ -80,14 +80,14 @@ function addArea()
 	bean.area_level = child_arealevel;
 	if(AreaRPC.insertArea(bean))
 	{  
-		top.msgAlert("地区信息"+WCMLang.Add_success);	
-		top.getCurrentFrameObj().changeAreaListTable(parent_id);
-		top.getCurrentFrameObj().insertAreaTree(bean.area_id,bean.area_cname);
-		top.CloseModalWindow();
+		msgAlert("地区信息"+WCMLang.Add_success);
+		getCurrentFrameObj().changeAreaListTable(parent_id);
+		getCurrentFrameObj().insertAreaTree(bean.area_id,bean.area_cname);
+		CloseModalWindow();
 	}
 	else
 	{  
-		top.msgWargin("地区信息"+WCMLang.Add_fail);
+		msgWargin("地区信息"+WCMLang.Add_fail);
 	}
 }
 
@@ -102,7 +102,7 @@ function insertAreaTree(id,dept_name)
 function openUpdateAreaPage()
 {
 	var selectIDS = table.getSelecteCheckboxValue("area_id");
-	  top.OpenModalWindow("维护地区","/sys/appeal/area/area_add.jsp?parentID="+area_id+"&area_id="+selectIDS,450,130);
+	  OpenModalWindow("维护地区","/sys/appeal/area/area_add.jsp?parentID="+area_id+"&area_id="+selectIDS,450,130);
 }
 
 
@@ -121,16 +121,16 @@ function updateArea()
 	 
 	if(AreaRPC.updateArea(bean))
 	{  
-		top.msgAlert("地区信息"+WCMLang.Add_success);	
+		msgAlert("地区信息"+WCMLang.Add_success);
 		 
-		 top.getCurrentFrameObj().changeAreaListTable(parent_id);
+		 getCurrentFrameObj().changeAreaListTable(parent_id);
 		 
-		 top.getCurrentFrameObj().updateAreaTree(bean.area_id,bean.area_cname);
+		 getCurrentFrameObj().updateAreaTree(bean.area_id,bean.area_cname);
 		 
 	 
-		top.CloseModalWindow();
+		CloseModalWindow();
 	}else{
-		top.msgWargin("地区信息"+WCMLang.Add_fail);
+		msgWargin("地区信息"+WCMLang.Add_fail);
 	}
 }
 
@@ -146,12 +146,12 @@ function deleteArea()
 	var selectIDS = table.getSelecteCheckboxValue("area_id");
 	if(AreaRPC.deleteArea(selectIDS))
 	{
-		top.msgAlert("地区信息"+WCMLang.Delete_success);
-		top.getCurrentFrameObj().changeAreaListTable(area_id);
-		top.getCurrentFrameObj().deleteTreeNode(selectIDS);
+		msgAlert("地区信息"+WCMLang.Delete_success);
+		getCurrentFrameObj().changeAreaListTable(area_id);
+		getCurrentFrameObj().deleteTreeNode(selectIDS);
 	}else
 	{
-		top.msgWargin("地区信息"+WCMLang.Delete_fail);
+		msgWargin("地区信息"+WCMLang.Delete_fail);
 	}
 }
 //节点排序
@@ -160,15 +160,15 @@ function saveAreaSort()
 	var selectIDS = table.getAllCheckboxValue("area_id");
 	if(AreaRPC.saveAreaSort(selectIDS))
 	{
-		top.msgAlert(WCMLang.Sort_success);
+		msgAlert(WCMLang.Sort_success);
 		showAreaTree();	 
 	}else
 	{  
-		top.msgWargin(WCMLang.Sort_fail);
+		msgWargin(WCMLang.Sort_fail);
 	}
 }
 //打开权限选择窗口
 /*function openSelectSinglAreaPage(title,handl_name)
 {
-	top.OpenModalWindow(title,"/sys/org/Area/select_singl_Area.jsp?handl_name="+handl_name,450,510);
+	OpenModalWindow(title,"/sys/org/Area/select_singl_Area.jsp?handl_name="+handl_name,450,510);
 }*/

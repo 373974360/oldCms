@@ -58,7 +58,7 @@ String site_id = request.getParameter("site_id");
 		}
 		else
 		{
-			top.msgWargin("请输入时间范围");
+			msgWargin("请输入时间范围");
 		}
 		var category_name = "";
 		var category_ids = "";
@@ -74,7 +74,7 @@ String site_id = request.getParameter("site_id");
 
 		if(category_ids == "")
 		{
-			top.msgWargin("请选择问卷分类");
+			msgWargin("请选择问卷分类");
 			return;
 		}
 		window.location.href = "surveyCountDetail.jsp?site_id="+site_id+"&st="+s_time.substring(0,10)+"&et="+e_time.substring(0,10)+"&cn="+$("#count_num").val()+"&ids="+category_ids+"&na="+category_name+"&tt="+$("#time_type").val();

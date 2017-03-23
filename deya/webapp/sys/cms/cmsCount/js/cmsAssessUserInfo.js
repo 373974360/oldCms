@@ -17,22 +17,22 @@ var chartJsonData = ""; // bar图时的json字符串
 function showList(){
 	
 	//得到父页面中设置的参数 --- start
-	//var start_day = top.getCurrentFrameObj().$("#start_day").val();
-	//var end_day = top.getCurrentFrameObj().$("#end_day").val();
+	//var start_day = getCurrentFrameObj().$("#start_day").val();
+	//var end_day = getCurrentFrameObj().$("#end_day").val();
 	
 	var mp = new Map();
 	/*
 	// 不包含引用信息
-	if(!top.getCurrentFrameObj().$("#ref_info").is(':checked')){
+	if(!getCurrentFrameObj().$("#ref_info").is(':checked')){
 		// 不包含引用也不包含链接信息
-		if(!top.getCurrentFrameObj().$("#link_info").is(':checked')){
+		if(!getCurrentFrameObj().$("#link_info").is(':checked')){
 			mp.put("is_host","0");
 		}else{ // 不包含引用,包含连接
 			mp.put("is_host","0,2");
 		}
 	} else {
 		// 包含引用,不包含连接
-		if(!top.getCurrentFrameObj().$("#link_info").is(':checked')){
+		if(!getCurrentFrameObj().$("#link_info").is(':checked')){
 			mp.put("is_host","0,1");
 		}else{	// 包含引用和连接
 			mp.remove("is_host");
@@ -40,13 +40,13 @@ function showList(){
 	}*/
 	
 	// 判断栏目选择信息
-	//var statu = top.getCurrentFrameObj().$("#all_cat_ids").is(':checked');
+	//var statu = getCurrentFrameObj().$("#all_cat_ids").is(':checked');
 	//if(statu) {
 		
 	//}else{
-		//selected_ids = top.getCurrentFrameObj().selected_ids;
+		//selected_ids = getCurrentFrameObj().selected_ids;
 		if(selected_ids == ""){
-			//top.msgWargin("目录信息不能为空!");
+			//msgWargin("目录信息不能为空!");
 			//return;
 		}else{
 			mp.put("cat_ids",selected_ids);
@@ -83,9 +83,6 @@ function createTable(){
     "   <th width='30%'>栏目</th>		" +
     "   <th width='20%'>全部信息</th>       " +
     "   <th width='15%'>已发信息</th>   " +
-    "   <th width='15%'>待审信息</th>   " +
-    "   <th width='15%'>退稿信息</th>   " +
-    "   <th width='15%'>草稿信息</th>   " +
     "   <th width='15%'>图片信息</th>   " +
     "	<th width='20%'><nobr>发稿率</nobr></th> " +
     " </tr>" +
@@ -114,9 +111,6 @@ function stuffTable(bean){
 	treeHtml+="<tr> <td><span class='file'>"+ bean.cat_name +"</span></td>";
     treeHtml += "<td>"+ bean.inputCount +"</td>";
     treeHtml += "<td>"+ bean.releasedCount +"</td>";
-    treeHtml += "<td>"+ bean.checkCount +"</td>";
-    treeHtml += "<td>"+ bean.backCount +"</td>";
-    treeHtml += "<td>"+ bean.caogaoCount +"</td>";
     treeHtml += "<td>"+ bean.picReleasedCount +"</td>";
     treeHtml += "<td>"+ bean.releaseRate +"%</td>";
     // treeHtml += "<td  align='left'><span onclick='openPieChart("+bean.input_user+")'>"+ "查看"+"</span></td>";
@@ -126,8 +120,8 @@ function stuffTable(bean){
 }
 
 function openPieChart(input_user) {
-	//top.getCurrentFrameObj().pieJsonData = 	pieChartDataList.get(index);
-	top.OpenModalWindow("查看详细信息","/sys/zwgk/count/chart.html",475,470);
+	//getCurrentFrameObj().pieJsonData = 	pieChartDataList.get(index);
+	OpenModalWindow("查看详细信息","/sys/zwgk/count/chart.html",475,470);
 	
 }
 
@@ -210,13 +204,10 @@ function createTableCate(){
 	var treeHtmls = "<thead>" +
     "<tr> " +
     "   <th width='30%'>栏目</th>		" +
-    "   <th width='10%'>全部信息</th>       " +
-    "   <th width='10%'>已发信息</th>   " +
-    "   <th width='10%'>待审信息</th>   " +
-    "   <th width='10%'>退稿信息</th>   " +
-    "   <th width='10%'>草稿信息</th>   " +
-    "   <th width='10%'>图片信息</th>   " +
-    "	<th width='10%'>发稿率</th> " +
+    "   <th width='20%'>全部信息</th>       " +
+    "   <th width='15%'>已发信息</th>   " +
+    "   <th width='15%'>图片信息</th>   " +
+    "	<th width='20%'>发稿率</th> " +
     " </tr>" +
     "</thead>" +
     "<tbody>" ;
@@ -334,18 +325,12 @@ function setHandlList(bean)
 		{
 			str+="<td><a href=\"javascript:openUInfoList("+bean.cat_id+")\"><div style='color:red;'>"+bean.inputCount+"</div></a></td>";
 			str+="<td>"+bean.releasedCount+"</td>";
-            str+="<td>"+bean.checkCount+"</td>";
-            str+="<td>"+bean.backCount+"</td>";
-            str+="<td>"+bean.caogaoCount+"</td>";
-            str+="<td>"+bean.picReleasedCount+"</td>";
+			str+="<td>"+bean.picReleasedCount+"</td>";
 			str+="<td>"+bean.releaseRate +"</td>";
 		}else{
 			str+="<td>"+bean.inputCount+"</td>";
 			str+="<td>"+bean.releasedCount+"</td>";
-            str+="<td>"+bean.checkCount+"</td>";
-            str+="<td>"+bean.backCount+"</td>";
-            str+="<td>"+bean.caogaoCount+"</td>";
-            str+="<td>"+bean.picReleasedCount+"</td>";
+			str+="<td>"+bean.picReleasedCount+"</td>";
 			str+="<td>"+bean.releaseRate+"</td>";
 		}
 	}
@@ -354,5 +339,5 @@ function setHandlList(bean)
 
 function openUInfoList(cat_id)
 {
-  top.OpenModalWindow("详细信息列表","/sys/cms/cmsCount/UserInfoList.jsp?site_id="+site_id+"&input_user="+input_user+"&start_day="+start_day+"&end_day="+end_day+"&is_host="+is_host+"&cat_id="+cat_id,1000,600);
+  OpenModalWindow("详细信息列表","/sys/cms/cmsCount/UserInfoList.jsp?site_id="+site_id+"&input_user="+input_user+"&start_day="+start_day+"&end_day="+end_day+"&is_host="+is_host+"&cat_id="+cat_id,1000,600);
 }

@@ -72,7 +72,7 @@ function showList(){
 		if(i>0)
 		{			
 			$(this).css({"text-align":"left"});	
-			$(this).html('<a href="javascript:top.addTab(true,\'/sys/system/metadata/metaData_view.jsp?meta_id='+beanList.get(i-1).meta_id+'\',\'元数据信息\')">'+beanList.get(i-1).meta_cname+'</a>');
+			$(this).html('<a href="javascript:addTab(true,\'/sys/system/metadata/metaData_view.jsp?meta_id='+beanList.get(i-1).meta_id+'\',\'元数据信息\')">'+beanList.get(i-1).meta_cname+'</a>');
 		}
 	});	
 
@@ -152,12 +152,12 @@ function addMetaData()
 
 	if(MetaDataRPC.insertMetaData(bean))
 	{
-		top.msgAlert("元数据信息"+WCMLang.Add_success);			
+		msgAlert("元数据信息"+WCMLang.Add_success);
 		locationMetaData();
 	}
 	else
 	{
-		top.msgWargin("元数据信息"+WCMLang.Add_fail);
+		msgWargin("元数据信息"+WCMLang.Add_fail);
 	}
 }
 //修改元数据
@@ -173,12 +173,12 @@ function updateMetaData()
   
 	if(MetaDataRPC.updateMetaData(bean))
 	{
-		top.msgAlert("元数据信息"+WCMLang.Add_success);			
+		msgAlert("元数据信息"+WCMLang.Add_success);
 		locationMetaData();
 	}
 	else
 	{
-		top.msgWargin("元数据信息"+WCMLang.Add_fail);
+		msgWargin("元数据信息"+WCMLang.Add_fail);
 	}
 }
 
@@ -188,11 +188,11 @@ function deleteMetaData()
 	var selectIDS = table.getSelecteCheckboxValue("meta_id");
 	if(MetaDataRPC.deleteMetaData(selectIDS))
 	{
-		top.msgAlert("元数据信息"+WCMLang.Delete_success);
+		msgAlert("元数据信息"+WCMLang.Delete_success);
 		reloadMetaDataList();
 	}else
 	{
-		top.msgWargin("元数据信息"+WCMLang.Delete_fail);
+		msgWargin("元数据信息"+WCMLang.Delete_fail);
 	}
 }
 
@@ -202,7 +202,7 @@ function metaDataSearchHandl(obj)
 	var con_value = $(obj).parent().find("#searchkey").val();
 	if(con_value.trim() == "" ||  con_value == null)
 	{
-		top.msgAlert(WCMLang.Search_empty);
+		msgAlert(WCMLang.Search_empty);
 		return;
 	}
 	table.con_name = $(obj).parent().find("#searchFields").val(); 

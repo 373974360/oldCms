@@ -67,9 +67,9 @@ function showResouceTurnPage(){
 function openAddResoucePage(res_id)
 {
 	if(res_id != null)
-		top.addTab(true,"/sys/ggfw/ser/serResouce_add.jsp?top_index="+top.curTabIndex+"&ser_id="+ser_id+"&res_id="+res_id,"服务资源维护");
+		addTab(true,"/sys/ggfw/ser/serResouce_add.jsp?top_index="+curTabIndex+"&ser_id="+ser_id+"&res_id="+res_id,"服务资源维护");
 	else
-		top.addTab(true,"/sys/ggfw/ser/serResouce_add.jsp?top_index="+top.curTabIndex+"&ser_id="+ser_id,"服务资源维护");
+		addTab(true,"/sys/ggfw/ser/serResouce_add.jsp?top_index="+curTabIndex+"&ser_id="+ser_id,"服务资源维护");
 }
 
 function openUpdateResoucePage()
@@ -90,12 +90,12 @@ function addSerResouce()
 	bean.ser_id = ser_id;
 	if(SerRPC.insertSerResouce(bean))
 	{
-		top.msgAlert("服务资源"+WCMLang.Add_success);		
-		top.getCurrentFrameObj(top_index).loadSerResouceTable();
-		top.tab_colseOnclick(top.curTabIndex);
+		msgAlert("服务资源"+WCMLang.Add_success);
+		getCurrentFrameObj(top_index).loadSerResouceTable();
+		tab_colseOnclick(curTabIndex);
 	}else
 	{
-		top.msgWargin("服务资源"+WCMLang.Add_fail);
+		msgWargin("服务资源"+WCMLang.Add_fail);
 	}
 }
 
@@ -112,12 +112,12 @@ function updateSerResouce()
 	bean.res_id = res_id;
 	if(SerRPC.updateSerResouce(bean))
 	{
-		top.msgAlert("服务资源"+WCMLang.Add_success);		
-		top.getCurrentFrameObj(top_index).loadSerResouceTable();
-		top.tab_colseOnclick(top.curTabIndex);
+		msgAlert("服务资源"+WCMLang.Add_success);
+		getCurrentFrameObj(top_index).loadSerResouceTable();
+		tab_colseOnclick(curTabIndex);
 	}else
 	{
-		top.msgWargin("服务资源"+WCMLang.Add_fail);
+		msgWargin("服务资源"+WCMLang.Add_fail);
 	}
 }
 
@@ -127,11 +127,11 @@ function deleteSerResouce()
 
 	if(SerRPC.deleteSerResouce(selectIDS))
 	{
-		top.msgAlert("服务资源"+WCMLang.Delete_success);
+		msgAlert("服务资源"+WCMLang.Delete_success);
 		loadSerResouceTable();
 	}else
 	{
-		top.msgWargin("服务资源"+WCMLang.Delete_fail);
+		msgWargin("服务资源"+WCMLang.Delete_fail);
 	}
 }
 
@@ -140,10 +140,10 @@ function sortSerResouce()
 	var selectIDS = table.getAllCheckboxValue("res_id");
 	if(SerRPC.sortSerResouce(selectIDS))
 	{
-		top.msgAlert(WCMLang.Sort_success);
+		msgAlert(WCMLang.Sort_success);
 	}else
 	{
-		top.msgWargin(WCMLang.Sort_fail);
+		msgWargin(WCMLang.Sort_fail);
 	}
 }
 
@@ -152,9 +152,9 @@ function batchPublishSerResouce(publish_status)
 	var selectIDS = table.getSelecteCheckboxValue("res_id");
 	if(SerRPC.updateSerResouceStatus(selectIDS,publish_status))
 	{
-		top.msgAlert(WCMLang.Publish_success);		
+		msgAlert(WCMLang.Publish_success);
 		loadSerResouceTable();
 	}
 	else
-		top.msgWargin(WCMLang.Publish_fail);
+		msgWargin(WCMLang.Publish_fail);
 }

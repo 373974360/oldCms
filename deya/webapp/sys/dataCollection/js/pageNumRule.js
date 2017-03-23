@@ -101,7 +101,7 @@ function addManyURL()
 	var reg=/^(http|https):\/\/(.*?)/ig;
 
 	if(!reg.test(addURL)){
-		top.msgAlert("地址不是以http://或https://开头!");
+		msgAlert("地址不是以http://或https://开头!");
 	}else{
 		if(addURL.indexOf("(*)")>-1)
 		{   
@@ -119,7 +119,7 @@ function addManyURL()
 			$("#save_collURL").empty();
 			$("#save_collURL").val(addURL);
 		}else{
-			top.msgAlert("请使用(*)通配符匹配网址!");
+			msgAlert("请使用(*)通配符匹配网址!");
 		}
 	}
 	

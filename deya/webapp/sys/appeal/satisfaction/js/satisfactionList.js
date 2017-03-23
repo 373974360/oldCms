@@ -51,12 +51,12 @@ function addSatisfaction()
 	});
 	if(SatisfactionRPC.insertSatisfaction(optionList))
 	{
-		top.msgAlert("满意度指标"+WCMLang.Add_success);			
+		msgAlert("满意度指标"+WCMLang.Add_success);
 		locationSatisfaction();
 	}
 	else
 	{
-		top.msgWargin("满意度指标"+WCMLang.Add_fail);
+		msgWargin("满意度指标"+WCMLang.Add_fail);
 	}
 	init_input();
 	initButtomStyle();

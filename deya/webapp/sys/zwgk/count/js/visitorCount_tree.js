@@ -13,7 +13,7 @@ function createTableAllSite()
 	beanList = List.toJSList(beanList);
 	
 	//传给父页面list
-	parent.beanListResult = beanList;
+	beanListResult = beanList;
 	
 	var treeHtmls = "<thead>" +
     "<tr> " +
@@ -106,6 +106,6 @@ function setHandlListAllSite(bean, index)
 // 跳转到站点下的栏目详细统计页面
 function redirectURL(bean_site_id,site_name)
 {
-	top.addTab(true ,"/sys/zwgk/count/gkVisitorCount.jsp?start_day="+start_day+"&end_day="+end_day+"&site_id="
+	addTab(true ,"/sys/zwgk/count/gkVisitorCount.jsp?start_day="+start_day+"&end_day="+end_day+"&site_id="
 		+bean_site_id,site_name+"栏目统计");
 }

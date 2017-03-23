@@ -25,8 +25,8 @@ ObjectPool={
 			return this[key];
 		}else if(window.opener.ObjectPool[key]){
 			return window.opener.ObjectPool[key];
-		}else if(window.parent.ObjectPool[key]){
-			return window.parent.ObjectPool[key];
+		}else if(window.ObjectPool[key]){
+			return window.ObjectPool[key];
 		}
 	},
 	getFromOpener:function(key){//指定从本窗口的opener窗口的对象池中查找对象

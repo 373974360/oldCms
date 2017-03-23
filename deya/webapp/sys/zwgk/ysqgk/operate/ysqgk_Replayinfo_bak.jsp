@@ -372,7 +372,7 @@ function doReplay(id,pro_type)
 	<tr>
 		<td align="left" valign="middle" style="text-indent:10px;">
             <input id="btn166hf" name="btn2" type="button" onclick="doReplay('do_2',1);" value="重新回复" />
-            <input id="btn2" name="btn2" type="button" onclick="top.tab_colseOnclick(top.curTabIndex)" value="返回"/>
+            <input id="btn2" name="btn2" type="button" onclick="tab_colseOnclick(curTabIndex)" value="返回"/>
 		</td>
 	</tr>
 </table>
@@ -460,7 +460,7 @@ function doReplay(id,pro_type)
 				<th></th>
 				<td>
 					<input id="submitButton" name="submitButton" type="button" onclick="javascript:void(0);" value="提交" />					
-                    <input id="btn2" name="btn2" type="button" onclick="top.tab_colseOnclick(top.curTabIndex)" value="取消" />
+                    <input id="btn2" name="btn2" type="button" onclick="tab_colseOnclick(curTabIndex)" value="取消" />
 				</td>
 			</tr>
 		</tbody>

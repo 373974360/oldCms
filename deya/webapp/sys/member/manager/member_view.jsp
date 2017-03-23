@@ -56,6 +56,8 @@ function fillBean()
 	$("#me_account").val(oldregisterBean.me_account);
 	$("#me_password").val(oldregisterBean.me_password);
 	$("#member_table").autoFill(oldmemberBean);
+    $("#user_photo").attr("src",oldmemberBean.user_photo);
+    $("#place_photo").attr("src",oldmemberBean.place_photo);
 }
 
 function setCloseType()
@@ -120,11 +122,21 @@ function setCloseType()
 			<td >
 				<input id="me_email" name="me_email" type="text" class="width200" value="" />
 			</td>
-			<th>职业：</th>
+			<th>所属区县：</th>
 			<td >
-				<input id="me_vocation" name="me_vocation" type="text" class="width200" value="" onblur="checkInputValue('me_vocation',true,60,'职业','')"/>
+				<input id="me_vocation" name="me_vocation" type="text" class="width200" value="" onblur="checkInputValue('me_vocation',true,60,'所属区县','')"/>
 			</td>
 		</tr>
+        <tr>
+            <th>所属乡镇（街办）：</th>
+            <td >
+                <input id="xiangzhen" name="xiangzhen" type="text" class="width200" value="" onblur="checkInputValue('xiangzhen',true,60,'所属乡镇（街办）','')"/>
+            </td>
+            <th>所属社区（村）：</th>
+            <td >
+                <input id="shequ" name="shequ" type="text" class="width200" value="" onblur="checkInputValue('shequ',true,60,'所属社区（村）','')"/>
+            </td>
+        </tr>
 		<tr>
 			<th>移动电话：</th>
 			<td >
@@ -136,11 +148,21 @@ function setCloseType()
 			</td>
 		</tr>
 		<tr>
-			<th >地址：</th>
+			<th >信息站位置：</th>
 			<td colspan="3">
-				<input id="me_address" name="me_address" type="text" class="width585" value="" onblur="checkInputValue('me_address',true,250,'地址','')"/>
+				<input id="me_address" name="me_address" type="text" class="width585" value="" onblur="checkInputValue('me_address',true,250,'信息站位置','')"/>
 			</td>
 		</tr>
+        <tr>
+            <th >本人照片：</th>
+            <td >
+                <img src="" id="user_photo" name="user_photo" style="width: 150px"/>
+            </td>
+            <th >信息站照片：</th>
+            <td >
+                <img src="" id="place_photo" name="place_photo" style="width: 150px"/>
+            </td>
+        </tr>
 		<tr>
 			<th><span class="f_red">*</span>会员帐号：</th>
 			<td class="width250">
@@ -193,7 +215,7 @@ function setCloseType()
 	<tr>
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<div id ="viewType">
-			<input id="AddCancel" name="btn1" type="button" onclick="top.tab_colseOnclick(top.curTabIndex)" value="关闭" />	
+			<input id="AddCancel" name="btn1" type="button" onclick="tab_colseOnclick(curTabIndex)" value="关闭" />
 			</div>
 			<div id="addType" style="display:none" >
 			<input id="memAddButton" name="btn1" type="button" onclick="" value="保存" />	

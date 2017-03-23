@@ -188,7 +188,7 @@ function showTurnPage(){
 
 function openFieldsListPage(){
    // alert(ids);
-	top.OpenModalWindow("选择元数据","/sys/model/fields/fields_list_select.jsp?model_id="+model_id+"&ids="+ids,1000,600);
+	OpenModalWindow("选择元数据","/sys/model/fields/fields_list_select.jsp?model_id="+model_id+"&ids="+ids,1000,600);
 }
 
 
@@ -214,12 +214,12 @@ function saveFormSort()
 	{
 		if(jsonrpc.FormRPC.saveFormSort(model_ids))
 		{
-			top.msgAlert(WCMLang.Sort_success);
+			msgAlert(WCMLang.Sort_success);
 			reloadList(); 
 		}
 		else
 		{
-			top.msgWargin(WCMLang.Sort_fail);
+			msgWargin(WCMLang.Sort_fail);
 			return;
 		}
 	}
@@ -228,9 +228,9 @@ function saveFormSort()
 
 function openTabPageUpdate(id) 
 {    
-	//top.OpenModalWindow("维护站点","/sys/control/site/site_add.jsp?parentID="+site_id,500,360);
-	//alert('/sys/member2/onlinebook/bookList_add.jsp?parentID='+site_id+"&tab_index="+top.curTabIndex);
-	top.addTab(true,'/sys/model/form/form_fields_add.jsp?tab_index='+top.curTabIndex+"&id="+id+"&type=mod",'修改字段');
+	//OpenModalWindow("维护站点","/sys/control/site/site_add.jsp?parentID="+site_id,500,360);
+	//alert('/sys/member2/onlinebook/bookList_add.jsp?parentID='+site_id+"&tab_index="+curTabIndex);
+	addTab(true,'/sys/model/form/form_fields_add.jsp?tab_index='+curTabIndex+"&id="+id+"&type=mod",'修改字段');
 }
 
 
@@ -241,11 +241,11 @@ function deleteInfo()
 	if(jsonrpc.FormRPC.deleteFormFields(selectIDS,model_id))
 	//if(true)
 	{
-		top.msgAlert("信息"+WCMLang.Delete_success);
+		msgAlert("信息"+WCMLang.Delete_success);
 		reloadList();
 	}else
 	{
-		top.msgWargin("信息"+WCMLang.Delete_fail);
+		msgWargin("信息"+WCMLang.Delete_fail);
 	}
 }
 
@@ -256,11 +256,11 @@ function setFieldFlag(id,flag)
 	if(jsonrpc.FormRPC.updateFormFieldFlag(flag,"set",id))
 	//if(true)
 	{
-		top.msgAlert("操作成功");
+		msgAlert("操作成功");
 		reloadList();
 	}else
 	{
-		top.msgWargin("操作失败");
+		msgWargin("操作失败");
 	}
 }
 
@@ -269,11 +269,11 @@ function setFieldFlagOut(id,flag)
 	if(jsonrpc.FormRPC.updateFormFieldFlag(flag,"out",id))
 	//if(true)
 	{
-		top.msgAlert("操作成功");
+		msgAlert("操作成功");
 		reloadList();
 	}else
 	{
-		top.msgWargin("操作失败");
+		msgWargin("操作失败");
 	}
 }
 

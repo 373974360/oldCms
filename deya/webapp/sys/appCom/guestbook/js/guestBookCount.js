@@ -51,7 +51,7 @@ function funOK()
 	{
 		if(!judgeDate(start_day,end_day))
 		{
-			top.msgWargin("结束时间不能在开始时间前");
+			msgWargin("结束时间不能在开始时间前");
 			return;
 		}
 	}

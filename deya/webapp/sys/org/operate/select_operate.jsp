@@ -24,7 +24,7 @@ var update_status = "<%=update_status%>";
 
 $(document).ready(function(){
 	initButtomStyle();
-	var app_ids = top.getCurrentFrameObj().app_id;
+	var app_ids = getCurrentFrameObj().app_id;
 	if(app_ids == "control")
 		app_ids += ",cms";
 	json_data = eval(OperateRPC.getOperateTreeJsonStr(app_ids));
@@ -49,7 +49,7 @@ function initMenuTree()
 //调用父窗口方法,取到已选择过的权限ID,并让树节点选中
 function setSelectedRoleIDS()
 {
-	var opt_ids = top.getCurrentFrameObj().getSelectedRoleIDS();
+	var opt_ids = getCurrentFrameObj().getSelectedRoleIDS();
 	if(opt_ids != "" && opt_ids != null)
 	{
 		var tempA = opt_ids.split(",");
@@ -62,8 +62,8 @@ function setSelectedRoleIDS()
 
 function returnDeptID()
 {				
-	eval("top.getCurrentFrameObj()."+handl_name+"('"+getLeftMenuChecked()+"')");
-	top.CloseModalWindow();	
+	eval("getCurrentFrameObj()."+handl_name+"('"+getLeftMenuChecked()+"')");
+	CloseModalWindow();
 }
 </script>
 </head>
@@ -93,7 +93,7 @@ function returnDeptID()
 	<tr>
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="returnDeptID()" value="保存" />
-			<input id="userAddCancel" name="btn1" type="button" onclick="top.CloseModalWindow();" value="取消" />	
+			<input id="userAddCancel" name="btn1" type="button" onclick="CloseModalWindow();" value="取消" />
 		</td>
 	</tr>
 </table>

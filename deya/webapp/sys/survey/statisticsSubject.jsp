@@ -367,8 +367,8 @@ div.pro_back .pro_fore{overflow:hidden;display: block;}
 
 		function openTextDetailWindow(item_ids,item_nums,s_type)
 		{
-			//parent.fnModelWin('查看详细信息','survey/view_itemDetail.jsp?item_id='+item_ids+"&item_num="+item_nums+"&s_id="+s_id+"&s_type="+s_type,800,490);
-			top.OpenModalWindow("查看详细信息","/sys/survey/view_itemDetail.jsp?item_id="+item_ids+"&item_num="+item_nums+"&s_id="+s_id+"&s_type="+s_type,800,490);	
+			//fnModelWin('查看详细信息','survey/view_itemDetail.jsp?item_id='+item_ids+"&item_num="+item_nums+"&s_id="+s_id+"&s_type="+s_type,800,490);
+			OpenModalWindow("查看详细信息","/sys/survey/view_itemDetail.jsp?item_id="+item_ids+"&item_num="+item_nums+"&s_id="+s_id+"&s_type="+s_type,800,490);
 		}
 
 		function goOtherPage()
@@ -378,8 +378,8 @@ div.pro_back .pro_fore{overflow:hidden;display: block;}
 
 		function openSearch()
 		{
-			//parent.fnModelWin('数据统计查询','survey/search_statistics.jsp?s_id='+s_id,800,490);
-			top.OpenModalWindow("数据统计查询","/sys/survey/search_statistics.jsp?s_id="+s_id,800,490);
+			//fnModelWin('数据统计查询','survey/search_statistics.jsp?s_id='+s_id,800,490);
+			OpenModalWindow("数据统计查询","/sys/survey/search_statistics.jsp?s_id="+s_id,800,490);
 		}
 	//-->
 	</SCRIPT>

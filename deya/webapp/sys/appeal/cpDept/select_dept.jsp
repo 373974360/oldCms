@@ -33,7 +33,7 @@ $(document).ready(function(){
 //写入已选择过的部门
 function setSelectedCPDept()
 {
-	var ids = top.getCurrentFrameObj().getSelectedCPDept();
+	var ids = getCurrentFrameObj().getSelectedCPDept();
 	if(ids != "" && ids != null)
 	{
 		var tempA = ids.split(",");
@@ -86,8 +86,8 @@ function returnDeptID()
 		texts = texts.substring(1);
 	}
 
-	eval("top.getCurrentFrameObj()."+handl_name+"('"+ids+"','"+texts+"')");
-	top.CloseModalWindow();
+	eval("getCurrentFrameObj()."+handl_name+"('"+ids+"','"+texts+"')");
+	CloseModalWindow();
 }
 </script>
 </head>
@@ -117,7 +117,7 @@ function returnDeptID()
 	<tr>
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="returnDeptID()" value="保存" />
-			<input id="userAddCancel" name="btn1" type="button" onclick="top.CloseModalWindow();" value="取消" />	
+			<input id="userAddCancel" name="btn1" type="button" onclick="CloseModalWindow();" value="取消" />
 		</td>
 	</tr>
 </table>

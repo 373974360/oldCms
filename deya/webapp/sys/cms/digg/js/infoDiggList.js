@@ -130,7 +130,7 @@ function searchList()
 
 	if(start_day > end_day)
 	{
-		top.msgAlert("开始日期不能大于结束日期");
+		msgAlert("开始日期不能大于结束日期");
 		return;
 	}
 	if(start_day != "")

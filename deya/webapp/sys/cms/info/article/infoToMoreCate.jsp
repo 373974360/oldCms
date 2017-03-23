@@ -58,9 +58,9 @@ $(document).ready(function() {
 
 function setUserPublishOperate()	
 {
-	var opt_ids = ","+top.getOptIDSByUser(app_id,site_id)+",";
+	var opt_ids = ","+getOptIDSByUser(app_id,site_id)+",";
 	//判断是否是站点管理员或超级管理员
-	if(top.isSiteManager(app_id,site_id) == true || opt_ids.indexOf(",302,") > -1)
+	if(isSiteManager(app_id,site_id) == true || opt_ids.indexOf(",302,") > -1)
 	{
 		$("#table_id #opt_302").show();		
 	}
@@ -83,7 +83,7 @@ function OpenWindowForSubmit(){
 	
 	if($("#data :checked").length == 0)
 	{
-		top.msgAlert("请选择要提交的信息！");
+		msgAlert("请选择要提交的信息！");
 		return;
 	}
 	var ids ="";
@@ -95,7 +95,7 @@ function OpenWindowForSubmit(){
     if(ids!=""){
     	ids = ids.substring(0,ids.length-1);	
     }
-	top.OpenModalWindow("信息高级获取","/sys/cms/info/article/getFwCate.jsp?site_id="+site_id+"&app_id="+app_id+"&ids="+ids+"&is_Publish="+isPublish,500,430);
+	OpenModalWindow("信息高级获取","/sys/cms/info/article/getFwCate.jsp?site_id="+site_id+"&app_id="+app_id+"&ids="+ids+"&is_Publish="+isPublish,500,430);
 }
 
 function checkAllData(obj)

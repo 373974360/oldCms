@@ -76,7 +76,7 @@ function showTurnPage(){
 //打开添加窗口
 function openAddDesignStylePage()
 {	
-	top.OpenModalWindow("维护内容样式","/sys/system/design/style_add.jsp?app_id="+app_id,480,230);
+	OpenModalWindow("维护内容样式","/sys/system/design/style_add.jsp?app_id="+app_id,480,230);
 }
 
 function openUpdateDesignStylePage(c_id)
@@ -88,7 +88,7 @@ function openUpdateDesignStylePage(c_id)
 	}else
 		id = table.getSelecteCheckboxValue("style_id");	
 	
-	top.OpenModalWindow("维护内容样式","/sys/system/design/style_add.jsp?app_id="+app_id+"&style_id="+id,480,230);
+	OpenModalWindow("维护内容样式","/sys/system/design/style_add.jsp?app_id="+app_id+"&style_id="+id,480,230);
 }
 
 
@@ -105,13 +105,13 @@ function addStyle()
 
 	if(DesignRPC.insertDesignStyle(bean))
 	{
-		top.msgAlert("内容样式"+WCMLang.Add_success);
-		top.CloseModalWindow();
-		top.getCurrentFrameObj().reloadList();
+		msgAlert("内容样式"+WCMLang.Add_success);
+		CloseModalWindow();
+		getCurrentFrameObj().reloadList();
 	}
 	else
 	{
-		top.msgWargin("内容样式"+WCMLang.Add_fail);
+		msgWargin("内容样式"+WCMLang.Add_fail);
 	}
 }
 
@@ -127,13 +127,13 @@ function updateStyle()
 
 	if(DesignRPC.updateDesignStyle(bean))
 	{
-		top.msgAlert("内容样式"+WCMLang.Add_success);
-		top.CloseModalWindow();
-		top.getCurrentFrameObj().reloadList();
+		msgAlert("内容样式"+WCMLang.Add_success);
+		CloseModalWindow();
+		getCurrentFrameObj().reloadList();
 	}
 	else
 	{
-		top.msgWargin("内容样式"+WCMLang.Add_fail);
+		msgWargin("内容样式"+WCMLang.Add_fail);
 	}
 }
 
@@ -142,10 +142,10 @@ function deleteDesignStyle()
 	var selectIDS = table.getSelecteCheckboxValue("style_id");
 	if(DesignRPC.deleteDesignStyle(selectIDS))
 	{
-		top.msgAlert("内容样式"+WCMLang.Delete_success);
+		msgAlert("内容样式"+WCMLang.Delete_success);
 		reloadList();
 	}else
 	{
-		top.msgWargin("内容样式"+WCMLang.Delete_fail);
+		msgWargin("内容样式"+WCMLang.Delete_fail);
 	}
 }

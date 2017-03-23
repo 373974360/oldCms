@@ -56,7 +56,7 @@ function showManagerList(){
 	manager_table.getCol("user_realname").each(function(i){
 		if(i>0)
 		{
-			$(this).html('<a href="javascript:top.addTab(true,\'/sys/org/dept/user_view.jsp?user_id='+manager_beanList.get(i-1).user_id+'\',\'用户信息\')">'+manager_beanList.get(i-1).user_realname+'</a>');
+			$(this).html('<a href="javascript:addTab(true,\'/sys/org/dept/user_view.jsp?user_id='+manager_beanList.get(i-1).user_id+'\',\'用户信息\')">'+manager_beanList.get(i-1).user_realname+'</a>');
 		}
 	});
 	
@@ -73,11 +73,11 @@ function deleteDeptManager()
 	var selectIDS = manager_table.getSelecteCheckboxValue("user_id");
 	if(DeptRPC.deleteDeptManager(selectIDS,dept_id))
 	{
-		top.msgAlert("部门管理员"+WCMLang.Delete_success);
+		msgAlert("部门管理员"+WCMLang.Delete_success);
 		reoloadManagerList();
 	}else
 	{
-		top.msgAlert("部门管理员"+WCMLang.Delete_fail);
+		msgAlert("部门管理员"+WCMLang.Delete_fail);
 		return;
 	}
 }
@@ -91,7 +91,7 @@ function addDeptManager(dept_ids)
 	else
 		selected_dept_id = dept_id;
 
-	//top.OpenModalWindow("维护部门管理员","/sys/org/dept/deptMan_add.jsp?dept_id="+selected_dept_id,610,510);
+	//OpenModalWindow("维护部门管理员","/sys/org/dept/deptMan_add.jsp?dept_id="+selected_dept_id,610,510);
 
 	openSelectUserPage("选择部门管理员","saveManager");
 }
@@ -109,11 +109,11 @@ function saveManager(user_ids)
 {
 	if(DeptRPC.updateDetpManager(user_ids,old_dept_manager,selected_dept_id))
 	{
-		top.msgAlert("部门管理员"+WCMLang.Set_success);
-		top.getCurrentFrameObj().reoloadManagerList();
+		msgAlert("部门管理员"+WCMLang.Set_success);
+		getCurrentFrameObj().reoloadManagerList();
 		
 	}else{
-		top.msgWargin("部门管理员"+WCMLang.Set_fail);
+		msgWargin("部门管理员"+WCMLang.Set_fail);
 	}
 }
 

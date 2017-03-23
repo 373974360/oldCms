@@ -68,11 +68,11 @@ function returnStartURL()
 {
 	var startURL = $("#save_collURL").val();
 	if(startURL==null || startURL==""){
-		top.msgAlert("请先点击\"添加按钮\"完成连接地址格式化!");
+		msgAlert("请先点击\"添加按钮\"完成连接地址格式化!");
 		return;
 	}
-	eval("top.getCurrentFrameObj()."+hand_name+"('"+startURL+"','"+rowIndex+"')");
-	top.CloseModalWindow();
+	eval("getCurrentFrameObj()."+hand_name+"('"+startURL+"','"+rowIndex+"')");
+	CloseModalWindow();
 }
 
 </script>
@@ -153,7 +153,7 @@ function returnStartURL()
 	<tr>
 		<td colspan="2" align="center">
 			<input type="button" id="addURLBtn" value="完成" width="20px;" onclick="returnStartURL()"  />
-			<input type="button" id="cancelBtn" value="取消" width="20px;" onclick="top.CloseModalWindow();"  />
+			<input type="button" id="cancelBtn" value="取消" width="20px;" onclick="CloseModalWindow();"  />
 		</td>
 	</tr>
 </table>

@@ -95,11 +95,11 @@ function returnCatID()
 	{
 		ids = ids.substring(1);
 		$("#addButton").attr("disabled",true);
-		eval("top.getCurrentFrameObj()."+handl_name+"('"+ids+"')");
-		top.CloseModalWindow();
+		eval("getCurrentFrameObj()."+handl_name+"('"+ids+"')");
+		CloseModalWindow();
 	}else
 	{
-		top.msgWargin(WCMLang.selected_category);
+		msgWargin(WCMLang.selected_category);
 		return;
 	}
 	
@@ -139,7 +139,7 @@ function returnCatID()
 	<tr>
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="returnCatID()" value="保存" />
-			<input id="userAddCancel" name="btn1" type="button" onclick="top.CloseModalWindow();" value="取消" />	
+			<input id="userAddCancel" name="btn1" type="button" onclick="CloseModalWindow();" value="取消" />
 		</td>
 	</tr>
 </table>

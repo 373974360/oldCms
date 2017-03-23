@@ -37,12 +37,12 @@ function saveStatus()
 	$("#member_table").autoBind(oldmemberBean);
 	if(!MemberManRPC.updateMember(oldmemberBean))
 	{
-		top.msgWargin("会员信息"+WCMLang.Set_fail);
+		msgWargin("会员信息"+WCMLang.Set_fail);
 		return;
 	}
-	top.msgAlert("会员信息"+WCMLang.Set_success);
-	top.getCurrentFrameObj().reloadMemberList();
-	top.CloseModalWindow();
+	msgAlert("会员信息"+WCMLang.Set_success);
+	getCurrentFrameObj().reloadMemberList();
+	CloseModalWindow();
 }
 
 </script>
@@ -90,7 +90,7 @@ function saveStatus()
 			<td align="middle" valign="middle">
 				<input id="btn1" name="btn1" type="button" onclick="saveStatus()" value="保存" />
 				<input id="btn2" name="btn6" type="button" onclick="initPage()" value="重置" />
-				<input id="btn4" name="btn4" type="button" onclick="top.CloseModalWindow()" value="取消" />
+				<input id="btn4" name="btn4" type="button" onclick="CloseModalWindow()" value="取消" />
 			</td>
 		</tr>
 	</table>

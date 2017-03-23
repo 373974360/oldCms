@@ -77,7 +77,7 @@ function showTurnPage(){
 //打开添加窗口
 function openAddDesignCssPage()
 {	
-	top.OpenModalWindow("维护主题风格","/sys/system/design/css_add.jsp?app_id="+app_id,480,230);
+	OpenModalWindow("维护主题风格","/sys/system/design/css_add.jsp?app_id="+app_id,480,230);
 }
 
 function openUpdateDesignCssPage(c_id)
@@ -89,7 +89,7 @@ function openUpdateDesignCssPage(c_id)
 	}else
 		id = table.getSelecteCheckboxValue("css_id");
 
-	top.OpenModalWindow("维护主题风格","/sys/system/design/css_add.jsp?app_id="+app_id+"&css_id="+id,480,230);
+	OpenModalWindow("维护主题风格","/sys/system/design/css_add.jsp?app_id="+app_id+"&css_id="+id,480,230);
 }
 
 
@@ -106,19 +106,19 @@ function addCss()
 
 	if(DesignRPC.nameIsExist("cs_design_css","css_ename",bean.css_ename))
 	{
-		top.msgWargin("该英文名称已存在,请重新输入");
+		msgWargin("该英文名称已存在,请重新输入");
 		return;
 	}
 
 	if(DesignRPC.insertDesignCss(bean))
 	{
-		top.msgAlert("主题风格"+WCMLang.Add_success);
-		top.CloseModalWindow();
-		top.getCurrentFrameObj().reloadList();
+		msgAlert("主题风格"+WCMLang.Add_success);
+		CloseModalWindow();
+		getCurrentFrameObj().reloadList();
 	}
 	else
 	{
-		top.msgWargin("主题风格"+WCMLang.Add_fail);
+		msgWargin("主题风格"+WCMLang.Add_fail);
 	}
 }
 
@@ -134,13 +134,13 @@ function updateCss()
 
 	if(DesignRPC.updateDesignCss(bean))
 	{
-		top.msgAlert("主题风格"+WCMLang.Add_success);
-		top.CloseModalWindow();
-		top.getCurrentFrameObj().reloadList();
+		msgAlert("主题风格"+WCMLang.Add_success);
+		CloseModalWindow();
+		getCurrentFrameObj().reloadList();
 	}
 	else
 	{
-		top.msgWargin("主题风格"+WCMLang.Add_fail);
+		msgWargin("主题风格"+WCMLang.Add_fail);
 	}
 }
 
@@ -149,10 +149,10 @@ function deleteDesignCss()
 	var selectIDS = table.getSelecteCheckboxValue("css_id");
 	if(DesignRPC.deleteDesignCss(selectIDS))
 	{
-		top.msgAlert("主题风格"+WCMLang.Delete_success);
+		msgAlert("主题风格"+WCMLang.Delete_success);
 		reloadList();
 	}else
 	{
-		top.msgWargin("主题风格"+WCMLang.Delete_fail);
+		msgWargin("主题风格"+WCMLang.Delete_fail);
 	}
 }

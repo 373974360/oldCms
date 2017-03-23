@@ -85,7 +85,7 @@ $(document).ready(function(){
 	initButtomStyle();
 	init_input();
 	if($.browser.msie&&$.browser.version=="6.0"&&$("html")[0].scrollHeight>$("html").height()) $("html").css("overflowY","scroll"); 
-    window.parent.setExcelOutUrl('${url}');
+    window.setExcelOutUrl('${url}');
 }); 
 </script>
 <script type="text/javascript">
@@ -147,7 +147,7 @@ $(document).ready(function(){
 
  function openCateInfo(user_id,type)
  { 
-top.OpenModalWindow("查看详细信息","/sys/appeal/count/dept/letter_list.jsp?user_id="+user_id+"&type="+type+"&b_ids="+list_b_ids+"&s="+list_s+"&e="+list_e,1000,600);	
+OpenModalWindow("查看详细信息","/sys/appeal/count/dept/letter_list.jsp?user_id="+user_id+"&type="+type+"&b_ids="+list_b_ids+"&s="+list_s+"&e="+list_e,1000,600);
  }		
 </script>
 </head>

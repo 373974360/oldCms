@@ -75,7 +75,7 @@ function showTurnPage(){
 //打开添加窗口
 function openAddDesignFramePage()
 {		
-	top.addTab(true,"/sys/system/design/frame_add.jsp?app_id="+app_id+"&top_index="+top.curTabIndex,"维护外框样式");
+	addTab(true,"/sys/system/design/frame_add.jsp?app_id="+app_id+"&top_index="+curTabIndex,"维护外框样式");
 }
 
 function openUpdateDesignFramePage(c_id)
@@ -87,7 +87,7 @@ function openUpdateDesignFramePage(c_id)
 	}else
 		id = table.getSelecteCheckboxValue("frame_id");
 	
-	top.addTab(true,"/sys/system/design/frame_add.jsp?app_id="+app_id+"&top_index="+top.curTabIndex+"&frame_id="+id,"维护外框样式");
+	addTab(true,"/sys/system/design/frame_add.jsp?app_id="+app_id+"&top_index="+curTabIndex+"&frame_id="+id,"维护外框样式");
 }
 
 
@@ -104,13 +104,13 @@ function addFrame()
 
 	if(DesignRPC.insertDesignFrame(bean))
 	{
-		top.msgAlert("外框样式"+WCMLang.Add_success);
-		top.getCurrentFrameObj(top_index).reloadList();
-		top.tab_colseOnclick(top.curTabIndex);
+		msgAlert("外框样式"+WCMLang.Add_success);
+		getCurrentFrameObj(top_index).reloadList();
+		tab_colseOnclick(curTabIndex);
 	}
 	else
 	{
-		top.msgWargin("外框样式"+WCMLang.Add_fail);
+		msgWargin("外框样式"+WCMLang.Add_fail);
 	}
 }
 
@@ -126,13 +126,13 @@ function updateFrame()
 
 	if(DesignRPC.updateDesignFrame(bean))
 	{
-		top.msgAlert("外框样式"+WCMLang.Add_success);
-		top.getCurrentFrameObj(top_index).reloadList();
-		top.tab_colseOnclick(top.curTabIndex);
+		msgAlert("外框样式"+WCMLang.Add_success);
+		getCurrentFrameObj(top_index).reloadList();
+		tab_colseOnclick(curTabIndex);
 	}
 	else
 	{
-		top.msgWargin("外框样式"+WCMLang.Add_fail);
+		msgWargin("外框样式"+WCMLang.Add_fail);
 	}
 }
 
@@ -141,10 +141,10 @@ function deleteDesignFrame()
 	var selectIDS = table.getSelecteCheckboxValue("frame_id");
 	if(DesignRPC.deleteDesignFrame(selectIDS))
 	{
-		top.msgAlert("外框样式"+WCMLang.Delete_success);
+		msgAlert("外框样式"+WCMLang.Delete_success);
 		reloadList();
 	}else
 	{
-		top.msgWargin("外框样式"+WCMLang.Delete_fail);
+		msgWargin("外框样式"+WCMLang.Delete_fail);
 	}
 }

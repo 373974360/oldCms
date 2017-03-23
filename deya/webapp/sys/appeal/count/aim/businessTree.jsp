@@ -89,10 +89,10 @@ function fnOK(){
     }) 
 	//alert(ids); 
 	//alert(names);
-	//parent.document.right_frame.setBIds(ids);
-	//parent.document.right_frame.setBNames(names);
-	top.CloseModalWindow();
-	top.getCurrentFrameObj().setBIdsNames(ids,names);
+	//document.right_frame.setBIds(ids);
+	//document.right_frame.setBNames(names);
+	CloseModalWindow();
+	getCurrentFrameObj().setBIdsNames(ids,names);
 }
 
 </script>
@@ -141,7 +141,7 @@ function fnOK(){
 	<tr>
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="fnOK()" value="确定" />	
-			<input id="userAddCancel" name="btn1" type="button" onclick="top.CloseModalWindow();" value="取消" />	
+			<input id="userAddCancel" name="btn1" type="button" onclick="CloseModalWindow();" value="取消" />
 		</td>
 	</tr>
 </table>

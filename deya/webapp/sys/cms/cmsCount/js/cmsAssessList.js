@@ -46,7 +46,7 @@ function showList(){
 		
 	}else{
 		if(selected_ids== ""){
-			top.msgWargin("目录信息不能为空!");
+			msgWargin("目录信息不能为空!");
 			return;
 		}else{
 			mp.put("cat_ids",selected_ids);
@@ -77,9 +77,6 @@ function  outFileBtn(){
 		listHeader.add("录入员");
 		listHeader.add("全部信息");
 		listHeader.add("已发信息");
-        listHeader.add("待审信息");
-        listHeader.add("退稿信息");
-        listHeader.add("草稿信息");
 		listHeader.add("图片信息");
 		listHeader.add("发稿率");
 		var url = CmsCountRPC.cmsWorkInfoOutExcel(beanList,listHeader);
@@ -95,9 +92,6 @@ function createTable(){
     "   <th>录入员</th>		" +
     "   <th>全部信息</th>       " +
     "   <th>已发信息</th>   " +
-    "   <th>待审信息</th>   " +
-    "   <th>退稿信息</th>   " +
-    "   <th>草稿信息</th>   " +
     "   <th>图片信息</th>   " +
     "	<th>发稿率</th> " +
     "	<th>详细</th>     " +
@@ -125,9 +119,6 @@ function stuffTable(bean){
 	treeHtml+="<tr> <td><span class='file'>"+ bean.user_name +"</span></td>";
     treeHtml += "<td>"+ bean.inputCount +"</td>";
     treeHtml += "<td>"+ bean.releasedCount +"</td>";
-    treeHtml += "<td>"+ bean.checkCount +"</td>";
-    treeHtml += "<td>"+ bean.backCount +"</td>";
-    treeHtml += "<td>"+ bean.caogaoCount +"</td>";
     treeHtml += "<td>"+ bean.picInfoCount +"</td>";
     treeHtml += "<td>"+ bean.releaseRate +"%</td>";
     treeHtml += "<td><a href=\"javascript:openPieChart("+bean.input_user+",'"+bean.user_name+"')\">"+ "查看"+"</a></td>";
@@ -137,9 +128,9 @@ function stuffTable(bean){
 } 
 
 function openPieChart(input_user,user_name){
-	//top.getCurrentFrameObj().pieJsonData = 	pieChartDataList.get(index);
-	//top.OpenModalWindow("查看详细信息---"+user_name,"/sys/cms/cmsCount/cmsAssessUserInfo.jsp?site_id="+site_id+"&input_user="+input_user,1000,600);
-	top.addTab(true,"/sys/cms/cmsCount/cmsAssessUserInfo.jsp?site_id="+site_id+"&input_user="+input_user+"&start_day="+start_day+"&end_day="+end_day+"&selectedId="+selected_ids+"&is_host="+is_host,"查看详细信息---"+user_name);
+	//getCurrentFrameObj().pieJsonData = 	pieChartDataList.get(index);
+	//OpenModalWindow("查看详细信息---"+user_name,"/sys/cms/cmsCount/cmsAssessUserInfo.jsp?site_id="+site_id+"&input_user="+input_user,1000,600);
+	addTab(true,"/sys/cms/cmsCount/cmsAssessUserInfo.jsp?site_id="+site_id+"&input_user="+input_user+"&start_day="+start_day+"&end_day="+end_day+"&selectedId="+selected_ids+"&is_host="+is_host,"查看详细信息---"+user_name);
 }
 
 // 处理全选事件

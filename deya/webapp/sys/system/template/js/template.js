@@ -127,7 +127,7 @@ function showList(){
 	var url ="/sys/system/template/upload.jsp?t_id="+t_id+"&site_id="+site_id+"&modify_dtime="+modify_dtime+"&t_ename="+t_ename+"&creat_dtime="+creat_dtime+"&id="+id+"&modify_user="+modify_user+"&tcat_id="+tcat_id+"&t_path="+t_path+"&t_cname="+t_cname+"&app_id="+app_id+"&t_ver="+t_ver+"&creat_user="+creat_user;
 		url=encodeURI(url=encodeURI(url)); 
 		 
-	top.OpenModalWindow("上传模板",url,450,height);
+	OpenModalWindow("上传模板",url,450,height);
 } 
  
 function showTurnPage(){	
@@ -150,7 +150,7 @@ function showTurnPage(){
 //历史回溯控制
 function openHistoryTemplateVer(templateId,siteId){
 	//alert(templateId+"|"+siteId);
-	top.OpenModalWindow("模板历史版本","/sys/system/template/templateDataVerList.jsp?tc_id="+tc_id+"&t_id="+templateId+"&site_id="+siteId,1000,530);
+	OpenModalWindow("模板历史版本","/sys/system/template/templateDataVerList.jsp?tc_id="+tc_id+"&t_id="+templateId+"&site_id="+siteId,1000,530);
 	//window.location.href = "/sys/system/template/templateDataVerList.jsp?t_id="+templateId+"&site_id="+siteId;
 }
 
@@ -166,7 +166,7 @@ function openAddTemplatePage()
 {
 	if(tc_id == 0)
 	{
-		top.msgWargin("请先选择模板分类");
+		msgWargin("请先选择模板分类");
 		return;
 	}
 	window.location.href = "/sys/system/template/template_add.jsp?app="+app+"&site_id="+site_id+"&tc_id="+tc_id;
@@ -183,10 +183,6 @@ function openUpdateTemplateDataPage()
 function addTemplateData()
 {
 	$("#t_content").val(editAreaLoader.getValue());
-    if($("#t_content").val() == null || $("#t_content").val() == "")
-    {
-        $("#t_content").val(" ");
-    }
 	var bean = BeanUtil.getCopy(TemplateEditBean);	
 	$("#Template_table").autoBind(bean);
 	bean.t_content = $("#t_content").val();
@@ -197,14 +193,14 @@ function addTemplateData()
 	}
 	if(TemplateRPC.addTemplateEdit(bean))
 	{
-		top.msgAlert("模板"+WCMLang.Add_success);			
-		//top.CloseModalWindow();
-		//top.getCurrentFrameObj().reloadTemplateDataList();
+		msgAlert("模板"+WCMLang.Add_success);
+		//CloseModalWindow();
+		//getCurrentFrameObj().reloadTemplateDataList();
 		window.location.href = "templateCategoryList.jsp?tid="+bean.tcat_id+"&site_id="+bean.site_id;
 	}
 	else
 	{
-		top.msgWargin("模板"+WCMLang.Add_fail);
+		msgWargin("模板"+WCMLang.Add_fail);
 	}
 }
 //修改Template
@@ -212,10 +208,6 @@ function updateTemplateData()
 {
    
 	$("#t_content").val(editAreaLoader.getValue());
-    if($("#t_content").val() == null || $("#t_content").val() == "")
-    {
-        $("#t_content").val(" ");
-    }
 	var bean = BeanUtil.getCopy(TemplateEditBean);	
 	$("#Template_table").autoBind(bean);
 	bean.t_content = $("#t_content").val();
@@ -227,21 +219,21 @@ function updateTemplateData()
 	 
 	if(TemplateRPC.updateTemplateEditById(bean))
 	{ 
-		top.msgAlert("模板"+WCMLang.Add_success);			
-		//top.CloseModalWindow();
-		//top.getCurrentFrameObj().reloadTemplateDataList();
+		msgAlert("模板"+WCMLang.Add_success);
+		//CloseModalWindow();
+		//getCurrentFrameObj().reloadTemplateDataList();
 		window.location.href = "/sys/system/template/templateCategoryList.jsp?tid="+bean.tcat_id+"&site_id="+bean.site_id;
 	}
 	else
 	{ 
-		top.msgWargin("模板"+WCMLang.Add_fail);
+		msgWargin("模板"+WCMLang.Add_fail);
 	}
 }
 
 //删除Template
 function deleteTemplateData()
 {
-	top.msgConfirm(WCMLang.Delete_confirm,"deleteTemplateDataHandl()");
+	msgConfirm(WCMLang.Delete_confirm,"deleteTemplateDataHandl()");
 }
 
 function deleteTemplateDataHandl()
@@ -250,18 +242,18 @@ function deleteTemplateDataHandl()
 
 	if(TemplateRPC.delTemplateEditById(selectIDS,site_id))
 	{
-		top.msgAlert("模板"+WCMLang.Delete_success);
-		//top.CloseModalWindow();
-		top.getCurrentFrameObj().reloadTemplateDataList();
+		msgAlert("模板"+WCMLang.Delete_success);
+		//CloseModalWindow();
+		getCurrentFrameObj().reloadTemplateDataList();
 		//window.location.href = "/sys/system/template/templateCategoryList.jsp?tid="+tc_id+"&site_id="+bean.site_id;
 	}else
 	{
-		top.msgWargin("模板"+WCMLang.Delete_fail);
+		msgWargin("模板"+WCMLang.Delete_fail);
 	}
 }
 
 function deleteOneTemplateData(id,site_id){
-	top.msgConfirm(WCMLang.Delete_confirm,"deleteOneTemplateInfo('"+id+"','"+site_id+"')");
+	msgConfirm(WCMLang.Delete_confirm,"deleteOneTemplateInfo('"+id+"','"+site_id+"')");
 }
 
 //删除Template
@@ -269,18 +261,18 @@ function deleteOneTemplateInfo(id,site_id)
 {
 	if(TemplateRPC.delTemplateEditById(id,site_id))
 	{
-		top.msgAlert("模板"+WCMLang.Delete_success);
-		//top.CloseModalWindow();
-		top.getCurrentFrameObj().reloadTemplateDataList();
+		msgAlert("模板"+WCMLang.Delete_success);
+		//CloseModalWindow();
+		getCurrentFrameObj().reloadTemplateDataList();
 		//window.location.href = "/sys/system/template/templateCategoryList.jsp?tid="+tc_id+"&site_id="+site_id;
 	}else
 	{
-		top.msgWargin("模板"+WCMLang.Delete_fail);
+		msgWargin("模板"+WCMLang.Delete_fail);
 	}
 }
 
 function closePage(){
-	//top.CloseModalWindow();
+	//CloseModalWindow();
 	var bean = BeanUtil.getCopy(TemplateEditBean);	
 	$("#Template_table").autoBind(bean);
 	window.location.href = "/sys/system/template/templateCategoryList.jsp?tid="+bean.tcat_id+"&site_id="+bean.site_id;
@@ -289,8 +281,8 @@ function closePage(){
 
 function publishOneTemplate(tid, siteid, appid){
 	if(TemplateRPC.publish(tid, siteid, appid)){
-		top.msgAlert("模板"+WCMLang.Publish_success);
-		top.getCurrentFrameObj().reloadTemplateDataList();
+		msgAlert("模板"+WCMLang.Publish_success);
+		getCurrentFrameObj().reloadTemplateDataList();
 	}
 }
 //2013-0-16ydc添加
@@ -300,16 +292,16 @@ function downOneTemplate(tid, siteid, appid,tpath){
 function publishTemplate(){
 	var selectIDS = table.getSelecteCheckboxValue("t_id");
 	if(TemplateRPC.publish(selectIDS, site_id, app)){
-		top.msgAlert("模板"+WCMLang.Publish_success);
-		top.getCurrentFrameObj().reloadTemplateDataList();
+		msgAlert("模板"+WCMLang.Publish_success);
+		getCurrentFrameObj().reloadTemplateDataList();
 	}
 }
 
 function cancelTemplate(){
 	var selectIDS = table.getSelecteCheckboxValue("t_id");
 	if(TemplateRPC.cancel(selectIDS, site_id, app)){
-		top.msgAlert("模板撤销成功");
-		top.getCurrentFrameObj().reloadTemplateDataList();
+		msgAlert("模板撤销成功");
+		getCurrentFrameObj().reloadTemplateDataList();
 	}
 }
 
@@ -321,7 +313,7 @@ function authorDataSearchHandl(obj)
 //	var con_value = $(obj).parent().find("#searchkey").val();
 //	if(con_value.trim() == "" ||  con_value == null)
 //	{
-//		top.msgAlert(WCMLang.Search_empty);
+//		msgAlert(WCMLang.Search_empty);
 //		return;
 //	}
 //	table.con_name = $(obj).parent().find("#searchFields").val(); 

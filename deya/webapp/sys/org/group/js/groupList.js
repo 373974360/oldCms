@@ -56,7 +56,7 @@ function showList()
 	table.getCol("group_name").each(function(i){
 		if(i>0)
 		{
-			$(this).html('<a href="javascript:top.addTab(true,\'/sys/org/group/group_view.jsp?appID='+appId+'&site_id='+siteId+'&groupId='+beanList.get(i-1).group_id+'\',\'用户组信息\')">'+beanList.get(i-1).group_name+'</a>');	
+			$(this).html('<a href="javascript:addTab(true,\'/sys/org/group/group_view.jsp?appID='+appId+'&site_id='+siteId+'&groupId='+beanList.get(i-1).group_id+'\',\'用户组信息\')">'+beanList.get(i-1).group_name+'</a>');
 		}
 	});
 	
@@ -97,7 +97,7 @@ function showTurnPage()
 // 新建用户组
 function addGroup()
 {
-	top.OpenModalWindow("用户组添加","/sys/org/group/group_add.jsp?appId="+appId+"&site_id="+siteId,420,220);
+	OpenModalWindow("用户组添加","/sys/org/group/group_add.jsp?appId="+appId+"&site_id="+siteId,420,220);
 }
 
 // 添加用户页面"保存"操作
@@ -108,18 +108,18 @@ function savaGroup()
 	
 	if(!GroupManRPC.insertGroup(bean))
 	{
-		top.msgWargin("用户组"+WCMLang.Add_fail);
+		msgWargin("用户组"+WCMLang.Add_fail);
 		return;
 	}
-	top.msgAlert("用户组"+WCMLang.Add_success);
-	top.getCurrentFrameObj().reloadGroupList();
-	top.CloseModalWindow();
+	msgAlert("用户组"+WCMLang.Add_success);
+	getCurrentFrameObj().reloadGroupList();
+	CloseModalWindow();
 }
 
 // 显示用户组信息
 function viewGroup(groupId)
 {
-	top.OpenModalWindow("查看用户组信息","/sys/org/group/group_view.jsp?groupId="+groupId,450,190);	
+	OpenModalWindow("查看用户组信息","/sys/org/group/group_view.jsp?groupId="+groupId,450,190);
 }
 
 
@@ -127,7 +127,7 @@ function viewGroup(groupId)
 function updateGroup()
 {
 	var groupId = table.getSelecteCheckboxValue("group_id");
-	top.OpenModalWindow("用户组修改","/sys/org/group/group_update.jsp?groupId="+groupId,420,220);
+	OpenModalWindow("用户组修改","/sys/org/group/group_update.jsp?groupId="+groupId,420,220);
 }
 
 // 删除用户组
@@ -136,10 +136,10 @@ function deleteGroup()
 	var groupId = table.getSelecteCheckboxValue("group_id");
 	if( !GroupManRPC.deleteGroup(groupId,siteId))
 	{
-		top.msgWargin("用户组"+WCMLang.Delete_fail);
+		msgWargin("用户组"+WCMLang.Delete_fail);
 		return;
 	}
-	parent.msgAlert("用户组"+WCMLang.Delete_success);
+	msgAlert("用户组"+WCMLang.Delete_success);
 	reloadGroupList();
 }
 
@@ -172,11 +172,11 @@ function saveGroupUser(user_ids)
 	
 	if(GroupManRPC.insertGroupUser(bean,delete_user_ids))
 	{
-		top.msgAlert("用户组用户关联"+WCMLang.Add_success);
+		msgAlert("用户组用户关联"+WCMLang.Add_success);
 		table.unChekcbox();
 	}else
 	{
-		top.msgWargin("用户组用户关联"+WCMLang.Add_fail);
+		msgWargin("用户组用户关联"+WCMLang.Add_fail);
 	}
 }
 
@@ -201,11 +201,11 @@ function saveGroupRole(role_ids)
 	
 	if(GroupManRPC.insertRoleUserByUGroup(role_ids,bean))
 	{
-		top.msgAlert("用户组角色关联"+WCMLang.Add_success);		
+		msgAlert("用户组角色关联"+WCMLang.Add_success);
 		reloadGroupList();
 	}else
 	{
-		top.msgWargin("用户组角色关联"+WCMLang.Add_fail);
+		msgWargin("用户组角色关联"+WCMLang.Add_fail);
 	}
 }
 

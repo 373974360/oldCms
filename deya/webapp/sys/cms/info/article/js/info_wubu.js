@@ -330,7 +330,7 @@ function showList(){
 				str += "<li id='332' class='ico_delete' ><a title='删除' href='javascript:doDelete("+(i-1)+")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";break;
 			case 8:
 				str += "<li class='ico_view'><a title='预览' href='javascript:doView("+(i-1)+")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
-                var opt_ids = ","+top.getOptIDSByUser(app,site_id)+",";
+                var opt_ids = ","+getOptIDSByUser(app,site_id)+",";
                 if(opt_ids.indexOf(",302,") > -1 && opt_ids.indexOf(",315,") > -1)
                 {
                     str += "<li id='315' class='ico_edit' ><a  title='修改' href='javascript:openUpdatePage("+beanList.get(i-1).info_id+","+beanList.get(i-1).model_id+","+beanList.get(i-1).is_host+")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
@@ -570,7 +570,7 @@ function getTreeIdsOfLeavies(){
 }
 
 function isSubNode(node_id){	
-	if(top.isSubNode(node_id)){
+	if(isSubNode(node_id)){
 		subNode = true;//叶节点
 	}else{
 		subNode = false;
@@ -578,7 +578,7 @@ function isSubNode(node_id){
 }
 
 function getTheLeafNodes(){
-	var catIds = top.getCurrentNodeChileLeftNodeIDS();
+	var catIds = getCurrentNodeChileLeftNodeIDS();
 	if(catIds == null){
 		search_steps = "";
 	}else{
@@ -602,16 +602,16 @@ function openAddInfoPage(model_id)
 	is_save_first_page = true;
 	if(app == "ggfw")
 	{
-		top.addTab(true,"/sys/cms/info/article/m_link.jsp?cid="+cid+"&site_id="+site_id+"&app_id="+app+"&model=12&topnum="+top.curTabIndex,"添加信息");
+		addTab(true,"/sys/cms/info/article/m_link.jsp?cid="+cid+"&site_id="+site_id+"&app_id="+app+"&model=12&topnum="+curTabIndex,"添加信息");
 	}
 	else
 	{
 		if(gk_article == true)
 		{
-			top.addTab(true,"/sys/cms/info/article/m_gk_gkzn.jsp?cid="+cid+"&site_id="+site_id+"&app_id="+app+"&model="+model_id+"&topnum="+top.curTabIndex,"添加信息");
+			addTab(true,"/sys/cms/info/article/m_gk_gkzn.jsp?cid="+cid+"&site_id="+site_id+"&app_id="+app+"&model="+model_id+"&topnum="+curTabIndex,"添加信息");
 		}
 		else
-			top.addTab(true,"/sys/cms/info/article/"+getAddPagebyModel(model_id)+"?cid="+cid+"&site_id="+site_id+"&app_id="+app+"&model="+model_id+"&topnum="+top.curTabIndex,"添加信息");
+			addTab(true,"/sys/cms/info/article/"+getAddPagebyModel(model_id)+"?cid="+cid+"&site_id="+site_id+"&app_id="+app+"&model="+model_id+"&topnum="+curTabIndex,"添加信息");
 	}
 }
 
@@ -621,31 +621,31 @@ function openUpdatePage(Infoid,model_id,is_host)
 	if(is_host == 1)
 	{
 		//引用信息只修改信息主表内容
-		top.addTab(true,"/sys/cms/info/article/update_info.jsp?cid="+cid+"&info_id="+Infoid+"&site_id="+site_id+"&app_id="+app+"&model="+model_id+"&topnum="+top.curTabIndex,"维护信息");
+		addTab(true,"/sys/cms/info/article/update_info.jsp?cid="+cid+"&info_id="+Infoid+"&site_id="+site_id+"&app_id="+app+"&model="+model_id+"&topnum="+curTabIndex,"维护信息");
 	}
 	else
 	{
 		if(gk_article == true)
 		{
-			top.addTab(true,"/sys/cms/info/article/m_gk_gkzn.jsp?cid="+cid+"&info_id="+Infoid+"&site_id="+site_id+"&app_id="+app+"&model="+model_id+"&topnum="+top.curTabIndex,"维护信息");
+			addTab(true,"/sys/cms/info/article/m_gk_gkzn.jsp?cid="+cid+"&info_id="+Infoid+"&site_id="+site_id+"&app_id="+app+"&model="+model_id+"&topnum="+curTabIndex,"维护信息");
 		}else
-			top.addTab(true,"/sys/cms/info/article/"+getAddPagebyModel(model_id)+"?cid="+cid+"&info_id="+Infoid+"&site_id="+site_id+"&app_id="+app+"&model="+model_id+"&topnum="+top.curTabIndex,"维护信息");
+			addTab(true,"/sys/cms/info/article/"+getAddPagebyModel(model_id)+"?cid="+cid+"&info_id="+Infoid+"&site_id="+site_id+"&app_id="+app+"&model="+model_id+"&topnum="+curTabIndex,"维护信息");
 	}
 }
 
 function openViewPage(i_id)
 {
 	//window.location.href = "/sys/cms/info/article/infoView.jsp?info_id="+i_id+"&site_id="+site_id+"&snum="+snum;
-	top.addTab(true,"/sys/cms/info/article/infoView.jsp?info_id="+i_id+"&site_id="+site_id+"&topnum="+top.curTabIndex,"查看信息");
+	addTab(true,"/sys/cms/info/article/infoView.jsp?info_id="+i_id+"&site_id="+site_id+"&topnum="+curTabIndex,"查看信息");
 }
 
 //生成静态页面
 function createStaticContentHtml(){
 	var selectList = table.getSelecteBeans();
 	if(InfoBaseRPC.createContentHTML(selectList)){
-		top.msgAlert("静态页生成成功");		
+		msgAlert("静态页生成成功");
 	}else{
-		top.msgWargin("静态页生成失败,请重新生成");
+		msgWargin("静态页生成失败,请重新生成");
 	}
 }
 
@@ -653,10 +653,10 @@ function createStaticContentHtml(){
 function publishInfo(){
 	var selectList = table.getSelecteBeans();
 	if(InfoBaseRPC.updateInfoStatus(selectList,"8")){
-		top.msgAlert("信息发布成功");
+		msgAlert("信息发布成功");
 		reloadInfoDataList();
 	}else{
-		top.msgWargin("信息发布失败");
+		msgWargin("信息发布失败");
 	}
 }
 
@@ -664,10 +664,10 @@ function publishInfo(){
 function cancleInfo(){
 	var selectList = table.getSelecteBeans();
 	if(InfoBaseRPC.updateInfoStatus(selectList,"3")){
-		top.msgAlert("信息撤销成功");
+		msgAlert("信息撤销成功");
 		reloadInfoDataList();
 	}else{
-		top.msgWargin("信息撤销失败");
+		msgWargin("信息撤销失败");
 	}
 }
 
@@ -675,10 +675,10 @@ function cancleInfo(){
 function backInfo(){
 	var selectIDS = table.getSelecteCheckboxValue("info_id");
 	if(InfoBaseRPC.backInfo(selectIDS)){
-		top.msgAlert("信息归档成功");
+		msgAlert("信息归档成功");
 		reloadInfoDataList();
 	}else{
-		top.msgWargin("信息归档失败");
+		msgWargin("信息归档失败");
 	}
 }
 /*
@@ -686,10 +686,10 @@ function backInfo(){
 function goBackInfo(){
 	var selectList = table.getSelecteBeans();
 	if(InfoBaseRPC.goBackInfo(selectList)){
-		top.msgAlert("信息归档成功");
+		msgAlert("信息归档成功");
 		reloadInfoDataList();
 	}else{
-		top.msgWargin("信息归档失败");
+		msgWargin("信息归档失败");
 	}
 }*/
 
@@ -698,10 +698,10 @@ function deleteInfoData(){
 	var selectList = table.getSelecteBeans();
 
 	if(InfoBaseRPC.deleteInfo(selectList)){
-		top.msgAlert("信息"+WCMLang.Delete_success);
+		msgAlert("信息"+WCMLang.Delete_success);
 		reloadInfoDataList();
 	}else{
-		top.msgWargin("信息"+WCMLang.Delete_fail);
+		msgWargin("信息"+WCMLang.Delete_fail);
 	}
 }
 
@@ -733,7 +733,7 @@ function searchInfo()
 {
 	var keywords = $("#searchkey").val();
 	if(keywords.trim() == "" ||  keywords == null){
-		top.msgAlert(WCMLang.Search_empty);
+		msgAlert(WCMLang.Search_empty);
 		return;
 	}
 	var orderFeilds = $("#orderByFields").val();
@@ -795,12 +795,12 @@ function changeTimeSortHandl(val)
 
 //推送
 function openWindowForPush(){		
-	top.OpenModalWindow("信息推送","/sys/cms/info/article/infoTS.jsp?site_id="+site_id+"&app_id="+app,400,480);
+	OpenModalWindow("信息推送","/sys/cms/info/article/infoTS.jsp?site_id="+site_id+"&app_id="+app,400,480);
 }
 
 //转移
 function openWindowForMov(){	
-	top.OpenModalWindow("信息转移","/sys/cms/info/article/infoMove.jsp?site_id="+site_id+"&app_id="+app,400,460);	
+	OpenModalWindow("信息转移","/sys/cms/info/article/infoMove.jsp?site_id="+site_id+"&app_id="+app,400,460);
 }
 
 /*function moveInfoHandl(cat_id)
@@ -827,9 +827,9 @@ function moveInfoHandl(cat_id)
 function toPass(){
 	var selectList = table.getSelecteBeans();	
 	if(InfoBaseRPC.passInfoStatus(selectList,LoginUserBean.user_id)){
-		top.msgAlert("信息送审成功");		
+		msgAlert("信息送审成功");
 	}else{
-		top.msgWargin("信息送审失败");
+		msgWargin("信息送审失败");
 	}
 	reloadInfoDataList();
 }
@@ -838,9 +838,9 @@ function toPass(){
 function onPass(){
 	var selectList = table.getSelecteBeans();
 	if(InfoBaseRPC.passInfoStatus(selectList,LoginUserBean.user_id)){
-		top.msgAlert("审核操作成功");	
+		msgAlert("审核操作成功");
 	}else{
-		top.msgWargin("审核操作失败");
+		msgWargin("审核操作失败");
 	}
 	reloadInfoDataList();
 }
@@ -854,9 +854,9 @@ function noPass(desc){
 		selectIDS = table.getSelecteCheckboxValue("info_id");	
 	
 	if(InfoBaseRPC.noPassInfoStatus(selectIDS,desc)){
-		top.msgAlert("退回操作成功");		
+		msgAlert("退回操作成功");
 	}else{
-		top.msgWargin("退回操作失败");
+		msgWargin("退回操作失败");
 	}
 	temp_info_id = null;
 	reloadInfoDataList();
@@ -867,7 +867,7 @@ function noPassDesc(id)
 {
 	if(id != null && id != "")
 		temp_info_id = id;
-	top.OpenModalWindow("退稿意见","/sys/cms/info/article/noPassDesc.jsp",520,235);	
+	OpenModalWindow("退稿意见","/sys/cms/info/article/noPassDesc.jsp",520,235);
 }
 
 //单条信息通过
@@ -875,9 +875,9 @@ function doPass(num){
 	var list = new List();
 	list.add(beanList.get(num));
 	if(InfoBaseRPC.passInfoStatus(list,LoginUserBean.user_id)){
-		top.msgAlert("审核操作成功");
+		msgAlert("审核操作成功");
 	}else{		
-		top.msgWargin("审核操作失败");
+		msgWargin("审核操作失败");
 	}
 	reloadInfoDataList();
 }
@@ -886,9 +886,9 @@ function doPass(num){
 function doNoPass(id){
 	
 	if(InfoBaseRPC.noPassInfoStatus(id)){
-		top.msgAlert("退回操作成功");		
+		msgAlert("退回操作成功");
 	}else{
-		top.msgWargin("退回操作失败");
+		msgWargin("退回操作失败");
 	}
 	reloadInfoDataList();
 }
@@ -897,10 +897,10 @@ function doNoPass(id){
 function rebackInfo(){
 	var selectList = table.getSelecteBeans();
 	if(InfoBaseRPC.goBackInfo(selectList)){
-		top.msgAlert("还原操作成功");	
+		msgAlert("还原操作成功");
 		reloadInfoDataList();
 	}else{
-		top.msgWargin("还原操作失败");
+		msgWargin("还原操作失败");
 	}	
 }
 
@@ -909,10 +909,10 @@ function realDelInfo(){
 	var selectList = table.getSelecteBeans();
 	
 	if(InfoBaseRPC.realDeleteInfo(selectList)){
-		top.msgAlert("信息"+WCMLang.Delete_success);	
+		msgAlert("信息"+WCMLang.Delete_success);
 		reloadInfoDataList();
 	}else{
-		top.msgWargin("信息"+WCMLang.Delete_fail);
+		msgWargin("信息"+WCMLang.Delete_fail);
 	}	
 }
 
@@ -935,7 +935,7 @@ function findNodesById(id){
 
 //清空回收站
 function clearAllInfo(){	
-	var cIds = top.getCurrentNodeChileLeftNodeIDS();
+	var cIds = getCurrentNodeChileLeftNodeIDS();
 	cIds = cIds.substring(1);
 
 	var temp_site_id = site_id;
@@ -946,10 +946,10 @@ function clearAllInfo(){
 	}
 	
 	if(InfoBaseRPC.clearTrach(cIds,app,temp_site_id)){
-		top.msgAlert("回收站清空成功");
+		msgAlert("回收站清空成功");
 		reloadInfoDataList();
 	}else{			
-		top.msgWargin("回收站清空失败");
+		msgWargin("回收站清空失败");
 	}	
 }
 
@@ -985,10 +985,10 @@ function doSubmitPage(num){
 	list.add(beanList.get(num));
 	
 	if(InfoBaseRPC.passInfoStatus(list,LoginUserBean.user_id)){
-		top.msgAlert("送审操作成功");
+		msgAlert("送审操作成功");
 		reloadInfoDataList();
 	}else{		
-		top.msgWargin("送审操作失败");
+		msgWargin("送审操作失败");
 	}	
 }
 
@@ -997,10 +997,10 @@ function doPublish(num){
 	var list = new List();
 	list.add(beanList.get(num));
 	if(InfoBaseRPC.updateInfoStatus(list,"8")){
-		top.msgAlert("信息发布成功");
+		msgAlert("信息发布成功");
 		reloadInfoDataList();
 	}else{
-		top.msgWargin("信息发布失败");
+		msgWargin("信息发布失败");
 	}
 }
 
@@ -1009,10 +1009,10 @@ function doCancel(num){
 	var list = new List();
 	list.add(beanList.get(num));
 	if(InfoBaseRPC.updateInfoStatus(list,"3")){
-		top.msgAlert("信息撤销成功");
+		msgAlert("信息撤销成功");
 		reloadInfoDataList();
 	}else{
-		top.msgWargin("信息撤销失败");
+		msgWargin("信息撤销失败");
 	}
 }
 
@@ -1021,10 +1021,10 @@ function doClearOneInfo(num){
 	var list = new List();
 	list.add(beanList.get(num));
 	if(InfoBaseRPC.realDeleteInfo(list)){
-		top.msgAlert("信息"+WCMLang.Delete_success);
+		msgAlert("信息"+WCMLang.Delete_success);
 		reloadInfoDataList();
 	}else{
-		top.msgWargin("信息"+WCMLang.Delete_fail);
+		msgWargin("信息"+WCMLang.Delete_fail);
 	}
 }
 
@@ -1033,26 +1033,26 @@ function doReduce(num){
 	var list = new List();
 	list.add(beanList.get(num));
 	if(InfoBaseRPC.goBackInfo(list)){
-		top.msgAlert("还原操作成功");
+		msgAlert("还原操作成功");
 		reloadInfoDataList();
 	}else{
-		top.msgWargin("还原操作失败");
+		msgWargin("还原操作失败");
 	}	
 }
 
 //单条信息逻辑删除
 function doDelete(num){
-	top.msgConfirm(WCMLang.Delete_confirm,"doDeleteHandl("+num+")");	
+	msgConfirm(WCMLang.Delete_confirm,"doDeleteHandl("+num+")");
 }
 
 function doDeleteHandl(num){
 	var list = new List();
 	list.add(beanList.get(num));
 	if(InfoBaseRPC.deleteInfo(list)){
-		top.msgAlert("信息"+WCMLang.Delete_success);
+		msgAlert("信息"+WCMLang.Delete_success);
 		reloadInfoDataList();
 	}else{
-		top.msgWargin("信息"+WCMLang.Delete_fail);
+		msgWargin("信息"+WCMLang.Delete_fail);
 	}
 }
 
@@ -1060,16 +1060,16 @@ function doDeleteHandl(num){
 function getInfoFromOtherCat(){
 	//打开页面
 	is_save_first_page = true;
-	top.OpenModalWindow("信息获取","/sys/cms/info/article/infoGet.jsp?cat_id="+cid+"&site_id="+site_id+"&app_id="+app,800,530);	
+	OpenModalWindow("信息获取","/sys/cms/info/article/infoGet.jsp?cat_id="+cid+"&site_id="+site_id+"&app_id="+app,800,530);
 }
 
 //打开高级搜索页面
 function openHighSearchPage()
 {
 	if(app == "cms")
-		top.OpenModalWindow("高级搜索","/sys/cms/info/article/infoSearch.jsp",350,360);
+		OpenModalWindow("高级搜索","/sys/cms/info/article/infoSearch.jsp",350,360);
 	if(app == "zwgk")
-		top.OpenModalWindow("高级搜索","/sys/cms/info/article/gkInfoSearch.jsp",590,510);	
+		OpenModalWindow("高级搜索","/sys/cms/info/article/gkInfoSearch.jsp",590,510);
 }
 
 //高级搜索处理
@@ -1099,5 +1099,5 @@ function highSearchHandl(search_cons,lab_num,order_type_num)
 function getAllocateInfo()
 {
 	is_save_first_page = true;
-	top.OpenModalWindow("信息获取","/sys/cms/info/article/getAllocateInfo.jsp?cat_id="+cid+"&site_id="+site_id+"&app_id="+app,800,530);	
+	OpenModalWindow("信息获取","/sys/cms/info/article/getAllocateInfo.jsp?cat_id="+cid+"&site_id="+site_id+"&app_id="+app,800,530);
 }

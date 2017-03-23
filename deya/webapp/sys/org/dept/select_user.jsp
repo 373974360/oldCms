@@ -255,7 +255,7 @@ $(document).ready(function(){
 	function setSelectedUserInSelect()
 	{
 		try{
-			var user_ids = top.getCurrentFrameObj().getSelectedUserIDS();
+			var user_ids = getCurrentFrameObj().getSelectedUserIDS();
 			if(user_ids != "" && user_ids != null)
 			{
 				var tempA = user_ids.split(",");
@@ -292,8 +292,8 @@ $(document).ready(function(){
 	
 	function returnUserID()
 	{
-		eval("top.getCurrentFrameObj()."+handl_name+"('"+getSelectUserIDS()+"','"+getSelectUserNames()+"')");	
-		top.CloseModalWindow();
+		eval("getCurrentFrameObj()."+handl_name+"('"+getSelectUserIDS()+"','"+getSelectUserNames()+"')");
+		CloseModalWindow();
 	}
 
 </script>
@@ -349,7 +349,7 @@ $(document).ready(function(){
 	<tr>
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="returnUserID()" value="保存" />				
-			<input id="userAddCancel" name="btn1" type="button" onclick="top.CloseModalWindow();" value="取消" />	
+			<input id="userAddCancel" name="btn1" type="button" onclick="CloseModalWindow();" value="取消" />
 		</td>
 	</tr>
 </table>

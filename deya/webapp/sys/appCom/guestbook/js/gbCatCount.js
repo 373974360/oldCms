@@ -57,7 +57,7 @@ function funOK()
 		{
 			if(!judgeDate(start_day,end_day))
 			{
-				top.msgWargin("结束时间不能在开始时间前");
+				msgWargin("结束时间不能在开始时间前");
 				return;
 			}
 		}
@@ -65,7 +65,7 @@ function funOK()
 		reloadList();
 	}else
 	{
-		top.msgWargin("请选择留言分类");
+		msgWargin("请选择留言分类");
 	}
 	
 }

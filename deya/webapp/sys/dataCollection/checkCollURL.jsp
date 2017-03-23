@@ -47,7 +47,7 @@ function iniCollUrlTree()
 
 function coloseModelWindow()
 {
-	top.CloseModalWindow();
+	CloseModalWindow();
 }
 
 function initLoading(){

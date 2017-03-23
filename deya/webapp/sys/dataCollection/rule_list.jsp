@@ -56,7 +56,7 @@
 
     function showRuleCateTree()
     {
-        json_data = eval(CollectionDataRPC.getJSONTreeBySiteUser(top.LoginUserBean.user_id,site_id));
+        json_data = eval(CollectionDataRPC.getJSONTreeBySiteUser(LoginUserBean.user_id,site_id));
         setLeftMenuTreeJsonData(json_data);
         initMenuTree();
         treeNodeSelected(id);

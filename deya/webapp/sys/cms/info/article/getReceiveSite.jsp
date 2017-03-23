@@ -41,7 +41,7 @@ function showReceiveCateList(val)
 		var json_data = eval(SendInfoRPC.getReceiveCategoryList(getReceiveSiteDomain(val)));
 		if(json_data == null || json_data[0].children.length == 0)
 		{
-			top.msgWargin("该站点没有可以报送的目录");
+			msgWargin("该站点没有可以报送的目录");
 			return;
 		}else
 		{
@@ -54,7 +54,7 @@ function showReceiveCateList(val)
 	}
 	catch(e)
 	{
-		top.msgWargin("该站点没有可以报送的目录");
+		msgWargin("该站点没有可以报送的目录");
 		return;
 	}
 	
@@ -104,12 +104,12 @@ function fnOK()
 {
 	if($("#sel_list li").length == 0)
 	{
-		top.msgWargin("请选择要报送的站点目录");
+		msgWargin("请选择要报送的站点目录");
 		return;
 	}
-	var info_beans = top.getCurrentFrameObj().getSelectInfoBeans();
-	var site_id = top.getCurrentFrameObj().site_id;
-	var app_id = top.getCurrentFrameObj().app;
+	var info_beans = getCurrentFrameObj().getSelectInfoBeans();
+	var site_id = getCurrentFrameObj().site_id;
+	var app_id = getCurrentFrameObj().app;
 	var sendRecordList = new List();
 	$("#sel_list li").each(function(){
 		var bean = BeanUtil.getCopy(SendRecordBean);
@@ -141,16 +141,16 @@ function fnOK()
 	var mess = SendInfoRPC.insertSendInfo(sendRecordList,info_list);
 	if(mess == "")
 	{
-		top.msgAlert("信息报送成功");		
-		top.CloseModalWindow();
+		msgAlert("信息报送成功");
+		CloseModalWindow();
 		return;
 	}
 	if(mess == "false")
 	{
-		top.msgWargin("信息报送失败,请重新报送");
+		msgWargin("信息报送失败,请重新报送");
 		return;
 	}
-	top.msgWargin(mess.substring(1)+" 的站点报送失败，请重新报送至该站点");
+	msgWargin(mess.substring(1)+" 的站点报送失败，请重新报送至该站点");
 	return;
 	
 }
@@ -210,7 +210,7 @@ function fnOK()
 			<tr>
 				<td align="left" valign="middle" style="text-indent:100px;">
 					<input type="button" value="确定" class="btn1" onclick="fnOK()" />
-					<input type="button" value="取消" class="btn1" onclick="top.CloseModalWindow();" />
+					<input type="button" value="取消" class="btn1" onclick="CloseModalWindow();" />
 				</td>
 			</tr>
 		</table>

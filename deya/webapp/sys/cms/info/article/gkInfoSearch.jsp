@@ -16,7 +16,7 @@ $(document).ready(function() {
 	if ($.browser.msie && $.browser.version == "6.0" && $("html")[0].scrollHeight > $("html").height())
 		$("html").css("overflowY", "scroll");
 
-	$("#lab_num option[value="+top.getCurrentFrameObj().snum+"]").attr("selected",true);
+	$("#lab_num option[value="+getCurrentFrameObj().snum+"]").attr("selected",true);
 	
 	getAllInuptUserID();
 
@@ -47,7 +47,7 @@ function noSelected()
 function getAllInuptUserID()
 {
 	var m = new Map();
-	var cids = top.getCurrentNodeChileLeftNodeIDS();
+	var cids = getCurrentNodeChileLeftNodeIDS();
 	
 	cids = cids.substring(1);
 	if(cids.indexOf(",") > -1)
@@ -55,7 +55,7 @@ function getAllInuptUserID()
 	else
 		m.put("cat_id", cids);
 
-	m.put("site_id", top.getCurrentFrameObj().site_id);
+	m.put("site_id", getCurrentFrameObj().site_id);
 	var user_list = InfoBaseRPC.getAllInuptUserID(m);
 	user_list = List.toJSList(user_list);
 	$("#input_user").addOptions(user_list,"user_id","user_realname");
@@ -109,7 +109,7 @@ function related_ok(){
 		{
 			if(judgeDate(generate_end_time,generate_start_time))
 			{
-				top.msgWargin("生成日期结束时间不能小于开始时间");
+				msgWargin("生成日期结束时间不能小于开始时间");
 				return;
 			}
 		}
@@ -128,7 +128,7 @@ function related_ok(){
 		{
 			if(judgeDate(effect_end_time,effect_start_time))
 			{
-				top.msgWargin("生效日期结束时间不能小于开始时间");
+				msgWargin("生效日期结束时间不能小于开始时间");
 				return;
 			}
 		}
@@ -147,7 +147,7 @@ function related_ok(){
 		{
 			if(judgeDate(aboli_end_time,aboli_start_time))
 			{
-				top.msgWargin("废止日期结束时间不能小于开始时间");
+				msgWargin("废止日期结束时间不能小于开始时间");
 				return;
 			}
 		}
@@ -192,12 +192,12 @@ function related_ok(){
 		search_con += " and gk.serve_id = "+serve_id+"";
 	}
 	
-	top.getCurrentFrameObj().highSearchHandl(search_con,lab_num,orderByFields);
-	top.CloseModalWindow();
+	getCurrentFrameObj().highSearchHandl(search_con,lab_num,orderByFields);
+	CloseModalWindow();
 }
 
 function related_cancel(){
-	top.CloseModalWindow();
+	CloseModalWindow();
 }
 
 function getCheckedLeafNode(){

@@ -66,12 +66,12 @@ function returnDeptID()
 	
 	if(t_id == null || t_id == "")
 	{
-		top.msgWargin(WCMLang.selected_template);
+		msgWargin(WCMLang.selected_template);
 		return;
 	}else
 	{			
-		eval("top.getCurrentFrameObj()."+handl_name+"('"+t_id+"','"+t_name+"')");
-		top.CloseModalWindow();
+		eval("getCurrentFrameObj()."+handl_name+"('"+t_id+"','"+t_name+"')");
+		CloseModalWindow();
 	}	
 }
 </script>
@@ -108,7 +108,7 @@ function returnDeptID()
 	<tr>
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="returnDeptID()" value="保存" />
-			<input id="userAddCancel" name="btn1" type="button" onclick="top.CloseModalWindow();" value="取消" />	
+			<input id="userAddCancel" name="btn1" type="button" onclick="CloseModalWindow();" value="取消" />
 		</td>
 	</tr>
 </table>

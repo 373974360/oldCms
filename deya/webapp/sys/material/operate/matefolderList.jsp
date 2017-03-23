@@ -18,7 +18,7 @@ var jsonData;
 var chold_jData;
 var appList;
 var site_id ="<%=request.getParameter("site_id")%>";
-var user_id = top.LoginUserBean.user_id;
+var user_id = LoginUserBean.user_id;
 $(document).ready(function(){	
 	initButtomStyle();
 	init_FromTabsStyle();

@@ -81,7 +81,7 @@
 
 	function openSerTree(title,handl_name)
 	{
-		top.OpenModalWindow(title,"/sys/ggfw/ser/select_ser_tree.jsp?&handl_name="+handl_name,450,510);
+		OpenModalWindow(title,"/sys/ggfw/ser/select_ser_tree.jsp?&handl_name="+handl_name,450,510);
 	}
 
 	//移动目录
@@ -91,13 +91,13 @@
 		{
 			var selectIDS = table.getSelecteCheckboxValue("ser_id");			
 			if(SerRPC.moveSerCategory(parent_id,selectIDS)){
-				top.msgAlert("目录"+WCMLang.Move_success);
+				msgAlert("目录"+WCMLang.Move_success);
 				reloadSerCateTree();
 				treeNodeSelected(ser_id);
 				loadSerCategoryTable();
 			}else
 			{
-				top.msgWargin("目录"+WCMLang.Move_fail);
+				msgWargin("目录"+WCMLang.Move_fail);
 				return;
 			}
 		}

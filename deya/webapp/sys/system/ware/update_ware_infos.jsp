@@ -21,7 +21,7 @@
 <script type="text/javascript">
 
 var id = <%=id%>;
-var site_id = top.getCurrentFrameObj().site_id;
+var site_id = getCurrentFrameObj().site_id;
 var WareRPC = jsonrpc.WareRPC;
 var WareInfos = new Bean("com.deya.wcm.bean.system.ware.WareInfos",true);
 var val=new Validator();
@@ -62,12 +62,12 @@ function updateWareInfos()
 	bean.id = id;
 	if(WareRPC.updateWareInfos(bean))
 	{
-		top.msgAlert("信息"+WCMLang.Add_success);
-		top.getCurrentFrameObj().updateInfoToUL(bean);
-		top.CloseModalWindow();
+		msgAlert("信息"+WCMLang.Add_success);
+		getCurrentFrameObj().updateInfoToUL(bean);
+		CloseModalWindow();
 	}else
 	{
-		top.msgWargin("信息"+WCMLang.Add_fail);
+		msgWargin("信息"+WCMLang.Add_fail);
 	}
 }
 
@@ -172,7 +172,7 @@ function showValue(id,o){
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="updateWareInfos()" value="保存" />	
 			<input id="userAddReset" name="btn1" type="button" onclick="formReSet('ware_infos',id)" value="重置" />	
-			<input id="userAddCancel" name="btn1" type="button" onclick="top.CloseModalWindow();" value="取消" />	
+			<input id="userAddCancel" name="btn1" type="button" onclick="CloseModalWindow();" value="取消" />
 		</td>
 	</tr>
 </table>

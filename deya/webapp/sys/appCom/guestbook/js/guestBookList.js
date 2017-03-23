@@ -74,7 +74,7 @@ function fillBean()
 
 		strTable += '<td align="left" valign="middle" class=""><ul class="comment_opt">';
 		
-		strTable += '<li><img src="../../images/del.gif" onclick="parent.msgConfirm(WCMLang.Delete_confirm,\'deleteGuestBook('+bean.id+')\')" class="pointer" title="删除"/></li>';
+		strTable += '<li><img src="../../images/del.gif" onclick="msgConfirm(WCMLang.Delete_confirm,\'deleteGuestBook('+bean.id+')\')" class="pointer" title="删除"/></li>';
 		strTable += '<li><img src="../../images/edit.gif" onclick="openUpdateGuestbookPage('+bean.id+');" class="pointer" title="编辑"/></li>';
 		strTable += '<li><img src="../../images/view.png" onclick="viewGuestBook('+bean.id+');" class="pointer" title="查看"/></li></ul></td>';
 			
@@ -96,15 +96,15 @@ function deleteGuestBook(id)
 {
 	if(GuestBookRPC.deleteGuestBook(id))
 	{
-		top.msgAlert("留言信息"+WCMLang.Delete_success);
+		msgAlert("留言信息"+WCMLang.Delete_success);
 		reloadList();
 	}else
-		top.msgWargin("留言信息"+WCMLang.Delete_fail);
+		msgWargin("留言信息"+WCMLang.Delete_fail);
 }
 
 function openUpdateGuestbookPage(id)
 {
-	top.addTab(true,"/sys/appCom/guestbook/reply_gb.jsp?site_id="+site_id+"&topnum="+top.curTabIndex+"&id="+id+"&gbs_id="+gbs_id+"&cat_id="+cat_id,"编辑留言");
+	addTab(true,"/sys/appCom/guestbook/reply_gb.jsp?site_id="+site_id+"&topnum="+curTabIndex+"&id="+id+"&gbs_id="+gbs_id+"&cat_id="+cat_id,"编辑留言");
 }
 
 function updateGuestbook()
@@ -117,16 +117,16 @@ function updateGuestbook()
 
 	if(GuestBookRPC.updateGuestBook(bean))
 	{
-		top.msgAlert("留言信息"+WCMLang.Add_success);
-		top.getCurrentFrameObj(topnum).reloadList();
-		top.tab_colseOnclick(top.curTabIndex);
+		msgAlert("留言信息"+WCMLang.Add_success);
+		getCurrentFrameObj(topnum).reloadList();
+		tab_colseOnclick(curTabIndex);
 	}else
-		top.msgWargin("留言信息"+WCMLang.Add_fail);
+		msgWargin("留言信息"+WCMLang.Add_fail);
 }
 
 function viewGuestBook(id)
 {
-	top.addTab(true,"/sys/appCom/guestbook/view_gb.jsp?site_id="+site_id+"&topnum="+top.curTabIndex+"&id="+id+"&gbs_id="+gbs_id+"&cat_id="+cat_id,"查看留言");
+	addTab(true,"/sys/appCom/guestbook/view_gb.jsp?site_id="+site_id+"&topnum="+curTabIndex+"&id="+id+"&gbs_id="+gbs_id+"&cat_id="+cat_id,"查看留言");
 }
 
 // 取得选中的评论ID
@@ -156,11 +156,11 @@ function deleteSelect(handl_name)
 	
 	if(selectIDS == "" || selectIDS == null)
 	{
-		parent.msgWargin(WCMLang.Select_empty);
+		msgWargin(WCMLang.Select_empty);
 		return;
 	}else
 	{		
-		parent.msgConfirm(WCMLang.Delete_confirm,handl_name);
+		msgConfirm(WCMLang.Delete_confirm,handl_name);
 	}
 }
 //批量删除
@@ -175,7 +175,7 @@ function multiSelect(handl_name)
 	var selectIDS = getSelecteCheckboxValue();
 	if(selectIDS == "" || selectIDS == null)
 	{
-		parent.msgWargin(WCMLang.Select_empty);
+		msgWargin(WCMLang.Select_empty);
 		return;
 	}else
 	{
@@ -188,11 +188,11 @@ function publishGuestBook(publish_status)
 	var selectIDS = getSelecteCheckboxValue();
 	if(GuestBookRPC.publishGuestBook(selectIDS,publish_status))
 	{
-		top.msgAlert("留言"+WCMLang.Publish_success);
+		msgAlert("留言"+WCMLang.Publish_success);
 		reloadList();
 	}else
 	{
-		top.msgWargin("留言"+WCMLang.Publish_fail);
+		msgWargin("留言"+WCMLang.Publish_fail);
 	}
 }
 

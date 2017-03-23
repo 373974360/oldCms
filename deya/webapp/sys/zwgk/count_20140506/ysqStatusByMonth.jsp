@@ -126,7 +126,7 @@ $(document).ready(function(){
          		<div>
 				 <input id="addButton" name="btn1" type="button" onclick="search()" value="统计" />	
 				 <input type="button" id="outFileBtn" style="display:none" onclick="outFileBtn()" value="导出"/>
-                 <input id="backBtn" name="btn1" type="button" onclick="top.tab_colseOnclick(top.curTabIndex)" value="关闭" />
+                 <input id="backBtn" name="btn1" type="button" onclick="tab_colseOnclick(curTabIndex)" value="关闭" />
                  </div>
 				 <span class="blank3"></span>
 		</td>
@@ -139,7 +139,7 @@ $(document).ready(function(){
 </table>
 </form>
 <span class="blank9"></span>
- <input id="backBtn1" name="btn1" type="button" onclick="top.tab_colseOnclick(top.curTabIndex)" value="关闭" />
+ <input id="backBtn1" name="btn1" type="button" onclick="tab_colseOnclick(curTabIndex)" value="关闭" />
 <div>
 <iframe src="" id="chart" style="display:none" name="chart" width="100%"	height="300" frameborder="0"></iframe>
 </div>

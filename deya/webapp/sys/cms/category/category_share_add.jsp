@@ -114,7 +114,7 @@ function addCategory()
 
 	if(CategoryRPC.categoryIsExist(parent_id,$("#cat_ename").val(),app_id,site_id))
 	{
-		top.msgWargin("该英文名称已存在此目录下，请更换英文名称");
+		msgWargin("该英文名称已存在此目录下，请更换英文名称");
 		return;
 	}
 
@@ -128,16 +128,16 @@ function addCategory()
 	if(CategoryRPC.insertCategory(bean,false))
 	{
 		CategoryRPC.insertCategoryModel(cat_model_list);
-		top.msgAlert("目录信息"+WCMLang.Add_success);	
+		msgAlert("目录信息"+WCMLang.Add_success);
 		try{
-			top.getCurrentFrameObj(top_index).changeCategoryListTable(parent_id);
-			top.getCurrentFrameObj(top_index).insertCategoryTree(bean.cat_id,bean.cat_cname);
+			getCurrentFrameObj(top_index).changeCategoryListTable(parent_id);
+			getCurrentFrameObj(top_index).insertCategoryTree(bean.cat_id,bean.cat_cname);
 		}catch(e){}
-		top.tab_colseOnclick(top.curTabIndex);
+		tab_colseOnclick(curTabIndex);
 	}
 	else
 	{
-		top.msgWargin("目录信息"+WCMLang.Add_fail);
+		msgWargin("目录信息"+WCMLang.Add_fail);
 	}
 }
 
@@ -156,7 +156,7 @@ function updateCategory()
 	{
 		if(CategoryRPC.categoryIsExist(parent_id,bean.cat_ename,app_id,site_id))
 		{
-			top.msgWargin("该英文名称已存在此目录下，请更换英文名称");
+			msgWargin("该英文名称已存在此目录下，请更换英文名称");
 			return;
 		}
 	}
@@ -167,16 +167,16 @@ function updateCategory()
 	if(CategoryRPC.updateCategory(bean))
 	{
 		CategoryRPC.updateCategoryModel(cat_model_list,bean.id,site_id);
-		top.msgAlert("目录信息"+WCMLang.Add_success);	
+		msgAlert("目录信息"+WCMLang.Add_success);
 		try{
-			top.getCurrentFrameObj(top_index).changeCategoryListTable(parent_id);
-			top.getCurrentFrameObj(top_index).updateCategoryTree(bean.id,bean.cat_cname);
+			getCurrentFrameObj(top_index).changeCategoryListTable(parent_id);
+			getCurrentFrameObj(top_index).updateCategoryTree(bean.id,bean.cat_cname);
 		}catch(e){}
-		top.tab_colseOnclick(top.curTabIndex);
+		tab_colseOnclick(curTabIndex);
 	}
 	else
 	{
-		top.msgWargin("目录信息"+WCMLang.Add_fail);
+		msgWargin("目录信息"+WCMLang.Add_fail);
 	}
 }
 
@@ -378,7 +378,7 @@ function checkedCategoryModelInfo_shared(cat_id)
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="" value="保存" />	
 			<input id="userAddReset" name="btn1" type="button" onclick="formReSet('category_table',id)" value="重置" />	
-			<input id="userAddCancel" name="btn1" type="button" onclick="top.tab_colseOnclick(top.curTabIndex);" value="取消" />	
+			<input id="userAddCancel" name="btn1" type="button" onclick="tab_colseOnclick(curTabIndex);" value="取消" />
 		</td>
 	</tr>
 </table>

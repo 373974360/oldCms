@@ -27,7 +27,7 @@
 			if(types == "iframe")
 			{
 				$("#closeButton").click(function(){
-					parent.closeModelWin();
+					closeModelWin();
 				})
 			}
 			else

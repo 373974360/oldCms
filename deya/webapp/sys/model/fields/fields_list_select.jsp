@@ -43,7 +43,7 @@ $(document).ready(function(){
 		<tr> 
 			<td align="right" valign="middle">
 			    <input id="btn301" name="btn1" type="button" onclick="saveCateIDS()" value="确定" />
-				<input id="btn303" name="btn3" type="button" onclick="javascript:top.CloseModalWindow();" value="关闭" />
+				<input id="btn303" name="btn3" type="button" onclick="javascript:CloseModalWindow();" value="关闭" />
 			</td>
 		</tr>
 </table>

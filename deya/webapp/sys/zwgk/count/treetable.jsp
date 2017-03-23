@@ -40,7 +40,7 @@ $(document).ready(function(){
 	if($.browser.msie&&$.browser.version=="6.0"&&$("html")[0].scrollHeight>$("html").height()) $("html").css("overflowY","scroll"); 
 	if(type == "allsite")
 	{
-		node_ids = window.parent.node_ids;
+		node_ids = window.node_ids;
 		createTableAllSite();
 	}
 	else

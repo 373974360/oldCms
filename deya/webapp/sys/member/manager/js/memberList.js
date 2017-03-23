@@ -18,6 +18,8 @@ function initTable(){
 	colsList.add(setTitleClos("me_realname","真实姓名","150px","","",""));//英文名，显示名，宽，高，样式名，点击事件　
 	colsList.add(setTitleClos("me_account","登录名","150px","","",""));
 	colsList.add(setTitleClos("me_nickname","昵称","150px","","",""));
+    colsList.add(setTitleClos("add_time","添加时间","150px","","",""));
+    colsList.add(setTitleClos("update_time","更新时间","150px","","",""));
 	colsList.add(setTitleClos("me_status","状态","150px","","",""));
 	colsList.add(setTitleClos("blank"," ","","","",""));
 	
@@ -40,12 +42,19 @@ function showList(){
 	var sortType = table.sortType;		
 	if(sortCol == "" || sortCol == null)
 	{
-		sortCol = "id";
-		sortType = "desc";
+        sortCol = "update_time";
+        sortType = "desc";
 	}
+
+    var mcat_id = MemberManRPC.getMCatIDByUser(LoginUserBean.user_id,current_site_id);
+    if(mcat_id != null && mcat_id != ""){
+        con_m.put("mcat_id", mcat_id);
+    }
 		
 	con_m.put("start_num", tp.getStart());	
 	con_m.put("page_size", tp.pageSize);
+    con_m.put("sort_name", "update_time");
+    con_m.put("sort_type", "desc");
 
 	beanList = MemberManRPC.getMemberList(con_m);//第一个参数为站点ID，暂时默认为空	
 	beanList = List.toJSList(beanList);//把list转成JS的List对象	
@@ -112,7 +121,7 @@ function memberSearch(obj)
 	var search_value = $(obj).parent().find("#searchkey").val();
 	if(search_value.trim() == "" ||  search_value == null)
 	{
-		top.msgAlert(WCMLang.Search_empty);
+		msgAlert(WCMLang.Search_empty);
 		return;
 	}
 	search_name = $(obj).parent().find("#searchFields").val(); 
@@ -150,12 +159,12 @@ function saveMember()
 	$("#member_table").autoBind(addMemberBeab);
 	if(MemberManRPC.RegisterMember(addMemberBeab, addRegisterBean))
 	{
-		top.msgAlert("会员信息"+WCMLang.Add_success);
+		msgAlert("会员信息"+WCMLang.Add_success);
 		window.history.go(-1);
 	}
 	else
 	{
-		top.msgWargin("会员信息"+WCMLang.Add_fail);
+		msgWargin("会员信息"+WCMLang.Add_fail);
 	}
 }
 
@@ -163,7 +172,7 @@ function saveMember()
 function updateStatus()
 {
 	var id = table.getSelecteCheckboxValue("me_id");
-	top.OpenModalWindow("会员维护","/sys/member/manager/member_status.jsp?member_id="+id,350,210);
+	OpenModalWindow("会员维护","/sys/member/manager/member_status.jsp?member_id="+id,350,210);
 }
 
 // 修改会员
@@ -189,12 +198,12 @@ function saveUpdate()
 	$("#member_table").autoBind(addMemberBean);
 	if(MemberManRPC.updateMemberInfo(addMemberBean, oldregisterBean))
 	{
-		top.msgAlert("会员信息"+WCMLang.Add_success);
+		msgAlert("会员信息"+WCMLang.Add_success);
 		window.history.go(-1);
 	}
 	else
 	{
-		top.msgWargin("会员信息"+WCMLang.Add_fail);
+		msgWargin("会员信息"+WCMLang.Add_fail);
 	}
 }
 
@@ -261,10 +270,10 @@ function deleteMember()
 
 	if(MemberManRPC.deleteMember(selectIDS))
 	{
-		top.msgAlert("会员信息"+WCMLang.Delete_success);
+		msgAlert("会员信息"+WCMLang.Delete_success);
 		reloadMemberList();
 	}else
 	{
-		top.msgWargin("会员信息"+WCMLang.Delete_fail);
+		msgWargin("会员信息"+WCMLang.Delete_fail);
 	}
 }

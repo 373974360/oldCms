@@ -67,7 +67,7 @@ function openUpdateErrorTypePage(id) {
         c_id = table.getSelecteCheckboxValue("id");
     }
 
-    top.OpenModalWindow("纠错分类", "/sys/project/dz_siteError/viewErrorType.jsp?id=" + c_id +"&topnum="+top.curTabIndex, 385, 210);
+    OpenModalWindow("纠错分类", "/sys/project/dz_siteError/viewErrorType.jsp?id=" + c_id +"&topnum="+curTabIndex, 385, 210);
 
 }
 
@@ -78,11 +78,11 @@ function deleteErrorType() {
     var m = new Map();
     m.put("id", selectIDS);
     if (SiteErrorRPC.deleteErrorType(m)) {
-        top.msgAlert("纠错分类" + WCMLang.Delete_success);
+        msgAlert("纠错分类" + WCMLang.Delete_success);
         reloadErrorTypeList();
     }
     else {
-        top.msgWargin("纠错分类" + WCMLang.Delete_fail);
+        msgWargin("纠错分类" + WCMLang.Delete_fail);
     }
 }
 
@@ -106,18 +106,18 @@ function updateErrorTypeData() {
         bool = SiteErrorRPC.insertErrorType(bean);
     }
     if (bool) {
-        top.msgAlert("纠错分类保存成功");
-        top.getCurrentFrameObj(topnum).reloadErrorTypeList();
-        top.CloseModalWindow();
+        msgAlert("纠错分类保存成功");
+        getCurrentFrameObj(topnum).reloadErrorTypeList();
+        CloseModalWindow();
 
     } else {
-        top.msgWargin("纠错分类保存失败，请重新操作");
+        msgWargin("纠错分类保存失败，请重新操作");
     }
 
 }
 
 function addInfo() {
-    top.OpenModalWindow("纠错分类", "/sys/project/dz_siteError/viewErrorType.jsp?topnum="+top.curTabIndex, 385, 210);
+    OpenModalWindow("纠错分类", "/sys/project/dz_siteError/viewErrorType.jsp?topnum="+curTabIndex, 385, 210);
 }
 
 
@@ -127,11 +127,11 @@ function saveSort()
     var ids = table.getAllCheckboxValue("id");;
     if(SiteErrorRPC.saveErrorTypeSort(ids))
     {
-        top.msgAlert(WCMLang.Sort_success);
+        msgAlert(WCMLang.Sort_success);
         reloadErrorTypeList();
     }
     else
     {
-        top.msgWargin(WCMLang.Sort_fail);
+        msgWargin(WCMLang.Sort_fail);
     }
 }

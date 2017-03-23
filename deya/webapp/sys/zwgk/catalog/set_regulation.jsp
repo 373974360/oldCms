@@ -119,7 +119,7 @@ function choose_regu()
 		var temp_ids = getLeafTreeNode("leftMenuTree2");
 		if(temp_ids == "|")
 		{
-			top.msgWargin("请选择信息公开目录");
+			msgWargin("请选择信息公开目录");
 			return;
 		}
 		cat_ids = temp_ids.split("|")[0];
@@ -133,7 +133,7 @@ function choose_regu()
 		var temp_ids = getLeafTreeNode("leftMenuTree");
 		if(temp_ids == "|")
 		{
-			top.msgWargin("请选择共享目录");
+			msgWargin("请选择共享目录");
 			return;
 		}
 		cat_ids = temp_ids.split("|")[0];
@@ -209,11 +209,11 @@ function related_ok()
 
 	if(AppCatalogRPC.insertAppCateRegu(reg_list,cata_id))
 	{
-		top.msgAlert("目录汇聚规则"+WCMLang.Set_success);
-		top.CloseModalWindow();
+		msgAlert("目录汇聚规则"+WCMLang.Set_success);
+		CloseModalWindow();
 	}else
 	{
-		top.msgWargin("目录汇聚规则"+WCMLang.set_fail);
+		msgWargin("目录汇聚规则"+WCMLang.set_fail);
 	}
 }
 </script>
@@ -307,7 +307,7 @@ h3{height:20px;}
 			<tr>
 				<td align="left" valign="middle" style="text-indent:100px;">
 					<input type="button" value="确定" class="btn1" onclick="related_ok()" />
-					<input type="button" value="取消" class="btn1" onclick="top.CloseModalWindow();" />
+					<input type="button" value="取消" class="btn1" onclick="CloseModalWindow();" />
 				</td>
 			</tr>
 		</table>

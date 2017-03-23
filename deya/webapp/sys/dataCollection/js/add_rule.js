@@ -5,7 +5,7 @@ var CategoryRPC = jsonrpc.CategoryRPC;
 //添加url地址
 function addStartURL(hand_name)
 {
-	top.OpenModalWindow("添加采集网址","/sys/dataCollection/addURL.jsp?hand_name="+hand_name,800,500);
+	OpenModalWindow("添加采集网址","/sys/dataCollection/addURL.jsp?hand_name="+hand_name,800,500);
 }
 
 function saveStartURL(urlStr,rowindex)
@@ -69,9 +69,9 @@ function UpdateStartURL()
 	{
 		var urlstr = encodeURIComponent(encodeURIComponent(selectRow.cells[0].innerHTML)); //获取所选行的第一列的值
 		var selRowIndex = selectRow.sectionRowIndex; //获取所选行的索引值
-		top.OpenModalWindow("修改采集网址","/sys/dataCollection/updateURL.jsp?hand_name=saveStartURL"+"&urlStr="+urlstr+"&rowIndex="+selRowIndex,800,500);
+		OpenModalWindow("修改采集网址","/sys/dataCollection/updateURL.jsp?hand_name=saveStartURL"+"&urlStr="+urlstr+"&rowIndex="+selRowIndex,800,500);
 	}else{
-		top.msgAlert("请选择要修改的记录!");
+		msgAlert("请选择要修改的记录!");
 	}
 }
 
@@ -141,7 +141,7 @@ function getCollRuleValue()
 		collRuleBean.cat_name = $("#cat_cname").val();
 		collRuleBean.cat_id = $("#catidhidden").val();
 	}else{
-		top.msgAlert("请输入栏目信息!");
+		msgAlert("请输入栏目信息!");
 	}
 	
 	var s = $("#coll_interval").is(':checked');
@@ -172,9 +172,9 @@ function addCollectionRule()
 	}
 	if(CollectionDataRPC.addCollectionRule(collRuleBean))
 	{
-		top.msgAlert("采集规则"+WCMLang.Add_success);
-		top.getCurrentFrameObj(tab_index).loadRuleTable(); 
-		top.tab_colseOnclick(top.curTabIndex);
+		msgAlert("采集规则"+WCMLang.Add_success);
+		getCurrentFrameObj(tab_index).loadRuleTable();
+		tab_colseOnclick(curTabIndex);
 	}
 }
 
@@ -188,15 +188,15 @@ function checkCollUrl()
 	var encode = $("#pageEncoding").val();
 
 	if(collURL == ""){
-		top.msgAlert("您还没有填写\"采集地址\"!");
+		msgAlert("您还没有填写\"采集地址\"!");
 		return;
 	}else{
 		if(listUrlstart == "" || listUrlend == ""){
-			top.msgAlert("您还没有填写\"列表页地址规则\"!");
+			msgAlert("您还没有填写\"列表页地址规则\"!");
 			return;
 		}
 	}
-	top.OpenModalWindow("测试采集地址","/sys/dataCollection/checkCollURL.jsp?collURL="+collURL+"&ListStart="+listUrlstart+"&ListEnd="+listUrlend+"&encode="+encode,800,550);
+	OpenModalWindow("测试采集地址","/sys/dataCollection/checkCollURL.jsp?collURL="+collURL+"&ListStart="+listUrlstart+"&ListEnd="+listUrlend+"&encode="+encode,800,550);
 }
 
 //修改规则
@@ -210,10 +210,10 @@ function updateCollectionRule()
 	id = parseInt(id);
 	if(CollectionDataRPC.updateRuleInfo(collRuleBean,id))
 	{
-		top.msgAlert("修改成功!");
-		top.getCurrentFrameObj(tab_index).loadRuleTable(); 
-		top.tab_colseOnclick(top.curTabIndex);
+		msgAlert("修改成功!");
+		getCurrentFrameObj(tab_index).loadRuleTable();
+		tab_colseOnclick(curTabIndex);
 	}else{
-		top.msgAlert("修改失败!");
+		msgAlert("修改失败!");
 	}
 }

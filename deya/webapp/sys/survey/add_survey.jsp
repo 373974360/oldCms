@@ -192,7 +192,7 @@ String site_id = request.getParameter("site_id");
 		}); 
 		function setContentAreaHeight()
 		{						
-			var div_height = parseInt(top.$("#leftMenu").css("height"));
+			var div_height = parseInt($("#leftMenu").css("height"));
 			$("#content_area").css("height",div_height-12);				
 			$("#design_div").css("height",div_height-20);	
 			$("#attrs_div").css("height",div_height-51);

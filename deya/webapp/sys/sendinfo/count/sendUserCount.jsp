@@ -58,7 +58,7 @@ function setCountCon()
 		m.put("t_site_id",t_site_ids.substring(1));
 	}else
 	{
-		top.msgWargin("请选择接收站点");
+		msgWargin("请选择接收站点");
 	    return false;
 	}
 
@@ -70,7 +70,7 @@ function setCountCon()
 		{
 			if(judgeDate(end_time,start_time))
 			{
-				top.msgWargin("结束时间不能小于开始时间");
+				msgWargin("结束时间不能小于开始时间");
 				return false;
 			}
 		}

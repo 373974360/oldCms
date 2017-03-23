@@ -43,7 +43,7 @@ function showList(){
 		
 	}else{
 		if(selected_ids== ""){
-			top.msgWargin("目录信息不能为空!");
+			msgWargin("目录信息不能为空!");
 			return;
 		}else{
 			mp.put("cat_ids",selected_ids);

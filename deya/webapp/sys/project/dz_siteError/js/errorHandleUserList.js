@@ -72,7 +72,7 @@ function openUpdateErrorHandleUserPage(id) {
         c_id = table.getSelecteCheckboxValue("id");
     }
 
-    top.OpenModalWindow("纠错处理用户", "/sys/project/dz_siteError/viewErrorHandleUser.jsp?id=" + c_id +"&topnum="+top.curTabIndex, 385, 210);
+    OpenModalWindow("纠错处理用户", "/sys/project/dz_siteError/viewErrorHandleUser.jsp?id=" + c_id +"&topnum="+curTabIndex, 385, 210);
 
 }
 
@@ -83,11 +83,11 @@ function deleteErrorHandleUser() {
     var m = new Map();
     m.put("id", selectIDS);
     if (SiteErrorRPC.deleteErrorHandleUser(m)) {
-        top.msgAlert("纠错处理用户" + WCMLang.Delete_success);
+        msgAlert("纠错处理用户" + WCMLang.Delete_success);
         reloadErrorHandleUserList();
     }
     else {
-        top.msgWargin("纠错处理用户" + WCMLang.Delete_fail);
+        msgWargin("纠错处理用户" + WCMLang.Delete_fail);
     }
 }
 
@@ -118,16 +118,16 @@ function updateErrorHandleUserData() {
         bool = SiteErrorRPC.insertErrorHandleUser(bean);
     }
     if (bool) {
-        top.msgAlert("纠错处理用户保存成功");
-        top.getCurrentFrameObj(topnum).reloadErrorHandleUserList();
-        top.CloseModalWindow();
+        msgAlert("纠错处理用户保存成功");
+        getCurrentFrameObj(topnum).reloadErrorHandleUserList();
+        CloseModalWindow();
 
     } else {
-        top.msgWargin("纠错处理用户保存失败，请重新操作");
+        msgWargin("纠错处理用户保存失败，请重新操作");
     }
 
 }
 
 function addInfo() {
-    top.OpenModalWindow("纠错处理用户", "/sys/project/dz_siteError/viewErrorHandleUser.jsp?topnum="+top.curTabIndex, 385, 210);
+    OpenModalWindow("纠错处理用户", "/sys/project/dz_siteError/viewErrorHandleUser.jsp?topnum="+curTabIndex, 385, 210);
 }

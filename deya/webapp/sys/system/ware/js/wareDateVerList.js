@@ -114,13 +114,13 @@ function recoveryWareVer(wareid,siteid,verNum)
 {
 	if(WareRPC.recoveryWareVer(wareid,siteid,verNum))
 	{
-		top.msgAlert("恢复成功");
-		top.CloseModalWindow();
-		top.getCurrentFrameObj().loadWareTable();
+		msgAlert("恢复成功");
+		CloseModalWindow();
+		getCurrentFrameObj().loadWareTable();
 	}else{
-		top.msgAlert("恢复失败");
-		top.CloseModalWindow();
-		top.getCurrentFrameObj().loadWareTable();
+		msgAlert("恢复失败");
+		CloseModalWindow();
+		getCurrentFrameObj().loadWareTable();
 	}
 }
 

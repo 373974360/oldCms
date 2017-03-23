@@ -69,7 +69,7 @@
 
 		function getChatValue()
 		{
-			top.msgConfirm("该功能会清空编辑器中的内容，请谨慎操作，是否继续？","getChatValueHandl()");			
+			msgConfirm("该功能会清空编辑器中的内容，请谨慎操作，是否继续？","getChatValueHandl()");
 		}
 
 		function getChatValueHandl()
@@ -108,16 +108,16 @@
             bean.history_record_pic = getV(record_pic);
             bean.history_record_text = getV(record_text);
 			bean.sub_id = sub_id;
-			bean.update_user = top.LoginUserBean.user_id;
+			bean.update_user = LoginUserBean.user_id;
 
 			if(SubjectRPC.updateHistoryRecord(bean))
 			{
-				top.msgAlert("历史记录"+WCMLang.Add_success);
+				msgAlert("历史记录"+WCMLang.Add_success);
 				history.go(-1);
 			}
 			else
 			{
-				top.msgWargin("历史记录"+WCMLang.Add_fail);
+				msgWargin("历史记录"+WCMLang.Add_fail);
 			}
 		}
 	//-->

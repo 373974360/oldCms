@@ -35,9 +35,9 @@ function saveAttachConfig(){
 	K_V.put("key_is_compress", is_compress);
 	//alert(K_V);
 	if(configRPC.add(K_V)){
-		top.msgAlert(WCMLang.Add_success);
+		msgAlert(WCMLang.Add_success);
 	}else{
-		top.msgAlert(WCMLang.Add_fail);
+		msgAlert(WCMLang.Add_fail);
 	}
 }
 

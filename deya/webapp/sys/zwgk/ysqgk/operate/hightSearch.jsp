@@ -25,7 +25,7 @@ $(document).ready(function()
 	if ($.browser.msie && $.browser.version == "6.0" && $("html")[0].scrollHeight > $("html").height())
 		$("html").css("overflowY", "scroll");
 
-	$("#lab_num option[value="+top.getCurrentFrameObj().snum+"]").attr("selected",true);	
+	$("#lab_num option[value="+getCurrentFrameObj().snum+"]").attr("selected",true);
 });
 	
 function related_ok()
@@ -89,7 +89,7 @@ function related_ok()
 		{
 			if(judgeDate(put_dtime_e,put_dtime_s))
 			{
-				top.msgWargin("申请结束时间不能小于开始时间!");
+				msgWargin("申请结束时间不能小于开始时间!");
 				return;
 			}
 		}
@@ -109,7 +109,7 @@ function related_ok()
 		{
 			if(judgeDate(accept_dtime_e,accept_dtime_s))
 			{
-				top.msgWargin("受理结束时间不能小于开始时间!");
+				msgWargin("受理结束时间不能小于开始时间!");
 				return;
 			}
 		}
@@ -129,7 +129,7 @@ function related_ok()
 		{
 			if(judgeDate(reply_dtime_e,reply_dtime_s))
 			{
-				top.msgWargin("处理结束时间不能小于开始时间!");
+				msgWargin("处理结束时间不能小于开始时间!");
 				return;
 			}
 		}
@@ -141,11 +141,11 @@ function related_ok()
 
 	//排序处理
 	var orderByFields = $("#orderByFields :selected").val();
-    top.getCurrentFrameObj().highSearchHandl(search_con,do_state,orderByFields);
-	top.CloseModalWindow();
+    getCurrentFrameObj().highSearchHandl(search_con,do_state,orderByFields);
+	CloseModalWindow();
 }
 function related_cancel(){
-	top.CloseModalWindow();
+	CloseModalWindow();
 }
 </script>
 </head>

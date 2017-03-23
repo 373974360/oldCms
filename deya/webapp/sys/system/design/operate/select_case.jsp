@@ -138,7 +138,7 @@ function returnValues()
 		v_id = $(":checked[id='css_radio']").val();	
 		if(v_id == null)
 		{
-			top.msgWargin("请选择主题风格");
+			msgWargin("请选择主题风格");
 			return;
 		}
 	}
@@ -147,7 +147,7 @@ function returnValues()
 		v_id = $("#leftMenuTree .tree-checkbox1").parent().attr("node-id");
 		if(v_id == null)
 		{
-			top.msgWargin("请选择类似创建目录");
+			msgWargin("请选择类似创建目录");
 			return;
 		}
 	}
@@ -156,12 +156,12 @@ function returnValues()
 		v_id = $(":checked[id='case_radio']").val();	
 		if(v_id == null)
 		{
-			top.msgWargin("请选择方案套餐");
+			msgWargin("请选择方案套餐");
 			return;
 		}
 	}
-	top.top.getCurrentFrameObj().openDesignPage(c_type,v_id);
-	top.CloseModalWindow();
+	getCurrentFrameObj().openDesignPage(c_type,v_id);
+	CloseModalWindow();
 }
 </script>
 </head>
@@ -209,7 +209,7 @@ function returnValues()
 	<tr>
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="returnValues()" value="创建" />			
-			<input id="userAddCancel" name="btn1" type="button" onclick="top.CloseModalWindow();" value="取消" />	
+			<input id="userAddCancel" name="btn1" type="button" onclick="CloseModalWindow();" value="取消" />
 		</td>
 	</tr>
 </table>

@@ -97,11 +97,11 @@ function select_ok()
 	var url = $("#data :checked").parent().find("label").attr("url");
 	if(url == "" || url == null)
 	{
-		top.msgWargin("请选择信息");
+		msgWargin("请选择信息");
 		return;
 	}
-	top.getCurrentFrameObj(top_index).insertContentUrl(url);
-	top.CloseModalWindow();
+	getCurrentFrameObj(top_index).insertContentUrl(url);
+	CloseModalWindow();
 }
 </script>
 <style type="text/css">

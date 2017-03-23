@@ -1,4 +1,3 @@
-<%@ page contentType="text/html; charset=utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <%
 	String model_id = request.getParameter("model_id");
@@ -151,11 +150,11 @@ function insertCPFrom()
 	{
 		if(SQModelRPC.insertCPFrom(model_id,list))
 		{
-			top.msgAlert("扩展字段"+WCMLang.Add_success);
+			msgAlert("扩展字段"+WCMLang.Add_success);
 			window.history.go(-1);
 		}else
 		{
-			top.msgWargin("扩展字段"+WCMLang.Add_fail);
+			msgWargin("扩展字段"+WCMLang.Add_fail);
 		}
 	}
 }

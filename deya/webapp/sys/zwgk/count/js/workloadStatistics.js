@@ -83,16 +83,16 @@ function search()
 	var num = $("#num").val();
 	
 	if(s_day==null || s_day=="") {
-		top.msgWargin("开始时间不能为空!");
+		msgWargin("开始时间不能为空!");
 		return;
 	}
 	if(e_day==null || e_day=="") {
-		top.msgWargin("结束时间不能为空!");
+		msgWargin("结束时间不能为空!");
 		return;
 	}
 	e_day = e_day + " 23:59:59";
 	if(s_day > e_day){
-	   top.msgWargin("结束时间不能在开始时间前!");
+	   msgWargin("结束时间不能在开始时间前!");
 	   return ;
 	}
 	mp.put("start_day", s_day);
@@ -103,7 +103,7 @@ function search()
 	if(!is_all_node)
 	{
 		if(node_ids == "") {
-			top.msgWargin("公开节点不能为空!请选择公开节点");
+			msgWargin("公开节点不能为空!请选择公开节点");
 			return ;
 		}
 		mp.put("site_id",node_ids);

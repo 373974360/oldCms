@@ -235,14 +235,14 @@ function updateNode(id,name){
 }
 
 function deleteDC(){
-	top.msgConfirm(WCMLang.Delete_confirm,"deleteDCHandl()");	
+	msgConfirm(WCMLang.Delete_confirm,"deleteDCHandl()");
 }
 
 function deleteDCHandl()
 {
 	var node = $('#leftMenuTree').tree('getSelected');
 	if(node.id == "-1" || node.id == "-2" || node.nt == "df"){
-		top.msgAlert("只能删除扩展数据字典");
+		msgAlert("只能删除扩展数据字典");
 		return;
 	}else{
 		DataDictRPC.delDC(node.id);
@@ -250,7 +250,7 @@ function deleteDCHandl()
 		deleteNode(node.id);
 		dc = "-1";
 		selectKZ();
-		top.msgAlert("数据字典删除成功");
+		msgAlert("数据字典删除成功");
 	}
 }
 
@@ -262,7 +262,7 @@ function fnOK(){
 		return;
 	}
 	if(isExistFlag){
-		top.msgAlert("字典代码已经存在，请重新输入");
+		msgAlert("字典代码已经存在，请重新输入");
 		$("#dict_cat_id").focus();
 		return;
 	}
@@ -277,7 +277,7 @@ function fnOK(){
 			updateNode(bean.dict_cat_id,bean.dict_cat_name);
 		}
 		addDictionaryList();
-		top.msgAlert("数据字典"+WCMLang.Add_success);
+		msgAlert("数据字典"+WCMLang.Add_success);
 	}
 }
 

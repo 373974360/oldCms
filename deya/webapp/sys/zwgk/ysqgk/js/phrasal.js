@@ -107,12 +107,12 @@ function addPhrasal()
 	addBean.gph_content = getV("gph_content");
 	if(YsqgkRPC.insertYsqgkPhrasalBean(addBean))
 	{
-		top.msgAlert("常用语信息"+WCMLang.Add_success);
+		msgAlert("常用语信息"+WCMLang.Add_success);
 		goBack();
 	}
 	else
 	{
-		top.msgWargin("常用语信息"+WCMLang.Add_fail);
+		msgWargin("常用语信息"+WCMLang.Add_fail);
 		return;
 	}
 }
@@ -130,15 +130,15 @@ function updatePhrasal(gph_type)
 	updateBean.gph_content = getV("gph_content");
 	if(YsqgkRPC.updateYsqgkPhrasalBean(updateBean))
 	{
-		top.msgAlert("常用语信息"+WCMLang.Set_success);
-		//top.getCurrentFrameObj().showList();
-		//top.CloseModalWindow();
+		msgAlert("常用语信息"+WCMLang.Set_success);
+		//getCurrentFrameObj().showList();
+		//CloseModalWindow();
 		goBack();
 		//window.location.href  = "/sys/zwgk/ysqgk/operate/ysqgk_phrasal.jsp?gph_type="+gph_type;
 	}
 	else
 	{
-		top.msgWargin("常用语信息"+WCMLang.Set_fail);
+		msgWargin("常用语信息"+WCMLang.Set_fail);
 		return;
 	}
 }
@@ -148,19 +148,19 @@ function deletePhrasal(gph_type)
 	var gph_id = list_table.getSelecteCheckboxValue("gph_id");
 	if(gph_id =="")
 	{
-		top.msgAlert("请选择要操作的记录");
+		msgAlert("请选择要操作的记录");
 		return;
 	}else{
 		var mp = new Map();
 			mp.put("gph_id", gph_id);
 		if(YsqgkRPC.deleteYsqgkPhrasal(mp))
 		{
-			top.msgAlert("常用语信息"+WCMLang.Delete_success);
+			msgAlert("常用语信息"+WCMLang.Delete_success);
 			showList(gph_type);
 		}
 		else
 		{
-			top.msgWargin("常用语信息"+WCMLang.Delete_fail);
+			msgWargin("常用语信息"+WCMLang.Delete_fail);
 		}
 	}
 }
@@ -170,11 +170,11 @@ function sortPhrasal(gph_type)
 	var selectIDS = list_table.getAllCheckboxValue("gph_id");
 	if(YsqgkRPC.saveYsqgkPhrasalSort(selectIDS))
 	{
-		top.msgAlert(WCMLang.Sort_success);
+		msgAlert(WCMLang.Sort_success);
 		showList(gph_type);	
 	}else
 	{
-		top.msgWargin(WCMLang.Sort_fail);
+		msgWargin(WCMLang.Sort_fail);
 	}
 }
 

@@ -97,7 +97,7 @@ function showTurnPage(){
 //打开添加窗口
 function openAddReceiveConfigPage()
 {
-	top.addTab(true,"/sys/sendinfo/reivconf/add_reivconf.jsp?topnum="+top.curTabIndex,"报送配置");
+	addTab(true,"/sys/sendinfo/reivconf/add_reivconf.jsp?topnum="+curTabIndex,"报送配置");
 }
 
 //打开修改窗口
@@ -108,7 +108,7 @@ function openUpdateReceiveConfigPage(s_id)
 		id = s_id;
 	else
 		id = table.getSelecteCheckboxValue("site_id");
-	top.addTab(true,"/sys/sendinfo/reivconf/add_reivconf.jsp?site_id="+id+"&topnum="+top.curTabIndex,"报送配置");
+	addTab(true,"/sys/sendinfo/reivconf/add_reivconf.jsp?site_id="+id+"&topnum="+curTabIndex,"报送配置");
 }
 
 //得到栏目列表
@@ -132,19 +132,19 @@ function insertReceiveConfig()
 
 	if(bean.site_id == "")
 	{
-		top.msgWargin("请选择站点");
+		msgWargin("请选择站点");
 		return;
 	}
 	
 	if(SendInfoRPC.insertReceiveConfig(bean,getCatList(bean.site_id)))
 	{
-		top.msgAlert("接收站点配置"+WCMLang.Add_success);
-		top.getCurrentFrameObj(topnum).reloadList();
-		top.tab_colseOnclick(top.curTabIndex);
+		msgAlert("接收站点配置"+WCMLang.Add_success);
+		getCurrentFrameObj(topnum).reloadList();
+		tab_colseOnclick(curTabIndex);
 	}
 	else
 	{
-		top.msgWargin("接收站点配置"+WCMLang.Add_fail);
+		msgWargin("接收站点配置"+WCMLang.Add_fail);
 	}
 }
 
@@ -161,13 +161,13 @@ function updateReceiveConfig()
 	bean.site_id = site_id;
 	if(SendInfoRPC.updateReceiveConfig(bean,getCatList(site_id)))
 	{
-		top.msgAlert("接收站点配置"+WCMLang.Add_success);
-		top.getCurrentFrameObj(topnum).reloadList();
-		top.tab_colseOnclick(top.curTabIndex);
+		msgAlert("接收站点配置"+WCMLang.Add_success);
+		getCurrentFrameObj(topnum).reloadList();
+		tab_colseOnclick(curTabIndex);
 	}
 	else
 	{
-		top.msgWargin("接收站点配置"+WCMLang.Add_fail);
+		msgWargin("接收站点配置"+WCMLang.Add_fail);
 	}
 }
 
@@ -178,11 +178,11 @@ function deleteReceiveConfig()
 	
 	if(SendInfoRPC.deleteReceiveConfig(selectIDS))
 	{
-		top.msgAlert("接收站点配置"+WCMLang.Delete_success);
+		msgAlert("接收站点配置"+WCMLang.Delete_success);
 		reloadList();
 	}else
 	{
-		top.msgWargin("接收站点配置"+WCMLang.Delete_fail);
+		msgWargin("接收站点配置"+WCMLang.Delete_fail);
 	}
 }
 
@@ -195,10 +195,10 @@ function publishReceiveConfig(receive_status)
 	m.put("ids",selectIDS);
 	if(SendInfoRPC.updateReceiveConfigStatus(m))
 	{
-		top.msgAlert("接收站点配置"+WCMLang.Set_success);
+		msgAlert("接收站点配置"+WCMLang.Set_success);
 		reloadList();
 	}else
 	{
-		top.msgWargin("接收站点配置"+WCMLang.Set_fail);
+		msgWargin("接收站点配置"+WCMLang.Set_fail);
 	}
 }

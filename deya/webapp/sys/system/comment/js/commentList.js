@@ -1,5 +1,5 @@
-﻿var CommentManRPC = top.jsonrpc.CommentManRPC;
-var SQRPC = top.jsonrpc.SQRPC;
+﻿var CommentManRPC = jsonrpc.CommentManRPC;
+var SQRPC = jsonrpc.SQRPC;
 var CommentBean = new Bean("com.deya.wcm.bean.system.comment.CommentBean",true);
 
 var tp = new TurnPage();
@@ -71,7 +71,7 @@ function fillBean()
 		{
 			strTable += '<li><img class="ok_type" src="../../images/ok.gif"  onclick="checkComment('+n+');" /></li>';
 		}
-		strTable += '<li><img src="../../images/del.gif" onclick="parent.msgConfirm(WCMLang.Delete_confirm,\'deleteComment('+n+')\')"/></li>';
+		strTable += '<li><img src="../../images/del.gif" onclick="msgConfirm(WCMLang.Delete_confirm,\'deleteComment('+n+')\')"/></li>';
 		strTable += '<li><img src="../../images/edit.gif" onclick="editOption('+n+');"/></li></ul></td>';
 			
 		strTable += '<td></td></tr>';
@@ -120,11 +120,11 @@ function editOption(index)
 		if(updateComment(updateBean))
 		{
 			$("#cnt"+index).attr("readOnly","readOnly");
-			top.msgAlert("评论内容"+WCMLang.Set_success);
+			msgAlert("评论内容"+WCMLang.Set_success);
 		}
 		else
 		{
-			top.msgWargin("评论内容"+WCMLang.Set_fail);
+			msgWargin("评论内容"+WCMLang.Set_fail);
 		}
 	}
 }
@@ -137,12 +137,12 @@ function checkComment(index)
 	if(updateComment(updateBean))
 	{
 		//hideTableRow(updateBean.cmt_id);
-		top.msgAlert("评论内容审核通过");
+		msgAlert("评论内容审核通过");
 		reloadCommentList();
 	}
 	else
 	{
-		top.msgWargin("评论内容审核失败");
+		msgWargin("评论内容审核失败");
 	}
 }
 
@@ -158,12 +158,12 @@ function batchCheckComment()
 	if(updateComment(updateBean))
 	{
 		//hideTableRow(ids);
-		top.msgAlert("评论内容审核通过");
+		msgAlert("评论内容审核通过");
 		reloadCommentList();
 	}
 	else
 	{
-		top.msgWargin("评论内容审核失败");
+		msgWargin("评论内容审核失败");
 	}
 }
 
@@ -179,12 +179,12 @@ function deleteComment(index)
 	if(CommentManRPC.deleteComment(del_m))
 	{
 		//hideTableRow(delBean.cmt_id);
-		top.msgAlert("评论"+WCMLang.Delete_success);
+		msgAlert("评论"+WCMLang.Delete_success);
 		reloadCommentList();
 	}
 	else
 	{
-		top.msgWargin("评论"+WCMLang.Delete_fail);
+		msgWargin("评论"+WCMLang.Delete_fail);
 	}
 }
 
@@ -200,12 +200,12 @@ function batchDeleteComment()
 	if(CommentManRPC.deleteComment(del_m))
 	{	
 		//hideTableRow(ids);
-		top.msgAlert("评论"+WCMLang.Delete_success);
+		msgAlert("评论"+WCMLang.Delete_success);
 		reloadCommentList();
 	}
 	else
 	{
-		top.msgWargin("评论"+WCMLang.Delete_fail);
+		msgWargin("评论"+WCMLang.Delete_fail);
 	}
 
 }
@@ -245,12 +245,12 @@ function searchList()
 	var key = $("#searchkey").val();
 	if(start_day=="" && end_day == "" && key=="")
 	{
-		top.msgAlert("请至少选择一个条件");
+		msgAlert("请至少选择一个条件");
 		return;
 	}
 	if(start_day > end_day)
 	{
-		top.msgAlert("开始日期不能大于结束日期");
+		msgAlert("开始日期不能大于结束日期");
 		return;
 	}
 	con_m.put("search","search");
@@ -318,7 +318,7 @@ function multiSelect(handl_name)
 	var selectIDS = getSelecteCheckboxValue();
 	if(selectIDS == "" || selectIDS == null)
 	{
-		parent.msgWargin(WCMLang.Select_empty);
+		msgWargin(WCMLang.Select_empty);
 		return;
 	}else
 	{
@@ -333,11 +333,11 @@ function deleteSelect(handl_name)
 	
 	if(selectIDS == "" || selectIDS == null)
 	{
-		parent.msgWargin(WCMLang.Select_empty);
+		msgWargin(WCMLang.Select_empty);
 		return;
 	}else
 	{		
-		parent.msgConfirm(WCMLang.Delete_confirm,handl_name);
+		msgConfirm(WCMLang.Delete_confirm,handl_name);
 	}
 }
 	

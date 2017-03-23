@@ -139,7 +139,7 @@ function publicSaveInfoEvent_GKZN(bean,model_ename,save_type)
 
 	if(bool)
 	{		
-		top.msgAlert("信息"+WCMLang.Add_success);
+		msgAlert("信息"+WCMLang.Add_success);
 		if(topnum != 0)//表示是从列表页点过来的
 		{
 			gotoListPage(bean);
@@ -148,6 +148,6 @@ function publicSaveInfoEvent_GKZN(bean,model_ename,save_type)
 	}
 	else
 	{
-		top.msgWargin("信息"+WCMLang.Add_fail);
+		msgWargin("信息"+WCMLang.Add_fail);
 	}
 }

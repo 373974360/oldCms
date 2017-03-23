@@ -51,7 +51,7 @@ function showList()
 	table.getCol("userlevel_name").each(function(i){
 		if(i>0)
 		{
-			$(this).html('<a href="javascript:top.OpenModalWindow(\'用户级别信息\',\'/sys/org/userLevel/userLevel_view.jsp?userlevel_id='+beanList.get(i-1).userlevel_id +'\',450,245)">'+beanList.get(i-1).userlevel_name+'</a>');	
+			$(this).html('<a href="javascript:OpenModalWindow(\'用户级别信息\',\'/sys/org/userLevel/userLevel_view.jsp?userlevel_id='+beanList.get(i-1).userlevel_id +'\',450,245)">'+beanList.get(i-1).userlevel_name+'</a>');
 		}
 	});
 	
@@ -70,14 +70,14 @@ function showTurnPage()
 // 新建用户级别
 function addUserLevel()
 {
-	top.OpenModalWindow("新建用户级别","/sys/org/userLevel/userLevel_add.jsp?type=add&userlevel_id=",460,245);
+	OpenModalWindow("新建用户级别","/sys/org/userLevel/userLevel_add.jsp?type=add&userlevel_id=",460,245);
 }
 
 // 更新用户级别
 function updateLevel()
 {
 	var userlevel_id = table.getSelecteCheckboxValue("userlevel_id");
-	top.OpenModalWindow("修改用户级别","/sys/org/userLevel/userLevel_add.jsp?type=update&userlevel_id="+userlevel_id,430,260);
+	OpenModalWindow("修改用户级别","/sys/org/userLevel/userLevel_add.jsp?type=update&userlevel_id="+userlevel_id,430,260);
 }
 
 // 删除用户级别
@@ -87,16 +87,16 @@ function deleteLevel()
 	/*
 	if(UserManRPC.haveExistUser(userlevel_ids)!= 0)
 	{
-		top.msgWargin("选中的用户级别中关联有用户"+"<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+"请取消关联后再删除！");
+		msgWargin("选中的用户级别中关联有用户"+"<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+"请取消关联后再删除！");
 		return;
 	}*/
 	
 	if(!UserManRPC.deleteUserLevel(userlevel_ids))
 	{
-		top.msgWargin("用户级别"+WCMLang.Delete_fail);
+		msgWargin("用户级别"+WCMLang.Delete_fail);
 		return;
 	}
-	top.msgAlert("用户级别"+WCMLang.Delete_success);
+	msgAlert("用户级别"+WCMLang.Delete_success);
 	reloaduserLevelList();
 }
 

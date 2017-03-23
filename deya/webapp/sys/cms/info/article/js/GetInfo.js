@@ -33,7 +33,7 @@ function setScrollHandl()
 
 function getInfoCount()
 {
-    m.put("user_id", top.LoginUserBean.user_id+"");
+    m.put("user_id", LoginUserBean.user_id+"");
 	if(cat_id != ""){
 		m.put("cat_ids", cat_id);
 	}
@@ -72,7 +72,7 @@ function getInfoCount()
 function getInfoList()
 {	
 	m.remove("shared_cat_ids");
-    m.put("user_id", top.LoginUserBean.user_id+"");
+    m.put("user_id", LoginUserBean.user_id+"");
 	m.put("page_size", pageSize);
 	m.put("start_num", pageSize*(pageNum-1)+"");
 	m.put("sort_name", "ci.released_dtime desc,ci.id");
@@ -341,12 +341,12 @@ function clickCategoryNode(id){
 //保存
 function related_ok(){
 	doGet();	
-	top.CloseModalWindow();
+	CloseModalWindow();
 }
 
 //取消
 function related_cancel(){
-	top.CloseModalWindow();
+	CloseModalWindow();
 }
 //把选中的信息添加到表中
 function doGet()
@@ -364,14 +364,14 @@ function doGet()
 		i_list.add(info_map.get($(this).val()));
 	});
 
-	if(jsonrpc.InfoBaseRPC.infoGet(i_list,site_id,app_id,cat_id_for_get,idsTmp,isPublish,top.LoginUserBean.user_id))
+	if(jsonrpc.InfoBaseRPC.infoGet(i_list,site_id,app_id,cat_id_for_get,idsTmp,isPublish,LoginUserBean.user_id))
 	{
-		top.msgAlert("获取成功");
-		top.getCurrentFrameObj().reloadInfoDataList();
+		msgAlert("获取成功");
+		getCurrentFrameObj().reloadInfoDataList();
 	}
 	else
 	{
-		top.msgWargin("获取失败,请重新操作");
+		msgWargin("获取失败,请重新操作");
 	}
 }
 
@@ -431,11 +431,11 @@ function doGet(){
 		ib.site_id = site_id;
 		ib.app_id = app_id;
 		ib.cat_id = cat_id_for_get;
-		ib.input_user = top.LoginUserBean.user_id;//获取时录入人为当前操作人
+		ib.input_user = LoginUserBean.user_id;//获取时录入人为当前操作人
 		ModelUtilRPC.insert(ib,model_ename);	
 	});	
-	top.msgAlert("获取成功");
-	top.getCurrentFrameObj().reloadInfoDataList();
+	msgAlert("获取成功");
+	getCurrentFrameObj().reloadInfoDataList();
 }*/
 
 

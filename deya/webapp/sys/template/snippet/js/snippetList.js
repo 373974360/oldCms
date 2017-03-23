@@ -84,26 +84,26 @@ function showTurnPage(){
 	var selectIDS = table.getAllCheckboxValue("sni_id");
 	if(SnippetRPC.saveSnippetSort(selectIDS))
 	{
-		top.msgAlert(WCMLang.Sort_success);
+		msgAlert(WCMLang.Sort_success);
 	}else
 	{
-		top.msgWargin(WCMLang.Sort_fail);
+		msgWargin(WCMLang.Sort_fail);
 	}
 }*/
 // 添加代码片段信息
 function addSnippetRecord()
 {
-	top.OpenModalWindow("新建代码片段信息","/sys/template/snippet/snippet_add.jsp?type=add&app="+app+"&site_id="+site_id,450,239);
+	OpenModalWindow("新建代码片段信息","/sys/template/snippet/snippet_add.jsp?type=add&app="+app+"&site_id="+site_id,450,239);
 }
 function openUpdateSnippetPage(id)
 {
-	top.OpenModalWindow("维护代码片段信息","/sys/template/snippet/snippet_add.jsp?type=update&id="+id,450,239);
+	OpenModalWindow("维护代码片段信息","/sys/template/snippet/snippet_add.jsp?type=update&id="+id,450,239);
 }
 // 修改代码片断信息
 function updateRecord1()
 {  
 	var id = table.getSelecteCheckboxValue("id");
-	top.OpenModalWindow("修改代码片段信息","/sys/template/snippet/snippet_add.jsp?type=update&id="+id,450,239);
+	OpenModalWindow("修改代码片段信息","/sys/template/snippet/snippet_add.jsp?type=update&id="+id,450,239);
 }
 
 // 删除代码片断信息
@@ -113,12 +113,12 @@ function deleteSnippet(id)
 	mp.put("id", id);
 	if(SnippetRPC.deleteSnippet(mp))
 	{
-		top.msgAlert("代码片段信息"+WCMLang.Delete_success);
+		msgAlert("代码片段信息"+WCMLang.Delete_success);
 		reloadSnippetList();
 	}
 	else
 	{
-		top.msgWargin("代码片段信息"+WCMLang.Delete_fail);
+		msgWargin("代码片段信息"+WCMLang.Delete_fail);
 	}
 }
 //添加代码片断信息-保存事件
@@ -136,11 +136,11 @@ function addSnippet()
 	
 	if(SnippetRPC.insertSnippet(addBean))
 	{
-		top.msgAlert("代码片段信息"+WCMLang.Add_success);
-		top.getCurrentFrameObj().reloadSnippetList();//获取父窗口
-		top.CloseModalWindow();
+		msgAlert("代码片段信息"+WCMLang.Add_success);
+		getCurrentFrameObj().reloadSnippetList();//获取父窗口
+		CloseModalWindow();
 	}else{
-		top.msgWargin("代码片段信息"+WCMLang.Add_fail);
+		msgWargin("代码片段信息"+WCMLang.Add_fail);
 		return;
 	}
 }
@@ -156,13 +156,13 @@ function updateSnippet()
 	updateBean.id = id;
 	if(SnippetRPC.updateSnippet(updateBean))
 	{
-		top.msgAlert("代码片段信息"+WCMLang.Set_success);
-		top.getCurrentFrameObj().reloadSnippetList();
-		top.CloseModalWindow();
+		msgAlert("代码片段信息"+WCMLang.Set_success);
+		getCurrentFrameObj().reloadSnippetList();
+		CloseModalWindow();
 	}
 	else
 	{
-		top.msgWargin("代码片段信息"+WCMLang.Set_fail);
+		msgWargin("代码片段信息"+WCMLang.Set_fail);
 		return;
 	}
 }

@@ -126,7 +126,7 @@ function showList()
 
 function updateCollInfoById(infoID)
 {
-	top.addTab(true,"/sys/dataCollection/updateCollInfo.jsp?tab_index="+top.curTabIndex+"&info_id="+infoID,"修改采集信息");
+	addTab(true,"/sys/dataCollection/updateCollInfo.jsp?tab_index="+curTabIndex+"&info_id="+infoID,"修改采集信息");
 }
 
 function showTurnPage()
@@ -224,10 +224,10 @@ function deleteCollInfoByid()
 	var ids = table.getSelecteCheckboxValue("id");
 	if(CollectionDataRPC.deleteCollInfoById(ids))
 	{
-		top.msgAlert("信息"+WCMLang.Delete_success);
+		msgAlert("信息"+WCMLang.Delete_success);
 		reloadInfoDataList();
 	}else{
-		top.msgWargin("信息"+WCMLang.Delete_fail);
+		msgWargin("信息"+WCMLang.Delete_fail);
 	}
 }
 
@@ -280,16 +280,16 @@ function pubCollDataInfotoCat()
 			article_bean.model_id= "11";
 			article_bean.released_dtime = artBeanList.get(i).art_pubTime;
 			article_bean.is_am_tupage = 0;
-			article_bean.input_user = top.LoginUserBean.user_id;
+			article_bean.input_user = LoginUserBean.user_id;
 			article_bean.weight = 60;
 			if(ModelUtilRPC.insert(article_bean,"article"))
 			{	
 				CollectionDataRPC.changeCollInfoStatus(artBeanList.get(i).id);
 				reloadInfoDataList();
-				top.msgAlert("操作成功!");	
+				msgAlert("操作成功!");
 			}else
 			{
-				top.msgWargin(article_bean.title+"操作失败!");
+				msgWargin(article_bean.title+"操作失败!");
 			}
 		}
 		if(artBeanList.get(i).model_id == "14")
@@ -310,7 +310,7 @@ function pubCollDataInfotoCat()
 			tygs_bean.model_id= "14";
 			tygs_bean.released_dtime = artBeanList.get(i).art_pubTime;
 			tygs_bean.is_am_tupage = 0;
-			tygs_bean.input_user = top.LoginUserBean.user_id;
+			tygs_bean.input_user = LoginUserBean.user_id;
 			tygs_bean.weight = 60;
 			
 			//索引码生成
@@ -327,10 +327,10 @@ function pubCollDataInfotoCat()
 			{	
 				CollectionDataRPC.changeCollInfoStatus(artBeanList.get(i).id);
 				reloadInfoDataList();
-				top.msgAlert("操作成功!");	
+				msgAlert("操作成功!");
 			}else
 			{
-				top.msgWargin(tygs_bean.title+"操作失败!");
+				msgWargin(tygs_bean.title+"操作失败!");
 			}
 		}
 	}
@@ -362,13 +362,13 @@ function searchCollInfo(){
 	SearchTitle = $("#searchCollTitle").val();
 	
 	if(sTime == "" && eTime == "" && SearchTitle == ""){
-		top.msgAlert("请输入查询条件!");
+		msgAlert("请输入查询条件!");
 	}else{
 		if(sTime != "" && sTime != null && eTime != "" && eTime != null)
 		{
 			if(judgeDate(eTime,sTime))
 			{
-				top.msgWargin("结束时间不能小于开始时间 !");
+				msgWargin("结束时间不能小于开始时间 !");
 				return;
 			}
 		}

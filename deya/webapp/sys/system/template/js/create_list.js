@@ -3,29 +3,29 @@ function saveCreateList()
 {
 	if(app_id == "cms")
 	{
-		top.getCurrentFrameObj().editAreaLoader.replaceSelection(saveCMSList());
+		getCurrentFrameObj().editAreaLoader.replaceSelection(saveCMSList());
 	}
 	if(app_id == "zwgk")
 	{
-		top.getCurrentFrameObj().editAreaLoader.replaceSelection(saveZWGKList());
+		getCurrentFrameObj().editAreaLoader.replaceSelection(saveZWGKList());
 	}
 	if(app_id == "ggfw")
 	{
-		top.getCurrentFrameObj().editAreaLoader.replaceSelection(saveGGFWList());
+		getCurrentFrameObj().editAreaLoader.replaceSelection(saveGGFWList());
 	}
 	if(app_id == "appeal")
 	{
-		top.getCurrentFrameObj().editAreaLoader.replaceSelection(saveAppealList());
+		getCurrentFrameObj().editAreaLoader.replaceSelection(saveAppealList());
 	}
 	if(app_id == "interview")
 	{
-		top.getCurrentFrameObj().editAreaLoader.replaceSelection(saveInterviewList());
+		getCurrentFrameObj().editAreaLoader.replaceSelection(saveInterviewList());
 	}
 	if(app_id == "survey")
 	{
-		top.getCurrentFrameObj().editAreaLoader.replaceSelection(saveSurveyList());
+		getCurrentFrameObj().editAreaLoader.replaceSelection(saveSurveyList());
 	}
-	top.CloseModalWindow();
+	CloseModalWindow();
 }
 
 function saveCMSList()

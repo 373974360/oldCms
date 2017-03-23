@@ -75,24 +75,24 @@ function related_ok(){
 		else
 			doTS(c_ids);			
 	}else
-		top.msgWargin("请选择要推送的节点");
+		msgWargin("请选择要推送的节点");
 	
 }
 
 function related_cancel(){
-	top.CloseModalWindow();
+	CloseModalWindow();
 }
 
 function doTS(catIds){
 	//var i_list = new List();
-	var info_list = top.top.getCurrentFrameObj().table.getSelecteBeans();
+	var info_list = getCurrentFrameObj().table.getSelecteBeans();
 	info_list = List.toJSList(info_list);
 	/******** 判断要推送的信息是否含有链接或引用的信息，链接或引用是不能再次被推送的 ***********   改掉了，可以再次被推送
 	for(var j=0;j<info_list.size();j++)
 	{
 		if(info_list.get(j).is_host != 0)
 		{
-			top.msgWargin("推送的信息中含有链接或引用的数据，该类型数据不能被再次推送，请重新选择");
+			msgWargin("推送的信息中含有链接或引用的数据，该类型数据不能被再次推送，请重新选择");
 			return;
 		}
 		i_list.add(info_list.get(j));
@@ -103,24 +103,24 @@ function doTS(catIds){
 	var isPublish = $("#isPublish").is(':checked');
 	if(jsonrpc.InfoBaseRPC.infoTo(info_list,s_site_id,app_id,catIds,idsTmp,isPublish))
 	{
-		top.msgAlert("推送成功");
-		top.CloseModalWindow();
-		top.top.getCurrentFrameObj().table.unChekcbox();
+		msgAlert("推送成功");
+		CloseModalWindow();
+		getCurrentFrameObj().table.unChekcbox();
 	}
 	else
 	{
-		top.msgWargin("推送失败,请重新操作");
+		msgWargin("推送失败,请重新操作");
 	}
 }
 
 function doTSForGK(catIds){
-	var info_list = top.top.getCurrentFrameObj().table.getSelecteBeans();
+	var info_list = getCurrentFrameObj().table.getSelecteBeans();
 	/*
 	for(var j=0;j<info_list.size();j++)
 	{
 		if(info_list.get(j).is_host != 0)
 		{
-			top.msgWargin("推送的信息中含有链接或引用的数据，该类型数据不能被再次推送，请重新选择");
+			msgWargin("推送的信息中含有链接或引用的数据，该类型数据不能被再次推送，请重新选择");
 			return;
 		}
 	}*/
@@ -152,7 +152,7 @@ function doTSForGK(catIds){
 						//判断内容页地址是否以/（相对路径）开始，如果是，需要加上原站点ID的域名
 						if(ib.content_url.indexOf("/") == 0)
 						{
-							var new_site_id = top.top.getCurrentFrameObj().getRealSiteIDByApp(app_id,site_id);
+							var new_site_id = getCurrentFrameObj().getRealSiteIDByApp(app_id,site_id);
 							ib.content_url = SiteRPC.getSiteDomain(new_site_id)+ib.content_url;
 						}
 					}
@@ -189,8 +189,8 @@ function doTSForGK(catIds){
 			}			
 		}
 	}
-	top.msgAlert("推送成功");
-	top.CloseModalWindow();
+	msgAlert("推送成功");
+	CloseModalWindow();
 }
 
 function getSelectIds(){

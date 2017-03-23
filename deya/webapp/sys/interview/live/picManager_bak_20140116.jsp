@@ -12,11 +12,11 @@
 	
 	<SCRIPT LANGUAGE="JavaScript">
 	<!--
-		var id = parent.id;
-		var sub_id = parent.sub_id;
-		var site_id = parent.site_id;
+		var id = id;
+		var sub_id = sub_id;
+		var site_id = site_id;
 		$(document).ready(function () {	
-			subjectBean = parent.subjectBean;
+			subjectBean = subjectBean;
 			setDivHeight();
 			initUPLoadImg("for_pic_file","fileName");
 			//主题状态为直播状态
@@ -87,7 +87,7 @@
 
 			if(!checkImgFile(str))
 			{
-				parent.alertWar("<span style='color:red'>上传的文档图片格式不对，只允许上传 jpg，jpeg，gif，png 等格式的文件，请重新上传！</span>"); 
+				alertWar("<span style='color:red'>上传的文档图片格式不对，只允许上传 jpg，jpeg，gif，png 等格式的文件，请重新上传！</span>");
 				return; 
 			}
 
@@ -143,7 +143,7 @@
 
 				}else
 				{
-					top.msgWargin("上传失败，请重新上传");
+					msgWargin("上传失败，请重新上传");
 				}
 			}			
 		}
@@ -152,7 +152,7 @@
 		{
 			if($("#fileName").val() == "")
 			{
-				top.msgWargin("请添加图片");
+				msgWargin("请添加图片");
 			}
 			else
 			{
@@ -176,7 +176,7 @@
 
 				}else
 				{
-					top.msgWargin("添加失败，请重新添加");
+					msgWargin("添加失败，请重新添加");
 				}
 			}
 		}
@@ -197,7 +197,7 @@
 			}
 			else
 			{
-				top.msgWargin("删除失败，请重新删除");
+				msgWargin("删除失败，请重新删除");
 			}
 		}
 	//-->

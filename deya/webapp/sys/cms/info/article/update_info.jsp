@@ -44,7 +44,7 @@ $(document).ready(function(){
 	if(infoid != "" && infoid != "null" && infoid != null){		
 		defaultBean = InfoBaseRPC.getInfoById(infoid,site_id);
 		if(defaultBean){
-			$("#info_article_table").autoFill(defaultBean);
+			$("#info_article_table").autoFill(defaultBean);			
 			publicReloadUpdateInfos();			
 		}
 		$("#addButton").click(updateInfoData);		
@@ -55,7 +55,7 @@ $(document).ready(function(){
 			$("#from_info_button").show();
 		}
 	}
-    reloadPublicInfo();
+	reloadPublicInfo();	
 });
 
 //修改
@@ -71,10 +71,10 @@ function updateInfoData()
 	
 	if(InfoBaseRPC.updateInfo(defaultBean))
 	{
-		top.msgAlert("信息"+WCMLang.Add_success);
+		msgAlert("信息"+WCMLang.Add_success);
 		gotoListPage();
 	}else
-		top.msgWargin("信息"+WCMLang.Add_fail);
+		msgWargin("信息"+WCMLang.Add_fail);
 }
 
 function selectPageHandle()
@@ -92,7 +92,7 @@ function openFromInfoPage()
 	var from_info_bean = InfoBaseRPC.getInfoById(defaultBean.from_id);	
 	if(from_info_bean != null)
 	{
-		window.location.href = "/sys/cms/info/article/"+getAddPagebyModel(from_info_bean.model_id)+"?model="+from_info_bean.model_id+ "&cid="+from_info_bean.cat_id+"&info_id="+defaultBean.from_id+"&site_id="+from_info_bean.site_id+"&app_id="+from_info_bean.app_id+"&topnum="+topnum;
+		window.location.href = "/sys/cms/info/article/"+getAddPagebyModel(from_info_bean.model_id)+"?cid="+from_info_bean.cat_id+"&info_id="+defaultBean.from_id+"&site_id="+from_info_bean.site_id+"&app_id="+from_info_bean.app_id+"&topnum="+topnum;
 	}
 }
 
@@ -129,7 +129,7 @@ function getAddPagebyModel(model_id)
 	</table>
 <!-- 内容主体不同部分　结束 -->
 
-<jsp:include page="../include/include_public_high_gk.jsp"/>
+<jsp:include page="../include/include_public_high.jsp"/>
 
 </div>
 
@@ -143,7 +143,7 @@ function getAddPagebyModel(model_id)
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="" value="保存" />
 			<input id="addReset" name="btn1" type="button" onclick="window.location.reload()" value="重置" />
-			<input id="addCancel" name="btn1" type="button" onclick="top.tab_colseOnclick(top.curTabIndex)" value="取消" />&nbsp;&nbsp;&nbsp;
+			<input id="addCancel" name="btn1" type="button" onclick="tab_colseOnclick(curTabIndex)" value="取消" />&nbsp;&nbsp;&nbsp;
 			<input id="from_info_button" class="hidden" name="btn1" type="button" onclick="openFromInfoPage()" value="编辑源信息" />
 		</td>
 	</tr>

@@ -43,7 +43,7 @@ function showList()
 	table.getCol("rcat_name").each(function(i){
 		if(i>0)
 		{
-			$(this).html('<a href="javascript:top.OpenModalWindow(\'新建采集规则分类\',\'/sys/dataCollection/ruleCategoryAdd.jsp?type=update&id='+beanList.get(i-1).id+'\',450,230)">'+beanList.get(i-1).rcat_name+'</a>');
+			$(this).html('<a href="javascript:OpenModalWindow(\'新建采集规则分类\',\'/sys/dataCollection/ruleCategoryAdd.jsp?type=update&id='+beanList.get(i-1).id+'\',450,230)">'+beanList.get(i-1).rcat_name+'</a>');
 		}
 	});
 
@@ -119,10 +119,10 @@ function insertRuleReleUserByCat(user_ids,group_ids)
 {	
 	if(CollectionDataRPC.insertRuleCatReleUserByCat(temp_rcat_id,user_ids,group_ids,app_id,site_id))
 	{
-		top.msgAlert("采集规则分类用户关联"+WCMLang.Add_success);
+		msgAlert("采集规则分类用户关联"+WCMLang.Add_success);
 	}else
 	{
-		top.msgWargin("采集规则分类用户关联"+WCMLang.Add_fail);
+		msgWargin("采集规则分类用户关联"+WCMLang.Add_fail);
 	}
 }
 /********** 关联用户 结束 **********/
@@ -130,14 +130,14 @@ function insertRuleReleUserByCat(user_ids,group_ids)
 // 新建button事件
 function openAddPage()
 {
-	top.OpenModalWindow("新建采集规则分类","/sys/dataCollection/ruleCategoryAdd.jsp?type=add&id="+id,450,230);
+	OpenModalWindow("新建采集规则分类","/sys/dataCollection/ruleCategoryAdd.jsp?type=add&id="+id,450,230);
 }
 
 // 修改button事件
 function openUpdatePage()
 {
 	var selectID = table.getSelecteCheckboxValue("id");
-	top.OpenModalWindow("新建采集规则分类","/sys/dataCollection/ruleCategoryAdd.jsp?type=update&id="+selectID,450,230);
+	OpenModalWindow("新建采集规则分类","/sys/dataCollection/ruleCategoryAdd.jsp?type=update&id="+selectID,450,230);
 }
 
 // 保存排序button事件
@@ -146,12 +146,12 @@ function saveSort()
 	var ids = table.getAllCheckboxValue("id");;
 	if(CollectionDataRPC.saveSort(ids))
 	{
-		top.msgAlert(WCMLang.Sort_success);
+		msgAlert(WCMLang.Sort_success);
 		showRuleCateTree();
 	}
 	else
 	{
-		top.msgWargin(WCMLang.Sort_fail);
+		msgWargin(WCMLang.Sort_fail);
 	}
 }
 
@@ -163,13 +163,13 @@ function deleteRuleCategory()
 	con_m.put("site_id", site_id);
 	if(CollectionDataRPC.deleteRuleCategory(con_m))
 	{
-		top.msgAlert("信息分类"+WCMLang.Delete_success);
+		msgAlert("信息分类"+WCMLang.Delete_success);
 		deleteTreeNode(ids+"");
 		loadRuleCategoryTable();
 	}
 	else
 	{
-		top.msgWargin("信息分类"+WCMLang.Delete_fail);
+		msgWargin("信息分类"+WCMLang.Delete_fail);
 		showRuleCateTree();
 	}
 	con_m.remove("id");
@@ -192,20 +192,20 @@ function saveAddRuleCategory()
 	var addBean = BeanUtil.getCopy(RuleCategoryBean);
 	$("#ruleCate_table").autoBind(addBean);
 	
-	addBean.site_id = top.getCurrentFrameObj().site_id;
-	addBean.app_id = top.getCurrentFrameObj().app_id;
-	addBean.parent_id = id;//top.getCurrentFrameObj().rcat_id;
+	addBean.site_id = getCurrentFrameObj().site_id;
+	addBean.app_id = getCurrentFrameObj().app_id;
+	addBean.parent_id = id;//getCurrentFrameObj().rcat_id;
 
 	if(CollectionDataRPC.insertRuleCate(addBean))
 	{
-		top.msgAlert("采集规则分类"+WCMLang.Add_success);
-		top.getCurrentFrameObj().showRuleCateTree();
-		top.getCurrentFrameObj().loadRuleCategoryTable();
-		top.CloseModalWindow();
+		msgAlert("采集规则分类"+WCMLang.Add_success);
+		getCurrentFrameObj().showRuleCateTree();
+		getCurrentFrameObj().loadRuleCategoryTable();
+		CloseModalWindow();
 	}
 	else
 	{
-		top.msgWargin("采集规则分类"+WCMLang.Add_fail);
+		msgWargin("采集规则分类"+WCMLang.Add_fail);
 	}
 }
 
@@ -219,14 +219,14 @@ function saveUpdateRuleCategory()
 	$("#ruleCate_table").autoBind(updateBean);
 	if(CollectionDataRPC.updateWareCate(updateBean))
 	{
-		top.msgAlert("采集规则分类"+WCMLang.Set_success);
-		top.getCurrentFrameObj().updateRuleCateTree(updateBean.id, updateBean.wcat_name);
-		top.getCurrentFrameObj().loadRuleCategoryTable();
-		top.CloseModalWindow();
+		msgAlert("采集规则分类"+WCMLang.Set_success);
+		getCurrentFrameObj().updateRuleCateTree(updateBean.id, updateBean.wcat_name);
+		getCurrentFrameObj().loadRuleCategoryTable();
+		CloseModalWindow();
 	}
 	else
 	{
-		top.msgWargin("采集规则分类"+WCMLang.Set_fail);
+		msgWargin("采集规则分类"+WCMLang.Set_fail);
 	}
 }
 

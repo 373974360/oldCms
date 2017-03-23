@@ -469,8 +469,8 @@
     },
     clear: function() {
       var parent = this.horiz.parentNode;
-      parent.removeChild(this.horiz);
-      parent.removeChild(this.vert);
+      removeChild(this.horiz);
+      removeChild(this.vert);
     }
   }, NativeScrollbars.prototype);
 
@@ -6037,7 +6037,7 @@
     }
     if (cm) signalLater(cm, "markerCleared", cm, this);
     if (withOp) endOperation(cm);
-    if (this.parent) this.parent.clear();
+    if (this.parent) this.clear();
   };
 
   // Find the position of the marker in the document. Returns a {from,
@@ -7279,12 +7279,12 @@
         } else {
           me.size -= sibling.size;
           me.height -= sibling.height;
-          var myIndex = indexOf(me.parent.children, me);
-          me.parent.children.splice(myIndex + 1, 0, sibling);
+          var myIndex = indexOf(me.children, me);
+          me.children.splice(myIndex + 1, 0, sibling);
         }
         sibling.parent = me.parent;
       } while (me.children.length > 10);
-      me.parent.maybeSpill();
+      me.maybeSpill();
     },
     iterN: function(at, n, op) {
       for (var i = 0; i < this.children.length; ++i) {
@@ -7934,7 +7934,7 @@
 
   function pushSelectionToHistory(sel, dest) {
     var top = lst(dest);
-    if (!(top && top.ranges && top.equals(sel)))
+    if (!(top && ranges && equals(sel)))
       dest.push(sel);
   }
 
@@ -8343,8 +8343,8 @@
   var contains = CodeMirror.contains = function(parent, child) {
     if (child.nodeType == 3) // Android browser always returns false when child is a textnode
       child = child.parentNode;
-    if (parent.contains)
-      return parent.contains(child);
+    if (contains)
+      return contains(child);
     do {
       if (child.nodeType == 11) child = child.host;
       if (child == parent) return true;

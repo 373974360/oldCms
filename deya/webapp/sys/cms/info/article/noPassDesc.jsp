@@ -25,11 +25,11 @@ $(document).ready(function() {
 
 
 function related_cancel(){
-	top.CloseModalWindow();
+	CloseModalWindow();
 }
 
 function related_ok(){
-	top.getCurrentFrameObj().noPass($("#auto_desc").val());
+	getCurrentFrameObj().noPass($("#auto_desc").val());
 	related_cancel();
 }
 

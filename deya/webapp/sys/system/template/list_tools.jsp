@@ -11,7 +11,7 @@
 <script type="text/javascript" src="js/create_list.js"></script>
 <script type="text/javascript">
 
-var site_id = top.current_site_id;
+var site_id = current_site_id;
 var app_id = "cms";
 
 $(document).ready(function(){
@@ -251,7 +251,7 @@ function setSurveyCategory()
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="saveCreateList()" value="插入" />	
 			<input id="userAddReset" name="btn1" type="button" onclick="resetForm()" value="重置" />	
-			<input id="userAddCancel" name="btn1" type="button" onclick="top.CloseModalWindow();" value="取消" />	
+			<input id="userAddCancel" name="btn1" type="button" onclick="CloseModalWindow();" value="取消" />
 		</td>
 	</tr>
 </table>

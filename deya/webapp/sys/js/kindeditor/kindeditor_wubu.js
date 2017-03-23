@@ -140,7 +140,7 @@ function _extend(child, parent, proto) {
 	var childProto;
 	if (parent) {
 		var fn = function () {};
-		fn.prototype = parent.prototype;
+		fn.prototype = prototype;
 		childProto = new fn();
 		_each(proto, function(key, val) {
 			childProto[key] = val;
@@ -150,7 +150,7 @@ function _extend(child, parent, proto) {
 	}
 	childProto.constructor = child;
 	child.prototype = childProto;
-	child.parent = parent ? parent.prototype : null;
+	child.parent = parent ? prototype : null;
 }
 function _json(text) {
 	var match;
@@ -1816,7 +1816,7 @@ function _copyAndDelete(range, isCopy, isDelete) {
 		return isCopy ? frag : range;
 	}
 	function extractNodes(parent, frag) {
-		var node = parent.firstChild, nextNode;
+		var node = firstChild, nextNode;
 		while (node) {
 			var testRange = new KRange(doc).selectNode(node);
 			start = testRange.compareBoundaryPoints(_START_TO_END, range);
@@ -1901,9 +1901,9 @@ function _getStartEnd(rng, isStart) {
 		pointRange = rng.duplicate();
 	pointRange.collapse(isStart);
 	var parent = pointRange.parentElement(),
-		nodes = parent.childNodes;
+		nodes = childNodes;
 	if (nodes.length === 0) {
-		return {node: parent.parentNode, offset: K(parent).index()};
+		return {node: parentNode, offset: K(parent).index()};
 	}
 	var startNode = doc, startPos = 0, cmp = -1;
 	var testRange = rng.duplicate();
@@ -1941,7 +1941,7 @@ function _getStartEnd(rng, isStart) {
 		}
 	}
 	if (cmp < 0 && startNode.nodeType == 1) {
-		return {node: parent, offset: K(parent.lastChild).index() + 1};
+		return {node: parent, offset: K(lastChild).index() + 1};
 	}
 	if (cmp > 0) {
 		while (startNode.nextSibling && startNode.nodeType == 1) {
@@ -2373,7 +2373,7 @@ _extend(KRange, {
 			if (pos === 0) {
 				while (!knode.prev()) {
 					parent = knode.parent();
-					if (!parent || _NOSPLIT_TAG_MAP[parent.name] || !toBlock && parent.isBlock()) {
+					if (!parent || _NOSPLIT_TAG_MAP[name] || !toBlock && isBlock()) {
 						break;
 					}
 					knode = parent;
@@ -2386,7 +2386,7 @@ _extend(KRange, {
 			} else if (pos == knode.children().length) {
 				while (!knode.next()) {
 					parent = knode.parent();
-					if (!parent || _NOSPLIT_TAG_MAP[parent.name] || !toBlock && parent.isBlock()) {
+					if (!parent || _NOSPLIT_TAG_MAP[name] || !toBlock && isBlock()) {
 						break;
 					}
 					knode = parent;
@@ -2754,7 +2754,7 @@ _extend(KCmd, {
 				}
 				if (knode.type == 3 && _trim(node.nodeValue).length > 0) {
 					var parent;
-					while ((parent = knode.parent()) && parent.isStyle() && parent.children().length == 1) {
+					while ((parent = knode.parent()) && isStyle() && children().length == 1) {
 						knode = parent;
 					}
 					_wrapNode(knode, wrapper);
@@ -2770,7 +2770,7 @@ _extend(KCmd, {
 		var node = tempRange.startContainer, pos = tempRange.startOffset,
 			parent = node.nodeType == 3 ? node.parentNode : node,
 			needSplit = false, knode;
-		while (parent && parent.parentNode) {
+		while (parent && parentNode) {
 			knode = K(parent);
 			if (map) {
 				if (!knode.isStyle()) {
@@ -2785,15 +2785,15 @@ _extend(KCmd, {
 				}
 			}
 			needSplit = true;
-			parent = parent.parentNode;
+			parent = parentNode;
 		}
 		if (needSplit) {
 			var dummy = doc.createElement('span');
 			range.cloneRange().collapse(!isStart).insertNode(dummy);
 			if (isStart) {
-				tempRange.setStartBefore(parent.firstChild).setEnd(node, pos);
+				tempRange.setStartBefore(firstChild).setEnd(node, pos);
 			} else {
-				tempRange.setStart(node, pos).setEndAfter(parent.lastChild);
+				tempRange.setStart(node, pos).setEndAfter(lastChild);
 			}
 			var frag = tempRange.extractContents(),
 				first = frag.firstChild, last = frag.lastChild;
@@ -2801,7 +2801,7 @@ _extend(KCmd, {
 				tempRange.insertNode(frag);
 				range.setStartAfter(last).setEndBefore(dummy);
 			} else {
-				parent.appendChild(frag);
+				appendChild(frag);
 				range.setStartBefore(dummy).setEndBefore(first);
 			}
 			var dummyParent = dummy.parentNode;
@@ -2822,7 +2822,7 @@ _extend(KCmd, {
 		range.enlarge();
 		if (range.startOffset === 0) {
 			var ksc = K(range.startContainer), parent;
-			while ((parent = ksc.parent()) && parent.isStyle() && parent.children().length == 1) {
+			while ((parent = ksc.parent()) && isStyle() && children().length == 1) {
 				ksc = parent;
 			}
 			range.setStart(ksc[0], 0);
@@ -2919,7 +2919,7 @@ _extend(KCmd, {
 				if (_hasAttrOrCss(K(parent), map)) {
 					return K(parent);
 				}
-				parent = parent.parentNode;
+				parent = parentNode;
 			}
 			while (child && (child = child.lastChild)) {
 				if (_hasAttrOrCss(K(child), map)) {
@@ -3217,8 +3217,8 @@ _extend(KCmd, {
 			_nativeCommand(doc, 'unlink', null);
 			if (_WEBKIT && K(range.startContainer).name === 'img') {
 				var parent = K(range.startContainer).parent();
-				if (parent.name === 'a') {
-					parent.remove(true);
+				if (name === 'a') {
+					remove(true);
 				}
 			}
 		} else {
@@ -3581,7 +3581,7 @@ function KEdit(options) {
 _extend(KEdit, KWidget, {
 	init : function(options) {
 		var self = this;
-		KEdit.parent.init.call(self, options);
+		KEdit.init.call(self, options);
 		self.srcElement = K(options.srcElement);
 		self.div.addClass('ke-edit');
 		self.designMode = _undef(options.designMode, true);
@@ -3699,7 +3699,7 @@ _extend(KEdit, KWidget, {
 		doc.write('');
 		self.iframe.unbind();
 		self.textarea.unbind();
-		KEdit.parent.remove.call(self);
+		KEdit.remove.call(self);
 	},
 	html : function(val, isFull) {
 		var self = this, doc = self.doc;
@@ -3812,7 +3812,7 @@ function KToolbar(options) {
 _extend(KToolbar, KWidget, {
 	init : function(options) {
 		var self = this;
-		KToolbar.parent.init.call(self, options);
+		KToolbar.init.call(self, options);
 		self.disableMode = _undef(options.disableMode, false);
 		self.noDisableItemMap = _toMap(_undef(options.noDisableItems, []));
 		self._itemMap = {};
@@ -3930,7 +3930,7 @@ _extend(KMenu, KWidget, {
 	init : function(options) {
 		var self = this;
 		options.z = options.z || 811213;
-		KMenu.parent.init.call(self, options);
+		KMenu.init.call(self, options);
 		self.centerLineMode = _undef(options.centerLineMode, true);
 		self.div.addClass('ke-menu').bind('click,mousedown', function(e){
 			e.stopPropagation();
@@ -3995,7 +3995,7 @@ _extend(KMenu, KWidget, {
 			self.options.beforeRemove.call(self);
 		}
 		K('.ke-menu-item', self.div[0]).unbind();
-		KMenu.parent.remove.call(self);
+		KMenu.remove.call(self);
 		return self;
 	}
 });
@@ -4010,7 +4010,7 @@ _extend(KColorPicker, KWidget, {
 	init : function(options) {
 		var self = this;
 		options.z = options.z || 811213;
-		KColorPicker.parent.init.call(self, options);
+		KColorPicker.init.call(self, options);
 		var colors = options.colors || [
 			['#E53333', '#E56600', '#FF9900', '#64451D', '#DFC5A4', '#FFE500'],
 			['#009900', '#006600', '#99BB00', '#B8D100', '#60D978', '#00D5FF'],
@@ -4069,7 +4069,7 @@ _extend(KColorPicker, KWidget, {
 		_each(self._cells, function() {
 			this.unbind();
 		});
-		KColorPicker.parent.remove.call(self);
+		KColorPicker.remove.call(self);
 		return self;
 	}
 });
@@ -4179,7 +4179,7 @@ _extend(KDialog, KWidget, {
 		var shadowMode = _undef(options.shadowMode, true);
 		options.z = options.z || 811213;
 		options.shadowMode = false;
-		KDialog.parent.init.call(self, options);
+		KDialog.init.call(self, options);
 		var title = options.title,
 			body = K(options.body, self.doc),
 			previewBtn = options.previewBtn,
@@ -4284,7 +4284,7 @@ _extend(KDialog, KWidget, {
 		K('iframe', self.div).each(function() {
 			K(this).remove();
 		});
-		KDialog.parent.remove.call(self);
+		KDialog.remove.call(self);
 		return self;
 	}
 });

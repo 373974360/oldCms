@@ -127,7 +127,7 @@ function getGuestBookCount(gbs_id)
 //打开添加窗口
 function openAddGuestBookSubPage()
 {
-	top.addTab(true,"/sys/appCom/guestbook/add_gbSub.jsp?site_id="+site_id+"&topnum="+top.curTabIndex,"新建主题");
+	addTab(true,"/sys/appCom/guestbook/add_gbSub.jsp?site_id="+site_id+"&topnum="+curTabIndex,"新建主题");
 }
 
 //打开修改窗口
@@ -138,19 +138,19 @@ function openUpdateGuestBookSubPage(s_id)
 		id = s_id;
 	else
 		id = table.getSelecteCheckboxValue("gbs_id");
-	top.addTab(true,"/sys/appCom/guestbook/add_gbSub.jsp?site_id="+site_id+"&topnum="+top.curTabIndex+"&gbs_id="+id,"新建主题");
+	addTab(true,"/sys/appCom/guestbook/add_gbSub.jsp?site_id="+site_id+"&topnum="+curTabIndex+"&gbs_id="+id,"新建主题");
 }
 
 //打开查看留言窗口
 function openGuestBookPage(s_id,cat_id)
 {
-	top.addTab(true,"/sys/appCom/guestbook/guestBookList.jsp?site_id="+site_id+"&topnum="+top.curTabIndex+"&gbs_id="+s_id+"&cat_id="+cat_id,"查看留言");
+	addTab(true,"/sys/appCom/guestbook/guestBookList.jsp?site_id="+site_id+"&topnum="+curTabIndex+"&gbs_id="+s_id+"&cat_id="+cat_id,"查看留言");
 }
 
 //打开统计窗口
 function openGuestBookCountPage(s_id,cat_id)
 {
-	top.addTab(true,"/sys/appCom/guestbook/guestBookCount.jsp?site_id="+site_id+"&gbs_id="+s_id+"&cat_id="+cat_id,"留言统计");
+	addTab(true,"/sys/appCom/guestbook/guestBookCount.jsp?site_id="+site_id+"&gbs_id="+s_id+"&cat_id="+cat_id,"留言统计");
 }
 
 function insertGuestbookSub()
@@ -166,13 +166,13 @@ function insertGuestbookSub()
 	bean.description = getV(contentId);
 	if(GuestBookRPC.insertGuestBookSub(bean))
 	{
-		top.msgAlert("留言板主题"+WCMLang.Add_success);
-		top.getCurrentFrameObj(topnum).reloadList();
-		top.tab_colseOnclick(top.curTabIndex);
+		msgAlert("留言板主题"+WCMLang.Add_success);
+		getCurrentFrameObj(topnum).reloadList();
+		tab_colseOnclick(curTabIndex);
 	}
 	else
 	{
-		top.msgWargin("留言板主题"+WCMLang.Add_fail);
+		msgWargin("留言板主题"+WCMLang.Add_fail);
 	}
 }
 
@@ -189,13 +189,13 @@ function updateGuestbookSub()
 	bean.gbs_id = gbs_id;
 	if(GuestBookRPC.updateGuestBookSub(bean))
 	{
-		top.msgAlert("留言板主题"+WCMLang.Add_success);
-		top.getCurrentFrameObj(topnum).reloadList();
-		top.tab_colseOnclick(top.curTabIndex);
+		msgAlert("留言板主题"+WCMLang.Add_success);
+		getCurrentFrameObj(topnum).reloadList();
+		tab_colseOnclick(curTabIndex);
 	}
 	else
 	{
-		top.msgWargin("留言板主题"+WCMLang.Add_fail);
+		msgWargin("留言板主题"+WCMLang.Add_fail);
 	}
 }
 
@@ -206,11 +206,11 @@ function deleteGuestBookSub()
 	
 	if(GuestBookRPC.deleteGuestBookSub(selectIDS))
 	{
-		top.msgAlert("留言板主题"+WCMLang.Delete_success);
+		msgAlert("留言板主题"+WCMLang.Delete_success);
 		reloadList();
 	}else
 	{
-		top.msgWargin("留言板主题"+WCMLang.Delete_fail);
+		msgWargin("留言板主题"+WCMLang.Delete_fail);
 	}
 }
 
@@ -220,11 +220,11 @@ function publishGuestBookSub(publish_status)
 	var selectIDS = table.getSelecteCheckboxValue("gbs_id");
 	if(GuestBookRPC.publishGuestBookSub(selectIDS,publish_status))
 	{
-		top.msgAlert("留言板主题"+WCMLang.Publish_success);
+		msgAlert("留言板主题"+WCMLang.Publish_success);
 		reloadList();
 	}else
 	{
-		top.msgWargin("留言板主题"+WCMLang.Publish_fail);
+		msgWargin("留言板主题"+WCMLang.Publish_fail);
 	}
 }
 

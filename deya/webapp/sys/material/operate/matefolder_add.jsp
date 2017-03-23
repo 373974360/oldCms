@@ -14,7 +14,7 @@
 <script type="text/javascript">
 var site_id ="<%=request.getParameter("site_id")%>";
 var f_id = "<%=request.getParameter("f_id")%>";
-var user_id = top.LoginUserBean.user_id;
+var user_id = LoginUserBean.user_id;
 var defaultBean;
 
 $(document).ready(function(){
@@ -103,7 +103,7 @@ function selectedCustomFollder(id,text){
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="" value="保存" />	
 			<input id="userAddReset" name="btn1" type="button" onclick="formReSet('MateFolder_table',f_id)" value="重置"/>	
-			<input id="userAddCancel" name="btn1" type="button" onclick="top.CloseModalWindow();" value="取消" />	
+			<input id="userAddCancel" name="btn1" type="button" onclick="CloseModalWindow();" value="取消" />
 		</td>
 	</tr>
 </table>

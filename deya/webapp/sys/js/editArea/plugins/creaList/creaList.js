@@ -27,16 +27,16 @@ var EditArea_creaList= {
 		switch(ctrl_name){
 			case "creaLink":
 				// Control id, button img, command   名称,图片名,操作方法,对应editArea.execCommand
-				return parent.editAreaLoader.get_button_html('creaLink', 'creaLink.png', 'creaLink', false, this.baseURL);break;
+				return editAreaLoader.get_button_html('creaLink', 'creaLink.png', 'creaLink', false, this.baseURL);break;
 			case "creaList":
 				// Control id, button img, command   名称,图片名,操作方法,对应editArea.execCommand
-				return parent.editAreaLoader.get_button_html('creaList', 'creaList.png', 'creaList', false, this.baseURL);break;
+				return editAreaLoader.get_button_html('creaList', 'creaList.png', 'creaList', false, this.baseURL);break;
 			case "hotList":
 				// Control id, button img, command   名称,图片名,操作方法,对应editArea.execCommand
-				return parent.editAreaLoader.get_button_html('hotList', 'hotList.png', 'hotList', false, this.baseURL);break;
+				return editAreaLoader.get_button_html('hotList', 'hotList.png', 'hotList', false, this.baseURL);break;
 			case "selFile":
 				// Control id, button img, command   名称,图片名,操作方法,对应editArea.execCommand
-				return parent.editAreaLoader.get_button_html('selFile', 'selImg.png', 'selFile', false, this.baseURL);break;
+				return editAreaLoader.get_button_html('selFile', 'selImg.png', 'selFile', false, this.baseURL);break;
 			
 		}
 		return false;
@@ -79,16 +79,16 @@ var EditArea_creaList= {
 		// Handle commands
 		switch(cmd){			
 			case "creaList":						
-				top.OpenModalWindow("列表生成工具","/sys/system/template/list_tools.jsp",650,420);
+				OpenModalWindow("列表生成工具","/sys/system/template/list_tools.jsp",650,420);
 				return false;
 			case "hotList":						
-				top.OpenModalWindow("热点信息生成工具","/sys/system/template/hotlist_tools.jsp",650,440);
+				OpenModalWindow("热点信息生成工具","/sys/system/template/hotlist_tools.jsp",650,440);
 				return false;
 			case "creaLink":						
-				top.OpenModalWindow("获取链接地址","/sys/system/template/link_tools.jsp",650,495);
+				OpenModalWindow("获取链接地址","/sys/system/template/link_tools.jsp",650,495);
 				return false;
 			case "selFile":						
-				top.OpenModalWindow("选择图片","/sys/system/template/select_file.jsp",650,495);
+				OpenModalWindow("选择图片","/sys/system/template/select_file.jsp",650,495);
 				return false;
 		}
 		// Pass to next handler in chain

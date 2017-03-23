@@ -56,7 +56,7 @@ function changeDeptListTable(o_id){
 //打开关联业务窗口
 function openSelectCQModel(title,handl_name)
 {
-	top.OpenModalWindow(title,"/sys/appeal/model/select_model.jsp?handl_name="+handl_name,450,500);
+	OpenModalWindow(title,"/sys/appeal/model/select_model.jsp?handl_name="+handl_name,450,500);
 }
 
 </script>

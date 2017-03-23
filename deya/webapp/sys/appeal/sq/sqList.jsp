@@ -101,14 +101,14 @@ function pcSearch()
 	if(!val.getResult()){		
 		return;
 	}
-
-    $("#searchFields option").each(function(){
-        m.remove($(this).val());
-    });
-
-    var text = $("#searchFields option:selected").val();
-    m.put(text,s_val);
-
+	
+	$("#searchFields option").each(function(){
+		if($(this).attr("selected") == true)
+		{
+			m.put($(this).val(),s_val);
+		}else
+			m.remove($(this).val());
+	});
 	m.remove("tag_ids");
 	m.remove("search_date");		
 	reloadSQList();

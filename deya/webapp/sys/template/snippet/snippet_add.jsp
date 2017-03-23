@@ -11,8 +11,8 @@
 <script type="text/javascript">
 
  
-var app = top.getCurrentFrameObj().app;
-var site_id = top.getCurrentFrameObj().site_id;
+var app = getCurrentFrameObj().app;
+var site_id = getCurrentFrameObj().site_id;
 
 var id = "<%=request.getParameter("id")%>";
 var type = "<%=request.getParameter("type")%>";
@@ -92,7 +92,7 @@ $(document).ready(function(){
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="saveBtn" name="saveBtn" type="button" onclick="" value="保存" />
 			<input id="resetBtn" name="resetBtn" type="button" onclick="form1.reset()" value="重置" />
-			<input id="viewCancel" name="btn1" type="button" onclick="top.CloseModalWindow()" value="取消" />
+			<input id="viewCancel" name="btn1" type="button" onclick="CloseModalWindow()" value="取消" />
 		</td>
 	</tr>
 </table>

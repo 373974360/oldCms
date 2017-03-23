@@ -29,10 +29,10 @@ function reloadIndex()
 		m.put("end_time",$("#end_time").val());
 	if(jsonrpc.GKInfoRPC.reloadGKIndex(m))
 	{
-		top.msgAlert("重新生成索引码任务已完成");
+		msgAlert("重新生成索引码任务已完成");
 	}else
 	{
-		top.msgWargin("索引码重置失败,请重新生成");
+		msgWargin("索引码重置失败,请重新生成");
 	}
 }
 

@@ -124,7 +124,7 @@
 					<td align="left" valign="middle" style="text-indent: 100px;">
 					    <input id="userAddCance1" name="btn1" type="button" onclick="handleFun()" value="处理" />
 					    <input id="userAddCance2" name="btn2" type="button" onclick="noHandleFun()" value="不予处理" />
-						<input id="userAddCance3" name="btn3" type="button" onclick="top.CloseModalWindow();" value="关闭" />
+						<input id="userAddCance3" name="btn3" type="button" onclick="CloseModalWindow();" value="关闭" />
 					</td>
 				</tr>
 			</table>

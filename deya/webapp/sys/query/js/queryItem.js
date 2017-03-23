@@ -126,11 +126,11 @@ function openUpdatePage(site_id,conf_id)
 	var beanList = table.getSelecteBeans();
 	if(beanList.size() ==0)
 	{
-		top.msgAlert("请选择一条记录！");
+		msgAlert("请选择一条记录！");
 		return;
 	}else if(beanList.size()>1)
 	{
-		top.msgAlert("只能选择一条记录修改！");
+		msgAlert("只能选择一条记录修改！");
 		return;
 	}else{
 		m = beanList.list[0];
@@ -147,7 +147,7 @@ function deleteQueryItems(site_id,conf_id)
 	var beanList = table.getSelecteBeans();
 	if(beanList.size() ==0)
 	{
-		top.msgAlert("请选择一条记录！");
+		msgAlert("请选择一条记录！");
 		return;
 	}else{
 		for(var i=0;i<beanList.size();i++)
@@ -165,11 +165,11 @@ function deleteQueryItems(site_id,conf_id)
 
 	if(QueryItemRPC.deleteQueryItem(m))
 	{
-		top.msgAlert("信息删除成功！");
+		msgAlert("信息删除成功！");
 		reloadList();
 	}else
 	{
-		top.msgWargin("信息删除失败！");
+		msgWargin("信息删除失败！");
 	}
 }
 
@@ -177,10 +177,10 @@ function deleteItemsByConfId(conf_id)
 {
 	if(QueryItemRPC.deleteQueryItemByConf_id(conf_id))
 	{
-		top.msgAlert("信息清除成功！");
+		msgAlert("信息清除成功！");
 		reloadList();
 	}else
 	{
-		top.msgWargin("信息清除失败！");
+		msgWargin("信息清除失败！");
 	}
 }

@@ -77,7 +77,7 @@ function checkRegInfo(reg_bean)
 
 	if(UserManRPC.registerISExist(reg_bean.username,reg_bean.register_id))
 	{
-		top.msgWargin(WCMLang.register_iSExist);
+		msgWargin(WCMLang.register_iSExist);
 		return false;
 	}
 	return true;
@@ -94,11 +94,11 @@ function insertRegister()
 
 	if(UserManRPC.insertRegister(reg_bean))
 	{
-		top.msgAlert("帐号信息"+WCMLang.Add_success);
-		top.CloseModalWindow();
+		msgAlert("帐号信息"+WCMLang.Add_success);
+		CloseModalWindow();
 	}else
 	{
-		top.msgWargin("帐号信息"+WCMLang.Add_fail);
+		msgWargin("帐号信息"+WCMLang.Add_fail);
 	}
 	
 }
@@ -114,11 +114,11 @@ function updateRegister()
 
 	if(UserManRPC.updateRegister(reg_bean))
 	{
-		top.msgAlert("帐号信息"+WCMLang.Add_success);
-		top.CloseModalWindow();
+		msgAlert("帐号信息"+WCMLang.Add_success);
+		CloseModalWindow();
 	}else
 	{
-		top.msgWargin("帐号信息"+WCMLang.Add_fail);
+		msgWargin("帐号信息"+WCMLang.Add_fail);
 	}
 } 
 </script>
@@ -166,7 +166,7 @@ function updateRegister()
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="" value="保存" />	
 			<input id="userAddReset" name="btn1" type="button" onclick="formReSet('register_table',user_id)" value="重置" />	
-			<input id="userAddCancel" name="btn1" type="button" onclick="top.CloseModalWindow();" value="取消" />
+			<input id="userAddCancel" name="btn1" type="button" onclick="CloseModalWindow();" value="取消" />
 		</td>
 	</tr>
 </table>

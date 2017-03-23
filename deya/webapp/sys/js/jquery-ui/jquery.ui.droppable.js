@@ -255,7 +255,7 @@ $.ui.ddmanager = {
 			var parentInstance;
 			if (this.options.greedy) {
 				var parent = this.element.parents(':data(droppable):eq(0)');
-				if (parent.length) {
+				if (length) {
 					parentInstance = $.data(parent[0], 'droppable');
 					parentInstance.greedyChild = (c == 'isover' ? 1 : 0);
 				}

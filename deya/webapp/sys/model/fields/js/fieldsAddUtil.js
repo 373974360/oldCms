@@ -34,7 +34,7 @@ function ChangeHiddenFieldValue() {
 
     var value = "";
     if (choiceUrl.length < 1) { 
-        parent.alertN("请添加选项！");
+        alertN("请添加选项！");
         return false;
     }
 
@@ -52,7 +52,7 @@ function ChangeHiddenFieldValue() {
     obj.value = value;
 
     if (Default && !bFoundMatchWithDefault) {
-        //parent.alertN("“选项”域的默认值必须从指定的选项中选择。请再试一次。");
+        //alertN("“选项”域的默认值必须从指定的选项中选择。请再试一次。");
         //return false;
     }
     else {

@@ -295,7 +295,7 @@ function showYsq_type_table(type)
 				<th></th>
 				<td>
 					<input id="submitButton" name="submitButton" type="button" onclick="SubmitInfo(1,node_id)" value="提交" />					
-                    <input id="btn2" name="btn2" type="button" onclick="top.tab_colseOnclick(top.curTabIndex)" value="取消" />
+                    <input id="btn2" name="btn2" type="button" onclick="tab_colseOnclick(curTabIndex)" value="取消" />
 				</td>
 			</tr>
 		</tbody>

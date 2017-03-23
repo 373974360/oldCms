@@ -204,11 +204,11 @@ function insertQueryDicBean()
 	{
 		if(QueryDicRPC.insertQueryDicBean(conf_id,list))
 		{
-			top.msgAlert("字段"+WCMLang.Add_success);
+			msgAlert("字段"+WCMLang.Add_success);
 			window.history.go(-1);
 		}else
 		{
-			top.msgWargin("字段"+WCMLang.Add_fail);
+			msgWargin("字段"+WCMLang.Add_fail);
 		}
 	}
 }

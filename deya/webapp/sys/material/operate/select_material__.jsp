@@ -42,7 +42,7 @@ var aidnum = window.dialogArguments;
 
 var site_id ="<%=request.getParameter("site_id")%>";
 var handl_name ="<%=request.getParameter("handl_name")%>";
-var user_id = aidnum.top.LoginUserBean.user_id;
+var user_id = aidnum.LoginUserBean.user_id;
 var json_data;
 var imgDomain;
 var pageSize = 20;

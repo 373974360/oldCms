@@ -14,17 +14,17 @@ function search()
 	start_day = $("#start_day").val();
 	end_day = $("#end_day").val();
 	if(start_day > end_day){
-	   top.msgWargin("结束时间不能在开始时间前");
+	   msgWargin("结束时间不能在开始时间前");
 	   return ;
 	}
 	if(start_day=="" || start_day==null || start_day=="null")
 	{
-		top.msgWargin("开始时间不能为空");
+		msgWargin("开始时间不能为空");
 		return;
 	}
 	if(end_day=="" || end_day==null || end_day=="null")
 	{
-		top.msgWargin("结束时间不能为空");
+		msgWargin("结束时间不能为空");
 		return;
 	}
 	$("#countList").show();

@@ -141,12 +141,12 @@ function deleteCommonLang()
 	del_m.put("ph_id",ids);
 	if(CommonLangRPC.deleteCommonLang(del_m))
 	{
-		top.msgAlert("常用语"+WCMLang.Delete_success);
+		msgAlert("常用语"+WCMLang.Delete_success);
 		reloadCommonLangList();
 	}
 	else
 	{
-		top.msgWargin("常用语"+WCMLang.Delete_fail);
+		msgWargin("常用语"+WCMLang.Delete_fail);
 	}
 }
 
@@ -156,11 +156,11 @@ function saveSort()
 	var ids = table.getAllCheckboxValue("ph_id");
 	if(CommonLangRPC.saveSort(ids))
 	{
-		top.msgAlert(WCMLang.Sort_success);
+		msgAlert(WCMLang.Sort_success);
 	}
 	else
 	{
-		top.msgWargin(WCMLang.Sort_fail);
+		msgWargin(WCMLang.Sort_fail);
 	}
 }
 

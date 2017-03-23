@@ -17,9 +17,9 @@ function saveMailConfig(){
 	K_V.put("key_smtp_send_mail", $("#smtp_send_mail").val());
 	//alert(K_V);
 	if(configRPC.add(K_V)){
-		top.msgAlert("添加成功");
+		msgAlert("添加成功");
 	}else{
-		top.msgAlert("添加失败");
+		msgAlert("添加失败");
 	}
 }
 
@@ -35,9 +35,9 @@ function updateMailConfig(){
 	K_V.put("key_smtp_password", $("#smtp_password").val());
 	K_V.put("key_smtp_send_mail", $("#smtp_send_mail").val());
 	if(configRPC.update(K_V)){
-		top.msgAlert("修改成功");
+		msgAlert("修改成功");
 	}else{
-		top.msgAlert("修改失败");
+		msgAlert("修改失败");
 	}
 }
 

@@ -76,9 +76,9 @@ function showTurnPage(){
 function openAddPage(s_id)
 {
 	if(s_id != null)
-		top.addTab(true,"/sys/ggfw/ser/serCate_add.jsp?parent_id="+ser_id+"&top_index="+top.curTabIndex+"&s_id="+s_id,"维护场景导航");
+		addTab(true,"/sys/ggfw/ser/serCate_add.jsp?parent_id="+ser_id+"&top_index="+curTabIndex+"&s_id="+s_id,"维护场景导航");
 	else
-		top.addTab(true,"/sys/ggfw/ser/serCate_add.jsp?parent_id="+ser_id+"&top_index="+top.curTabIndex,"维护场景导航");
+		addTab(true,"/sys/ggfw/ser/serCate_add.jsp?parent_id="+ser_id+"&top_index="+curTabIndex,"维护场景导航");
 }
 
 function openUpdatePage()
@@ -106,23 +106,23 @@ function addSerCate()
 
 	if(SerRPC.insertSerCategory(bean))
 	{
-		top.msgAlert("场景式服务主题"+WCMLang.Add_success);
+		msgAlert("场景式服务主题"+WCMLang.Add_success);
 		if(bean.cat_type != "leaf")
 		{
-			top.getCurrentFrameObj(top_index).insertCategoryTree(bean.ser_id,bean.cat_name);
-			top.getCurrentFrameObj(top_index).loadSerCategoryTable();
+			getCurrentFrameObj(top_index).insertCategoryTree(bean.ser_id,bean.cat_name);
+			getCurrentFrameObj(top_index).loadSerCategoryTable();
 		}
 		else
 		{
-			top.getCurrentFrameObj(top_index).reloadSerCateTree();			
-			top.getCurrentFrameObj(top_index).treeNodeSelected(parent_id);
-			top.getCurrentFrameObj(top_index).loadSerCategoryTable();
+			getCurrentFrameObj(top_index).reloadSerCateTree();
+			getCurrentFrameObj(top_index).treeNodeSelected(parent_id);
+			getCurrentFrameObj(top_index).loadSerCategoryTable();
 		}
 		
-		top.tab_colseOnclick(top.curTabIndex);
+		tab_colseOnclick(curTabIndex);
 	}else
 	{
-		top.msgWargin("场景式服务主题"+WCMLang.Add_fail);
+		msgWargin("场景式服务主题"+WCMLang.Add_fail);
 	}
 }
 
@@ -141,13 +141,13 @@ function updateSerCate()
 
 	if(SerRPC.updateSerCategory(bean))
 	{
-		top.msgAlert("场景式服务主题"+WCMLang.Add_success);
-		top.getCurrentFrameObj(top_index).updateCategoryTree(bean.ser_id,bean.cat_name);
-		top.getCurrentFrameObj(top_index).loadSerCategoryTable();
-		top.tab_colseOnclick(top.curTabIndex);
+		msgAlert("场景式服务主题"+WCMLang.Add_success);
+		getCurrentFrameObj(top_index).updateCategoryTree(bean.ser_id,bean.cat_name);
+		getCurrentFrameObj(top_index).loadSerCategoryTable();
+		tab_colseOnclick(curTabIndex);
 	}else
 	{
-		top.msgWargin("场景式服务主题"+WCMLang.Add_fail);
+		msgWargin("场景式服务主题"+WCMLang.Add_fail);
 	}
 }
 
@@ -157,12 +157,12 @@ function deleteSerCategory()
 
 	if(SerRPC.deleteSerCategory(selectIDS))
 	{
-		top.msgAlert("场景式服务主题"+WCMLang.Delete_success);
+		msgAlert("场景式服务主题"+WCMLang.Delete_success);
 		loadSerCategoryTable();
 		deleteTreeNode(selectIDS);
 	}else
 	{
-		top.msgWargin("场景式服务主题"+WCMLang.Delete_fail);
+		msgWargin("场景式服务主题"+WCMLang.Delete_fail);
 	}
 }
 
@@ -172,12 +172,12 @@ function sortSerCategory()
 	var selectIDS = table.getAllCheckboxValue("ser_id");
 	if(SerRPC.sortSerCategory(selectIDS))
 	{
-		top.msgAlert(WCMLang.Sort_success);
+		msgAlert(WCMLang.Sort_success);
 		reloadSerCateTree();
 		treeNodeSelected(temp_ser_id);
 	}else
 	{
-		top.msgWargin(WCMLang.Sort_fail);
+		msgWargin(WCMLang.Sort_fail);
 	}
 }
 
@@ -195,7 +195,7 @@ function updateCategoryTree(id,category_name)
 
 function selectInfoUrl()
 {
-	top.OpenModalWindow("选择信息","/sys/cms/info/article/selectInfo.jsp?top_index="+top.curTabIndex+"&app_id="+app_id,800,530);
+	OpenModalWindow("选择信息","/sys/cms/info/article/selectInfo.jsp?top_index="+curTabIndex+"&app_id="+app_id,800,530);
 }
 
 function insertContentUrl(url)

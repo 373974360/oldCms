@@ -21,7 +21,7 @@ var handl_name = "<%=handl_name%>";
 
 $(document).ready(function(){
 	initButtomStyle();	
-	json_data = top.getCurrentFrameObj().json_data;//直接取父窗口里的树对象
+	json_data = getCurrentFrameObj().json_data;//直接取父窗口里的树对象
 	setLeftMenuTreeJsonData(json_data);
 	
 });
@@ -34,19 +34,19 @@ function returnCatID()
 	if(node == null)
 	{
 		
-		top.msgWargin(WCMLang.selected_category);
+		msgWargin(WCMLang.selected_category);
 		return;
 	}else
 	{			
 		if(node.attributes != null && node.attributes.cat_type == "leaf")
 		{
-			top.msgWargin("请选择枝节点进行移动");
+			msgWargin("请选择枝节点进行移动");
 			return;
 		}
 		else
 		{
-			eval("top.getCurrentFrameObj()."+handl_name+"('"+node.id+"')");
-			top.CloseModalWindow();
+			eval("getCurrentFrameObj()."+handl_name+"('"+node.id+"')");
+			CloseModalWindow();
 		}
 	}
 }
@@ -78,7 +78,7 @@ function returnCatID()
 	<tr>
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="returnCatID()" value="保存" />
-			<input id="userAddCancel" name="btn1" type="button" onclick="top.CloseModalWindow();" value="取消" />	
+			<input id="userAddCancel" name="btn1" type="button" onclick="CloseModalWindow();" value="取消" />
 		</td>
 	</tr>
 </table>

@@ -56,7 +56,6 @@ function initEditArea(textareaID)
         indentUnit : 4,  // 缩进单位，默认2
         lineNumbers : true,  // 是否显示行号
         lineWrapping : true
-
     });
 }
 

@@ -16,7 +16,7 @@
 var cat_map = new Map();
 var app_id = "<%=app_id%>";
 var site_id = "<%=site_id%>";
-var user_id = top.LoginUserBean.user_id+"";
+var user_id = LoginUserBean.user_id+"";
 if(site_id == null || site_id == "null")
 	site_id = "";
 

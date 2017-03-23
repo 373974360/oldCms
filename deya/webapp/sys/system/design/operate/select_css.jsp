@@ -50,8 +50,8 @@ function getCssList()
 
 function returnValues()
 {
-	top.loadCssObject($(":checked").val());
-	top.CloseModalWindow();
+	loadCssObject($(":checked").val());
+	CloseModalWindow();
 }
 </script>
 </head>
@@ -76,7 +76,7 @@ function returnValues()
 	<tr>
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="returnValues()" value="确定" />			
-			<input id="userAddCancel" name="btn1" type="button" onclick="top.CloseModalWindow();" value="取消" />	
+			<input id="userAddCancel" name="btn1" type="button" onclick="CloseModalWindow();" value="取消" />
 		</td>
 	</tr>
 </table>

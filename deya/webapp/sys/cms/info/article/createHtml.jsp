@@ -72,7 +72,7 @@ function createContentHtml()
 		{
 			if(judgeDate(end_time,start_time))
 			{
-				top.msgWargin("结束时间不能小于开始时间");
+				msgWargin("结束时间不能小于开始时间");
 				return;
 			}
 		}
@@ -80,7 +80,7 @@ function createContentHtml()
 
 	if(c_ids == "" && start_time == "" && end_time == "")
 	{
-		top.msgWargin("请选择生成条件");
+		msgWargin("请选择生成条件");
 		return;
 	}
 	var m = new Map();
@@ -97,13 +97,13 @@ function createContentHtml()
 	$("#create_button").attr("disabled",true);
 	if(InfoBaseRPC.batchPublishContentHtml(m))
 	{
-		top.msgAlert("页面生成成功");
+		msgAlert("页面生成成功");
 		$("#loadImg").hide();
 		$("#create_button").removeAttr("disabled");
 		return;
 	}else
 	{
-		top.msgWargin("页面生成失败,请重新生成");
+		msgWargin("页面生成失败,请重新生成");
 		$("#loadImg").hide();
 		$("#create_button").removeAttr("disabled");
 		return;

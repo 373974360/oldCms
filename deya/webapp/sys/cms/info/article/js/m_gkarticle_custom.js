@@ -199,11 +199,11 @@ function publicSaveInfoEventCustom(bean,cusBean,model_ename,save_type)
 		{
 			insertOtherInfos(bean,model_ename);
 		}
-		top.msgAlert("信息"+WCMLang.Add_success);			
+		msgAlert("信息"+WCMLang.Add_success);
 		gotoListPage(bean);
 	}
 	else
 	{
-		top.msgWargin("信息"+WCMLang.Add_fail);
+		msgWargin("信息"+WCMLang.Add_fail);
 	}
 }

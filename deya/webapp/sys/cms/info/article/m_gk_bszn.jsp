@@ -25,7 +25,7 @@ if(topnum == null || topnum.trim().equals("") || topnum.trim().equals("null") ){
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>信息维护</title>
 <jsp:include page="../include/include_info_tools.jsp"/>
-<script type="text/javascript" src="js/m_gk_bszn.js?v=20150915"></script>
+<script type="text/javascript" src="js/m_gk_bszn.js?v=201610091545"></script>
 <script type="text/javascript">
 <!--
 var topnum = "<%=topnum%>";
@@ -40,7 +40,7 @@ var mFlag = false;
 var gk_sxyj ="gk_sxyj";
 var gk_bltj ="gk_bltj";
 var gk_blsx ="gk_blsx";
-var gk_sfbz ="gk_sfbz";
+// var gk_sfbz ="gk_sfbz";
 var gk_bllc ="gk_bllc";
 var gk_cclx ="gk_cclx";
 var gk_sfyj ="gk_sfyj";
@@ -51,9 +51,9 @@ var gk_sfyj ="gk_sfyj";
         initUeditor(gk_sxyj);
         initUeditor(gk_bltj);
         initUeditor(gk_blsx);
-        initUeditor(gk_sfbz);
+      //  initUeditor(gk_sfbz);
         initUeditor(gk_bllc);
-        initUeditor(gk_cclx);
+//        initUeditor(gk_cclx);
         initUeditor(gk_sfyj);
 
 		reloadPublicGKInfo();
@@ -67,9 +67,9 @@ var gk_sfyj ="gk_sfyj";
                 setV(gk_sxyj,defaultBean.gk_sxyj);
                 setV(gk_bltj,defaultBean.gk_bltj);
                 setV(gk_blsx,defaultBean.gk_blsx);
-                setV(gk_sfbz,defaultBean.gk_sfbz);
+//                setV(gk_sfbz,defaultBean.gk_sfbz);
                 setV(gk_bllc,defaultBean.gk_bllc);
-                setV(gk_cclx,defaultBean.gk_cclx);
+//                setV(gk_cclx,defaultBean.gk_cclx);
                 setV(gk_sfyj,defaultBean.gk_sfyj);
 				publicReloadUpdateGKInfos();
 			}
@@ -109,13 +109,13 @@ var gk_sfyj ="gk_sfyj";
 		-->
 		<input id="gk_fwlb" type="hidden" value="行政许可项目" class="input_select" style="width:150px;">
     	<tr>
-			<th>受理机构：</th>
+			<th>办理部门：</th>
 			<td>
 				<input id="gk_bsjg" name="gk_bsjg" type="text" class="width350" maxlength="80" value="" />
 			</td>
 		</tr>
         <tr>
-			<th>设定依据：</th>
+			<th>办理依据：</th>
 			<td>				
 				<script id="gk_sxyj" type="text/plain" style="width:95%;height:160px;"></script>
 			</td>
@@ -139,28 +139,10 @@ var gk_sfyj ="gk_sfyj";
 				<script id="gk_bllc" type="text/plain" style="width:95%;height:160px;"></script>
 			</td>
 		</tr>
-		 <tr>
-			<th>办理时限：</th>
+		<tr>
+			<th>办理地点：</th>
 			<td>
-				<input id="gk_blshixian" name="gk_blshixian" type="text" class="width350" maxlength="80" value="" />
-			</td>
-		</tr>
-		<tr>
-			<th>收费标准：</th>
-			<td>				
-				<script id="gk_sfbz" type="text/plain" style="width:95%;height:160px;"></script>
-			</td>
-		</tr>
-		<tr>
-			<th>收费依据：</th>
-			<td>				
-				<script id="gk_sfyj" type="text/plain" style="width:95%;height:160px;"></script>
-			</td>
-		</tr>
-		<tr>
-			<th>联系电话：</th>
-			<td>
-				<input id="gk_zxqd" name="gk_zxqd" type="text" class="width350" maxlength="80" value="" />
+				<input id="gk_gsfs" name="gk_gsfs" type="text" class="width350" maxlength="80" value="" />
 			</td>
 		</tr>
         <tr>
@@ -170,17 +152,38 @@ var gk_sfyj ="gk_sfyj";
 			</td>
 		</tr>
 		<tr>
-			<th>办理地点：</th>
+			<th>联系电话：</th>
 			<td>
-				<input id="gk_gsfs" name="gk_gsfs" type="text" class="width350" maxlength="80" value="" />
+				<input id="gk_zxqd" name="gk_zxqd" type="text" class="width350" maxlength="80" value="" />
 			</td>
 		</tr>
-        <tr>
+		 <tr>
+			<th>法定办理时限：</th>
+			<td>
+				<input id="gk_blshixian" name="gk_blshixian" type="text" class="width350" maxlength="80" value="" />
+			</td>
+		</tr>
+<!--		<tr>
+			<th>收费标准：</th>
+			<td>				
+				<script id="gk_sfbz" type="text/plain" style="width:95%;height:160px;"></script>
+			</td>
+		</tr>-->
+		<tr>
+			<th>收费依据及标准：</th>
+			<td>				
+				<script id="gk_sfyj" type="text/plain" style="width:95%;height:160px;"></script>
+			</td>
+		</tr>
+
+
+
+<!--        <tr>
 			<th>乘车路线：</th>
 			<td>
 				<script id="gk_cclx" type="text/plain" style="width:95%;height:160px;"></script>
 			</td>
-		</tr>
+		</tr>-->
 		<!--
         <tr>
 			<th>机构网址：</th>
@@ -204,7 +207,7 @@ var gk_sfyj ="gk_sfyj";
 			</td>
 		</tr>
 		-->
-        <tr>
+        <!--<tr>
 			<th style="vertical-align:top;">网上咨询：</th>
 			<td style="">
 				<input id="gk_wszx" name="gk_wszx" type="text" class="width350" maxlength="80" value="" />
@@ -219,7 +222,7 @@ var gk_sfyj ="gk_sfyj";
 				<input id="gk_wsbl" name="gk_wsbl" type="text" class="width350" maxlength="80" value="" />
 			<span class="blank9"></span>
 			</td>
-		</tr>
+		</tr>-->
         <!--
         <tr>
 			<th style="vertical-align:top;">状态查询：</th>
@@ -263,7 +266,7 @@ var gk_sfyj ="gk_sfyj";
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="" value="保存" />
 			<input id="addReset" name="btn1" type="button" onclick="window.location.reload()" value="重置" />
-			<input id="addCancel" name="btn1" type="button" onclick="top.tab_colseOnclick(top.curTabIndex)" value="取消" />	
+			<input id="addCancel" name="btn1" type="button" onclick="tab_colseOnclick(curTabIndex)" value="取消" />
 		</td>
 	</tr>
 </table>

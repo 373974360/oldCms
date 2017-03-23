@@ -19,7 +19,7 @@ $(document).ready(function(){
 	initButtomStyle();
 	init_FromTabsStyle();
 	if($.browser.msie&&$.browser.version=="6.0"&&$("html")[0].scrollHeight>$("html").height()) $("html").css("overflowY","scroll");
-	var content = top.getCurrentFrameObj(top_index).getProNoteValue(pro_id);
+	var content = getCurrentFrameObj(top_index).getProNoteValue(pro_id);
 	$("#pro_note").val(content);
 	KE.html("pro_note",content);
 });
@@ -35,11 +35,11 @@ function saveproNote()
 	m.put("pro_id",pro_id);
 	if(SQRPC.updateProcessNote(m))
 	{
-		top.msgAlert("内容"+WCMLang.Add_success);
-		top.getCurrentFrameObj(top_index).setProNoteValue(pro_id,content);
-		top.CloseModalWindow();
+		msgAlert("内容"+WCMLang.Add_success);
+		getCurrentFrameObj(top_index).setProNoteValue(pro_id,content);
+		CloseModalWindow();
 	}else
-		top.msgWargin("内容"+WCMLang.Add_fail);
+		msgWargin("内容"+WCMLang.Add_fail);
 }
 </script>
 </head>
@@ -56,7 +56,7 @@ function saveproNote()
 		<tr>
 			<td align="center">
 				<input id="submitButton" name="btn1" type="button" onclick="javascript:saveproNote();" value="提交" />
-				<input id="userAddCancel" name="btn1" type="button" onclick="top.CloseModalWindow();" value="关闭" />
+				<input id="userAddCancel" name="btn1" type="button" onclick="CloseModalWindow();" value="关闭" />
 			</td>
 		</tr>
 	</table>	

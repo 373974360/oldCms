@@ -23,7 +23,7 @@
 var sq_id = "<%=sq_id%>";
 var top_index = "<%=top_index%>";
 var site_id = "<%=site_id%>";
-var current_dept_id = top.getCurrentFrameObj(top_index).current_dept_id;//当前用户所在的部门
+var current_dept_id = getCurrentFrameObj(top_index).current_dept_id;//当前用户所在的部门
 var sq_custom_list;//用于存储扩展字段的列表
 $(document).ready(function(){
 	initButtomStyle();
@@ -37,7 +37,7 @@ $(document).ready(function(){
 	if(sq_id != "" && sq_id != "null" && sq_id != null)
 	{		
 		//defaultBean = SQRPC.getSqBean(sq_id);
-		defaultBean = top.getCurrentFrameObj(top_index).defaultBean;
+		defaultBean = getCurrentFrameObj(top_index).defaultBean;
 		getCPFormListByModel();//得到扩展字段及其内容
 		if(defaultBean)
 		{
@@ -62,7 +62,7 @@ $(document).ready(function(){
 //得到该登录人所具有的权限ID，显示发布按钮
 function getOptIDSByUser()
 {
-	var opt_ids = ","+jsonrpc.UserLoginRPC.getOptIDSByUserAPPSite(top.LoginUserBean.user_id,"appeal","")+",";
+	var opt_ids = ","+jsonrpc.UserLoginRPC.getOptIDSByUserAPPSite(LoginUserBean.user_id,"appeal","")+",";
 	if(opt_ids.indexOf(",175,") > -1)
 	{
 		$("#publish_status_tr").show();
@@ -269,12 +269,12 @@ function updateSQ()
 			SQRPC.updateSQCustom(sq_custom_list);
 		}
 
-		top.msgAlert(WCMLang.Add_success);
-		top.getCurrentFrameObj(top_index).location.reload();//刷新上一个列表
-		top.tab_colseOnclick(top.curTabIndex);
+		msgAlert(WCMLang.Add_success);
+		getCurrentFrameObj(top_index).location.reload();//刷新上一个列表
+		tab_colseOnclick(curTabIndex);
 	}else
 	{
-		top.msgAlert(WCMLang.Add_fail);
+		msgAlert(WCMLang.Add_fail);
 	}
 }
 
@@ -302,7 +302,6 @@ function updateSQ()
 				</select>
 			</td>
 		</tr>
-        <!--
 		<tr>
 			<th>内容分类：</th>
 			<td>
@@ -330,8 +329,7 @@ function updateSQ()
 					</div>
 				</div>
 			</td>
-		</tr>
-		-->
+		</tr>	
 		<tr id="gzyy_open_tr">
 			<th>公开意愿：</th>
 			<td>
@@ -352,7 +350,7 @@ function updateSQ()
 		</tr>
 		<tr id="sq_title2_info_tr">
 			<th>信件标题 ：</th>
-			<td><input id="sq_title2" name="sq_title2" type="text" class="width500" value="" onblur="checkInputValue('sq_title2',false,200,'信件标题','')"/></td>
+			<td><input id="sq_title2" name="sq_title2" type="text" class="width200" value="" onblur="checkInputValue('sq_title2',false,200,'信件标题','')"/></td>
 		</tr>
 		<tr>
 			<th>信件内容 ：</th>
@@ -366,7 +364,6 @@ function updateSQ()
 				<input id="weight" name="weight" type="text" style="width:50px;" value="60"  maxlength="2" onblur="checkInputValue('weight',true,2,'权重','checkNumber')"/>默认值：60，取值范围（0-99）
 			</td>
 		</tr>
-        <!--
 		<tr>
 			<th>特征标记：</th>
 			<td>
@@ -374,7 +371,6 @@ function updateSQ()
 				</ul>
 			</td>
 		</tr>
-		-->
 	 </tbody>
 	</table>
 	
@@ -386,7 +382,7 @@ function updateSQ()
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="userAddButton" name="btn1" type="button" onclick="updateSQ()" value="保存" />	
 			<input id="userAddReset" name="btn1" type="button" onclick="formReSet('sq_table',sq_id)" value="重置" />
-			<input id="userAddCancel" name="btn1" type="button" onclick="top.tab_colseOnclick(top.curTabIndex)" value="取消" />	
+			<input id="userAddCancel" name="btn1" type="button" onclick="tab_colseOnclick(curTabIndex)" value="取消" />
 		</td>
 	</tr>
 </table>

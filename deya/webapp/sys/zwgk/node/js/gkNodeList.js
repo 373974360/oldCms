@@ -105,7 +105,7 @@ function showTurnPage(){
 //打开栏目维护页面
 function openCategoryPage(node_id)
 {	
-	top.addTab(true,"/sys/cms/category/categoryList.jsp?cat_type=0&app_id="+app_id+"&site_id="+node_id,"维护公开节点目录");
+	addTab(true,"/sys/cms/category/categoryList.jsp?cat_type=0&app_id="+app_id+"&site_id="+node_id,"维护公开节点目录");
 }
 
 //得到该角色下已有的用户ID
@@ -126,18 +126,18 @@ function saveUser(user_ids)
 	var selectIDS = table.getSelecteCheckboxValue("node_id");
 	if(jsonrpc.SiteRPC.insertSiteUserManager(app_id,selectIDS,insert_user_ids,delete_user_ids))
 	{  
-		top.msgAlert("节点管理员"+WCMLang.Add_success);
+		msgAlert("节点管理员"+WCMLang.Add_success);
 		table.unChekcbox();
 	}
 	else
 	{
-		top.msgWargin("节点管理员"+WCMLang.Add_fail);
+		msgWargin("节点管理员"+WCMLang.Add_fail);
 	}
 }
 
 function openAddNodePage()
 {
-	top.addTab(true,"/sys/zwgk/node/gkNode_add.jsp?top_index="+top.curTabIndex+"&nodcat_id="+nodcat_id,"维护公开节点");
+	addTab(true,"/sys/zwgk/node/gkNode_add.jsp?top_index="+curTabIndex+"&nodcat_id="+nodcat_id,"维护公开节点");
 }
 
 function openUpdateNodePage(nc_id)
@@ -147,7 +147,7 @@ function openUpdateNodePage(nc_id)
 		selectIDS = nc_id;
 	else
 		selectIDS = table.getSelecteCheckboxValue("node_id");
-	top.addTab(true,"/sys/zwgk/node/gkNode_add.jsp?top_index="+top.curTabIndex+"&node_id="+selectIDS,"维护公开节点");
+	addTab(true,"/sys/zwgk/node/gkNode_add.jsp?top_index="+curTabIndex+"&node_id="+selectIDS,"维护公开节点");
 }
 
 
@@ -158,11 +158,11 @@ function deleteNode()
 	
 	if(GKNodeRPC.deleteGKNode(selectIDS))
 	{
-		top.msgAlert("节点信息"+WCMLang.Delete_success);
+		msgAlert("节点信息"+WCMLang.Delete_success);
 		loadMenuTable();
 	}else
 	{
-		top.msgWargin("节点信息"+WCMLang.Delete_fail);
+		msgWargin("节点信息"+WCMLang.Delete_fail);
 	}
 }
 
@@ -171,10 +171,10 @@ function sortNode()
 	var selectIDS = table.getAllCheckboxValue("id");
 	if(GKNodeRPC.sortGKNode(selectIDS))
 	{
-		top.msgAlert(WCMLang.Sort_success);
+		msgAlert(WCMLang.Sort_success);
 	}else
 	{
-		top.msgWargin(WCMLang.Sort_fail);
+		msgWargin(WCMLang.Sort_fail);
 	}
 }
 
@@ -184,11 +184,11 @@ function updateNodeStatus(status)
 	var selectIDS = table.getSelecteCheckboxValue("id");
 	if(GKNodeRPC.updateGKNodeStatus(selectIDS,status))
 	{
-		top.msgAlert("节点状态"+WCMLang.Set_success);
+		msgAlert("节点状态"+WCMLang.Set_success);
 		loadMenuTable();
 	}else
 	{
-		top.msgWargin("节点状态"+WCMLang.Set_fail);
+		msgWargin("节点状态"+WCMLang.Set_fail);
 	}
 }
 
@@ -200,11 +200,11 @@ function moveGKNode(nodcat_id)
 		var selectIDS = table.getSelecteCheckboxValue("id");
 		if(GKNodeRPC.moveGKNode(selectIDS,nodcat_id))
 		{
-			top.msgAlert(WCMLang.Move_success);			
+			msgAlert(WCMLang.Move_success);
 			loadMenuTable();
 		}else
 		{
-			top.msgWargin(WCMLang.Move_fail);
+			msgWargin(WCMLang.Move_fail);
 		}
 	}
 }
@@ -225,9 +225,9 @@ function saveZWGKConfig()
 {
 
 	if(CategoryRPC.insertCategoryModel(getTemplateReleModelList())){		
-			top.msgAlert(WCMLang.Add_success);
+			msgAlert(WCMLang.Add_success);
 	}else{		
-			top.msgAlert(WCMLang.Add_fail);
+			msgAlert(WCMLang.Add_fail);
 	}
 }
 
@@ -235,9 +235,9 @@ function updateZWGKConfig()
 {
 
 	if(jsonrpc.SiteRPC.insertSiteReleApp($("#rela_site_id").val(),app_id)  && CategoryRPC.deleteCategoryModel("10,11,12",node_id) && CategoryRPC.insertCategoryModel(getTemplateReleModelList()) && CategoryRPC.updateBaseCategoryTemplate($("#template_list").val()) && CategoryRPC.updateGKZNCateTemplate($("#gkzy_list_template_id").val(),$("#gkzn_list_template_id").val(),$("#gknb_list_template_id").val())){		
-			top.msgAlert(WCMLang.Add_success);
+			msgAlert(WCMLang.Add_success);
 	}else{		
-			top.msgAlert(WCMLang.Add_fail);
+			msgAlert(WCMLang.Add_fail);
 	}
 }
 

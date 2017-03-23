@@ -40,7 +40,7 @@ function getLeadList()
 
 function getSelectedLeadID()
 {
-	var lead_ids = top.getCurrentFrameObj().getSelectedCPDept();
+	var lead_ids = getCurrentFrameObj().getSelectedCPDept();
 	
 	if(lead_ids != "" && lead_ids != null)
 	{
@@ -66,8 +66,8 @@ function returnLeadID()
 		lead_names = lead_names.substring(1);
 	}
 
-	eval("top.getCurrentFrameObj()."+handl_name+"('"+lead_ids+"','"+lead_names+"')");
-	top.CloseModalWindow();
+	eval("getCurrentFrameObj()."+handl_name+"('"+lead_ids+"','"+lead_names+"')");
+	CloseModalWindow();
 }
 
 </script>
@@ -95,7 +95,7 @@ function returnLeadID()
 	<tr>
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="returnLeadID()" value="保存" />
-			<input id="userAddCancel" name="btn1" type="button" onclick="top.CloseModalWindow();" value="取消" />	
+			<input id="userAddCancel" name="btn1" type="button" onclick="CloseModalWindow();" value="取消" />
 		</td>
 	</tr>
 </table>

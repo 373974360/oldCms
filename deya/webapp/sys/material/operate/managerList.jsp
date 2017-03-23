@@ -37,7 +37,7 @@ if(f_id =="" || f_id == null || f_id == "null"){
 }
 var site_id ="<%=request.getParameter("site_id")%>";
 var app_id = "cms";
-var user_id = top.LoginUserBean.user_id;
+var user_id = LoginUserBean.user_id;
 var json_data;
 var imgDomain;
 var pageSize = 0;

@@ -44,7 +44,7 @@
 			sortType = "desc";
 		}
 
-		beanList = SubjectRPC.getSubjectList(con,start,pageSize,top.LoginUserBean.user_id);//第一个参数为站点ID，暂时默认为空		
+		beanList = SubjectRPC.getSubjectList(con,start,pageSize,LoginUserBean.user_id);//第一个参数为站点ID，暂时默认为空
 		beanList = List.toJSList(beanList);//把list转成JS的List对象		
 		curr_bean = null;		
 		table.setBeanList(beanList,"td_list");//设置列表内容的样式
@@ -114,7 +114,7 @@
 	function showTurnPage(){
 		tp = new TurnPage();
 	
-		tp.total = SubjectRPC.getSubjectCount(con,top.LoginUserBean.user_id);		
+		tp.total = SubjectRPC.getSubjectCount(con,LoginUserBean.user_id);
 		tp.show("turn","");
 		tp.onPageChange = showList;
 	}
@@ -126,17 +126,17 @@ function fnSubjectSubmit()
 {
 	if(beanList.get(carent_cell_num).submit_status == 0)
 	{
-		if(SubjectRPC.subjectSubmit(beanList.get(carent_cell_num).id,1,top.LoginUserBean.user_id))
+		if(SubjectRPC.subjectSubmit(beanList.get(carent_cell_num).id,1,LoginUserBean.user_id))
 		{
-			top.alertN("提交成功");
+			alertN("提交成功");
 			beanList.get(carent_cell_num).submit_status = 0;
 			$(table.getCol("submit_status")[carent_cell_num+1]).html("已提交&#160;");
 		}
 		else
-			top.msgWargin("提交失败，请重新提交");
+			msgWargin("提交失败，请重新提交");
 	}
 	else
-		top.msgAlert("该记录已经提交");
+		msgAlert("该记录已经提交");
 }
 
 function bathSubjectSubmits()
@@ -147,18 +147,18 @@ function bathSubjectSubmits()
 
 	if(selectIDS == "")
 	{
-		top.msgAlert("所选的记录已是提交状态，无需再提交");
+		msgAlert("所选的记录已是提交状态，无需再提交");
 		return;
 	}
 
-	if(SubjectRPC.subjectSubmit(selectIDS,1,top.LoginUserBean.user_id))
+	if(SubjectRPC.subjectSubmit(selectIDS,1,LoginUserBean.user_id))
 	{
-		top.msgAlert("提交成功");
+		msgAlert("提交成功");
 		showTurnPage();
 		showList();	
 	}
 	else
-		top.msgWargin("提交失败，请重新提交");
+		msgWargin("提交失败，请重新提交");
 }
 
 /**********************提交操作　结束*************************************/
@@ -174,18 +174,18 @@ function batchDelSubjects()
 
 	if(selectIDS == "")
 	{
-		top.msgWargin("所选的记录已通过审核，不能删除");
+		msgWargin("所选的记录已通过审核，不能删除");
 		return;
 	}
 	
-	if(SubjectRPC.deleteSubject(selectIDS,top.LoginUserBean.user_id))
+	if(SubjectRPC.deleteSubject(selectIDS,LoginUserBean.user_id))
 	{
-		top.msgAlert("访谈主题"+WCMLang.Delete_success);
+		msgAlert("访谈主题"+WCMLang.Delete_success);
 		showTurnPage();
 		showList();	
 	}
 	else
-		top.msgWargin("访谈主题"+WCMLang.Delete_fail);
+		msgWargin("访谈主题"+WCMLang.Delete_fail);
 }
 
 
@@ -194,21 +194,21 @@ function deleteSubject(id,audit_status)
 {
 	if(audit_status != 1)
 	{
-		top.msgConfirm("确认删除选中记录？","deleteSubjectOper("+id+")");
+		msgConfirm("确认删除选中记录？","deleteSubjectOper("+id+")");
 	}
 	else
-		top.msgWargin("该记录已通过审核，不能再删除");
+		msgWargin("该记录已通过审核，不能再删除");
 }
 
 function deleteSubjectOper(id)
 {
-	if(SubjectRPC.deleteSubject(id,top.LoginUserBean.user_id))
+	if(SubjectRPC.deleteSubject(id,LoginUserBean.user_id))
 	{
-		top.msgAlert("访谈主题"+WCMLang.Delete_success);
+		msgAlert("访谈主题"+WCMLang.Delete_success);
 		showTurnPage();
 		showList();	
 	}
 	else
-		top.msgWargin("访谈主题"+WCMLang.Delete_fail);
+		msgWargin("访谈主题"+WCMLang.Delete_fail);
 }
 /**********************删除操作　结束*************************************/

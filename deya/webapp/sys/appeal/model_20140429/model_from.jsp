@@ -150,11 +150,11 @@ function insertCPFrom()
 	{
 		if(SQModelRPC.insertCPFrom(model_id,list))
 		{
-			top.msgAlert("扩展字段"+WCMLang.Add_success);
+			msgAlert("扩展字段"+WCMLang.Add_success);
 			window.history.go(-1);
 		}else
 		{
-			top.msgWargin("扩展字段"+WCMLang.Add_fail);
+			msgWargin("扩展字段"+WCMLang.Add_fail);
 		}
 	}
 }

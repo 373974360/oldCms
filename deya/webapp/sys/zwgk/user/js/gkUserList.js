@@ -49,7 +49,7 @@ function showList(){
 			var nameList = nameMap.get(key);
 			nameList = List.toJSList(nameList);
 			var name = nameList.get(0);
-			$(this).html('<a href="javascript:top.addTab(true,\'/sys/org/dept/user_view.jsp?user_id='+beanList.get(i-1).user_id+'\',\'用户信息\')">'+name+'</a>');	
+			$(this).html('<a href="javascript:addTab(true,\'/sys/org/dept/user_view.jsp?user_id='+beanList.get(i-1).user_id+'\',\'用户信息\')">'+name+'</a>');
 		}
 	});
 	
@@ -91,12 +91,12 @@ function saveUser(ids)
 	if(jsonrpc.SiteRPC.insertSiteUserManager(app_id,node_id,insert_user_ids,delete_user_ids))
 	{  
 		loadMenuTable();
-		top.msgAlert("节点管理员"+WCMLang.Add_success);
+		msgAlert("节点管理员"+WCMLang.Add_success);
 		table.unChekcbox();
 	}
 	else
 	{
-		top.msgWargin("节点管理员"+WCMLang.Add_fail);
+		msgWargin("节点管理员"+WCMLang.Add_fail);
 	}
 }
 
@@ -112,11 +112,11 @@ function saveSiteUser(user_ids)
 	if(SiteUserRPC.linkSiteUser(insert_user_ids,delete_user_ids, node_id, app_id))
 	{
 		loadMenuTable();
-		top.msgAlert("站点用户关联"+WCMLang.Add_success);
+		msgAlert("站点用户关联"+WCMLang.Add_success);
 		table.unChekcbox();
 	}else
 	{
-		top.msgWargin("站点用户关联"+WCMLang.Add_fail);
+		msgWargin("站点用户关联"+WCMLang.Add_fail);
 	}
 }
 
@@ -126,10 +126,10 @@ function deleteSiteUser()
 	var user_ids = table.getSelecteCheckboxValue("user_id");
 	if( !SiteUserRPC.deleteSiteUser(user_ids, node_id, app_id))
 	{
-		top.msgWargin("站点用户"+WCMLang.Delete_fail);
+		msgWargin("站点用户"+WCMLang.Delete_fail);
 		return;
 	}
-	parent.msgAlert("站点用户"+WCMLang.Delete_success);
+	msgAlert("站点用户"+WCMLang.Delete_success);
 	loadMenuTable();
 }
 
@@ -146,13 +146,13 @@ function saveRoleUser(role_ids)
 
 	if(jsonrpc.RoleRPC.insertRoleUserByUser(bean))
 	{
-		top.msgAlert("角色用户关联"+WCMLang.Add_success);
-		top.CloseModalWindow();
-		top.getCurrentFrameObj().loadMenuTable();
+		msgAlert("角色用户关联"+WCMLang.Add_success);
+		CloseModalWindow();
+		getCurrentFrameObj().loadMenuTable();
 		table.unChekcbox();
 	}else
 	{
-		top.msgWargin("角色用户关联"+WCMLang.Add_fail);
+		msgWargin("角色用户关联"+WCMLang.Add_fail);
 	}
 }
 

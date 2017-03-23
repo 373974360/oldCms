@@ -52,12 +52,12 @@ function updateDeptLevel()
 	
 	if(!DeptRPC.updateDeptLevel(addBean))
 	{
-		top.msgWargin("用户级别"+WCMLang.Add_fail);
+		msgWargin("用户级别"+WCMLang.Add_fail);
 		return;
 	}
-	top.msgAlert("用户级别"+WCMLang.Add_success);
-	top.getCurrentFrameObj().reloadDeptLevelList();
-	top.CloseModalWindow();
+	msgAlert("用户级别"+WCMLang.Add_success);
+	getCurrentFrameObj().reloadDeptLevelList();
+	CloseModalWindow();
 }
 
 // 新建部门级别函数
@@ -71,12 +71,12 @@ function addDeptLevel()
 	
 	if(!DeptRPC.insertDeptLevel(addBean))
 	{
-		top.msgWargin("用户级别"+WCMLang.Add_fail);
+		msgWargin("用户级别"+WCMLang.Add_fail);
 		return;
 	}
-	top.msgAlert("用户级别"+WCMLang.Add_success);
-	top.getCurrentFrameObj().reloadDeptLevelList();
-	top.CloseModalWindow();
+	msgAlert("用户级别"+WCMLang.Add_success);
+	getCurrentFrameObj().reloadDeptLevelList();
+	CloseModalWindow();
 }
 
 // 修改状态下的重置
@@ -142,7 +142,7 @@ function checkDeptLevel()
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="submit" onclick="" value="保存" />	
 			<input id="levelAddReset" name="btn1" type="button" onclick="formReSet('level_table',deptlevel_name)" value="重置" />	
-			<input id="levelAddCancel" name="btn1" type="button" onclick="top.CloseModalWindow();" value="取消" />	
+			<input id="levelAddCancel" name="btn1" type="button" onclick="CloseModalWindow();" value="取消" />
 		</td>
 	</tr>
 </table>

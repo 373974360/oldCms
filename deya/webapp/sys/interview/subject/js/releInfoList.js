@@ -116,11 +116,11 @@ function addReleInfo()
 {
 	if(subm_sta == 1 && (tn == "" || tn == null))
 	{
-		top.msgWargin("该主题已通过审核，不能再进行操作！");
+		msgWargin("该主题已通过审核，不能再进行操作！");
 		return;
 	}
 	//window.location.href = "add_releInfo.jsp?sub_id="+sub_id;
-	top.addTab(true,"/sys/interview/subject/add_releInfo.jsp?sub_id="+sub_id+"&topnum="+top.curTabIndex,"维护信息");
+	addTab(true,"/sys/interview/subject/add_releInfo.jsp?sub_id="+sub_id+"&topnum="+curTabIndex,"维护信息");
 }
 
 
@@ -157,17 +157,17 @@ function saveReleInfo()
 	{
 		return;
 	}
-	bean.add_user = top.LoginUserBean.user_id;
+	bean.add_user = LoginUserBean.user_id;
 	if(SubjectRPC.insertReleInfo(bean))
 	{
-		top.msgAlert("信息"+WCMLang.Add_success);
-		top.getCurrentFrameObj(topnum).showTurnPage();
-		top.getCurrentFrameObj(topnum).showList();
-		top.tab_colseOnclick(top.curTabIndex);
+		msgAlert("信息"+WCMLang.Add_success);
+		getCurrentFrameObj(topnum).showTurnPage();
+		getCurrentFrameObj(topnum).showList();
+		tab_colseOnclick(curTabIndex);
 	}
 	else
 	{
-		top.msgWargin("信息"+WCMLang.Add_fail);
+		msgWargin("信息"+WCMLang.Add_fail);
 	}
 }
 /**********************添加操作　结束*************************************/
@@ -178,24 +178,24 @@ function fnUpdateReleInfo()
 {
 	if(subm_sta == 1 && (tn == "" || tn == null))
 	{
-		top.msgWargin("该主题已通过审核，不能再进行修改操作！");
+		msgWargin("该主题已通过审核，不能再进行修改操作！");
 		return;
 	}
 	var selectIDS = table.getSelecteCheckboxValue("id");
 	if(selectIDS == "")
 	{
-		top.msgAlert("请选择要修改的记录");
+		msgAlert("请选择要修改的记录");
 		return;
 	}
 	else
 	{
 		if(selectIDS.split(",").length > 1)
 		{
-			top.msgAlert("只能选择一条记录进行修改操作");
+			msgAlert("只能选择一条记录进行修改操作");
 			return;
 		}
 		//window.location.href = "add_releInfo.jsp?id="+selectIDS;
-		top.addTab(true,"/sys/interview/subject/add_releInfo.jsp?id="+selectIDS+"&topnum="+top.curTabIndex,"维护信息");
+		addTab(true,"/sys/interview/subject/add_releInfo.jsp?id="+selectIDS+"&topnum="+curTabIndex,"维护信息");
 	}
 }
 
@@ -203,11 +203,11 @@ function showUpdatePate(id)
 {	
 	if(subm_sta == 1 && (tn == "" || tn == null))
 	{
-		top.msgWargin("该主题已通过审核，不能再进行修改操作！");
+		msgWargin("该主题已通过审核，不能再进行修改操作！");
 		return;
 	}
 	//window.location.href = "add_releInfo.jsp?id="+id;
-	top.addTab(true,"/sys/interview/subject/add_releInfo.jsp?id="+id+"&topnum="+top.curTabIndex,"维护信息");
+	addTab(true,"/sys/interview/subject/add_releInfo.jsp?id="+id+"&topnum="+curTabIndex,"维护信息");
 }
 
 function updateReleInfo()
@@ -220,17 +220,17 @@ function updateReleInfo()
 	{
 		return;
 	}	
-	bean.update_user = top.LoginUserBean.user_id;
+	bean.update_user = LoginUserBean.user_id;
 	if(SubjectRPC.updateReleInfo(bean))
 	{
-		top.msgAlert("信息"+WCMLang.Add_success);
-		top.getCurrentFrameObj(topnum).showTurnPage();
-		top.getCurrentFrameObj(topnum).showList();
-		top.tab_colseOnclick(top.curTabIndex);
+		msgAlert("信息"+WCMLang.Add_success);
+		getCurrentFrameObj(topnum).showTurnPage();
+		getCurrentFrameObj(topnum).showList();
+		tab_colseOnclick(curTabIndex);
 	}
 	else
 	{
-		top.msgWargin("信息"+WCMLang.Add_fail);
+		msgWargin("信息"+WCMLang.Add_fail);
 	}
 }
 /**********************修改操作　结束*************************************/
@@ -241,15 +241,15 @@ function batchDelSubReleInfo()
 {
 	if(subm_sta == 1 && (tn == "" || tn == null))
 	{
-		top.msgWargin("该主题已通过审核，不能再进行删除操作！");
+		msgWargin("该主题已通过审核，不能再进行删除操作！");
 		return;
 	}
 	if (table.getSelecteCount() < 1) {
-			top.msgAlert("请选择要删除的记录！");
+			msgAlert("请选择要删除的记录！");
 			return;
 	}
 
-	parent.msgConfirm("确认删除选中记录？","batchDelSubReleInfos()");
+	msgConfirm("确认删除选中记录？","batchDelSubReleInfos()");
 	
 }
 
@@ -257,14 +257,14 @@ function batchDelSubReleInfos()
 {
 	var selectIDS = table.getSelecteCheckboxValue("id");
 	
-	if(SubjectRPC.deleteReleInfo(selectIDS,top.LoginUserBean.user_id))
+	if(SubjectRPC.deleteReleInfo(selectIDS,LoginUserBean.user_id))
 	{
-		top.msgAlert("删除成功");
+		msgAlert("删除成功");
 		
 		showList();	
 	}
 	else
-		top.msgWargin("删除失败，请重新删除");
+		msgWargin("删除失败，请重新删除");
 }
 
 //删除信息
@@ -272,21 +272,21 @@ function deleteSubReleInfo(id)
 {
 	if(subm_sta == 1 && (tn == "" || tn == null))
 	{
-		top.msgWargin("该主题已通过审核，不能再进行删除操作！");
+		msgWargin("该主题已通过审核，不能再进行删除操作！");
 		return;
 	}
-	parent.msgConfirm("确认删除选中记录？","deleteSubReleInfos("+id+")")
+	msgConfirm("确认删除选中记录？","deleteSubReleInfos("+id+")")
 }
 
 function deleteSubReleInfos(id)
 {
-	if(SubjectRPC.deleteReleInfo(id,top.LoginUserBean.user_id))
+	if(SubjectRPC.deleteReleInfo(id,LoginUserBean.user_id))
 	{
-		top.msgAlert("删除成功");		
+		msgAlert("删除成功");
 		showList();	
 	}
 	else
-		top.msgWargin("删除失败，请重新删除");
+		msgWargin("删除失败，请重新删除");
 }
 /**********************删除操作　结束*************************************/
 /**********************发布操作　开始*************************************/
@@ -295,33 +295,33 @@ function batchPublishSubReleInfo(publish_flag,msg)
 {
 	if(subm_sta == 1 && (tn == "" || tn == null))
 	{
-		top.msgWargin("该主题已通过审核，不能再进行"+msg+"操作！");
+		msgWargin("该主题已通过审核，不能再进行"+msg+"操作！");
 		return;
 	}
 	var selectIDS = table.getSelecteCheckboxValue("id");
 	if(selectIDS == "")
 	{
-		top.msgWargin("请选择要"+msg+"的记录");
+		msgWargin("请选择要"+msg+"的记录");
 		return;
 	}
 	
-	if(SubjectRPC.publishReleInfo(selectIDS,top.LoginUserBean.user_id,publish_flag))
+	if(SubjectRPC.publishReleInfo(selectIDS,LoginUserBean.user_id,publish_flag))
 	{
-		top.msgAlert(msg+"成功");
+		msgAlert(msg+"成功");
 		
 		showList();	
 	}
 	else
-		top.msgWargin(msg+"失败，请重新"+msg);
+		msgWargin(msg+"失败，请重新"+msg);
 }
 
 
 //单条发布
 function publishSubReleInfo(publish_flag,msg)
 {
-	if(SubjectRPC.publishReleInfo(beanList.get(carent_cell_num).id,top.LoginUserBean.user_id,publish_flag))
+	if(SubjectRPC.publishReleInfo(beanList.get(carent_cell_num).id,LoginUserBean.user_id,publish_flag))
 	{
-		top.msgAlert(msg+"成功");		
+		msgAlert(msg+"成功");
 		//showList();	
 		eval("beanList.get(carent_cell_num).publish_flag = "+publish_flag);
 		if(publish_flag==1)
@@ -335,7 +335,7 @@ function publishSubReleInfo(publish_flag,msg)
 		
 	}
 	else
-		top.msgWargin(msg+"失败，请重新"+msg);
+		msgWargin(msg+"失败，请重新"+msg);
 }
 
 
@@ -347,7 +347,7 @@ function saveSort()
 {
 	if(subm_sta == 1 && (tn == "" || tn == null))
 	{
-		top.msgWargin("该主题已通过审核，不能再进行排序操作！");
+		msgWargin("该主题已通过审核，不能再进行排序操作！");
 		return;
 	}
 
@@ -356,11 +356,11 @@ function saveSort()
 	{
 		if(SubjectRPC.saveReleInfoSort(ids))
 		{
-			top.msgAlert(WCMLang.Sort_success);			
+			msgAlert(WCMLang.Sort_success);
 		}
 		else
 		{
-			top.msgWargin(WCMLang.Sort_fail);
+			msgWargin(WCMLang.Sort_fail);
 			return;
 		}
 	}
@@ -369,7 +369,7 @@ function saveSort()
 
 function view_releInfo2(id)
 {	
-	//top.addTab(true,'/sys/interview/subject/view_releInfo.jsp?id='+id,'查看信息内容');
+	//addTab(true,'/sys/interview/subject/view_releInfo.jsp?id='+id,'查看信息内容');
 	//window.location.href = '/sys/interview/subject/add_releInfo.jsp?id='+id;
-	top.addTab(true,"/sys/interview/subject/add_releInfo.jsp?id="+id+"&topnum="+top.curTabIndex,"查看信息");
+	addTab(true,"/sys/interview/subject/add_releInfo.jsp?id="+id+"&topnum="+curTabIndex,"查看信息");
 }

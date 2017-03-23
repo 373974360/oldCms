@@ -19,7 +19,7 @@ function choose_regu()
 		var temp_ids = getAllTreeNode("leftMenuTree2_regu");
 		if(temp_ids == "|")
 		{
-			top.msgWargin("请选择信息公开目录");
+			msgWargin("请选择信息公开目录");
 			return;
 		}
 		cat_ids = temp_ids.split("|")[0];
@@ -31,7 +31,7 @@ function choose_regu()
 			node_ids = site_id;
 		}
 		if(node_ids=='' || node_ids=='undefined'  || node_ids==undefined){
-			top.msgWargin("请选择公开节点");
+			msgWargin("请选择公开节点");
 			return;
 		}
 
@@ -54,7 +54,7 @@ function choose_regu()
 		var temp_ids = getAllTreeNode("leftMenuTree_regu");
 		if(temp_ids == "|")
 		{
-			top.msgWargin("请选择共享目录");
+			msgWargin("请选择共享目录");
 			return;
 		}
 		cat_ids = temp_ids.split("|")[0];

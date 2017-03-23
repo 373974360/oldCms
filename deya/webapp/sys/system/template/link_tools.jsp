@@ -12,7 +12,7 @@
 <script type="text/javascript" src="../../js/indexjs/tools.js"></script>
 <script type="text/javascript">
 var node_id = "";
-var site_id = top.current_site_id;
+var site_id = current_site_id;
 var app_id = "cms";
 var link_url = "";
 var CategoryRPC = jsonrpc.CategoryRPC;
@@ -267,11 +267,11 @@ function saveCreateLink()
 	}
 	if(link_url == "")
 	{
-		top.msgWargin("未获取到路径地址，请重新选择节点");
+		msgWargin("未获取到路径地址，请重新选择节点");
 		return;
 	}
-	top.getCurrentFrameObj().editAreaLoader.replaceSelection(link_url);
-	top.CloseModalWindow();
+	getCurrentFrameObj().editAreaLoader.replaceSelection(link_url);
+	CloseModalWindow();
 }
 </script>
 
@@ -362,7 +362,7 @@ function saveCreateLink()
 	<tr>
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="saveCreateLink()" value="插入" />
-			<input id="userAddCancel" name="btn1" type="button" onclick="top.CloseModalWindow();" value="取消" />	
+			<input id="userAddCancel" name="btn1" type="button" onclick="CloseModalWindow();" value="取消" />
 		</td>
 	</tr>
 </table>

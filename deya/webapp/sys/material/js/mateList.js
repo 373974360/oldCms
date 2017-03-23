@@ -576,17 +576,17 @@ function MateInfoClick(type,site_id){
     	}
 	});
     if(str ==""){
-		top.msgAlert(WCMLang.Select_empty+"!");
+		msgAlert(WCMLang.Select_empty+"!");
 		return;
 	}
     str = str.substring(0,str.length -1);
     var Temparr = str.split(","); 
 	if(type == "1"){
 		if(Temparr.length > 1){
-			top.msgAlert(WCMLang.Select_singl+"!");
+			msgAlert(WCMLang.Select_singl+"!");
 			return;	
 		}else{
-			top.OpenModalWindow("素材信息","/sys/material/operate/mateInfo_modify.jsp?att_id="+str+"&cnode_id="+cnode_id+"&cnode_type="+cnode_type+"&site_id="+site_id,500,210);
+			OpenModalWindow("素材信息","/sys/material/operate/mateInfo_modify.jsp?att_id="+str+"&cnode_id="+cnode_id+"&cnode_type="+cnode_type+"&site_id="+site_id,500,210);
 		}
 	}else if(type == "2")
 	{
@@ -597,11 +597,11 @@ function MateInfoClick(type,site_id){
 				deleteFileForMate(Temparr[j]);
 				$("#sucaiList li[id='"+Temparr[j]+"']").remove();
 			}
-			top.msgAlert("素材信息"+WCMLang.Delete_success);
-			top.CloseModalWindow();	
+			msgAlert("素材信息"+WCMLang.Delete_success);
+			CloseModalWindow();
 		}else
 		{
-			top.msgWargin("素材信息"+WCMLang.Delete_fail);
+			msgWargin("素材信息"+WCMLang.Delete_fail);
 		}
 	}
 }
@@ -632,13 +632,13 @@ function updateMateInfo()
 	
 	if(MateInfoRPC.updateMateInfoBean(bean))
 	{
-		top.msgAlert("素材信息"+WCMLang.Add_success);			   
-		top.getCurrentFrameObj().updateMateInfoTitle(bean.alias_name); 		      
-		top.CloseModalWindow();
+		msgAlert("素材信息"+WCMLang.Add_success);
+		getCurrentFrameObj().updateMateInfoTitle(bean.alias_name);
+		CloseModalWindow();
 	}
 	else
 	{
-		top.msgWargin("素材信息"+WCMLang.Add_fail);
+		msgWargin("素材信息"+WCMLang.Add_fail);
 	}
 }
 
@@ -676,13 +676,13 @@ function getSearchInfos(site_id)
 		/*
 		if(uploadY != beginY || uploadY != endY)
 		{
-			top.msgAlert("只能查询"+uploadY+"年"+uploadM+"月时间的素材!");
+			msgAlert("只能查询"+uploadY+"年"+uploadM+"月时间的素材!");
 		}
 		if(uploadY==beginY && uploadY==endY)
 		{
 			if(uploadM != beginM || uploadM != endM)
 			{
-				top.msgAlert("只能查询"+uploadY+"年"+uploadM+"月时间的素材!");
+				msgAlert("只能查询"+uploadY+"年"+uploadM+"月时间的素材!");
 			}
 		}
 		*/
@@ -699,7 +699,7 @@ function getSearchInfos(site_id)
 	}
 	if(beignTime !="" && beignTime != null && endTime !="" && endTime !=null){
 		if(!judgeDate(beignTime,endTime)){
-			top.msgAlert("结束时间不能小于起始时间!");
+			msgAlert("结束时间不能小于起始时间!");
 			return;
 		}
 	}
@@ -729,18 +729,18 @@ function MateFolderClick(site_id,type){
 	if(type == "1"){
 		if(node.attributes.ctype=="fixed")
 		{ 
-			top.msgAlert(WCMLang.Update_fixedFolderForNot);
+			msgAlert(WCMLang.Update_fixedFolderForNot);
 			return;
 		}else{
-			top.OpenModalWindow("维护目录","/sys/material/operate/matefolder_add.jsp?f_id="+f_id+"&site_id="+site_id,470,195);
+			OpenModalWindow("维护目录","/sys/material/operate/matefolder_add.jsp?f_id="+f_id+"&site_id="+site_id,470,195);
 		}
 	}else if(type == "2"){
 		if(node.attributes.ctype=="fixed" || node.id == 0)
 		{ 
-			top.msgAlert(WCMLang.Update_fixedFolderForNot);
+			msgAlert(WCMLang.Update_fixedFolderForNot);
 			return;
 		}else{
-			top.OpenModalWindow("维护目录","/sys/material/operate/matefolder_modify.jsp?f_id="+tempid,470,130);
+			OpenModalWindow("维护目录","/sys/material/operate/matefolder_modify.jsp?f_id="+tempid,470,130);
 		}
 	}else if(type == "3"){
 		deleteCustomFollder();
@@ -763,13 +763,13 @@ function addMateFolder()
 	bean.user_id = user_id;
 	if(MateFolderRPC.insertMateFolder(bean))
 	{	
-		top.msgAlert("目录信息"+WCMLang.Add_success);	
-		top.getCurrentFrameObj().insertMateFolderTree(bean.f_id,bean.cname);
-		top.CloseModalWindow();
+		msgAlert("目录信息"+WCMLang.Add_success);
+		getCurrentFrameObj().insertMateFolderTree(bean.f_id,bean.cname);
+		CloseModalWindow();
 	}
 	else
 	{
-		top.msgWargin("目录信息"+WCMLang.Add_fail);
+		msgWargin("目录信息"+WCMLang.Add_fail);
 	}
 }
 //更新目录节点
@@ -792,13 +792,13 @@ function updateMateFolder()
 	bean.f_id = f_id;
 	if(MateFolderRPC.updateMateFolder(bean))
 	{
-		top.msgAlert("目录信息"+WCMLang.Add_success);	
-		top.getCurrentFrameObj().updateMateFolderTree(bean.f_id,bean.cname);
-		top.CloseModalWindow();
+		msgAlert("目录信息"+WCMLang.Add_success);
+		getCurrentFrameObj().updateMateFolderTree(bean.f_id,bean.cname);
+		CloseModalWindow();
 	}
 	else
 	{
-		top.msgWargin("目录信息"+WCMLang.Add_fail);
+		msgWargin("目录信息"+WCMLang.Add_fail);
 	}
 }
 //更新目录节点
@@ -811,15 +811,15 @@ function deleteCustomFollder()
 	//得到选中的树节点
 	var node = $('#leftMenuTree').tree('getSelected');
 	if(node == ""){
-		top.msgAlert(""+WCMLang.Select_empty);
+		msgAlert(""+WCMLang.Select_empty);
 	    return;
 	}
 	if(node.attributes.ctype=="fixed" || node.id == 0)
 	{ 
-		top.msgAlert(WCMLang.Delete_fixedFolderForNot+"!");
+		msgAlert(WCMLang.Delete_fixedFolderForNot+"!");
 		return;
 	}
-	top.msgConfirm(WCMLang.Delete_confirm,"deleteCustomFollderHandl()");	
+	msgConfirm(WCMLang.Delete_confirm,"deleteCustomFollderHandl()");
 }
 
 function deleteCustomFollderHandl()
@@ -827,11 +827,11 @@ function deleteCustomFollderHandl()
 	var node = $('#leftMenuTree').tree('getSelected');
 	if(MateFolderRPC.deleteMateFolder(node.id))
 	{
-		top.msgAlert("目录信息"+WCMLang.Delete_success);
+		msgAlert("目录信息"+WCMLang.Delete_success);
 		$("div[node-id='"+node.id+"']").parent().remove();		
 	}else
 	{
-		top.msgWargin("目录信息"+WCMLang.Delete_fail);
+		msgWargin("目录信息"+WCMLang.Delete_fail);
 	}
 }
 
@@ -860,12 +860,12 @@ function addMateInfo(att_id,f_id,site_id,serverUrl,hd_url,thum_url,att_ename,old
 	
 	if(MateInfoRPC.insertMateInfoBean(bean))
 	{	
-		//top.msgAlert("素材信息"+WCMLang.Add_success);	
-		//top.CloseModalWindow();
+		//msgAlert("素材信息"+WCMLang.Add_success);
+		//CloseModalWindow();
 	}
 	else
 	{
-		top.msgWargin("素材信息"+WCMLang.Add_fail);
+		msgWargin("素材信息"+WCMLang.Add_fail);
 	}
 }
 
@@ -881,22 +881,22 @@ function MoveClick()
 	});
 	if(move_selected_id == "" || move_selected_id  == null)
 	{
-		top.msgWargin("请选择要转移的素材");
+		msgWargin("请选择要转移的素材");
 	}
 	else
-		top.OpenModalWindow("选择目录","/sys/material/operate/cat_tree.jsp?site_id="+site_id,350,420);	
+		OpenModalWindow("选择目录","/sys/material/operate/cat_tree.jsp?site_id="+site_id,350,420);
 }
 
 function MoveMateHandl(cat_id)
 {
 	if(MateInfoRPC.moveMateInfo(cat_id,move_selected_id))
 	{
-		top.msgAlert("素材"+WCMLang.Move_success);
+		msgAlert("素材"+WCMLang.Move_success);
 		$("#sucaiList").empty();
 		getMateInfoList(tempid,"custom",site_id,imgDomain);
 	}else
 	{
-		top.msgWargin("素材"+WCMLang.Move_fail);
+		msgWargin("素材"+WCMLang.Move_fail);
 		return;
 	}
 }

@@ -107,7 +107,7 @@ var select = {};
     }
     else {
       var parent = node.parentNode;
-      while (parent && !parent.nextSibling) parent = parent.parentNode;
+      while (parent && !nextSibling) parent = parentNode;
       return parent && baseNodeAfter(parent);
     }
   }

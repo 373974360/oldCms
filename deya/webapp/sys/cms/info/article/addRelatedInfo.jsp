@@ -36,10 +36,10 @@ function addRelatedInfo(){
 	$("#info_related_table").autoBind(relateBean);
 	
 	if(infoid == null || infoid == "null" || infoid == ""){
-		var tp = top.getCurrentFrameObj().getInfoGoble();
+		var tp = getCurrentFrameObj().getInfoGoble();
 		if(tp == 0){
 			tp = InfoBaseRPC.getInfoId();
-			top.getCurrentFrameObj().setInfoGoble(tp);
+			getCurrentFrameObj().setInfoGoble(tp);
 		}
 		relateBean.info_id = tp;
 	}else{
@@ -49,11 +49,11 @@ function addRelatedInfo(){
 	relateBean.related_info_id = InfoBaseRPC.getReleInfoID();
 	
 	if(InfoBaseRPC.addRelatedInfo(relateBean)){
-		//top.msgAlert("添加成功");
-		top.getCurrentFrameObj().showRelatedInfos(relateBean.info_id);
-		top.CloseModalWindow();
+		//msgAlert("添加成功");
+		getCurrentFrameObj().showRelatedInfos(relateBean.info_id);
+		CloseModalWindow();
 	}else{
-		top.msgAlert("添加失败");
+		msgAlert("添加失败");
 	}
 }
 
@@ -61,10 +61,10 @@ function updateRelatedInfo(){
 	var relateBean = BeanUtil.getCopy(RelatedBean);	
 	$("#info_related_table").autoBind(relateBean);
 	if(InfoBaseRPC.updateRelatedInfo(relateBean)){
-		//top.msgAlert("修改成功");
-		top.CloseModalWindow();
+		//msgAlert("修改成功");
+		CloseModalWindow();
 	}else{
-		top.msgAlert("修改失败");
+		msgAlert("修改失败");
 	}
 }
 
@@ -114,7 +114,7 @@ function updateRelatedInfo(){
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="" value="保存" />
 			<input id="addReset" name="btn1" type="button" onclick="formReSet('info_related_table',title)" value="重置" />
-			<input id="addCancel" name="btn1" type="button" onclick="top.CloseModalWindow();" value="取消" />	
+			<input id="addCancel" name="btn1" type="button" onclick="CloseModalWindow();" value="取消" />
 		</td>
 	</tr>
 </table>

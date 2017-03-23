@@ -131,7 +131,7 @@ function showTurnPageResult(result,e)
  */
 function openaddRuleTabPage()
 {
-	top.addTab(true,"/sys/dataCollection/add_rule.jsp?rcat_id="+id+"&tab_index="+top.curTabIndex,"添加规则");
+	addTab(true,"/sys/dataCollection/add_rule.jsp?rcat_id="+id+"&tab_index="+curTabIndex,"添加规则");
 }
 
 /**
@@ -143,10 +143,10 @@ function deleteRuleByid()
 	var ids = table.getSelecteCheckboxValue("id");
 	if(CollectionDataRPC.deleteRuleById(ids))
 	{
-		top.msgAlert("信息"+WCMLang.Delete_success);
+		msgAlert("信息"+WCMLang.Delete_success);
 		loadRuleTable();
 	}else{
-		top.msgWargin("信息"+WCMLang.Delete_fail);
+		msgWargin("信息"+WCMLang.Delete_fail);
 	}
 }
 
@@ -157,6 +157,6 @@ function deleteRuleByid()
 function updateRuleById()
 {
 	var id = table.getSelecteCheckboxValue("id");
-	top.addTab(true,"/sys/dataCollection/add_rule.jsp?type=update&id="+id+"+&tab_index="+top.curTabIndex,"修改规则");
+	addTab(true,"/sys/dataCollection/add_rule.jsp?type=update&id="+id+"+&tab_index="+curTabIndex,"修改规则");
 }
 

@@ -11,7 +11,7 @@ function addPicInfo()
 	}
 	if($("#add_pic_table img").length == 0)
 	{
-		top.msgAlert("图片不能为空，请选择图片");
+		msgAlert("图片不能为空，请选择图片");
 		return;
 	}
 	var st = $(":radio[name='info_status'][checked]").val();
@@ -64,7 +64,7 @@ function updatePicInfo()
 	}
 	if($("#add_pic_table img").length == 0)
 	{
-		top.msgAlert("图片不能为空，请选择图片");
+		msgAlert("图片不能为空，请选择图片");
 		return;
 	}
 	var st = $(":radio[name='info_status'][checked]").val();

@@ -82,14 +82,14 @@ function related_ok(){
 		ids += $(this).attr("ware_id");
 	});
 	
-	top.getCurrentFrameObj().setFocusInfoIds(ids);
+	getCurrentFrameObj().setFocusInfoIds(ids);
 	
-	top.CloseModalWindow();
+	CloseModalWindow();
 }
 
 //取消事件
 function related_cancel(){
-	top.CloseModalWindow();
+	CloseModalWindow();
 }
 
 //查询事件
@@ -124,7 +124,7 @@ function setSelctWareInfos()
 //得到曾经选择过的标签
 function getSelctWareInfos()
 {
-	var ids = top.getCurrentFrameObj().getSelctWareInfo();
+	var ids = getCurrentFrameObj().getSelctWareInfo();
 	if(ids != "" && ids != null)
 	{
 		var tempA = ids.split(",");

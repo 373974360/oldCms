@@ -65,7 +65,7 @@ $(document).ready(function(){
 
 // 打开选择节点的弹出窗口
 function openPage() {
-	top.OpenModalWindow("选择公开节点","/sys/zwgk/count/nodeSelected.jsp",725,525);
+	OpenModalWindow("选择公开节点","/sys/zwgk/count/nodeSelected.jsp",725,525);
 }
 
 // 设置选中的节点名称
@@ -107,24 +107,24 @@ function searchSiteCount()
 	start_day = $("#start_day").val();
 	end_day = $("#end_day").val();
 	if(start_day > end_day){
-	   top.msgWargin("结束时间不能在开始时间前!");
+	   msgWargin("结束时间不能在开始时间前!");
 	   return ;
 	}
 	if(start_day=="" || start_day==null || start_day=="null")
 	{
-		top.msgWargin("开始时间不能为空!");
+		msgWargin("开始时间不能为空!");
 		return;
 	}
 	if(end_day=="" || end_day==null || end_day=="null")
 	{
-		top.msgWargin("结束时间不能为空!");
+		msgWargin("结束时间不能为空!");
 		return;
 	}
 	end_day = end_day + " 23:59:59";
 	if(!is_all_node)
 	{
 		if(node_ids == "") {
-			top.msgWargin("公开节点不能为空,请选择公开节点!");
+			msgWargin("公开节点不能为空,请选择公开节点!");
 			return;
 		}
 	} 

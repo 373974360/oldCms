@@ -17,7 +17,7 @@
 				<ul class="flagClass">
 					<li><input id="d" name="info_status" type="radio"  value="0"/><label for="d">草稿</label></li>
 					<li id="li_ds"><input id="e" name="info_status" type="radio" value="2" checked="checked" /><label for="e">待审</label></li>					
-					<!--<li id="opt_303" class="hidden"><input id="f" name="info_status" type="radio" value="4" /><label for="f">待发</label></li>-->
+					<li id="opt_303" class="hidden"><input id="f" name="info_status" type="radio" value="4" /><label for="f">待发</label></li>
 					<li id="opt_302" class="hidden"><input id="3" name="info_status" type="radio" value="8" /><label for="g">发布</label></li>
 				</ul>
 			</td>

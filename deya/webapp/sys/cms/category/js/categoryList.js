@@ -69,7 +69,7 @@ function showList(){
 
 function openAddCategoryPage()
 {
-	top.addTab(true,"/sys/cms/category/category_add.jsp?top_index="+top.curTabIndex+"&site_id="+site_id+"&app_id="+app_id+"&class_id="+class_id+"&parentID="+cat_id,"维护目录");
+	addTab(true,"/sys/cms/category/category_add.jsp?top_index="+curTabIndex+"&site_id="+site_id+"&app_id="+app_id+"&class_id="+class_id+"&parentID="+cat_id,"维护目录");
 }
 
 function openUpdateCategoryPage(cid)
@@ -81,9 +81,9 @@ function openUpdateCategoryPage(cid)
 		id = table.getSelecteCheckboxValue("id");
 	
 	if(cate_type == "share")
-		top.addTab(true,"/sys/cms/category/category_share_add.jsp?app_id="+app_id+"&site_id="+site_id+"&class_id="+class_id+"&top_index="+top.curTabIndex+"&id="+id,"维护目录");
+		addTab(true,"/sys/cms/category/category_share_add.jsp?app_id="+app_id+"&site_id="+site_id+"&class_id="+class_id+"&top_index="+curTabIndex+"&id="+id,"维护目录");
 	else
-		top.addTab(true,"/sys/cms/category/category_add.jsp?app_id="+app_id+"&site_id="+site_id+"&class_id="+class_id+"&top_index="+top.curTabIndex+"&id="+id,"维护目录");
+		addTab(true,"/sys/cms/category/category_add.jsp?app_id="+app_id+"&site_id="+site_id+"&class_id="+class_id+"&top_index="+curTabIndex+"&id="+id,"维护目录");
 }
 
 function showTurnPage(){
@@ -109,12 +109,12 @@ function deleteCategory()
 
 	if(CategoryRPC.deleteCategory(selectIDS,site_id,app_id))
 	{
-		top.msgAlert("目录信息"+WCMLang.Delete_success);
+		msgAlert("目录信息"+WCMLang.Delete_success);
 		changeCategoryListTable(cat_id);
 		deleteTreeNode(selectIDS);
 	}else
 	{
-		top.msgWargin("目录信息"+WCMLang.Delete_fail);
+		msgWargin("目录信息"+WCMLang.Delete_fail);
 	}
 }
 
@@ -123,11 +123,11 @@ function sortCategory()
 	var selectIDS = table.getAllCheckboxValue("id");
 	if(CategoryRPC.sortCategory(selectIDS))
 	{
-		top.msgAlert(WCMLang.Sort_success);
+		msgAlert(WCMLang.Sort_success);
 		showCategoryTree();
 	}else
 	{
-		top.msgWargin(WCMLang.Sort_fail);
+		msgWargin(WCMLang.Sort_fail);
 	}
 }
 
@@ -154,12 +154,12 @@ function moveCategory(parent_id)
 	{
 		var selectIDS = table.getSelecteCheckboxValue("cat_id");			
 		if(CategoryRPC.moveCategory(parent_id,selectIDS,site_id)){
-			top.msgAlert("目录"+WCMLang.Move_success);
+			msgAlert("目录"+WCMLang.Move_success);
 			loadCategoryTable()
 			showCategoryTree();
 		}else
 		{
-			top.msgWargin("目录"+WCMLang.Move_fail);
+			msgWargin("目录"+WCMLang.Move_fail);
 			return;
 		}
 	}
@@ -167,7 +167,7 @@ function moveCategory(parent_id)
 
 function openSelectCategory(title,handl_name)
 {
-	top.OpenModalWindow(title,"/sys/cms/category/select_menu.jsp?handl_name="+handl_name,610,510);
+	OpenModalWindow(title,"/sys/cms/category/select_menu.jsp?handl_name="+handl_name,610,510);
 }
 
 function initCategoryTree()
@@ -198,12 +198,12 @@ function copyBasisCategory(c_id,c_name)
 {
 	if(CategoryRPC.copyBasisCategory(cat_id,c_id,site_id))
 	{
-		top.msgAlert("目录"+WCMLang.Add_success);
+		msgAlert("目录"+WCMLang.Add_success);
 		loadCategoryTable()
 		showCategoryTree();
 	}else
 	{
-		top.msgWargin("目录"+WCMLang.Add_fail);
+		msgWargin("目录"+WCMLang.Add_fail);
 		return;
 	}
 }
@@ -213,12 +213,12 @@ function copyShareCategory(c_id)
 {
 	if(CategoryRPC.copyShareCategory(cat_id,c_id,app_id,site_id))
 	{
-		top.msgAlert("目录"+WCMLang.Add_success);
+		msgAlert("目录"+WCMLang.Add_success);
 		loadCategoryTable()
 		showCategoryTree();
 	}else
 	{
-		top.msgWargin("目录"+WCMLang.Add_fail);
+		msgWargin("目录"+WCMLang.Add_fail);
 		return;
 	}
 } 

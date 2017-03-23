@@ -45,9 +45,9 @@ function saveZWGKConfig()
 		{
 			jsonrpc.SerRPC.updateSerTemplateContent($("#mark2").val());
 		}
-		top.msgAlert(WCMLang.Add_success);
+		msgAlert(WCMLang.Add_success);
 	}else{		
-			top.msgAlert(WCMLang.Add_fail);
+			msgAlert(WCMLang.Add_fail);
 	}
 }
 

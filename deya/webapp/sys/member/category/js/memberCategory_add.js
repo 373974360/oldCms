@@ -31,13 +31,13 @@ function addMemberCategory()
 	addBean.mcat_memo = $("#mcat_memo").val();
 	if(MemberManRPC.insertMemberCategory(addBean))
 	{
-		top.msgAlert("会员分类信息"+WCMLang.Add_success);
-		top.getCurrentFrameObj().reloadCategoryList();
-		top.CloseModalWindow();
+		msgAlert("会员分类信息"+WCMLang.Add_success);
+		getCurrentFrameObj().reloadCategoryList();
+		CloseModalWindow();
 	}
 	else
 	{
-		top.msgWargin("会员分类信息"+WCMLang.Add_fail);
+		msgWargin("会员分类信息"+WCMLang.Add_fail);
 		return;
 	}
 }
@@ -54,13 +54,13 @@ function updateMemberCategory()
 	updateBean.mcat_memo = $("#mcat_memo").val();
 	if(MemberManRPC.updateMemberCategory(updateBean))
 	{
-		top.msgAlert("会员分类信息"+WCMLang.Set_success);
-		top.getCurrentFrameObj().reloadCategoryList();
-		top.CloseModalWindow();
+		msgAlert("会员分类信息"+WCMLang.Set_success);
+		getCurrentFrameObj().reloadCategoryList();
+		CloseModalWindow();
 	}
 	else
 	{
-		top.msgWargin("会员分类信息"+WCMLang.Set_fail);
+		msgWargin("会员分类信息"+WCMLang.Set_fail);
 		return;
 	}
 }

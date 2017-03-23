@@ -106,14 +106,14 @@ function saveModelUser(model_ids)
 	var user_ids = table.getSelecteCheckboxValue("user_id");
 	if(jsonrpc.SQModelRPC.insertModelReleUser(model_ids,user_ids))
 	{
-		top.msgAlert("用户与业务关联"+WCMLang.Add_success);
-		top.CloseModalWindow();
-		top.getCurrentFrameObj().reloadCpUserList();
+		msgAlert("用户与业务关联"+WCMLang.Add_success);
+		CloseModalWindow();
+		getCurrentFrameObj().reloadCpUserList();
 		table.unChekcbox();
 	}
 	else
 	{
-		top.msgWargin("用户与业务关联"+WCMLang.Add_fail);
+		msgWargin("用户与业务关联"+WCMLang.Add_fail);
 	}
 }
 
@@ -136,13 +136,13 @@ function saveRoleUser(role_ids)
 
 	if(jsonrpc.RoleRPC.insertRoleUserByUser(bean))
 	{
-		top.msgAlert("角色用户关联"+WCMLang.Add_success);
-		top.CloseModalWindow();
-		top.getCurrentFrameObj().reloadCpUserList();
+		msgAlert("角色用户关联"+WCMLang.Add_success);
+		CloseModalWindow();
+		getCurrentFrameObj().reloadCpUserList();
 		table.unChekcbox();
 	}else
 	{
-		top.msgWargin("角色用户关联"+WCMLang.Add_fail);
+		msgWargin("角色用户关联"+WCMLang.Add_fail);
 	}
 }
 
@@ -157,13 +157,13 @@ function saveDeptUser(user_ids)
 
 		if(CpUserRPC.insertCpUser(dept_id,user_ids))
 		{
-			top.msgAlert("用户添加"+WCMLang.Add_success);
-			top.CloseModalWindow();
-			top.getCurrentFrameObj().reloadCpUserList();
+			msgAlert("用户添加"+WCMLang.Add_success);
+			CloseModalWindow();
+			getCurrentFrameObj().reloadCpUserList();
 			table.unChekcbox();
 		}else
 		{
-			top.msgWargin("用户添加"+WCMLang.Add_fail);
+			msgWargin("用户添加"+WCMLang.Add_fail);
 		}
 	}
 }
@@ -173,7 +173,7 @@ function userISExist(user_ids)
 	var names = CpUserRPC.userISExist(user_ids);
 	if(names != "" && names != null)
 	{
-		top.msgWargin(names+" 这些用户已经添加过，请重新选择");
+		msgWargin(names+" 这些用户已经添加过，请重新选择");
 		return false;
 	}else
 		return true;
@@ -185,12 +185,12 @@ function deleteCpDept()
 	var selectIDS = table.getSelecteCheckboxValue("user_id");
 	if(CpUserRPC.deleteCpUser(dept_id,selectIDS))
 	{
-		top.msgAlert("用户与机构关联"+WCMLang.Delete_success);
-		top.CloseModalWindow();
-		top.getCurrentFrameObj().reloadCpUserList();
+		msgAlert("用户与机构关联"+WCMLang.Delete_success);
+		CloseModalWindow();
+		getCurrentFrameObj().reloadCpUserList();
 	}else
 	{
-		top.msgWargin("用户与机构关联"+WCMLang.Delete_fail);
+		msgWargin("用户与机构关联"+WCMLang.Delete_fail);
 	}
 }
 
@@ -209,13 +209,13 @@ function updateRole()
 	bean.role_id = role_id;
 	if(RoleRPC.updateRole(bean))
 	{
-		top.msgAlert("用户与机构关联"+WCMLang.Add_success);			
-		top.CloseModalWindow();
-		top.getCurrentFrameObj().reloadCpUserList();
+		msgAlert("用户与机构关联"+WCMLang.Add_success);
+		CloseModalWindow();
+		getCurrentFrameObj().reloadCpUserList();
 	}
 	else
 	{
-		top.msgWargin("用户与机构关联"+WCMLang.Add_fail);
+		msgWargin("用户与机构关联"+WCMLang.Add_fail);
 	}
 }
 

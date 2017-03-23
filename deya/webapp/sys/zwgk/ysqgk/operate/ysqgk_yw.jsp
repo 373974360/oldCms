@@ -172,7 +172,7 @@ function saveFile_url(url)
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="addYsqgkConfig()" value="保存" />
 			<!--input id="btnReset" name="btn1" type="button" onclick="formReSet('YsqgkConfig_table',"")" value="重置" /-->	
-			<input id="btnCancel" name="btn1" type="button" onclick="top.CloseModalWindow();" value="取消" />
+			<input id="btnCancel" name="btn1" type="button" onclick="CloseModalWindow();" value="取消" />
 		</td>
 	</tr>
 </table>

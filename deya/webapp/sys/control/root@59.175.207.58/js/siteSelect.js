@@ -29,7 +29,7 @@ function getCateNames(ids){
 			cat_names = cat_names.substr(1);
 		} 
 	}
-	top.getCurrentFrameObj().setCatNames(cat_names);
+	getCurrentFrameObj().setCatNames(cat_names);
 }
 
 // 设置已经选中的栏目
@@ -48,12 +48,12 @@ function setSelectedID(){
 // 保存选中的栏目id
 function saveCateIDS(){
 	var ids = getSelectedIDS();
-	top.getCurrentFrameObj().cat_str = ids;
+	getCurrentFrameObj().cat_str = ids;
 	
 	getCateNames(ids); // 取得选中的栏目名称
-	top.CloseModalWindow();
+	CloseModalWindow();
 }
 
 function cancle(){
-	top.CloseModalWindow();
+	CloseModalWindow();
 }

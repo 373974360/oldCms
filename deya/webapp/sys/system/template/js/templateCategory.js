@@ -76,7 +76,7 @@ function showTemplateFileList(){
 				{
 					p = p.replace(/\\/ig,"\\\\\\\\");
 				}
-				$(this).html('<a href="javascript:top.addTab(true,\'/sys/system/template/resouFile_update.jsp?tid='+tc_id+'&site_id='+site_id+'&path='+p+'\',\'维护资源\')">'+tf_beanList.get(i-1).file_name+'</a>');
+				$(this).html('<a href="javascript:addTab(true,\'/sys/system/template/resouFile_update.jsp?tid='+tc_id+'&site_id='+site_id+'&path='+p+'\',\'维护资源\')">'+tf_beanList.get(i-1).file_name+'</a>');
 			}
 			else
 			{
@@ -115,7 +115,7 @@ function showTemplateFileList(){
 //添加目录
 function openTemplateResourcesFolder()
 {
-	top.OpenModalWindow("新建目录","/sys/system/template/add_folder.jsp",350,120);
+	OpenModalWindow("新建目录","/sys/system/template/add_folder.jsp",350,120);
 }
 
 function addTemplateResourcesFolder(folder_name)
@@ -129,32 +129,32 @@ function addTemplateResourcesFolder(folder_name)
 
 	if(TemplateRPC.addTemplateResourcesFolder(path))
 	{
-		top.msgAlert("资源目录"+WCMLang.Add_success);
+		msgAlert("资源目录"+WCMLang.Add_success);
 		insertTreeNode(eval('[{"id":'+getRandom()+',"text":\"'+folder_name+'\","attributes":{\"url\":\"'+path+'\"}}]'));
 	}
 	else
 	{
-		top.msgWargin("资源目录"+WCMLang.Add_fail);
+		msgWargin("资源目录"+WCMLang.Add_fail);
 	}
 
 }
 
 function deleteTemplateResources(file_path)
 {
-	top.msgConfirm(WCMLang.Delete_confirm,"deleteTemplateResourcesHandl('"+file_path+"')");
+	msgConfirm(WCMLang.Delete_confirm,"deleteTemplateResourcesHandl('"+file_path+"')");
 }
 
 function deleteTemplateResourcesHandl(file_path)
 {
 	if(TemplateRPC.deleteTemplateResources(file_path,site_id))
 	{
-		top.msgAlert("资源文件"+WCMLang.Delete_success);
+		msgAlert("资源文件"+WCMLang.Delete_success);
 		showTemplateFileList();
 		showTemplateFileTurnPage();
 	}
 	else
 	{
-		top.msgWargin("资源文件"+WCMLang.Delete_fail);
+		msgWargin("资源文件"+WCMLang.Delete_fail);
 	}
 }
 
@@ -162,12 +162,12 @@ function updateResourcesFile()
 {
 	if(TemplateRPC.updateResourcesFile(path,$("#f_content").val(),site_id))
 	{
-		top.msgAlert("资源文件"+WCMLang.Add_success);
-		top.tab_colseOnclick(top.curTabIndex);
+		msgAlert("资源文件"+WCMLang.Add_success);
+		tab_colseOnclick(curTabIndex);
 	}
 	else
 	{
-		top.msgAlert("资源文件"+WCMLang.Add_fail);
+		msgAlert("资源文件"+WCMLang.Add_fail);
 		return;
 	}
 }
@@ -265,18 +265,18 @@ function showTemplateCategoryList(){
 //添加树节点
 function insertTemplateCategoryTree(id,name)
 {
-	top.insertTreeNode(eval('[{"id":'+id+',"iconCls":"tree-file icon-templateFolder", "text":\"'+name+'\","attributes":{"url":\"/sys/system/template/templateCategoryList.jsp?tid='+id+'\"}}]'));	
+	insertTreeNode(eval('[{"id":'+id+',"iconCls":"tree-file icon-templateFolder", "text":\"'+name+'\","attributes":{"url":\"/sys/system/template/templateCategoryList.jsp?tid='+id+'\"}}]'));
 }
 //修改树节点
 function updateTemplateCategoryTree(id,dept_name)
 {
-	top.updateTreeNode(id,dept_name);
+	updateTreeNode(id,dept_name);
 }
 
 //删除树节点
 function deleteTemplateCategoryTree(ids)
 {
-	top.deleteTreeNode(ids);
+	deleteTreeNode(ids);
 }
 
 function showTemplateCategoryTurnPage(){	
@@ -331,15 +331,15 @@ function addTemplateCategoryData()
 
 	if(TemplateRPC.addTemplateCategory(bean))
 	{
-		top.msgAlert("模板"+WCMLang.Add_success);
+		msgAlert("模板"+WCMLang.Add_success);
 		insertTemplateCategoryTree(bean.tcat_id,bean.tcat_cname);	
-		//top.CloseModalWindow();
-		//top.getCurrentFrameObj().reloadTemplateDataList();
+		//CloseModalWindow();
+		//getCurrentFrameObj().reloadTemplateDataList();
 		window.location.href = "/sys/system/template/templateCategoryList.jsp?tid="+bean.parent_id+"&labNum=2&site_id="+bean.site_id;
 	}
 	else
 	{
-		top.msgWargin("模板"+WCMLang.Add_fail);
+		msgWargin("模板"+WCMLang.Add_fail);
 	}
 }
 //修改Template
@@ -355,15 +355,15 @@ function updateTemplateCategoryData()
 
 	if(TemplateRPC.updateTemplateCategoryById(bean))
 	{
-		top.msgAlert("模板"+WCMLang.Add_success);	
+		msgAlert("模板"+WCMLang.Add_success);
 		updateTemplateCategoryTree(bean.tcat_id,bean.tcat_cname);
-		//top.CloseModalWindow();
-		//top.getCurrentFrameObj().reloadTemplateDataList();
+		//CloseModalWindow();
+		//getCurrentFrameObj().reloadTemplateDataList();
 		window.location.href = "/sys/system/template/templateCategoryList.jsp?tid="+bean.parent_id+"&labNum=2&site_id="+bean.site_id;
 	}
 	else
 	{
-		top.msgWargin("模板"+WCMLang.Add_fail);
+		msgWargin("模板"+WCMLang.Add_fail);
 	}
 }
 
@@ -373,25 +373,25 @@ function deleteTemplateCategoryData()
 	var selectIDS = tc_table.getSelecteCheckboxValue("tcat_id");
 	if(selectIDS == 1)
 	{
-		top.msgWargin("专题目录为系统目录，不能进行删除操作");
+		msgWargin("专题目录为系统目录，不能进行删除操作");
 		return;
 	}	
 
 	if(TemplateRPC.delTemplateCategoryById(selectIDS,site_id))
 	{
-		top.msgAlert("模板"+WCMLang.Delete_success);
-		//top.CloseModalWindow();
+		msgAlert("模板"+WCMLang.Delete_success);
+		//CloseModalWindow();
 		deleteTemplateCategoryTree(selectIDS)
-		top.getCurrentFrameObj().reloadTemplateCategoryDataList();
+		getCurrentFrameObj().reloadTemplateCategoryDataList();
 		//window.location.href = "/sys/system/template/templateCategoryList.jsp?tid="+parent_id+"&labNum=2&site_id="+bean.site_id;
 	}else
 	{
-		top.msgWargin("模板"+WCMLang.Delete_fail);
+		msgWargin("模板"+WCMLang.Delete_fail);
 	}
 }
 
 function deleteOneTemplateCategoryData(id,siteid){
-	top.msgConfirm(WCMLang.Delete_confirm,"deleteOneTemplateCategoryInfo('"+id+"','"+siteid+"')");
+	msgConfirm(WCMLang.Delete_confirm,"deleteOneTemplateCategoryInfo('"+id+"','"+siteid+"')");
 }
 
 function deleteOneTemplateCategoryInfo(id, siteid)
@@ -399,25 +399,25 @@ function deleteOneTemplateCategoryInfo(id, siteid)
 	var selectIDS = tc_table.getSelecteCheckboxValue("tcat_id");
 	if(selectIDS == 1)
 	{
-		top.msgWargin("专题目录为系统目录，不能进行删除操作");
+		msgWargin("专题目录为系统目录，不能进行删除操作");
 		return;
 	}
 	if(TemplateRPC.delTemplateCategoryById(id,siteid))
 	{
-		top.msgAlert("模板"+WCMLang.Delete_success);
-		//top.CloseModalWindow();
+		msgAlert("模板"+WCMLang.Delete_success);
+		//CloseModalWindow();
 		deleteTemplateCategoryTree(id)
-		top.getCurrentFrameObj().reloadTemplateCategoryDataList();
+		getCurrentFrameObj().reloadTemplateCategoryDataList();
 		//window.location.href = "/sys/system/template/templateCategoryList.jsp?tid="+parent_id+"&labNum=2&site_id="+bean.site_id;
 	}else
 	{
-		top.msgWargin("模板"+WCMLang.Delete_fail);
+		msgWargin("模板"+WCMLang.Delete_fail);
 	}
 }
 
 
 function closeTemplateCategoryPage(){
-	//top.CloseModalWindow();
+	//CloseModalWindow();
 	var bean = BeanUtil.getCopy(TemplateCategoryBean);	
 	$("#templateCategory_table").autoBind(bean);
 	window.location.href = "/sys/system/template/templateCategoryList.jsp?tid="+bean.parent_id+"&labNum=2&site_id="+bean.site_id;
@@ -453,10 +453,10 @@ function sortTemplateCategory()
 
 	if(TemplateRPC.sortTemplateCategory(selectIDS))
 	{
-		top.msgAlert(WCMLang.Sort_success);
+		msgAlert(WCMLang.Sort_success);
 		reloadTemplateCategoryDataList();
 	}else
 	{
-		top.msgWargin(WCMLang.Sort_fail);
+		msgWargin(WCMLang.Sort_fail);
 	}
 }

@@ -96,13 +96,8 @@ function updateInfoData()
 	bean.gk_grjl = getV(gk_grjl);
 	bean.gk_gzfg = getV(gk_gzfg);
 
-	var st = $(":radio[name='info_status'][checked]").val();
-	bean.info_status = (st == null ? "2" : st);
-	if(bean.info_status == "8" || bean.info_status == 8){
-		bean.step_id = 100;
-	}else{
-		bean.step_id = 0;
-	}
+	bean.info_status = defaultBean.info_status;
+
 	setCateClassToBean(bean);
 	//修改的时候不用判断索引码，重新生成的话，如果有重复的不会修改原索引码
 	publicSaveInfoEvent(bean,"gkfldcy","update");

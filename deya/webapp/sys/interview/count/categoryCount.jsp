@@ -100,7 +100,7 @@ String site_id = request.getParameter("site_id");
 		}
 		else
 		{
-			top.msgWargin("请输入时间范围");
+			msgWargin("请输入时间范围");
 		}
 	}
 	//-->

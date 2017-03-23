@@ -136,32 +136,32 @@ function updateSubjectStatus(operName,message,fields,status_flag)
 	{		
 		if(fields == "publish_status" && beanList.get(carent_cell_num).audit_status != 1)
 		{
-			top.msgWargin("该主题未通过审核，不能进行发布状态操作");
+			msgWargin("该主题未通过审核，不能进行发布状态操作");
 			return;
 		}
 
 		if(fields == "status" && beanList.get(carent_cell_num).audit_status != 1)
 		{
-			top.msgWargin("该主题未通过审核，不能进行访谈状态操作");
+			msgWargin("该主题未通过审核，不能进行访谈状态操作");
 			return;
 		}
 
 		if(fields == "audit_status"  && beanList.get(carent_cell_num).publish_status > 0)
 		{
-			top.msgWargin("该主题已设置发布状态，不能进行审核状态操作");
+			msgWargin("该主题已设置发布状态，不能进行审核状态操作");
 			return;
 		}
 
 		if(fields == "audit_status"  && beanList.get(carent_cell_num).status != 0)
 		{
-			top.msgWargin("该主题已设置访谈状态，不能进行审核状态操作");
+			msgWargin("该主题已设置访谈状态，不能进行审核状态操作");
 			return;
 		}
 
 
-		if(SubjectRPC.updateSubjectStatus(beanList.get(carent_cell_num).id,fields,status_flag,operName,message,top.LoginUserBean.user_id,top.LoginUserBean.user_id))
+		if(SubjectRPC.updateSubjectStatus(beanList.get(carent_cell_num).id,fields,status_flag,operName,message,LoginUserBean.user_id,LoginUserBean.user_id))
 		{
-			top.msgAlert(operName+"状态设置成功");
+			msgAlert(operName+"状态设置成功");
 			eval("beanList.get(carent_cell_num)."+fields+" = "+status_flag);
 			if(fields == "status") 
 				fields = "status2";
@@ -169,11 +169,11 @@ function updateSubjectStatus(operName,message,fields,status_flag)
 			$(table.getCol(fields)[carent_cell_num+1]).html(message+"&#160;");
 		}
 		else
-			top.msgWargin(operName+"状态设置失败，请重新设置");
+			msgWargin(operName+"状态设置失败，请重新设置");
 	}
 	else
 	{
-		top.msgAlert("该主题已是"+message+"状态");
+		msgAlert("该主题已是"+message+"状态");
 	}
 }
 /**********************发布操作　结束*************************************/
@@ -190,11 +190,11 @@ function updateSubjectStatus(operName,message,fields,status_flag)
 function batchDelSubject()
 {
 	if (table.getSelecteCount() < 1) {
-			top.msgAlert("请选择要删除的记录！");
+			msgAlert("请选择要删除的记录！");
 			return;
 	}
 
-	parent.msgConfirm("确认删除选中记录？","batchDelSubjects()");
+	msgConfirm("确认删除选中记录？","batchDelSubjects()");
 	
 }
 
@@ -202,33 +202,33 @@ function batchDelSubjects()
 {
 	var selectIDS = table.getSelecteCheckboxValue("id");
 	
-	if(SubjectRPC.deleteSubject(selectIDS,top.LoginUserBean.user_id))
+	if(SubjectRPC.deleteSubject(selectIDS,LoginUserBean.user_id))
 	{
-		top.msgAlert("访谈主题"+WCMLang.Delete_success);
+		msgAlert("访谈主题"+WCMLang.Delete_success);
 		showTurnPage();
 		showList();	
 	}
 	else
-		top.msgWargin("访谈主题"+WCMLang.Delete_fail);
+		msgWargin("访谈主题"+WCMLang.Delete_fail);
 }
 
 
 //删除分类
 function deleteSubject(id,audit_status)
 {
-	parent.msgConfirm("确认删除选中记录？","deleteSubjectOper("+id+")")
+	msgConfirm("确认删除选中记录？","deleteSubjectOper("+id+")")
 }
 
 function deleteSubjectOper(id)
 {
-	if(SubjectRPC.deleteSubject(id,top.LoginUserBean.user_id))
+	if(SubjectRPC.deleteSubject(id,LoginUserBean.user_id))
 	{
-		top.msgAlert("访谈主题"+WCMLang.Delete_success);
+		msgAlert("访谈主题"+WCMLang.Delete_success);
 		showTurnPage();
 		showList();	
 	}
 	else
-		top.msgWargin("访谈主题"+WCMLang.Delete_fail);
+		msgWargin("访谈主题"+WCMLang.Delete_fail);
 }
 /**********************删除操作　结束*************************************/
 function fnOpenLiveManager()
@@ -236,14 +236,14 @@ function fnOpenLiveManager()
 	var ls = table.getSelecteBeans();
 	if(ls == null || ls.size() == 0)
 	{
-		top.msgAlert("请选择要操作的记录");
+		msgAlert("请选择要操作的记录");
 		return;
 	}
 	else
 	{
 		if(ls.size() > 1)
 		{
-			top.msgAlert("只能选择一条记录进行管理操作");
+			msgAlert("只能选择一条记录进行管理操作");
 			return;
 		}
 		window.open("../live/liveManager.jsp?site_id="+site_id+"&id="+ls.get(0).id+"&sub_id="+ls.get(0).sub_id);
@@ -260,12 +260,12 @@ function updateRecommend(flag)
 	var selectIDS = table.getSelecteCheckboxValue("id");
 	if(SubjectRPC.updateSubjectRecommend(selectIDS,flag))
 	{
-		top.msgAlert("推荐状态设置成功");
+		msgAlert("推荐状态设置成功");
 		showTurnPage();
 		showList();	
 	}
 	else
-		top.msgWargin("推荐状态设置失败，请重新设置");
+		msgWargin("推荐状态设置失败，请重新设置");
 }
 /**********************推荐操作　结束*************************************/
 
@@ -275,7 +275,7 @@ function fnHistoryRecord()
 	var ls = table.getSelecteBeans();
 	if(ls.get(0).status != 2)
 	{
-		top.msgWargin("该主题未设置为历史状态，不能进行历史记录维护");
+		msgWargin("该主题未设置为历史状态，不能进行历史记录维护");
 		return;
 	}
 	else
@@ -289,7 +289,7 @@ function roleSearchHandl(obj)
 	var con_value = $(obj).parent().find("#searchkey").val();
 	if(con_value.trim() == "" ||  con_value == null)
 	{
-		top.msgAlert(WCMLang.Search_empty);
+		msgAlert(WCMLang.Search_empty);
 		return;
 	}
 	con = " and sub_name like '%"+con_value+"%'";	

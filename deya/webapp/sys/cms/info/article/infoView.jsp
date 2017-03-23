@@ -47,8 +47,8 @@ $(document).ready(function(){
 				$("#contentFrame").attr("src","/info/contentView.jsp?info_id=<%=info_id%>&site_id=<%=site_id%>");
 		}
 
-		var opt_ids = ","+top.getOptIDSByUser(defaultBean.app_id,site_id)+",";//登录人所拥有管理权限ID
-		var is_admin = top.isSiteManager(defaultBean.app_id,site_id);//是否是站点管理员或超级管理员
+		var opt_ids = ","+getOptIDSByUser(defaultBean.app_id,site_id)+",";//登录人所拥有管理权限ID
+		var is_admin = isSiteManager(defaultBean.app_id,site_id);//是否是站点管理员或超级管理员
 		//根据信息状态值显示不同的操作		
 		if(defaultBean.final_status == -1)
 		{
@@ -80,54 +80,20 @@ $(document).ready(function(){
 			}
 			if(defaultBean.info_status == 2)
 			{
-                //待审状态显示通过，退稿
-                if(is_admin == true || opt_ids.indexOf(",303,") > -1)
-                {
-                    $("li[id='opt_303']").show().find("input").click();
-                    $("li[id='opt_304']").show();
-                    $("#operate_table").show();
-                    $("#addButton").show();
-                }
-
-                //得到该栏目所使用的流程ID
-                var wf_id = CategoryRPC.getWFIDByCatID(defaultBean.cat_id,defaultBean.site_id);
-                if(wf_id != 0)
-                {
-                    var auditHtml = "";
-                    var step_id = getMaxStepIDByUserID(wf_id, defaultBean.app_id, site_id);
-                    var workFlowBean = jsonrpc.WorkFlowRPC.getWorkFlowBean(wf_id);
-                    var workStepList = workFlowBean.workFlowStep_list;
-                    workStepList = List.toJSList(workStepList);
-                    for (var i = 0; i < workStepList.size(); i++) {
-                        if (workStepList.get(i).step_id > step_id) {
-                            if (workStepList.get(i).required == 1) {
-                                $("#audit_tr").removeClass("hidden");
-                                var html = '<input id="auditChecked" name="auditStep" type="radio" checked="checked" onclick="changeStepId(' + (workStepList.get(i).step_id - 1) + ',2)"/><label for="e">' + workStepList.get(i).step_name + '</label>&nbsp;&nbsp;';
-                                auditHtml = auditHtml + html;
-                                $("#audit_list").append(html);
-                                $("#auditChecked").click();
-                                break;
-                            }
-                            else {
-                                $("#audit_tr").removeClass("hidden");
-                                var html = '<input name="auditStep" type="radio" onclick="changeStepId(' + (workStepList.get(i).step_id - 1) + ',2)"/><label for="e">' + workStepList.get(i).step_name + '</label>&nbsp;&nbsp;';
-                                auditHtml = auditHtml + html;
-                                $("#audit_list").append(html);
-                            }
-                        }
-                    }
-                }
-
-                //显示发布
-                if(is_admin == true || opt_ids.indexOf(",302,") > -1)
-                {
-                    $("#opt_302").show().find("input").click();
-                    defaultBean.step_id = 100;
-                    defaultBean.info_status = 8;
-                    //$("#opt_999").show();
-                }
+				//待审状态显示通过，退稿
+				if(is_admin == true || opt_ids.indexOf(",303,") > -1)
+				{
+					$("li[id='opt_303']").show();
+					$("#operate_table").show();
+					$("#addButton").show();
+				}
+				//显示发布
+				if(is_admin == true || opt_ids.indexOf(",302,") > -1)
+				{
+					$("#opt_302").show();
+                    $("#opt_999").show();
+				}
 			}
-
 			if(defaultBean.info_status == 1 || defaultBean.info_status == 0)
 			{
 				//草,退稿状态下显示待审
@@ -184,12 +150,6 @@ function getAddPagebyModel(model_id)
 	return add_page;
 }
 
-function changeStepId(step_id,status)
-{
-    defaultBean.step_id = step_id;
-    defaultBean.info_status = status;
-}
-
 //保存操作
 function saveInfoStatus()
 {
@@ -198,7 +158,7 @@ function saveInfoStatus()
 	var operate_boolean = false;
 	if(info_status == null || info_status == "")
 	{
-		top.msgWargin("请选择信息状态");
+		msgWargin("请选择信息状态");
 		return;
 	}
 	var info_list = new List();
@@ -224,15 +184,13 @@ function saveInfoStatus()
 
 	if(operate_boolean)
 	{		
-		top.msgAlert("信息状态保存成功");
+		msgAlert("信息状态保存成功");
 		try{
-			top.getCurrentFrameObj(topnum).reloadInfoDataList();
-			top.tab_colseOnclick(top.curTabIndex);
-		}catch(e){
-            top.tab_colseOnclick(top.curTabIndex);
-        }
+			getCurrentFrameObj(topnum).reloadInfoDataList();
+			tab_colseOnclick(curTabIndex);
+		}catch(e){}
 	}else{
-		top.msgWargin("信息状态保存失败");
+		msgWargin("信息状态保存失败");
 	};
 }
 
@@ -280,22 +238,16 @@ function openFromInfoPage()
 			<th>信息状态：</th>
 			<td>
 				<ul class="flagClass">									
-					<li id="li_ds" class="hidden"><input id="a" name="info_status" type="radio" value="2" onclick="isShowAudit(true)" /><label for="a">待审</label></li>
-					<li id="opt_308" class="hidden"><input id="b" name="info_status" type="radio" value="-1" onclick="isShowAudit(false)" /><label for="b">还原</label></li>
-					<li id="opt_303" class="hidden"><input id="c" name="info_status" type="radio" value="99" onclick="isShowAudit(true)" /><label for="c">通过</label></li>
-					<li id="opt_304" class="hidden"><input id="d" name="info_status" type="radio" value="1" onclick="isShowAudit(false)" /><label for="d">退稿</label></li>
-					<li id="opt_307" class="hidden"><input id="e" name="info_status" type="radio" value="3" onclick="isShowAudit(false)" /><label for="e">撤销</label></li>
-                    <!--<li id="opt_999" class="hidden"><input id="g" name="info_status" type="radio" value="4" onclick="isShowAudit(false)" /><label for="g">待发</label></li>-->
-					<li id="opt_302" class="hidden"><input id="f" name="info_status" type="radio" value="8" onclick="isShowAudit(false)" /><label for="f">发布</label></li>
+					<li id="li_ds" class="hidden"><input id="a" name="info_status" type="radio" value="2" /><label for="a">待审</label></li>
+					<li id="opt_308" class="hidden"><input id="b" name="info_status" type="radio" value="-1" /><label for="b">还原</label></li>
+					<li id="opt_303" class="hidden"><input id="c" name="info_status" type="radio" value="99" /><label for="c">通过</label></li>
+					<li id="opt_303" class="hidden"><input id="d" name="info_status" type="radio" value="1" /><label for="d">退稿</label></li>
+					<li id="opt_307" class="hidden"><input id="e" name="info_status" type="radio" value="3" /><label for="e">撤销</label></li>
+                    <li id="opt_999" class="hidden"><input id="g" name="info_status" type="radio" value="4" /><label for="g">待发</label></li>
+					<li id="opt_302" class="hidden"><input id="f" name="info_status" type="radio" value="8" /><label for="f">发布</label></li>
 				</ul>
 			</td>
 		</tr>
-        <tr id="audit_tr" class="hidden">
-            <th>选择审核人：</th>
-            <td id="audit_list">
-
-            </td>
-        </tr>
 		<tr class="hidden" id="auto_desc_tr">
 			<th style="vertical-align:top;">退稿意见：</th>
 			<td>
@@ -316,7 +268,7 @@ function openFromInfoPage()
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" class="hidden" name="btn1" type="button" onclick="saveInfoStatus()" value="保存" />
 			<input id="btn300" class="hidden" name="btn1" type="button" onclick="openUpdatePage()" value="编辑" />
-			<input id="addCancel" name="btn1" type="button" onclick="top.tab_colseOnclick(top.curTabIndex);" value="取消" />&nbsp;&nbsp;&nbsp;
+			<input id="addCancel" name="btn1" type="button" onclick="tab_colseOnclick(curTabIndex);" value="取消" />&nbsp;&nbsp;&nbsp;
 			<input id="from_info_button" class="hidden" name="btn1" type="button" onclick="openFromInfoPage()" value="编辑源信息" />	
 		</td>
 	</tr>

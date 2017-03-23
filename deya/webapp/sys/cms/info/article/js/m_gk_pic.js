@@ -14,7 +14,7 @@ function addInfoData()
 	}
 	if($("#add_pic_table img").length == 0)
 	{
-		top.msgAlert("图片不能为空，请选择图片");
+		msgAlert("图片不能为空，请选择图片");
 		return;
 	}
 
@@ -52,7 +52,7 @@ function updateInfoData()
 	} 
 	if($("#add_pic_table img").length == 0)
 	{
-		top.msgAlert("图片不能为空，请选择图片");
+		msgAlert("图片不能为空，请选择图片");
 		return;
 	}
 

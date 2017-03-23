@@ -607,16 +607,16 @@ function mCodeIconEvent(cmd)
 {
 	switch(cmd){			
 		case "creaList":						
-			top.OpenModalWindow("列表生成工具","/sys/system/template/list_tools.jsp",650,420);
+			OpenModalWindow("列表生成工具","/sys/system/template/list_tools.jsp",650,420);
 			return false;
 		case "hotList":						
-			top.OpenModalWindow("热点信息生成工具","/sys/system/template/hotlist_tools.jsp",650,440);
+			OpenModalWindow("热点信息生成工具","/sys/system/template/hotlist_tools.jsp",650,440);
 			return false;
 		case "creaLink":						
-			top.OpenModalWindow("获取链接地址","/sys/system/template/link_tools.jsp",650,495);
+			OpenModalWindow("获取链接地址","/sys/system/template/link_tools.jsp",650,495);
 			return false;
 		case "selImg":						
-			top.OpenModalWindow("选择图片","/sys/system/template/select_file.jsp",650,495);
+			OpenModalWindow("选择图片","/sys/system/template/select_file.jsp",650,495);
 			return false;
 	}
 }

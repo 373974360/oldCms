@@ -18,9 +18,9 @@ function addInfoData()
 	bean.gk_sxyj = getV(gk_sxyj);
 	bean.gk_bltj = getV(gk_bltj);
 	bean.gk_blsx = getV(gk_blsx);
-	bean.gk_sfbz = getV(gk_sfbz);
+//	bean.gk_sfbz = getV(gk_sfbz);
 	bean.gk_bllc = getV(gk_bllc);
-	bean.gk_cclx = getV(gk_cclx);
+//	bean.gk_cclx = getV(gk_cclx);
     bean.gk_sfyj = getV(gk_sfyj);
 
 
@@ -64,18 +64,12 @@ function updateInfoData()
     bean.gk_sxyj = getV(gk_sxyj);
     bean.gk_bltj = getV(gk_bltj);
     bean.gk_blsx = getV(gk_blsx);
-    bean.gk_sfbz = getV(gk_sfbz);
+//    bean.gk_sfbz = getV(gk_sfbz);
     bean.gk_bllc = getV(gk_bllc);
-    bean.gk_cclx = getV(gk_cclx);
+//    bean.gk_cclx = getV(gk_cclx);
     bean.gk_sfyj = getV(gk_sfyj);
 	
-	var st = $(":radio[name='info_status'][checked]").val();
-	bean.info_status = (st == null ? "2" : st);
-	if(bean.info_status == "8" || bean.info_status == 8){
-		bean.step_id = 100;
-	}else{
-		bean.step_id = 0;
-	}
+	bean.info_status = defaultBean.info_status;
     var info_level = $(":radio[name='info_level'][checked]").val();
     bean.info_level = (info_level == null ? "B" : info_level);
     var isIpLimit = $(":radio[name='isIpLimit'][checked]").val();

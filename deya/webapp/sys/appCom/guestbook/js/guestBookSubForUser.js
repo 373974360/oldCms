@@ -112,12 +112,12 @@ function showTurnPage(){
 //打开查看留言窗口
 function openGuestBookPage(s_id,cat_id)
 {
-	top.addTab(true,"/sys/appCom/guestbook/guestBookList.jsp?site_id="+site_id+"&topnum="+top.curTabIndex+"&gbs_id="+s_id+"&cat_id="+cat_id,"查看留言");
+	addTab(true,"/sys/appCom/guestbook/guestBookList.jsp?site_id="+site_id+"&topnum="+curTabIndex+"&gbs_id="+s_id+"&cat_id="+cat_id,"查看留言");
 }
 
 //打开统计窗口
 function openGuestBookCountPage(s_id,cat_id)
 {
-	top.addTab(true,"/sys/appCom/guestbook/guestBookCount.jsp?site_id="+site_id+"&gbs_id="+s_id+"&cat_id="+cat_id,"留言统计");
+	addTab(true,"/sys/appCom/guestbook/guestBookCount.jsp?site_id="+site_id+"&gbs_id="+s_id+"&cat_id="+cat_id,"留言统计");
 }
 

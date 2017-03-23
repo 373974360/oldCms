@@ -38,10 +38,10 @@ function batchIsNotOpenOk()
 	var bnopenType = jsonrpc.SQRPC.batchIsNotOpenOk(m);
 	if(bnopenType)
 	{
-		top.msgAlert("操作成功");
-		top.CloseModalWindow();
+		msgAlert("操作成功");
+		CloseModalWindow();
 	}else{
-		top.msgAlert("操作失败!");
+		msgAlert("操作失败!");
 	}
 }
 
@@ -53,7 +53,7 @@ function getSearchTime()
 
 	if(beignTime !="" && beignTime != null && endTime !="" && endTime !=null){
 		if(!judgeDate(beignTime,endTime)){
-			top.msgAlert("结束时间不能小于起始时间!");
+			msgAlert("结束时间不能小于起始时间!");
 			return;
 		}
 	}

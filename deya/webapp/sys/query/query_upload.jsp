@@ -74,17 +74,17 @@ function loadExcelUpload()
 function setExcleItem(conf_id,site_id){
 	var file_url = $("#file_url").val();
 	if(file_url == ""){
-		top.msgAlert("请上传Excel文件！");
+		msgAlert("请上传Excel文件！");
 		return;
 	}else{
 		if(QueryItemRPC.writeExcelItems(file_url,conf_id,site_id))
 		{
-			top.msgAlert("操作"+WCMLang.Add_success);
+			msgAlert("操作"+WCMLang.Add_success);
 			window.location.href = "query_conf.jsp?site_id="+site_id;
 		}
 		else
 		{
-			top.msgWargin("操作"+WCMLang.Add_fail);
+			msgWargin("操作"+WCMLang.Add_fail);
 		}
 	}
 }

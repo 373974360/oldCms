@@ -84,7 +84,7 @@ function showTurnPage(){
 //打开添加窗口
 function openAddSendConfigPage()
 {
-	top.addTab(true,"/sys/sendinfo/sendconf/add_sendconf.jsp?topnum="+top.curTabIndex,"报送配置");
+	addTab(true,"/sys/sendinfo/sendconf/add_sendconf.jsp?topnum="+curTabIndex,"报送配置");
 }
 
 //打开修改窗口
@@ -95,7 +95,7 @@ function openUpdateSendConfigPage(s_id)
 		id = s_id;
 	else
 		id = table.getSelecteCheckboxValue("site_id");
-	top.addTab(true,"/sys/sendinfo/sendconf/add_sendconf.jsp?site_id="+id+"&topnum="+top.curTabIndex,"报送配置");
+	addTab(true,"/sys/sendinfo/sendconf/add_sendconf.jsp?site_id="+id+"&topnum="+curTabIndex,"报送配置");
 }
 
 //得到栏目列表
@@ -119,7 +119,7 @@ function insertSendConfig()
 
 	if($("#sel_list li").length == 0)
 	{
-		top.tab_colseOnclick(top.curTabIndex);
+		tab_colseOnclick(curTabIndex);
 		return;
 	}
 
@@ -133,13 +133,13 @@ function insertSendConfig()
 	
 	if(SendInfoRPC.insertSendConfig(site_list))
 	{
-		top.msgAlert("报送站点配置"+WCMLang.Add_success);
-		top.getCurrentFrameObj(topnum).reloadList();
-		top.tab_colseOnclick(top.curTabIndex);
+		msgAlert("报送站点配置"+WCMLang.Add_success);
+		getCurrentFrameObj(topnum).reloadList();
+		tab_colseOnclick(curTabIndex);
 	}
 	else
 	{
-		top.msgWargin("报送站点配置"+WCMLang.Add_fail);
+		msgWargin("报送站点配置"+WCMLang.Add_fail);
 	}
 }
 
@@ -151,11 +151,11 @@ function deleteSendConfig()
 	
 	if(SendInfoRPC.deleteSendConfig(m))
 	{
-		top.msgAlert("报送站点配置"+WCMLang.Delete_success);
+		msgAlert("报送站点配置"+WCMLang.Delete_success);
 		reloadList();
 	}else
 	{
-		top.msgWargin("报送站点配置"+WCMLang.Delete_fail);
+		msgWargin("报送站点配置"+WCMLang.Delete_fail);
 	}
 }
 

@@ -110,12 +110,12 @@ function saveSCategory()
 	bean.site_id = site_id;
 	if(SubjectRPC.insertSubCategory(bean))
 	{
-		top.msgAlert("访谈模型"+WCMLang.Add_success);
+		msgAlert("访谈模型"+WCMLang.Add_success);
 		window.location.href = "subjectCategory.jsp?site_id="+site_id;
 	}
 	else
 	{
-		top.msgWargin("访谈模型"+WCMLang.Add_fail);
+		msgWargin("访谈模型"+WCMLang.Add_fail);
 	}
 }
 /**********************添加操作　结束*************************************/
@@ -147,12 +147,12 @@ function updateSCategory()
 	bean.update_user = "";
 	if(SubjectRPC.updateSubCategory(bean))
 	{
-		top.msgAlert("访谈模型"+WCMLang.Add_success);
+		msgAlert("访谈模型"+WCMLang.Add_success);
 		window.location.href = "subjectCategory.jsp?site_id="+site_id;
 	}
 	else
 	{
-		top.msgWargin("访谈模型"+WCMLang.Add_fail);
+		msgWargin("访谈模型"+WCMLang.Add_fail);
 	}
 }
 /**********************修改操作　结束*************************************/
@@ -164,16 +164,16 @@ function publishSubCategory()
 	{
 		if(SubjectRPC.updateSubCategoryState(beanList.get(carent_cell_num).id,1,""))
 		{
-			top.msgAlert("发布状态设置成功");
+			msgAlert("发布状态设置成功");
 			beanList.get(carent_cell_num).publish_status = 1;
 			$(table.getCol("publish_status")[carent_cell_num+1]).html("已发布&#160;");
 		}
 		else
-			top.msgWargin("发布状态设置失败，请重新设置");
+			msgWargin("发布状态设置失败，请重新设置");
 	}
 	else
 	{
-		top.msgAlert("该分类已是已发布状态");
+		msgAlert("该分类已是已发布状态");
 	}
 }
 
@@ -187,18 +187,18 @@ function batchPubSubCategorys()
 
 	if(selectIDS == "")
 	{
-		top.msgAlert("所选的记录已是发布状态，无需再发布");
+		msgAlert("所选的记录已是发布状态，无需再发布");
 		return;
 	}
 	
 	if(SubjectRPC.updateSubCategoryState(selectIDS,1,""))
 	{
-		top.msgAlert("发布状态设置成功");
+		msgAlert("发布状态设置成功");
 		showTurnPage();
 		showList();	
 	}
 	else
-		top.msgWargin("发布状态设置失败，请重新设置");
+		msgWargin("发布状态设置失败，请重新设置");
 }
 
 //验证是否有状态重复的ID
@@ -238,12 +238,12 @@ function cancelSubCategory()
 	{
 		if(SubjectRPC.updateSubCategoryState(beanList.get(carent_cell_num).id,-1,""))
 		{
-			top.msgAlert("发布状态设置成功");
+			msgAlert("发布状态设置成功");
 			beanList.get(carent_cell_num).publish_status = 0;
 			$(table.getCol("publish_status")[carent_cell_num+1]).html("已撤消&#160;");
 		}
 		else
-			top.msgWargin("发布状态设置失败，请重新设置");
+			msgWargin("发布状态设置失败，请重新设置");
 	}	
 }
 
@@ -257,18 +257,18 @@ function batchCelSubCategorys()
 
 	if(selectIDS.replace(",,","") == "")
 	{
-		top.msgAlert("所选的记录已是撤消状态，无需再撤消");
+		msgAlert("所选的记录已是撤消状态，无需再撤消");
 		return;
 	}
 	
 	if(SubjectRPC.updateSubCategoryState(selectIDS,-1,""))
 	{
-		top.msgAlert("发布状态设置成功");
+		msgAlert("发布状态设置成功");
 		showTurnPage();
 		showList();	
 	}
 	else
-		top.msgWargin("发布状态设置失败，请重新设置");
+		msgWargin("发布状态设置失败，请重新设置");
 }
 /**********************撤消操作　结束*************************************/
 
@@ -285,43 +285,43 @@ function batchDelSubCategorys()
 	{
 		if(SubjectRPC.getSubjectCountByCategoryID(tempA[i]) != 0)
 		{
-			top.msgWargin("该模型下有主题记录，请先删除主题记录再删除模型");
+			msgWargin("该模型下有主题记录，请先删除主题记录再删除模型");
 			return;
 		}
 	}
 	
 	if(SubjectRPC.deleteSubCategory(selectIDS,""))
 	{
-		top.msgAlert("访谈模型"+WCMLang.Delete_success);
+		msgAlert("访谈模型"+WCMLang.Delete_success);
 		showTurnPage();
 		showList();	
 	}
 	else
-		top.msgWargin("访谈模型"+WCMLang.Delete_fail);
+		msgWargin("访谈模型"+WCMLang.Delete_fail);
 }
 
 //删除分类
 function deleteSubCategory(id)
 {
-	parent.msgConfirm("确认删除选中记录？","delSubCategory("+id+")")
+	msgConfirm("确认删除选中记录？","delSubCategory("+id+")")
 }
 
 function delSubCategory(id)
 {
 	if(SubjectRPC.getSubjectCountByCategoryID(id) != 0)
 	{
-		top.msgWargin("该模型下有主题记录，请先删除主题记录再删除模型");
+		msgWargin("该模型下有主题记录，请先删除主题记录再删除模型");
 		return;
 	}
 
 	if(SubjectRPC.deleteSubCategory(id,""))
 	{
-		top.msgAlert("访谈模型"+WCMLang.Delete_success);
+		msgAlert("访谈模型"+WCMLang.Delete_success);
 		showTurnPage();
 		showList();	
 	}
 	else
-		top.msgWargin("访谈模型"+WCMLang.Delete_fail);
+		msgWargin("访谈模型"+WCMLang.Delete_fail);
 }
 /**********************删除操作　结束*************************************/
 
@@ -335,9 +335,9 @@ function saveSort()
 	{
 		if(SubjectRPC.saveSubCategorySort(ids))
 		{
-			top.msgAlert(WCMLang.Sort_success);
+			msgAlert(WCMLang.Sort_success);
 		}else{
-			top.msgWargin(WCMLang.Sort_fail);
+			msgWargin(WCMLang.Sort_fail);
 		}
 		
 	}
@@ -347,6 +347,6 @@ function saveSort()
 //查看分类
 function view_categoryByID(id)
 {		
-	//top.addTab(true,'/sys/interview/subject/view_category.jsp?id='+id,'访谈模型信息');
+	//addTab(true,'/sys/interview/subject/view_category.jsp?id='+id,'访谈模型信息');
 	window.location.href = '/sys/interview/subject/add_category.jsp?id='+id;
 }

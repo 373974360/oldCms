@@ -7,7 +7,7 @@ var beanList = null;
 var table = new Table();	
 	table.table_name = "appCategory_table";;
 var con_m = new Map();
-var user_id = top.LoginUserBean.user_id;
+var user_id = LoginUserBean.user_id;
 
 function initTable(){
 	
@@ -50,7 +50,7 @@ function showList(){
 
 function openUpdateCategoryPage2(cat_id)
 {
-	top.OpenModalWindow("维护分类信息","/sys/appeal/category/category_add.jsp?cat_id="+cat_id,450,140);
+	OpenModalWindow("维护分类信息","/sys/appeal/category/category_add.jsp?cat_id="+cat_id,450,140);
 }
 
 function showTurnPage(){	
@@ -62,13 +62,13 @@ function showTurnPage(){
 
 function openAddCategoryPage()
 {
-	top.OpenModalWindow("维护分类","/sys/appeal/category/category_add.jsp?parentID="+cat_id,450,140);
+	OpenModalWindow("维护分类","/sys/appeal/category/category_add.jsp?parentID="+cat_id,450,140);
 }
 
 function openUpdateCategoryPage()
 {
 	var selectIDS = table.getSelecteCheckboxValue("cat_id");
-	top.OpenModalWindow("维护分类","/sys/appeal/category/category_add.jsp?parentID="+cat_id+"&cat_id="+selectIDS,450,140);
+	OpenModalWindow("维护分类","/sys/appeal/category/category_add.jsp?parentID="+cat_id+"&cat_id="+selectIDS,450,140);
 }
 //添加内容分类
 function addCategory()
@@ -85,14 +85,14 @@ function addCategory()
 	
 	if(AppealCategoryRPC.insertCategory(bean))
 	{	
-		top.msgAlert("分类信息"+WCMLang.Add_success);	
-		top.getCurrentFrameObj().changeCategoryListTable(parent_id);
-		top.getCurrentFrameObj().insertCategoryTree(bean.cat_id,bean.cat_cname);
-		top.CloseModalWindow();
+		msgAlert("分类信息"+WCMLang.Add_success);
+		getCurrentFrameObj().changeCategoryListTable(parent_id);
+		getCurrentFrameObj().insertCategoryTree(bean.cat_id,bean.cat_cname);
+		CloseModalWindow();
 	}
 	else
 	{
-		top.msgWargin("分类信息"+WCMLang.Add_fail);
+		msgWargin("分类信息"+WCMLang.Add_fail);
 	}
 }
 //添加树节点
@@ -113,14 +113,14 @@ function updateCategory()
 	
 	if(AppealCategoryRPC.updateCategory(bean))
 	{
-		top.msgAlert("分类信息"+WCMLang.Add_success);	
-		top.getCurrentFrameObj().changeCategoryListTable(parent_id);
-		top.getCurrentFrameObj().updateCategoryTree(bean.cat_id,bean.cat_cname);
-		top.CloseModalWindow();
+		msgAlert("分类信息"+WCMLang.Add_success);
+		getCurrentFrameObj().changeCategoryListTable(parent_id);
+		getCurrentFrameObj().updateCategoryTree(bean.cat_id,bean.cat_cname);
+		CloseModalWindow();
 	}
 	else
 	{
-		top.msgWargin("分类信息"+WCMLang.Add_fail);
+		msgWargin("分类信息"+WCMLang.Add_fail);
 	}
 }
 //修改树节点
@@ -133,12 +133,12 @@ function deleteCategory()
 	var selectIDS = table.getSelecteCheckboxValue("cat_id");
 	if(AppealCategoryRPC.deleteCategory(selectIDS))
 	{
-		top.msgAlert("分类信息"+WCMLang.Delete_success);
-		top.getCurrentFrameObj().changeCategoryListTable(cat_id);
-		top.getCurrentFrameObj().deleteTreeNode(selectIDS);
+		msgAlert("分类信息"+WCMLang.Delete_success);
+		getCurrentFrameObj().changeCategoryListTable(cat_id);
+		getCurrentFrameObj().deleteTreeNode(selectIDS);
 	}else
 	{
-		top.msgWargin("分类信息"+WCMLang.Delete_fail);
+		msgWargin("分类信息"+WCMLang.Delete_fail);
 	}
 }
 function getAppInfoByID(cat_id)
@@ -156,11 +156,11 @@ function sortCategory()
 	var selectIDS = table.getAllCheckboxValue("cat_id");
 	if(AppealCategoryRPC.saveCategorySort(selectIDS))
 	{
-		top.msgAlert(WCMLang.Sort_success);
+		msgAlert(WCMLang.Sort_success);
 		showCategoryTree();	
 	}else
 	{
-		top.msgWargin(WCMLang.Sort_fail);
+		msgWargin(WCMLang.Sort_fail);
 	}
 }
 
@@ -171,12 +171,12 @@ function moveCategory(parent_id)
 		var selectIDS = table.getSelecteCheckboxValue("cat_id");
 		
 		if(AppealCategoryRPC.moveAppCate(parent_id,selectIDS)){
-			top.msgAlert("分类"+WCMLang.Move_success);
+			msgAlert("分类"+WCMLang.Move_success);
 			loadCategoryTable()
 			showCategoryTree();
 		}else
 		{
-			top.msgWargin("分类"+WCMLang.Move_fail);
+			msgWargin("分类"+WCMLang.Move_fail);
 			return;
 		}
 	}

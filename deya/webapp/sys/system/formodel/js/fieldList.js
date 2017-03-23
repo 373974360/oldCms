@@ -83,13 +83,13 @@ function showTurnPage(){
 //打开查看窗口
 function openViewFieldPage(r_id)
 {	
-	top.OpenModalWindow("查看内容模型字段","/sys/system/formodel/field_view.jsp?field_id="+r_id,450,285);	
+	OpenModalWindow("查看内容模型字段","/sys/system/formodel/field_view.jsp?field_id="+r_id,450,285);
 }
 
 //打开添加窗口
 function openAddFieldPage()
 {
-	top.OpenModalWindow("维护内容模型字段","/sys/system/formodel/field_add.jsp?model_id="+model_id,450,285);	
+	OpenModalWindow("维护内容模型字段","/sys/system/formodel/field_add.jsp?model_id="+model_id,450,285);
 }
 
 //打开修改窗口
@@ -98,10 +98,10 @@ function openUpdateFieldPage()
 	var selectList = table.getSelecteBeans();	
 	if(selectList.get(0).table_name != "cs_info_udefined")
 	{
-		top.msgWargin("系统字段不允许维护");
+		msgWargin("系统字段不允许维护");
 	}
 	else
-		top.OpenModalWindow("维护内容模型字段","/sys/system/formodel/field_add.jsp?field_id="+selectList.get(0).field_id,450,285);	
+		OpenModalWindow("维护内容模型字段","/sys/system/formodel/field_add.jsp?field_id="+selectList.get(0).field_id,450,285);
 }
 
 //添加内容模型
@@ -119,13 +119,13 @@ function addModelField()
 	bean.table_name = "cs_info_udefined";
 	if(ModelRPC.insertModelField(bean))
 	{
-		top.msgAlert("内容模型字段"+WCMLang.Add_success);
-		top.CloseModalWindow();
-		top.getCurrentFrameObj().reloadFieldList();
+		msgAlert("内容模型字段"+WCMLang.Add_success);
+		CloseModalWindow();
+		getCurrentFrameObj().reloadFieldList();
 	}
 	else
 	{
-		top.msgWargin("内容模型字段"+WCMLang.Add_fail);
+		msgWargin("内容模型字段"+WCMLang.Add_fail);
 	}
 }
 //修改内容模型
@@ -141,13 +141,13 @@ function updateModelField()
   
 	if(ModelRPC.updateModelField(bean))
 	{
-		top.msgAlert("内容模型字段"+WCMLang.Add_success);			
-		top.CloseModalWindow();
-		top.getCurrentFrameObj().reloadFieldList();
+		msgAlert("内容模型字段"+WCMLang.Add_success);
+		CloseModalWindow();
+		getCurrentFrameObj().reloadFieldList();
 	}
 	else
 	{
-		top.msgWargin("内容模型字段"+WCMLang.Add_fail);
+		msgWargin("内容模型字段"+WCMLang.Add_fail);
 	}
 }
 
@@ -165,17 +165,17 @@ function deleteModelField()
 	if(c_name != "")
 	{
 		c_name = c_name.substring(1);
-		top.msgWargin(c_name+" 这些系统字段不允许删除");
+		msgWargin(c_name+" 这些系统字段不允许删除");
 		return;
 	}
 
 	var selectIDS = table.getSelecteCheckboxValue("field_id");
 	if(ModelRPC.deleteModelField(selectIDS))
 	{
-		top.msgAlert("内容模型字段"+WCMLang.Delete_success);
+		msgAlert("内容模型字段"+WCMLang.Delete_success);
 		reloadFieldList();
 	}else
 	{
-		top.msgWargin("内容模型字段"+WCMLang.Delete_fail);
+		msgWargin("内容模型字段"+WCMLang.Delete_fail);
 	}
 }

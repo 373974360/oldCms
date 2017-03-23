@@ -40,10 +40,10 @@ $(document).ready(function(){
 
 function initData()
 {
-	is_admin = top.getCurrentFrameObj(top_index).is_admin;
-	current_dept_id = top.getCurrentFrameObj(top_index).current_dept_id;
-	defaultBean = top.getCurrentFrameObj(top_index).defaultBean;
-	model_bean = top.getCurrentFrameObj(top_index).model_bean;
+	is_admin = getCurrentFrameObj(top_index).is_admin;
+	current_dept_id = getCurrentFrameObj(top_index).current_dept_id;
+	defaultBean = getCurrentFrameObj(top_index).defaultBean;
+	model_bean = getCurrentFrameObj(top_index).model_bean;
 	sq_realname = defaultBean.sq_realname;
 	sq_title2 = defaultBean.sq_title2;
 	sq_id = defaultBean.sq_id;
@@ -326,7 +326,7 @@ function pcSimpleSearch(vals)
 	<tr>
 		<td align="left" valign="middle">
 			<input id="btn2" name="btn2" type="button" onclick="doVoid('do_1');" value="置为重复件" />
-			<input id="btn2" name="btn2" type="button" onclick="top.tab_colseOnclick(top.curTabIndex)" value="关闭" />
+			<input id="btn2" name="btn2" type="button" onclick="tab_colseOnclick(curTabIndex)" value="关闭" />
 		</td>
 	</tr>
 </table>
@@ -353,7 +353,7 @@ function pcSimpleSearch(vals)
 				<th></th>
 				<td>
 					<input id="submitButton" name="btn1" type="button" onclick="setChongfu()" value="提交" />
-					<input id="btn2" name="btn2" type="button" onclick="top.tab_colseOnclick(top.curTabIndex)" value="取消" />
+					<input id="btn2" name="btn2" type="button" onclick="tab_colseOnclick(curTabIndex)" value="取消" />
 				</td>
 			</tr>
 		</tbody>

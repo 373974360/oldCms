@@ -58,7 +58,7 @@ function showTurnPage(){
 
 function openAddCatePage()
 {
-	top.OpenModalWindow("维护公开节点分类","/sys/zwgk/node/gkCate_add.jsp",450,135);
+	OpenModalWindow("维护公开节点分类","/sys/zwgk/node/gkCate_add.jsp",450,135);
 }
 
 
@@ -75,7 +75,7 @@ function openUpdateCatePage(nc_id)
 		selectIDS = nc_id;
 	else
 		selectIDS = table.getSelecteCheckboxValue("nodcat_id");
-	top.OpenModalWindow("维护公开节点分类","/sys/zwgk/node/gkCate_add.jsp?nodcat_id="+selectIDS,450,135);
+	OpenModalWindow("维护公开节点分类","/sys/zwgk/node/gkCate_add.jsp?nodcat_id="+selectIDS,450,135);
 }
 
 //修改树节点
@@ -103,23 +103,23 @@ function deleteNodeCate()
 	}
 	if(msg2 != "" && msg2.length > 0)
 	{
-		top.msgWargin("分类 "+msg2.substring(1)+" 下还包含有子分类，请先清空子分类再删除！");
+		msgWargin("分类 "+msg2.substring(1)+" 下还包含有子分类，请先清空子分类再删除！");
 		return;
 	}
 	if(msg != "" && msg.length > 0)
 	{
-		top.msgWargin("分类 "+msg.substring(1)+" 下还包含有节点信息，请先清空节点再删除！");
+		msgWargin("分类 "+msg.substring(1)+" 下还包含有节点信息，请先清空节点再删除！");
 		return;
 	}
 	
 	if(GKNodeRPC.deleteGKNodeCategory(selectIDS))
 	{
-		top.msgAlert("公开节点分类"+WCMLang.Delete_success);
+		msgAlert("公开节点分类"+WCMLang.Delete_success);
 		loadMenuTable();
 		showMenuTree();
 	}else
 	{
-		top.msgWargin("公开节点分类"+WCMLang.Delete_fail);
+		msgWargin("公开节点分类"+WCMLang.Delete_fail);
 	}
 }
 
@@ -128,11 +128,11 @@ function sortNodeCate()
 	var selectIDS = table.getAllCheckboxValue("nodcat_id");
 	if(GKNodeRPC.sortGKNodeCategory(selectIDS))
 	{
-		top.msgAlert(WCMLang.Sort_success);
+		msgAlert(WCMLang.Sort_success);
 		showMenuTree();
 	}else
 	{
-		top.msgWargin(WCMLang.Sort_fail);
+		msgWargin(WCMLang.Sort_fail);
 	}
 }
 
@@ -144,12 +144,12 @@ function moveGKNodeCategory(parent_id)
 		var selectIDS = table.getSelecteCheckboxValue("nodcat_id");
 		if(GKNodeRPC.moveGKNodeCategory(selectIDS,parent_id))
 		{
-			top.msgAlert(WCMLang.Move_success);
+			msgAlert(WCMLang.Move_success);
 			showMenuTree();
 			loadMenuTable();
 		}else
 		{
-			top.msgWargin(WCMLang.Move_fail);
+			msgWargin(WCMLang.Move_fail);
 		}
 	}
 }

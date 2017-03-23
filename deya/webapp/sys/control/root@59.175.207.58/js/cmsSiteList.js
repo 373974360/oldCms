@@ -25,7 +25,7 @@ function showList(){
 		
 	}else{
 		if(selected_ids== ""){
-			top.msgWargin("请选择站点!");
+			msgWargin("请选择站点!");
 			return;
 		}else{
 			mp.put("site_ids",selected_ids);
@@ -120,7 +120,7 @@ function setTreeNodeUser(bean)
 }
 
 function openCateInfo(site_id,site_name) { 
-	//top.getCurrentFrameObj().pieJsonData = 	pieChartDataList.get(index);
-	top.OpenModalWindow("查看 "+site_name+" 详细信息","/sys/control/count/cmsSiteCateInfo.jsp?site_id="+site_id,1000,600);
+	//getCurrentFrameObj().pieJsonData = 	pieChartDataList.get(index);
+	OpenModalWindow("查看 "+site_name+" 详细信息","/sys/control/count/cmsSiteCateInfo.jsp?site_id="+site_id,1000,600);
 	
 }

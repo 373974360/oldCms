@@ -44,9 +44,9 @@ function insertMingLuTemplate()
 	bean.site_id = site_id;
 	if(MingLuRPC.insertMingLuTemplate(bean))
 	{
-		top.msgAlert("公务员名录"+WCMLang.Set_success);		
+		msgAlert("公务员名录"+WCMLang.Set_success);
 	}else
-		top.msgWargin("公务员名录"+WCMLang.Set_fail);
+		msgWargin("公务员名录"+WCMLang.Set_fail);
 }
 
 function updateMingLuTemplate()
@@ -56,9 +56,9 @@ function updateMingLuTemplate()
 	bean.id = defaultBean.id;
 	if(MingLuRPC.updateMingLuTemplate(bean))
 	{
-		top.msgAlert("公务员名录"+WCMLang.Set_success);		
+		msgAlert("公务员名录"+WCMLang.Set_success);
 	}else
-		top.msgWargin("公务员名录"+WCMLang.Set_fail);
+		msgWargin("公务员名录"+WCMLang.Set_fail);
 }
 
 function openTemplate(n1,n2)

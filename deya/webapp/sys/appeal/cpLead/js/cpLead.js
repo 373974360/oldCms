@@ -126,13 +126,13 @@ function addCpLead()
 	bean.lead_id=0
 	if(CpLeadRPC.insertCpLead(bean))
 	{
-		top.msgAlert("领导信息"+WCMLang.Add_success);
+		msgAlert("领导信息"+WCMLang.Add_success);
 		window.location.href = "/sys/appeal/cpLead/cpLeadList.jsp";
 		
 	}
 	else
 	{
-		top.msgWargin("领导信息"+WCMLang.Add_fail);
+		msgWargin("领导信息"+WCMLang.Add_fail);
 	}
 }
 
@@ -148,12 +148,12 @@ function updateCpLead()
 	}
 	if(CpLeadRPC.updateCpLead(bean))
 	{
-		top.msgAlert("领导信息"+WCMLang.Add_success);	
+		msgAlert("领导信息"+WCMLang.Add_success);
 		window.location.href = "/sys/appeal/cpLead/cpLeadList.jsp";
 	}
 	else
 	{
-		top.msgWargin("领导信息"+WCMLang.Add_fail);
+		msgWargin("领导信息"+WCMLang.Add_fail);
 	}
 }
 //往输入框里填写部门信息
@@ -168,11 +168,11 @@ function deleteCpLead()
 	var selectIDS = table.getSelecteCheckboxValue("lead_id");
 	if(CpLeadRPC.deleteCpLead(selectIDS))
 	{
-		top.msgAlert("领导信息"+WCMLang.Delete_success);
+		msgAlert("领导信息"+WCMLang.Delete_success);
 		window.location.href = "/sys/appeal/cpLead/cpLeadList.jsp";
 	}else
 	{
-		top.msgWargin("领导信息"+WCMLang.Delete_fail);
+		msgWargin("领导信息"+WCMLang.Delete_fail);
 	}
 }
 
@@ -184,13 +184,13 @@ function saveCpleadSort()
 	{
 		if(CpLeadRPC.savesortCpLead(tp.getStart(),lead_ids))
 		{
-			top.msgAlert(WCMLang.Sort_success);
-			top.CloseModalWindow();
+			msgAlert(WCMLang.Sort_success);
+			CloseModalWindow();
 			reloadCpLeadList();
 		}
 		else
 		{
-			top.msgWargin(WCMLang.Sort_fail);
+			msgWargin(WCMLang.Sort_fail);
 			return;
 		}
 	}

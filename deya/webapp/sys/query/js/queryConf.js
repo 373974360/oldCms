@@ -169,12 +169,12 @@ function addQueryConf(site_id)
 	
 	if(QueryConfRPC.insertQueryConf(bean))
 	{
-		top.msgAlert("业务"+WCMLang.Add_success);
+		msgAlert("业务"+WCMLang.Add_success);
 		window.location.href = "query_conf.jsp?site_id="+site_id;
 	}
 	else
 	{
-		top.msgWargin("业务"+WCMLang.Add_fail);
+		msgWargin("业务"+WCMLang.Add_fail);
 	}
 }
 
@@ -188,12 +188,12 @@ function updateQueryConf(conf_id){
 	bean.conf_id = conf_id;
 	if(QueryConfRPC.updateQueryConf(bean))
 	{
-		top.msgAlert("业务修改成功！");			
+		msgAlert("业务修改成功！");
 		window.location.href = "query_conf.jsp?site_id="+site_id;;
 	}
 	else
 	{
-		top.msgWargin("业务修改失败！");
+		msgWargin("业务修改失败！");
 	}
 }
 
@@ -203,10 +203,10 @@ function deleteQueryConf()
 	m.put("conf_id",table.getSelecteCheckboxValue("conf_id")+"");
 	if(QueryConfRPC.deleteQueryConf(m))
 	{
-		top.msgAlert("业务删除成功！");
+		msgAlert("业务删除成功！");
 		reloadList();
 	}else
 	{
-		top.msgWargin("业务删除失败！");
+		msgWargin("业务删除失败！");
 	}
 }

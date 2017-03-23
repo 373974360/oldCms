@@ -57,13 +57,13 @@ function updateNode()
 	
 	if(!GKNodeRPC.updateGKNode(addBean))
 	{		
-		top.msgWargin("公开节点"+WCMLang.Add_fail);
+		msgWargin("公开节点"+WCMLang.Add_fail);
 		return;
 	}
 	saveTemplateReleModel();
-	top.msgAlert("公开节点"+WCMLang.Add_success);
-	top.getCurrentFrameObj(top_index).loadMenuTable();
-	top.tab_colseOnclick(top.curTabIndex);
+	msgAlert("公开节点"+WCMLang.Add_success);
+	getCurrentFrameObj(top_index).loadMenuTable();
+	tab_colseOnclick(curTabIndex);
 }
 
 function addNode()
@@ -80,19 +80,19 @@ function addNode()
 	node_id = addBean.node_id;
 	if(GKNodeRPC.nodeIdIsExist(addBean.node_id))
 	{
-		top.msgWargin("该节点英文名称已存在，请重新输入英文名称");
+		msgWargin("该节点英文名称已存在，请重新输入英文名称");
 		return;
 	}
 
 	if(!GKNodeRPC.insertGKNode(addBean))
 	{		
-		top.msgWargin("公开节点"+WCMLang.Add_fail);
+		msgWargin("公开节点"+WCMLang.Add_fail);
 		return;
 	}
 	//saveZWGKConfig();
-	top.msgAlert("公开节点"+WCMLang.Add_success);
-	top.getCurrentFrameObj(top_index).loadMenuTable();
-	top.tab_colseOnclick(top.curTabIndex);
+	msgAlert("公开节点"+WCMLang.Add_success);
+	getCurrentFrameObj(top_index).loadMenuTable();
+	tab_colseOnclick(curTabIndex);
 }
 
 // 修改状态下的重置
@@ -275,7 +275,7 @@ function writeAppleName(vals)
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="" value="保存" />	
 			<input id="btnReset" name="btn1" type="button" onclick="formReSet('add_table',node_id)" value="重置" />	
-			<input id="btnCancel" name="btn1" type="button" onclick="top.CloseModalWindow();" value="取消" />	
+			<input id="btnCancel" name="btn1" type="button" onclick="CloseModalWindow();" value="取消" />
 		</td>
 	</tr>
 </table>

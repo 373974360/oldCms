@@ -136,12 +136,12 @@ function addQueryConf(){
 	
 	if(QueryConfRPC.insertQueryConf(bean))
 	{
-		top.msgAlert("业务"+WCMLang.Add_success);
+		msgAlert("业务"+WCMLang.Add_success);
 		window.location.href = "query_conf.jsp";
 	}
 	else
 	{
-		top.msgWargin("业务"+WCMLang.Add_fail);
+		msgWargin("业务"+WCMLang.Add_fail);
 	}
 }
 
@@ -155,10 +155,10 @@ function deleteQueryConf()
 	var selectIDS = table.getSelecteCheckboxValue("conf_id");
 	if(QueryConfRPC.deleteQueryConf(selectIDS))
 	{
-		top.msgAlert("业务删除成功！");
+		msgAlert("业务删除成功！");
 		reloadList();
 	}else
 	{
-		top.msgWargin("业务删除失败！");
+		msgWargin("业务删除失败！");
 	}
 }

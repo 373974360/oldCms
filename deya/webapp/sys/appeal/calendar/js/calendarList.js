@@ -108,26 +108,26 @@ function showTurnPage(){
 	var selectIDS = table.getAllCheckboxValue("ca_id");
 	if(CalendarRPC.saveCalendarSort(selectIDS))
 	{
-		top.msgAlert(WCMLang.Sort_success);
+		msgAlert(WCMLang.Sort_success);
 	}else
 	{
-		top.msgWargin(WCMLang.Sort_fail);
+		msgWargin(WCMLang.Sort_fail);
 	}
 }*/
 // 添加节假日信息
 function addCalendarRecord()
 {
-	top.OpenModalWindow("新建节假日信息","/sys/appeal/calendar/calendar_add.jsp?type=add",450,239);
+	OpenModalWindow("新建节假日信息","/sys/appeal/calendar/calendar_add.jsp?type=add",450,239);
 }
 function openUpdateCalendarPage(ca_id)
 {
-	top.OpenModalWindow("维护节假日信息","/sys/appeal/calendar/calendar_add.jsp?type=update&ca_id="+ca_id,450,239);
+	OpenModalWindow("维护节假日信息","/sys/appeal/calendar/calendar_add.jsp?type=update&ca_id="+ca_id,450,239);
 }
 // 修改节假日信息
 function updateRecord1()
 {  
 	var ca_id = table.getSelecteCheckboxValue("ca_id");
-	top.OpenModalWindow("修改节假日信息","/sys/appeal/calendar/calendar_add.jsp?type=update&ca_id="+ca_id,450,239);
+	OpenModalWindow("修改节假日信息","/sys/appeal/calendar/calendar_add.jsp?type=update&ca_id="+ca_id,450,239);
 }
 
 // 删除节假日信息
@@ -138,12 +138,12 @@ function deleteCalendar()
 	mp.put("ca_id", ca_id);
 	if(CalendarRPC.deleteCalendar(mp))
 	{
-		top.msgAlert("节假日信息"+WCMLang.Delete_success);
+		msgAlert("节假日信息"+WCMLang.Delete_success);
 		reloadCalendarList();
 	}
 	else
 	{
-		top.msgWargin("节假日信息"+WCMLang.Delete_fail);
+		msgWargin("节假日信息"+WCMLang.Delete_fail);
 	}
 }
 //添加节假日信息-保存事件
@@ -158,18 +158,18 @@ function addCalendar()
 
 	if(judgeDate(addBean.end_dtime,addBean.start_dtime))
 	{
-		top.msgWargin("结束时间不能小于开始时间，请重新设置结束时间");
+		msgWargin("结束时间不能小于开始时间，请重新设置结束时间");
 		return;
 	}
 
 	addBean.ca_id = CalendarRPC.getInsertID();
 	if(CalendarRPC.insertCalendar(addBean))
 	{
-		top.msgAlert("节假日信息"+WCMLang.Add_success);
-		top.getCurrentFrameObj().reloadCalendarList();
-		top.CloseModalWindow();
+		msgAlert("节假日信息"+WCMLang.Add_success);
+		getCurrentFrameObj().reloadCalendarList();
+		CloseModalWindow();
 	}else{
-		top.msgWargin("节假日信息"+WCMLang.Add_fail);
+		msgWargin("节假日信息"+WCMLang.Add_fail);
 		return;
 	}
 }
@@ -184,19 +184,19 @@ function updateCalendar()
 	}	
 	if(judgeDate(updateBean.end_dtime,updateBean.start_dtime))
 	{
-		top.msgWargin("结束时间不能小于开始时间，请重新设置结束时间");
+		msgWargin("结束时间不能小于开始时间，请重新设置结束时间");
 		return;
 	}
 	updateBean.ca_id = ca_id;
 	if(CalendarRPC.updateCalendar(updateBean))
 	{
-		top.msgAlert("节假日信息"+WCMLang.Set_success);
-		top.getCurrentFrameObj().reloadCalendarList();
-		top.CloseModalWindow();
+		msgAlert("节假日信息"+WCMLang.Set_success);
+		getCurrentFrameObj().reloadCalendarList();
+		CloseModalWindow();
 	}
 	else
 	{
-		top.msgWargin("节假日信息"+WCMLang.Set_fail);
+		msgWargin("节假日信息"+WCMLang.Set_fail);
 		return;
 	}
 }
@@ -207,10 +207,10 @@ function updateCalendar()
 	
 	if(CalendarRPC.saveCalendarSort(selectIDS))
 	{
-		top.msgAlert(WCMLang.Sort_success);
+		msgAlert(WCMLang.Sort_success);
 		reloadCalendarList();	
 	}else
 	{
-		top.msgWargin(WCMLang.Sort_fail);
+		msgWargin(WCMLang.Sort_fail);
 	}
 }*/

@@ -177,7 +177,7 @@ function addCategory()
 
 	if(CategoryRPC.categoryIsExist(parent_id,$("#cat_ename").val(),app_id,site_id))
 	{
-		top.msgWargin("该英文名称已存在此目录下，请更换英文名称");
+		msgWargin("该英文名称已存在此目录下，请更换英文名称");
 		return;
 	}
 
@@ -207,22 +207,22 @@ function addCategory()
 			insertToInfoCategory(bean.id);
 		insertCategoryReleUser(bean.id);
 
-		top.msgAlert("目录信息"+WCMLang.Add_success);	
+		msgAlert("目录信息"+WCMLang.Add_success);
 		try{			
 			if(cat_type == "0")
 			{
-				top.getCurrentFrameObj(top_index).changeCategoryListTable(parent_id);
-				top.getCurrentFrameObj(top_index).insertCategoryTree(bean.cat_id,bean.cat_cname);
+				getCurrentFrameObj(top_index).changeCategoryListTable(parent_id);
+				getCurrentFrameObj(top_index).insertCategoryTree(bean.cat_id,bean.cat_cname);
 			}else
-				top.getCurrentFrameObj(top_index).reloadZTList();
+				getCurrentFrameObj(top_index).reloadZTList();
 		}catch(e){
 			
 		}
-		top.tab_colseOnclick(top.curTabIndex);
+		tab_colseOnclick(curTabIndex);
 	}
 	else
 	{
-		top.msgWargin("目录信息"+WCMLang.Add_fail);
+		msgWargin("目录信息"+WCMLang.Add_fail);
 	}
 }
 
@@ -369,7 +369,7 @@ function updateCategory()
 	{
 		if(CategoryRPC.categoryIsExist(parent_id,bean.cat_ename,app_id,site_id))
 		{
-			top.msgWargin("该英文名称已存在此目录下，请更换英文名称");
+			msgWargin("该英文名称已存在此目录下，请更换英文名称");
 			return;
 		}
 	}
@@ -386,21 +386,21 @@ function updateCategory()
 			insertToInfoCategory(cat_id);
 		insertCategoryReleUser(cat_id);
 
-		top.msgAlert("目录信息"+WCMLang.Add_success);	
+		msgAlert("目录信息"+WCMLang.Add_success);
 		try{
 			if(cat_type == "0")
 			{
-				top.getCurrentFrameObj(top_index).changeCategoryListTable(parent_id);
+				getCurrentFrameObj(top_index).changeCategoryListTable(parent_id);
 
-				top.getCurrentFrameObj(top_index).updateCategoryTree(cat_id,bean.cat_cname);
+				getCurrentFrameObj(top_index).updateCategoryTree(cat_id,bean.cat_cname);
 			}else
-				top.getCurrentFrameObj(top_index).reloadZTList();
+				getCurrentFrameObj(top_index).reloadZTList();
 		}catch(e){}
-		top.tab_colseOnclick(top.curTabIndex);
+		tab_colseOnclick(curTabIndex);
 	}
 	else
 	{
-		top.msgWargin("目录信息"+WCMLang.Add_fail);
+		msgWargin("目录信息"+WCMLang.Add_fail);
 	}
 }
 
@@ -830,7 +830,7 @@ function choose_regu()
 		var temp_ids = getLeafTreeNode("leftMenuTree2_regu");
 		if(temp_ids == "|")
 		{
-			top.msgWargin("请选择信息公开目录");
+			msgWargin("请选择信息公开目录");
 			return;
 		}
 		cat_ids = temp_ids.split("|")[0];
@@ -844,7 +844,7 @@ function choose_regu()
 		var temp_ids = getLeafTreeNode("leftMenuTree_regu");
 		if(temp_ids == "|")
 		{
-			top.msgWargin("请选择共享目录");
+			msgWargin("请选择共享目录");
 			return;
 		}
 		cat_ids = temp_ids.split("|")[0];
@@ -1541,7 +1541,7 @@ function returnCategoryReguList(c_id)
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="" value="保存" />	
 			<input id="userAddReset" name="btn1" type="button" onclick="window.location.reload()" value="重置" />	
-			<input id="userAddCancel" name="btn1" type="button" onclick="top.tab_colseOnclick(top.curTabIndex);" value="取消" />	
+			<input id="userAddCancel" name="btn1" type="button" onclick="tab_colseOnclick(curTabIndex);" value="取消" />
 		</td>
 	</tr>
 </table>

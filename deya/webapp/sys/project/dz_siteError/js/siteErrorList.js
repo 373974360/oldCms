@@ -160,7 +160,7 @@ function openUpdateSiteErrorPage(id) {
     } else {
         c_id = table.getSelecteCheckboxValue("id");
     }
-    top.addTab(true,"/sys/project/dz_siteError/viewSiteError.jsp?id=" + c_id +"&topnum="+top.curTabIndex,"站点纠错信息");
+    addTab(true,"/sys/project/dz_siteError/viewSiteError.jsp?id=" + c_id +"&topnum="+curTabIndex,"站点纠错信息");
 }
 
 
@@ -170,11 +170,11 @@ function deleteSiteError() {
     var m = new Map();
     m.put("id", selectIDS);
     if (SiteErrorRPC.deleteSiteError(m)) {
-        top.msgAlert("站点纠错信息" + WCMLang.Delete_success);
+        msgAlert("站点纠错信息" + WCMLang.Delete_success);
         reloadSiteErrorList();
     }
     else {
-        top.msgWargin("站点纠错信息" + WCMLang.Delete_fail);
+        msgWargin("站点纠错信息" + WCMLang.Delete_fail);
     }
 }
 
@@ -209,16 +209,16 @@ function updateSiteErrorData() {
         bool = SiteErrorRPC.insertSiteError(bean);
     }
     if (bool) {
-        top.msgAlert("站点纠错信息保存成功");
-        top.getCurrentFrameObj(topnum).reloadSiteErrorList();
-        top.CloseModalWindow();
+        msgAlert("站点纠错信息保存成功");
+        getCurrentFrameObj(topnum).reloadSiteErrorList();
+        CloseModalWindow();
     } else {
-        top.msgWargin("站点纠错信息保存失败，请重新操作");
+        msgWargin("站点纠错信息保存失败，请重新操作");
     }
 }
 
 function addInfo() {
-    top.addTab(true,"/sys/project/dz_siteError/viewSiteError.jsp?topnum="+top.curTabIndex,"站点纠错信息");
+    addTab(true,"/sys/project/dz_siteError/viewSiteError.jsp?topnum="+curTabIndex,"站点纠错信息");
 }
 
 function savePublishFlag(publish_flag) {
@@ -228,9 +228,9 @@ function savePublishFlag(publish_flag) {
     m.put("id", selectIDS);
 
     if (SiteErrorRPC.publishSiteError(m)) {
-        top.msgAlert("站点纠错信息状态设置成功");
+        msgAlert("站点纠错信息状态设置成功");
         reloadSiteErrorList();
     } else {
-        top.msgWargin("站点纠错信息状态设置失败，请重新操作");
+        msgWargin("站点纠错信息状态设置失败，请重新操作");
     }
 }

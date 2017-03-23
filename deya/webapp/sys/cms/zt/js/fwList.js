@@ -76,7 +76,7 @@ function showList(){
 	table.getCol("cat_handl").each(function(i){
 		if(i>0)
 		{
-			$(this).html('<a href="javascript:top.addTab(true,\'/sys/cms/category/categoryList.jsp?cat_type=2&site_id='+site_id+'&app_id='+app_id+'&cat_id='+beanList.get(i-1).cat_id+'\',\'目录管理\')">目录管理</a>');	
+			$(this).html('<a href="javascript:addTab(true,\'/sys/cms/category/categoryList.jsp?cat_type=2&site_id='+site_id+'&app_id='+app_id+'&cat_id='+beanList.get(i-1).cat_id+'\',\'目录管理\')">目录管理</a>');
 		}
 	});
 	table.getCol("is_archive").each(function(i){
@@ -111,7 +111,7 @@ function showTurnPage(){
 
 function openAddCategoryPage()
 {
-	top.addTab(true,"/sys/cms/category/category_add.jsp?site_id="+site_id+"&app_id="+app_id+"&top_index="+top.curTabIndex+"&&parentID=0&cat_type=2","维护目录");
+	addTab(true,"/sys/cms/category/category_add.jsp?site_id="+site_id+"&app_id="+app_id+"&top_index="+curTabIndex+"&&parentID=0&cat_type=2","维护目录");
 }
 
 function openUpdateCategoryPage(cid)
@@ -121,7 +121,7 @@ function openUpdateCategoryPage(cid)
 		id = cid;
 	else
 		id = table.getSelecteCheckboxValue("id");
-	top.addTab(true,"/sys/cms/category/category_add.jsp?site_id="+site_id+"&app_id="+app_id+"&top_index="+top.curTabIndex+"&id="+id+"&cat_type=2","维护目录");
+	addTab(true,"/sys/cms/category/category_add.jsp?site_id="+site_id+"&app_id="+app_id+"&top_index="+curTabIndex+"&id="+id+"&cat_type=2","维护目录");
 }
 
 function deleteCategory()
@@ -130,11 +130,11 @@ function deleteCategory()
 
 	if(CategoryRPC.deleteCategory(selectIDS,site_id,app_id))
 	{
-		top.msgAlert("目录信息"+WCMLang.Delete_success);
+		msgAlert("目录信息"+WCMLang.Delete_success);
 		reloadZTList();
 	}else
 	{
-		top.msgWargin("目录信息"+WCMLang.Delete_fail);
+		msgWargin("目录信息"+WCMLang.Delete_fail);
 	}
 }
 
@@ -144,7 +144,7 @@ function searchHandl(obj)
 	var con_value = $(obj).parent().find("#searchkey").val();
 	if(con_value.trim() == "" ||  con_value == null)
 	{
-		top.msgAlert(WCMLang.Search_empty);
+		msgAlert(WCMLang.Search_empty);
 		return;
 	}
 	table.con_name = $(obj).parent().find("#searchFields").val(); 
@@ -160,10 +160,10 @@ function updateArchiveStatus(flag)
 
 	if(CategoryRPC.updateCategoryArchiveStatus(selectIDS,flag))
 	{
-		top.msgAlert(WCMLang.ArchiveStatus_success);
+		msgAlert(WCMLang.ArchiveStatus_success);
 		reloadZTList();
 	}else
 	{
-		top.msgWargin(WCMLang.ArchiveStatus_fail);
+		msgWargin(WCMLang.ArchiveStatus_fail);
 	}
 }

@@ -27,7 +27,7 @@
 	}else{
 		String cids[] = cid.split(",");
 		for(int j=0; j<cids.length; j++){
-			//System.out.println(cids[j]+"========="+m);
+			System.out.println(cids[j]+"========="+m);
 			List<WareBean> list = WareManager.getWareList(cids[j],m);
 			for(int i=0; i<list.size(); i++){
 				WareBean ware = list.get(i);

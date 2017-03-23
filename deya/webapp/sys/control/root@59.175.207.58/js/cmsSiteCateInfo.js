@@ -11,8 +11,8 @@ var chartJsonData = ""; // bar图时的json字符串
 function showList(){
 	
 	//得到父页面中设置的参数 --- start
-	var start_day = top.getCurrentFrameObj().$("#start_day").val();
-	var end_day = top.getCurrentFrameObj().$("#end_day").val();
+	var start_day = getCurrentFrameObj().$("#start_day").val();
+	var end_day = getCurrentFrameObj().$("#end_day").val();
 	
 	var mp = new Map();	
 	mp.put("start_day",start_day);

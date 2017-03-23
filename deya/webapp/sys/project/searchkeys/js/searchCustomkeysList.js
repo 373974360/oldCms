@@ -59,7 +59,7 @@ function showList(){
 	}
 	updateType = false;
 	setTimeout(function(){
-		top.jsonrpc.SearchCustomKeyRPC.getSearchCustomKeysList(showListResult,con_m);//第一个参数为站点ID，暂时默认为空	
+		jsonrpc.SearchCustomKeyRPC.getSearchCustomKeysList(showListResult,con_m);//第一个参数为站点ID，暂时默认为空
 	},12);
 }
 
@@ -87,7 +87,7 @@ function showListResult(result,e){
 		//alert(0);
 		if(i>0)
 		{
-			$(this).html('<a href="javascript:openUpdatePage2('+beanList.get(i-1).id+')">修改</a>'+"&nbsp;&nbsp;&nbsp;"+'<a href="javascript:top.msgConfirm(\'确定要进行该操作吗？\',\'deleteData2('+beanList.get(i-1).id+')\');">删除</a>');			
+			$(this).html('<a href="javascript:openUpdatePage2('+beanList.get(i-1).id+')">修改</a>'+"&nbsp;&nbsp;&nbsp;"+'<a href="javascript:msgConfirm(\'确定要进行该操作吗？\',\'deleteData2('+beanList.get(i-1).id+')\');">删除</a>');
 		} 
 	});
 	
@@ -102,7 +102,7 @@ function showListResult(result,e){
 		//alert(0);
 		if(i>0)
 		{
-			$(this).html("&nbsp;&nbsp;&nbsp;"+'<a href="javascript:top.msgConfirm(\'确定要进行该操作吗？\',\'deleteData2('+beanList.get(i-1).id+')\');">删除</a>');			
+			$(this).html("&nbsp;&nbsp;&nbsp;"+'<a href="javascript:msgConfirm(\'确定要进行该操作吗？\',\'deleteData2('+beanList.get(i-1).id+')\');">删除</a>');
 		} 
 	});
 	
@@ -111,7 +111,7 @@ function showListResult(result,e){
 
 function showTurnPage(){
 	setTimeout(function(){
-		top.jsonrpc.SearchCustomKeyRPC.getSearchCustomKeysListCount(showTurnPageResult,con_m);
+		jsonrpc.SearchCustomKeyRPC.getSearchCustomKeysListCount(showTurnPageResult,con_m);
 	},12);
 }
 
@@ -126,7 +126,7 @@ function showTurnPageResult(result,e){
 //添加会员分类信息
 function addInfoPage()
 {
-	top.OpenModalWindow("新建关键词","/sys/project/searchkeys/searchkeyList_add.jsp?site_id="+site_id,460,245);
+	OpenModalWindow("新建关键词","/sys/project/searchkeys/searchkeyList_add.jsp?site_id="+site_id,460,245);
 }
 
 
@@ -142,26 +142,26 @@ function addData(){
 	//$("#form_table").autoBind(DateBean);
 	bean.title = $("#title").val();
 	bean.site_id = site_id;
-	top.jsonrpc.SearchKeyRPC.addSearchKey(addDataResult,bean);	
+	jsonrpc.SearchKeyRPC.addSearchKey(addDataResult,bean);
 }  
 
 function addDataResult(result,e){
     if(e != null){return;}
 	if(result){
-		top.msgAlert("信息添加成功！");			
-		top.getCurrentFrameObj().reloadList();
-		top.CloseModalWindow();
+		msgAlert("信息添加成功！");
+		getCurrentFrameObj().reloadList();
+		CloseModalWindow();
 	}else{
-		top.msgWargin("信息添加失败！");
+		msgWargin("信息添加失败！");
 	}
 }
 
 
 //修改
 function openUpdatePage2(selectIDS){
-	//top.addTab(true,'/sys/searchkeys/searchkeyList_add.jsp?id='+selectIDS+'&tab_index='+top.curTabIndex,'修改');
-	top.OpenModalWindow("修改关键词","/sys/project/searchkeys/searchkeyList_add.jsp?site_id="+site_id+"&id="+selectIDS,460,245);
-	//top.OpenModalWindow("修改","/sys/nongye/member/member_card_add.jsp?card_id="+selectIDS,900,640);
+	//addTab(true,'/sys/searchkeys/searchkeyList_add.jsp?id='+selectIDS+'&tab_index='+curTabIndex,'修改');
+	OpenModalWindow("修改关键词","/sys/project/searchkeys/searchkeyList_add.jsp?site_id="+site_id+"&id="+selectIDS,460,245);
+	//OpenModalWindow("修改","/sys/nongye/member/member_card_add.jsp?card_id="+selectIDS,900,640);
 }
 
 
@@ -174,17 +174,17 @@ function updateData(){
 	bean.title = $("#title").val();
 	bean.site_id = site_id;
 	
-	top.jsonrpc.SearchKeyRPC.updateSearchKeyById(updateDataResult,bean);
+	jsonrpc.SearchKeyRPC.updateSearchKeyById(updateDataResult,bean);
 }
 
 function updateDataResult(result,e){
     if(e != null){return;}
 	if(result){  
-		top.msgAlert("信息修改成功!");			
-		top.getCurrentFrameObj().reloadList();
-		top.CloseModalWindow();
+		msgAlert("信息修改成功!");
+		getCurrentFrameObj().reloadList();
+		CloseModalWindow();
 	}else{  
-		top.msgWargin("信息修改失败！");
+		msgWargin("信息修改失败！");
 	}
 }
 
@@ -195,14 +195,14 @@ function saveModelSort()
 	var model_ids = table.getAllCheckboxValue("id");
 	if(model_ids != "" && model_ids != null)
 	{
-		if(top.jsonrpc.SearchKeyRPC.sortSearchKeys(model_ids))
+		if(jsonrpc.SearchKeyRPC.sortSearchKeys(model_ids))
 		{
-			top.msgAlert(WCMLang.Sort_success);
+			msgAlert(WCMLang.Sort_success);
 			reloadList();
 		}
 		else
 		{
-			top.msgWargin(WCMLang.Sort_fail);
+			msgWargin(WCMLang.Sort_fail);
 			return;
 		}
 	}
@@ -220,7 +220,7 @@ function deleteData()
 function deleteData2(m_id)
 {
 	//var selectIDS = table.getSelecteCheckboxValue("dengji_id");
-	top.jsonrpc.SearchCustomKeyRPC.deleteSearchCustomKeys(deleteDataResult,m_id);
+	jsonrpc.SearchCustomKeyRPC.deleteSearchCustomKeys(deleteDataResult,m_id);
 }
 
 
@@ -228,10 +228,10 @@ function deleteDataResult(result,e){
     if(e != null){return;}
     if(result)
 	{
-		top.msgAlert("信息删除成功");
+		msgAlert("信息删除成功");
 		reloadList();
 	}else
 	{
-		top.msgWargin("信息删除失败");
+		msgWargin("信息删除失败");
 	}
 }

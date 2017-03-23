@@ -284,7 +284,7 @@ function doAdd(type){
 		   if(field_maxnum*1<default_valueText.length){
 			        var htmlError = "默认值超出最大范围！"
 	   		        htmlError = "<li><font color='red'>"+htmlError+"</font>";
-			        top.msgWargin(htmlError); 
+			        msgWargin(htmlError);
 	   				return;
 		   }
 	   }
@@ -317,7 +317,7 @@ function doAdd(type){
 		   if(field_maxnumArea*1<default_valueArea.length){
 			        var htmlError = "默认值超出最大范围！"
 	   		        htmlError = "<li><font color='red'>"+htmlError+"</font>";
-			        top.msgWargin(htmlError);
+			        msgWargin(htmlError);
 	   				return;
 		   }
 	   }
@@ -354,7 +354,7 @@ function doAdd(type){
 		   if(field_maxnumAreaHtml*1<default_valueAreaHtml.length){
 			        var htmlError = "默认值超出最大范围！"
 	   		        htmlError = "<li><font color='red'>"+htmlError+"</font>";
-			        top.msgWargin(htmlError);
+			        msgWargin(htmlError);
 	   				return;
 		   }
 	   }
@@ -401,7 +401,7 @@ function doAdd(type){
 			}
 		}else if(data_type=='2'){//数据字典类型
 		    if(data_type_id=='-1'){
-		    	top.msgWargin("请选择数据分类");
+		    	msgWargin("请选择数据分类");
                 return false;
 			}
 			
@@ -440,7 +440,7 @@ function doAdd(type){
     	   if(max_num*1<min_num*1){
     		    var htmlError = "最大值不能小于最小值！"
    		        htmlError = "<li><font color='red'>"+htmlError+"</font>";
-    		    top.msgWargin(htmlError);
+    		    msgWargin(htmlError);
    				return; 
     	   }
        }  
@@ -448,7 +448,7 @@ function doAdd(type){
 		   if(default_valueNum*1<min_num*1 || default_valueNum*1>max_num*1){
 		   	    var htmlError = "数字默认值超出范围！"
 		        htmlError = "<li><font color='red'>"+htmlError+"</font>";
-		   	    top.msgWargin(htmlError);
+		   	    msgWargin(htmlError);
 				return; 
 		   }
 	   }
@@ -516,7 +516,7 @@ function doAdd(type){
 				var htmlError = "一个内容模型中只能存在一个文件类型的字段！"
 		        htmlError = "<li><font color='red'>"+htmlError+"</font>";
 		        //$("#errorSpan").html(htmlError);
-				parent.alertWar(htmlError);
+				alertWar(htmlError);
 				return;   
 			}
 		}
@@ -529,18 +529,18 @@ function doAdd(type){
 			var htmlError = "【字段名称】已经存在！"
 	        htmlError = "<li><font color='red'>"+htmlError+"</font>";
 	        //$("#errorSpan").html(htmlError);
-			top.msgWargin(htmlError);
+			msgWargin(htmlError);
 			return; 
 		}else{
 			
-			//top.msgWargin("新增成功");
+			//msgWargin("新增成功");
 			//return;
 			 if(jsonrpc.FieldsRPC.addFields(bean)){
-				 top.msgAlert("新增成功");
-				 top.getCurrentFrameObj(tab_index).reloadList(); 
-				 top.tab_colseOnclick(top.curTabIndex);
+				 msgAlert("新增成功");
+				 getCurrentFrameObj(tab_index).reloadList();
+				 tab_colseOnclick(curTabIndex);
 			 }else{
-				 top.msgAlert("新增失败");	
+				 msgAlert("新增失败");
 			 }
 		}
    }else if(type=='mod'){
@@ -549,11 +549,11 @@ function doAdd(type){
 	    //alert(id);
    	    //alert(bean.id);
    	    if(jsonrpc.FieldsRPC.updateFieldsById(bean)){
-   	    		 top.msgAlert("修改成功");
-   	    		 top.getCurrentFrameObj(tab_index).reloadList(); 
-   	    		 top.tab_colseOnclick(top.curTabIndex);
+   	    		 msgAlert("修改成功");
+   	    		 getCurrentFrameObj(tab_index).reloadList();
+   	    		 tab_colseOnclick(curTabIndex);
 			 }else{
-				 top.msgAlert("修改失败");	
+				 msgAlert("修改失败");
 		}
    }
 }

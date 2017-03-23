@@ -25,7 +25,7 @@ function showList(){
 	mp.put("end_day",b_end_day);
     mp.put(v_type,"bycat");
 
-	beanList = top.jsonrpc.CmsCountSourceRPC.getInfoCountListBySource(mp);
+	beanList = jsonrpc.CmsCountSourceRPC.getInfoCountListBySource(mp);
 	beanList = List.toJSList(beanList);
 	
 	createTable(beanList);

@@ -107,15 +107,15 @@ function updateCate()
 	
 	if(cat_ids == "")
 	{
-		top.msgWargin("请选择目录");
+		msgWargin("请选择目录");
 		return;
 	}
 
 	if(CategoryRPC.batchUpdateCategory(map,model_list,cat_ids,site_id))
 	{
-		top.msgAlert("目录信息"+WCMLang.Add_success);
+		msgAlert("目录信息"+WCMLang.Add_success);
 	}else
-		top.msgWargin("目录信息"+WCMLang.Add_fail);
+		msgWargin("目录信息"+WCMLang.Add_fail);
 }
 </script>
 </head>

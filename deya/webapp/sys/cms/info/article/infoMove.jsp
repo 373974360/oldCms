@@ -70,7 +70,7 @@ function related_ok(){
 		var children = $("#leftMenuTree").tree('getChildren',node.target);
 		if(children != null && children != "")
 		{
-			top.msgAlert("请选择最末级栏目");		
+			msgAlert("请选择最末级栏目");
 			return;
 		}
 		else
@@ -86,18 +86,18 @@ function related_ok(){
 	*/
 
 	if(cId == "" || cId == 0){
-		top.msgAlert("请选择转移的目标栏目");		
+		msgAlert("请选择转移的目标栏目");
 		return;
 	}
 
-	top.getCurrentFrameObj().moveInfoHandl(cId);	
-	top.msgAlert("转移成功");
-	top.getCurrentFrameObj().reloadInfoDataList();
-	top.CloseModalWindow();
+	getCurrentFrameObj().moveInfoHandl(cId);
+	msgAlert("转移成功");
+	getCurrentFrameObj().reloadInfoDataList();
+	CloseModalWindow();
 }
 
 function related_cancel(){
-	top.CloseModalWindow();
+	CloseModalWindow();
 }
 
 

@@ -64,7 +64,7 @@ function showList(){
 		if(i>0)
 		{			
 			$(this).css({"text-align":"left"});	
-			$(this).html('<a href="javascript:top.OpenModalWindow(\'修改注册机构\',\'/sys/appeal/cpDept/cpDept_add.jsp?dept_id='+beanList.get(i-1).dept_id+'\',450,190);">'+beanList.get(i-1).dept_name+'</a>');
+			$(this).html('<a href="javascript:OpenModalWindow(\'修改注册机构\',\'/sys/appeal/cpDept/cpDept_add.jsp?dept_id='+beanList.get(i-1).dept_id+'\',450,190);">'+beanList.get(i-1).dept_name+'</a>');
 		}
 	});	
 	
@@ -88,14 +88,14 @@ function showTurnPage(){
 //打开添加窗口
 function openAddCpDeptPage()
 {
-	top.OpenModalWindow("注册新机构","/sys/appeal/cpDept/cpDept_add.jsp?p_id="+dept_id,450,190);
+	OpenModalWindow("注册新机构","/sys/appeal/cpDept/cpDept_add.jsp?p_id="+dept_id,450,190);
 }
 
 //打开修改窗口
 function openUpdateCpDeptPage()
 {
 	var selectIDS = table.getSelecteCheckboxValue("dept_id");
-	top.OpenModalWindow("修改注册机构","/sys/appeal/cpDept/cpDept_add.jsp?dept_id="+selectIDS,450,190);
+	OpenModalWindow("修改注册机构","/sys/appeal/cpDept/cpDept_add.jsp?dept_id="+selectIDS,450,190);
 }
 
 //添加注册机构
@@ -112,14 +112,14 @@ function addCpDept()
 	bean.dept_id = 0;
 	if(CpDeptRPC.insertCpdept(bean))
 	{
-		top.msgAlert("注册机构信息"+WCMLang.Add_success);
-		top.CloseModalWindow();
-		top.getCurrentFrameObj().reloadCpDeptList();
-		top.getCurrentFrameObj().showCpDeptTree();
+		msgAlert("注册机构信息"+WCMLang.Add_success);
+		CloseModalWindow();
+		getCurrentFrameObj().reloadCpDeptList();
+		getCurrentFrameObj().showCpDeptTree();
 	}
 	else
 	{
-		top.msgWargin("注册机构信息"+WCMLang.Add_fail);
+		msgWargin("注册机构信息"+WCMLang.Add_fail);
 	}
 }
 //修改注册机构
@@ -135,14 +135,14 @@ function updateCpDept()
 
 	if(CpDeptRPC.updateCpDept(bean))
 	{
-		top.msgAlert("注册机构信息"+WCMLang.Add_success);	
-		top.CloseModalWindow();
-		top.getCurrentFrameObj().reloadCpDeptList();
-		top.getCurrentFrameObj().showCpDeptTree();
+		msgAlert("注册机构信息"+WCMLang.Add_success);
+		CloseModalWindow();
+		getCurrentFrameObj().reloadCpDeptList();
+		getCurrentFrameObj().showCpDeptTree();
 	}
 	else
 	{
-		top.msgWargin("注册机构信息"+WCMLang.Add_fail);
+		msgWargin("注册机构信息"+WCMLang.Add_fail);
 	}
 }
 
@@ -152,13 +152,13 @@ function deleteCpDept()
 	var selectIDS = table.getSelecteCheckboxValue("dept_id");
 	if(CpDeptRPC.deleteCpdept(selectIDS))
 	{
-		top.msgAlert("注册机构信息"+WCMLang.Delete_success);
-		top.CloseModalWindow();
-		top.getCurrentFrameObj().reloadCpDeptList();
-		top.getCurrentFrameObj().showCpDeptTree();
+		msgAlert("注册机构信息"+WCMLang.Delete_success);
+		CloseModalWindow();
+		getCurrentFrameObj().reloadCpDeptList();
+		getCurrentFrameObj().showCpDeptTree();
 	}else
 	{
-		top.msgWargin("注册机构信息"+WCMLang.Delete_fail);
+		msgWargin("注册机构信息"+WCMLang.Delete_fail);
 	}
 }
 
@@ -170,14 +170,14 @@ function saveDeptSort()
 	{
 		if(CpDeptRPC.saveDeptSort(dept_ids))
 		{
-			top.msgAlert(WCMLang.Sort_success);
-			top.getCurrentFrameObj().showCpDeptTree();
-			top.treeNodeSelected(dept_id);
+			msgAlert(WCMLang.Sort_success);
+			getCurrentFrameObj().showCpDeptTree();
+			treeNodeSelected(dept_id);
 			reloadCpDeptList();
 		}
 		else
 		{
-			top.msgWargin(WCMLang.Sort_fail);
+			msgWargin(WCMLang.Sort_fail);
 			return;
 		}
 	}

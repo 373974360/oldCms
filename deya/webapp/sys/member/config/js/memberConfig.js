@@ -18,16 +18,16 @@ function savaConfig()
 	$("#config_table").autoBind(saveBean);
 	saveBean.config_id = defaultBean.config_id;
 	
-	saveBean.reg_pro = KE.html("reg_pro");
-	saveBean.close_pro = KE.html("close_pro");
+	//saveBean.reg_pro = KE.html("reg_pro");
+	//saveBean.close_pro = KE.html("close_pro");
 
 	if(MemberManRPC.updateMemberConfigBean(saveBean))
 	{
 		init();
-		top.msgAlert("注册配置"+WCMLang.Add_success);
+		msgAlert("注册配置"+WCMLang.Add_success);
 	}
 	else
 	{
-		top.msgWargin("注册配置"+WCMLang.Add_fail);
+		msgWargin("注册配置"+WCMLang.Add_fail);
 	}
 }

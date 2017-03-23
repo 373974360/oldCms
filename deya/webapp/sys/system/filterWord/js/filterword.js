@@ -75,7 +75,7 @@ function showList(){
 		if(i>0)
 		{			
 			$(this).css({"text-align":"left"});	
-			$(this).html('<a href="javascript:top.OpenModalWindow(\'维护过滤词\',\'/sys/system/filterWord/filterWord_add.jsp?fw_id=' + beanList.get(i-1).filterword_id + '\',450,190);">'+beanList.get(i-1).pattern+'</a>');
+			$(this).html('<a href="javascript:OpenModalWindow(\'维护过滤词\',\'/sys/system/filterWord/filterWord_add.jsp?fw_id=' + beanList.get(i-1).filterword_id + '\',450,190);">'+beanList.get(i-1).pattern+'</a>');
 		}
 	});	
 	table.getCol("replacement").each(function(i){
@@ -93,20 +93,20 @@ function showTurnPage(){
 //打开查看窗口
 function openViewFilterWordPage(fw_id)
 {	
-	top.OpenModalWindow("维护过滤词","/sys/system/filterWord/filterWord_add.jsp?fw_id="+fw_id,450,190);	
+	OpenModalWindow("维护过滤词","/sys/system/filterWord/filterWord_add.jsp?fw_id="+fw_id,450,190);
 }
 
 //打开添加窗口
 function openAddFilterWordPage(app_id,site_id)
 {
-	top.OpenModalWindow("维护过滤词","/sys/system/filterWord/filterWord_add.jsp?app_id="+app_id+"&site_id="+site_id,450,190);	
+	OpenModalWindow("维护过滤词","/sys/system/filterWord/filterWord_add.jsp?app_id="+app_id+"&site_id="+site_id,450,190);
 }
 
 //打开修改窗口
 function openUpdateFilterWordPage()
 {
 	var selectIDS = table.getSelecteCheckboxValue("filterword_id");
-	top.OpenModalWindow("维护过滤词","/sys/system/filterWord/filterWord_add.jsp?fw_id="+selectIDS,450,190);
+	OpenModalWindow("维护过滤词","/sys/system/filterWord/filterWord_add.jsp?fw_id="+selectIDS,450,190);
 }
 
 //添加过滤词
@@ -123,13 +123,13 @@ function addFilterWord()
 	bean.filterword_id=0;
 	if(FilterWordRPC.insertFilterWord(bean))
 	{
-		top.msgAlert("过滤词信息"+WCMLang.Add_success);	
-		top.CloseModalWindow();
-		top.getCurrentFrameObj().show()
+		msgAlert("过滤词信息"+WCMLang.Add_success);
+		CloseModalWindow();
+		getCurrentFrameObj().show()
 	}
 	else
 	{
-		top.msgWargin("过滤词信息"+WCMLang.Add_fail);
+		msgWargin("过滤词信息"+WCMLang.Add_fail);
 	}
 }
 //修改过滤词
@@ -145,13 +145,13 @@ function updateFilterWord()
 
 	if(FilterWordRPC.updateFilterWord(bean))
 	{
-		top.msgAlert("过滤词信息"+WCMLang.Add_success);			
-		top.CloseModalWindow();
-		top.getCurrentFrameObj().show()
+		msgAlert("过滤词信息"+WCMLang.Add_success);
+		CloseModalWindow();
+		getCurrentFrameObj().show()
 	}
 	else
 	{
-		top.msgWargin("过滤词信息"+WCMLang.Add_fail);
+		msgWargin("过滤词信息"+WCMLang.Add_fail);
 	}
 }
 
@@ -161,11 +161,11 @@ function deleteFilterWord()
 	var selectIDS = table.getSelecteCheckboxValue("filterword_id");
 	if(FilterWordRPC.deleteFilterWord(selectIDS))
 	{
-		top.msgAlert("过滤词信息"+WCMLang.Delete_success);
-		top.getCurrentFrameObj().show()
+		msgAlert("过滤词信息"+WCMLang.Delete_success);
+		getCurrentFrameObj().show()
 	}else
 	{
-		top.msgWargin("过滤词信息"+WCMLang.Delete_fail);
+		msgWargin("过滤词信息"+WCMLang.Delete_fail);
 	}
 }
 

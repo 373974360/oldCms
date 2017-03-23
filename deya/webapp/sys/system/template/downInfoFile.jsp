@@ -56,10 +56,10 @@
 		//    out.clear();
 		//    out=pageContext.pushBody();
 
-		//System.out.println("文件下载完毕.");
+		System.out.println("文件下载完毕.");
 	} catch (Exception e) {
 		e.printStackTrace();
-		//System.out.println("下载文件失败!");
+		System.out.println("下载文件失败!");
 	} finally {
 		if (bis != null) {
 			try {

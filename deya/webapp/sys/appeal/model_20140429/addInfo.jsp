@@ -191,7 +191,7 @@ function SubmitLetterInfo()
 	}
 
 	if($("#sq_realname").val() ==""){
-		top.msgAlert("姓名不能为空!");
+		msgAlert("姓名不能为空!");
 		return;
 	}else{
 		SQBean.sq_realname = $("#sq_realname").val();
@@ -211,21 +211,21 @@ function SubmitLetterInfo()
 	SQBean.sq_ip = local_IP+"";
 
 	if(getV("sq_content") == ""){
-		top.msgAlert("信件内容不能为空!");
+		msgAlert("信件内容不能为空!");
 		return;
 	}else{
 		SQBean.sq_content = getV("sq_content");
 	    SQBean.sq_content2= getV("sq_content");
 	}
     if($("#sq_title").val() == ""){
-        top.msgAlert("信件标题不能为空!");
+        msgAlert("信件标题不能为空!");
 		return;
 	}else{
 		SQBean.sq_title = $("#sq_title").val();
 	    SQBean.sq_title2 = $("#sq_title").val();
 	}
 	if($(":radio[id='do_dept'][checked=true]").val() == ""){
-		top.msgAlert("请选择收件单位或人!");
+		msgAlert("请选择收件单位或人!");
 		return;
 	}else{
 		SQBean.do_dept = $(":radio[id='do_dept'][checked=true]").val()+"";
@@ -278,11 +278,11 @@ function SubmitLetterInfo()
 					SQManager.insertSQCursom(sc_list);//插入扩展字段
 		   }
 	    */
-		top.msgAlert("操作成功!");
+		msgAlert("操作成功!");
 		window.location.href = "/sys/appeal/model/modelList.jsp";
 	}else
 	{
-		top.msgWargin("操作失败!");
+		msgWargin("操作失败!");
 	}
 }
 

@@ -391,18 +391,11 @@ List<String> fileTypeList = new ArrayList<String>();
 		   }else if(field_type.equals("6")){//文件
 			   fileList.add(field_enname);
 			   fileTypeList.add(default_value);
-               //是否必填
-               String onblur = "";
-               if(is_null){//必填
-                   onblur = "checkInputValue('"+field_enname+"',false,500,'"+field_cnname+"','')";
-               }else{
-                   onblur = "checkInputValue('"+field_enname+"',true,500,'"+field_cnname+"','')";
-               }
 			   %>
 			   <tr class="<%=display%>">
 				<th><%if(is_null){%><span class="f_red">*</span><%}%><%=field_cnname%>：</th>
 				<td style=""><div style="float:left;margin:auto;">
-				<input id="<%=field_enname%>" name="<%=field_enname%>" type="text" style="width:250px;" value="" onblur="<%=onblur%>"/></div>
+				<input id="<%=field_enname%>" name="<%=field_enname%>" type="text" style="width:250px;" value="" /></div>
 				<div style="float:left">&#160;<input type="file" name="<%=field_enname%>_uploadify" id="<%=field_enname%>_uploadify"/></div>
 				<div style="float:left;margin-top:5px">&#160;&#160;&#160;<%if(!field_text.equals("")){%>注：<%=field_text%><%}%></div>
 				<span></span>
@@ -432,7 +425,7 @@ List<String> fileTypeList = new ArrayList<String>();
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="" value="保存" />
 			<input id="addReset" name="btn1" type="button" onclick="window.location.reload()" value="重置" />
-			<input id="addCancel" name="btn1" type="button" onclick="top.tab_colseOnclick(top.curTabIndex)" value="取消" />	
+			<input id="addCancel" name="btn1" type="button" onclick="tab_colseOnclick(curTabIndex)" value="取消" />
 		</td>
 	</tr>
 </table>

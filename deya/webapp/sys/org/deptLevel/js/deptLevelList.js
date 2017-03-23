@@ -50,7 +50,7 @@ function showList()
 	table.getCol("deptlevel_name").each(function(i){
 		if(i>0)
 		{
-			$(this).html('<a href="javascript:top.OpenModalWindow(\'部门级别信息\',\'/sys/org/deptLevel/deptLevel_view.jsp?deptlevel_id='+beanList.get(i-1).deptlevel_id +'\',450,245)">'+beanList.get(i-1).deptlevel_name+'</a>');	
+			$(this).html('<a href="javascript:OpenModalWindow(\'部门级别信息\',\'/sys/org/deptLevel/deptLevel_view.jsp?deptlevel_id='+beanList.get(i-1).deptlevel_id +'\',450,245)">'+beanList.get(i-1).deptlevel_name+'</a>');
 		}
 	});
 	
@@ -66,14 +66,14 @@ function showTurnPage()
 // 新建部门级别
 function addDeptLevel()
 {
-	top.OpenModalWindow("新建部门级别","/sys/org/deptLevel/deptLevel_add.jsp?type=add&deptlevel_id=",460,245);
+	OpenModalWindow("新建部门级别","/sys/org/deptLevel/deptLevel_add.jsp?type=add&deptlevel_id=",460,245);
 }
 
 // 更新部门级别
 function updateLevel()
 {
 	var deptlevel_id = table.getSelecteCheckboxValue("deptlevel_id");
-	top.OpenModalWindow("修改部门级别","/sys/org/deptLevel/deptLevel_add.jsp?type=update&deptlevel_id="+deptlevel_id,430,260);
+	OpenModalWindow("修改部门级别","/sys/org/deptLevel/deptLevel_add.jsp?type=update&deptlevel_id="+deptlevel_id,430,260);
 }
 
 // 删除部门级别
@@ -83,16 +83,16 @@ function deleteLevel()
 	/*
 	if(DeptRPC.haveExistDept(deptlevel_ids)!= 0)
 	{
-		top.msgWargin("选中的部门级别中关联有部门"+"<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+"请取消关联后再删除！");
+		msgWargin("选中的部门级别中关联有部门"+"<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+"请取消关联后再删除！");
 		return;
 	}*/
 	
 	if(!DeptRPC.deleteDeptLevel(deptlevel_ids))
 	{
-		top.msgAlert("部门级别"+WCMLang.Delete_fail);
+		msgAlert("部门级别"+WCMLang.Delete_fail);
 		return;
 	}
-	top.msgAlert("部门级别"+WCMLang.Delete_success);
+	msgAlert("部门级别"+WCMLang.Delete_success);
 	reloadDeptLevelList();
 }
 

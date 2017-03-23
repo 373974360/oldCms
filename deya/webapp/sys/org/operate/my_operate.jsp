@@ -17,7 +17,7 @@
 $(document).ready(function(){
 	initButtomStyle();
 	
-	var json_data = eval(jsonrpc.UserManRPC.getAppJSONStrByUserID(top.LoginUserBean.user_id));
+	var json_data = eval(jsonrpc.UserManRPC.getAppJSONStrByUserID(LoginUserBean.user_id));
 	initMenuTree();
 	setLeftMenuTreeJsonData(json_data);
 	initOperateTree();	
@@ -56,7 +56,7 @@ function showOperateTree(state,s_id)
 		{
 			json_data = eval(OperateRPC.getOperateTreeJsonStr2(s_id));			
 			setAppointTreeJsonData("leftMenuTree2",json_data);
-			setSelectedRoleIDS(top.getOptIDSByUser(s_id,""));
+			setSelectedRoleIDS(getOptIDSByUser(s_id,""));
 		}
 	}
 	else
@@ -65,12 +65,12 @@ function showOperateTree(state,s_id)
 		{
 			json_data = eval(OperateRPC.getOperateTreeJsonStr2("zwgk"));	
 			setAppointTreeJsonData("leftMenuTree2",json_data);
-			setSelectedRoleIDS(top.getOptIDSByUser("zwgk",s_id));
+			setSelectedRoleIDS(getOptIDSByUser("zwgk",s_id));
 		}else
 		{
 			json_data = eval(OperateRPC.getOperateTreeJsonStr2("cms"));			
 			setAppointTreeJsonData("leftMenuTree2",json_data);
-			setSelectedRoleIDS(top.getOptIDSByUser("cms",s_id));
+			setSelectedRoleIDS(getOptIDSByUser("cms",s_id));
 		}
 	}	
 }
@@ -135,7 +135,7 @@ function setSelectedRoleIDS(opt_ids)
 <table class="table_option" border="0" cellpadding="0" cellspacing="0">
 	<tr>
 		<td align="left" valign="middle" style="text-indent:100px;">			
-			<input id="userAddCancel" name="btn1" type="button" onclick="top.tab_colseOnclick(top.curTabIndex);" value="关闭" />	
+			<input id="userAddCancel" name="btn1" type="button" onclick="tab_colseOnclick(curTabIndex);" value="关闭" />
 		</td>
 	</tr>
 </table>

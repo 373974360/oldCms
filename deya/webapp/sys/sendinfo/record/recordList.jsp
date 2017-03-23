@@ -25,7 +25,7 @@ $(document).ready(function(){
 
 function openSearchPage()
 {
-	top.OpenModalWindow("报送记录搜索","/sys/sendinfo/record/recordSearch.jsp?site_id="+site_id,400,260);	
+	OpenModalWindow("报送记录搜索","/sys/sendinfo/record/recordSearch.jsp?site_id="+site_id,400,260);
 }
 
 function searchHandl(con)

@@ -2,35 +2,35 @@ function saveHotList()
 {
 	if(app_id == "cms")
 	{
-		top.getCurrentFrameObj().editAreaLoader.replaceSelection(saveCMSHotList());
+		getCurrentFrameObj().editAreaLoader.replaceSelection(saveCMSHotList());
 	}
 	if(app_id == "ggfw")
 	{
-		top.getCurrentFrameObj().editAreaLoader.replaceSelection(saveGGFWHotList());
+		getCurrentFrameObj().editAreaLoader.replaceSelection(saveGGFWHotList());
 	}
 	if(app_id == "zwgk")
 	{
 		var ss = saveGKHotList();
 		if(ss == null || ss == "")
 			return;
-		top.getCurrentFrameObj().editAreaLoader.replaceSelection(ss);
+		getCurrentFrameObj().editAreaLoader.replaceSelection(ss);
 	}
 	if(app_id == "appeal")
 	{
 		var ss = saveSQHotList();
 		if(ss == null || ss == "")
 			return;
-		top.getCurrentFrameObj().editAreaLoader.replaceSelection(ss);
+		getCurrentFrameObj().editAreaLoader.replaceSelection(ss);
 	}
 	if(app_id == "interview")
 	{
-		top.getCurrentFrameObj().editAreaLoader.replaceSelection(saveInterViewHotList());
+		getCurrentFrameObj().editAreaLoader.replaceSelection(saveInterViewHotList());
 	}
 	if(app_id == "survey")
 	{
-		top.getCurrentFrameObj().editAreaLoader.replaceSelection(saveSurveyHotList());
+		getCurrentFrameObj().editAreaLoader.replaceSelection(saveSurveyHotList());
 	}
-	top.CloseModalWindow();
+	CloseModalWindow();
 }
 
 //得到栏目ID
@@ -199,7 +199,7 @@ function saveGKHotList()
 	else
 	{
 		$(".list_tab").eq(1).click();
-		top.msgWargin("请选择信息公开节点");
+		msgWargin("请选择信息公开节点");
 		return;
 	}	
 
@@ -256,7 +256,7 @@ function saveSQHotList()
 	if(model_id == "" || model_id == null)
 	{
 		$(".list_tab").eq(1).click();
-		top.msgWargin("请选择诉求业务");
+		msgWargin("请选择诉求业务");
 		return;
 	}else
 	{

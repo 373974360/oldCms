@@ -69,7 +69,7 @@
 			{
 				if(!judgeDate(s_time,e_time))
 				{
-					parent.alertN("结束日期不能小于开始日期");
+					alertN("结束日期不能小于开始日期");
 					return;
 				}
 			}	
@@ -100,8 +100,8 @@
 			}
 
 			
-			top.getCurrentFrameObj(top_index).searchHandl(str);
-			top.tab_colseOnclick(top.curTabIndex);			
+			getCurrentFrameObj(top_index).searchHandl(str);
+			tab_colseOnclick(curTabIndex);
 
 		}
 
@@ -216,7 +216,7 @@
 	<tr>
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="fnSearch()" value="确定" />
-			<input id="userAddButton" name="btn1" type="button" onclick="top.tab_colseOnclick(top.curTabIndex)" value="关闭" />
+			<input id="userAddButton" name="btn1" type="button" onclick="tab_colseOnclick(curTabIndex)" value="关闭" />
 		</td>
 	</tr>
 </table>

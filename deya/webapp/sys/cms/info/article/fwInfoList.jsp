@@ -64,7 +64,7 @@ $(document).ready(function(){
 function getFWInfo()
 {
 	is_save_first_page = true;
-	top.OpenModalWindow("信息高级获取","/sys/cms/info/article/fwInfoGet.jsp?cat_id="+cid+"&app_id="+app,800,530);
+	OpenModalWindow("信息高级获取","/sys/cms/info/article/fwInfoGet.jsp?cat_id="+cid+"&app_id="+app,800,530);
 }
 
 </script>

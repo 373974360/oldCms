@@ -374,14 +374,14 @@ $(document).ready(function(){
 	<tr>
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<div id ="viewType" style="display:none">  
-			<input id="AddCancel" name="btn1" type="button" onclick="top.tab_colseOnclick(top.curTabIndex)" value="关闭" />	
+			<input id="AddCancel" name="btn1" type="button" onclick="tab_colseOnclick(curTabIndex)" value="关闭" />
 			</div>
 			<div id="addType" style="display:" >
 			<input id="subButton" name="btn1" type="button" value="保存" />	
 			<!-- 
 			<input id="memAddReset" name="btn2" type="button" onclick="formReSet('member_table','')" value="重置" />
 			-->
-			<input id="memAddCancel" name="btn3" type="button" onclick="javascritp:top.tab_colseOnclick(top.curTabIndex);" value="取消" />	
+			<input id="memAddCancel" name="btn3" type="button" onclick="javascritp:tab_colseOnclick(curTabIndex);" value="取消" />
 			</div>
 		</td>
 	</tr>

@@ -51,7 +51,7 @@ var app = "<%=app_id%>";
 
 $(document).ready(function(){
 	//让树节点选中
-	top.treeNodeSelected(tc_id);
+	treeNodeSelected(tc_id);
 	initButtomStyle();
 	init_FromTabsStyle();
 	if($.browser.msie&&$.browser.version=="6.0"&&$("html")[0].scrollHeight>$("html").height()) $("html").css("overflowY","scroll"); 
@@ -61,7 +61,7 @@ $(document).ready(function(){
 	
 	if(lab_num != "" && lab_num != "null" && lab_num != null)
 	{
-		//top.treeNodeSelected(parent_id);
+		//treeNodeSelected(parent_id);
 		//changeLabShowList(lab_num);
 		$(".fromTabs li:nth-child("+lab_num+") .tab_right").click();
 		$(".fromTabs li:nth-child("+lab_num+")").click();		

@@ -46,11 +46,11 @@ function updateCollDataInfobyid()
 	bean.art_content = getV(contentId);
 	if(CollectionDataRPC.updateCollDataInfo(bean))
 	{
-		top.msgAlert("修改成功!");
-		top.getCurrentFrameObj(tab_index).reloadInfoDataList(); 
-		top.tab_colseOnclick(top.curTabIndex);
+		msgAlert("修改成功!");
+		getCurrentFrameObj(tab_index).reloadInfoDataList();
+		tab_colseOnclick(curTabIndex);
 	}else{
-		top.msgAlert("修改失败!");
+		msgAlert("修改失败!");
 	}
 	
 }
@@ -81,13 +81,13 @@ function updateCollDataInfobyid()
 		<tr>
 			<th>关键词：</th>
 			<td>
-				<textarea id="art_keyWords" name="info_keywords" style="width:620px;height:70px"></textarea>
+				<textarea id="art_keyWords" name="info_keywords" style="width:90%;height:70px"></textarea>
 			</td>
 		</tr>
 		<tr>
 			<th style="vertical-align:top;">详细内容：</th>
 			<td style="">
-                <script id="art_content" type="text/plain" style="width:620px;height:300px;"></script>
+                <script id="art_content" type="text/plain" style="width:100%;height:300px;"></script>
 				<div class="hidden" id="word_count_div"></div>
 			<span class="blank9"></span>
 		</tr>
@@ -100,7 +100,7 @@ function updateCollDataInfobyid()
 		<tr>
 			<td align="left" valign="middle" style="text-indent:100px;">
 				<input id="updateButton" name="btn1" type="button" onclick="" value="保存" />
-				<input id="addCancel" name="btn1" type="button" onclick="top.tab_colseOnclick(top.curTabIndex)" value="取消" />	
+				<input id="addCancel" name="btn1" type="button" onclick="tab_colseOnclick(curTabIndex)" value="取消" />
 			</td>
 		</tr>
 	</table>

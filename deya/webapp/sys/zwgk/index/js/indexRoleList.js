@@ -41,11 +41,11 @@ function updateRoleList()
 
 	if(IndexRPC.updateIndexRole(list))
 	{
-		top.msgWargin("索引规则"+WCMLang.Set_success);
+		msgWargin("索引规则"+WCMLang.Set_success);
 	}
 	else
 	{
-		top.msgWargin("索引规则"+WCMLang.Set_fail);
+		msgWargin("索引规则"+WCMLang.Set_fail);
 	}
 	initTable();
 }

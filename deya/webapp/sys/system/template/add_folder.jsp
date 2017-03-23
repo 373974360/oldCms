@@ -15,10 +15,10 @@ function returnValueHandl()
 	var fn = $("#folder_name").val();
 	if(fn != "" && fn != null)
 	{
-		top.top.getCurrentFrameObj().addTemplateResourcesFolder(fn);
-		top.CloseModalWindow();
+		getCurrentFrameObj().addTemplateResourcesFolder(fn);
+		CloseModalWindow();
 	}else
-		top.msgWargin("请输入目录名称");
+		msgWargin("请输入目录名称");
 }
 
 </script>
@@ -47,7 +47,7 @@ function returnValueHandl()
 	<tr>
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="returnValueHandl()" value="保存" />	
-			<input id="cancel" name="btn1" type="button" onclick="top.CloseModalWindow();" value="取消" />		
+			<input id="cancel" name="btn1" type="button" onclick="CloseModalWindow();" value="取消" />
 		</td>
 	</tr>
 </table>

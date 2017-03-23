@@ -2,7 +2,7 @@
 function fnAddSubject(main_type)
 {
 	//window.location.href = "add_subject.jsp?site_id="+site_id+"&tn="+main_type;
-	top.addTab(true,"/sys/interview/subject/add_subject.jsp?site_id="+site_id+"&tn="+main_type+"&topnum="+top.curTabIndex,"维护主题");
+	addTab(true,"/sys/interview/subject/add_subject.jsp?site_id="+site_id+"&tn="+main_type+"&topnum="+curTabIndex,"维护主题");
 }
 
 function getFckeditorValue()
@@ -32,22 +32,22 @@ function saveSubject()
 	
 	if(bean.audit_status != 1 && (bean.publish_status != 0 || bean.status != 0 ))
 	{
-		top.msgWargin("该主题未通过审核，不能设置发布状态和访谈状态");
+		msgWargin("该主题未通过审核，不能设置发布状态和访谈状态");
 		return;
 	}
 	bean.site_id = site_id;
-	bean.apply_user = parent.LoginUserBean.user_id;
-	bean.apply_dept = parent.LoginUserBean.dept_id;
+	bean.apply_user = LoginUserBean.user_id;
+	bean.apply_dept = LoginUserBean.dept_id;
 	if(SubjectRPC.insertSubject(bean))
 	{
-		top.msgAlert("访谈主题"+WCMLang.Add_success);
-		top.getCurrentFrameObj(topnum).showTurnPage();
-		top.getCurrentFrameObj(topnum).showList();
-		top.tab_colseOnclick(top.curTabIndex);
+		msgAlert("访谈主题"+WCMLang.Add_success);
+		getCurrentFrameObj(topnum).showTurnPage();
+		getCurrentFrameObj(topnum).showList();
+		tab_colseOnclick(curTabIndex);
 	}
 	else
 	{
-		top.msgWargin("访谈主题"+WCMLang.Add_fail);
+		msgWargin("访谈主题"+WCMLang.Add_fail);
 	}
 }
 /**********************添加操作　结束*************************************/
@@ -59,10 +59,10 @@ function showUpdatePate(main_type,id,audit_status)
 	if(main_type == "main" || audit_status != 1)
 	{
 		//window.location.href = "add_subject.jsp?site_id="+site_id+"&tn="+main_type+"&id="+id;
-		top.addTab(true,"/sys/interview/subject/add_subject.jsp?site_id="+site_id+"&tn="+main_type+"&id="+id+"&topnum="+top.curTabIndex,"维护主题");
+		addTab(true,"/sys/interview/subject/add_subject.jsp?site_id="+site_id+"&tn="+main_type+"&id="+id+"&topnum="+curTabIndex,"维护主题");
 	}
 	else
-		top.msgAlert("该主题已经通过审核，不能再修改操作");
+		msgAlert("该主题已经通过审核，不能再修改操作");
 }
 
 function fnUpdateSubject(main_type)
@@ -70,14 +70,14 @@ function fnUpdateSubject(main_type)
 	var selectIDS = table.getSelecteCheckboxValue("id");
 	if(selectIDS == "")
 	{
-		parent.alertN("请选择要修改的主题");
+		alertN("请选择要修改的主题");
 		return;
 	}
 	else
 	{
 		if(selectIDS.split(",").length > 1)
 		{
-			parent.alertN("只能选择一条主题进行修改操作");
+			alertN("只能选择一条主题进行修改操作");
 			return;
 		}
 		else
@@ -85,11 +85,11 @@ function fnUpdateSubject(main_type)
 			if(main_type == "main" || table.getSelecteBeans().get(0).audit_status != 1)
 			{
 				//window.location.href = "add_subject.jsp?site_id="+site_id+"&tn="+main_type+"&id="+selectIDS;
-				top.addTab(true,"/sys/interview/subject/add_subject.jsp?site_id="+site_id+"&tn="+main_type+"&id="+selectIDS+"&topnum="+top.curTabIndex,"维护主题");
+				addTab(true,"/sys/interview/subject/add_subject.jsp?site_id="+site_id+"&tn="+main_type+"&id="+selectIDS+"&topnum="+curTabIndex,"维护主题");
 			}
 			else
 			{
-				top.msgAlert("该主题已经通过审核，不能再修改操作");
+				msgAlert("该主题已经通过审核，不能再修改操作");
 			}
 		}
 	}
@@ -108,20 +108,20 @@ function updateSubject()
 
 	if(bean.audit_status != 1 && (bean.publish_status > 0 || bean.status > 0 ))
 	{
-		top.msgWargin("该主题未通过审核，不能设置发布状态和访谈状态");
+		msgWargin("该主题未通过审核，不能设置发布状态和访谈状态");
 		return;
 	}
-	bean.update_user = parent.LoginUserBean.user_id;
+	bean.update_user = LoginUserBean.user_id;
 	if(SubjectRPC.updateSubject(bean))
 	{
-		top.msgAlert("访谈主题"+WCMLang.Add_success);	
-		top.getCurrentFrameObj(topnum).showTurnPage();
-		top.getCurrentFrameObj(topnum).showList();
-		top.tab_colseOnclick(top.curTabIndex);
+		msgAlert("访谈主题"+WCMLang.Add_success);
+		getCurrentFrameObj(topnum).showTurnPage();
+		getCurrentFrameObj(topnum).showList();
+		tab_colseOnclick(curTabIndex);
 	}
 	else
 	{
-		top.msgWargin("访谈主题"+WCMLang.Add_fail);
+		msgWargin("访谈主题"+WCMLang.Add_fail);
 	}
 }
 
@@ -131,8 +131,8 @@ function updateSubject()
 //查看分类
 function view_subject(main_type,id)
 {	
-	//parent.fnModelWin('查看访谈主题','interview/subject/view_subject.jsp?tn='+main_type+'&id='+id,800,500)
-	top.addTab(true,'/sys/interview/subject/view_subject.jsp?tn='+main_type+'&id='+id,'查看访谈主题');
+	//fnModelWin('查看访谈主题','interview/subject/view_subject.jsp?tn='+main_type+'&id='+id,800,500)
+	addTab(true,'/sys/interview/subject/view_subject.jsp?tn='+main_type+'&id='+id,'查看访谈主题');
 }
 
 
@@ -140,7 +140,7 @@ function view_subject(main_type,id)
 function fnActorManager(main_type)
 {	
 	selectBean = table.getSelecteBeans();
-	top.addTab(true,'/sys/interview/subject/actorList.jsp?&tn='+main_type+'&sub_id='+selectBean.get(0).sub_id+'&ss='+selectBean.get(0).audit_status,'嘉宾资料管理');	
+	addTab(true,'/sys/interview/subject/actorList.jsp?&tn='+main_type+'&sub_id='+selectBean.get(0).sub_id+'&ss='+selectBean.get(0).audit_status,'嘉宾资料管理');
 }
 
 function actorManager(main_type)
@@ -153,17 +153,17 @@ function fnReleInfoManager(main_type)
 	var ls = table.getSelecteBeans();
 	if(ls == null || ls.size() == 0)
 	{
-		parent.alertN("请选择要操作的主题");
+		alertN("请选择要操作的主题");
 		return;
 	}
 	else
 	{
 		if(ls.size() > 1)
 		{
-			parent.alertN("只能选择一条主题进行管理操作");
+			alertN("只能选择一条主题进行管理操作");
 			return;
 		}
-		top.addTab(true,"/sys/interview/subject/releInfoList.jsp?&tn="+main_type+"&sub_id="+ls.get(0).sub_id+"&ss="+ls.get(0).audit_status,"相关信息管理");
+		addTab(true,"/sys/interview/subject/releInfoList.jsp?&tn="+main_type+"&sub_id="+ls.get(0).sub_id+"&ss="+ls.get(0).audit_status,"相关信息管理");
 	}
 }
 
@@ -183,7 +183,7 @@ function checkImgFile(files)
 		} 
 		else
 		{ 			
-			parent.alertWar("<span style='color:red'>上传的文档图片格式不对，只允许上传 jpg，jpeg，gif，png 等格式的文件，请重新上传！</span>"); 
+			alertWar("<span style='color:red'>上传的文档图片格式不对，只允许上传 jpg，jpeg，gif，png 等格式的文件，请重新上传！</span>");
 			return false;
 		}
 	}
@@ -207,7 +207,7 @@ function checkVideoFile(files)
 		} 
 		else
 		{ 					
-			parent.alertWar("<span style='color:red'>上传的视频文件格式不对，只允许上传 asf，avi，mpg，mpeg，mpe，mov，wmv，wav，mid，midi，mp3，mpa，mp2，ra，wma 等格式的文件，请重新上传！</span>"); 
+			alertWar("<span style='color:red'>上传的视频文件格式不对，只允许上传 asf，avi，mpg，mpeg，mpe，mov，wmv，wav，mid，midi，mp3，mpa，mp2，ra，wma 等格式的文件，请重新上传！</span>");
 			return false;
 		}
 	}
@@ -224,7 +224,7 @@ function fnCancel()
 
 function openSearchWin(main_type)
 {
-	top.addTab(true,"/sys/interview/subject/search_subject.jsp?tn="+main_type+"&ti="+top.curTabIndex,"访谈主题查询");
+	addTab(true,"/sys/interview/subject/search_subject.jsp?tn="+main_type+"&ti="+curTabIndex,"访谈主题查询");
 }
 
 function searchHandl(str)

@@ -102,7 +102,7 @@ function ChangeStatus(o)
 			<td align="right" valign="middle">
 				 <input id="addButton" name="btn1" type="button" onclick="search()" value="统计" />	
 				 <input type="button" id="outFileBtn" style="display:none" onclick="outFileBtn()" value="导出"/>
-				 <input id="backBtn" name="btn1" type="button" onclick="top.tab_colseOnclick(top.curTabIndex)" value="关闭" />
+				 <input id="backBtn" name="btn1" type="button" onclick="tab_colseOnclick(curTabIndex)" value="关闭" />
 				 <span class="blank3"></span>
 			</td>
 		</tr>
@@ -116,7 +116,7 @@ function ChangeStatus(o)
 <div id="underline"></div>
 <span class="blank3"></span>
 
-        <input id="backBtn1" name="btn1" type="button" onclick="top.tab_colseOnclick(top.curTabIndex)" value="关闭" />
+        <input id="backBtn1" name="btn1" type="button" onclick="tab_colseOnclick(curTabIndex)" value="关闭" />
 </div>
 </body>
 </html>

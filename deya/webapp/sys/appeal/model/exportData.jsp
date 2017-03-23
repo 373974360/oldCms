@@ -42,8 +42,8 @@ function startexportData()
 	{
 		m.put("model_id",model_id);
 	}
-	top.getCurrentFrameObj().getexportData(m);
-	top.CloseModalWindow();
+	getCurrentFrameObj().getexportData(m);
+	CloseModalWindow();
 }
 
 //获取是否公开的值
@@ -74,7 +74,7 @@ function getSearchTime()
 
 	if(beignTime !="" && beignTime != null && endTime !="" && endTime !=null){
 		if(!judgeDate(beignTime,endTime)){
-			top.msgAlert("结束时间不能小于起始时间!");
+			msgAlert("结束时间不能小于起始时间!");
 			return;
 		}
 	}

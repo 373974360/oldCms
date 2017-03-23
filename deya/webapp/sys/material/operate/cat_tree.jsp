@@ -17,7 +17,7 @@ var jsonData;
 var chold_jData;
 var appList;
 var site_id ="<%=request.getParameter("site_id")%>";
-var user_id = top.LoginUserBean.user_id;
+var user_id = LoginUserBean.user_id;
 var MateFolderRPC = jsonrpc.MateFolderRPC;
 $(document).ready(function(){	
 	initButtomStyle();
@@ -37,11 +37,11 @@ function returnDeptID()
 	var node = $('#leftMenuTree').tree('getSelected');
 	if(node != null)
 	{		
-		top.getCurrentFrameObj().MoveMateHandl(node.id);
-		top.CloseModalWindow();
+		getCurrentFrameObj().MoveMateHandl(node.id);
+		CloseModalWindow();
 	}else
 	{
-		top.msgWargin("请选择素材目录");
+		msgWargin("请选择素材目录");
 	}
 }
 </script>
@@ -70,7 +70,7 @@ function returnDeptID()
 	<tr>
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="returnDeptID()" value="保存" />
-			<input id="userAddCancel" name="btn1" type="button" onclick="top.CloseModalWindow();" value="取消" />	
+			<input id="userAddCancel" name="btn1" type="button" onclick="CloseModalWindow();" value="取消" />
 		</td>
 	</tr>
 </table>

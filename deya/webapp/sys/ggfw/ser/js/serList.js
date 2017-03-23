@@ -90,12 +90,12 @@ function showList(){
 
 function openXGXXPage(xgwt_cat_id)
 {
-	top.addTab(true,"/sys/cms/info/article/articleDataList.jsp?cat_id="+xgwt_cat_id+"&app_id=ggfw&site_id=ggfw","相关信息维护");
+	addTab(true,"/sys/cms/info/article/articleDataList.jsp?cat_id="+xgwt_cat_id+"&app_id=ggfw&site_id=ggfw","相关信息维护");
 }
 
 function openCJWTPage(cjwt_cat_id)
 {
-	top.addTab(true,"/sys/cms/info/article/articleDataList.jsp?cat_id="+cjwt_cat_id+"&app_id=ggfw&site_id=ggfw","常见问题维护");
+	addTab(true,"/sys/cms/info/article/articleDataList.jsp?cat_id="+cjwt_cat_id+"&app_id=ggfw&site_id=ggfw","常见问题维护");
 }
 
 function showTurnPage(){				
@@ -106,9 +106,9 @@ function showTurnPage(){
 function openAddSerCategoryPage(ser_id)
 {
 	if(ser_id != null)
-		top.addTab(true,"/sys/ggfw/ser/serTopic_add.jsp?top_index="+top.curTabIndex+"&ser_id="+ser_id,"维护场景主题");
+		addTab(true,"/sys/ggfw/ser/serTopic_add.jsp?top_index="+curTabIndex+"&ser_id="+ser_id,"维护场景主题");
 	else
-		top.addTab(true,"/sys/ggfw/ser/serTopic_add.jsp?top_index="+top.curTabIndex,"维护场景主题");
+		addTab(true,"/sys/ggfw/ser/serTopic_add.jsp?top_index="+curTabIndex,"维护场景主题");
 }
 
 function openUpdateSerCategoryPage()
@@ -129,7 +129,7 @@ function addSerTopic()
 
 	if(bean.res_flag == 1 && bean.dict_id == "")
 	{
-		top.msgWargin("请选择资源分类");
+		msgWargin("请选择资源分类");
 		return;
 	}
 
@@ -139,12 +139,12 @@ function addSerTopic()
 	bean.cat_type = "root";
 	if(SerRPC.insertSerCategory(bean))
 	{
-		top.msgAlert("场景式服务主题"+WCMLang.Add_success);			
-		top.getCurrentFrameObj(top_index).reloadSerList();
-		top.tab_colseOnclick(top.curTabIndex);
+		msgAlert("场景式服务主题"+WCMLang.Add_success);
+		getCurrentFrameObj(top_index).reloadSerList();
+		tab_colseOnclick(curTabIndex);
 	}else
 	{
-		top.msgWargin("场景式服务主题"+WCMLang.Add_fail);
+		msgWargin("场景式服务主题"+WCMLang.Add_fail);
 	}
 }
 
@@ -160,7 +160,7 @@ function updateSerTopic()
 
 	if(bean.res_flag == 1 && bean.dict_id == "")
 	{
-		top.msgWargin("请选择资源分类");
+		msgWargin("请选择资源分类");
 		return;
 	}
 
@@ -168,12 +168,12 @@ function updateSerTopic()
 	bean.cat_type = "root";
 	if(SerRPC.updateSerCategory(bean))
 	{
-		top.msgAlert("场景式服务主题"+WCMLang.Add_success);			
-		top.getCurrentFrameObj(top_index).reloadSerList();
-		top.tab_colseOnclick(top.curTabIndex);
+		msgAlert("场景式服务主题"+WCMLang.Add_success);
+		getCurrentFrameObj(top_index).reloadSerList();
+		tab_colseOnclick(curTabIndex);
 	}else
 	{
-		top.msgWargin("场景式服务主题"+WCMLang.Add_fail);
+		msgWargin("场景式服务主题"+WCMLang.Add_fail);
 	}
 }
 
@@ -183,11 +183,11 @@ function deleteSerCategory()
 
 	if(SerRPC.deleteSerCategory(selectIDS))
 	{
-		top.msgAlert("场景式服务主题"+WCMLang.Delete_success);
+		msgAlert("场景式服务主题"+WCMLang.Delete_success);
 		reloadSerList();
 	}else
 	{
-		top.msgWargin("场景式服务主题"+WCMLang.Delete_fail);
+		msgWargin("场景式服务主题"+WCMLang.Delete_fail);
 	}
 }
 
@@ -196,10 +196,10 @@ function sortSerCategory()
 	var selectIDS = table.getAllCheckboxValue("ser_id");
 	if(SerRPC.sortSerCategory(selectIDS))
 	{
-		top.msgAlert(WCMLang.Sort_success);
+		msgAlert(WCMLang.Sort_success);
 	}else
 	{
-		top.msgWargin(WCMLang.Sort_fail);
+		msgWargin(WCMLang.Sort_fail);
 	}
 }
 
@@ -208,10 +208,10 @@ function batchPublishSerCategory(publish_status)
 	var selectIDS = table.getSelecteCheckboxValue("ser_id");
 	if(SerRPC.updateSerCategoryStatus(selectIDS,publish_status))
 	{
-		top.msgAlert(WCMLang.Publish_success);		
+		msgAlert(WCMLang.Publish_success);
 		showList();	
 	}
 	else
-		top.msgWargin(WCMLang.Publish_fail);
+		msgWargin(WCMLang.Publish_fail);
 }
 

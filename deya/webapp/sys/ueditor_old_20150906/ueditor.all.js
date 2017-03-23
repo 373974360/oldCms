@@ -1847,7 +1847,7 @@ function getDomNode(node, start, ltr, startFromChild, fn, guard) {
         parent;
     !tmpNode && (tmpNode = node[ltr]);
     while (!tmpNode && (parent = (parent || node).parentNode)) {
-        if (parent.tagName == 'BODY' || guard && !guard(parent)) {
+        if (tagName == 'BODY' || guard && !guard(parent)) {
             return null;
         }
         tmpNode = parent[ltr];
@@ -2258,10 +2258,10 @@ var domUtils = dom.domUtils = {
         if (parent) {
             if (keepChildren && node.hasChildNodes()) {
                 while (child = node.firstChild) {
-                    parent.insertBefore(child, node);
+                    insertBefore(child, node);
                 }
             }
-            parent.removeChild(node);
+            removeChild(node);
         }
         return node;
     },
@@ -2374,14 +2374,14 @@ var domUtils = dom.domUtils = {
         if (nodeA === nodeB)
             return nodeA;
         var parentsA = [nodeA] , parentsB = [nodeB], parent = nodeA, i = -1;
-        while (parent = parent.parentNode) {
+        while (parent = parentNode) {
             if (parent === nodeB) {
                 return parent;
             }
             parentsA.push(parent);
         }
         parent = nodeB;
-        while (parent = parent.parentNode) {
+        while (parent = parentNode) {
             if (parent === nodeA)
                 return parent;
             parentsB.push(parent);
@@ -2830,7 +2830,7 @@ var domUtils = dom.domUtils = {
      *          wrapNode = document.createElement( "div" ),
      *          parent = document.createElement("p");
      *
-     *      parent.appendChild( node );
+     *      appendChild( node );
      *      wrapNode.appendChild( parent );
      *
      *      //拆分前
@@ -2872,7 +2872,7 @@ var domUtils = dom.domUtils = {
             }
             clone = parentClone;
         } while (parent !== parentClone);
-        tmpNode = parent.parentNode;
+        tmpNode = parentNode;
         tmpNode.insertBefore(leftNodes, parent);
         tmpNode.insertBefore(rightNodes, parent);
         tmpNode.insertBefore(node, rightNodes);
@@ -3047,30 +3047,30 @@ var domUtils = dom.domUtils = {
      */
     mergeToParent:function (node) {
         var parent = node.parentNode;
-        while (parent && dtd.$removeEmpty[parent.tagName]) {
-            if (parent.tagName == node.tagName || parent.tagName == 'A') {//针对a标签单独处理
+        while (parent && dtd.$removeEmpty[tagName]) {
+            if (tagName == node.tagName || tagName == 'A') {//针对a标签单独处理
                 domUtils.trimWhiteTextNode(parent);
                 //span需要特殊处理  不处理这样的情况 <span stlye="color:#fff">xxx<span style="color:#ccc">xxx</span>xxx</span>
-                if (parent.tagName == 'SPAN' && !domUtils.isSameStyle(parent, node)
-                    || (parent.tagName == 'A' && node.tagName == 'SPAN')) {
-                    if (parent.childNodes.length > 1 || parent !== node.parentNode) {
-                        node.style.cssText = parent.style.cssText + ";" + node.style.cssText;
-                        parent = parent.parentNode;
+                if (tagName == 'SPAN' && !domUtils.isSameStyle(parent, node)
+                    || (tagName == 'A' && node.tagName == 'SPAN')) {
+                    if (childNodes.length > 1 || parent !== node.parentNode) {
+                        node.style.cssText = style.cssText + ";" + node.style.cssText;
+                        parent = parentNode;
                         continue;
                     } else {
-                        parent.style.cssText += ";" + node.style.cssText;
+                        style.cssText += ";" + node.style.cssText;
                         //trace:952 a标签要保持下划线
-                        if (parent.tagName == 'A') {
-                            parent.style.textDecoration = 'underline';
+                        if (tagName == 'A') {
+                            style.textDecoration = 'underline';
                         }
                     }
                 }
-                if (parent.tagName != 'A') {
+                if (tagName != 'A') {
                     parent === node.parentNode && domUtils.remove(node, true);
                     break;
                 }
             }
-            parent = parent.parentNode;
+            parent = parentNode;
         }
     },
     /**
@@ -5509,7 +5509,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
                     while (node && (node.nodeType == 3 || dtd[tagName][node.tagName]) && node !== end) {
                         pre = node;
                         node = domUtils.getNextDomNode(node, node.nodeType == 1, null, function (parent) {
-                            return dtd[tagName][parent.tagName];
+                            return dtd[tagName][tagName];
                         });
                     }
                     var frag = range.setEndAfter(pre).extractContents(), elm;
@@ -6114,10 +6114,10 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
         range.collapse( start );
         var parent = range.parentElement();
         //如果节点里没有子节点，直接退出
-        if ( !parent.hasChildNodes() ) {
+        if ( !hasChildNodes() ) {
             return  {container:parent, offset:0};
         }
-        var siblings = parent.children,
+        var siblings = children,
             child,
             testRange = range.duplicate(),
             startIndex = 0, endIndex = siblings.length - 1, index = -1,
@@ -6140,7 +6140,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
             testRange.moveToElementText( parent );
             testRange.setEndPoint( 'StartToStart', range );
             distance = testRange.text.replace( /(\r\n|\r)/g, '\n' ).length;
-            siblings = parent.childNodes;
+            siblings = childNodes;
             if ( !distance ) {
                 child = siblings[siblings.length - 1];
                 return  {container:child, offset:child.nodeValue.length};
@@ -6902,7 +6902,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
                     (options.initialStyle ? '<style>' + options.initialStyle + '</style>' : '') +
                     '</head><body class=\'view\' ></body>' +
                     '<script type=\'text/javascript\' ' + (ie ? 'defer=\'defer\'' : '' ) +' id=\'_initialScript\'>' +
-                    'setTimeout(function(){editor = window.parent.UE.instants[\'ueditorInstant' + me.uid + '\'];editor._setup(document);},0);' +
+                    'setTimeout(function(){editor = window.UE.instants[\'ueditorInstant' + me.uid + '\'];editor._setup(document);},0);' +
                     'var _tmpScript = document.getElementById(\'_initialScript\');_tmpScript.parentNode.removeChild(_tmpScript);</script></html>';
                 container.appendChild(domUtils.createElement(document, 'iframe', {
                     id: 'ueditor_' + me.uid,
@@ -8966,9 +8966,9 @@ var filterWord = UE.filterWord = function () {
          */
         previousSibling : function(){
             var parent = this.parentNode;
-            for (var i = 0, ci; ci = parent.children[i]; i++) {
+            for (var i = 0, ci; ci = children[i]; i++) {
                 if (ci === this) {
-                   return i == 0 ? null : parent.children[i-1];
+                   return i == 0 ? null : children[i-1];
                 }
             }
 
@@ -8985,9 +8985,9 @@ var filterWord = UE.filterWord = function () {
          */
         nextSibling : function(){
             var parent = this.parentNode;
-            for (var i = 0, ci; ci = parent.children[i++];) {
+            for (var i = 0, ci; ci = children[i++];) {
                 if (ci === this) {
-                    return parent.children[i];
+                    return children[i];
                 }
             }
         },
@@ -9197,7 +9197,7 @@ var filterWord = UE.filterWord = function () {
          */
         getIndex:function(){
             var parent = this.parentNode;
-            for(var i= 0,ci;ci=parent.children[i];i++){
+            for(var i= 0,ci;ci=children[i];i++){
                 if(ci === this){
                     return i;
                 }
@@ -9401,14 +9401,14 @@ var htmlparser = UE.htmlparser = function (htmlstr,ignoreBlank) {
 
     function text(parent, data) {
 
-        if(needChild[parent.tagName]){
-            var tmpNode = uNode.createElement(needChild[parent.tagName]);
-            parent.appendChild(tmpNode);
+        if(needChild[tagName]){
+            var tmpNode = uNode.createElement(needChild[tagName]);
+            appendChild(tmpNode);
             tmpNode.appendChild(uNode.createText(data));
             parent = tmpNode;
         }else{
 
-            parent.appendChild(uNode.createText(data));
+            appendChild(uNode.createText(data));
         }
     }
 
@@ -9429,8 +9429,8 @@ var htmlparser = UE.htmlparser = function (htmlstr,ignoreBlank) {
             }
         }
         //按dtd处理嵌套
-//        if(parent.type != 'root' && !dtd[parent.tagName][tagName])
-//            parent = parent.parentNode;
+//        if(type != 'root' && !dtd[tagName][tagName])
+//            parent = parentNode;
         var elm = new uNode({
             parentNode:parent,
             type:'element',
@@ -9448,17 +9448,17 @@ var htmlparser = UE.htmlparser = function (htmlstr,ignoreBlank) {
         }
         //trace:3970
 //        //如果parent下不能放elm
-//        if(dtd.$inline[parent.tagName] && dtd.$block[elm.tagName] && !dtd[parent.tagName][elm.tagName]){
-//            parent = parent.parentNode;
+//        if(dtd.$inline[tagName] && dtd.$block[elm.tagName] && !dtd[tagName][elm.tagName]){
+//            parent = parentNode;
 //            elm.parentNode = parent;
 //        }
-        parent.children.push(elm);
+        children.push(elm);
         //如果是自闭合节点返回父亲节点
         return  dtd.$empty[tagName] ? parent : elm
     }
 
     function comment(parent, data) {
-        parent.children.push(new uNode({
+        children.push(new uNode({
             type:'comment',
             data:data,
             parentNode:parent
@@ -10338,8 +10338,8 @@ UE.commands['inserthtml'] = {
                 if ( !hadBreak && child.nodeType == domUtils.NODE_ELEMENT && domUtils.isBlockElm( child ) ){
 
                     parent = domUtils.findParent( child,function ( node ){ return domUtils.isBlockElm( node ); } );
-                    if ( parent && parent.tagName.toLowerCase() != 'body' && !(dtd[parent.tagName][child.nodeName] && child.parentNode === parent)){
-                        if(!dtd[parent.tagName][child.nodeName]){
+                    if ( parent && tagName.toLowerCase() != 'body' && !(dtd[tagName][child.nodeName] && child.parentNode === parent)){
+                        if(!dtd[tagName][child.nodeName]){
                             pre = parent;
                         }else{
                             tmp = child.parentNode;
@@ -11284,10 +11284,10 @@ UE.plugins['font'] = function () {
     function mergeWithParent(node){
         var parent;
         while(parent = node.parentNode){
-            if(parent.tagName == 'SPAN' && domUtils.getChildCount(parent,function(child){
+            if(tagName == 'SPAN' && domUtils.getChildCount(parent,function(child){
                 return !domUtils.isBookmarkNode(child) && !domUtils.isBr(child)
             }) == 1) {
-                parent.style.cssText += node.style.cssText;
+                style.cssText += node.style.cssText;
                 domUtils.remove(node,true);
                 node = parent;
 
@@ -11368,7 +11368,7 @@ UE.plugins['font'] = function () {
                 //拷贝父亲们的特别的属性,这里只做背景颜色的处理
                 var parent = domUtils.findParent(span,function(n){return n.tagName == 'SPAN' && /background-color/.test(n.style.cssText)});
                 if(parent && !/background-color/.test(span.style.cssText)){
-                    span.style.backgroundColor = parent.style.backgroundColor;
+                    span.style.backgroundColor = style.backgroundColor;
                 }
             }
 
@@ -13205,9 +13205,9 @@ UE.plugins['list'] = function () {
                 return;
 
             var parent = node.parentNode;
-            if(parent.tagName == node.tagName){
+            if(tagName == node.tagName){
                 var nodeStyleType = getStyle(node) || (node.tagName == 'OL' ? 'decimal' : 'disc'),
-                    parentStyleType = getStyle(parent) || (parent.tagName == 'OL' ? 'decimal' : 'disc');
+                    parentStyleType = getStyle(parent) || (tagName == 'OL' ? 'decimal' : 'disc');
                 if(nodeStyleType == parentStyleType){
                     var styleIndex = utils.indexOf(listStyle[node.tagName], nodeStyleType);
                     styleIndex = styleIndex + 1 == listStyle[node.tagName].length ? 0 : styleIndex + 1;
@@ -13217,11 +13217,11 @@ UE.plugins['list'] = function () {
             }
             var index = 0,type = 2;
             if( domUtils.hasClass(node,/custom_/)){
-                if(!(/[ou]l/i.test(parent.tagName) && domUtils.hasClass(parent,/custom_/))){
+                if(!(/[ou]l/i.test(tagName) && domUtils.hasClass(parent,/custom_/))){
                     type = 1;
                 }
             }else{
-                if(/[ou]l/i.test(parent.tagName) && domUtils.hasClass(parent,/custom_/)){
+                if(/[ou]l/i.test(tagName) && domUtils.hasClass(parent,/custom_/)){
                     type = 3;
                 }
             }
@@ -13340,10 +13340,10 @@ UE.plugins['list'] = function () {
             var rng = me.selection.getRange(),
                 parent = domUtils.findParent(rng.startContainer,function(node){return domUtils.isBlockElm(node)},true),
                 li = domUtils.findParentByTagName(rng.startContainer,'li',true);
-            if(parent && parent.tagName != 'PRE' && !li){
-                var html = parent.innerHTML.replace(new RegExp(domUtils.fillChar, 'g'),'');
+            if(parent && tagName != 'PRE' && !li){
+                var html = innerHTML.replace(new RegExp(domUtils.fillChar, 'g'),'');
                 if(/^\s*1\s*\.[^\d]/.test(html)){
-                    parent.innerHTML = html.replace(/^\s*1\s*\./,'');
+                    innerHTML = html.replace(/^\s*1\s*\./,'');
                     rng.setStartAtLast(parent).collapse(true).select();
                     me.__hasEnterExecCommand = true;
                     me.execCommand('insertorderedlist');
@@ -14555,7 +14555,7 @@ UE.plugins['enterkey'] = function() {
                     br = range.document.createElement('br');
                     range.insertNode(br);
                     var parent = br.parentNode;
-                    if (parent.lastChild === br) {
+                    if (lastChild === br) {
                         br.parentNode.insertBefore(br.cloneNode(true), br);
                         range.setStartBefore(br);
                     } else {
@@ -14723,9 +14723,9 @@ UE.plugins['keystrokes'] = function() {
                     var parent = start.parentNode;
                     while(domUtils.getChildCount(parent) == 1 && !domUtils.isBody(parent)){
                         start = parent;
-                        parent = parent.parentNode;
+                        parent = parentNode;
                     }
-                    if(start === parent.lastChild)
+                    if(start === lastChild)
                         evt.preventDefault();
                     return;
                 }

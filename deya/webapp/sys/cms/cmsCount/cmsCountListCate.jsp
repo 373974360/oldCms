@@ -95,7 +95,7 @@ function showCategoryTree()
 
 // 弹出选择栏目的页面
 function openSelectPage(){
-	top.OpenModalWindow("选择站点下的栏目","/sys/cms/cmsCount/cateSelect.jsp?site_id="+site_id,318,480);
+	OpenModalWindow("选择站点下的栏目","/sys/cms/cmsCount/cateSelect.jsp?site_id="+site_id,318,480);
 }
 
 function setCountType(){

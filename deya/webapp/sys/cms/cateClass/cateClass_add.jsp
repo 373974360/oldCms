@@ -65,12 +65,12 @@ function updateCateClass()
 	addBean.app_ids = getAppIDS();
 	if(!CategoryRPC.updateCateClass(addBean))
 	{
-		top.msgWargin("分类方式"+WCMLang.Add_fail);
+		msgWargin("分类方式"+WCMLang.Add_fail);
 		return;
 	}
-	top.msgAlert("分类方式"+WCMLang.Add_success);
-	top.getCurrentFrameObj().reloadCateClassList();
-	top.CloseModalWindow();
+	msgAlert("分类方式"+WCMLang.Add_success);
+	getCurrentFrameObj().reloadCateClassList();
+	CloseModalWindow();
 }
 
 function addCateClass()
@@ -86,12 +86,12 @@ function addCateClass()
 		
 	if(!CategoryRPC.insertCateClass(addBean))
 	{
-		top.msgWargin("分类方式"+WCMLang.Add_fail);
+		msgWargin("分类方式"+WCMLang.Add_fail);
 		return;
 	}
-	top.msgAlert("分类方式"+WCMLang.Add_success);
-	top.getCurrentFrameObj().reloadCateClassList();
-	top.CloseModalWindow();
+	msgAlert("分类方式"+WCMLang.Add_success);
+	getCurrentFrameObj().reloadCateClassList();
+	CloseModalWindow();
 }
 
 // 修改状态下的重置
@@ -168,7 +168,7 @@ function checkEname()
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="" value="保存" />	
 			<input id="btnReset" name="btn1" type="button" onclick="formReSet('add_table',class_cname)" value="重置" />	
-			<input id="btnCancel" name="btn1" type="button" onclick="top.CloseModalWindow();" value="取消" />	
+			<input id="btnCancel" name="btn1" type="button" onclick="CloseModalWindow();" value="取消" />
 		</td>
 	</tr>
 </table>

@@ -190,7 +190,7 @@
         <tr>
             <td align="center" valign="middle">
                 <input name="btn1" type="button" onclick="updateSiteErrorData()" value="保存"/>
-                <input id="userAddCancel" name="btn1" type="button" onclick="top.tab_colseOnclick(top.curTabIndex);"
+                <input id="userAddCancel" name="btn1" type="button" onclick="tab_colseOnclick(curTabIndex);"
                        value="取消"/>
             </td>
         </tr>

@@ -70,7 +70,7 @@
             <td align="left" valign="middle" style="text-indent:100px;">
                 <input id="addButton" name="btn1" type="button" onclick="updateErrorHandleUserData()" value="保存" />
                 <input id="userAddReset" name="btn1" type="button" onclick="formReSet('errorHandleUser_table',id)" value="重置" />
-                <input id="userAddCancel" name="btn1" type="button" onclick="top.CloseModalWindow();" value="取消" />
+                <input id="userAddCancel" name="btn1" type="button" onclick="CloseModalWindow();" value="取消" />
             </td>
         </tr>
     </table>

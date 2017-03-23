@@ -295,7 +295,7 @@ function openPrintPage()
 				  </ul>
 				</td>				
 			</tr>			
-			<tr>
+			<!--<tr>
 				<th><nobr>信息的指定提供方式：</nobr></th>
 				<td><ul id="a123">
 					<li><input id="offer_type" name="offer_type" type="checkbox" value="0" checked="true"/><label for="e">纸质</label></li>
@@ -303,7 +303,7 @@ function openPrintPage()
                     <li><input id="offer_type" name="offer_type" type="checkbox" value="2" /><label for="e">光盘</label></li>
                     <li><input id="offer_type" name="offer_type" type="checkbox" value="3" /><label for="e">磁盘</label></li>					
 				</ul></td>
-            </tr>			
+            </tr>-->
 			<tr>
 				<th><nobr>获取信息方式：</nobr></th>
 				<td><ul id="a43">
@@ -367,7 +367,7 @@ function openPrintPage()
 			<input id="btn166hf" name="btn2" type="button" onclick="doVoid('do_0',1);" value="回复" />
 			<input id="btn167wx" name="btn3" type="button" onclick="setWuxiao(node_id,ysq_id)" value="置为无效" />
 			<input id="btn167hf" name="btn2" type="button" onclick="openPrintPage()" value="打印" />
-			<input id="" name="btn4" type="button" onclick="top.tab_colseOnclick(top.curTabIndex)" value="返回" />
+			<input id="" name="btn4" type="button" onclick="tab_colseOnclick(curTabIndex)" value="返回" />
 		</td>
 	</tr>
 </table>
@@ -457,7 +457,7 @@ function openPrintPage()
 				<th></th>
 				<td>
 					<input id="submitButton" name="submitButton" type="button" onclick="javascript:void(0);" value="提交" />					
-                    <input id="btn2" name="btn2" type="button" onclick="top.tab_colseOnclick(top.curTabIndex)" value="取消" />
+                    <input id="btn2" name="btn2" type="button" onclick="tab_colseOnclick(curTabIndex)" value="取消" />
 				</td>
 			</tr>
 		</tbody>

@@ -9,7 +9,7 @@
 	<script src="js/statisticsViewDetail.js"></script>
 	<SCRIPT LANGUAGE="JavaScript">
 	<!--
-		var search_con = top.getCurrentFrameObj().con;
+		var search_con = getCurrentFrameObj().con;
 		var div_height = 0;		
 		var s_id = request.getParameter("s_id");
 		var item_id = request.getParameter("item_id");

@@ -48,12 +48,12 @@ function updateCateClass()
 	
 	if(!CategoryRPC.updateZTCategory(addBean))
 	{
-		top.msgWargin("专题分类"+WCMLang.Add_fail);
+		msgWargin("专题分类"+WCMLang.Add_fail);
 		return;
 	}
-	top.msgAlert("专题分类"+WCMLang.Add_success);
-	top.getCurrentFrameObj().reloadZTCateList();
-	top.CloseModalWindow();
+	msgAlert("专题分类"+WCMLang.Add_success);
+	getCurrentFrameObj().reloadZTCateList();
+	CloseModalWindow();
 }
 
 function addCateClass()
@@ -66,15 +66,15 @@ function addCateClass()
 		return;
 	}
 	addBean.app_ids = "cms";
-	addBean.site_id = top.getCurrentFrameObj().site_id;
+	addBean.site_id = getCurrentFrameObj().site_id;
 	if(!CategoryRPC.insertZTCategory(addBean))
 	{
-		top.msgWargin("专题分类"+WCMLang.Add_fail);
+		msgWargin("专题分类"+WCMLang.Add_fail);
 		return;
 	}
-	top.msgAlert("专题分类"+WCMLang.Add_success);
-	top.getCurrentFrameObj().reloadZTCateList();
-	top.CloseModalWindow();
+	msgAlert("专题分类"+WCMLang.Add_success);
+	getCurrentFrameObj().reloadZTCateList();
+	CloseModalWindow();
 }
 
 // 修改状态下的重置
@@ -115,7 +115,7 @@ function checkEname()
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="" value="保存" />	
 			<input id="btnReset" name="btn1" type="button" onclick="formReSet('add_table',id)" value="重置" />	
-			<input id="btnCancel" name="btn1" type="button" onclick="top.CloseModalWindow();" value="取消" />	
+			<input id="btnCancel" name="btn1" type="button" onclick="CloseModalWindow();" value="取消" />
 		</td>
 	</tr>
 </table>

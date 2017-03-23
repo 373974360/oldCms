@@ -72,7 +72,7 @@ function showList(){
 			if(tm == null || tm == "null" || tm == "NULL"){
 				$(this).html("");
 			}
-			//$(this).html('<a href="javascript:top.addTab(true,\'/sys/system/assist/hotwords/hotWord_view.jsp?hot_id='+beanList.get(i-1).hot_id+'\',\'元数据信息\')">'+beanList.get(i-1).hot_name+'</a>');
+			//$(this).html('<a href="javascript:addTab(true,\'/sys/system/assist/hotwords/hotWord_view.jsp?hot_id='+beanList.get(i-1).hot_id+'\',\'元数据信息\')">'+beanList.get(i-1).hot_name+'</a>');
 		}
 	});	
 
@@ -98,24 +98,24 @@ function showTurnPage(){
 //打开查看窗口
 function openViewHotDataPage(hot_id)
 {	//OpenModalWindow
-	top.OpenModalWindow("热词查看","/sys/system/assist/hotwords/hotWord_view.jsp?hot_id="+hot_id,360,165);	
+	OpenModalWindow("热词查看","/sys/system/assist/hotwords/hotWord_view.jsp?hot_id="+hot_id,360,165);
 }
 
 //打开添加窗口
 function openAddHotPage()
 {
-	top.OpenModalWindow("维护热词","/sys/system/assist/hotwords/hotWord_add.jsp?app="+app+"&site_id="+site_id,360,165);	
+	OpenModalWindow("维护热词","/sys/system/assist/hotwords/hotWord_add.jsp?app="+app+"&site_id="+site_id,360,165);
 }
 
 //打开修改窗口
 function openUpdateHotDataPage()
 {
 	var selectIDS = table.getSelecteCheckboxValue("hot_id");
-	top.OpenModalWindow("维护热词","/sys/system/assist/hotwords/hotWord_add.jsp?hot_id="+selectIDS,360,165);
+	OpenModalWindow("维护热词","/sys/system/assist/hotwords/hotWord_add.jsp?hot_id="+selectIDS,360,165);
 }
 
 function openUpdatePage(hotid){
-	top.OpenModalWindow("维护热词","/sys/system/assist/hotwords/hotWord_add.jsp?hot_id="+hotid,360,165);
+	OpenModalWindow("维护热词","/sys/system/assist/hotwords/hotWord_add.jsp?hot_id="+hotid,360,165);
 }
 
 //添加热词
@@ -131,13 +131,13 @@ function addHotData()
 
 	if(AssistRPC.addHotWordById(bean))
 	{
-		top.msgAlert("热词"+WCMLang.Add_success);			
-		top.CloseModalWindow();
-		top.getCurrentFrameObj().reloadHotDataList();
+		msgAlert("热词"+WCMLang.Add_success);
+		CloseModalWindow();
+		getCurrentFrameObj().reloadHotDataList();
 	}
 	else
 	{
-		top.msgWargin("热词"+WCMLang.Add_fail);
+		msgWargin("热词"+WCMLang.Add_fail);
 	}
 }
 //修改热词
@@ -153,13 +153,13 @@ function updateHotData()
   
 	if(AssistRPC.updateHotWordById(bean))
 	{
-		top.msgAlert("热词"+WCMLang.Add_success);			
-		top.CloseModalWindow();
-		top.getCurrentFrameObj().reloadHotDataList();
+		msgAlert("热词"+WCMLang.Add_success);
+		CloseModalWindow();
+		getCurrentFrameObj().reloadHotDataList();
 	}
 	else
 	{
-		top.msgWargin("热词"+WCMLang.Add_fail);
+		msgWargin("热词"+WCMLang.Add_fail);
 	}
 }
 
@@ -169,17 +169,17 @@ function deleteHotData()
 	var selectIDS = table.getSelecteCheckboxValue("hot_id");
 	if(AssistRPC.delHotWordById(selectIDS))
 	{
-		top.msgAlert("热词"+WCMLang.Delete_success);
-		top.CloseModalWindow();
-		top.getCurrentFrameObj().reloadHotDataList();
+		msgAlert("热词"+WCMLang.Delete_success);
+		CloseModalWindow();
+		getCurrentFrameObj().reloadHotDataList();
 	}else
 	{
-		top.msgWargin("热词"+WCMLang.Delete_fail);
+		msgWargin("热词"+WCMLang.Delete_fail);
 	}
 }
 
 function closePage(){
-	top.CloseModalWindow();
+	CloseModalWindow();
 }
 
 //搜索
@@ -188,7 +188,7 @@ function hotDataSearchHandl(obj)
 	var con_value = $(obj).parent().find("#searchkey").val();
 	if(con_value.trim() == "" ||  con_value == null)
 	{
-		top.msgAlert(WCMLang.Search_empty);
+		msgAlert(WCMLang.Search_empty);
 		return;
 	}
 	table.con_name = $(obj).parent().find("#searchFields").val(); 

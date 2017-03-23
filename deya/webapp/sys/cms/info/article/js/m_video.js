@@ -48,12 +48,12 @@ function addInfoData()
 	
 	if(check_videoPath()==0)
 	{
-		top.msgAlert("视频不能为空，请上传视频!");
+		msgAlert("视频不能为空，请上传视频!");
 		return;
 	}
 	if(check_videoPath()==1)
 	{
-		top.msgAlert("视频格式不正确，请重新上传!");
+		msgAlert("视频格式不正确，请重新上传!");
 		return;
 	}
 	
@@ -98,12 +98,12 @@ function updateInfoData()
 	// 视频的格式和非空检查
 	if(check_videoPath()==0)
 	{
-		top.msgAlert("视频不能为空，请上传视频!");
+		msgAlert("视频不能为空，请上传视频!");
 		return;
 	}
 	if(check_videoPath()==1)
 	{
-		top.msgAlert("视频格式不正确，请重新上传!");
+		msgAlert("视频格式不正确，请重新上传!");
 		return;
 	}
     var info_level = $(":radio[name='info_level'][checked]").val();

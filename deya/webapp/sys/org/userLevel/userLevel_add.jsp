@@ -51,12 +51,12 @@ function updateUserLevel()
 	addBean.userlevel_id = defaultBean.userlevel_id;
 	if(!UserManRPC.updateUserLevel(addBean))
 	{
-		top.msgWargin("用户级别"+WCMLang.Add_fail);
+		msgWargin("用户级别"+WCMLang.Add_fail);
 		return;
 	}
-	top.msgAlert("用户级别"+WCMLang.Add_success);
-	top.getCurrentFrameObj().reloaduserLevelList();
-	top.CloseModalWindow();
+	msgAlert("用户级别"+WCMLang.Add_success);
+	getCurrentFrameObj().reloaduserLevelList();
+	CloseModalWindow();
 }
 
 // 新建用户级别函数
@@ -77,12 +77,12 @@ function addUserLevel()
 	$("#level_table").autoBind(addBean);
 	if(!UserManRPC.insertUserLevel(addBean))
 	{
-		top.msgWargin("用户级别"+WCMLang.Add_fail);
+		msgWargin("用户级别"+WCMLang.Add_fail);
 		return;
 	}
-	top.msgAlert("用户级别"+WCMLang.Add_success);
-	top.getCurrentFrameObj().reloaduserLevelList();
-	top.CloseModalWindow();
+	msgAlert("用户级别"+WCMLang.Add_success);
+	getCurrentFrameObj().reloaduserLevelList();
+	CloseModalWindow();
 }
 
 // 修改状态下的重置
@@ -146,7 +146,7 @@ function checkUserLevel()
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="submit" onclick="" value="保存" />	
 			<input id="levelAddReset" name="btn1" type="button" onclick="formReSet('level_table',userlevel_name)" value="重置" />	
-			<input id="levelAddCancel" name="btn1" type="button" onclick="top.CloseModalWindow();" value="取消" />	
+			<input id="levelAddCancel" name="btn1" type="button" onclick="CloseModalWindow();" value="取消" />
 		</td>
 	</tr>
 </table>

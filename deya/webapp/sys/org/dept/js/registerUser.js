@@ -113,12 +113,12 @@ function addUser()
 	bean.dept_id = dept_id;
 	if(UserManRPC.insertUser(bean))
 	{
-		parent.msgAlert("添加成功");	
+		msgAlert("添加成功");
 		window.location.href = "deptList.jsp?deptID="+dept_id+"&labNum=2";;
 	}
 	else
 	{
-		parent.msgAlert("添加失败，请重新保存");
+		msgAlert("添加失败，请重新保存");
 	}
 }
 
@@ -129,16 +129,16 @@ function setUserToAdmin()
 	
 	if(selectIDS == "" || selectIDS == null)
 	{
-		parent.msgAlert("请选择要设置为管理员的人员");
+		msgAlert("请选择要设置为管理员的人员");
 		return;
 	}else
 	{
 		if(DeptRPC.insertDetpManager(selectIDS,dept_id))
 		{
-			parent.msgAlert("设置成功");
+			msgAlert("设置成功");
 		}else
 		{
-			parent.msgAlert("设置失败，请重新设置");
+			msgAlert("设置失败，请重新设置");
 			return;
 		}
 	}
@@ -158,7 +158,7 @@ function userSearchHandl(obj)
 	var conn_value = $(obj).parent().find("#searchkey").val();
 	if(conn_value.trim() == "" ||  conn_value == null)
 	{
-		parent.msgAlert("请输入搜索条件");
+		msgAlert("请输入搜索条件");
 		return;
 	}
 	table.con_name = $(obj).parent().find("#searchFields").val(); 

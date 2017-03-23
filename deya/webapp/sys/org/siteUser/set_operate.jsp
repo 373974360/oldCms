@@ -23,8 +23,8 @@
 var handl_name = "<%=handl_name%>";
 var priv_type = <%=priv_type%>;
 var user_id = <%=user_id%>;
-var app_id = top.getCurrentFrameObj().appId;
-var site_id = top.getCurrentFrameObj().siteId;
+var app_id = getCurrentFrameObj().appId;
+var site_id = getCurrentFrameObj().siteId;
 var CategoryRPC = jsonrpc.CategoryRPC;
 var json_data;
 var selected_category_ids = "";
@@ -67,7 +67,7 @@ $(document).ready(function(){
 
 function getSelectedRoleID()
 {
-	var role_ids = top.getCurrentFrameObj().getCurrentSelectedRoleID(user_id);
+	var role_ids = getCurrentFrameObj().getCurrentSelectedRoleID(user_id);
 	
 	if(role_ids != "" && role_ids != null)
 	{
@@ -206,12 +206,12 @@ function saveUserOperate()
 
 	if(bools)
 	{
-		top.msgAlert("权限设置"+WCMLang.Add_success);		
-		eval("top.getCurrentFrameObj()."+handl_name+"()");	
-		top.CloseModalWindow();
+		msgAlert("权限设置"+WCMLang.Add_success);
+		eval("getCurrentFrameObj()."+handl_name+"()");
+		CloseModalWindow();
 	}else
 	{
-		top.msgAlert("权限设置"+WCMLang.Add_fail);
+		msgAlert("权限设置"+WCMLang.Add_fail);
 	}
 }
 
@@ -394,7 +394,7 @@ function checkAllTree2(obj)
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="saveUserOperate()" value="保存" />	
 			<input id="userAddReset" name="btn1" type="button" onclick="form1.reset()" value="重置" />	
-			<input id="userAddCancel" name="btn1" type="button" onclick="top.CloseModalWindow();" value="取消" />	
+			<input id="userAddCancel" name="btn1" type="button" onclick="CloseModalWindow();" value="取消" />
 		</td>
 	</tr>
 </table>

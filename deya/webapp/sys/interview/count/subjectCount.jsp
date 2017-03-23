@@ -56,7 +56,7 @@ String site_id = request.getParameter("site_id");
 		}
 		else
 		{
-			top.msgWargin("请输入时间范围");
+			msgWargin("请输入时间范围");
 			return;
 		}
 		var category_name = "";
@@ -73,7 +73,7 @@ String site_id = request.getParameter("site_id");
 
 		if(category_ids == "")
 		{
-			top.msgWargin("请选择访谈模型");
+			msgWargin("请选择访谈模型");
 			return;
 		}
 		window.location.href = "subjectCountDetail.jsp?site_id="+site_id+"&st="+s_time+"&et="+e_time+"&ot="+$("#ordery_type").val()+"&cn="+$("#count_num").val()+"&ids="+category_ids+"&na="+category_name+"&tt="+$("#time_type").val();

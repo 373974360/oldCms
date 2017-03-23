@@ -18,6 +18,8 @@ function initTable(){
 	colsList.add(setTitleClos("me_realname","真实姓名","","","",""));//英文名，显示名，宽，高，样式名，点击事件　
 	colsList.add(setTitleClos("me_account","登录名","150px","","",""));
 	colsList.add(setTitleClos("me_nickname","昵称","150px","","",""));
+    colsList.add(setTitleClos("add_time","添加时间","150px","","",""));
+    colsList.add(setTitleClos("update_time","更新时间","150px","","",""));
 	colsList.add(setTitleClos("me_status","状态","150px","","",""));
 	
 	table.setColsList(colsList);
@@ -34,17 +36,22 @@ function reloadMemberCheckList()
 }
 
 function showList(){
-			
 	var sortCol = table.sortCol;
 	var sortType = table.sortType;		
 	if(sortCol == "" || sortCol == null)
 	{
-		sortCol = "id";
+		sortCol = "update_time";
 		sortType = "desc";
 	}
-		
+    var mcat_id = MemberManRPC.getMCatIDByUser(LoginUserBean.user_id,current_site_id);
+    if(mcat_id != null && mcat_id != ""){
+        con_m.put("mcat_id", mcat_id);
+    }
+
 	con_m.put("start_num", tp.getStart());	
 	con_m.put("page_size", tp.pageSize);
+    con_m.put("sort_name", "update_time");
+    con_m.put("sort_type", "desc");
 
 	beanList = MemberManRPC.getMemberList(con_m);//第一个参数为站点ID，暂时默认为空	
 	beanList = List.toJSList(beanList);//把list转成JS的List对象	
@@ -68,7 +75,7 @@ function showList(){
 		if(i>0)
 		{
 			var id = beanList.get(i-1).me_id;
-			$(this).html('<a href="javascript:top.addTab(true,\'/sys/member/manager/member_view.jsp?type=view&member_id='+id+'\',\'会员信息\')">'+beanList.get(i-1).me_realname+'</a>');
+			$(this).html('<a href="javascript:addTab(true,\'/sys/member/manager/member_view.jsp?type=view&member_id='+id+'\',\'会员信息\')">'+beanList.get(i-1).me_realname+'</a>');
 		}
 	});
 	
@@ -110,7 +117,7 @@ function memberSearch(obj)
 	var search_value = $(obj).parent().find("#searchkey").val();
 	if(search_value.trim() == "" ||  search_value == null)
 	{
-		top.msgAlert(WCMLang.Search_empty);
+		msgAlert(WCMLang.Search_empty);
 		return;
 	}
 	search_name = $(obj).parent().find("#searchFields").val(); 
@@ -124,7 +131,7 @@ function memberSearch(obj)
 function singleCheck()
 {
 	var ids = table.getSelecteCheckboxValue("me_id");
-	top.OpenModalWindow("会员审核","/sys/member/check/member_check.jsp?member_id="+ids+"&type=single",350,190);
+	OpenModalWindow("会员审核","/sys/member/check/member_check.jsp?member_id="+ids+"&type=single",350,190);
 	
 }
 
@@ -132,7 +139,7 @@ function singleCheck()
 function batchCheck()
 {
 	var ids = table.getSelecteCheckboxValue("me_id");
-	top.OpenModalWindow("会员批量审核","/sys/member/check/member_check.jsp?member_id="+ids+"&type=batch",350,140);
+	OpenModalWindow("会员批量审核","/sys/member/check/member_check.jsp?member_id="+ids+"&type=batch",350,140);
 }
 	
 // 审核通过
@@ -151,12 +158,12 @@ function saveStatus()
 	mp.put("ids", me_id);
 	if(!MemberManRPC.checkMemberByIDS(mp))
 	{
-		top.msgWargin("会员审核" + WCMLang.Set_fail);
+		msgWargin("会员审核" + WCMLang.Set_fail);
 		return;
 	}
-	top.msgAlert("会员审核" + WCMLang.Set_success);
-	top.getCurrentFrameObj().reloadMemberCheckList();
-	top.CloseModalWindow();
+	msgAlert("会员审核" + WCMLang.Set_success);
+	getCurrentFrameObj().reloadMemberCheckList();
+	CloseModalWindow();
 }
 
 function deleteMember()
@@ -165,10 +172,10 @@ function deleteMember()
 
 	if(MemberManRPC.deleteMember(selectIDS))
 	{
-		top.msgAlert("会员信息"+WCMLang.Delete_success);
+		msgAlert("会员信息"+WCMLang.Delete_success);
 		reloadMemberCheckList();
 	}else
 	{
-		top.msgWargin("会员信息"+WCMLang.Delete_fail);
+		msgWargin("会员信息"+WCMLang.Delete_fail);
 	}
 }

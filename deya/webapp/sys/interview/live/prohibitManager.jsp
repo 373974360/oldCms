@@ -10,11 +10,11 @@
 	
 	<SCRIPT LANGUAGE="JavaScript">
 	<!--
-		var id = parent.id;
-		var sub_id = parent.sub_id;
+		var id = id;
+		var sub_id = sub_id;
 		
 		$(document).ready(function () {	
-			subjectBean = parent.subjectBean;
+			subjectBean = subjectBean;
 			initButtomStyle();
 			//主题状态为直播状态
 			if(subjectBean.status == 1)

@@ -68,27 +68,27 @@ function sortPurposeSort()
 	var selectIDS = table.getAllCheckboxValue("pur_id");
 	if(PurposeRPC.savePurposeSort(selectIDS))
 	{
-		top.msgAlert(WCMLang.Sort_success);
+		msgAlert(WCMLang.Sort_success);
 	}else
 	{
-		top.msgWargin(WCMLang.Sort_fail);
+		msgWargin(WCMLang.Sort_fail);
 	}
 }
 // 添加诉求目的信息
 function addPurposeRecord()
 {
-	top.OpenModalWindow("新建诉求目的信息","/sys/appeal/purpose/purpose_add.jsp?type=add",460,145);
+	OpenModalWindow("新建诉求目的信息","/sys/appeal/purpose/purpose_add.jsp?type=add",460,145);
 }
 
 function openUpdatePurposePage2(pur_id)
 {
-	top.OpenModalWindow("维护诉求目的信息","/sys/appeal/purpose/purpose_add.jsp?type=update&pur_id="+pur_id,450,145);
+	OpenModalWindow("维护诉求目的信息","/sys/appeal/purpose/purpose_add.jsp?type=update&pur_id="+pur_id,450,145);
 }
 //修改诉求目的信息
 function updatePurposePage()
 {
 	var selectIDS = table.getSelecteCheckboxValue("pur_id");
-	top.OpenModalWindow("维护诉求目的信息","/sys/appeal/purpose/purpose_add.jsp?type=update&pur_id="+selectIDS,450,145);
+	OpenModalWindow("维护诉求目的信息","/sys/appeal/purpose/purpose_add.jsp?type=update&pur_id="+selectIDS,450,145);
 }
 // 删除诉求目的信息
 function deletePurpose()
@@ -98,12 +98,12 @@ function deletePurpose()
 		mp.put("pur_id", pur_id);
 	if(PurposeRPC.deletePurpose(mp))
 	{
-		top.msgAlert("诉求目的信息"+WCMLang.Delete_success);
+		msgAlert("诉求目的信息"+WCMLang.Delete_success);
 		reloadPurposeList();
 	}
 	else
 	{
-		top.msgWargin("诉求目的信息"+WCMLang.Delete_fail);
+		msgWargin("诉求目的信息"+WCMLang.Delete_fail);
 	}
 }
 //添加诉求目的信息-保存事件
@@ -119,13 +119,13 @@ function addPurpose()
 	addBean.pur_id = PurposeRPC.getAppPurposeID();
 	if(PurposeRPC.insertPurpose(addBean))
 	{
-		top.msgAlert("诉求目的信息"+WCMLang.Add_success);
-		top.getCurrentFrameObj().reloadPurposeList();
-		top.CloseModalWindow();
+		msgAlert("诉求目的信息"+WCMLang.Add_success);
+		getCurrentFrameObj().reloadPurposeList();
+		CloseModalWindow();
 	}
 	else
 	{
-		top.msgWargin("诉求目的信息"+WCMLang.Add_fail);
+		msgWargin("诉求目的信息"+WCMLang.Add_fail);
 		return;
 	}
 }
@@ -141,13 +141,13 @@ function updatePurpose()
 	updateBean.pur_id = pur_id;
 	if(PurposeRPC.updatePurpose(updateBean))
 	{
-		top.msgAlert("诉求目的信息"+WCMLang.Set_success);
-		top.getCurrentFrameObj().reloadPurposeList();
-		top.CloseModalWindow();
+		msgAlert("诉求目的信息"+WCMLang.Set_success);
+		getCurrentFrameObj().reloadPurposeList();
+		CloseModalWindow();
 	}
 	else
 	{
-		top.msgWargin("诉求目的信息"+WCMLang.Set_fail);
+		msgWargin("诉求目的信息"+WCMLang.Set_fail);
 		return;
 	}
 }
@@ -158,10 +158,10 @@ function sortPurpose()
 	
 	if(PurposeRPC.savePurposeSort(selectIDS))
 	{
-		top.msgAlert(WCMLang.Sort_success);
+		msgAlert(WCMLang.Sort_success);
 		reloadPurposeList();	
 	}else
 	{
-		top.msgWargin(WCMLang.Sort_fail);
+		msgWargin(WCMLang.Sort_fail);
 	}
 }

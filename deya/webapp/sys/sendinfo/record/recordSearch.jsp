@@ -66,7 +66,7 @@ function related_ok(){
 		{
 			if(judgeDate(end_time,start_time))
 			{
-				top.msgWargin("结束时间不能小于开始时间");
+				msgWargin("结束时间不能小于开始时间");
 				return;
 			}
 		}
@@ -80,8 +80,8 @@ function related_ok(){
 	{
 		search_con += " and re.adopt_status = "+adopt_status;
 	}
-	top.getCurrentFrameObj().searchHandl(search_con);
-	top.CloseModalWindow();
+	getCurrentFrameObj().searchHandl(search_con);
+	CloseModalWindow();
 }
 
 
@@ -126,7 +126,7 @@ function related_ok(){
 			<tr>
 				<td align="left" valign="middle" style="text-indent:100px;">
 					<input type="button" value="搜索" class="btn1" onclick="related_ok()" />
-					<input type="button" value="取消" class="btn1" onclick="top.CloseModalWindow();" />
+					<input type="button" value="取消" class="btn1" onclick="CloseModalWindow();" />
 				</td>
 			</tr>
 		</table>

@@ -55,7 +55,7 @@ $(document).ready(function(){
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="saveBtn" name="saveBtn" type="button" onclick="" value="保存" />
 				<input id="resetBtn" name="resetBtn" type="button" onclick="formReSet('cate_table',mcat_name)" value="重置" />
-			<input id="viewCancel" name="btn1" type="button" onclick="top.CloseModalWindow()" value="关闭" />
+			<input id="viewCancel" name="btn1" type="button" onclick="CloseModalWindow()" value="关闭" />
 		</td>
 	</tr>
 </table>

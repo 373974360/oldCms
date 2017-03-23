@@ -25,7 +25,7 @@ alert(entername);
 <%
 String key = request.getParameter("entername");
 
-//System.out.println("key==============================================================="+key);
+System.out.println("key==============================================================="+key);
 
 %>
 </tr>

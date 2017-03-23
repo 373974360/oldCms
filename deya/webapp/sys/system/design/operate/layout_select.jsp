@@ -45,8 +45,8 @@ function loadLayoutList()
 function selctLayout(id)
 {
 	var layout_code = DesignRPC.getDesignLayoutBean(id).layout_content;
-	top.insertLayoutHandl(layout_code,position);
-	top.CloseModalWindow();
+	insertLayoutHandl(layout_code,position);
+	CloseModalWindow();
 }
 
 </script>
@@ -73,7 +73,7 @@ function selctLayout(id)
 	<tr>
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="returnRoleID()" value="保存" />
-			<input id="userAddCancel" name="btn1" type="button" onclick="top.CloseModalWindow();" value="取消" />	
+			<input id="userAddCancel" name="btn1" type="button" onclick="CloseModalWindow();" value="取消" />
 		</td>
 	</tr>
 </table>

@@ -27,14 +27,13 @@ if(dept_id == "null" || dept_id == "")
 {
 	var json_data = eval(DeptRPC.getDeptTreeByUser());	
 	if(json_data != null && json_data.length != 0){
-        dept_id = json_data[0].id;
+        	dept_id = json_data[0].id;
 	}
-
 }
 
 $(document).ready(function(){
 	//让树节点选中
-	top.treeNodeSelected(dept_id);
+	treeNodeSelected(dept_id);
 	initButtomStyle();
 	init_FromTabsStyle();
 	if($.browser.msie&&$.browser.version=="6.0"&&$("html")[0].scrollHeight>$("html").height()) $("html").css("overflowY","scroll"); 

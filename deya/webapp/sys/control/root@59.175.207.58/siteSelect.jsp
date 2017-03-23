@@ -32,7 +32,7 @@
 
 var CategoryRPC = jsonrpc.CategoryRPC;
 var site_id = "<%=site_id%>";
-var cat_str = top.getCurrentFrameObj().cat_str;
+var cat_str = getCurrentFrameObj().cat_str;
 var json_cat; // 站点栏目json对象
 
 var root_id = ""; //根目录,更目录为虚拟目录,需要去掉

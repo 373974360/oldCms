@@ -79,5 +79,5 @@ function updateInfoData()
 }
 
 function closePage(){
-	top.CloseModalWindow();
+	CloseModalWindow();
 }

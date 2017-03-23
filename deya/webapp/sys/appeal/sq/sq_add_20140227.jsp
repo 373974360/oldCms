@@ -20,11 +20,11 @@
 <script type="text/javascript">
 var sq_id = "<%=sq_id%>";
 var top_index = "<%=top_index%>";
-var is_admin = SQRPC.isAppealManager(top.LoginUserBean.user_id); //是否是管理员
-var current_dept_id = CpUserRPC.getSQDeptIDbyUserID(top.LoginUserBean.user_id);//当前用户所在的部门
+var is_admin = SQRPC.isAppealManager(LoginUserBean.user_id); //是否是管理员
+var current_dept_id = CpUserRPC.getSQDeptIDbyUserID(LoginUserBean.user_id);//当前用户所在的部门
 var defaultBean;
 var model_bean;
-var opt_ids = ","+jsonrpc.UserLoginRPC.getOptIDSByUserAPPSite(top.LoginUserBean.user_id,"appeal","")+",";
+var opt_ids = ","+jsonrpc.UserLoginRPC.getOptIDSByUserAPPSite(LoginUserBean.user_id,"appeal","")+",";
 $(document).ready(function(){
 	initButtomStyle();
 	init_input();
@@ -209,7 +209,7 @@ function updateShowText()
 //得到该登录人所具有的权限ID，显示操作按钮
 function getOptIDSByUser()
 {
-	var opt_ids = jsonrpc.UserLoginRPC.getOptIDSByUserAPPSite(top.LoginUserBean.user_id,"appeal","");
+	var opt_ids = jsonrpc.UserLoginRPC.getOptIDSByUserAPPSite(LoginUserBean.user_id,"appeal","");
 	if(opt_ids != "" && opt_ids != null)
 	{
 		var tempA = opt_ids.split(",");
@@ -269,7 +269,7 @@ function getProcessList()
 //打开审核内容修改窗口
 function openUpdateProcessPage(pro_id)
 {
-	top.OpenModalWindow("内容编辑","/sys/appeal/sq/update_process.jsp?pro_id="+pro_id+"&top_index="+top.curTabIndex,650,340);
+	OpenModalWindow("内容编辑","/sys/appeal/sq/update_process.jsp?pro_id="+pro_id+"&top_index="+curTabIndex,650,340);
 }
 
 function getProNoteValue(pro_id)
@@ -472,11 +472,11 @@ function getDisposeDeptList(dis_name)
 {	
 	var dept_list;
 	if(dis_name == "zb")//转办
-		dept_list= CpUserRPC.getBrotherDeptListByUserID(top.LoginUserBean.user_id);
+		dept_list= CpUserRPC.getBrotherDeptListByUserID(LoginUserBean.user_id);
 	if(dis_name == "jb")//交办
-		dept_list= CpUserRPC.getChildDeptListByUserID(top.LoginUserBean.user_id);
+		dept_list= CpUserRPC.getChildDeptListByUserID(LoginUserBean.user_id);
 	if(dis_name == "cb")//呈办
-		dept_list= CpUserRPC.getParentDeptListByUserID(top.LoginUserBean.user_id);
+		dept_list= CpUserRPC.getParentDeptListByUserID(LoginUserBean.user_id);
 
 	dept_list = List.toJSList(dept_list);
 	var str = "";
@@ -494,19 +494,19 @@ function getDisposeDeptList(dis_name)
 //信息判重
 function isReduplicate()
 {
-	top.addTab(true,"/sys/appeal/sq/sq_panchong.jsp?top_index="+top.curTabIndex,"信件判重");
+	addTab(true,"/sys/appeal/sq/sq_panchong.jsp?top_index="+curTabIndex,"信件判重");
 }
 
 //置为无效件
 function setWuxiao()
 {		
-	top.msgConfirm("确定要将此信件置为无效？","insertProcess(6)");
+	msgConfirm("确定要将此信件置为无效？","insertProcess(6)");
 }
 
 //信件编辑
 function updateSQ()
 {		
-	top.addTab(true,"/sys/appeal/sq/sq_update.jsp?sq_id="+sq_id+"&top_index="+top.curTabIndex,"信件编辑");
+	addTab(true,"/sys/appeal/sq/sq_update.jsp?sq_id="+sq_id+"&top_index="+curTabIndex,"信件编辑");
 }
 
 function openPrintPage()
@@ -828,7 +828,7 @@ function creatWord()
 				<th></th>
 				<td>
 					<input id="submitButton" name="btn1" type="button" onclick="javascript:void(0);" value="提交" />
-					<input id="btn2" name="btn2" type="button" onclick="top.tab_colseOnclick(top.curTabIndex)" value="取消" />
+					<input id="btn2" name="btn2" type="button" onclick="tab_colseOnclick(curTabIndex)" value="取消" />
 				</td>
 			</tr>			
 		</tbody>

@@ -11,20 +11,20 @@ var chartJsonData = ""; // bar图时的json字符串
 function showList(){
 	
 	//得到父页面中设置的参数 --- start
-	var start_day = top.getCurrentFrameObj().$("#start_day").val();
-	var end_day = top.getCurrentFrameObj().$("#end_day").val();
+	var start_day = getCurrentFrameObj().$("#start_day").val();
+	var end_day = getCurrentFrameObj().$("#end_day").val();
 	
 	var mp = new Map();
 	// 判断栏目选择信息
-	var statu = top.getCurrentFrameObj().$("#all_cat_ids").is(':checked');
+	var statu = getCurrentFrameObj().$("#all_cat_ids").is(':checked');
 	if(statu) {
 		mp.remove("site_ids");
 	}else{
-		if(top.getCurrentFrameObj().selected_ids== ""){
-			top.msgWargin("请选择站点!");
+		if(getCurrentFrameObj().selected_ids== ""){
+			msgWargin("请选择站点!");
 			return;
 		}else{
-			mp.put("site_ids",top.getCurrentFrameObj().selected_ids);
+			mp.put("site_ids",getCurrentFrameObj().selected_ids);
 		}
 	} 
 	

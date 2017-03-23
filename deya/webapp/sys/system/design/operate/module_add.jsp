@@ -39,14 +39,14 @@ $(document).ready(function(){
 	initButtomStyle();
 	init_FromTabsStyle();
 	
-	if(top.default_css_id == "" || top.default_css_id == null)
+	if(default_css_id == "" || default_css_id == null)
 	{
 		alert("请先选择主题风格");
-		top.CloseModalWindow();
+		CloseModalWindow();
 		return;
 	}
 	else
-		css_ename = DesignRPC.getDesignCssBean(top.default_css_id).css_ename
+		css_ename = DesignRPC.getDesignCssBean(default_css_id).css_ename
 
 
 	$("label").live("click",function(){
@@ -58,7 +58,7 @@ $(document).ready(function(){
 		$(".fromTabs li:first").hide();
 		$(".fromTabs li:last").click();
 
-		sel_module_id = top.currnet_module.find(".module_body > div").attr("module_id");
+		sel_module_id = currnet_module.find(".module_body > div").attr("module_id");
 		var moduleBean = DesignRPC.getDesignModuleBean(sel_module_id);
 		module_styles_id = moduleBean.style_ids;
 		sel_datasouce_type = moduleBean.datasouce_type;
@@ -68,21 +68,21 @@ $(document).ready(function(){
 
 		if(sel_datasouce_type == 0)
 		{
-			selectedCatTreeNode(top.currnet_module.find(".module_body > div").attr("cat_ids"));
+			selectedCatTreeNode(currnet_module.find(".module_body > div").attr("cat_ids"));
 		}
 		if(sel_datasouce_type == 1)
 		{
-			$("#content").val(top.currnet_module.find(".module_body > div").html());
-			KE.html("content",top.currnet_module.find(".module_body > div").html());
+			$("#content").val(currnet_module.find(".module_body > div").html());
+			KE.html("content",currnet_module.find(".module_body > div").html());
 			
 		}
 
-		default_style_id = top.currnet_module.find(".module_body > div").attr("style_id");
-		default_frame_id = top.currnet_module.find(" > div").attr("frame_id");
+		default_style_id = currnet_module.find(".module_body > div").attr("style_id");
+		default_frame_id = currnet_module.find(" > div").attr("frame_id");
 
 		//处理属性设置列表
 		getAttrList();
-		var attr_str = top.currnet_module.find(".module_body > div").attr("attr_str");
+		var attr_str = currnet_module.find(".module_body > div").attr("attr_str");
 		if(attr_str != "" && attr_str != null)
 		{
 			var tempA = attr_str.split(",");
@@ -356,7 +356,7 @@ function returnValues()
 		if(sel_frame_id != "" && sel_frame_id != null)
 			frameBean = DesignRPC.getDesignFrameBean(sel_frame_id);
 
-		top.updateModuleEvent(frameBean,sel_style_id,sel_class_name,old_class_name,sel_datasouce_type,datasouce_str,temp_cat_name,getAttrValue());
+		updateModuleEvent(frameBean,sel_style_id,sel_class_name,old_class_name,sel_datasouce_type,datasouce_str,temp_cat_name,getAttrValue());
 	}
 	else
 	{
@@ -372,9 +372,9 @@ function returnValues()
 			return;
 		}
 		var frameBean = DesignRPC.getDesignFrameBean(sel_frame_id);
-		top.insertModuleEvent(moduleBean,frameBean,sel_style_id,sel_class_name,datasouce_str,temp_cat_name,action_type,getAttrValue());
+		insertModuleEvent(moduleBean,frameBean,sel_style_id,sel_class_name,datasouce_str,temp_cat_name,action_type,getAttrValue());
 	}
-	top.CloseModalWindow();
+	CloseModalWindow();
 }
 
 function getV(){
@@ -510,7 +510,7 @@ function getV(){
 	<tr>
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="returnValues()" value="保存" />			
-			<input id="userAddCancel" name="btn1" type="button" onclick="top.CloseModalWindow();" value="取消" />	
+			<input id="userAddCancel" name="btn1" type="button" onclick="CloseModalWindow();" value="取消" />
 		</td>
 	</tr>
 </table>

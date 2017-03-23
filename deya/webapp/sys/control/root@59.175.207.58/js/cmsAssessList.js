@@ -25,7 +25,7 @@ function showList(){
 		mp.remove("site_ids");
 	}else{
 		if(selected_ids== ""){
-			top.msgWargin("请选择站点!");
+			msgWargin("请选择站点!");
 			return;
 		}else{
 			mp.put("site_ids",selected_ids);
@@ -190,8 +190,8 @@ function setHandlList(bean)
 }
 
 function openPieChart(dept_id,dept_name) { 
-	//top.getCurrentFrameObj().pieJsonData = 	pieChartDataList.get(index);
-	top.OpenModalWindow("查看 "+dept_name+" 详细信息","/sys/control/count/cmsDeptUserInfo.jsp?dept_id="+dept_id,1000,600);
+	//getCurrentFrameObj().pieJsonData = 	pieChartDataList.get(index);
+	OpenModalWindow("查看 "+dept_name+" 详细信息","/sys/control/count/cmsDeptUserInfo.jsp?dept_id="+dept_id,1000,600);
 	
 }
 

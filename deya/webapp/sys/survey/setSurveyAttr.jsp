@@ -13,7 +13,7 @@
 <script language="javascript" src="../js/jquery.uploadify.js"></script>
 <script language="javascript" src="../js/uploadFile/swfobject.js"></script>
 <script type="text/javascript" src="../js/extend.js"></script>
-<script type="text/javascript" src="js/surveyList.js"></script>
+<script type="text/javascript" src="js/surveyList.js?v=2017"></script>
 
 <!-- <script type="text/javascript" src="/cms.files/component/common/htmledit/editor/js/cicroUtil.js"></script>
 <script type="text/javascript" src="/cms.files/component/common/htmledit/fckeditor.js"></script> -->
@@ -45,7 +45,7 @@
 			init_input();
 			init_FromTabsStyle();
 		}); 
-    //init_editer("verdict");
+//    init_editer("verdict");
 		function showCommitTD(flag)
 		{
 			if(flag == 1)
@@ -79,7 +79,7 @@
 				setSurveyAttrHandl();
 			}
 			else
-				parent.alertWar("上传失败，请重新提交");
+				alertWar("上传失败，请重新提交");
 		}		
 
 		function prevImg()
@@ -256,7 +256,7 @@
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="setSurveyAttrHandl()" value="保存" />	
 			<input id="userAddReset" name="btn1" type="button" onclick="window.location.reload()" value="重置" />	
-			<input id="userAddCancel" name="btn1" type="button" onclick="top.tab_colseOnclick(top.curTabIndex)" value="取消" />	
+			<input id="userAddCancel" name="btn1" type="button" onclick="tab_colseOnclick(curTabIndex)" value="取消" />
 		</td>
 	</tr>
 </table>

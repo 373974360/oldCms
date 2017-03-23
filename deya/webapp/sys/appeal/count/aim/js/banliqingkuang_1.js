@@ -2,8 +2,8 @@ var CountServicesUtilRPC = jsonrpc.CountServicesUtilRPC;
 
 //设置统计业务
 function setBIdsHtml(){
-		//parent.fnModelWin('设置业务','appeal/count/businessTree.html',330,450); 
-		top.OpenModalWindow("设置业务","/sys/appeal/count/aim/businessTree.jsp",330,450);
+		//fnModelWin('设置业务','appeal/count/businessTree.html',330,450);
+		OpenModalWindow("设置业务","/sys/appeal/count/aim/businessTree.jsp",330,450);
 }
 
 
@@ -37,16 +37,16 @@ function funOK(){
 	var timeS = $("#s").val();
 	var timeE = $("#e").val();
 	if(timeS=='' || timeE==''){
-		top.msgWargin("请填写时间范围");
+		msgWargin("请填写时间范围");
 		return ;
 	}
 	if(timeS>timeE){
-	   top.msgWargin("结束时间不能在开始时间前");
+	   msgWargin("结束时间不能在开始时间前");
 	   return ;
 	}
 	
 	if("----请选择统计业务----"==$("#b_name").val()){
-		top.msgWargin("请选择统计业务");
+		msgWargin("请选择统计业务");
 		return ;
 	}
 	

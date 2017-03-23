@@ -89,7 +89,7 @@ function initPage()
 		<tr>
 			<td align="middle" valign="middle">
 				<input id="btn1" name="btn1" type="button" onclick="saveStatus()" value="保存" />
-				<input id="btn4" name="btn4" type="button" onclick="top.CloseModalWindow()" value="取消" />
+				<input id="btn4" name="btn4" type="button" onclick="CloseModalWindow()" value="取消" />
 			</td>
 		</tr>
 	</table>

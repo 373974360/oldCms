@@ -126,7 +126,7 @@ $(document).ready(function(){
 <table class="table_option" border="0" cellpadding="0" cellspacing="0">
 	<tr>
 		<td align="left" valign="middle" style="text-indent:100px;">
-			<input id="userAddButton" name="btn1" type="button" onclick="top.tab_colseOnclick(top.curTabIndex)" value="关闭" />
+			<input id="userAddButton" name="btn1" type="button" onclick="tab_colseOnclick(curTabIndex)" value="关闭" />
 		</td>
 	</tr>
 </table>
