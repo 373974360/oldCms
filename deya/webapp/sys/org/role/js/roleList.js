@@ -77,7 +77,8 @@ function showList(){
 	table.getCol("action_col").each(function(i){
 		if(i>0)
 		{
-			var str = '<a href="javascript:openReleUserHandl('+(i-1)+')">关联用户</a>&#160;&#160;';
+			//var str = '<a href="javascript:openReleUserHandl('+(i-1)+')">关联用户</a>&#160;&#160;';
+            var str = '';
 			/*
 			if(beanList.get(i-1).app_id != app_id)
 			{

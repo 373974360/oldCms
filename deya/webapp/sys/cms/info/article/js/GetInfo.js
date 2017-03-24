@@ -366,12 +366,12 @@ function doGet()
 
 	if(jsonrpc.InfoBaseRPC.infoGet(i_list,site_id,app_id,cat_id_for_get,idsTmp,isPublish,LoginUserBean.user_id))
 	{
-		msgAlert("获取成功");
-		getCurrentFrameObj().reloadInfoDataList();
+		parent.msgAlert("获取成功");
+        parent.getCurrentFrameObj().reloadInfoDataList();
 	}
 	else
 	{
-		msgWargin("获取失败,请重新操作");
+        parent.msgWargin("获取失败,请重新操作");
 	}
 }
 

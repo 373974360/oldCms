@@ -66,6 +66,11 @@ function savePicUrl(url)
 {
 	$("#thumb_url").val(url);
 }
+
+function closeTab(){
+    parent.tab_colseOnclick(parent.curTabIndex);
+}
+
 </script>
 </head>
 
@@ -124,8 +129,7 @@ function savePicUrl(url)
 	<tr>
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="" value="保存" />
-			<input id="addReset" name="btn1" type="button" onclick="window.location.reload()" value="重置" />
-			<input id="addCancel" name="btn1" type="button" onclick="tab_colseOnclick(curTabIndex)" value="取消" />
+			<input id="addCancel" name="btn1" type="button" onclick="closeTab()" value="取消" />
 		</td>
 	</tr>
 </table>

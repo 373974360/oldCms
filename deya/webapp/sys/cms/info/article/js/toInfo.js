@@ -75,12 +75,12 @@ function related_ok(){
 		else
 			doTS(c_ids);			
 	}else
-		msgWargin("请选择要推送的节点");
+        parent.msgWargin("请选择要推送的节点");
 	
 }
 
 function related_cancel(){
-	CloseModalWindow();
+    parent.CloseModalWindow();
 }
 
 function doTS(catIds){
@@ -103,13 +103,13 @@ function doTS(catIds){
 	var isPublish = $("#isPublish").is(':checked');
 	if(jsonrpc.InfoBaseRPC.infoTo(info_list,s_site_id,app_id,catIds,idsTmp,isPublish))
 	{
-		msgAlert("推送成功");
-		CloseModalWindow();
-		getCurrentFrameObj().table.unChekcbox();
+        parent.msgAlert("推送成功");
+        parent.CloseModalWindow();
+        parent.getCurrentFrameObj().table.unChekcbox();
 	}
 	else
 	{
-		msgWargin("推送失败,请重新操作");
+        parent.msgWargin("推送失败,请重新操作");
 	}
 }
 
@@ -189,8 +189,8 @@ function doTSForGK(catIds){
 			}			
 		}
 	}
-	msgAlert("推送成功");
-	CloseModalWindow();
+    parent.msgAlert("推送成功");
+    parent.CloseModalWindow();
 }
 
 function getSelectIds(){

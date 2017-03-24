@@ -545,7 +545,7 @@ function init_page() {
     else {
         $("#area_nav").css("width", $(window).width() - 20);
         $(".banaerContent").css("width", $(window).width());
-        $("#area_main_table").css("width", $(window).width() - 550);
+        $("#area_main_table").css("width", $(window).width());
     }
     //alert($(window).width());
 }
@@ -859,8 +859,8 @@ function msgAlert(msg) {
     msgHandl("alert", msg);
     if ($("#msgAlert").length == 0) {
         parent.$("#msgAlert").oneTime(1300, function () {
-            parent.$(this).fadeOut(300, function () {
-                parent.$(this).dialog('close');
+            parent.$("#msgAlert").fadeOut(300, function () {
+                parent.$("#msgAlert").dialog('close');
             });
         });
     } else {
@@ -905,7 +905,7 @@ function msgHandl(type, msg) {
         parent.$("#msgAlert input").unbind('click');
         //给操作按钮加上点击事件
         parent.$("#msgAlert input").click(function () {
-            $("#msgAlert").dialog('close');
+            parent.$("#msgAlert").dialog('close');
         });
         //加入描述语句
         parent.$("#msgAlert td").html(msg);
