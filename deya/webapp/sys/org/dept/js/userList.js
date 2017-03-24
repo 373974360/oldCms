@@ -71,7 +71,7 @@ function showUserList(){
 	user_table.getCol("user_realname").each(function(i){
 		if(i>0)
 		{
-			$(this).html('<a href="javascript:addTab(true,\'/sys/org/dept/user_view.jsp?user_id='+user_beanList.get(i-1).user_id+'\',\'用户信息\')">'+user_beanList.get(i-1).user_realname+'</a>');
+			$(this).html('<a href="javascript:parent.addTab(true,\'/sys/org/dept/user_view.jsp?user_id='+user_beanList.get(i-1).user_id+'\',\'用户信息\')">'+user_beanList.get(i-1).user_realname+'</a>');
 		}
 	});
 	
@@ -215,7 +215,7 @@ function addUser()
 	}
 	else
 	{
-		msgWargin("用户信息"+WCMLang.Add_fail);
+        parent.msgWargin("用户信息"+WCMLang.Add_fail);
 	}
 }
 
@@ -236,7 +236,7 @@ function updateUser()
 	}
 	else
 	{
-		msgWargin("用户信息"+WCMLang.Add_fail);
+        parent.msgWargin("用户信息"+WCMLang.Add_fail);
 	}
 }
 
@@ -246,11 +246,11 @@ function setUserStatus(status)
 	var selectIDS = user_table.getSelecteCheckboxValue("user_id");
 	if(UserManRPC.updateUserStatus(status,selectIDS))
 	{
-		msgAlert("用户状态"+WCMLang.Set_success);
+        parent.msgAlert("用户状态"+WCMLang.Set_success);
 		reoloadUserList();
 	}else
 	{
-		msgWargin("用户状态"+WCMLang.Set_fail);
+        parent.msgWargin("用户状态"+WCMLang.Set_fail);
 		return;
 	}	
 }
@@ -261,18 +261,18 @@ function deleteUser()
 	var selectIDS = user_table.getSelecteCheckboxValue("user_id");
 	if(UserManRPC.deleteUser(selectIDS))
 	{
-		msgAlert("用户信息"+WCMLang.Delete_success);
+        parent.msgAlert("用户信息"+WCMLang.Delete_success);
 		reoloadUserList();
 	}else
 	{
-		msgWargin("用户信息"+WCMLang.Delete_fail);
+        parent.msgWargin("用户信息"+WCMLang.Delete_fail);
 	}
 }
 
 //刷新列表
 function reloadUserPageList()
 {
-	msgAlert("用户信息"+WCMLang.Add_success);
+    parent.msgAlert("用户信息"+WCMLang.Add_success);
 	window.location.href = "deptList.jsp?deptID="+dept_id;
 }
 
@@ -287,7 +287,7 @@ function openUpdateUserPage()
 function openRegPage()
 {	
 	var selectIDS = user_table.getSelecteCheckboxValue("user_id");
-	OpenModalWindow("维护帐号","/sys/org/dept/registerUser_update.jsp?user_id="+selectIDS,460,225);
+    parent.OpenModalWindow("维护帐号","/sys/org/dept/registerUser_update.jsp?user_id="+selectIDS,460,225);
 }
 
 //置为管理员
@@ -313,19 +313,19 @@ function setUserToAdmin()
 		}
 		else
 		{
-			msgAlert("部门管理员"+WCMLang.Set_success);
+            parent.msgAlert("部门管理员"+WCMLang.Set_success);
 			user_table.unChekcbox();
 			return;
 		}
 	}
 	if(DeptRPC.insertDetpManager(selectIDS,dept_id))
 	{
-		msgAlert("部门管理员"+WCMLang.Set_success);
+        parent.msgAlert("部门管理员"+WCMLang.Set_success);
 		reoloadManagerList();
 		user_table.unChekcbox();
 	}else
 	{
-		msgWargin("部门管理员"+WCMLang.Set_fail);
+        parent.msgWargin("部门管理员"+WCMLang.Set_fail);
 		return;
 	}	
 }
@@ -363,11 +363,11 @@ function moveUser(dept_id)
 		move_m.put("dept_id",dept_id);
 		move_m.put("user_ids",selectIDS);
 		if(UserManRPC.moveUser(move_m)){
-			msgAlert("用户"+WCMLang.Move_success);
+            parent.msgAlert("用户"+WCMLang.Move_success);
 			reoloadUserList();
 		}else
 		{
-			msgWargin("用户"+WCMLang.Move_fail);
+            parent.msgWargin("用户"+WCMLang.Move_fail);
 			return;
 		}
 	}
@@ -397,11 +397,11 @@ function saveUserSort()
 	{
 		if(UserManRPC.saveUserSort(user_ids))
 		{
-			msgAlert(WCMLang.Sort_success);
+            parent.msgAlert(WCMLang.Sort_success);
 		}
 		else
 		{
-			msgWargin(WCMLang.Sort_fail);
+            parent.msgWargin(WCMLang.Sort_fail);
 			return;
 		}
 	}

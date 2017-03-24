@@ -175,8 +175,13 @@ function publicSelectCheckbox(table_obj,value_name,handl_name)
 	
 	if(selectIDS == "" || selectIDS == null)
 	{
-		msgWargin(WCMLang.Select_empty);
-		return;
+		try{
+            msgWargin(WCMLang.Select_empty);
+            return false;
+		}catch (e){
+            parent.msgWargin(WCMLang.Select_empty);
+            return false;
+		}
 	}else
 	{
 		eval(handl_name);
@@ -194,14 +199,24 @@ function publicSelectSinglCheckbox(table_obj,value_name,handl_name)
 	
 	if(selectIDS == "" || selectIDS == null)
 	{
-		msgWargin(WCMLang.Select_empty);
-		return;
+        try{
+            msgWargin(WCMLang.Select_empty);
+            return false;
+        }catch (e){
+            parent.msgWargin(WCMLang.Select_empty);
+            return false;
+        }
 	}else
 	{
 		if(selectIDS.split(",").length > 1)
 		{
-			msgWargin(WCMLang.Select_singl);
-			return;
+            try{
+                msgWargin(WCMLang.Select_singl);
+                return false;
+            }catch (e){
+                parent.msgWargin(WCMLang.Select_singl);
+                return false;
+            }
 		}
 		else{
 			eval(handl_name);
@@ -220,11 +235,22 @@ function deleteRecord(table_obj,value_name,handl_name)
 	
 	if(selectIDS == "" || selectIDS == null)
 	{
-		msgWargin(WCMLang.Select_empty);
-		return;
+        try{
+            msgWargin(WCMLang.Select_empty);
+            return false;
+        }catch (e){
+            parent.msgWargin(WCMLang.Select_empty);
+            return false;
+        }
 	}else
-	{		
-		msgConfirm(WCMLang.Delete_confirm,handl_name);
+	{
+        try{
+            msgConfirm(WCMLang.Delete_confirm,handl_name);
+            return false;
+        }catch (e){
+            parent.msgConfirm(WCMLang.Delete_confirm,handl_name);
+            return false;
+        }
 	}
 }
 
@@ -234,16 +260,32 @@ function deleteSinglRecord(table_obj,value_name,handl_name)
 	
 	if(selectIDS == "" || selectIDS == null)
 	{
-		msgWargin(WCMLang.Select_empty);
-		return;
+        try{
+            msgWargin(WCMLang.Select_empty);
+            return false;
+        }catch (e){
+            parent.msgWargin(WCMLang.Select_empty);
+            return false;
+        }
 	}else
 	{
 		if(selectIDS.split(",").length > 1)
 		{
-			msgWargin(WCMLang.Select_singl);
-			return;
+            try{
+                msgWargin(WCMLang.Select_singl);
+                return false;
+            }catch (e){
+                parent.msgWargin(WCMLang.Select_singl);
+                return false;
+            }
 		}
-		msgConfirm(WCMLang.Delete_confirm,handl_name);
+        try{
+            msgConfirm(WCMLang.Delete_confirm,handl_name);
+            return false;
+        }catch (e){
+            parent.msgConfirm(WCMLang.Delete_confirm,handl_name);
+            return false;
+        }
 	}
 }
 
@@ -257,14 +299,24 @@ function updateRecord(table_obj,value_name,handl_name)
 	var selectIDS = table_obj.getSelecteCheckboxValue(value_name);
 	if(selectIDS == "" || selectIDS == null)
 	{
-		msgWargin(WCMLang.Select_empty);
-		return;
+        try{
+            msgWargin(WCMLang.Select_empty);
+            return false;
+        }catch (e){
+            parent.msgWargin(WCMLang.Select_empty);
+            return false;
+        }
 	}else
 	{
 		if(selectIDS.split(",").length > 1)
 		{
-			msgWargin(WCMLang.Select_singl);
-			return;
+            try{
+                msgWargin(WCMLang.Select_singl);
+                return false;
+            }catch (e){
+                parent.msgWargin(WCMLang.Select_singl);
+                return false;
+            }
 		}
 		else{
 			eval(handl_name);
@@ -283,8 +335,13 @@ function sortRecord(table_obj,value_name,handl_name)
 	
 	if(selectIDS == "" || selectIDS == null)
 	{
-		msgWargin(WCMLang.Select_empty);
-		return;
+        try{
+            msgWargin(WCMLang.Select_empty);
+            return false;
+        }catch (e){
+            parent.msgWargin(WCMLang.Select_empty);
+            return false;
+        }
 	}else
 	{
 		eval(handl_name);

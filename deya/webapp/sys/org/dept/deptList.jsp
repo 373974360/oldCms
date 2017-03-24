@@ -33,7 +33,7 @@ if(dept_id == "null" || dept_id == "")
 
 $(document).ready(function(){
 	//让树节点选中
-	treeNodeSelected(dept_id);
+	parent.treeNodeSelected(dept_id);
 	initButtomStyle();
 	init_FromTabsStyle();
 	if($.browser.msie&&$.browser.version=="6.0"&&$("html")[0].scrollHeight>$("html").height()) $("html").css("overflowY","scroll"); 

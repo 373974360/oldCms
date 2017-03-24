@@ -71,7 +71,7 @@ function showDeptList(){
 	table.getCol("dept_name").each(function(i){	
 		if(i>0)
 		{
-			$(this).html('<a href="javascript:addTab(true,\'/sys/org/dept/dept_view.jsp?dept_id='+beanList.get(i-1).dept_id+'\',\'部门信息\')">'+beanList.get(i-1).dept_name+'</a>');
+			$(this).html('<a href="javascript:parent.addTab(true,\'/sys/org/dept/dept_view.jsp?dept_id='+beanList.get(i-1).dept_id+'\',\'部门信息\')">'+beanList.get(i-1).dept_name+'</a>');
 		}
 	});
 
@@ -125,19 +125,19 @@ function addDept()
 	bean.dept_id = DeptRPC.getDeptID();
 	if(bean.dept_id == 0)
 	{
-		msgAlert("部门信息"+WCMLang.Add_success);
+		parent.msgAlert("部门信息"+WCMLang.Add_success);
 		return;
 	}
 	
 	if(DeptRPC.insertDept(bean))
 	{
-		msgAlert("部门信息"+WCMLang.Add_success);
+        parent.msgAlert("部门信息"+WCMLang.Add_success);
 		insertDeptTree(bean.dept_id,bean.dept_name);		
 		window.location.href = "deptList.jsp?deptID="+parent_id+"&labNum=2";
 	}
 	else
 	{
-		msgWargin("部门信息"+WCMLang.Add_fail);
+        parent.msgWargin("部门信息"+WCMLang.Add_fail);
 	}	
 }
 
@@ -159,13 +159,13 @@ function updateDept()
 	bean.dept_id = dept_id;
 	if(DeptRPC.updateDept(bean))
 	{
-		msgAlert("部门信息"+WCMLang.Add_success);
+        parent.msgAlert("部门信息"+WCMLang.Add_success);
 		updateDeptTree(bean.dept_id,bean.dept_name);		
 		window.location.href = "deptList.jsp?deptID="+parent_id+"&labNum=2";
 	}
 	else
 	{
-		msgWargin("部门信息"+WCMLang.Add_fail);
+        parent.msgWargin("部门信息"+WCMLang.Add_fail);
 	}
 }
 
@@ -176,11 +176,11 @@ function deleteDeptHandl()
 	if(DeptRPC.deleteDept(selectIDS))
 	{
 		deleteDeptTree(selectIDS);
-		msgAlert("部门信息"+WCMLang.Delete_success);
+        parent.msgAlert("部门信息"+WCMLang.Delete_success);
 		reoloadDeptList();
 	}else
 	{
-		msgWargin("部门信息"+WCMLang.Delete_fail);
+        parent.msgWargin("部门信息"+WCMLang.Delete_fail);
 	}
 }
 
@@ -210,14 +210,14 @@ function saveDeptSort()
 	{
 		if(DeptRPC.saveDeptSort(dept_ids))
 		{
-			msgAlert(WCMLang.Sort_success);
+            parent.msgAlert(WCMLang.Sort_success);
 			getDeptTreeJsonData();
-			treeNodeSelected(dept_id);
+            parent.treeNodeSelected(dept_id);
 			reoloadDeptList();
 		}
 		else
 		{
-			msgWargin(WCMLang.Sort_fail);
+            parent.msgWargin(WCMLang.Sort_fail);
 			return;
 		}
 	}
@@ -229,7 +229,7 @@ function deptSearchHandl(obj)
 	var conn_value = $(obj).parent().find("#searchkey").val();
 	if(conn_value.trim() == "" ||  conn_value == null)
 	{
-		msgAlert(WCMLang.Search_empty);
+        parent.msgAlert(WCMLang.Search_empty);
 		return;
 	}
 	table.con_name = $(obj).parent().find("#searchFields").val(); 
@@ -244,12 +244,12 @@ function moveDept(parent_id)
 	{
 		var selectIDS = table.getSelecteCheckboxValue("dept_id");			
 		if(DeptRPC.moveDept(parent_id,selectIDS)){
-			msgAlert("部门"+WCMLang.Move_success);
+            parent.msgAlert("部门"+WCMLang.Move_success);
 			reoloadDeptList();
 			getDeptTreeJsonData();
 		}else
 		{
-			msgWargin("部门"+WCMLang.Move_fail);
+            parent.msgWargin("部门"+WCMLang.Move_fail);
 			return;
 		}
 	}

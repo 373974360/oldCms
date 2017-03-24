@@ -56,7 +56,7 @@ function showManagerList(){
 	manager_table.getCol("user_realname").each(function(i){
 		if(i>0)
 		{
-			$(this).html('<a href="javascript:addTab(true,\'/sys/org/dept/user_view.jsp?user_id='+manager_beanList.get(i-1).user_id+'\',\'用户信息\')">'+manager_beanList.get(i-1).user_realname+'</a>');
+			$(this).html('<a href="javascript:parent.addTab(true,\'/sys/org/dept/user_view.jsp?user_id='+manager_beanList.get(i-1).user_id+'\',\'用户信息\')">'+manager_beanList.get(i-1).user_realname+'</a>');
 		}
 	});
 	
@@ -73,11 +73,11 @@ function deleteDeptManager()
 	var selectIDS = manager_table.getSelecteCheckboxValue("user_id");
 	if(DeptRPC.deleteDeptManager(selectIDS,dept_id))
 	{
-		msgAlert("部门管理员"+WCMLang.Delete_success);
+        parent.msgAlert("部门管理员"+WCMLang.Delete_success);
 		reoloadManagerList();
 	}else
 	{
-		msgAlert("部门管理员"+WCMLang.Delete_fail);
+        parent.msgAlert("部门管理员"+WCMLang.Delete_fail);
 		return;
 	}
 }
@@ -109,11 +109,11 @@ function saveManager(user_ids)
 {
 	if(DeptRPC.updateDetpManager(user_ids,old_dept_manager,selected_dept_id))
 	{
-		msgAlert("部门管理员"+WCMLang.Set_success);
-		getCurrentFrameObj().reoloadManagerList();
+        parent.msgAlert("部门管理员"+WCMLang.Set_success);
+        parent.getCurrentFrameObj().reoloadManagerList();
 		
 	}else{
-		msgWargin("部门管理员"+WCMLang.Set_fail);
+        parent.msgWargin("部门管理员"+WCMLang.Set_fail);
 	}
 }
 
