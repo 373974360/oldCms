@@ -75,7 +75,7 @@ function showTurnPage(){
 //打开添加窗口
 function openAddDesignLayoutPage()
 {		
-	addTab(true,"/sys/system/design/layout_add.jsp?app_id="+app_id+"&top_index="+curTabIndex,"维护布局");
+	addTab(true,"/sys/system/design/layout_add.jsp?app_id="+app_id+"&top_index="+curTabIndex,"修改布局");
 }
 
 function openUpdateDesignLayoutPage(c_id)
@@ -87,7 +87,7 @@ function openUpdateDesignLayoutPage(c_id)
 	}else
 		id = table.getSelecteCheckboxValue("layout_id");
 	
-	addTab(true,"/sys/system/design/layout_add.jsp?app_id="+app_id+"&top_index="+curTabIndex+"&layout_id="+id,"维护布局");
+	addTab(true,"/sys/system/design/layout_add.jsp?app_id="+app_id+"&top_index="+curTabIndex+"&layout_id="+id,"修改布局");
 }
 
 

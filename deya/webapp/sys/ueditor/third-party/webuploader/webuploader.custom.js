@@ -930,8 +930,8 @@
                     overflow: 'hidden'
                 });
     
-                append( container );
-                addClass('webuploader-container');
+                parent.append( container );
+                parent.addClass('webuploader-container');
                 this._container = container;
                 return container;
             },

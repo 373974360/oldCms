@@ -82,13 +82,13 @@ function addPurposeRecord()
 
 function openUpdatePurposePage2(pur_id)
 {
-	OpenModalWindow("维护诉求目的信息","/sys/appeal/purpose/purpose_add.jsp?type=update&pur_id="+pur_id,450,145);
+	OpenModalWindow("修改诉求目的信息","/sys/appeal/purpose/purpose_add.jsp?type=update&pur_id="+pur_id,450,145);
 }
 //修改诉求目的信息
 function updatePurposePage()
 {
 	var selectIDS = table.getSelecteCheckboxValue("pur_id");
-	OpenModalWindow("维护诉求目的信息","/sys/appeal/purpose/purpose_add.jsp?type=update&pur_id="+selectIDS,450,145);
+	OpenModalWindow("修改诉求目的信息","/sys/appeal/purpose/purpose_add.jsp?type=update&pur_id="+selectIDS,450,145);
 }
 // 删除诉求目的信息
 function deletePurpose()

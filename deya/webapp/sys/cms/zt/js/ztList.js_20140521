@@ -145,7 +145,7 @@ function showTurnPage(){
 
 function openAddCategoryPage()
 {
-	top.addTab(true,"/sys/cms/category/category_add.jsp?top_index="+top.curTabIndex+"&app_id="+app_id+"&parentID=0&cat_type=1","维护目录");
+	top.addTab(true,"/sys/cms/category/category_add.jsp?top_index="+top.curTabIndex+"&app_id="+app_id+"&parentID=0&cat_type=1","修改目录");
 }
 
 function openUpdateCategoryPage(cid)
@@ -155,7 +155,7 @@ function openUpdateCategoryPage(cid)
 		id = cid;
 	else
 		id = table.getSelecteCheckboxValue("id");
-	top.addTab(true,"/sys/cms/category/category_add.jsp?top_index="+top.curTabIndex+"&id="+id+"&cat_type=1&app_id="+app_id,"维护目录");
+	top.addTab(true,"/sys/cms/category/category_add.jsp?top_index="+top.curTabIndex+"&id="+id+"&cat_type=1&app_id="+app_id,"修改目录");
 }
 
 var ztCate_list = new List();

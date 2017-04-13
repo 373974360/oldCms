@@ -28,7 +28,7 @@
 	<script type="text/javascript" src="../../../js/jquery-easyui/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="../../../js/indexjs/indexList.js"></script>
 	<script type="text/javascript" src="../../../js/indexjs/tools.js"></script>
-	<script type="text/javascript" src="js/info.js?v=20151019"></script>
+	<script type="text/javascript" src="js/info.js?v=20170412"></script>
 
 	<script type="text/javascript">
 

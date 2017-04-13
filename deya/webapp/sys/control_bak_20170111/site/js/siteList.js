@@ -98,7 +98,7 @@ function openAddSitePage()
 	var create_flag = SiteRPC.isCreateSite();//创建站点时判断站点是否超出，可以创建返回true,不能创建返回站点总数用于提示
 	if(create_flag == "true")
 	{
-		addTab(true,'/sys/control/site/site_add.jsp?parentID='+site_id+"&tab_index="+curTabIndex,'维护站点');
+		addTab(true,'/sys/control/site/site_add.jsp?parentID='+site_id+"&tab_index="+curTabIndex,'修改站点');
 	}else
 	{
 		msgWargin("您所购站点数已创建完成，如需要增加站点，请联系厂商");
@@ -107,9 +107,9 @@ function openAddSitePage()
 
 function openUpdateSitePage()
 {  
-	//OpenModalWindow("维护站点","/sys/control/site/site_add.jsp?parentID="+site_id,500,360);
+	//OpenModalWindow("修改站点","/sys/control/site/site_add.jsp?parentID="+site_id,500,360);
 	var selectIDS = table.getSelecteCheckboxValue("site_id");
-	addTab(true,'/sys/control/site/site_add.jsp?site_id='+selectIDS+'&parentID='+site_id+"&tab_index="+curTabIndex,'维护站点');
+	addTab(true,'/sys/control/site/site_add.jsp?site_id='+selectIDS+'&parentID='+site_id+"&tab_index="+curTabIndex,'修改站点');
 }
 
 function openViewPage(s_id)

@@ -49,7 +49,7 @@ function showList(){
 //修改页面
 function openNameUpdateAreaPage(area_id,parent_id)
 {
-	  OpenModalWindow("维护地区","/sys/appeal/area/area_add.jsp?parentID="+parent_id+"&area_id="+area_id,450,130);
+	  OpenModalWindow("修改地区","/sys/appeal/area/area_add.jsp?parentID="+parent_id+"&area_id="+area_id,450,130);
 }
 function showTurnPage(){					
 	tp.show("turn","simple");	
@@ -58,7 +58,7 @@ function showTurnPage(){
 //新增页面
 function openAddAreaPage()
 {
-	OpenModalWindow("维护地区","/sys/appeal/area/area_add.jsp?parentID="+area_id,450,130);
+	OpenModalWindow("修改地区","/sys/appeal/area/area_add.jsp?parentID="+area_id,450,130);
 }
 
 //执行新增
@@ -102,7 +102,7 @@ function insertAreaTree(id,dept_name)
 function openUpdateAreaPage()
 {
 	var selectIDS = table.getSelecteCheckboxValue("area_id");
-	  OpenModalWindow("维护地区","/sys/appeal/area/area_add.jsp?parentID="+area_id+"&area_id="+selectIDS,450,130);
+	  OpenModalWindow("修改地区","/sys/appeal/area/area_add.jsp?parentID="+area_id+"&area_id="+selectIDS,450,130);
 }
 
 

@@ -62,13 +62,13 @@ function showTurnPage(){
 
 function openAddGroupPage()
 {
-	OpenModalWindow("维护站群","/sys/control/group/group_add.jsp?parentID="+sgroup_id,500,300);
+	OpenModalWindow("修改站群","/sys/control/group/group_add.jsp?parentID="+sgroup_id,500,300);
 }
 
 function openUpdateGroupPage()
 {
 	var selectIDS = table.getSelecteCheckboxValue("sgroup_id");
-	OpenModalWindow("维护站群","/sys/control/group/group_add.jsp?parentID="+sgroup_id+"&sgroup_id="+selectIDS,500,300);
+	OpenModalWindow("修改站群","/sys/control/group/group_add.jsp?parentID="+sgroup_id+"&sgroup_id="+selectIDS,500,300);
 }
 
 function openViewPage(s_id)

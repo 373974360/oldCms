@@ -75,7 +75,7 @@ function showTurnPage(){
 //打开添加窗口
 function openAddDesignCasePage()
 {		
-	addTab(true,"/sys/system/design/case_add.jsp?app_id="+app_id+"&top_index="+curTabIndex,"维护方案套餐");
+	addTab(true,"/sys/system/design/case_add.jsp?app_id="+app_id+"&top_index="+curTabIndex,"修改方案套餐");
 }
 
 function openUpdateDesignCasePage(c_id)
@@ -87,7 +87,7 @@ function openUpdateDesignCasePage(c_id)
 	}else
 		id = table.getSelecteCheckboxValue("case_id");
 	
-	addTab(true,"/sys/system/design/case_add.jsp?app_id="+app_id+"&top_index="+curTabIndex+"&case_id="+id,"维护方案套餐");
+	addTab(true,"/sys/system/design/case_add.jsp?app_id="+app_id+"&top_index="+curTabIndex+"&case_id="+id,"修改方案套餐");
 }
 
 

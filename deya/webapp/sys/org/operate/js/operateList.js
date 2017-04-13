@@ -73,13 +73,13 @@ function showTurnPage(){
 
 function openAddOperatePage()
 {
-	OpenModalWindow("维护权限","/sys/org/operate/operate_add.jsp?parentID="+opt_id,500,308);
+	OpenModalWindow("修改权限","/sys/org/operate/operate_add.jsp?parentID="+opt_id,500,308);
 }
 
 function openUpdateOperatePage()
 {
 	var selectIDS = table.getSelecteCheckboxValue("opt_id");
-	OpenModalWindow("维护权限","/sys/org/operate/operate_add.jsp?parentID="+opt_id+"&opt_id="+selectIDS,500,308);
+	OpenModalWindow("修改权限","/sys/org/operate/operate_add.jsp?parentID="+opt_id+"&opt_id="+selectIDS,500,308);
 }
 
 function addOperate()

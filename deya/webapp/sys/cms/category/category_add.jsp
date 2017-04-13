@@ -18,7 +18,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>目录维护</title>
+    <title>目录修改</title>
 
 
     <link rel="stylesheet" type="text/css" href="../../styles/themes/default/tree.css">

@@ -23,7 +23,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>信息维护</title>
+<title>信息修改</title>
 <jsp:include page="../include/include_info_tools.jsp"/>
 <script type="text/javascript" src="js/m_gk_xsjg.js"></script>
 <script type="text/javascript">

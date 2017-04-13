@@ -78,7 +78,7 @@ function showList(){
 	table.getCol("action_Col").each(function(i){
 		if(i>0)
 		{			
-			$(this).html('<a href="javascript:addTab(true,\'/sys/system/formodel/fieldList.jsp?model_id='+beanList.get(i-1).model_id+'\',\'内容模型字段\')">字段维护</a>');
+			$(this).html('<a href="javascript:addTab(true,\'/sys/system/formodel/fieldList.jsp?model_id='+beanList.get(i-1).model_id+'\',\'内容模型字段\')">字段修改</a>');
 		}
 	});	
 	
@@ -89,7 +89,7 @@ function showList(){
 			if(beanList.get(i-1).model_type == "0"){
 				$(this).html("系统默认");
 			}else if(beanList.get(i-1).model_type == "1"){
-				$(this).html('<a href="javascript:addTab(true,\'/sys/model/form/form_list.jsp?model_id='+beanList.get(i-1).model_id+'\',\'内容模型字段\')">字段维护</a>');
+				$(this).html('<a href="javascript:addTab(true,\'/sys/model/form/form_list.jsp?model_id='+beanList.get(i-1).model_id+'\',\'内容模型字段\')">字段修改</a>');
 			}else if(beanList.get(i-1).model_type == "2"){
 				//$(this).html("第三方");
 				$(this).html('<a href="javascript:addTab(true,\'/sys/model/form/form_list3.jsp?model_id='+beanList.get(i-1).model_id+'\',\'内容模型字段\')">资源库字段设置</a>');

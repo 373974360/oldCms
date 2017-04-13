@@ -67,7 +67,7 @@ function showTurnPage(){
 //打开添加窗口
 function openAddGuestBookClassPage()
 {
-	OpenModalWindow("维护类别","/sys/appCom/guestbook/add_gbClass.jsp?cat_id="+cat_id+"&site_id="+site_id+"&="+curTabIndex,550,250);
+	OpenModalWindow("修改类别","/sys/appCom/guestbook/add_gbClass.jsp?cat_id="+cat_id+"&site_id="+site_id+"&="+curTabIndex,550,250);
 }
 
 //打开修改窗口
@@ -78,7 +78,7 @@ function openUpdateGuestBookClassPage(s_id)
 		id = s_id;
 	else
 		id = table.getSelecteCheckboxValue("class_id");
-	OpenModalWindow("维护类别","/sys/appCom/guestbook/add_gbClass.jsp?class_id="+id,550,250);
+	OpenModalWindow("修改类别","/sys/appCom/guestbook/add_gbClass.jsp?class_id="+id,550,250);
 }
 
 function insertGuestbookClass()

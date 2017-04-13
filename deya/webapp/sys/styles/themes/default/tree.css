@@ -75,11 +75,11 @@
 }
 
 .tree-node-hover{
-	background-color:#DBEAFA;
-	color:#FC910D;
+	background-color:#64C56F;
+	color:#454545;
 }
 .tree-node-selected{
-	background-color:#3480D4;
+	background-color: #1da02c;
 	color:#FFF;
 }
 .tree-checkbox{

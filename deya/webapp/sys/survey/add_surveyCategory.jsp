@@ -6,7 +6,7 @@ String site_id = request.getParameter("site_id");
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>维护问卷分类</title>
+<title>修改问卷分类</title>
 
 
 <jsp:include page="../include/include_tools.jsp"/>

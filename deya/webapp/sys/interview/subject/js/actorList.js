@@ -95,7 +95,7 @@ function addActor()
 		return;
 	}
 	//window.location.href = "add_actor.jsp?sub_id="+sub_id;
-	addTab(true,"/sys/interview/subject/add_actor.jsp?sub_id="+sub_id+"&topnum="+curTabIndex,"维护嘉宾信息");
+	addTab(true,"/sys/interview/subject/add_actor.jsp?sub_id="+sub_id+"&topnum="+curTabIndex,"修改嘉宾信息");
 }
 
 
@@ -192,7 +192,7 @@ function fnUpdateActor()
 	var selectIDS = table.getSelecteCheckboxValue("id");
 	
 	//window.location.href = "add_actor.jsp?id="+selectIDS;
-	addTab(true,"/sys/interview/subject/add_actor.jsp?id="+selectIDS+"&topnum="+curTabIndex,"维护嘉宾信息");
+	addTab(true,"/sys/interview/subject/add_actor.jsp?id="+selectIDS+"&topnum="+curTabIndex,"修改嘉宾信息");
 }
 
 function showUpdatePate(id)
@@ -203,7 +203,7 @@ function showUpdatePate(id)
 		return;
 	}
 	//window.location.href = "add_actor.jsp?id="+id;
-	addTab(true,"/sys/interview/subject/add_actor.jsp?id="+id+"&topnum="+curTabIndex,"维护嘉宾信息");
+	addTab(true,"/sys/interview/subject/add_actor.jsp?id="+id+"&topnum="+curTabIndex,"修改嘉宾信息");
 }
 
 function updateActor()

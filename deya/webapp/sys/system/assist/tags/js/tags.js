@@ -124,18 +124,18 @@ function openViewTagDataPage(tag_id)
 //打开添加窗口
 function openAddTagPage()
 {
-	OpenModalWindow("维护Tag","/sys/system/assist/tags/tags_add.jsp?app="+app+"&site_id="+site_id,385,215);
+	OpenModalWindow("修改Tag","/sys/system/assist/tags/tags_add.jsp?app="+app+"&site_id="+site_id,385,215);
 }
 
 //打开修改窗口
 function openUpdateTagDataPage()
 {
 	var selectIDS = table.getSelecteCheckboxValue("tag_id");
-	OpenModalWindow("维护Tag","/sys/system/assist/tags/tags_add.jsp?tag_id="+selectIDS,385,215);
+	OpenModalWindow("修改Tag","/sys/system/assist/tags/tags_add.jsp?tag_id="+selectIDS,385,215);
 }
 
 function openUpdataPage(tagid){
-	OpenModalWindow("维护Tag","/sys/system/assist/tags/tags_add.jsp?tag_id="+tagid,385,215);
+	OpenModalWindow("修改Tag","/sys/system/assist/tags/tags_add.jsp?tag_id="+tagid,385,215);
 }
 
 //添加Tag

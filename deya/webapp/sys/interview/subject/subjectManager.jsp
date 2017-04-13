@@ -62,7 +62,7 @@ $(document).ready(function(){
 				<input id="btn1" name="btn1" type="button" onclick="updateRecord(table,'id','fnUpdateSubject(\'main\')');" value="修改" />
 				<input id="btn3" name="btn3" type="button" onclick="publicSelectSinglCheckbox(table,'id','fnActorManager(\'main\')')" value="嘉宾资料管理" />
 				<input id="btn3" name="btn3" type="button" onclick="publicSelectSinglCheckbox(table,'id','fnReleInfoManager(\'main\')')" value="相关信息管理" />		
-				<input id="btn3" name="btn3" type="button" onclick="publicSelectSinglCheckbox(table,'id','fnHistoryRecord()')" value="历史记录维护" />		
+				<input id="btn3" name="btn3" type="button" onclick="publicSelectSinglCheckbox(table,'id','fnHistoryRecord()')" value="历史记录修改" />
 				<input id="btn3" name="btn3" type="button" onclick="deleteRecord(table,'id','batchDelSubjects()');" value="删除" />		
 				<!-- <input id="btn3" name="btn3" type="button" onclick="openSearchWin('main')" value="查询" />	 -->
 		</td>

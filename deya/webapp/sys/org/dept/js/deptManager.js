@@ -91,7 +91,7 @@ function addDeptManager(dept_ids)
 	else
 		selected_dept_id = dept_id;
 
-	//OpenModalWindow("维护部门管理员","/sys/org/dept/deptMan_add.jsp?dept_id="+selected_dept_id,610,510);
+	//OpenModalWindow("修改部门管理员","/sys/org/dept/deptMan_add.jsp?dept_id="+selected_dept_id,610,510);
 
 	openSelectUserPage("选择部门管理员","saveManager");
 }

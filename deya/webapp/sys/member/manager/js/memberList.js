@@ -168,11 +168,11 @@ function saveMember()
 	}
 }
 
-// 维护会员
+// 修改会员
 function updateStatus()
 {
 	var id = table.getSelecteCheckboxValue("me_id");
-	OpenModalWindow("会员维护","/sys/member/manager/member_status.jsp?member_id="+id,350,210);
+	OpenModalWindow("会员修改","/sys/member/manager/member_status.jsp?member_id="+id,350,210);
 }
 
 // 修改会员

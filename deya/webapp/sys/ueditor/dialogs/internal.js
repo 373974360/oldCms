@@ -1,11 +1,11 @@
 (function () {
-    var parent = 
+    var parent = window.parent;
     //dialog对象
-    dialog = $EDITORUI[window.frameElement.id.replace( /_iframe$/, '' )];
+    dialog = parent.$EDITORUI[window.frameElement.id.replace( /_iframe$/, '' )];
     //当前打开dialog的编辑器实例
     editor = dialog.editor;
 
-    UE = UE;
+    UE = parent.UE;
 
     domUtils = UE.dom.domUtils;
 

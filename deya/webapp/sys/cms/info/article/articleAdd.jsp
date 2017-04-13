@@ -8,7 +8,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>信息维护</title>
+<title>信息修改</title>
 <link type="text/css" rel="stylesheet" href="../../../styles/themes/default/tree.css" />
 <link type="text/css" rel="stylesheet" href="../../../styles/sq.css" />
 

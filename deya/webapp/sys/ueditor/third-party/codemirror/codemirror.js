@@ -67,7 +67,7 @@ var CodeMirror = (function() {
         loadMode();
         // The selection. These are always maintained to point at valid
         // positions. Inverted is used to remember that the user is
-        // selecting bottom-to-
+        // selecting bottom-to-top.
         var sel = {from: {line: 0, ch: 0}, to: {line: 0, ch: 0}, inverted: false};
         // Selection-related flags. shiftSelecting obviously tracks
         // whether the user is holding shift.
@@ -2430,12 +2430,12 @@ var CodeMirror = (function() {
                 } else {
                     me.size -= sibling.size;
                     me.height -= sibling.height;
-                    var myIndex = indexOf(me.children, me);
-                    me.children.splice(myIndex + 1, 0, sibling);
+                    var myIndex = indexOf(me.parent.children, me);
+                    me.parent.children.splice(myIndex + 1, 0, sibling);
                 }
                 sibling.parent = me.parent;
             } while (me.children.length > 10);
-            me.maybeSpill();
+            me.parent.maybeSpill();
         },
         iter: function(from, to, op) { this.iterN(from, to - from, op); },
         iterN: function(at, n, op) {

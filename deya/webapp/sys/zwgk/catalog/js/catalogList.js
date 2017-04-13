@@ -86,7 +86,7 @@ function openCatalogAction(c_id)
 
 function openAddCatalogPage()
 {
-	addTab(true,"/sys/zwgk/catalog/catalog_add.jsp?top_index="+curTabIndex+"&parentID="+cata_id,"维护目录");
+	addTab(true,"/sys/zwgk/catalog/catalog_add.jsp?top_index="+curTabIndex+"&parentID="+cata_id,"修改目录");
 }
 //打开规则选择窗口
 function openSelectRegulation(c_id)
@@ -102,7 +102,7 @@ function openUpdateCatalogPage(cid)
 	else
 		id = table.getSelecteCheckboxValue("cata_id");
 
-	addTab(true,"/sys/zwgk/catalog/catalog_add.jsp?top_index="+curTabIndex+"&parentID="+cata_id+"&cata_id="+id,"维护目录");
+	addTab(true,"/sys/zwgk/catalog/catalog_add.jsp?top_index="+curTabIndex+"&parentID="+cata_id+"&cata_id="+id,"修改目录");
 }
 
 //添加目录

@@ -67,9 +67,9 @@ function showResouceTurnPage(){
 function openAddResoucePage(res_id)
 {
 	if(res_id != null)
-		addTab(true,"/sys/ggfw/ser/serResouce_add.jsp?top_index="+curTabIndex+"&ser_id="+ser_id+"&res_id="+res_id,"服务资源维护");
+		addTab(true,"/sys/ggfw/ser/serResouce_add.jsp?top_index="+curTabIndex+"&ser_id="+ser_id+"&res_id="+res_id,"服务资源修改");
 	else
-		addTab(true,"/sys/ggfw/ser/serResouce_add.jsp?top_index="+curTabIndex+"&ser_id="+ser_id,"服务资源维护");
+		addTab(true,"/sys/ggfw/ser/serResouce_add.jsp?top_index="+curTabIndex+"&ser_id="+ser_id,"服务资源修改");
 }
 
 function openUpdateResoucePage()

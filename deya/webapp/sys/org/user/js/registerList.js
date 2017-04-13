@@ -135,11 +135,11 @@ function delUserPage()
 	}
 }
 
-// 用户维护操作
+// 用户修改操作
 function updateUserPage()
 {
 	var userId = table.getSelecteCheckboxValue("user_id");
-	OpenModalWindow("用户维护","/sys/org/user/user_update.jsp?user_id="+userId,465,210);
+	OpenModalWindow("用户修改","/sys/org/user/user_update.jsp?user_id="+userId,465,210);
 }
 
 // 初始化用户修改页面

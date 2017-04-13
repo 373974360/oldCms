@@ -75,7 +75,7 @@ function showTurnPage(){
 //打开添加窗口
 function openAddDesignFramePage()
 {		
-	addTab(true,"/sys/system/design/frame_add.jsp?app_id="+app_id+"&top_index="+curTabIndex,"维护外框样式");
+	addTab(true,"/sys/system/design/frame_add.jsp?app_id="+app_id+"&top_index="+curTabIndex,"修改外框样式");
 }
 
 function openUpdateDesignFramePage(c_id)
@@ -87,7 +87,7 @@ function openUpdateDesignFramePage(c_id)
 	}else
 		id = table.getSelecteCheckboxValue("frame_id");
 	
-	addTab(true,"/sys/system/design/frame_add.jsp?app_id="+app_id+"&top_index="+curTabIndex+"&frame_id="+id,"维护外框样式");
+	addTab(true,"/sys/system/design/frame_add.jsp?app_id="+app_id+"&top_index="+curTabIndex+"&frame_id="+id,"修改外框样式");
 }
 
 

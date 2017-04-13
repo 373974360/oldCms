@@ -111,7 +111,7 @@ function showTurnPage(){
 
 function openAddCategoryPage()
 {
-	addTab(true,"/sys/cms/category/category_add.jsp?site_id="+site_id+"&app_id="+app_id+"&top_index="+curTabIndex+"&&parentID=0&cat_type=2","维护目录");
+	addTab(true,"/sys/cms/category/category_add.jsp?site_id="+site_id+"&app_id="+app_id+"&top_index="+curTabIndex+"&&parentID=0&cat_type=2","修改目录");
 }
 
 function openUpdateCategoryPage(cid)
@@ -121,7 +121,7 @@ function openUpdateCategoryPage(cid)
 		id = cid;
 	else
 		id = table.getSelecteCheckboxValue("id");
-	addTab(true,"/sys/cms/category/category_add.jsp?site_id="+site_id+"&app_id="+app_id+"&top_index="+curTabIndex+"&id="+id+"&cat_type=2","维护目录");
+	addTab(true,"/sys/cms/category/category_add.jsp?site_id="+site_id+"&app_id="+app_id+"&top_index="+curTabIndex+"&id="+id+"&cat_type=2","修改目录");
 }
 
 function deleteCategory()

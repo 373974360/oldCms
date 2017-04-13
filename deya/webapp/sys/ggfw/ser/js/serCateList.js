@@ -76,9 +76,9 @@ function showTurnPage(){
 function openAddPage(s_id)
 {
 	if(s_id != null)
-		addTab(true,"/sys/ggfw/ser/serCate_add.jsp?parent_id="+ser_id+"&top_index="+curTabIndex+"&s_id="+s_id,"维护场景导航");
+		addTab(true,"/sys/ggfw/ser/serCate_add.jsp?parent_id="+ser_id+"&top_index="+curTabIndex+"&s_id="+s_id,"修改场景导航");
 	else
-		addTab(true,"/sys/ggfw/ser/serCate_add.jsp?parent_id="+ser_id+"&top_index="+curTabIndex,"维护场景导航");
+		addTab(true,"/sys/ggfw/ser/serCate_add.jsp?parent_id="+ser_id+"&top_index="+curTabIndex,"修改场景导航");
 }
 
 function openUpdatePage()

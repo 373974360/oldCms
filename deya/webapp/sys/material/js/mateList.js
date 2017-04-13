@@ -732,7 +732,7 @@ function MateFolderClick(site_id,type){
 			msgAlert(WCMLang.Update_fixedFolderForNot);
 			return;
 		}else{
-			OpenModalWindow("维护目录","/sys/material/operate/matefolder_add.jsp?f_id="+f_id+"&site_id="+site_id,470,195);
+			OpenModalWindow("修改目录","/sys/material/operate/matefolder_add.jsp?f_id="+f_id+"&site_id="+site_id,470,195);
 		}
 	}else if(type == "2"){
 		if(node.attributes.ctype=="fixed" || node.id == 0)
@@ -740,7 +740,7 @@ function MateFolderClick(site_id,type){
 			msgAlert(WCMLang.Update_fixedFolderForNot);
 			return;
 		}else{
-			OpenModalWindow("维护目录","/sys/material/operate/matefolder_modify.jsp?f_id="+tempid,470,130);
+			OpenModalWindow("修改目录","/sys/material/operate/matefolder_modify.jsp?f_id="+tempid,470,130);
 		}
 	}else if(type == "3"){
 		deleteCustomFollder();

@@ -10,7 +10,7 @@
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>标签内容维护</title>
+<title>标签内容修改</title>
 
 
 <link rel="stylesheet" type="text/css" href="../../styles/themes/default/easyui.css">

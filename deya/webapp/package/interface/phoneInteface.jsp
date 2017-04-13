@@ -1,8 +1,8 @@
 <%@ page contentType="application/json; charset=utf-8"%>
-<%@ page language="java" import="com.deya.util.FormatUtil,com.deya.wcm.bean.appeal.sq.SQBean,com.deya.wcm.bean.cms.category.CategoryBean,com.deya.wcm.bean.cms.info.*,com.deya.wcm.bean.interview.SubjectActor" %>
-<%@page import="com.deya.wcm.bean.interview.SubjectBean,com.deya.wcm.bean.system.formodel.ModelBean,com.deya.wcm.bean.template.TurnPageBean,com.deya.wcm.services.appeal.sq.SQManager"%>
-<%@page import="com.deya.wcm.services.cms.category.CategoryManager,com.deya.wcm.services.cms.info.InfoBaseManager,com.deya.wcm.services.cms.info.ModelUtil,com.deya.wcm.services.model.services.InfoCustomService"%>
-<%@page import="com.deya.wcm.services.system.formodel.ModelManager,com.deya.wcm.services.zwgk.info.GKInfoManager,com.deya.wcm.template.velocity.data.AppealData,com.deya.wcm.template.velocity.data.InfoUtilData,com.deya.wcm.template.velocity.data.InterViewData,org.json.JSONException"%><%@ page import="org.json.JSONObject"%><%@ page import="java.util.Iterator"%><%@ page import="java.util.List"%><%@ page import="java.util.Map"%><%@ page import="java.util.Set"%>
+<%@ page language="java" import="java.util.*,com.deya.wcm.services.cms.info.*,org.w3c.dom.Node,com.deya.util.xml.*,com.deya.wcm.bean.template.TurnPageBean" %>
+<%@page import="com.deya.wcm.bean.cms.info.*,com.deya.wcm.services.system.formodel.*,com.deya.wcm.services.zwgk.info.*,com.deya.wcm.bean.cms.category.CategoryBean"%>
+<%@page import="com.deya.util.*,com.deya.wcm.template.velocity.data.*,com.deya.wcm.bean.appeal.sq.*,com.deya.wcm.services.appeal.sq.*"%>
+<%@page import="org.apache.ibatis.session.SqlSession,java.net.*,java.io.*,com.deya.wcm.bean.system.formodel.*,com.deya.wcm.bean.interview.*,com.deya.wcm.services.cms.category.CategoryManager"%><%@ page import="com.deya.wcm.services.model.services.InfoCustomService"%><%@ page import="org.json.JSONObject"%><%@ page import="org.json.JSONException"%><%@ page import="com.deya.wcm.services.search.search.SearchManager"%>
 <%
 String action_type = request.getParameter("action_type");
 String result = "";
@@ -22,13 +22,13 @@ if("newsPic_list".equals(action_type))
 {
 	result = getNewsPicList(request);
 }
-if("news_content".equals(action_type))
-{
-	result = getNewsContent(request);
-}
 if("cmsLd_list".equals(action_type))
 {
 	result = getCmsLdInfoList(request);
+}
+if("news_content".equals(action_type))
+{
+	result = getNewsContent(request);
 }
 if("gkShared_list".equals(action_type))
 {
@@ -78,6 +78,10 @@ if("isToudi".equals(action_type))
 {
 	result = isToudi(request);
 }
+if("searchInfo".equals(action_type))
+{
+	result = searchInfo(request);
+}
 
 out.println(result);
 
@@ -91,7 +95,7 @@ public String getNewsList(HttpServletRequest request)
 	String cat_id = FormatUtil.formatNullString(request.getParameter("cat_id"));
 	String page = FormatUtil.formatNullString(request.getParameter("page"));
 	String size = FormatUtil.formatNullString(request.getParameter("size"));
-	String params = "site_id=" + site_id + ";cat_id="+cat_id+";size="+size+";cur_page="+page+";orderby=ci.weight desc,ci.released_dtime desc;";
+	String params = "site_id=" + site_id + ";cat_id="+cat_id+";size="+size+";cur_page="+page+";orderby=ci.released_dtime desc;";
 	List<InfoBean> info_list = InfoUtilData.getInfoList(params);
 	if(info_list != null && info_list.size() > 0)
 	{
@@ -111,7 +115,7 @@ public String getCmsLdInfoList(HttpServletRequest request)
 	String cat_id = FormatUtil.formatNullString(request.getParameter("cat_id"));
 	String page = FormatUtil.formatNullString(request.getParameter("page"));
 	String size = FormatUtil.formatNullString(request.getParameter("size"));
-	String params = "site_id=" + site_id + ";cat_id="+cat_id+";size="+size+";cur_page="+page+";orderby=ci.weight desc,ci.released_dtime desc;";
+	String params = "site_id=" + site_id + ";cat_id="+cat_id+";size="+size+";cur_page="+page+";orderby=ci.released_dtime desc;";
 	List<InfoBean> info_list = InfoUtilData.getInfoList(params);
 	if(info_list != null && info_list.size() > 0)
 	{
@@ -132,7 +136,7 @@ public String getNewsListCount(HttpServletRequest request)
 	String cat_id = FormatUtil.formatNullString(request.getParameter("cat_id"));
 	String page = FormatUtil.formatNullString(request.getParameter("page"));
 	String size = FormatUtil.formatNullString(request.getParameter("size"));
-	String params = "site_id=" + site_id + ";cat_id="+cat_id+";size="+size+";cur_page="+page+";orderby=ci.weight desc,ci.released_dtime desc;";
+	String params = "site_id=" + site_id + ";cat_id="+cat_id+";size="+size+";cur_page="+page+";orderby=ci.released_dtime desc;";
 	TurnPageBean tpb = InfoUtilData.getInfoCount(params);
 	if(tpb != null)
 	{
@@ -148,7 +152,7 @@ public String getNewsPicCount(HttpServletRequest request)
 	String cat_id = FormatUtil.formatNullString(request.getParameter("cat_id"));
 	String page = FormatUtil.formatNullString(request.getParameter("page"));
 	String size = FormatUtil.formatNullString(request.getParameter("size"));
-	String params = "site_id=" + site_id + ";cat_id="+cat_id+";is_show_thumb=true;size="+size+";cur_page="+page+";orderby=ci.weight desc,ci.released_dtime desc;";
+	String params = "site_id=" + site_id + ";cat_id="+cat_id+";is_show_thumb=true;size="+size+";cur_page="+page+";orderby=ci.released_dtime desc;";
 	TurnPageBean tpb = InfoUtilData.getInfoCount(params);
 	if(tpb != null)
 	{
@@ -164,13 +168,13 @@ public String getNewsPicList(HttpServletRequest request)
 	String cat_id = FormatUtil.formatNullString(request.getParameter("cat_id"));
 	String page = FormatUtil.formatNullString(request.getParameter("page"));
 	String size = FormatUtil.formatNullString(request.getParameter("size"));
-	String params = "site_id=" + site_id + ";cat_id="+cat_id+";is_show_thumb=true;size="+size+";cur_page="+page+";orderby=ci.weight desc,ci.released_dtime desc;";
+	String params = "site_id=" + site_id + ";cat_id="+cat_id+";is_show_thumb=true;size="+size+";cur_page="+page+";orderby=ci.released_dtime desc;";
 	List<InfoBean> info_list = InfoUtilData.getInfoList(params);
 	if(info_list != null && info_list.size() > 0)
 	{
 		for(InfoBean info : info_list)
 		{
-			json += ",{\"info_id\":\""+info.getInfo_id()+"\",\"title\":\""+info.getTitle()+"\",\"source\":\""+info.getSource()+"\",\"thumb_url\":\""+info.getThumb_url()+"\",\"released_dtime\":\""+info.getReleased_dtime()+"\"}";
+			json += ",{\"info_id\":\""+info.getInfo_id()+"\",\"title\":\""+info.getTitle()+"\",\"model_id\":\""+info.getModel_id()+"\",\"content_url\":\""+info.getContent_url()+"\",\"description\":\""+replaceStr(info.getDescription())+"\",\"source\":\""+info.getSource()+"\",\"thumb_url\":\""+info.getThumb_url()+"\",\"released_dtime\":\""+info.getReleased_dtime()+"\"}";
 		}
 		json = json.substring(1);
 	}
@@ -196,7 +200,7 @@ public String getNewsContent(HttpServletRequest request)
 				ArticleBean article = (ArticleBean)obj;
 				json = "{\"type\":\"article\",\"info_id\":\""+article.getInfo_id()+"\",\"title\":\""+article.getTitle()+"\",\"source\":\""+article.getSource()+"\",\"author\":\""+article.getAuthor()+"\",\"hits\":\""+article.getHits()+"\",\"released_dtime\":\""+article.getReleased_dtime()+"\",\"description\":\""+replaceStr(article.getDescription())+"\",\"content\":\""+replaceStr(article.getInfo_content())+"\"}";
 			}
-			if(mb.getModel_id() == 10)
+			else if(mb.getModel_id() == 10)
 			{
 				PicBean article = (PicBean)obj;
 				List<PicItemBean> picList = article.getItem_list();
@@ -207,17 +211,17 @@ public String getNewsContent(HttpServletRequest request)
 				json = json.substring(0,json.length() - 1);
 				json += "],\"content\":\""+replaceStr(article.getPic_content())+"\"}";
 			}
-			if(mb.getModel_id() == 13)
+			else if(mb.getModel_id() == 13)
 			{
 				VideoBean article = (VideoBean)obj;
 				json = "{\"type\":\"video\",\"info_id\":\""+article.getInfo_id()+"\",\"title\":\""+article.getTitle()+"\",\"source\":\""+article.getSource()+"\",\"author\":\""+article.getAuthor()+"\",\"hits\":\""+article.getHits()+"\",\"released_dtime\":\""+article.getReleased_dtime()+"\",\"description\":\""+replaceStr(article.getDescription())+"\",\"video_path\":\""+article.getVideo_path()+"\",\"content\":\""+replaceStr(article.getInfo_content())+"\"}";
 			}
-			if(mb.getModel_id() == 14)
+			else if(mb.getModel_id() == 14)
 			{
 				GKFtygsBean article = (GKFtygsBean)obj;
 				json = "{\"type\":\"tygs\",\"info_id\":\""+article.getInfo_id()+"\",\"title\":\""+article.getTitle()+"\",\"source\":\""+article.getSource()+"\",\"author\":\""+article.getAuthor()+"\",\"hits\":\""+article.getHits()+"\",\"released_dtime\":\""+article.getReleased_dtime()+"\",\"description\":\""+replaceStr(article.getDescription())+"\",\"content\":\""+replaceStr(article.getGk_content())+"\"}";
 			}
-			if(mb.getModel_id() == 20)
+			else if(mb.getModel_id() == 20)
 			{
 				GKFbsznBean article = (GKFbsznBean)obj;
 				json = "{\"type\":\"b\",\"info_id\":\""+article.getInfo_id()+"\",\"title\":\""+article.getTitle()+"\",\"source\":\""+article.getSource()+"\",\"author\":\""+article.getAuthor()+"\",\"hits\":\""+article.getHits()+"\",\"released_dtime\":\""+article.getReleased_dtime()+"\"";
@@ -246,6 +250,15 @@ public String getNewsContent(HttpServletRequest request)
 					json = json.substring(0,json.length() - 1);
 				}
 				json += "]}";
+			}else{
+			    Map custom = (Map)ModelUtil.select(id, "", "article_custom");
+			    Set set = custom.keySet();
+			    json = "{\"type\":\"b\",\"info_id\":\""+bean.getInfo_id()+"\",\"title\":\""+bean.getTitle()+"\",\"source\":\""+bean.getSource()+"\",\"author\":\""+bean.getAuthor()+"\",\"hits\":\""+bean.getHits()+"\",\"released_dtime\":\""+bean.getReleased_dtime()+"\"";
+			    for (Object key : set) {
+			        Object value = custom.get(key);
+                    json += ",\"" + key.toString() + "\":\""+replaceStr(value.toString())+"\"";
+			    }
+			    json += "}";
 			}
 		}
 	}
@@ -261,7 +274,7 @@ public String getGkSharedInfoList(HttpServletRequest request)
 	String title = FormatUtil.formatNullString(request.getParameter("title"));
 	String page = FormatUtil.formatNullString(request.getParameter("page"));
 	String size = FormatUtil.formatNullString(request.getParameter("size"));
-	String params = "node_id=" + node_id + ";catalog_id="+cat_id+";gk_index="+gk_index+";title="+title+";size="+size+";cur_page="+page+";orderby=ci.weight desc,ci.released_dtime desc;";
+	String params = "node_id=" + node_id + ";catalog_id="+cat_id+";gk_index="+gk_index+";title="+title+";size="+size+";cur_page="+page+";orderby=ci.released_dtime desc;";
 	List<GKInfoBean> info_list = InfoUtilData.getGKInfoList(params);
 	if(info_list != null && info_list.size() > 0)
 	{
@@ -283,7 +296,7 @@ public String getGkSharedInfoCount(HttpServletRequest request)
 	String title = FormatUtil.formatNullString(request.getParameter("title"));
 	String page = FormatUtil.formatNullString(request.getParameter("page"));
 	String size = FormatUtil.formatNullString(request.getParameter("size"));
-	String params = "node_id=" + node_id + ";catalog_id="+cat_id+";gk_index="+gk_index+";title="+title+";size="+size+";cur_page="+page+";orderby=ci.weight desc,ci.released_dtime desc;";
+	String params = "node_id=" + node_id + ";catalog_id="+cat_id+";gk_index="+gk_index+";title="+title+";size="+size+";cur_page="+page+";orderby=ci.released_dtime desc;";
 	TurnPageBean tpb = InfoUtilData.getGKInfoCount(params);
 	if(tpb != null)
 	{
@@ -301,7 +314,7 @@ public String getGkInfoList(HttpServletRequest request)
 	String title = FormatUtil.formatNullString(request.getParameter("title"));
 	String page = FormatUtil.formatNullString(request.getParameter("page"));
 	String size = FormatUtil.formatNullString(request.getParameter("size"));
-	String params = "node_id=" + node_id + ";cat_id="+cat_id+";size="+size+";cur_page="+page+";orderby=ci.weight desc,ci.released_dtime desc;";
+	String params = "node_id=" + node_id + ";cat_id="+cat_id+";size="+size+";cur_page="+page+";orderby=ci.released_dtime desc;";
 	List<GKInfoBean> info_list = InfoUtilData.getGKInfoList(params);
 	if(info_list != null && info_list.size() > 0)
 	{
@@ -323,7 +336,7 @@ public String getLdInfoList(HttpServletRequest request)
 	String title = FormatUtil.formatNullString(request.getParameter("title"));
 	String page = FormatUtil.formatNullString(request.getParameter("page"));
 	String size = FormatUtil.formatNullString(request.getParameter("size"));
-	String params = "node_id=" + node_id + ";cat_id="+cat_id+";size="+size+";cur_page="+page+";orderby=ci.weight desc,ci.released_dtime desc;";
+	String params = "node_id=" + node_id + ";cat_id="+cat_id+";size="+size+";cur_page="+page+";orderby=ci.released_dtime desc;";
 	List<GKInfoBean> info_list = InfoUtilData.getGKInfoList(params);
 	if(info_list != null && info_list.size() > 0)
 	{
@@ -346,7 +359,7 @@ public String getGkInfoCount(HttpServletRequest request)
 	String title = FormatUtil.formatNullString(request.getParameter("title"));
 	String page = FormatUtil.formatNullString(request.getParameter("page"));
 	String size = FormatUtil.formatNullString(request.getParameter("size"));
-	String params = "node_id=" + node_id + ";cat_id="+cat_id+";size="+size+";cur_page="+page+";orderby=ci.weight desc,ci.released_dtime desc;";
+	String params = "node_id=" + node_id + ";cat_id="+cat_id+";size="+size+";cur_page="+page+";orderby=ci.released_dtime desc;";
 	TurnPageBean tpb = InfoUtilData.getGKInfoCount(params);
 	if(tpb != null)
 	{
@@ -362,7 +375,7 @@ public String getFWInfoList(HttpServletRequest request)
 	String cat_id = FormatUtil.formatNullString(request.getParameter("cat_id"));
 	String page = FormatUtil.formatNullString(request.getParameter("page"));
 	String size = FormatUtil.formatNullString(request.getParameter("size"));
-	String params = "site_id=" + site_id + ";cat_id="+cat_id+";size="+size+";cur_page="+page+";orderby=ci.weight desc,ci.released_dtime desc;";
+	String params = "site_id=" + site_id + ";cat_id="+cat_id+";size="+size+";cur_page="+page+";orderby=ci.released_dtime desc;";
 	List<InfoBean> info_list = InfoUtilData.getFWInfoList(params);
 	if(info_list != null && info_list.size() > 0)
 	{
@@ -492,13 +505,27 @@ public String getCustomInfoMap(HttpServletRequest request){
 	return jsonObject.toString();
 }
 
+public String searchInfo(HttpServletRequest request){
+	com.deya.wcm.bean.search.SearchResult result = SearchManager.searchGJ(request);
+	JSONObject jsonObject = new JSONObject();
+    try {
+        jsonObject.put("maxPage",result.getPageControl().getMaxPage());
+        jsonObject.put("maxRowCount",result.getPageControl().getMaxRowCount());
+        jsonObject.put("rowsPerPage",result.getPageControl().getRowsPerPage());
+        jsonObject.put("items",result.getItems());
+    } catch (JSONException e) {
+        e.printStackTrace();
+    }
+	return jsonObject.toString();
+}
+
 
 public String isToudi(HttpServletRequest request){
 	String json = "";
 	String info_id = FormatUtil.formatNullString(request.getParameter("info_id"));
-	boolean isToudi = com.deya.project.dz_recruit.UserInfoRPC.isToudi(Integer.parseInt(info_id),request);
+	//boolean isToudi = com.deya.project.dz_recruit.UserInfoRPC.isToudi(Integer.parseInt(info_id),request);
 	JSONObject jsonObject = new JSONObject();
-    jsonObject.put("isToudi",isToudi);
+    //jsonObject.put("isToudi",isToudi);
 	return jsonObject.toString();
 }
 

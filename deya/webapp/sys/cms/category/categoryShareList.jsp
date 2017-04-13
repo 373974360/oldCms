@@ -47,7 +47,7 @@ function showCategoryTree()
 
 function openAddCategoryPage()
 {
-	addTab(true,"/sys/cms/category/category_share_add.jsp?top_index="+curTabIndex+"&class_id="+class_id+"&parentID="+cat_id,"维护目录");
+	addTab(true,"/sys/cms/category/category_share_add.jsp?top_index="+curTabIndex+"&class_id="+class_id+"&parentID="+cat_id,"修改目录");
 }
 
 function viewCategory(c_id)

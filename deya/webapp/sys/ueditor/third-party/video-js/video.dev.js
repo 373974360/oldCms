@@ -1040,10 +1040,10 @@ vjs.getComputedDimension = function(el, strCssRule){
  * @private
  */
 vjs.insertFirst = function(child, parent){
-  if (firstChild) {
-    insertBefore(child, firstChild);
+  if (parent.firstChild) {
+    parent.insertBefore(child, parent.firstChild);
   } else {
-    appendChild(child);
+    parent.appendChild(child);
   }
 };
 

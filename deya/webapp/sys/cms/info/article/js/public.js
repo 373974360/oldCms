@@ -1266,29 +1266,3 @@ function getReleSiteID() {
 function selectPageHandle() {
     openSelectMaterialPage('savePicUrl', getReleSiteID(), 'radio');
 }
-
-
-function initUeditor(input_id)
-{
-    UE.getEditor(input_id);
-}
-
-function distoryUeditor(input_id)
-{
-    UE.getEditor(input_id).destroy();
-}
-
-function getV(input_id){
-    return UE.getEditor(input_id).getContent();
-}
-function setV(input_id,v){
-    UE.getEditor(input_id).ready(function(){
-        UE.getEditor(input_id).setContent(v);//这里给编辑器添加内容
-    });
-}
-
-function insertV(input_id,v)
-{
-    var ucontent = getV(input_id);
-    setV(input_id,ucontent + v);
-}

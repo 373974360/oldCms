@@ -56,6 +56,8 @@
 
         var menuUrl = "<%=menuUrl%>";
 
+        var pageName = "页面";
+
         $(document).ready(function(){
 
             $("#sysname").html('<img alt="" src="images/system_name.png" />');
@@ -104,7 +106,70 @@
 
             if(menuUrl != null && menuUrl != "null"){
                 $('#area_left').css("display","none");
-                setMainIframeUrl(menuUrl,"页面");
+                if(menuUrl.indexOf("verifyInfoList") >= 0){
+                    pageName = "审核信息";
+                }
+                if(menuUrl.indexOf("authorDataList") >= 0){
+                    pageName = "作者管理";
+                }
+                if(menuUrl.indexOf("sourceDataList") >= 0){
+                    pageName = "来源管理";
+                }
+                if(menuUrl.indexOf("managerList") >= 0){
+                    pageName = "素材管理";
+                }
+                if(menuUrl.indexOf("cmsCountList") >= 0){
+                    pageName = "信息统计";
+                }
+                if(menuUrl.indexOf("cmsAssessList") >= 0){
+                    pageName = "工作量考核";
+                }
+                if(menuUrl.indexOf("cmsUpdateList") >= 0){
+                    pageName = "信息更新统计";
+                }
+                if(menuUrl.indexOf("categoryList") >= 0){
+                    pageName = "目录管理";
+                }
+                if(menuUrl.indexOf("pageList") >= 0){
+                    pageName = "页面管理";
+                }
+                if(menuUrl.indexOf("roleList") >= 0){
+                    pageName = "站点角色管理";
+                }
+                if(menuUrl.indexOf("SiteUserList") >= 0){
+                    pageName = "站点用户管理";
+                }
+                if(menuUrl.indexOf("workFlowList") >= 0){
+                    pageName = "工作流管理";
+                }
+                if(menuUrl.indexOf("surveyCategoryList") >= 0){
+                    pageName = "问卷分类管理";
+                }
+                if(menuUrl.indexOf("surveyList") >= 0){
+                    pageName = "问卷调查管理";
+                }
+                if(menuUrl.indexOf("deptList") >= 0){
+                    pageName = "用户管理";
+                }
+                if(menuUrl.indexOf("syncYinHaiDeptAdd") >= 0){
+                    pageName = "增量同步组织机构";
+                }
+                if(menuUrl.indexOf("syncYinHaiDeptAll") >= 0){
+                    pageName = "全量同步组织机构";
+                }
+                if(menuUrl.indexOf("syncYinHaiUserAdd") >= 0){
+                    pageName = "增量同步用户";
+                }
+                if(menuUrl.indexOf("syncYinHaiUserAll") >= 0){
+                    pageName = "全量同步用户";
+                }
+                if(menuUrl.indexOf("loginLogList") >= 0){
+                    pageName = "登录日志";
+                }
+                if(menuUrl.indexOf("csLogList") >= 0){
+                    pageName = "审计日志";
+                }
+                setMainIframeUrl(menuUrl,pageName);
             }
 
         });

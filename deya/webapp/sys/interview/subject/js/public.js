@@ -2,7 +2,7 @@
 function fnAddSubject(main_type)
 {
 	//window.location.href = "add_subject.jsp?site_id="+site_id+"&tn="+main_type;
-	addTab(true,"/sys/interview/subject/add_subject.jsp?site_id="+site_id+"&tn="+main_type+"&topnum="+curTabIndex,"维护主题");
+	addTab(true,"/sys/interview/subject/add_subject.jsp?site_id="+site_id+"&tn="+main_type+"&topnum="+curTabIndex,"修改主题");
 }
 
 function getFckeditorValue()
@@ -59,7 +59,7 @@ function showUpdatePate(main_type,id,audit_status)
 	if(main_type == "main" || audit_status != 1)
 	{
 		//window.location.href = "add_subject.jsp?site_id="+site_id+"&tn="+main_type+"&id="+id;
-		addTab(true,"/sys/interview/subject/add_subject.jsp?site_id="+site_id+"&tn="+main_type+"&id="+id+"&topnum="+curTabIndex,"维护主题");
+		addTab(true,"/sys/interview/subject/add_subject.jsp?site_id="+site_id+"&tn="+main_type+"&id="+id+"&topnum="+curTabIndex,"修改主题");
 	}
 	else
 		msgAlert("该主题已经通过审核，不能再修改操作");
@@ -85,7 +85,7 @@ function fnUpdateSubject(main_type)
 			if(main_type == "main" || table.getSelecteBeans().get(0).audit_status != 1)
 			{
 				//window.location.href = "add_subject.jsp?site_id="+site_id+"&tn="+main_type+"&id="+selectIDS;
-				addTab(true,"/sys/interview/subject/add_subject.jsp?site_id="+site_id+"&tn="+main_type+"&id="+selectIDS+"&topnum="+curTabIndex,"维护主题");
+				addTab(true,"/sys/interview/subject/add_subject.jsp?site_id="+site_id+"&tn="+main_type+"&id="+selectIDS+"&topnum="+curTabIndex,"修改主题");
 			}
 			else
 			{

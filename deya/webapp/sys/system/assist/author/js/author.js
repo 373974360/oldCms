@@ -111,19 +111,19 @@ function openViewAuthorDataPage(author_id)
 //打开添加窗口
 function openAddAuthorPage()
 {
-    parent.OpenModalWindow("维护","/sys/system/assist/author/author_add.jsp?app="+app+"&site_id="+site_id,380,195);
+    parent.OpenModalWindow("修改","/sys/system/assist/author/author_add.jsp?app="+app+"&site_id="+site_id,380,195);
 }
 
 //打开修改窗口
 function openUpdateAuthorDataPage()
 {
 	var selectIDS = table.getSelecteCheckboxValue("author_id");
-    parent.OpenModalWindow("维护","/sys/system/assist/author/author_add.jsp?author_id="+selectIDS,380,195);
+    parent.OpenModalWindow("修改","/sys/system/assist/author/author_add.jsp?author_id="+selectIDS,380,195);
 }
 
 function openUpdatePage(authorid)
 {
-    parent.OpenModalWindow("维护","/sys/system/assist/author/author_add.jsp?author_id="+authorid,380,195);
+    parent.OpenModalWindow("修改","/sys/system/assist/author/author_add.jsp?author_id="+authorid,380,195);
 }
 
 //添加Author

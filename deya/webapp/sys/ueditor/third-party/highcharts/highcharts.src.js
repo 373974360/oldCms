@@ -360,7 +360,7 @@ function createElement(tag, attribs, styles, parent, nopad) {
 		css(el, styles);
 	}
 	if (parent) {
-		appendChild(el);
+		parent.appendChild(el);
 	}
 	return el;
 }
@@ -1929,7 +1929,7 @@ var Color = function (input) {
 			ret = merge(input);
 			ret.stops = [].concat(ret.stops);
 			each(stops, function (stop, i) {
-				ret.stops[i] = [ret.stops[i][0], sget(format)];
+				ret.stops[i] = [ret.stops[i][0], stop.get(format)];
 			});
 
 		// it's NaN if gradient colors on a column chart
@@ -1954,7 +1954,7 @@ var Color = function (input) {
 	function brighten(alpha) {
 		if (stops) {
 			each(stops, function (stop) {
-				sbrighten(alpha);
+				stop.brighten(alpha);
 			});
 		
 		} else if (isNumber(alpha) && alpha !== 0) {
@@ -2917,7 +2917,7 @@ SVGElement.prototype = {
 		}
 
 		// mark as inverted
-		this.parentInverted = parent && inverted;
+		this.parentInverted = parent && parent.inverted;
 
 		// build formatted text
 		if (this.textStr !== undefined) {
@@ -4586,11 +4586,11 @@ Highcharts.VMLElement = VMLElement = {
 			renderer = wrapper.renderer,
 			element = wrapper.element,
 			box = renderer.box,
-			inverted = parent && inverted,
+			inverted = parent && parent.inverted,
 
 			// get the parent node
 			parentNode = parent ?
-				element || parent :
+				parent.element || parent :
 				box;
 
 
@@ -4952,7 +4952,7 @@ Highcharts.VMLElement = VMLElement = {
 	 */
 	safeRemoveChild: function (element) {
 		// discardElement will detach the node from its parent before attaching it
-		// to the garbage bin. Therefore it is important that the node is attached and have 
+		// to the garbage bin. Therefore it is important that the node is attached and have parent.
 		if (element.parentNode) {
 			discardElement(element);
 		}

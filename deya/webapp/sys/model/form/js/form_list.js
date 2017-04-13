@@ -204,7 +204,7 @@ function saveFormSort()
 
 function openTabPageUpdate(id) 
 {    
-	//OpenModalWindow("维护站点","/sys/control/site/site_add.jsp?parentID="+site_id,500,360);
+	//OpenModalWindow("修改站点","/sys/control/site/site_add.jsp?parentID="+site_id,500,360);
 	//alert('/sys/member2/onlinebook/bookList_add.jsp?parentID='+site_id+"&tab_index="+curTabIndex);
 	addTab(true,'/sys/model/form/form_fields_add.jsp?tab_index='+curTabIndex+"&id="+id+"&type=mod",'修改字段');
 }

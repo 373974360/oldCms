@@ -189,7 +189,7 @@ function showTurnPage(){
 //打开修改窗口
 function openUpdatePage(info_id,cat_id,site_ids)
 {
-	addTab(true,"/sys/cms/info/article/m_gk_gkzn.jsp?info_id="+info_id+"&cid="+cat_id+"&site_id="+site_ids+"&app_id="+app+"&topnum="+curTabIndex,"维护信息");
+	addTab(true,"/sys/cms/info/article/m_gk_gkzn.jsp?info_id="+info_id+"&cid="+cat_id+"&site_id="+site_ids+"&app_id="+app+"&topnum="+curTabIndex,"修改信息");
 }
 
 function initTabAndStatus()

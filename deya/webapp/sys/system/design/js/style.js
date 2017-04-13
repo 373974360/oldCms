@@ -76,7 +76,7 @@ function showTurnPage(){
 //打开添加窗口
 function openAddDesignStylePage()
 {	
-	OpenModalWindow("维护内容样式","/sys/system/design/style_add.jsp?app_id="+app_id,480,230);
+	OpenModalWindow("修改内容样式","/sys/system/design/style_add.jsp?app_id="+app_id,480,230);
 }
 
 function openUpdateDesignStylePage(c_id)
@@ -88,7 +88,7 @@ function openUpdateDesignStylePage(c_id)
 	}else
 		id = table.getSelecteCheckboxValue("style_id");	
 	
-	OpenModalWindow("维护内容样式","/sys/system/design/style_add.jsp?app_id="+app_id+"&style_id="+id,480,230);
+	OpenModalWindow("修改内容样式","/sys/system/design/style_add.jsp?app_id="+app_id+"&style_id="+id,480,230);
 }
 
 

@@ -59,10 +59,10 @@ $(document).ready(function(){
 	if($.browser.msie&&$.browser.version=="6.0"&&$("html")[0].scrollHeight>$("html").height()) $("html").css("overflowY","scroll"); 
 	//得到权限信息
 	
-	setLeftTreeHeight();
-	showCategoryTree();	
+	showCategoryTree();
 	setSearchInfo();
 	initCategoryTree();
+    setLeftTreeHeight();
 });
 
 function showCategoryTree()

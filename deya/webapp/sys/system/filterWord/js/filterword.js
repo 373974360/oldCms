@@ -75,7 +75,7 @@ function showList(){
 		if(i>0)
 		{			
 			$(this).css({"text-align":"left"});	
-			$(this).html('<a href="javascript:OpenModalWindow(\'维护过滤词\',\'/sys/system/filterWord/filterWord_add.jsp?fw_id=' + beanList.get(i-1).filterword_id + '\',450,190);">'+beanList.get(i-1).pattern+'</a>');
+			$(this).html('<a href="javascript:OpenModalWindow(\'修改过滤词\',\'/sys/system/filterWord/filterWord_add.jsp?fw_id=' + beanList.get(i-1).filterword_id + '\',450,190);">'+beanList.get(i-1).pattern+'</a>');
 		}
 	});	
 	table.getCol("replacement").each(function(i){
@@ -93,20 +93,20 @@ function showTurnPage(){
 //打开查看窗口
 function openViewFilterWordPage(fw_id)
 {	
-	OpenModalWindow("维护过滤词","/sys/system/filterWord/filterWord_add.jsp?fw_id="+fw_id,450,190);
+	OpenModalWindow("修改过滤词","/sys/system/filterWord/filterWord_add.jsp?fw_id="+fw_id,450,190);
 }
 
 //打开添加窗口
 function openAddFilterWordPage(app_id,site_id)
 {
-	OpenModalWindow("维护过滤词","/sys/system/filterWord/filterWord_add.jsp?app_id="+app_id+"&site_id="+site_id,450,190);
+	OpenModalWindow("修改过滤词","/sys/system/filterWord/filterWord_add.jsp?app_id="+app_id+"&site_id="+site_id,450,190);
 }
 
 //打开修改窗口
 function openUpdateFilterWordPage()
 {
 	var selectIDS = table.getSelecteCheckboxValue("filterword_id");
-	OpenModalWindow("维护过滤词","/sys/system/filterWord/filterWord_add.jsp?fw_id="+selectIDS,450,190);
+	OpenModalWindow("修改过滤词","/sys/system/filterWord/filterWord_add.jsp?fw_id="+selectIDS,450,190);
 }
 
 //添加过滤词

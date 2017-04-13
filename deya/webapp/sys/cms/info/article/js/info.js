@@ -667,16 +667,16 @@ function openUpdatePage(Infoid, model_id, is_host) {
     if (is_host == 1) {
         //引用信息只修改信息主表内容
         //window.location.href = "/sys/cms/info/article/update_info.jsp?cid=" + cid + "&info_id=" + Infoid + "&site_id=" + site_id + "&app_id=" + app + "&model=" + model_id + "&topnum=" + window.parent.curTabIndex;
-        parent.addTab(true, "/sys/cms/info/article/update_info.jsp?cid=" + cid + "&info_id=" + Infoid + "&site_id=" + site_id + "&app_id=" + app + "&model=" + model_id + "&topnum=" + parent.curTabIndex, "维护信息");
+        parent.addTab(true, "/sys/cms/info/article/update_info.jsp?cid=" + cid + "&info_id=" + Infoid + "&site_id=" + site_id + "&app_id=" + app + "&model=" + model_id + "&topnum=" + parent.curTabIndex, "修改信息");
     }
     else {
         if (gk_article == true) {
             //window.location.href = "/sys/cms/info/article/m_gk_gkzn.jsp?cid=" + cid + "&info_id=" + Infoid + "&site_id=" + site_id + "&app_id=" + app + "&model=" + model_id + "&topnum=" + window.parent.curTabIndex;
-            parent.addTab(true, "/sys/cms/info/article/m_gk_gkzn.jsp?cid=" + cid + "&info_id=" + Infoid + "&site_id=" + site_id + "&app_id=" + app + "&model=" + model_id + "&topnum=" + parent.curTabIndex, "维护信息");
+            parent.addTab(true, "/sys/cms/info/article/m_gk_gkzn.jsp?cid=" + cid + "&info_id=" + Infoid + "&site_id=" + site_id + "&app_id=" + app + "&model=" + model_id + "&topnum=" + parent.curTabIndex, "修改信息");
         } else
             var model = getAddPagebyModel(model_id);
         //window.location.href = "/sys/cms/info/article/" + model + "?cid=" + cid + "&info_id=" + Infoid + "&site_id=" + site_id + "&app_id=" + app + "&model=" + model_id + "&topnum=" + window.parent.curTabIndex;
-        parent.addTab(true, "/sys/cms/info/article/" + getAddPagebyModel(model_id) + "?cid=" + cid + "&info_id=" + Infoid + "&site_id=" + site_id + "&app_id=" + app + "&model=" + model_id + "&topnum=" + parent.curTabIndex, "维护信息");
+        parent.addTab(true, "/sys/cms/info/article/" + getAddPagebyModel(model_id) + "?cid=" + cid + "&info_id=" + Infoid + "&site_id=" + site_id + "&app_id=" + app + "&model=" + model_id + "&topnum=" + parent.curTabIndex, "修改信息");
     }
 }
 
@@ -1017,7 +1017,7 @@ function doView(num) {
     }
     else {
         //window.open(SiteRPC.getDefaultSiteDomainBySiteID(getRealSiteIDByApp(beanList.get(num).app_id,beanList.get(num).site_id))+url);
-        window.open(url);
+        window.open("http://www.cdzfgjj.gov.cn" + url);
     }
 }
 

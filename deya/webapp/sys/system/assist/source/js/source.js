@@ -125,18 +125,18 @@ function openViewSourceDataPage(source_id)
 //打开添加窗口
 function openAddSourcePage()
 {
-    parent.OpenModalWindow("维护来源","/sys/system/assist/source/source_add.jsp?app="+app+"&site_id="+site_id,380,215);
+    parent.OpenModalWindow("修改来源","/sys/system/assist/source/source_add.jsp?app="+app+"&site_id="+site_id,380,215);
 }
 
 //打开修改窗口
 function openUpdateSourceDataPage()
 {
 	var selectIDS = table.getSelecteCheckboxValue("source_id");
-    parent.OpenModalWindow("维护来源","/sys/system/assist/source/source_add.jsp?source_id="+selectIDS,380,215);
+    parent.OpenModalWindow("修改来源","/sys/system/assist/source/source_add.jsp?source_id="+selectIDS,380,215);
 }
 
 function openUpdatePage(sourceid){
-    parent.OpenModalWindow("维护来源","/sys/system/assist/source/source_add.jsp?source_id="+sourceid,380,215);
+    parent.OpenModalWindow("修改来源","/sys/system/assist/source/source_add.jsp?source_id="+sourceid,380,215);
 }
 
 //添加Source

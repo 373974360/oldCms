@@ -4,12 +4,12 @@ var val=new Validator();
 
 function openAddPage(parent_id)
 {	
-	parent.addTab(true,"/sys/page/page_add.jsp?parent_id="+parent_id+"&app_id="+app_id+"&site_id="+site_id+"&cur_indexid="+parent.curTabIndex,'维护页面');
+	parent.addTab(true,"/sys/page/page_add.jsp?parent_id="+parent_id+"&app_id="+app_id+"&site_id="+site_id+"&cur_indexid="+parent.curTabIndex,'修改页面');
 }
 
 function openUpdatePage(id)
 {
-    parent.addTab(true,"/sys/page/page_add.jsp?id="+id+"&cur_indexid="+parent.curTabIndex,'维护页面');
+    parent.addTab(true,"/sys/page/page_add.jsp?id="+id+"&cur_indexid="+parent.curTabIndex,'修改页面');
 }
 
 function addPage()

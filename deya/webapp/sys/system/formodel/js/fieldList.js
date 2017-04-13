@@ -89,7 +89,7 @@ function openViewFieldPage(r_id)
 //打开添加窗口
 function openAddFieldPage()
 {
-	OpenModalWindow("维护内容模型字段","/sys/system/formodel/field_add.jsp?model_id="+model_id,450,285);
+	OpenModalWindow("修改内容模型字段","/sys/system/formodel/field_add.jsp?model_id="+model_id,450,285);
 }
 
 //打开修改窗口
@@ -98,10 +98,10 @@ function openUpdateFieldPage()
 	var selectList = table.getSelecteBeans();	
 	if(selectList.get(0).table_name != "cs_info_udefined")
 	{
-		msgWargin("系统字段不允许维护");
+		msgWargin("系统字段不允许修改");
 	}
 	else
-		OpenModalWindow("维护内容模型字段","/sys/system/formodel/field_add.jsp?field_id="+selectList.get(0).field_id,450,285);
+		OpenModalWindow("修改内容模型字段","/sys/system/formodel/field_add.jsp?field_id="+selectList.get(0).field_id,450,285);
 }
 
 //添加内容模型

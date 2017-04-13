@@ -77,7 +77,7 @@ function showTurnPage(){
 //打开添加窗口
 function openAddDesignCssPage()
 {	
-	OpenModalWindow("维护主题风格","/sys/system/design/css_add.jsp?app_id="+app_id,480,230);
+	OpenModalWindow("修改主题风格","/sys/system/design/css_add.jsp?app_id="+app_id,480,230);
 }
 
 function openUpdateDesignCssPage(c_id)
@@ -89,7 +89,7 @@ function openUpdateDesignCssPage(c_id)
 	}else
 		id = table.getSelecteCheckboxValue("css_id");
 
-	OpenModalWindow("维护主题风格","/sys/system/design/css_add.jsp?app_id="+app_id+"&css_id="+id,480,230);
+	OpenModalWindow("修改主题风格","/sys/system/design/css_add.jsp?app_id="+app_id+"&css_id="+id,480,230);
 }
 
 

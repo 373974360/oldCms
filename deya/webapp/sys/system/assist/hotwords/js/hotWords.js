@@ -104,18 +104,18 @@ function openViewHotDataPage(hot_id)
 //打开添加窗口
 function openAddHotPage()
 {
-	OpenModalWindow("维护热词","/sys/system/assist/hotwords/hotWord_add.jsp?app="+app+"&site_id="+site_id,360,165);
+	OpenModalWindow("修改热词","/sys/system/assist/hotwords/hotWord_add.jsp?app="+app+"&site_id="+site_id,360,165);
 }
 
 //打开修改窗口
 function openUpdateHotDataPage()
 {
 	var selectIDS = table.getSelecteCheckboxValue("hot_id");
-	OpenModalWindow("维护热词","/sys/system/assist/hotwords/hotWord_add.jsp?hot_id="+selectIDS,360,165);
+	OpenModalWindow("修改热词","/sys/system/assist/hotwords/hotWord_add.jsp?hot_id="+selectIDS,360,165);
 }
 
 function openUpdatePage(hotid){
-	OpenModalWindow("维护热词","/sys/system/assist/hotwords/hotWord_add.jsp?hot_id="+hotid,360,165);
+	OpenModalWindow("修改热词","/sys/system/assist/hotwords/hotWord_add.jsp?hot_id="+hotid,360,165);
 }
 
 //添加热词

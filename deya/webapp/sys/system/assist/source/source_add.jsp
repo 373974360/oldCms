@@ -8,7 +8,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>来源维护</title>
+<title>来源修改</title>
 
 
 <jsp:include page="../../../include/include_tools.jsp"/>
@@ -66,7 +66,7 @@ $(document).ready(function(){
 		<tr>
 			<th>来源URL：</th>
 			<td >
-				<input id="source_url" name="source_url" type="text" class="width200" value=""/>
+				<input id="source_url" name="source_url" type="text" class="width200" value="" onblur="checkInputValue('source_url',false,60,'来源URL','checkWebsite')"/>
 				<input type="hidden" name="app_id" id="app_id" value="0"/>
 				<input type="hidden" name="site_id" id="site_id" value="0"/>
 			</td>

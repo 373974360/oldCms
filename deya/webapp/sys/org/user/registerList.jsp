@@ -41,7 +41,7 @@ $(document).ready(function(){
 		<td align="left" valign="middle" class="search_td fromTabs">
 				<input id="btn1" name="btn1" type="button" onclick="publicSelectCheckbox( table, 'user_id', 'activitingUserPage()')" value="开通帐号" />
 				<input id="btn2" name="btn6" type="button" onclick="publicSelectCheckbox( table, 'user_id', 'stopUserPage()')" value="停用帐号" />
-				<input id="btn4" name="btn4" type="button" onclick="updateRecord( table, 'user_id', 'updateUserPage()')" value="维护账号" />
+				<input id="btn4" name="btn4" type="button" onclick="updateRecord( table, 'user_id', 'updateUserPage()')" value="修改账号" />
 				<input id="btn3" name="btn3" type="button" onclick="deleteRecord( table, 'user_id', 'delUserPage()')" value="删除" />
 			<span class="blank3"></span>
 		</td>	
@@ -65,7 +65,7 @@ $(document).ready(function(){
 			<td align="left" valign="middle">
 				<input id="btn1" name="btn1" type="button" onclick="publicSelectCheckbox( table, 'user_id', 'activitingUserPage()')" value="开通帐号" />
 				<input id="btn2" name="btn6" type="button" onclick="publicSelectCheckbox( table, 'user_id', 'stopUserPage()')" value="停用帐号" />
-				<input id="btn4" name="btn4" type="button" onclick="updateRecord( table, 'user_id', 'updateUserPage()')" value="维护账号" />
+				<input id="btn4" name="btn4" type="button" onclick="updateRecord( table, 'user_id', 'updateUserPage()')" value="修改账号" />
 				<input id="btn3" name="btn3" type="button" onclick="deleteRecord( table, 'user_id', 'delUserPage()')" value="删除" />
 		<span class="blank3"></span>
 			</td>

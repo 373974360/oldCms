@@ -950,14 +950,14 @@ jQuery.ready.promise = function( obj ) {
 				top = window.frameElement == null && document.documentElement;
 			} catch(e) {}
 
-			if ( top && doScroll ) {
+			if ( top && top.doScroll ) {
 				(function doScrollCheck() {
 					if ( !jQuery.isReady ) {
 
 						try {
 							// Use the trick by Diego Perini
 							// http://javascript.nwbox.com/IEContentLoaded/
-							doScroll("left");
+							top.doScroll("left");
 						} catch(e) {
 							return setTimeout( doScrollCheck, 50 );
 						}
@@ -1465,8 +1465,8 @@ setDocument = Sizzle.setDocument = function( node ) {
 	// If iframe document is assigned to "document" variable and if iframe has been reloaded,
 	// IE will throw "permission denied" error when accessing "document" variable, see jQuery #13936
 	// IE6-8 do not support the defaultView property so parent will be undefined
-	if ( parent && attachEvent && parent !== top ) {
-		attachEvent( "onbeforeunload", function() {
+	if ( parent && parent.attachEvent && parent !== parent.top ) {
+		parent.attachEvent( "onbeforeunload", function() {
 			setDocument();
 		});
 	}
@@ -2090,7 +2090,7 @@ Expr = Sizzle.selectors = {
 							return true;
 						}
 
-						start = [ forward ? firstChild : lastChild ];
+						start = [ forward ? parent.firstChild : parent.lastChild ];
 
 						// non-xml :nth-child(...) stores cache data on `parent`
 						if ( forward && useCache ) {
@@ -2099,7 +2099,7 @@ Expr = Sizzle.selectors = {
 							cache = outerCache[ type ] || [];
 							nodeIndex = cache[0] === dirruns && cache[1];
 							diff = cache[0] === dirruns && cache[2];
-							node = nodeIndex && childNodes[ nodeIndex ];
+							node = nodeIndex && parent.childNodes[ nodeIndex ];
 
 							while ( (node = ++nodeIndex && node && node[ dir ] ||
 
@@ -4654,11 +4654,11 @@ if ( !jQuery.support.optSelected ) {
 			var parent = elem.parentNode;
 
 			if ( parent ) {
-				selectedIndex;
+				parent.selectedIndex;
 
 				// Make sure that it also works with optgroups, see #5701
-				if ( parentNode ) {
-					parentNode.selectedIndex;
+				if ( parent.parentNode ) {
+					parent.parentNode.selectedIndex;
 				}
 			}
 			return null;
@@ -5846,7 +5846,7 @@ function sibling( cur, dir ) {
 jQuery.each({
 	parent: function( elem ) {
 		var parent = elem.parentNode;
-		return parent && nodeType !== 11 ? parent : null;
+		return parent && parent.nodeType !== 11 ? parent : null;
 	},
 	parents: function( elem ) {
 		return jQuery.dir( elem, "parentNode" );
@@ -6195,7 +6195,7 @@ jQuery.fn.extend({
 					next = this.nextSibling;
 				}
 				jQuery( this ).remove();
-				insertBefore( elem, next );
+				parent.insertBefore( elem, next );
 			}
 		// Allow new content to include elements from the context set
 		}, true );
@@ -9384,7 +9384,7 @@ jQuery.fn.extend({
 			jQuery.queue( this, type, [] );
 
 			if ( hooks && hooks.stop ) {
-				hooks.scall( this, true );
+				hooks.stop.call( this, true );
 			}
 
 			// look for any active animations, and finish them

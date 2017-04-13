@@ -121,7 +121,7 @@ function addCalendarRecord()
 }
 function openUpdateCalendarPage(ca_id)
 {
-	OpenModalWindow("维护节假日信息","/sys/appeal/calendar/calendar_add.jsp?type=update&ca_id="+ca_id,450,239);
+	OpenModalWindow("修改节假日信息","/sys/appeal/calendar/calendar_add.jsp?type=update&ca_id="+ca_id,450,239);
 }
 // 修改节假日信息
 function updateRecord1()

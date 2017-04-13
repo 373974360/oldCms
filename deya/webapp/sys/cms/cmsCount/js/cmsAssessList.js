@@ -120,7 +120,11 @@ function stuffTable(bean){
     treeHtml += "<td>"+ bean.inputCount +"</td>";
     treeHtml += "<td>"+ bean.releasedCount +"</td>";
     treeHtml += "<td>"+ bean.picInfoCount +"</td>";
-    treeHtml += "<td>"+ bean.releaseRate +"%</td>";
+    if(bean.releaseRate == "�"){
+        treeHtml += "<td>-</td>";
+	}else{
+        treeHtml += "<td>"+ bean.releaseRate +"%</td>";
+	}
     treeHtml += "<td><a href=\"javascript:openPieChart("+bean.input_user+",'"+bean.user_name+"')\">"+ "查看"+"</a></td>";
    // treeHtml += "<td  align='left'><span onclick='openPieChart("+bean.input_user+")'>"+ "查看"+"</span></td>";
 	treeHtml+="</tr>";

@@ -90,12 +90,12 @@ function showList(){
 
 function openXGXXPage(xgwt_cat_id)
 {
-	addTab(true,"/sys/cms/info/article/articleDataList.jsp?cat_id="+xgwt_cat_id+"&app_id=ggfw&site_id=ggfw","相关信息维护");
+	addTab(true,"/sys/cms/info/article/articleDataList.jsp?cat_id="+xgwt_cat_id+"&app_id=ggfw&site_id=ggfw","相关信息修改");
 }
 
 function openCJWTPage(cjwt_cat_id)
 {
-	addTab(true,"/sys/cms/info/article/articleDataList.jsp?cat_id="+cjwt_cat_id+"&app_id=ggfw&site_id=ggfw","常见问题维护");
+	addTab(true,"/sys/cms/info/article/articleDataList.jsp?cat_id="+cjwt_cat_id+"&app_id=ggfw&site_id=ggfw","常见问题修改");
 }
 
 function showTurnPage(){				
@@ -106,9 +106,9 @@ function showTurnPage(){
 function openAddSerCategoryPage(ser_id)
 {
 	if(ser_id != null)
-		addTab(true,"/sys/ggfw/ser/serTopic_add.jsp?top_index="+curTabIndex+"&ser_id="+ser_id,"维护场景主题");
+		addTab(true,"/sys/ggfw/ser/serTopic_add.jsp?top_index="+curTabIndex+"&ser_id="+ser_id,"修改场景主题");
 	else
-		addTab(true,"/sys/ggfw/ser/serTopic_add.jsp?top_index="+curTabIndex,"维护场景主题");
+		addTab(true,"/sys/ggfw/ser/serTopic_add.jsp?top_index="+curTabIndex,"修改场景主题");
 }
 
 function openUpdateSerCategoryPage()

@@ -120,7 +120,7 @@ function addReleInfo()
 		return;
 	}
 	//window.location.href = "add_releInfo.jsp?sub_id="+sub_id;
-	addTab(true,"/sys/interview/subject/add_releInfo.jsp?sub_id="+sub_id+"&topnum="+curTabIndex,"维护信息");
+	addTab(true,"/sys/interview/subject/add_releInfo.jsp?sub_id="+sub_id+"&topnum="+curTabIndex,"修改信息");
 }
 
 
@@ -195,7 +195,7 @@ function fnUpdateReleInfo()
 			return;
 		}
 		//window.location.href = "add_releInfo.jsp?id="+selectIDS;
-		addTab(true,"/sys/interview/subject/add_releInfo.jsp?id="+selectIDS+"&topnum="+curTabIndex,"维护信息");
+		addTab(true,"/sys/interview/subject/add_releInfo.jsp?id="+selectIDS+"&topnum="+curTabIndex,"修改信息");
 	}
 }
 
@@ -207,7 +207,7 @@ function showUpdatePate(id)
 		return;
 	}
 	//window.location.href = "add_releInfo.jsp?id="+id;
-	addTab(true,"/sys/interview/subject/add_releInfo.jsp?id="+id+"&topnum="+curTabIndex,"维护信息");
+	addTab(true,"/sys/interview/subject/add_releInfo.jsp?id="+id+"&topnum="+curTabIndex,"修改信息");
 }
 
 function updateReleInfo()

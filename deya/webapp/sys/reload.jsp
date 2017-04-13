@@ -182,7 +182,7 @@
 <tr><td><a href="?name=gkclass">重载信息公开栏目节点信息</a></td></tr>
 <tr><td></td></tr>
 <tr><td><a href="?name=sysconfig">重载系统配置（站点水印）信息</a></td></tr>
-<tr><td><a href="?name=sysall">重载系统维护（如热词，作者，来源信息）信息</a></td></tr>
+<tr><td><a href="?name=sysall">重载系统修改（如热词，作者，来源信息）信息</a></td></tr>
 <tr><td><a href="?name=frommodel">重载内容模型信息</a></td></tr>
 <tr><td><a href="?name=template">重载模板信息</a></td></tr>
 <tr><td><a href="?name=ware">重载标签信息</a></td></tr>

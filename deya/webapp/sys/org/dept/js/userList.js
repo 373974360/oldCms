@@ -287,7 +287,7 @@ function openUpdateUserPage()
 function openRegPage()
 {	
 	var selectIDS = user_table.getSelecteCheckboxValue("user_id");
-    parent.OpenModalWindow("维护帐号","/sys/org/dept/registerUser_update.jsp?user_id="+selectIDS,460,225);
+    parent.OpenModalWindow("修改帐号","/sys/org/dept/registerUser_update.jsp?user_id="+selectIDS,460,225);
 }
 
 //置为管理员

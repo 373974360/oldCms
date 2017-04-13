@@ -81,7 +81,7 @@ function showTurnPage(){
 
 function openAddSiteDomainPage()
 {  
-	OpenModalWindow("维护域名","/sys/control/site/domain_add.jsp?site_id="+site_id,460,130);
+	OpenModalWindow("修改域名","/sys/control/site/domain_add.jsp?site_id="+site_id,460,130);
 }
 
 function openUpdateSiteDomainPage(d_id)
@@ -92,7 +92,7 @@ function openUpdateSiteDomainPage(d_id)
 		selectIDS = d_id;
 	}else
 		selectIDS = table.getSelecteCheckboxValue("domain_id");
-	OpenModalWindow("维护域名","/sys/control/site/domain_add.jsp?site_id="+site_id+"&domain_id="+selectIDS,460,130);
+	OpenModalWindow("修改域名","/sys/control/site/domain_add.jsp?site_id="+site_id+"&domain_id="+selectIDS,460,130);
 }
 
 //添加

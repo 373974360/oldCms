@@ -58,7 +58,7 @@ function showTurnPage(){
 
 function openAddCatePage()
 {
-	OpenModalWindow("维护公开节点分类","/sys/zwgk/node/gkCate_add.jsp",450,135);
+	OpenModalWindow("修改公开节点分类","/sys/zwgk/node/gkCate_add.jsp",450,135);
 }
 
 
@@ -75,7 +75,7 @@ function openUpdateCatePage(nc_id)
 		selectIDS = nc_id;
 	else
 		selectIDS = table.getSelecteCheckboxValue("nodcat_id");
-	OpenModalWindow("维护公开节点分类","/sys/zwgk/node/gkCate_add.jsp?nodcat_id="+selectIDS,450,135);
+	OpenModalWindow("修改公开节点分类","/sys/zwgk/node/gkCate_add.jsp?nodcat_id="+selectIDS,450,135);
 }
 
 //修改树节点

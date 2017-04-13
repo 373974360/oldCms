@@ -88,7 +88,7 @@ function showTurnPage(){
 
 //打开添加页面
 function openAddPage(){ 
-	OpenModalWindow("维护服务器","/sys/control/server/server_add.jsp",500,260);
+	OpenModalWindow("修改服务器","/sys/control/server/server_add.jsp",500,260);
 }
 
 
@@ -117,7 +117,7 @@ function funAdd(){
 //打开修改页面
 function openUpdatePage(){
 	var selectIDS = table.getSelecteCheckboxValue("server_id");
-	OpenModalWindow("维护服务器","/sys/control/server/server_add.jsp?server_id="+selectIDS,500,260);
+	OpenModalWindow("修改服务器","/sys/control/server/server_add.jsp?server_id="+selectIDS,500,260);
 }
 
 //打开查看页面

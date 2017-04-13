@@ -50,7 +50,7 @@ function showList(){
 
 function openUpdateCategoryPage2(cat_id)
 {
-	OpenModalWindow("维护分类信息","/sys/appeal/category/category_add.jsp?cat_id="+cat_id,450,140);
+	OpenModalWindow("修改分类信息","/sys/appeal/category/category_add.jsp?cat_id="+cat_id,450,140);
 }
 
 function showTurnPage(){	
@@ -62,13 +62,13 @@ function showTurnPage(){
 
 function openAddCategoryPage()
 {
-	OpenModalWindow("维护分类","/sys/appeal/category/category_add.jsp?parentID="+cat_id,450,140);
+	OpenModalWindow("修改分类","/sys/appeal/category/category_add.jsp?parentID="+cat_id,450,140);
 }
 
 function openUpdateCategoryPage()
 {
 	var selectIDS = table.getSelecteCheckboxValue("cat_id");
-	OpenModalWindow("维护分类","/sys/appeal/category/category_add.jsp?parentID="+cat_id+"&cat_id="+selectIDS,450,140);
+	OpenModalWindow("修改分类","/sys/appeal/category/category_add.jsp?parentID="+cat_id+"&cat_id="+selectIDS,450,140);
 }
 //添加内容分类
 function addCategory()

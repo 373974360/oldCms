@@ -76,7 +76,7 @@ function showTemplateFileList(){
 				{
 					p = p.replace(/\\/ig,"\\\\\\\\");
 				}
-				$(this).html('<a href="javascript:addTab(true,\'/sys/system/template/resouFile_update.jsp?tid='+tc_id+'&site_id='+site_id+'&path='+p+'\',\'维护资源\')">'+tf_beanList.get(i-1).file_name+'</a>');
+				$(this).html('<a href="javascript:addTab(true,\'/sys/system/template/resouFile_update.jsp?tid='+tc_id+'&site_id='+site_id+'&path='+p+'\',\'修改资源\')">'+tf_beanList.get(i-1).file_name+'</a>');
 			}
 			else
 			{

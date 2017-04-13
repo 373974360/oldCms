@@ -125,7 +125,7 @@ function openViewRolePage(r_id)
 	var height = 190;
 	if(app_id == "system"|| app_id == "control")
 		height = 360;
-	parent.OpenModalWindow("维护角色","/sys/org/role/role_add.jsp?app="+app_id+"&role_id="+r_id,450,height);
+	parent.OpenModalWindow("修改角色","/sys/org/role/role_add.jsp?app="+app_id+"&role_id="+r_id,450,height);
 }
 
 //打开添加窗口
@@ -134,7 +134,7 @@ function openAddRolePage()
 	var height = 190;
 	if(app_id == "system" || app_id == "control")
 		height = 360;
-    parent.OpenModalWindow("维护角色","/sys/org/role/role_add.jsp?app="+app_id+"&site_id="+site_id,450,height);
+    parent.OpenModalWindow("修改角色","/sys/org/role/role_add.jsp?app="+app_id+"&site_id="+site_id,450,height);
 }
 
 //打开修改窗口
@@ -152,7 +152,7 @@ function openUpdateRolePage()
 		if(app_id == "system" || app_id == "control")
 			height = 360;
 		var selectIDS = table.getSelecteCheckboxValue("role_id");
-        parent.OpenModalWindow("维护角色","/sys/org/role/role_add.jsp?app="+app_id+"&role_id="+selectIDS,450,height);
+        parent.OpenModalWindow("修改角色","/sys/org/role/role_add.jsp?app="+app_id+"&role_id="+selectIDS,450,height);
 	}
 }
 

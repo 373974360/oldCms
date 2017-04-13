@@ -97,7 +97,7 @@ function addSnippetRecord()
 }
 function openUpdateSnippetPage(id)
 {
-	OpenModalWindow("维护代码片段信息","/sys/template/snippet/snippet_add.jsp?type=update&id="+id,450,239);
+	OpenModalWindow("修改代码片段信息","/sys/template/snippet/snippet_add.jsp?type=update&id="+id,450,239);
 }
 // 修改代码片断信息
 function updateRecord1()

@@ -617,15 +617,15 @@ function openUpdatePage(Infoid,model_id,is_host)
 	if(is_host == 1)
 	{
 		//引用信息只修改信息主表内容
-		addTab(true,"/sys/cms/info/article/update_info.jsp?cid="+cid+"&info_id="+Infoid+"&site_id="+site_id+"&app_id="+app+"&model="+model_id+"&topnum="+curTabIndex,"维护信息");
+		addTab(true,"/sys/cms/info/article/update_info.jsp?cid="+cid+"&info_id="+Infoid+"&site_id="+site_id+"&app_id="+app+"&model="+model_id+"&topnum="+curTabIndex,"修改信息");
 	}
 	else
 	{
 		if(gk_article == true)
 		{
-			addTab(true,"/sys/cms/info/article/m_gk_gkzn.jsp?cid="+cid+"&info_id="+Infoid+"&site_id="+site_id+"&app_id="+app+"&model="+model_id+"&topnum="+curTabIndex,"维护信息");
+			addTab(true,"/sys/cms/info/article/m_gk_gkzn.jsp?cid="+cid+"&info_id="+Infoid+"&site_id="+site_id+"&app_id="+app+"&model="+model_id+"&topnum="+curTabIndex,"修改信息");
 		}else
-			addTab(true,"/sys/cms/info/article/"+getAddPagebyModel(model_id)+"?cid="+cid+"&info_id="+Infoid+"&site_id="+site_id+"&app_id="+app+"&model="+model_id+"&topnum="+curTabIndex,"维护信息");
+			addTab(true,"/sys/cms/info/article/"+getAddPagebyModel(model_id)+"?cid="+cid+"&info_id="+Infoid+"&site_id="+site_id+"&app_id="+app+"&model="+model_id+"&topnum="+curTabIndex,"修改信息");
 	}
 }
 

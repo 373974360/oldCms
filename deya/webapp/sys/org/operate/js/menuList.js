@@ -83,7 +83,7 @@ function showTurnPage(){
 
 function openAddMenuPage()
 {
-	OpenModalWindow("维护菜单","/sys/org/operate/menu_add.jsp?parentID="+menu_id,500,300);
+	OpenModalWindow("修改菜单","/sys/org/operate/menu_add.jsp?parentID="+menu_id,500,300);
 }
 
 function addMenu()
@@ -120,7 +120,7 @@ function insertMenuTree(id,dept_name)
 function openUpdateMenuPage()
 {
 	var selectIDS = table.getSelecteCheckboxValue("menu_id");
-	OpenModalWindow("维护菜单","/sys/org/operate/menu_add.jsp?parentID="+menu_id+"&menu_id="+selectIDS,500,300);
+	OpenModalWindow("修改菜单","/sys/org/operate/menu_add.jsp?parentID="+menu_id+"&menu_id="+selectIDS,500,300);
 }
 
 function updateMenu()

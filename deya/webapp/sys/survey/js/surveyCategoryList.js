@@ -108,7 +108,7 @@
 function fnAddSurveyCategory()
 {
 	window.location.href = "add_surveyCategory.jsp?site_id="+site_id;
-	//OpenModalWindow("维护问卷分类","/sys/survey/add_surveyCategory.jsp",440,305);
+	//OpenModalWindow("修改问卷分类","/sys/survey/add_surveyCategory.jsp",440,305);
 }
 
 function saveSurveyCategory()
@@ -274,14 +274,14 @@ function batchDelSurveyCategoryHandl()
 /**********************修改操作　开始*************************************/
 function showUpdatePage(c_id)
 {
-	//OpenModalWindow("维护问卷分类","/sys/survey/add_surveyCategory.jsp?c_id="+c_id,440,305);
+	//OpenModalWindow("修改问卷分类","/sys/survey/add_surveyCategory.jsp?c_id="+c_id,440,305);
 	window.location.href = "/sys/survey/add_surveyCategory.jsp?c_id="+c_id+"&site_id="+site_id;
 }
 
 function fnUpdateSurveyCategory()
 {
 	var selectIDS = table.getSelecteCheckboxValue("category_id");	
-	//OpenModalWindow("维护问卷分类","/sys/survey/add_surveyCategory.jsp?c_id="+selectIDS,440,305);
+	//OpenModalWindow("修改问卷分类","/sys/survey/add_surveyCategory.jsp?c_id="+selectIDS,440,305);
 	window.location.href = "/sys/survey/add_surveyCategory.jsp?c_id="+selectIDS+"&site_id="+site_id;
 }
 /**********************修改操作　结束*************************************/

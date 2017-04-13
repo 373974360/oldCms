@@ -186,7 +186,7 @@ Validator = function(){
 		}
 		else {
 			this.check_result = false;
-			this.addError(input_name, "【" + name + "】项中填写的网络URL地址有误,参考格式: http://www.cicro.com/");
+			this.addError(input_name, "【" + name + "】项中填写的网络URL地址有误,参考格式: http://www.yinhai.com/");
 			return false;
 		}
 	}

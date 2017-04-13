@@ -102,10 +102,10 @@ function showTurnPage(){
 	tp.onPageChange = showList;
 }
 
-//打开栏目维护页面
+//打开栏目修改页面
 function openCategoryPage(node_id)
 {	
-	addTab(true,"/sys/cms/category/categoryList.jsp?cat_type=0&app_id="+app_id+"&site_id="+node_id,"维护公开节点目录");
+	addTab(true,"/sys/cms/category/categoryList.jsp?cat_type=0&app_id="+app_id+"&site_id="+node_id,"修改公开节点目录");
 }
 
 //得到该角色下已有的用户ID
@@ -137,7 +137,7 @@ function saveUser(user_ids)
 
 function openAddNodePage()
 {
-	addTab(true,"/sys/zwgk/node/gkNode_add.jsp?top_index="+curTabIndex+"&nodcat_id="+nodcat_id,"维护公开节点");
+	addTab(true,"/sys/zwgk/node/gkNode_add.jsp?top_index="+curTabIndex+"&nodcat_id="+nodcat_id,"修改公开节点");
 }
 
 function openUpdateNodePage(nc_id)
@@ -147,7 +147,7 @@ function openUpdateNodePage(nc_id)
 		selectIDS = nc_id;
 	else
 		selectIDS = table.getSelecteCheckboxValue("node_id");
-	addTab(true,"/sys/zwgk/node/gkNode_add.jsp?top_index="+curTabIndex+"&node_id="+selectIDS,"维护公开节点");
+	addTab(true,"/sys/zwgk/node/gkNode_add.jsp?top_index="+curTabIndex+"&node_id="+selectIDS,"修改公开节点");
 }
 
 

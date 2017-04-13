@@ -74,7 +74,7 @@ function showTurnPage(){
 //打开添加窗口
 function openAddDesignModulePage()
 {		
-	addTab(true,"/sys/system/design/module_add.jsp?app_id="+app_id+"&top_index="+curTabIndex,"维护模块");
+	addTab(true,"/sys/system/design/module_add.jsp?app_id="+app_id+"&top_index="+curTabIndex,"修改模块");
 }
 
 function openUpdateDesignModulePage(c_id)
@@ -86,7 +86,7 @@ function openUpdateDesignModulePage(c_id)
 	}else
 		id = table.getSelecteCheckboxValue("module_id");
 	
-	addTab(true,"/sys/system/design/module_add.jsp?app_id="+app_id+"&top_index="+curTabIndex+"&module_id="+id,"维护模块");
+	addTab(true,"/sys/system/design/module_add.jsp?app_id="+app_id+"&top_index="+curTabIndex+"&module_id="+id,"修改模块");
 }
 
 function getAttrIDS()

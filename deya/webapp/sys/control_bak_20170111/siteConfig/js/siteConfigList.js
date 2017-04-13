@@ -51,13 +51,13 @@ function showTurnPage(){
 
 //打开添加页面
 function openAddPage(){ 
-	OpenModalWindow("维护配置","/sys/control/siteConfig/siteConfig_add.jsp",500,160);
+	OpenModalWindow("修改配置","/sys/control/siteConfig/siteConfig_add.jsp",500,160);
 }
 
 //打开修改页面
 function openUpdatePage(){
 	var selectIDS = table.getSelecteCheckboxValue("config_id");
-	OpenModalWindow("维护配置","/sys/control/siteConfig/siteConfig_add.jsp?config_id="+selectIDS,500,160);
+	OpenModalWindow("修改配置","/sys/control/siteConfig/siteConfig_add.jsp?config_id="+selectIDS,500,160);
 }
 
 //添加
