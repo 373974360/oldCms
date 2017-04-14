@@ -1,16 +1,16 @@
 package com.deya.util;
 
-import com.deya.util.FormatUtil;
 import com.deya.util.jconfig.JconfigUtilContainer;
+
+import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.Enumeration;
-import javax.servlet.http.HttpServletRequest;
 
 public class jspFilterHandl {
-    private static String[] filter_str = {"/*","\\","union","--","1=1","and ","concat","acustart","application","script","location","limit ","alert","iframe","set-cookie","+","or ","drop table","asc\\(","mid\\(","char\\(","net user","exists","alter",
+    private static String[] filter_str = {"%22","%27","%3E","%3e","%3C","%3c","/*","\\","union","--","1=1","and ","concat","acustart","application","script","location","limit ","alert","iframe","set-cookie","+","or ","drop table","asc\\(","mid\\(","char\\(","net user","exists","alter",
             "+acu+","onmouseover","header","exec ","insert ","select ","delete ","trancate","update ","updatexml","extractvalue","href=","data:text","declare","master","execute","xp_cmdshell","netlocalgroup","count\\(","restore","floor","ExtractValue","UpdateXml",
-            "injected","ACUstart","ACUend","():;","acu:Expre","window.location.href","document","parameter: ","<OBJECT","javascript","confirm","<script>","</script>","..","<img>" ,"</img>","cat ", "click", "function","prompt(","<a"};
+            "injected","ACUstart","ACUend","():;","acu:Expre","window.location.href","document","parameter: ","<OBJECT","javascript","confirm","<script>","</script>","..","<img>" ,"</img>","cat ", "click", "function","prompt(","<a",";"};
     private static String no_filter_jsp;
 
     static {
@@ -61,12 +61,14 @@ public class jspFilterHandl {
         String basePath = request.getScheme() + "://" + request.getServerName()
                 + path + "/";
         // HTTP 头设置 Referer过滤
+        /*
         String referer = ((HttpServletRequest) request).getHeader("Referer"); // REFRESH
         if(referer != null){
             if(isTureKey(referer)){
                 return true;  //包含要过滤的关键字
             }
         }
+        */
         try{
             String servletPath = request.getServletPath();
             String queryString = request.getQueryString();
