@@ -95,7 +95,7 @@ function showCategoryTree()
 				<input id="btn1" name="btn1" type="button" onclick="updateRecord(table,'id','openUpdateCategoryPage()');" value="修改" />	
 				<input id="btn3" name="btn3" type="button" onclick="publicSelectCheckbox(table,'cat_id','openSelectSingleCategory(\'选择目录\',\'moveCategory\',site_id)')" value="移动目录" />
 				<input id="btn3" name="btn3" type="button" onclick="sortRecord(table,'cat_id','sortCategory()');" value="保存排序" />
-				<input id="btn3" name="btn3" type="button" onclick="openSelectShareCateClass('选择类目','copyShareCategory',app_id)" value="快速创建" />
+				<%--<input id="btn3" name="btn3" type="button" onclick="openSelectShareCateClass('选择类目','copyShareCategory',app_id)" value="快速创建" />--%>
 				<input id="btn3" name="btn3" type="button" onclick="deleteRecord(table,'cat_id','deleteCategory()');" value="删除" />
 			</td>
 		</tr>

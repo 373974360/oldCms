@@ -1002,11 +1002,15 @@ function msgConfirm(msg, fun) {
         //给操作按钮加上点击事件
 
         parent.$("#msgConfirm input:first").click(function () {
-            $("#msgConfirm").dialog('close');
-            eval('document.getElementById("iframe_' + curTabIndex + '").contentWindow.' + fun)
+            parent.$("#msgConfirm").dialog('close');
+            try{
+                eval('parent.document.getElementById("iframe_' + parent.curTabIndex + '").contentWindow.' + fun);
+            }catch (e){
+                eval('parent.document.getElementById("iframe_1").contentWindow.' + fun);
+            }
         });
         parent.$("#msgConfirm input:last").click(function () {
-            $("#msgConfirm").dialog('close');
+            parent.$("#msgConfirm").dialog('close');
         });
         //加入描述语句
         parent.$("#msgConfirm td").html(msg);

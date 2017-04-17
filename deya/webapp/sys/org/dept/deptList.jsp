@@ -133,13 +133,13 @@ function changeLabShowList(labname)
 <table class="table_option" border="0" cellpadding="0" cellspacing="0">
 		<tr>
 			<td align="left" valign="middle">
-				<input id="btn1" name="btn1" type="button" onclick="openAddUserPage();" value="添加用户" />
-				<input id="btn1" name="btn1" type="button" onclick="updateRecord(user_table,'user_id','openUpdateUserPage()');" value="修改" />	
-				<input id="btn3" name="btn3" type="button" onclick="publicSelectCheckbox(user_table,'user_id','openSelectSingleDept(\'选择组织机构节点\',\'moveUser\',\'\')')" value="移动用户" /><!-- openSelectSingleDept 函数在/sys/js/sysUI.js中 -->
-				<input id="btn3" name="btn3" type="button" onclick="publicSelectCheckbox(user_table,'user_id','setUserStatus(1)')" value="停用" />
-				<input id="btn3" name="btn3" type="button" onclick="publicSelectCheckbox(user_table,'user_id','setUserStatus(0)')" value="启用" />
-				<input id="btn2" name="btn6" type="button" onclick="publicSelectCheckbox(user_table,'user_id','setUserToAdmin()');" value="置为管理员" />
-				<input id="btn3" name="btn3" type="button" onclick="publicSelectSinglCheckbox(user_table,'user_id','openRegPage()')" value="帐号修改" />
+				<%--<input id="btn1" name="btn1" type="button" onclick="openAddUserPage();" value="添加用户" />--%>
+				<%--<input id="btn1" name="btn1" type="button" onclick="updateRecord(user_table,'user_id','openUpdateUserPage()');" value="修改" />	--%>
+				<%--<input id="btn3" name="btn3" type="button" onclick="publicSelectCheckbox(user_table,'user_id','openSelectSingleDept(\'选择组织机构节点\',\'moveUser\',\'\')')" value="移动用户" /><!-- openSelectSingleDept 函数在/sys/js/sysUI.js中 -->--%>
+				<%--<input id="btn3" name="btn3" type="button" onclick="publicSelectCheckbox(user_table,'user_id','setUserStatus(1)')" value="停用" />--%>
+				<%--<input id="btn3" name="btn3" type="button" onclick="publicSelectCheckbox(user_table,'user_id','setUserStatus(0)')" value="启用" />--%>
+				<%--<input id="btn2" name="btn6" type="button" onclick="publicSelectCheckbox(user_table,'user_id','setUserToAdmin()');" value="置为管理员" />--%>
+				<%--<input id="btn3" name="btn3" type="button" onclick="publicSelectSinglCheckbox(user_table,'user_id','openRegPage()')" value="帐号修改" />--%>
 				<input id="btn2" name="btn2" type="button" onclick="saveUserSort();" value="保存排序" />
 				<input id="btn1" name="btn1" type="button" onclick="deleteRecord(user_table,'user_id','deleteUser()');" value="删除" /><!-- deleteRecord 函数在/sys/js/sysUI.js中 -->
 			</td>
@@ -155,10 +155,10 @@ function changeLabShowList(labname)
 	<table class="table_option" border="0" cellpadding="0" cellspacing="0">
 		<tr>
 			<td align="left" valign="middle">
-				<input id="btn1" name="btn1" type="button" onclick="openAddDeptPage();" value="新建部门" />
-				<input id="btn2" name="btn2" type="button" onclick="updateRecord(table,'dept_id','openUpdateDeptPage()');" value="修改" />
-				<input id="btn3" name="btn3" type="button" onclick="publicSelectCheckbox(table,'dept_id','openSelectSingleDept(\'选择组织机构节点\',\'moveDept\',\'\')')" value="移动部门" /><!-- openSelectSingleDept 函数在/sys/js/sysUI.js中 -->				
-				<input id="btn2" name="btn2" type="button" onclick="saveDeptSort();" value="保存排序" />
+				<%--<input id="btn1" name="btn1" type="button" onclick="openAddDeptPage();" value="新建部门" />--%>
+				<%--<input id="btn2" name="btn2" type="button" onclick="updateRecord(table,'dept_id','openUpdateDeptPage()');" value="修改" />--%>
+				<%--<input id="btn3" name="btn3" type="button" onclick="publicSelectCheckbox(table,'dept_id','openSelectSingleDept(\'选择组织机构节点\',\'moveDept\',\'\')')" value="移动部门" /><!-- openSelectSingleDept 函数在/sys/js/sysUI.js中 -->				--%>
+				<%--<input id="btn2" name="btn2" type="button" onclick="saveDeptSort();" value="保存排序" />--%>
 				<input id="btn3" name="btn3" type="button" onclick="deleteRecord(table,'dept_id','deleteDeptHandl()');" value="删除" /><!-- deleteRecord 函数在/sys/js/sysUI.js中 -->
 			</td>
 		</tr>
@@ -173,7 +173,7 @@ function changeLabShowList(labname)
 	<table class="table_option" border="0" cellpadding="0" cellspacing="0">
 		<tr>
 			<td align="left" valign="middle">
-				<input id="btn1" name="btn1" type="button" onclick="addDeptManager();" value="添加管理员" />
+				<%--<input id="btn1" name="btn1" type="button" onclick="addDeptManager();" value="添加管理员" />--%>
 				<input id="btn3" name="btn3" type="button" onclick="deleteRecord(manager_table,'user_id','deleteDeptManager()');" value="删除" /><!-- deleteRecord 函数在/sys/js/sysUI.js中 -->
 			</td>
 		</tr>
