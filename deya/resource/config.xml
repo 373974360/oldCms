@@ -85,7 +85,7 @@
         <property name="path" value="${rootPath}/package/ci_setup.jar"/>
     </category>
     <category name="manager_path">
-        <property name="path" value="${rootPath}/vhosts/common/sys"/>
+        <property name="path" value="/deya/admin/vhosts/common/sys"/>
     </category>
     <category name="cms_files">
         <property name="path" value="${rootPath}/cms.files"/>

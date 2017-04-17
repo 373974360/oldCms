@@ -92,7 +92,8 @@ function  outFileBtn(){
 		listHeader.add("引用信息");
 		listHeader.add("连接信息"); 
 		var url = CmsCountRPC.cmsInfoOutExcel(beanList,listHeader);
-		location.href=url;  
+        //parent.addTab(true, url + "&topnum=" + parent.curTabIndex, "添加信息");
+		location.href=url;
 	}
 }
 

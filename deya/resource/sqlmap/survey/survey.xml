@@ -220,7 +220,7 @@
 	
 	<!-- 得到某个答卷详细信息 -->
 	<select id="getAnswerItemDetail" parameterType="java.lang.String" resultMap="ansertItemDetail" >
-		select cai.item_id,cai.item_value,min(cai.item_text) as item_text,min(cc.subject_id) as subject_id,min(cc.item_name) as item_name from cp_survey_answer_item cai,cp_survey_sub cs,cp_survey_child cc where cai.answer_id = #{answer_id} and cai.s_id = cs.survey_id and cs.subject_id = cc.subject_id and cai.item_id = cc.item_id and (cc.item_num = cai.item_value or (item_num=0 and is_text=1)) group by cai.item_id,cai.item_value
+		select cai.item_id,cai.item_value,(cai.item_text) as item_text,(cc.subject_id) as subject_id,(cc.item_name) as item_name from cp_survey_answer_item cai, cp_survey_sub cs, cp_survey_child cc where cai.answer_id = #{answer_id}   and cai.s_id = cs.survey_id   and cs.subject_id = cc.subject_id   and cai.item_id = cc.item_id   and (cc.item_num = cai.item_value or (item_num = 0 and is_text = 1))
 	</select>
 	
 	<!-- 得到某个主题的答卷列表总数 -->
