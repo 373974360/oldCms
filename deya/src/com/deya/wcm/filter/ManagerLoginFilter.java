@@ -69,13 +69,8 @@ public class ManagerLoginFilter implements javax.servlet.Filter{
             }
         }else
         {
-            if(UserLogin.checkLoginBySession(request))
+            if(!jspFilterHandl.isRightParam(request,requestUri))
             {
-                chain.doFilter(request, response);
-            }
-            else
-            {
-                //response.sendRedirect(loginPage);
                 response.setContentType("text/html; charset=utf-8");
                 if(requestUri.indexOf("/sys/JSON-RPC") >= 0)
                 {
@@ -84,7 +79,25 @@ public class ManagerLoginFilter implements javax.servlet.Filter{
                 else{
                     response.getWriter().write(Javascript.location(loginPage,"top"));
                 }
+            }else{
+                if(UserLogin.checkLoginBySession(request))
+                {
+                    chain.doFilter(request, response);
+                }
+                else
+                {
+                    //response.sendRedirect(loginPage);
+                    response.setContentType("text/html; charset=utf-8");
+                    if(requestUri.indexOf("/sys/JSON-RPC") >= 0)
+                    {
+                        response.getWriter().write("top.location.href='" + loginPage +"'");
+                    }
+                    else{
+                        response.getWriter().write(Javascript.location(loginPage,"top"));
+                    }
+                }
             }
+
         }
     }
 
