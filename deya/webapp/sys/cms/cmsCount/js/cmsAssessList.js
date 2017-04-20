@@ -151,7 +151,7 @@ function allSelected(){
 
 // 生成柱状图
 function setBarChart(){
-	var wid = document.body.clientWidth - 212;
+	var wid = "100%";
 	chartJsonData = "";
 	if(beanList.size() == 0)
 	{

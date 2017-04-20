@@ -226,14 +226,15 @@
 			<td align="left" valign="middle" >
 
 				<input id="searchkey" type="text" class="input_text" style="width:240px;" value=""  /><input id="btn" type="button" value="搜索" onclick="searchInfo()"/>
-				<select id="orderByFields" class="input_select" onchange="changeTimeSort(this.value)">
+				<select id="orderByFields" class="input_select hidden" onchange="changeTimeSort(this.value)">
 					<option selected="selected" value="1">时间倒序</option>
 					<option value="2">时间正序</option>
 					<option value="3">权重倒序</option>
 					<option value="4">权重正序</option>
 				</select>
+				<!--
 				&nbsp;&nbsp;&nbsp;&nbsp;
-				<input id="btnSearch" name="btn6" type="button" onclick="openHighSearchPage()" value="高级搜索" />
+				<input id="btnSearch" name="btn6" type="button" onclick="openHighSearchPage()" value="高级搜索" />-->
 			</td>
 		</tr>
 

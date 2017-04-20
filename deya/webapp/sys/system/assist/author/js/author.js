@@ -111,7 +111,7 @@ function openViewAuthorDataPage(author_id)
 //打开添加窗口
 function openAddAuthorPage()
 {
-    parent.OpenModalWindow("修改","/sys/system/assist/author/author_add.jsp?app="+app+"&site_id="+site_id,380,195);
+    parent.OpenModalWindow("添加","/sys/system/assist/author/author_add.jsp?app="+app+"&site_id="+site_id,380,195);
 }
 
 //打开修改窗口

@@ -134,7 +134,7 @@ function openAddRolePage()
 	var height = 190;
 	if(app_id == "system" || app_id == "control")
 		height = 360;
-    parent.OpenModalWindow("修改角色","/sys/org/role/role_add.jsp?app="+app_id+"&site_id="+site_id,450,height);
+    parent.OpenModalWindow("添加角色","/sys/org/role/role_add.jsp?app="+app_id+"&site_id="+site_id,450,height);
 }
 
 //打开修改窗口

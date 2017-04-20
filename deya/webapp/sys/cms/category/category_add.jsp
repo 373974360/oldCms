@@ -46,6 +46,11 @@
             initButtomStyle();
 
             if (app_id == "ggfw" || app_id == "cms") {
+                $(".list_tab").eq(1).hide();
+                $(".list_tab").eq(2).hide();
+                $(".list_tab").eq(3).hide();
+                $(".list_tab").eq(4).hide();
+                $(".list_tab").eq(5).hide();
                 $(".list_tab").eq(6).hide();
             }
 
@@ -963,7 +968,7 @@
                            onblur="checkInputValue('cat_ename',false,15,'英文名称','checkLower')"/>
                 </td>
             </tr>
-            <tr>
+            <tr class="hidden">
                 <th>类目编号：</th>
                 <td>
                     <input id="cat_code" name="cat_code" type="text" class="width300"
@@ -1028,7 +1033,7 @@
                            checked="true"/><label>否</label>
                 </td>
             </tr>
-            <tr>
+            <tr class="hidden">
                 <th>允许用户投稿：</th>
                 <td>
                     <input id="is_allow_submit" name="is_allow_submit" type="radio" value="1"/><label>是</label>
@@ -1036,7 +1041,7 @@
                            checked="true"/><label>否</label>
                 </td>
             </tr>
-            <tr>
+            <tr class="hidden">
                 <th>允许评论：</th>
                 <td>
                     <input id="is_allow_comment" name="is_allow_comment" type="radio" value="1"/><label>是</label>
@@ -1052,14 +1057,14 @@
                            checked="true"/><label>否</label>
                 </td>
             </tr>
-            <tr>
+            <tr class="hidden">
                 <th>前台导航显示：</th>
                 <td>
                     <input id="is_show" name="is_show" type="radio" value="1" checked="true"/><label>是</label>
                     <input id="is_show" name="is_show" type="radio" value="0"/><label>否</label>
                 </td>
             </tr>
-            <tr>
+            <tr class="hidden">
                 <th>前台栏目树显示：</th>
                 <td>
                     <input id="is_show_tree" name="is_show_tree" type="radio" value="1" checked="true"/><label>是</label>

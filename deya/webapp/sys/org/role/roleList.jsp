@@ -70,7 +70,7 @@ $(document).ready(function(){
 	<table class="table_option" border="0" cellpadding="0" cellspacing="0" >
 		<tr>		
 			<td class="fromTabs">
-				<input id="btn1" name="btn1" type="button" onclick="openAddRolePage();" value="新建角色" />
+				<input id="btn1" name="btn1" type="button" onclick="openAddRolePage();" value="添加角色" />
 				<input id="btn1" name="btn1" type="button" onclick="updateRecord(table,'role_id','openUpdateRolePage()');" value="修改" />
 				<!-- <input id="selectUser" name="btn3" type="button" onclick="" value="关联用户" />
 				<input id="btn3" name="btn3" type="button" onclick="publicSelectSinglCheckbox(table,'role_id','openSelectOperatePage(\'选择权限\',\'saveRoleOperate\')')" value="关联权限" /> -->
@@ -86,10 +86,10 @@ $(document).ready(function(){
 	<span class="blank3"></span>
 	<div id="table"></div><!-- 列表DIV -->
 	<div id="turn"></div><!-- 翻页DIV -->
-	<table class="table_option" border="0" cellpadding="0" cellspacing="0">
+	<table class="table_option hidden" border="0" cellpadding="0" cellspacing="0">
 	<tr>
 		<td align="left" valign="middle">
-			<input id="btn1" name="btn1" type="button" onclick="openAddRolePage();" value="新建角色" />
+			<input id="btn1" name="btn1" type="button" onclick="openAddRolePage();" value="添加角色" />
 			<input id="btn1" name="btn1" type="button" onclick="updateRecord(table,'role_id','openUpdateRolePage()');" value="修改" />
 			<!-- <input id="selectUser" name="btn3" type="button" onclick="" value="关联用户" />
 			<input id="btn3" name="btn3" type="button" onclick="publicSelectSinglCheckbox(table,'role_id','openSelectOperatePage(\'选择权限\',\'saveRoleOperate\')')" value="关联权限" /> -->

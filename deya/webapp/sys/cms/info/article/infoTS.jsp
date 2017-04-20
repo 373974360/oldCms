@@ -77,14 +77,14 @@ function setUserPublishOperate()
 		<table id="table" class="table_form" border="0" cellpadding="0" cellspacing="0">
 			<tbody>
 				<tr id="tsArea_tr">
-					<th>推送范围：</th>
-					<td>
+					<th class="hidden">推送范围：</th>
+					<td class="hidden">
 						<select name="tsArea" id="tsArea" onchange="changeSiteId(this.value)">
 							<option value="">当前站点</option>
 						</select>
 					</td>
-					<th class="hidden tsResult" style="width: 80px;">推送结果：</th>
-					<td width="120px" class="hidden tsResult" id="opt_302">
+					<th class="hidden tsResult left" style="width: 108px;">推送结果：</th>
+					<td class="hidden tsResult" id="opt_302">
 						<ul><li><input type="checkbox" id="isPublish" name="isPublish" class="input_checkbox" checked="checked"><label for="isPublish">直接发布</label></li></ul>
 					</td>
 				</tr>

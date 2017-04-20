@@ -617,7 +617,12 @@ function getWorkFlowList()
 	var WorkFlowRPC = jsonrpc.WorkFlowRPC;
 	var list = WorkFlowRPC.getWorkFlowList();
 	list = List.toJSList(list);
-	$("#wf_id").addOptions(list,"wf_id","wf_name");
+	if(list.size() == 0){
+        $("#wf_id").parent().parent().addClass("hidden");
+	}else{
+        $("#wf_id").addOptions(list,"wf_id","wf_name");
+	}
+
 }
 
 /*****************截取时间字符串 开始*****************************/

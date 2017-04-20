@@ -46,7 +46,7 @@ $(document).ready(function(){
 </div>
 <div id="siteUser_table"></div>
 <div id="turn"></div>
-<table class="table_option" border="0" cellpadding="0" cellspacing="0">
+<table class="table_option hidden" border="0" cellpadding="0" cellspacing="0">
 		<tr>
 			<td align="left" valign="middle">					
 				<input id="btnManaUser" name="btnManaUser" type="button" 

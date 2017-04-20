@@ -87,13 +87,15 @@ h3{height:20px;}
 		<table id="table_id" width="100%" class="table_form" border="0" cellpadding="0" cellspacing="0">
 			<tbody>
 				<tr>
-					<th style="width:80px">获取范围：</th>
+					
+				<!--	<th style="width:80px">获取范围：</th>
 					<td width="150px">
 						<select class="width150" name="tsArea" id="tsArea" onchange="changeSiteId(this.value)">
 							<option value="">当前站点</option>
 							<option value="cms">站点内容管理系统</option>
 						</select>
-					</td>
+					</td>-->
+
 					<th style="width:80px">获取方式：</th>
 					<td width="190px">
 						<ul id="status_ul">
@@ -112,18 +114,20 @@ h3{height:20px;}
 		</table>
 		<table class="table_form" border="0" cellpadding="0" cellspacing="0">
 			<tr>
-				<td style="width:176px; padding-left:12px" valign="top" rowspan="2" >
-					<div id="cat_tree_div1" class="select_div border_color" style="width:176px; height:400px; overflow:scroll;border:1px #7f9db9 solid;" >
-						<div id="leftMenuBox">
-							<div id="leftMenu" class="contentBox6 textLeft" style="height:400px;">
-								<ul id="leftMenuTree" class="easyui-tree" animate="true" style="width:176px;overflow:hidden">
-								</ul>
-								<span class="blank3"></span >
+				
+				<!--	<td style="width:176px; padding-left:12px" valign="top" rowspan="2" >
+						<div id="cat_tree_div1" class="select_div border_color" style="width:176px; height:400px; overflow:scroll;border:1px #7f9db9 solid;" >
+							<div id="leftMenuBox">
+								<div id="leftMenu" class="contentBox6 textLeft" style="height:400px;">
+									<ul id="leftMenuTree" class="easyui-tree" animate="true" style="width:176px;overflow:hidden">
+									</ul>
+									<span class="blank3"></span >
+								</div>
 							</div>
 						</div>
-					</div>
-				</td>
-				<td id="tree_td_2" style="width:176px;" valign="top" rowspan="2">
+					</td>
+				-->
+				<td id="tree_td_2" style="width:200px;" valign="top" rowspan="2">
 					<div id="cat_tree_div2" class="select_div border_color" style="width:176px; height:400px; overflow:scroll;border:1px #7f9db9 solid;" >
 						<div id="leftMenuBox">
 							<div id="leftMenu2" class="contentBox6 textLeft" style="height:400px;">
@@ -149,8 +153,8 @@ h3{height:20px;}
 			</tr>
 			<tr>
 			  <td valign="top">	
-					<div id="scroll_div" style="width:397px;height:371px;overflow:auto;background:#ffffff" class="border_color">
-						<ul id="data" class="txt_list" style="width:1000px;">
+					<div id="scroll_div" style="width:100%;height:371px;overflow:auto;background:#ffffff" class="border_color">
+						<ul id="data" class="txt_list" style="width:95%;">
 
 						</ul>
 					</div>

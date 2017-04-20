@@ -39,7 +39,7 @@
 					<option value="ip">IP</option>
 				</select>
 				<input id="searchkey" type="text" class="input_text" value=""  /><input id="btnSearch" type="button" class="btn x2" value="搜索" onclick="roleSearchHandl(this)"/>
-				<select id="orderByFields" class="input_select" onchange="csLogSortHandl(this.value)">
+				<select id="orderByFields" class="input_select hidden" onchange="csLogSortHandl(this.value)">
 					<option value="audit_time,desc" selected="selected">按时间倒序(默认)</option>
 					<option value="audit_time,asc" >按时间顺序</option>
 				</select>

@@ -56,17 +56,17 @@ $(document).ready(function(){
 	<table class="table_option" border="0" cellpadding="0" cellspacing="0">
 	<tr>
 		<td align="left" valign="middle">
-			<input id="btn1" name="btn1" type="button" onclick="fnAddSurvey('')" value="添加" />
-			<input id="btn1" name="btn1" type="button" onclick="publicSelectSinglCheckbox(table,'id','showSurveyAttr(\'bath\')')" value="属性设置" />
-			<input id="btn1" name="btn1" type="button" onclick="publicSelectCheckbox(table,'id','updateRecommend(1)')" value="推荐" />
-			<input id="btn1" name="btn1" type="button" onclick="publicSelectCheckbox(table,'id','updateRecommend(0)')" value="不推荐" />
-			<input id="btn1" name="btn1" type="button" onclick="updateRecord(table,'id','fnUpdateSurvey()');" value="修改" />
-			<input id="btn3" name="btn3" type="button" onclick="publicSelectCheckbox(table,'id','batchPublishSurvey(1)')" value="发布" />	
-			<input id="btn3" name="btn3" type="button" onclick="publicSelectCheckbox(table,'id','batchPublishSurvey(-1)')" value="撤销" />	
+			<input class="hidden" id="btn1" name="btn1" type="button" onclick="fnAddSurvey('')" value="添加" />
+			<input class="hidden" id="btn1" name="btn1" type="button" onclick="publicSelectSinglCheckbox(table,'id','showSurveyAttr(\'bath\')')" value="属性设置" />
+			<input class="hidden" id="btn1" name="btn1" type="button" onclick="publicSelectCheckbox(table,'id','updateRecommend(1)')" value="推荐" />
+			<input class="hidden" id="btn1" name="btn1" type="button" onclick="publicSelectCheckbox(table,'id','updateRecommend(0)')" value="不推荐" />
+			<input class="hidden" id="btn1" name="btn1" type="button" onclick="updateRecord(table,'id','fnUpdateSurvey()');" value="修改" />
+			<input class="hidden" id="btn3" name="btn3" type="button" onclick="publicSelectCheckbox(table,'id','batchPublishSurvey(1)')" value="发布" />
+			<input class="hidden" id="btn3" name="btn3" type="button" onclick="publicSelectCheckbox(table,'id','batchPublishSurvey(-1)')" value="撤销" />
 			<input id="btn1" name="btn1" type="button" onclick="publicSelectSinglCheckbox(table,'id','showAnswer()')" value="查看问卷" />
 			<input id="btn1" name="btn1" type="button" onclick="publicSelectSinglCheckbox(table,'id','openSubject()')" value="数据统计" />
 			<input id="btn1" name="btn1" type="button" onclick="publicSelectSinglCheckbox(table,'id','openAnswer()')" value="所有答卷" />
-			<input id="btn3" name="btn3" type="button" onclick="deleteRecord(table,'id','batchDelSurveyHandl()')" value="删除" />
+			<input class="hidden" id="btn3" name="btn3" type="button" onclick="deleteRecord(table,'id','batchDelSurveyHandl()')" value="删除" />
 			<!-- <input id="btn1" name="btn1" type="button" onclick="fnSearch()" value="查询" />		 -->	
 		</td>
 	</tr>

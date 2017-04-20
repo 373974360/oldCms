@@ -1145,14 +1145,14 @@ function setUserOperate() {
         $("#opt_302").show().find("input").click();
         $("#audit_tr").addClass("hidden");
         $("#opt_303").show();
-        $("#timer_publish").show();//显示出定时发布区域
+        $("#timer_publish").hide();//显示出定时发布区域
     } else {
         if (wf_id == 0) {
             //是否有发布权限
             if (opt_ids.indexOf(",302,") > -1) {
                 $("#opt_302").show().find("input").click();
                 $("#audit_tr").addClass("hidden");
-                $("#timer_publish").show(); //显示出定时发布区域
+                $("#timer_publish").hide(); //显示出定时发布区域
             }
         }
         else if (opt_ids.indexOf(",303,") > -1) {
@@ -1163,7 +1163,7 @@ function setUserOperate() {
                 if (opt_ids.indexOf(",302,") > -1) {
                     $("#opt_302").show().find("input").click();
                     $("#audit_tr").addClass("hidden");
-                    $("#timer_publish").show(); //显示出定时发布区域
+                    $("#timer_publish").hide(); //显示出定时发布区域
                 }
             }
         } else {

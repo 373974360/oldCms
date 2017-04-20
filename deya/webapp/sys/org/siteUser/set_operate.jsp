@@ -43,6 +43,7 @@ $(document).ready(function(){
 			$(".list_tab").eq(3).hide();
 		}else
 		{
+            $(".list_tab").eq(2).hide();
 			$(".list_tab").eq(3).hide();
 		}
 	}

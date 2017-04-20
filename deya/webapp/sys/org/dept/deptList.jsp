@@ -92,7 +92,7 @@ function changeLabShowList(labname)
 						<div class="tab_right" onclick="changeLabShowList('dept')">部门列表</div>
 					</div>
 				</li>
-				<li class="list_tab">
+				<li class="list_tab hidden">
 					<div class="tab_left">
 						<div class="tab_right" onclick="changeLabShowList('manager')">管理员列表</div>
 					</div>
@@ -113,7 +113,7 @@ function changeLabShowList(labname)
 				<option selected="selected" value="user_realname">姓名</option>
 			</select>
 			<input id="searchkey" type="text" class="input_text" value=""  /><input id="btnSearch" type="button" class="btn x2" value="搜索" onclick="userSearchHandl(this)"/>
-			<select id="orderByFields" class="input_select" onchange="userSortHandl(this.value)">
+			<select id="orderByFields" class="input_select hidden" onchange="userSortHandl(this.value)">
 				<option selected="selected" value="user_id,desc">按时间倒序(默认)</option>
 				<option value="user_id,asc">按时间顺序</option>
 			</select>
@@ -140,7 +140,7 @@ function changeLabShowList(labname)
 				<%--<input id="btn3" name="btn3" type="button" onclick="publicSelectCheckbox(user_table,'user_id','setUserStatus(0)')" value="启用" />--%>
 				<%--<input id="btn2" name="btn6" type="button" onclick="publicSelectCheckbox(user_table,'user_id','setUserToAdmin()');" value="置为管理员" />--%>
 				<%--<input id="btn3" name="btn3" type="button" onclick="publicSelectSinglCheckbox(user_table,'user_id','openRegPage()')" value="帐号修改" />--%>
-				<input id="btn2" name="btn2" type="button" onclick="saveUserSort();" value="保存排序" />
+				<%--<input id="btn2" name="btn2" type="button" onclick="saveUserSort();" value="保存排序" />--%>
 				<input id="btn1" name="btn1" type="button" onclick="deleteRecord(user_table,'user_id','deleteUser()');" value="删除" /><!-- deleteRecord 函数在/sys/js/sysUI.js中 -->
 			</td>
 		</tr>

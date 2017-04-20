@@ -125,7 +125,7 @@ function openViewSourceDataPage(source_id)
 //打开添加窗口
 function openAddSourcePage()
 {
-    parent.OpenModalWindow("修改来源","/sys/system/assist/source/source_add.jsp?app="+app+"&site_id="+site_id,380,215);
+    parent.OpenModalWindow("添加来源","/sys/system/assist/source/source_add.jsp?app="+app+"&site_id="+site_id,380,215);
 }
 
 //打开修改窗口

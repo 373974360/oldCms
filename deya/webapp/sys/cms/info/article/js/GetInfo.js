@@ -189,7 +189,7 @@ function initCatTree(s_id){
 		else
 		{
 			$("#tree_td_2").show();
-			$("#scroll_div").css("width","397px");
+			$("#scroll_div").css("width","100%");
 			if(s_id == "cms")
 			{
 				cat_jdata = eval(CategoryRPC.getAllowSharedSiteJSONStr(site_id));
@@ -478,7 +478,7 @@ function changeSiteId(val){
 	{
 		$("#status_ul li").eq(0).show();
 		$("#tree_td_2").show();
-		$("#scroll_div").css("width","397px");
+		$("#scroll_div").css("width","100%");
 		s_site_id = site_id;
 		
 		$("#leftMenuTree2").empty();

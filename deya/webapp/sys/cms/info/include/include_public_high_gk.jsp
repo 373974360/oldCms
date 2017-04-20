@@ -95,6 +95,12 @@
 				 顺序号：<input type="text" id="gk_num" name="gk_num" class="width70"  value="0" maxlength="8" onkeypress="var k=event.keyCode; return k>=48&&k<=57" onpaste="return !clipboardData.getData('text').match(/\D/)" ondragenter="return false" style="ime-mode:Disabled"/>&#160;<input type="button" value="重新生成" onclick="getNewGKIndex()"/>
 			</td>
 		</tr>
+		<tr>
+			<th>权重：</th>
+			<td>
+				<input id="weight" name="weight" type="text" style="width:50px;" value="60"  maxlength="2" onblur="checkInputValue('weight',true,2,'权重','checkNumber')"/>默认值：60，取值范围（0-99）
+			</td>
+		</tr>
 		<tr id="info_staus_tr">
 			<th>发布状态：</th>
 			<td >
@@ -115,7 +121,7 @@
 	</tbody>
 </table>
 <div class="sq_box">
-<div class="sq_title_box" >
+<div class="sq_title_box hidden" >
 	<div class="sq_title sq_title_plus">高级属性</div>
 	<div class="sq_title_right">点击展开</div>
 </div>
@@ -192,17 +198,6 @@
 				</select>
 			</td>
 			<td></td>
-		</tr>
-	</tbody>
-</table>
-
-<table id="" class="table_form" border="0" cellpadding="0" cellspacing="0">
-	<tbody>
-		<tr>
-			<th>权重：</th>
-			<td>
-				<input id="weight" name="weight" type="text" style="width:50px;" value="60"  maxlength="2" onblur="checkInputValue('weight',true,2,'权重','checkNumber')"/>默认值：60，取值范围（0-99）
-			</td>
 		</tr>
 	</tbody>
 </table>
