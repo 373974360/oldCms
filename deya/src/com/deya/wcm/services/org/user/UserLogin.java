@@ -658,10 +658,11 @@ public class UserLogin {
 	 */
 	public static String menuListToStrHandl(List<MenuBean> ml)
 	{		
-		int ml_size = ml.size();
+		int ml_size = 0;
 		String json_str = "";
 		if(ml != null && ml.size() > 0)
 		{
+			ml_size = ml.size();
 			for(int i=0;i<ml.size();i++)
 			{			
 				//4 是 政务公开系统

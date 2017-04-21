@@ -75,7 +75,9 @@
             setMainIframeUrl("space.html","Home");
 
             jsonData = eval(UserLogin.menuListToJsonStrByUserID(LoginUserBean.user_id,""));
-            chold_jData = jsonData[0].children;
+            if(jsonData.length > 0){
+                chold_jData = jsonData[0].children;
+			}
             //我的平台树字符串
             myPlatform_jsonData = eval(UserLogin.getMyPlatformTreeStr());
 
