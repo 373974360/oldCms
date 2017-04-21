@@ -101,7 +101,7 @@ public String getNewsList(HttpServletRequest request)
 	{
 		for(InfoBean info : info_list)
 		{
-			json += ",{\"info_id\":\""+info.getInfo_id()+"\",\"title\":\""+info.getTitle()+"\",\"model_id\":\""+info.getModel_id()+"\",\"content_url\":\""+info.getContent_url()+"\",\"description\":\""+replaceStr(info.getDescription())+"\",\"source\":\""+info.getSource()+"\",\"released_dtime\":\""+info.getReleased_dtime()+"\"}";
+			json += ",{\"info_id\":\""+info.getInfo_id()+"\",\"title\":\""+replaceFont(info.getTitle())+"\",\"model_id\":\""+info.getModel_id()+"\",\"content_url\":\""+info.getContent_url()+"\",\"description\":\""+replaceStr(info.getDescription())+"\",\"source\":\""+info.getSource()+"\",\"released_dtime\":\""+info.getReleased_dtime()+"\"}";
 		}
 		json = json.substring(1);
 	}
@@ -122,7 +122,7 @@ public String getCmsLdInfoList(HttpServletRequest request)
 	    for(InfoBean info : info_list)
 		{
 		    GKFldcyBean ldcy = (GKFldcyBean)ModelUtil.select(String.valueOf(info.getInfo_id()), info.getSite_id(), ModelManager.getModelEName(info.getModel_id()));
-			json += ",{\"info_id\":\""+ldcy.getInfo_id()+"\",\"title\":\""+ldcy.getTitle()+"\",\"model_id\":\""+info.getModel_id()+"\",\"content_url\":\""+info.getContent_url()+"\",\"description\":\""+replaceStr(info.getDescription())+"\",\"source\":\""+ldcy.getSource()+"\",\"pic\":\""+ldcy.getGk_pic()+"\",\"ldzw\":\""+ldcy.getGk_ldzw()+"\",\"gzfg\":\""+ldcy.getGk_gzfg()+"\",\"released_dtime\":\""+info.getReleased_dtime()+"\"}";
+			json += ",{\"info_id\":\""+ldcy.getInfo_id()+"\",\"title\":\""+replaceFont(ldcy.getTitle())+"\",\"model_id\":\""+info.getModel_id()+"\",\"content_url\":\""+info.getContent_url()+"\",\"description\":\""+replaceStr(info.getDescription())+"\",\"source\":\""+ldcy.getSource()+"\",\"pic\":\""+ldcy.getGk_pic()+"\",\"ldzw\":\""+ldcy.getGk_ldzw()+"\",\"gzfg\":\""+ldcy.getGk_gzfg()+"\",\"released_dtime\":\""+info.getReleased_dtime()+"\"}";
 		}
 		json = json.substring(1);
 	}
@@ -174,7 +174,7 @@ public String getNewsPicList(HttpServletRequest request)
 	{
 		for(InfoBean info : info_list)
 		{
-			json += ",{\"info_id\":\""+info.getInfo_id()+"\",\"title\":\""+info.getTitle()+"\",\"model_id\":\""+info.getModel_id()+"\",\"content_url\":\""+info.getContent_url()+"\",\"description\":\""+replaceStr(info.getDescription())+"\",\"source\":\""+info.getSource()+"\",\"thumb_url\":\""+info.getThumb_url()+"\",\"released_dtime\":\""+info.getReleased_dtime()+"\"}";
+			json += ",{\"info_id\":\""+info.getInfo_id()+"\",\"title\":\""+replaceFont(info.getTitle())+"\",\"model_id\":\""+info.getModel_id()+"\",\"content_url\":\""+info.getContent_url()+"\",\"description\":\""+replaceStr(info.getDescription())+"\",\"source\":\""+info.getSource()+"\",\"thumb_url\":\""+info.getThumb_url()+"\",\"released_dtime\":\""+info.getReleased_dtime()+"\"}";
 		}
 		json = json.substring(1);
 	}
@@ -198,15 +198,15 @@ public String getNewsContent(HttpServletRequest request)
 			if(mb.getModel_id() == 11)
 			{
 				ArticleBean article = (ArticleBean)obj;
-				json = "{\"type\":\"article\",\"info_id\":\""+article.getInfo_id()+"\",\"title\":\""+article.getTitle()+"\",\"source\":\""+article.getSource()+"\",\"author\":\""+article.getAuthor()+"\",\"hits\":\""+article.getHits()+"\",\"released_dtime\":\""+article.getReleased_dtime()+"\",\"description\":\""+replaceStr(article.getDescription())+"\",\"content\":\""+replaceStr(article.getInfo_content())+"\"}";
+				json = "{\"type\":\"article\",\"info_id\":\""+article.getInfo_id()+"\",\"title\":\""+replaceFont(article.getTitle())+"\",\"source\":\""+article.getSource()+"\",\"author\":\""+article.getAuthor()+"\",\"hits\":\""+article.getHits()+"\",\"released_dtime\":\""+article.getReleased_dtime()+"\",\"description\":\""+replaceStr(article.getDescription())+"\",\"content\":\""+replaceStr(article.getInfo_content())+"\"}";
 			}
 			else if(mb.getModel_id() == 10)
 			{
 				PicBean article = (PicBean)obj;
 				List<PicItemBean> picList = article.getItem_list();
-				json = "{\"type\":\"pic\",\"info_id\":\""+article.getInfo_id()+"\",\"title\":\""+article.getTitle()+"\",\"source\":\""+article.getSource()+"\",\"author\":\""+article.getAuthor()+"\",\"hits\":\""+article.getHits()+"\",\"released_dtime\":\""+article.getReleased_dtime()+"\",\"description\":\""+replaceStr(article.getDescription())+"\",\"picList\":[";
+				json = "{\"type\":\"pic\",\"info_id\":\""+article.getInfo_id()+"\",\"title\":\""+replaceFont(article.getTitle())+"\",\"source\":\""+article.getSource()+"\",\"author\":\""+article.getAuthor()+"\",\"hits\":\""+article.getHits()+"\",\"released_dtime\":\""+article.getReleased_dtime()+"\",\"description\":\""+replaceStr(article.getDescription())+"\",\"picList\":[";
 				for(PicItemBean pib : picList){
-					json += "{\"pic_path\":\"" + pib.getPic_path()+"\",\"pic_title\":\"" + pib.getPic_title()+"\",\"pic_note\":\"" + replaceStr(pib.getPic_note())+"\"},";
+					json += "{\"pic_path\":\"" + pib.getPic_path()+"\",\"pic_title\":\"" + replaceFont(pib.getPic_title())+"\",\"pic_note\":\"" + replaceStr(pib.getPic_note())+"\"},";
 				}
 				json = json.substring(0,json.length() - 1);
 				json += "],\"content\":\""+replaceStr(article.getPic_content())+"\"}";
@@ -214,17 +214,17 @@ public String getNewsContent(HttpServletRequest request)
 			else if(mb.getModel_id() == 13)
 			{
 				VideoBean article = (VideoBean)obj;
-				json = "{\"type\":\"video\",\"info_id\":\""+article.getInfo_id()+"\",\"title\":\""+article.getTitle()+"\",\"source\":\""+article.getSource()+"\",\"author\":\""+article.getAuthor()+"\",\"hits\":\""+article.getHits()+"\",\"released_dtime\":\""+article.getReleased_dtime()+"\",\"description\":\""+replaceStr(article.getDescription())+"\",\"video_path\":\""+article.getVideo_path()+"\",\"content\":\""+replaceStr(article.getInfo_content())+"\"}";
+				json = "{\"type\":\"video\",\"info_id\":\""+article.getInfo_id()+"\",\"title\":\""+replaceFont(article.getTitle())+"\",\"source\":\""+article.getSource()+"\",\"author\":\""+article.getAuthor()+"\",\"hits\":\""+article.getHits()+"\",\"released_dtime\":\""+article.getReleased_dtime()+"\",\"description\":\""+replaceStr(article.getDescription())+"\",\"video_path\":\""+article.getVideo_path()+"\",\"content\":\""+replaceStr(article.getInfo_content())+"\"}";
 			}
 			else if(mb.getModel_id() == 14)
 			{
 				GKFtygsBean article = (GKFtygsBean)obj;
-				json = "{\"type\":\"tygs\",\"info_id\":\""+article.getInfo_id()+"\",\"title\":\""+article.getTitle()+"\",\"source\":\""+article.getSource()+"\",\"author\":\""+article.getAuthor()+"\",\"hits\":\""+article.getHits()+"\",\"released_dtime\":\""+article.getReleased_dtime()+"\",\"description\":\""+replaceStr(article.getDescription())+"\",\"content\":\""+replaceStr(article.getGk_content())+"\"}";
+				json = "{\"type\":\"tygs\",\"info_id\":\""+article.getInfo_id()+"\",\"title\":\""+replaceFont(article.getTitle())+"\",\"source\":\""+article.getSource()+"\",\"author\":\""+article.getAuthor()+"\",\"hits\":\""+article.getHits()+"\",\"released_dtime\":\""+article.getReleased_dtime()+"\",\"description\":\""+replaceStr(article.getDescription())+"\",\"content\":\""+replaceStr(article.getGk_content())+"\"}";
 			}
 			else if(mb.getModel_id() == 20)
 			{
 				GKFbsznBean article = (GKFbsznBean)obj;
-				json = "{\"type\":\"b\",\"info_id\":\""+article.getInfo_id()+"\",\"title\":\""+article.getTitle()+"\",\"source\":\""+article.getSource()+"\",\"author\":\""+article.getAuthor()+"\",\"hits\":\""+article.getHits()+"\",\"released_dtime\":\""+article.getReleased_dtime()+"\"";
+				json = "{\"type\":\"b\",\"info_id\":\""+article.getInfo_id()+"\",\"title\":\""+replaceFont(article.getTitle())+"\",\"source\":\""+article.getSource()+"\",\"author\":\""+article.getAuthor()+"\",\"hits\":\""+article.getHits()+"\",\"released_dtime\":\""+article.getReleased_dtime()+"\"";
 				json +=",\"gk_bsjg\":\""+replaceStr(article.getGk_bsjg())+"\"}";							//受理机构
 				json +=",\"gk_sxyj\":\""+replaceStr(article.getGk_sxyj())+"\"}";							//事项依据
 				json +=",\"gk_bldx\":\""+replaceStr(article.getGk_bldx())+"\"}";							//服务对象
@@ -253,7 +253,7 @@ public String getNewsContent(HttpServletRequest request)
 			}else{
 			    Map custom = (Map)ModelUtil.select(id, "", "article_custom");
 			    Set set = custom.keySet();
-			    json = "{\"type\":\"b\",\"info_id\":\""+bean.getInfo_id()+"\",\"title\":\""+bean.getTitle()+"\",\"source\":\""+bean.getSource()+"\",\"author\":\""+bean.getAuthor()+"\",\"hits\":\""+bean.getHits()+"\",\"released_dtime\":\""+bean.getReleased_dtime()+"\"";
+			    json = "{\"type\":\"b\",\"info_id\":\""+bean.getInfo_id()+"\",\"title\":\""+replaceFont(bean.getTitle())+"\",\"source\":\""+bean.getSource()+"\",\"author\":\""+bean.getAuthor()+"\",\"hits\":\""+bean.getHits()+"\",\"released_dtime\":\""+bean.getReleased_dtime()+"\"";
 			    for (Object key : set) {
 			        Object value = custom.get(key);
                     json += ",\"" + key.toString() + "\":\""+replaceStr(value.toString())+"\"";
@@ -280,7 +280,7 @@ public String getGkSharedInfoList(HttpServletRequest request)
 	{
 		for(GKInfoBean info : info_list)
 		{
-			json += ",{\"info_id\":\""+info.getInfo_id()+"\",\"title\":\""+info.getTitle()+"\",\"source\":\""+info.getSource()+"\",\"released_dtime\":\""+info.getReleased_dtime()+"\"}";
+			json += ",{\"info_id\":\""+info.getInfo_id()+"\",\"title\":\""+replaceFont(info.getTitle())+"\",\"source\":\""+info.getSource()+"\",\"released_dtime\":\""+info.getReleased_dtime()+"\"}";
 		}
 		json = json.substring(1);
 	}
@@ -320,7 +320,7 @@ public String getGkInfoList(HttpServletRequest request)
 	{
 		for(GKInfoBean info : info_list)
 		{
-			json += ",{\"info_id\":\""+info.getInfo_id()+"\",\"title\":\""+info.getTitle()+"\",\"source\":\""+info.getSource()+"\",\"released_dtime\":\""+info.getReleased_dtime()+"\"}";
+			json += ",{\"info_id\":\""+info.getInfo_id()+"\",\"title\":\""+replaceFont(info.getTitle())+"\",\"source\":\""+info.getSource()+"\",\"released_dtime\":\""+info.getReleased_dtime()+"\"}";
 		}
 		json = json.substring(1);
 	}
@@ -343,7 +343,7 @@ public String getLdInfoList(HttpServletRequest request)
 		for(GKInfoBean info : info_list)
 		{
 		    GKFldcyBean ldcy = (GKFldcyBean)ModelUtil.select(String.valueOf(info.getInfo_id()), info.getSite_id(), ModelManager.getModelEName(info.getModel_id()));
-			json += ",{\"info_id\":\""+ldcy.getInfo_id()+"\",\"title\":\""+ldcy.getTitle()+"\",\"source\":\""+ldcy.getSource()+"\",\"pic\":\""+ldcy.getGk_pic()+"\",\"ldzw\":\""+ldcy.getGk_ldzw()+"\",\"gzfg\":\""+ldcy.getGk_gzfg()+"\",\"released_dtime\":\""+info.getReleased_dtime()+"\"}";
+			json += ",{\"info_id\":\""+ldcy.getInfo_id()+"\",\"title\":\""+replaceFont(ldcy.getTitle())+"\",\"source\":\""+ldcy.getSource()+"\",\"pic\":\""+ldcy.getGk_pic()+"\",\"ldzw\":\""+ldcy.getGk_ldzw()+"\",\"gzfg\":\""+ldcy.getGk_gzfg()+"\",\"released_dtime\":\""+info.getReleased_dtime()+"\"}";
 		}
 		json = json.substring(1);
 	}
@@ -381,7 +381,7 @@ public String getFWInfoList(HttpServletRequest request)
 	{
 		for(InfoBean info : info_list)
 		{
-			json += ",{\"info_id\":\""+info.getInfo_id()+"\",\"title\":\""+info.getTitle()+"\",\"source\":\""+info.getSource()+"\",\"released_dtime\":\""+info.getReleased_dtime()+"\"}";
+			json += ",{\"info_id\":\""+info.getInfo_id()+"\",\"title\":\""+replaceFont(info.getTitle())+"\",\"source\":\""+info.getSource()+"\",\"released_dtime\":\""+info.getReleased_dtime()+"\"}";
 		}
 		json = json.substring(1);
 	}
@@ -403,7 +403,7 @@ public String getSQInfoList(HttpServletRequest request)
 	{
 		for(SQBean info : info_list)
 		{
-			json += ",{\"sq_id\":\""+info.getSq_id()+"\",\"sq_title\":\""+info.getSq_title2()+"\",\"add_dtime\":\""+info.getSq_dtime()+"\",\"over_time\":\""+info.getOver_dtime()+"\"}";
+			json += ",{\"sq_id\":\""+info.getSq_id()+"\",\"sq_title\":\""+replaceFont(info.getSq_title2())+"\",\"add_dtime\":\""+info.getSq_dtime()+"\",\"over_time\":\""+info.getOver_dtime()+"\"}";
 		}
 		json = json.substring(1);
 	}
@@ -535,6 +535,11 @@ public static String replaceStr(String str)
 {
 	//return str.replaceAll("\"","'").replaceAll("\r|\n|\r\n","").replaceAll("<p.*?[^>]>|</p.*?[^>]>", "<p>");
 	return str.replaceAll("\"","'").replaceAll("\r|\n|\r\n","").replaceAll("<p\\+.*?[^>]>|</p\\+.*?[^>]>", "<p>");
+}
+
+//替换标题里面的font标签
+public static String replaceFont(String str){
+    return str.replaceAll("<font([^>]*)>", "").replaceAll("</font([^>]*)>", "");
 }
 
 %>

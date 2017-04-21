@@ -194,20 +194,22 @@ public final class WIndowsUtil {
      * @param args String[]
      */
     public static void main(String[] args) {
-        System.out.println("MACAddress : " + WIndowsUtil.getMACAddress());
-        System.out.println("HostName : " + WIndowsUtil.getHostName());
-        System.out.println("IP : " + WIndowsUtil.getIP());
-        System.out.println("GateWay : " + WIndowsUtil.getGateWayIP());
-        System.out.println("DNS : " + WIndowsUtil.getDNSServer());
-        System.out.println("PATH : " + WIndowsUtil.getPath());
-        System.out.println("System dir : " + WIndowsUtil.getSystemDir());
-        System.out.println("JAVA_HOME : " + WIndowsUtil.getJavaHome());
-        System.out.println("CLASSPATH : " + WIndowsUtil.getClassPath());
-        System.out.println("SystemVariable(CLASSPATH) : " +
-                           WIndowsUtil.getSystemVariableValue("CLASSPATH"));
-        System.out.println("getNetVariableValue(Physical Address) : " +
-                           WIndowsUtil.getNetVariableValue("Physical Address"));
-        System.out.println("HostsPath : " + WIndowsUtil.getHostsPath());
+//        System.out.println("MACAddress : " + WIndowsUtil.getMACAddress());
+//        System.out.println("HostName : " + WIndowsUtil.getHostName());
+//        System.out.println("IP : " + WIndowsUtil.getIP());
+//        System.out.println("GateWay : " + WIndowsUtil.getGateWayIP());
+//        System.out.println("DNS : " + WIndowsUtil.getDNSServer());
+//        System.out.println("PATH : " + WIndowsUtil.getPath());
+//        System.out.println("System dir : " + WIndowsUtil.getSystemDir());
+//        System.out.println("JAVA_HOME : " + WIndowsUtil.getJavaHome());
+//        System.out.println("CLASSPATH : " + WIndowsUtil.getClassPath());
+//        System.out.println("SystemVariable(CLASSPATH) : " +
+//                           WIndowsUtil.getSystemVariableValue("CLASSPATH"));
+//        System.out.println("getNetVariableValue(Physical Address) : " +
+//                           WIndowsUtil.getNetVariableValue("Physical Address"));
+//        System.out.println("HostsPath : " + WIndowsUtil.getHostsPath());
+
+        System.out.println("西安市<font color='red'>雁</font><font color='red'>塔</font>区经济适用房购买资格审核公示第十一批");
     }
 
 }
