@@ -905,7 +905,11 @@ function msgHandl(type, msg) {
         parent.$("#msgAlert input").unbind('click');
         //给操作按钮加上点击事件
         parent.$("#msgAlert input").click(function () {
-            parent.$("#msgAlert").dialog('close');
+            try{
+                $("#msgAlert").dialog('close');
+            }catch (e){
+                parent.$("#msgAlert").dialog('close');
+            }
         });
         //加入描述语句
         parent.$("#msgAlert td").html(msg);
@@ -1056,15 +1060,30 @@ function loginOut() {
 
 //得到当前IFrame窗口对象
 function getCurrentFrameObj(c_index) {
-    if (c_index != "" && c_index != null)
+    /*if (c_index != "" && c_index != null)
         return document.getElementById("iframe_" + c_index).contentWindow;
-    else
+    else{
         try {
             return document.getElementById("iframe_" + curTabIndex).contentWindow;
         } catch (e) {
             return parent.document.getElementById("iframe_" + parent.curTabIndex).contentWindow;
         }
-
+    }*/
+    var result = null;
+    if (c_index != "" && c_index != null)
+        try {
+            result = document.getElementById("iframe_" + c_index).contentWindow;
+        } catch (e) {
+            result = parent.document.getElementById("iframe_" + c_index).contentWindow;
+        }
+    else{
+        try {
+            result = document.getElementById("iframe_" + curTabIndex).contentWindow;
+        } catch (e) {
+            result = parent.document.getElementById("iframe_" + parent.curTabIndex).contentWindow;
+        }
+    }
+    return result;
 }
 
 

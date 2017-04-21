@@ -99,7 +99,7 @@ function roleSearchHandl(obj)
 	{
 		if(!judgeDate(start_day,end_day))
 		{
-			msgWargin("结束时间不能早于开始时间，请重新选择结束时间");
+			parent.msgWargin("结束时间不能早于开始时间，请重新选择结束时间");
 			return;
 		}
 	}
@@ -117,7 +117,7 @@ function roleSearchHandl(obj)
 
 	if(con_value.trim() == "" && start_day.trim() == "" && end_day.trim() == "")
 	{
-		msgWargin(WCMLang.Search_empty);
+        parent.msgWargin(WCMLang.Search_empty);
 		return;
 	}
 	reloadLogSettingList();
@@ -156,10 +156,10 @@ function deleteLogSetting()
 	var selectIDS = table.getSelecteCheckboxValue("audit_id");
 	if(LogManager.deleteLogSetting(selectIDS))
 	{
-		msgAlert("审计日志"+WCMLang.Delete_success);
+        parent.msgAlert("审计日志"+WCMLang.Delete_success);
 		reloadLogSettingList();
 	}else
 	{
-		msgWargin("审计日志"+WCMLang.Delete_fail);
+        parent.msgWargin("审计日志"+WCMLang.Delete_fail);
 	}
 }

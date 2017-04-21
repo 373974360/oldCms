@@ -122,11 +122,11 @@ function saveSiteUser(user_ids)
 	if(SiteUserRPC.linkSiteUser(insert_user_ids,delete_user_ids, siteId, appId))
 	{
 		reloadSiteUserList();
-		msgAlert("站点用户关联"+WCMLang.Add_success);
+		parent.msgAlert("站点用户关联"+WCMLang.Add_success);
 		table.unChekcbox();
 	}else
 	{
-		msgWargin("站点用户关联"+WCMLang.Add_fail);
+        parent.msgWargin("站点用户关联"+WCMLang.Add_fail);
 	}
 }
 
@@ -137,10 +137,10 @@ function deleteSiteUser()
 	var user_ids = table.getSelecteCheckboxValue("user_id");
 	if( !SiteUserRPC.deleteSiteUser(user_ids, siteId, appId))
 	{
-		msgWargin("站点用户"+WCMLang.Delete_fail);
+        parent.msgWargin("站点用户"+WCMLang.Delete_fail);
 		return;
 	}
-	msgAlert("站点用户"+WCMLang.Delete_success);
+    parent.msgAlert("站点用户"+WCMLang.Delete_success);
 	reloadSiteUserList();
 }
 
@@ -157,13 +157,13 @@ function saveRoleUser(role_ids)
 
 	if(jsonrpc.RoleRPC.insertRoleUserByUser(bean))
 	{
-		msgAlert("角色用户关联"+WCMLang.Add_success);
-		CloseModalWindow();
-		getCurrentFrameObj().reloadSiteUserList();
+        parent.msgAlert("角色用户关联"+WCMLang.Add_success);
+        parent.CloseModalWindow();
+        parent.getCurrentFrameObj().reloadSiteUserList();
 		table.unChekcbox();
 	}else
 	{
-		msgWargin("角色用户关联"+WCMLang.Add_fail);
+        parent.msgWargin("角色用户关联"+WCMLang.Add_fail);
 	}
 }
 
@@ -175,6 +175,6 @@ function getCurrentSelectedRoleID(user_id)
 
 function setUserOperate()
 {
-	getCurrentFrameObj().reloadSiteUserList();
+    parent.getCurrentFrameObj().reloadSiteUserList();
 }
 

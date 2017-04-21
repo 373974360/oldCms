@@ -39,8 +39,9 @@
 								<li><a href="#" onclick="changeUrl('/sys/index.jsp?method=modifyInfo')">修改信息</a> </li>
 								<li><a href="#" onclick="changeUrl('/sys/index.jsp?method=delInfo')">删除信息</a> </li>
 								<li><a href="#" onclick="changeUrl('/sys/index.jsp?method=unPublishInfo')">撤销信息</a> </li>
+								<li><a href="#" onclick="changeUrl('/sys/index.jsp?method=unPublishedInfo')">已撤信息</a> </li>
 								<li><a href="#" onclick="changeUrl('/sys/index.jsp?method=checkInfo')">审核信息（分栏目）</a> </li>
-								<li><a href="#" onclick="changeUrl('/sys/index.jsp?menuUrl=/sys/system/assist/author/authorDataList.jsp')">审核信息</a> </li>
+								<li><a href="#" onclick="changeUrl('/sys/index.jsp?menuUrl=/sys/cms/info/article/verifyInfoList.jsp')">审核信息</a> </li>
 								<li><a href="#" onclick="changeUrl('/sys/index.jsp?method=noPassInfo')">退稿信息</a> </li>
 								<li><a href="#" onclick="changeUrl('/sys/index.jsp?method=drafgInfo')">草稿信息</a> </li>
 								<li><a href="#" onclick="changeUrl('/sys/index.jsp?method=rubbyInfo')">回收站信息</a> </li>

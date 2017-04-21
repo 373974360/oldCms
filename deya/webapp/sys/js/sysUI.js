@@ -798,7 +798,12 @@ function openSelectTemplate(template_id,template_name,site_id)
 {
 	temp_template_id = template_id;	
 	temp_template_name = template_name;
-	OpenModalWindow("选择模板","/sys/system/template/select_template.jsp?site_id="+site_id+"&handl_name=setSelectTemplate",520,500);
+	try{
+        OpenModalWindow("选择模板","/sys/system/template/select_template.jsp?site_id="+site_id+"&handl_name=setSelectTemplate",520,500);
+	}catch (e){
+        parent.OpenModalWindow("选择模板","/sys/system/template/select_template.jsp?site_id="+site_id+"&handl_name=setSelectTemplate",520,500);
+	}
+
 }
 
 function setSelectTemplate(id,name)

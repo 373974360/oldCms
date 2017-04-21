@@ -43,27 +43,27 @@ $(document).ready(function(){
 <table id="Source_table" class="table_form" border="0" cellpadding="0" cellspacing="0">
 	<tbody>
 		<tr>
-			<th><span class="f_red">*</span>来源名称：</th>
+			<th><span class="f_red">*</span>名称：</th>
 			<td class="width250">
 				<input id="source_name" name="source_name" type="text" class="width200" value="" onblur="checkInputValue('source_name',false,80,'Source名称','')"/>
 				<input type="hidden" name="source_id" id="source_id" value="0" />
 			</td>
 		</tr>
-		<tr>
+		<tr class="hidden">
 			<th>首字母：</th>
 			<td >
 				<input id="source_initial" name="source_initial" type="text" class="width200" value=""/>
 			</td>
 		</tr>	
 		<tr>
-			<th>来源URL：</th>
+			<th>URL：</th>
 			<td >
 				<input id="source_url" name="source_url" type="text" class="width200" value=""/>
 				<input type="hidden" name="app_id" id="app_id" value="0"/>
 				<input type="hidden" name="site_id" id="site_id" value="0"/>
 			</td>
 		</tr>	
-		<tr>
+		<tr class="hidden">
 			<th>来源LOGO路径：</th>
 			<td >
 				<input id="logo_path" name="logo_path" type="text" class="width200" value=""/>

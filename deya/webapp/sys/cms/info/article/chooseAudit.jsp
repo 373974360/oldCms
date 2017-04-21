@@ -119,29 +119,29 @@ function related_ok()
     {
         if(InfoBaseRPC.updateInfoStatus(list,"8"))
         {
-            msgAlert("发布操作成功");
-            CloseModalWindow();
-            getCurrentFrameObj().reloadInfoDataList();
+            parent.msgAlert("发布操作成功");
+            parent.CloseModalWindow();
+            parent.getCurrentFrameObj().reloadInfoDataList();
         }
         else{
-            msgWargin("发布操作失败");
+            parent.msgWargin("发布操作失败");
         }
     }
     else
     {
         if(InfoBaseRPC.passInfoStatus(list,LoginUserBean.user_id)){
-            msgAlert("审核操作成功");
-            CloseModalWindow();
-            getCurrentFrameObj().reloadInfoDataList();
+            parent.msgAlert("审核操作成功");
+            parent.CloseModalWindow();
+            parent.getCurrentFrameObj().reloadInfoDataList();
         }else{
-            msgWargin("审核操作失败");
+            parent.msgWargin("审核操作失败");
         }
     }
 
 }
 
 function related_cancel(){
-    CloseModalWindow();
+    parent.CloseModalWindow();
 }
 
 </script>

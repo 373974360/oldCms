@@ -49,7 +49,7 @@ $(document).ready(function(){
 				<input type="hidden" name="author_id" id="author_id" value="0" />
 			</td>
 		</tr>
-		<tr>
+		<tr class="hidden">
 			<th>首字母：</th>
 			<td >
 				<input id="author_initial" name="author_initial" type="text" class="width200" value=""/>

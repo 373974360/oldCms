@@ -784,8 +784,8 @@ function update_dtTimeIsCorrect(bean) {
 
 function gotoListPage(bean) {
     //window.location.href = "/sys/cms/info/article/articleDataList.jsp?cat_id="+bean.cat_id+"&app="+bean.app_id+"&site_id="+bean.site_id+"&snum="+snum;
-    getCurrentFrameObj(topnum).reloadInfoDataList();
-    tab_colseOnclick(curTabIndex);
+    //getCurrentFrameObj(topnum).reloadInfoDataList();
+    tab_colseOnclick(parent.curTabIndex);
 }
 
 //公用保存处理事件
@@ -1035,11 +1035,11 @@ function publicSaveInfoEvent(bean, model_ename, save_type) {
         if (bean.info_status != 0) {
             insertOtherInfos(bean, model_ename, info_id);
         }
-        msgAlert("信息" + WCMLang.Add_success);
+        parent.msgAlert("信息" + WCMLang.Add_success);
         gotoListPage(bean);
     }
     else {
-        msgWargin("信息" + WCMLang.Add_fail);
+        parent.msgWargin("信息" + WCMLang.Add_fail);
     }
 }
 
@@ -1091,7 +1091,7 @@ function setInfoStatusButton() {
         var workStepList = workFlowBean.workFlowStep_list;
         workStepList = List.toJSList(workStepList);
         for (var i = 0; i < workStepList.size(); i++) {
-            if (workStepList.get(i).step_id > step_id) {
+            // if (workStepList.get(i).step_id > step_id) {
                 if (workStepList.get(i).required == 1) {
                     $("#audit_tr").removeClass("hidden");
                     var html = '<input id="auditChecked" name="auditStep" type="radio" checked="checked" onclick="setStepId(' + (workStepList.get(i).step_id - 1) + ')"/><label for="e">' + workStepList.get(i).step_name + '</label>&nbsp;&nbsp;';
@@ -1106,7 +1106,7 @@ function setInfoStatusButton() {
                     auditHtml = auditHtml + html;
                     $("#audit_list").append(html);
                 }
-            }
+            // }
         }
         /*
          step_id = getMaxStepIDByUserID(wf_id,app_id,site_id);

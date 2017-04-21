@@ -116,6 +116,16 @@
                     $(":button[id='btn306']").hide();
                     $(":button[id='btn332']").hide();
                 }
+                //已撤销信息
+                if("unPublishedInfo" == sso_method_cookie_value){
+                    $(".unPublishedInfo").css("display","inline-block");
+                    $(".list_tab").eq(1).click();
+                    $(".infoListTable").removeClass("hidden");
+                    $(":button[id='btn404']").hide();
+                    $(":button[id='btn305']").hide();
+                    $(":button[id='btn306']").hide();
+                    $(":button[id='btn332']").hide();
+                }
                 //审核信息
                 if("checkInfo" == sso_method_cookie_value){
                     $(".checkInfo").css("display","inline-block");

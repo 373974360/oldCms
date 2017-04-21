@@ -243,7 +243,7 @@ function showList() {
             //var model_ename = ModelRPC.getModelEName(beanList.get(i-1).model_id);
             $(this).addClass(model_map.get(beanList.get(i - 1).model_id).model_icon);
             $(this).css("padding-left", "20px");
-            $(this).html('<a href="javascript:openViewPage(' + beanList.get(i - 1).info_id + ')">' + title_flag + beanList.get(i - 1).title + '</a>' + title_end_str);
+            $(this).html('<a href="javascript:openViewPage(' + beanList.get(i - 1).content_url + ')">' + title_flag + beanList.get(i - 1).title + '</a>' + title_end_str);
         }
     });
 
@@ -341,6 +341,12 @@ function showList() {
                 //撤销信息
                 if ("unPublishInfo" == sso_method_cookie_value) {
                     str += "<li id='307' class='ico_cancel'><a  title='撤销' href='javascript:doCancel(" + (i - 1) + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
+                }
+                //已撤销信息
+                if ("unPublishedInfo" == sso_method_cookie_value) {
+                    str += "<li id='302' class='ico_publish'><a  title='发布' href='javascript:doPublish("+(i-1)+")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
+                    str += "<li id='315' class='ico_edit' ><a  title='修改' href='javascript:openUpdatePage("+beanList.get(i-1).info_id+","+beanList.get(i-1).model_id+","+beanList.get(i-1).is_host+")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
+                    str += "<li id='332' class='ico_delete' ><a title='删除' href='javascript:doDelete("+(i-1)+")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
                 }
                 //审核信息
                 if ("checkInfo" == sso_method_cookie_value) {
@@ -682,7 +688,13 @@ function openUpdatePage(Infoid, model_id, is_host) {
 
 function openViewPage(i_id) {
     //window.location.href = "/sys/cms/info/article/infoView.jsp?info_id="+i_id+"&site_id="+site_id+"&snum="+snum;
-    parent.addTab(true, "/sys/cms/info/article/infoView.jsp?info_id=" + i_id + "&site_id=" + site_id + "&topnum=" + parent.curTabIndex, "查看信息");
+    //parent.addTab(true, "/sys/cms/info/article/infoView.jsp?info_id=" + i_id + "&site_id=" + site_id + "&topnum=" + parent.curTabIndex, "查看信息");
+    if(i_id.indexOf("http://")>=0 || i_id.indexOf("https://")>=0){
+        parent.addTab(true, i_id, "查看信息");
+    }else{
+        parent.addTab(true, "http://www.cdzfgjj.gov.cn" + i_id, "查看信息");
+    }
+
 }
 
 //生成静态页面

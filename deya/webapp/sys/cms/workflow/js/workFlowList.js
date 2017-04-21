@@ -103,7 +103,7 @@ function addWorkFlow()
 	bean.wf_steps = $("#wf_step_table tr").length;
 	if(bean.wf_steps == 0)
 	{
-		msgWargin("请添加流程步骤");
+		parent.msgWargin("请添加流程步骤");
 		return;
 	}
 
@@ -139,12 +139,12 @@ function addWorkFlow()
 	
 	if(WorkFlowRPC.insertWorkFlow(bean))
 	{
-		msgAlert("工作流信息"+WCMLang.Add_success);
+        parent.msgAlert("工作流信息"+WCMLang.Add_success);
 		locationWorkFlow();
 	}
 	else
 	{
-		msgWargin("工作流信息"+WCMLang.Add_fail);
+        parent.msgWargin("工作流信息"+WCMLang.Add_fail);
 	}
 }
 //修改工作流
@@ -161,7 +161,7 @@ function updateWorkFlow()
 	bean.wf_steps = $("#wf_step_table tr").length;
 	if(bean.wf_steps == 0)
 	{
-		msgWargin("请添加流程步骤");
+        parent.msgWargin("请添加流程步骤");
 		return;
 	}
 
@@ -198,12 +198,12 @@ function updateWorkFlow()
 	bean.wf_id = wf_id;
 	if(WorkFlowRPC.updateWorkFlow(bean))
 	{
-		msgAlert("工作流信息"+WCMLang.Add_success);
+        parent.msgAlert("工作流信息"+WCMLang.Add_success);
 		locationWorkFlow();
 	}
 	else
 	{
-		msgWargin("工作流信息"+WCMLang.Add_fail);
+        parent.msgWargin("工作流信息"+WCMLang.Add_fail);
 	}
 }
 
@@ -213,11 +213,11 @@ function deleteWorkFlow()
 	var selectIDS = table.getSelecteCheckboxValue("wf_id");
 	if(WorkFlowRPC.deleteWorkFlow(selectIDS))
 	{
-		msgAlert("工作流信息"+WCMLang.Delete_success);
+        parent.msgAlert("工作流信息"+WCMLang.Delete_success);
 		reloadWorkFlowList();
 	}else
 	{
-		msgWargin("工作流信息"+WCMLang.Delete_fail);
+        parent.msgWargin("工作流信息"+WCMLang.Delete_fail);
 	}
 }
 

@@ -50,7 +50,7 @@ $(document).ready(function(){
 	<span class="blank3"></span>
 	<div id="table"></div><!-- 列表DIV -->
 	<div id="turn"></div><!-- 翻页DIV -->
-	<table class="table_option" border="0" cellpadding="0" cellspacing="0">
+	<table class="table_option hidden" border="0" cellpadding="0" cellspacing="0">
 	<tr>
 		<td align="left" valign="middle">
 				<input id="btn1" name="btn1" type="button" onclick="fnAddSurveyCategory('')" value="添加" />

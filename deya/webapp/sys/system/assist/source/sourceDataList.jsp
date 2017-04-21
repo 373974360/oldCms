@@ -37,7 +37,7 @@ $(document).ready(function(){
 	<table class="table_option" border="0" cellpadding="0" cellspacing="0" >
 		<tr>		
 			<td align="left" valign="middle" id="dept_search" class="search_td fromTabs" >
-				<input id="btn1" name="btn1" type="button" onclick="openAddSourcePage();" value="添加来源" />
+				<input id="btn1" name="btn1" type="button" onclick="openAddSourcePage();" value="添加" />
 				<input id="btn1" name="btn1" type="button" onclick="updateRecord(table,'source_id','openUpdateSourceDataPage()');" value="修改" />
 				<input id="btn3" name="btn3" type="button" onclick="deleteRecord(table,'source_id','deleteSourceData()');" value="删除" />					
 				<span class="blank3"></span>
@@ -47,7 +47,7 @@ $(document).ready(function(){
 	<span class="blank3"></span>
 	<div id="table"></div>
 	<div id="turn"></div>
-	<table class="table_option" border="0" cellpadding="0" cellspacing="0">
+	<table class="table_option hidden" border="0" cellpadding="0" cellspacing="0">
 	<tr>
 		<td align="left" valign="middle">
 			<input id="btn1" name="btn1" type="button" onclick="openAddSourcePage();" value="添加来源" />

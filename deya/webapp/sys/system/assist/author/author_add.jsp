@@ -57,7 +57,7 @@ $(document).ready(function(){
 				<input type="hidden" name="author_id" id="author_id" value="0" />
 			</td>
 		</tr>
-		<tr>
+		<tr class="hidden">
 			<th>首字母：</th>
 			<td >
 				<input id="author_initial" name="author_initial" type="text" class="width200" value=""/>
@@ -66,7 +66,7 @@ $(document).ready(function(){
 		<tr>
 			<th>URL：</th>
 			<td >
-				<input id="author_url" name="author_url" type="text" class="width200" value=""  onblur="checkInputValue('author_url',false,60,'URL','checkWebsite')"/>
+				<input id="author_url" name="author_url" type="text" class="width200" value=""  onblur="checkInputValue('author_url',true,60,'URL','checkWebsite')"/>
 				<input type="hidden" name="app_id" id="app_id" value="0"/>
 				<input type="hidden" name="site_id" id="site_id" value="0"/>
 			</td>

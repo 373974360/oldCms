@@ -47,7 +47,7 @@ function getRoleList()
 
 function getSelectedRoleID()
 {
-	var role_ids = getCurrentFrameObj().getCurrentSelectedRoleID();
+	var role_ids = parent.getCurrentFrameObj().getCurrentSelectedRoleID();
 	
 	if(role_ids != "" && role_ids != null)
 	{
@@ -68,8 +68,8 @@ function returnRoleID()
 	if(role_ids != "")
 		role_ids = role_ids.substring(1);
 
-	eval("getCurrentFrameObj()."+handl_name+"('"+role_ids+"')");
-	CloseModalWindow();
+	eval("parent.getCurrentFrameObj()."+handl_name+"('"+role_ids+"')");
+    parent.CloseModalWindow();
 }
 
 </script>
@@ -97,7 +97,7 @@ function returnRoleID()
 	<tr>
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="returnRoleID()" value="保存" />
-			<input id="userAddCancel" name="btn1" type="button" onclick="CloseModalWindow();" value="取消" />
+			<input id="userAddCancel" name="btn1" type="button" onclick="parent.CloseModalWindow();" value="取消" />
 		</td>
 	</tr>
 </table>
