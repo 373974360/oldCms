@@ -93,7 +93,7 @@ public class ManagerLoginFilter implements javax.servlet.Filter{
                         response.getWriter().write("top.location.href='" + loginPage +"'");
                     }
                     else{
-                        response.getWriter().write(Javascript.location(loginPage,"top"));
+                        response.getWriter().write(Javascript.location(loginPage,"window"));
                     }
                 }
             }

@@ -49,7 +49,7 @@ function showUserList(){
 	}
 	
 	var m = new Map();
-	m.put("dept_id", dept_id);
+	//m.put("dept_id", dept_id);
 	m.put("start_num", user_tp.getStart());	
 	m.put("page_size", user_tp.pageSize);
 	m.put("sort_name", sortCol);

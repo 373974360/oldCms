@@ -81,7 +81,7 @@
 </table>
 <table id="" class="table_form" border="0" cellpadding="0" cellspacing="0">
 	<tbody>
-    	<tr>
+    	<tr class="hidden">
 			<th>索引号：</th>
 			<td>
 				<input type="text" id="gk_index" name="gk_index" readonly="readonly" style="background-color:#F0F0EE;"  class="width200" value="" />

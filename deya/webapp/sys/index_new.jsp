@@ -6,7 +6,7 @@
 	<title>政务信息管理平台</title>
 
 
-	<meta http-equiv="X-UA-Compatible" content="IE=9" />
+	<meta http-equiv="X-UA-Compatible" content="IE=11" />
 	<link type="text/css" rel="stylesheet" href="styles/main.css" />
 	<link type="text/css" rel="stylesheet" href="styles/index.css" />
 	<link rel="stylesheet" type="text/css" href="styles/themes/default/tree.css">

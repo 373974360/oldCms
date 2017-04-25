@@ -979,7 +979,7 @@
                 <th>工作流：</th>
                 <td>
                     <select id="wf_id" name="wf_id" class="width305" onchange="changeWorkFlowHandl(this.value)">
-                        <option value="0"></option>
+                        <option value="0">无</option>
                     </select>
                 </td>
             </tr>

@@ -421,7 +421,12 @@ function disabledWidget()
  */
 function openSelectMaterialPage(handl_name,site_id,i_type)
 {
-	window.showModalDialog("/sys/material/operate/select_material.jsp?i_type="+i_type+"&site_id="+site_id+"&handl_name="+handl_name,window,'dialogWidth:700px;dialogHeight:550px;status:no;center:yes');
+    try{
+        OpenModalWindow("素材管理","/sys/material/operate/select_material.jsp?i_type="+i_type+"&site_id="+site_id+"&handl_name="+handl_name,700,550);
+    }catch (e){
+        parent.OpenModalWindow("素材管理","/sys/material/operate/select_material.jsp?i_type="+i_type+"&site_id="+site_id+"&handl_name="+handl_name,700,550);
+    }
+	//window.showModalDialog("/sys/material/operate/select_material.jsp?i_type="+i_type+"&site_id="+site_id+"&handl_name="+handl_name,window,'dialogWidth:700px;dialogHeight:550px;status:no;center:yes');
 }
 
 /*

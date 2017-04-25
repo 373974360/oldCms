@@ -339,7 +339,7 @@ $.widget("ui.draggable", $.ui.mouse, {
 			($(o.containment == 'document' ? document : window).height() || document.body.parentNode.scrollHeight) - this.helperProportions.height - this.margins.top
 		];
 
-		if(!(/^(document|$/).test(o.containment) && o.containment.constructor != Array) {
+		if(!(/^(document|$)/).test(o.containment) && o.containment.constructor != Array) {
 			var ce = $(o.containment)[0]; if(!ce) return;
 			var co = $(o.containment).offset();
 			var over = ($(ce).css("overflow") != 'hidden');

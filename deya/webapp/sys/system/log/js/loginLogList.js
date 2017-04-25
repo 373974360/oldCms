@@ -78,6 +78,7 @@ function roleSearchHandl(obj)
 	var start_day = $(obj).parent().find("#start_day").val();
 	if(start_day.trim() != "" &&  start_day != null)
 	{
+        start_day = start_day +" 00:00:00";
 		m.put("start_day", start_day);
 	}else
 	{
@@ -87,6 +88,7 @@ function roleSearchHandl(obj)
 	var end_day = $(obj).parent().find("#end_day").val();
 	if(end_day.trim() != "" &&  end_day != null)
 	{
+        end_day = end_day  + " 23:59:59";
 		m.put("end_day", end_day);
 	}else
 	{
@@ -95,7 +97,7 @@ function roleSearchHandl(obj)
 
 	if(start_day.trim() != "" && end_day.trim() != "")
 	{
-		if(!judgeDate(start_day,end_day))
+		if(!judgeAllDateTime(start_day,end_day))
 		{
 			parent.msgWargin("结束时间不能早于开始时间，请重新选择结束时间");
 			return;

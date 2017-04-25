@@ -172,7 +172,10 @@
 	<!-- *******************************需替换sql 开始******************************* -->
 	<!-- 根据条件查询人员信息 -->
 	<sql id="getAllUserListByDeptID_sql_conn">
-		where user_status != -1 and dept_id = ${dept_id}	 	
+		where user_status != -1
+		<if test="dept_id != null">
+			and dept_id = ${dept_id}
+		</if>
             <if test="con_value != null">
 				and ${con_name} like '%${con_value}%'
 			</if>
