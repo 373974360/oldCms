@@ -71,8 +71,8 @@ function initTopNextLeve(nextJsonData) {
 
 //触发用户最后选择的应用节点
 function initLastSelectMenu() {
-    if (init_top_menu_id != "")
-        $("#top_menu li[id='" + init_top_menu_id + "']").click();
+    //if (init_top_menu_id != "")
+        $("#top_menu li[id='" + 6 + "']").click();
     $("#main_nav > ul li[id='350']").click();
 
 }

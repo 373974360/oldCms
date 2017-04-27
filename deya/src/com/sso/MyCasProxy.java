@@ -36,8 +36,8 @@ public class MyCasProxy extends Cas20ProxyReceivingTicketValidationFilter {
         boolean checkUserLogin = UserLogin.checkUserLogin(name, request);
         if(!checkUserLogin){
             System.out.println("----------子系统中无此用户，先同步用户--------");
-            SyncOrg.syncOrgDeptOrUser("user",0);
-            SyncOrg.syncOrgDeptOrUser("dept",0);
+            SyncOrg.syncOrgDeptOrUser("user",1);
+            SyncOrg.syncOrgDeptOrUser("dept",1);
             checkUserLogin = UserLogin.checkUserLogin(name, request);
             if(!checkUserLogin){
                 System.out.println("----------同步之后还是无此用户，登录失败--------");

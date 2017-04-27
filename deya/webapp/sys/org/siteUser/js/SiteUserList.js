@@ -82,7 +82,7 @@ function showList()
 	table.getCol("action_col").each(function(i){	
 		if(i>0)
 		{		
-			$(this).html('<a href="javascript:openSetOperate(\'权限管理\',\'setUserOperate\',\''+appId+'\',\''+siteId+'\',0,'+beanList.get(i-1).user_id+')">权限管理</a>');	
+			$(this).html('<a href="javascript:openSetOperate(\'权限管理\',\'setUserOperate\',\''+appId+'\',\''+siteId+'\',0,'+beanList.get(i-1).user_id+')">权限管理</a>');
 		}
 	});
 

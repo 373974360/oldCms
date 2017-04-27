@@ -42,7 +42,7 @@ public class SubjectBean implements IBean,java.io.Serializable{
 	private String update_time = "";//修改时间
 	private String update_user = "";//修改人
 	private String audit_time = "";//审核时间
-	private String audit_user = "";//审核人
+	private String audit_user = "";//审核步骤
 	private int is_delete = 0;//是否删除
 	private int sort = 0;//排序
 	private int click_count = 0;//排序

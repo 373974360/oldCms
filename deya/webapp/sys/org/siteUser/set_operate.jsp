@@ -23,8 +23,11 @@
 var handl_name = "<%=handl_name%>";
 var priv_type = <%=priv_type%>;
 var user_id = <%=user_id%>;
-var app_id = getCurrentFrameObj().appId;
-var site_id = getCurrentFrameObj().siteId;
+var app_id = parent.getCurrentFrameObj().appId;
+var site_id = parent.getCurrentFrameObj().siteId;
+if(site_id == "" || site_id == "null" || site_id == null){
+    site_id = "CMScdgjj";````
+}
 var CategoryRPC = jsonrpc.CategoryRPC;
 var json_data;
 var selected_category_ids = "";

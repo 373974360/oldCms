@@ -881,8 +881,8 @@ function moveInfoHandl(cat_id) {
 //送审
 function toPass() {
 
-    //打开选择审核人页面
-    parent.OpenModalWindow("选择审核人", "/sys/cms/info/article/chooseAudit.jsp?cat_id=" + cid + "&site_id=" + site_id + "&app_id=" + app, 400, 200);
+    //打开选择审核步骤页面
+    parent.OpenModalWindow("选择审核步骤", "/sys/cms/info/article/chooseAudit.jsp?cat_id=" + cid + "&site_id=" + site_id + "&app_id=" + app, 400, 200);
     /*
      var selectList = table.getSelecteBeans();
      if(InfoBaseRPC.passInfoStatus(selectList,LoginUserBean.user_id)){
@@ -897,8 +897,8 @@ function toPass() {
 //通过
 function onPass() {
 
-    //打开选择审核人页面
-    parent.OpenModalWindow("选择审核人", "/sys/cms/info/article/chooseAudit.jsp?cat_id=" + cid + "&site_id=" + site_id + "&app_id=" + app, 400, 200);
+    //打开选择审核步骤页面
+    parent.OpenModalWindow("选择审核步骤", "/sys/cms/info/article/chooseAudit.jsp?cat_id=" + cid + "&site_id=" + site_id + "&app_id=" + app, 400, 200);
     /*
      var selectList = table.getSelecteBeans();
      if(InfoBaseRPC.passInfoStatus(selectList,LoginUserBean.user_id)){
@@ -936,8 +936,8 @@ function noPassDesc(id) {
 
 //单条信息通过
 function doPass(num) {
-    //打开选择审核人页面
-    parent.OpenModalWindow("选择审核人", "/sys/cms/info/article/chooseAudit.jsp?cat_id=" + cid + "&site_id=" + site_id + "&app_id=" + app + "&num=" + num, 400, 200);
+    //打开选择审核步骤页面
+    parent.OpenModalWindow("选择审核步骤", "/sys/cms/info/article/chooseAudit.jsp?cat_id=" + cid + "&site_id=" + site_id + "&app_id=" + app + "&num=" + num, 400, 200);
     /*
      var list = new List();
      list.add(beanList.get(num));
@@ -1044,8 +1044,8 @@ function getRealSiteIDByApp(t_app_id, t_site_id) {
 
 //单条信息提交送审
 function doSubmitPage(num) {
-    //打开选择审核人页面
-    parent.OpenModalWindow("选择审核人", "/sys/cms/info/article/chooseAudit.jsp?cat_id=" + cid + "&site_id=" + site_id + "&app_id=" + app + "&num=" + num, 400, 200);
+    //打开选择审核步骤页面
+    parent.OpenModalWindow("选择审核步骤", "/sys/cms/info/article/chooseAudit.jsp?cat_id=" + cid + "&site_id=" + site_id + "&app_id=" + app + "&num=" + num, 400, 200);
     /*
      var list = new List();
      list.add(beanList.get(num));

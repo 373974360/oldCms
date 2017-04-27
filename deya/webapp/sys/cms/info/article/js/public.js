@@ -1122,7 +1122,7 @@ function setInfoStatusButton() {
 }
 
 
-//设置是否显示选择审核人一栏
+//设置是否显示选择审核步骤一栏
 function isShowAudit(isShow) {
     if (isShow) {
         $("#audit_tr").removeClass("hidden");

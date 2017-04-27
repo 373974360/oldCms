@@ -92,19 +92,9 @@
             //iniMenuOnMouseOver();
             initButtomStyle();
 
-            initLastSelectMenu();//选中用户最后一次选择的菜单
+            //initLastSelectMenu();//选中用户最后一次选择的菜单
 
             //createSiteMenu();
-
-
-
-            //初始化默认点击站点内容管理
-            $('#top_menu #6').click();
-
-            //这里判断method，并且写入cookie
-            if(method != null && method != "null"){
-                request.setCookie(sso_method_cookie_name,method);
-            }
 
             if(menuUrl != null && menuUrl != "null"){
                 $('#area_left').css("display","none");
@@ -172,7 +162,15 @@
                     pageName = "审计日志";
                 }
                 setMainIframeUrl(menuUrl,pageName);
-            }
+            }else{
+                //初始化默认点击站点内容管理
+                $('#top_menu #6').click();
+
+                //这里判断method，并且写入cookie
+                if(method != null && method != "null"){
+                    request.setCookie(sso_method_cookie_name,method);
+                }
+			}
 
         });
 
