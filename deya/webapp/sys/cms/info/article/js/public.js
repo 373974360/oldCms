@@ -784,7 +784,7 @@ function update_dtTimeIsCorrect(bean) {
 
 function gotoListPage(bean) {
     //window.location.href = "/sys/cms/info/article/articleDataList.jsp?cat_id="+bean.cat_id+"&app="+bean.app_id+"&site_id="+bean.site_id+"&snum="+snum;
-    //getCurrentFrameObj(topnum).reloadInfoDataList();
+    getCurrentFrameObj("100").reloadInfoDataList();
     tab_colseOnclick(parent.curTabIndex);
 }
 

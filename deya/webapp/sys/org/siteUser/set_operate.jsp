@@ -207,12 +207,12 @@ function saveUserOperate()
 
 	if(bools)
 	{
-		msgAlert("权限设置"+WCMLang.Add_success);
+		parent.msgAlert("权限设置"+WCMLang.Add_success);
 		eval("getCurrentFrameObj()."+handl_name+"()");
-		CloseModalWindow();
+        parent.CloseModalWindow();
 	}else
 	{
-		msgAlert("权限设置"+WCMLang.Add_fail);
+        parent.msgAlert("权限设置"+WCMLang.Add_fail);
 	}
 }
 

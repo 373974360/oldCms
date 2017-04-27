@@ -169,7 +169,7 @@
             }
 
             if (CategoryRPC.categoryIsExist(parent_id, $("#cat_ename").val(), app_id, site_id)) {
-                msgWargin("该英文名称已存在此目录下，请更换英文名称");
+                parent.msgWargin("该英文名称已存在此目录下，请更换英文名称");
                 return;
             }
 
@@ -197,7 +197,7 @@
                     insertToInfoCategory(bean.id);
                 insertCategoryReleUser(bean.id);
 
-                msgAlert("目录信息" + WCMLang.Add_success);
+                parent.msgAlert("目录信息" + WCMLang.Add_success);
                 try {
                     if (cat_type == "0") {
                         getCurrentFrameObj(top_index).changeCategoryListTable(parent_id);
@@ -210,7 +210,7 @@
                 parent.tab_colseOnclick(parent.curTabIndex);
             }
             else {
-                msgWargin("目录信息" + WCMLang.Add_fail);
+                parent.msgWargin("目录信息" + WCMLang.Add_fail);
             }
         }
 
@@ -340,7 +340,7 @@
 
             if (defaultBean.cat_ename != bean.cat_ename) {
                 if (CategoryRPC.categoryIsExist(parent_id, bean.cat_ename, app_id, site_id)) {
-                    msgWargin("该英文名称已存在此目录下，请更换英文名称");
+                    parent.msgWargin("该英文名称已存在此目录下，请更换英文名称");
                     return;
                 }
             }
@@ -731,7 +731,7 @@
             if (choose_type == "zwgk") {
                 var temp_ids = getLeafTreeNode("leftMenuTree2_regu");
                 if (temp_ids == "|") {
-                    msgWargin("请选择信息公开目录");
+                    parent.msgWargin("请选择信息公开目录");
                     return;
                 }
                 cat_ids = temp_ids.split("|")[0];
@@ -743,7 +743,7 @@
             } else {
                 var temp_ids = getLeafTreeNode("leftMenuTree_regu");
                 if (temp_ids == "|") {
-                    msgWargin("请选择共享目录");
+                    parent.msgWargin("请选择共享目录");
                     return;
                 }
                 cat_ids = temp_ids.split("|")[0];

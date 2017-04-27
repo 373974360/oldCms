@@ -718,7 +718,7 @@ public class InfoBaseManager {
         m.put("info_id", info_ids);
         AccessCountManager.deleteAccessCountInfos(m);
 
-        InfoPublishManager.createRelaContentHTML(l);
+        //InfoPublishManager.createRelaContentHTML(l);
 
         return true;
     }

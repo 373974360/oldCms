@@ -121,7 +121,7 @@ function saveSiteUser(user_ids)
 
 	if(SiteUserRPC.linkSiteUser(insert_user_ids,delete_user_ids, siteId, appId))
 	{
-		reloadSiteUserList();
+        parent.getCurrentFrameObj().reloadSiteUserList();
 		parent.msgAlert("站点用户关联"+WCMLang.Add_success);
 		table.unChekcbox();
 	}else
@@ -141,7 +141,7 @@ function deleteSiteUser()
 		return;
 	}
     parent.msgAlert("站点用户"+WCMLang.Delete_success);
-	reloadSiteUserList();
+    parent.getCurrentFrameObj().reloadSiteUserList();
 }
 
 //关联角色

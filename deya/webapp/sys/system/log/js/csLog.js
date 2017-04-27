@@ -54,7 +54,8 @@ function showList(){
 	beanList = LogSettingRPC.getLogSetting(m);//	
 	beanList = List.toJSList(beanList);//把list转成JS的List对象
 	
-	curr_bean = null;		
+	curr_bean = null;
+	table.checkBox = false;
 	table.setBeanList(beanList,"td_list");//设置列表内容的样式
 	table.show("table");
 	table.getCol("audit_des").each(function(i){	

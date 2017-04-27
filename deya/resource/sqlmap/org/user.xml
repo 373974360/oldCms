@@ -361,7 +361,7 @@
     </delete>
 
 	<select id="selectMaxUserId" resultType="java.lang.String">
-		select max(user_id) from cs_org_user;
+		select max(user_id) from cs_org_user
 	</select>
 
     <!--********************************同步银海组织机构sql结束**********************************************-->

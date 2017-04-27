@@ -71,10 +71,10 @@ function updateInfoData()
 	
 	if(InfoBaseRPC.updateInfo(defaultBean))
 	{
-		msgAlert("信息"+WCMLang.Add_success);
+		parent.msgAlert("信息"+WCMLang.Add_success);
 		gotoListPage();
 	}else
-		msgWargin("信息"+WCMLang.Add_fail);
+        parent.msgWargin("信息"+WCMLang.Add_fail);
 }
 
 function selectPageHandle()

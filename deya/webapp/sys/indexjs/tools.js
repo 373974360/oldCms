@@ -86,7 +86,7 @@ function initLastSelectMenu()
 {
     if(init_top_menu_id != "")
         $("#top_menu li[id='"+init_top_menu_id+"']").click();
-    $("#main_nav > ul li[id='402']").click();
+    $("#main_nav > ul li[id='350']").click();
 
 }
 

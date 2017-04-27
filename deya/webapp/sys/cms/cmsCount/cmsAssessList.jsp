@@ -146,7 +146,7 @@ function openSelectPage(){
 </table>
 <span class="blank3"></span>
 
-<table>
+<table width="100%">
     <tr valign="top" >
     	<td>
     	<div id="chart">

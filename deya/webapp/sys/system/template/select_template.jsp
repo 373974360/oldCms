@@ -66,12 +66,12 @@ function returnDeptID()
 	
 	if(t_id == null || t_id == "")
 	{
-		msgWargin(WCMLang.selected_template);
+		parent.msgWargin(WCMLang.selected_template);
 		return;
 	}else
 	{			
 		eval("getCurrentFrameObj()."+handl_name+"('"+t_id+"','"+t_name+"')");
-		CloseModalWindow();
+        parent.CloseModalWindow();
 	}	
 }
 </script>

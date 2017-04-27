@@ -21,7 +21,8 @@ function initTable(){
 	colsList.add(setTitleClos("audit_time","时间","120px","","",""));
 	colsList.add(setTitleClos("ip","IP","100px","","",""));
 	colsList.add(setTitleClos("cel_spac","","","","",""));
-	
+
+	table.checkBox = false;
 	table.setColsList(colsList);
 	table.setAllColsList(colsList);				
 	table.enableSort=false;//禁用表头排序

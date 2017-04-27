@@ -22,7 +22,7 @@
 				</ul>
 			</td>
 		</tr>
-        <tr>
+        <tr class="hidden">
 			<th valign="top">推荐：</th>
 			<td>
 				<input id="btn1" name="btn1" type="button" onclick="openFocusPage('<%=infoid%>');" value="选择" />
@@ -39,7 +39,7 @@
 		</tr>
 	</tbody>
 </table>
-<div class="sq_box">
+<div class="sq_box hidden">
 	<div class="sq_title_box" >
 		<div class="sq_title sq_title_plus">高级属性</div>
 		<div class="sq_title_right">点击展开</div>

@@ -91,9 +91,9 @@ function closeTab(){
 			<span class="blank9"></span>
 			
 			<div class="hidden">
-			<input id="is_remote" name="is_remote" type="checkbox" /><label for="is_remote">远程图片本地化</label>&nbsp;&nbsp;
-			<input id="is_am_tupage" name="is_am_tupage" type="checkbox" value="1"/><label for="is_am_tupage">自动翻页</label>&nbsp;&nbsp;
-			翻页字数<input id="tupage_num" name="tupage_num" type="text" value="1000" onblur="checkInputValue('tupage_num',true,5,'翻页字数','checkInt')"/>
+			<input class="hidden" id="is_remote" name="is_remote" type="checkbox" /><label class="hidden" for="is_remote">远程图片本地化</label>&nbsp;&nbsp;
+			<input class="hidden" id="is_am_tupage" name="is_am_tupage" type="checkbox" value="1"/><label class="hidden" for="is_am_tupage">自动翻页</label>&nbsp;&nbsp;
+			翻页字数<input class="hidden" id="tupage_num" name="tupage_num" type="text" value="1000" onblur="checkInputValue('tupage_num',true,5,'翻页字数','checkInt')"/>
 			</div>
 			</td>
 		</tr>

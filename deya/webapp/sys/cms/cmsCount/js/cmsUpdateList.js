@@ -46,7 +46,7 @@ function showList(){
 		/*---------渭南专用-------*/
 	}else{
 		if(selected_ids== ""){
-			msgWargin("目录信息不能为空!");
+			parent.msgWargin("目录信息不能为空!");
 			return;
 		}else{
 			mp.put("cat_ids",selected_ids);
@@ -58,7 +58,7 @@ function showList(){
 	
 	createTable();
 	
-	$("#outFileBtn").show();  
+	//$("#outFileBtn").show();
 }
 
 

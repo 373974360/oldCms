@@ -145,15 +145,15 @@ function saveSurveyCategory()
 
 	if(bean.category_id.trim() == "")
 	{		
-		bean.add_user = LoginUserBean.user_id;
+		bean.add_user = parent.LoginUserBean.user_id;
 		bean.site_id = site_id;
 		if(SurveyCategoryRPC.insertSurveyCategory(bean))
 		{
-			msgAlert("问卷分类"+WCMLang.Add_success);
+			parent.msgAlert("问卷分类"+WCMLang.Add_success);
 			window.location.href='surveyCategoryList.jsp?site_id='+site_id
 		}else
 		{
-			msgWargin("问卷分类"+WCMLang.Add_fail);
+            parent.msgWargin("问卷分类"+WCMLang.Add_fail);
 		}
 	}
 	else
@@ -161,11 +161,11 @@ function saveSurveyCategory()
 		bean.update_user = LoginUserBean.user_id;
 		if(SurveyCategoryRPC.updateSurveyCategory(bean))
 		{
-			msgAlert("问卷分类"+WCMLang.Add_success);
+            parent.msgAlert("问卷分类"+WCMLang.Add_success);
 			window.location.href='surveyCategoryList.jsp?site_id='+site_id
 		}else
 		{
-			msgWargin("问卷分类"+WCMLang.Add_fail);
+            parent.msgWargin("问卷分类"+WCMLang.Add_fail);
 		}
 	}
 }

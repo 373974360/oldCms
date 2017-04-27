@@ -180,7 +180,7 @@ function saveSurvey()
 
 	if(bean.s_id.trim() == "")
 	{
-		bean.add_user = LoginUserBean.user_id;
+		bean.add_user = parent.LoginUserBean.user_id;
 		bean.site_id = site_id;
 		if(SurveyRPC.insertSurvey(bean,getSurveySubList()))
 		{
@@ -190,7 +190,7 @@ function saveSurvey()
 	}
 	else
 	{
-		bean.update_user = LoginUserBean.user_id;
+		bean.update_user = parent.LoginUserBean.user_id;
 		if(SurveyRPC.updateSurvey(bean,getSurveySubList()))
 		{
             parent.msgAlert("保存成功");
@@ -447,7 +447,7 @@ function deleteSurveyA(id)
 
 function deleteSurvey(id)
 {
-	if(SurveyRPC.deleteSurvey(id,LoginUserBean.user_id))
+	if(SurveyRPC.deleteSurvey(id, parent.LoginUserBean.user_id))
 	{
         parent.msgAlert("问卷调查主题"+WCMLang.Delete_success);
 		showTurnPage();
@@ -471,7 +471,7 @@ function batchDelSurveyHandl()
 {
 	var selectIDS = table.getSelecteCheckboxValue("id");
 	
-	if(SurveyRPC.deleteSurvey(selectIDS,LoginUserBean.user_id))
+	if(SurveyRPC.deleteSurvey(selectIDS, parent.LoginUserBean.user_id))
 	{
         parent.msgAlert("问卷调查主题"+WCMLang.Delete_success);
 		showTurnPage();
@@ -600,7 +600,7 @@ function setSurveyAttrHandl()
 	}
 
 	//bean.verdict = $("#verdict").val();
-	bean.update_user = LoginUserBean.user_id;
+	bean.update_user =  parent.LoginUserBean.user_id;
 	if(SurveyRPC.setSurveyAttr(bean))
 	{
         parent.msgAlert("保存成功");
