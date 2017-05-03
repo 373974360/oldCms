@@ -458,9 +458,9 @@ public class UserDAORMIImpl implements IUserDAO{
 	/* **********************同步银海组织机构 开始******************************** */
 
     @Override
-    public boolean insertSyncUser(List<UserBean> ubList, List<UserRegisterBean> urbList) {
+    public boolean insertSyncUser(List<UserBean> ubList, List<UserRegisterBean> urbList,boolean isAdd) {
         try{
-            return GetOrgRmi.getorgRmi().insertSyncUser(ubList,urbList);
+            return GetOrgRmi.getorgRmi().insertSyncUser(ubList,urbList,isAdd);
         }catch(RemoteException re)
         {
             re.printStackTrace();

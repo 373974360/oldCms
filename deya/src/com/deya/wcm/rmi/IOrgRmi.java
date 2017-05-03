@@ -413,7 +413,7 @@ public interface IOrgRmi extends Remote{
      *            deptList
      * @return boolean
      */
-    public boolean inserSynctDept(List<DeptBean> deptList) throws RemoteException;
+    public boolean inserSynctDept(List<DeptBean> deptList,boolean isAdd) throws RemoteException;
 
     /**
      * 同步银海人员信息
@@ -421,7 +421,7 @@ public interface IOrgRmi extends Remote{
      * @param List<UserRegisterBean> urbList 帐号对象
      * @return boolean
      * */
-    public boolean insertSyncUser(List<UserBean> ubList, List<UserRegisterBean> urbList) throws RemoteException;
+    public boolean insertSyncUser(List<UserBean> ubList, List<UserRegisterBean> urbList,boolean isAdd) throws RemoteException;
 
 	/**
 	 * 增量同步用户获取最大id

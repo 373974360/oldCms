@@ -178,7 +178,7 @@ public interface IDeptDAO {
      *            deptList
      * @return boolean
      */
-    public boolean inserSynctDept(List<DeptBean> deptList);
+    public boolean inserSynctDept(List<DeptBean> deptList,boolean isAdd);
 
 
 	/**

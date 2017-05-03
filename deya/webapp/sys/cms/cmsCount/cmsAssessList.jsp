@@ -45,7 +45,7 @@
 <script type="text/javascript" src="/sys/js/open-flash-chart/js/swfobject.js"></script>
 <script type="text/javascript">
 var cat_type = "0";
-var site_id = "<%=site_id%>";
+var site_id = "CMScdgjj";
 var app_id = "<%=app_id%>";//应用ID
 var cat_id = "<%=cat_id%>";
 var start_day = "<%=start_day%>";

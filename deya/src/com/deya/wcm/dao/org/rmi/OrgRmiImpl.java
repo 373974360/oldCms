@@ -618,13 +618,13 @@ public class OrgRmiImpl extends UnicastRemoteObject implements IOrgRmi{
 	/* **********************同步银海组织机构 开始******************************** */
 
     @Override
-    public boolean inserSynctDept(List<DeptBean> deptList) throws RemoteException {
-        return OrgDAOFactory.getDeptDao().inserSynctDept(deptList);
+    public boolean inserSynctDept(List<DeptBean> deptList,boolean isAdd) throws RemoteException {
+        return OrgDAOFactory.getDeptDao().inserSynctDept(deptList,isAdd);
     }
 
     @Override
-    public boolean insertSyncUser(List<UserBean> ubList, List<UserRegisterBean> urbList) throws RemoteException {
-        return OrgDAOFactory.getUserDao().insertSyncUser(ubList,urbList);
+    public boolean insertSyncUser(List<UserBean> ubList, List<UserRegisterBean> urbList,boolean isAdd) throws RemoteException {
+        return OrgDAOFactory.getUserDao().insertSyncUser(ubList,urbList,isAdd);
     }
 
 	@Override

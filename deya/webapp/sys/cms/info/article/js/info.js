@@ -553,14 +553,26 @@ function clickLabelHandl(num) {
             search_steps = "";
             break;
         case 2:
+            var temp_wf_id = CategoryRPC.getWFIDByCatID(cid, site_id);
+            if (temp_wf_id != 0) {
+                var temp_step_id = getMaxStepIDByUserID(temp_wf_id, app, site_id);
+                if(temp_step_id != 100){
+                    stepID = temp_step_id - 1 + "";
+                }
+            }else{
+                stepID = "0";
+            }
             infoStatus = "2";
-            stepID = "0";
             getTheLeafNodes();
             finalStatus = "0";
             break;
         case 3:
             infoStatus = "2";
-            stepID = "0";
+            var temp_wf_id = CategoryRPC.getWFIDByCatID(cid, site_id);
+            var temp_step_id = getMaxStepIDByUserID(temp_wf_id, app, site_id);
+            if(temp_step_id != 100){
+                stepID = temp_step_id - 1 + "";
+            }
             getTheLeafNodes();
             finalStatus = "0";
             is_my_info = true;

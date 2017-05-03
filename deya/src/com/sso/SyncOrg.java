@@ -37,13 +37,18 @@ public class SyncOrg {
     private static String forgcode = "";
     private static String torgcode = "";
     private static String certcode = "";
+    private static boolean isAdd = false;
 
-    public static void initParams(){
+    public static void initParams() {
         wsdlUrl = JconfigUtilContainer.bashConfig().getProperty("syncOrgOrUserUrl", "", "sso");
-        reqident = JconfigUtilContainer.bashConfig().getProperty("reqident", "", "sso");;
-        forgcode = JconfigUtilContainer.bashConfig().getProperty("forgcode", "", "sso");;
-        torgcode = JconfigUtilContainer.bashConfig().getProperty("torgcode", "", "sso");;
-        certcode = JconfigUtilContainer.bashConfig().getProperty("certcode", "", "sso");;
+        reqident = JconfigUtilContainer.bashConfig().getProperty("reqident", "", "sso");
+        ;
+        forgcode = JconfigUtilContainer.bashConfig().getProperty("forgcode", "", "sso");
+        ;
+        torgcode = JconfigUtilContainer.bashConfig().getProperty("torgcode", "", "sso");
+        ;
+        certcode = JconfigUtilContainer.bashConfig().getProperty("certcode", "", "sso");
+        ;
     }
 
     public static String getparamValue(Integer type) {
@@ -56,19 +61,21 @@ public class SyncOrg {
         }
         _xmlstr.append("<txdate/>");
         _xmlstr.append("<txtime/>");
-        _xmlstr.append("<forgcode>"+forgcode+"</forgcode>");
-        _xmlstr.append("<torgcode>"+torgcode+"</torgcode>");
+        _xmlstr.append("<forgcode>" + forgcode + "</forgcode>");
+        _xmlstr.append("<torgcode>" + torgcode + "</torgcode>");
         _xmlstr.append("<reqfilerows/>");
         _xmlstr.append("<reqtxfile/>");
         _xmlstr.append("<reqfilemny/>");
         _xmlstr.append("<txchannel>0</txchannel>");
         _xmlstr.append("<enccode/>");
-        _xmlstr.append("<certcode>"+certcode+"</certcode>");
-        if(type == 1){
+        _xmlstr.append("<certcode>" + certcode + "</certcode>");
+        if (type == 1) {
             _xmlstr.append("<type>1</type>");
             _xmlstr.append("<maxid/>");
+            isAdd = false;
         }
-        if(type == 0){
+        if (type == 0) {
+            isAdd = true;
             _xmlstr.append("<type>0</type>");
             if (syncName.equals("dept")) {
                 int maxId = DeptManager.getMaxDeptId();
@@ -88,7 +95,7 @@ public class SyncOrg {
     /**
      * 用http方式调用webservices
      */
-    public static List syncOrgDeptOrUser(String name,int type) {
+    public static List syncOrgDeptOrUser(String name, int type) {
         initParams();
         System.out.println("***********************同步" + syncName + " 开始***" + DateUtil.getCurrentDateTime() + "***********************");
         //服务的地址
@@ -120,7 +127,7 @@ public class SyncOrg {
                 }
                 String s = sb.toString();
                 System.out.println("*****************返回报文(未处理)************" + s);
-                s = s.replaceAll("&lt;", "<").replaceAll("&gt;", ">").replaceAll("&quot;","\"");
+                s = s.replaceAll("&lt;", "<").replaceAll("&gt;", ">").replaceAll("&quot;", "\"");
                 System.out.println("*****************返回报文(处理过)************" + s);
                 closeConnect(conn, is, os);
                 List result = getResult(s);
@@ -197,8 +204,8 @@ public class SyncOrg {
                         }
                         deptBeanList.add(deptBean);
                     }
-                    if(deptBeanList.size() > 0 ){
-                        DeptManager.inserSynctDept(deptBeanList);
+                    if (deptBeanList.size() > 0) {
+                        DeptManager.inserSynctDept(deptBeanList, isAdd);
                     }
                 }
                 return deptBeanList;
@@ -310,8 +317,8 @@ public class SyncOrg {
                     System.out.println(userRegisterBeanList.size() + "********************");
                     //userBeanList = userBeanList.subList(0,1);
                     //userRegisterBeanList = userRegisterBeanList.subList(0,1);
-                    if(userBeanList.size() > 0){
-                        UserManager.insertSyncUser(userBeanList, userRegisterBeanList);
+                    if (userBeanList.size() > 0) {
+                        UserManager.insertSyncUser(userBeanList, userRegisterBeanList, isAdd);
                     }
                 }
                 return userBeanList;

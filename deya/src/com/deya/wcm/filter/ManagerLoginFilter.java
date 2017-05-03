@@ -1,6 +1,7 @@
 package com.deya.wcm.filter;
 
 import java.io.IOException;
+import java.util.Enumeration;
 
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -14,7 +15,7 @@ import com.deya.util.Javascript;
 import com.deya.util.jspFilterHandl;
 import com.deya.wcm.services.org.user.UserLogin;
 
-public class ManagerLoginFilter implements javax.servlet.Filter{
+public class ManagerLoginFilter implements javax.servlet.Filter {
     private FilterConfig config;
 
     public static boolean isContains(String container, String[] regx) {
@@ -56,51 +57,45 @@ public class ManagerLoginFilter implements javax.servlet.Filter{
 
         //对前台的jsp进行xss漏洞过滤
         //if(!requestUri.startsWith("/sys"))
-        if(requestUri.indexOf("/sys/") < 0)
-        {
-            if(!jspFilterHandl.isRightParam(request,requestUri))
-            {
+        if (requestUri.indexOf("/sys/") < 0) {
+            if (!jspFilterHandl.isRightParam(request, requestUri)) {
                 response.setContentType("text/html; charset=utf-8");
                 response.sendRedirect("/");
                 return;
-            }else
-            {
+            } else {
                 chain.doFilter(request, response);
             }
-        }else
-        {
-            if(!jspFilterHandl.isRightParam(request,requestUri))
-            {
+        } else {
+            String method = request.getParameter("method");
+            if (method != null && !"".equals(method) && !"null".equals(method)) {
+                request.getSession().setAttribute("method", method);
+            }
+            method = (String)request.getSession().getAttribute("method");
+            String menuUrl = request.getParameter("menuUrl");
+            loginPage = loginPage + "?menuUrl=" + menuUrl + "&method=" + method;
+            if (!jspFilterHandl.isRightParam(request, requestUri)) {
                 response.setContentType("text/html; charset=utf-8");
-                if(requestUri.indexOf("/sys/JSON-RPC") >= 0)
-                {
-                    response.getWriter().write("top.location.href='" + loginPage +"'");
+                if (requestUri.indexOf("/sys/JSON-RPC") >= 0) {
+                    response.getWriter().write("top.location.href='" + loginPage + "'");
+                } else {
+                    response.getWriter().write(Javascript.location(loginPage, "top"));
                 }
-                else{
-                    response.getWriter().write(Javascript.location(loginPage,"top"));
-                }
-            }else{
-                if(UserLogin.checkLoginBySession(request))
-                {
+            } else {
+                if (UserLogin.checkLoginBySession(request)) {
                     chain.doFilter(request, response);
-                }
-                else
-                {
+                } else {
                     //response.sendRedirect(loginPage);
                     response.setContentType("text/html; charset=utf-8");
-                    if(requestUri.indexOf("/sys/JSON-RPC") >= 0)
-                    {
-                        response.getWriter().write("top.location.href='" + loginPage +"'");
-                    }
-                    else{
-                        response.getWriter().write(Javascript.location(loginPage,"window"));
+                    if (requestUri.indexOf("/sys/JSON-RPC") >= 0) {
+                        response.getWriter().write("top.location.href='" + loginPage + "'");
+                    } else {
+                        response.getWriter().write(Javascript.location(loginPage, "window"));
                     }
                 }
             }
 
         }
     }
-
 
 
     public void destroy() {

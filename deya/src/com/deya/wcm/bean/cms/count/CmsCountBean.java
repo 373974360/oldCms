@@ -182,7 +182,7 @@ public class CmsCountBean implements Serializable{
 			float i_rate = (float)releasedCount * 100 / inputCount;
 			releaseRate = nf.format(i_rate);
 		} else {
-			releaseRate = "0";
+			releaseRate = "-";
 		}
 	}
 

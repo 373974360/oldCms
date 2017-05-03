@@ -123,7 +123,7 @@ public class CmsCountExcelOut {
                    data[i][5] = String.valueOf(countBean.getCaogaoCount());
 				   data[i][6] = String.valueOf(countBean.getPicInfoCount());
 				   countBean.setReleaseRate();  
-				   data[i][7] = String.valueOf(countBean.getReleaseRate())+"%";
+				   data[i][7] = (String.valueOf(countBean.getReleaseRate())+"%").replace("�%","-");
 			 }
 			OutExcel oe=new OutExcel("站点信息统计表");
 			oe.doOut(fileStr[0],head,data);

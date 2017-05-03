@@ -158,7 +158,7 @@ function saveSurveyCategory()
 	}
 	else
 	{
-		bean.update_user = LoginUserBean.user_id;
+		bean.update_user = parent.LoginUserBean.user_id;
 		if(SurveyCategoryRPC.updateSurveyCategory(bean))
 		{
             parent.msgAlert("问卷分类"+WCMLang.Add_success);
@@ -180,13 +180,13 @@ function publishSurveyCategory(publish_status)
 	if(publish_status == -1)
 		message = "撤销";
 
-	if(SurveyCategoryRPC.updateSurveyCategoryPublishStatus(beanList.get(carent_cell_num).id,publish_status,LoginUserBean.user_id))
+	if(SurveyCategoryRPC.updateSurveyCategoryPublishStatus(beanList.get(carent_cell_num).id,publish_status,parent.LoginUserBean.user_id))
 	{
-		msgAlert(message+"成功");
+        parent.msgAlert(message+"成功");
 		showList();	
 	}
 	else
-		msgWargin(message+"失败，请重新"+message);
+        parent.msgWargin(message+"失败，请重新"+message);
 }
 
 function batchPublishSurveyCategory(publish_status)
@@ -197,9 +197,9 @@ function batchPublishSurveyCategory(publish_status)
 
 	var selectIDS = table.getSelecteCheckboxValue("id");
 	
-	if(SurveyCategoryRPC.updateSurveyCategoryPublishStatus(selectIDS,publish_status,LoginUserBean.user_id))
+	if(SurveyCategoryRPC.updateSurveyCategoryPublishStatus(selectIDS,publish_status,parent.LoginUserBean.user_id))
 	{
-		msgAlert(WCMLang.Publish_success);
+        parent.msgAlert(WCMLang.Publish_success);
 		showList();	
 	}
 	else
@@ -212,17 +212,17 @@ function deleteSurveyCategory(id)
 {
 	if(SurveyCategoryRPC.getSurveyCountByCategoryID(id) != 0)
 	{
-		msgWargin("该分类下有问卷记录<br>请先删除问卷记录再删除分类");
+        parent.msgWargin("该分类下有问卷记录<br>请先删除问卷记录再删除分类");
 		return;
 	}
 
-	if(SurveyCategoryRPC.deleteSurveyCategory(id,LoginUserBean.user_id))
+	if(SurveyCategoryRPC.deleteSurveyCategory(id,parent.LoginUserBean.user_id))
 	{
-		msgAlert("删除成功");
+        parent.msgAlert("删除成功");
 		reloadCategoryList();	
 	}
 	else
-		msgWargin("删除失败，请重新删除");
+        parent.msgWargin("删除失败，请重新删除");
 }
 
 function batchDelSurveyCategory()
@@ -234,14 +234,14 @@ function batchDelSurveyCategory()
 	{
 		if(SurveyCategoryRPC.getSurveyCountByCategoryID(tempA[i]) != 0)
 		{
-			msgWargin("该分类下有问卷记录<br>请先删除问卷记录再删除分类");
+            parent.msgWargin("该分类下有问卷记录<br>请先删除问卷记录再删除分类");
 			return;
 		}
 	}
 
 	if(selectIDS == "")
 	{
-		msgAlert("请选择要删除的记录");
+        parent.msgAlert("请选择要删除的记录");
 		return;
 	}
 
@@ -256,18 +256,18 @@ function batchDelSurveyCategoryHandl()
 	{
 		if(SurveyCategoryRPC.getSurveyCountByCategoryID(tempA[i]) != 0)
 		{
-			msgWargin("该分类下有问卷记录<br>请先删除问卷记录再删除分类");
+            parent.msgWargin("该分类下有问卷记录<br>请先删除问卷记录再删除分类");
 			return;
 		}
 	}
 
-	if(SurveyCategoryRPC.deleteSurveyCategory(selectIDS,LoginUserBean.user_id))
+	if(SurveyCategoryRPC.deleteSurveyCategory(selectIDS,parent.LoginUserBean.user_id))
 	{
-		msgAlert("问卷分类"+WCMLang.Delete_success);
+        parent.msgAlert("问卷分类"+WCMLang.Delete_success);
 		reloadCategoryList();	
 	}
 	else
-		msgWargin("问卷分类"+WCMLang.Delete_fail);
+        parent.msgWargin("问卷分类"+WCMLang.Delete_fail);
 }
 /**********************删除操作　结束*************************************/
 

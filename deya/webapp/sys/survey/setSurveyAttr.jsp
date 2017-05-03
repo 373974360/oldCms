@@ -19,7 +19,7 @@
 <script type="text/javascript" src="/cms.files/component/common/htmledit/fckeditor.js"></script> -->
 <SCRIPT LANGUAGE="JavaScript">
 	<!--
-		var site_id = request.getParameter("site_id");
+		var site_id = "CMScdgjj";
 		var s_id = request.getParameter("s_id");
 		var top_index = request.getParameter("top_index");
 		$(document).ready(function () {	
@@ -109,7 +109,7 @@
 						<div class="tab_right" >基础信息</div>
 					</div>
 				</li>
-				<li class="list_tab">
+				<li class="list_tab hidden">
 					<div class="tab_left">
 						<div class="tab_right" >文字说明</div>
 					</div>
@@ -256,7 +256,7 @@
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="setSurveyAttrHandl()" value="保存" />	
 			<input id="userAddReset" name="btn1" type="button" onclick="window.location.reload()" value="重置" />	
-			<input id="userAddCancel" name="btn1" type="button" onclick="tab_colseOnclick(curTabIndex)" value="取消" />
+			<input id="userAddCancel" name="btn1" type="button" onclick="parent.tab_colseOnclick(parent.curTabIndex)" value="取消" />
 		</td>
 	</tr>
 </table>

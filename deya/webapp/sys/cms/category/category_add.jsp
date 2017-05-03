@@ -33,7 +33,7 @@
         var parent_id = <%=parent_id%>;//父节点ID
         var id = "<%=id%>";//栏目ID，用于修改
         var class_id = "<%=class_id%>";//分类方式ID
-        var site_id = "<%=site_id%>";//站点ID
+        var site_id = "CMScdgjj";//站点ID
         var app_id = "<%=app_id%>";//应用ID
         var is_update = false;//是否是修改
         var cat_id;
@@ -200,10 +200,10 @@
                 parent.msgAlert("目录信息" + WCMLang.Add_success);
                 try {
                     if (cat_type == "0") {
-                        getCurrentFrameObj(top_index).changeCategoryListTable(parent_id);
-                        getCurrentFrameObj(top_index).insertCategoryTree(bean.cat_id, bean.cat_cname);
+                        parent.getCurrentFrameObj(top_index).changeCategoryListTable(parent_id);
+                        parent.getCurrentFrameObj(top_index).insertCategoryTree(bean.cat_id, bean.cat_cname);
                     } else
-                        getCurrentFrameObj(top_index).reloadZTList();
+                        parent.getCurrentFrameObj(top_index).reloadZTList();
                 } catch (e) {
 
                 }

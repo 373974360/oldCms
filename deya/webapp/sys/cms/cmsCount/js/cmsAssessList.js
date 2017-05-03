@@ -66,7 +66,7 @@ function showList(){
 	// chart处理
 	setBarChart();
 	
-	//$("#outFileBtn").show();
+	$("#outFileBtn").show();
 }
 
 

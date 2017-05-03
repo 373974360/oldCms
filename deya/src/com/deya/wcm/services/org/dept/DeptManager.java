@@ -821,8 +821,8 @@ public class DeptManager implements ISyncCatch{
      *            stl 操作日志对象
      * @return boolean
      */
-    public static boolean inserSynctDept(List<DeptBean> deptList) {
-        if (deptDao.inserSynctDept(deptList)) {
+    public static boolean inserSynctDept(List<DeptBean> deptList,boolean isAdd) {
+        if (deptDao.inserSynctDept(deptList,isAdd)) {
             reloadDept();
             return true;
         } else {

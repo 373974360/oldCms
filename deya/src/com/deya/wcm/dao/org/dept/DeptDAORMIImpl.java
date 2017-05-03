@@ -299,9 +299,9 @@ public class DeptDAORMIImpl implements IDeptDAO {
     /* **********************同步银海组织机构 开始******************************** */
 
     @Override
-    public boolean inserSynctDept(List<DeptBean> deptList) {
+    public boolean inserSynctDept(List<DeptBean> deptList,boolean isAdd) {
         try {
-            return GetOrgRmi.getorgRmi().inserSynctDept(deptList);
+            return GetOrgRmi.getorgRmi().inserSynctDept(deptList,isAdd);
         } catch (RemoteException re) {
             re.printStackTrace();
             return false;

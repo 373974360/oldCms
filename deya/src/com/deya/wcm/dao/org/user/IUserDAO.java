@@ -238,7 +238,7 @@ public interface IUserDAO {
      * @param List<UserRegisterBean> urbList 帐号对象
      * @return boolean
      * */
-    public boolean insertSyncUser(List<UserBean> ubList, List<UserRegisterBean> urbList);
+    public boolean insertSyncUser(List<UserBean> ubList, List<UserRegisterBean> urbList,boolean isAdd);
 
 	/**
 	 * 增量同步用户获取最大id

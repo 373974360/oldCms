@@ -141,7 +141,7 @@ function iniMenuHandl(jData, if_flag) {
                 if ($(event.target).data("attributes").url != null && $(event.target).data("attributes").url != "")
                     setMainIframeUrl($(event.target).data("attributes").url, $(event.target).data("title"));
                 else
-                    setMainIframeUrl("/sys/space.html", "信息修改");
+                    setMainIframeUrl("/sys/space.html", "信息列表");
 
                 curTreeID = $(selectLi).attr("id");
                 $("#nav_title").text($(this).html().replace(/\r?\n/g, "").replace(/(.*?)<.*/, "$1"));
@@ -674,7 +674,7 @@ function addTab(isColseBar, page_path, titles) {
     if (isColseBar) {
         strColseBar = "<a href=\"javascript:void(0)\" class=\"tabs-close\" onclick=\"tab_colseOnclick('" + index + "');\"></a>";
     }
-    var tmpLi = "<li id=\"tab_" + index + "\"  class=\"\"><div><div><a href=\"javascript:void(0)\" class=\"tabs-inner\" onclick=\"tabOnclick('" + index + "');\"><span class=\"tabs-title tabs-closable\">信息修改</span><span class=\"tabs-icon\"></span></a>" + strColseBar + "</div></div></li>";
+    var tmpLi = "<li id=\"tab_" + index + "\"  class=\"\"><div><div><a href=\"javascript:void(0)\" class=\"tabs-inner\" onclick=\"tabOnclick('" + index + "');\"><span class=\"tabs-title tabs-closable\">信息列表</span><span class=\"tabs-icon\"></span></a>" + strColseBar + "</div></div></li>";
     if ($(".tabs").length == 0) {
         parent.$(".tabs").append(tmpLi);
 
@@ -689,7 +689,7 @@ function addTab(isColseBar, page_path, titles) {
         if (page_path != "" && page_path != null)
             setMainIframeUrl(page_path, titles);
         else
-            setMainIframeUrl("/sys/space.html", "信息修改");
+            setMainIframeUrl("/sys/space.html", "信息列表");
         parent.tabIndex++;
     } else {
         $(".tabs").append(tmpLi);
@@ -705,7 +705,7 @@ function addTab(isColseBar, page_path, titles) {
         if (page_path != "" && page_path != null)
             setMainIframeUrl(page_path, titles);
         else
-            setMainIframeUrl("/sys/space.html", "信息修改");
+            setMainIframeUrl("/sys/space.html", "信息列表");
         tabIndex++;
     }
 

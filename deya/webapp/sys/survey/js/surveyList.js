@@ -404,7 +404,7 @@ function publishSurvey(publish_status)
 	if(publish_status == -1)
 		message = "撤销";
 
-	if(SurveyRPC.publishSurvey(beanList.get(carent_cell_num).id,publish_status,LoginUserBean.user_id))
+	if(SurveyRPC.publishSurvey(beanList.get(carent_cell_num).id,publish_status,parent.LoginUserBean.user_id))
 	{
         parent.msgAlert(message+"成功");
 		showList();	
@@ -428,7 +428,7 @@ function batchPublishSurvey(publish_status)
 
 	var selectIDS = table.getSelecteCheckboxValue("id");
 	
-	if(SurveyRPC.publishSurvey(selectIDS,publish_status,LoginUserBean.user_id))
+	if(SurveyRPC.publishSurvey(selectIDS,publish_status,parent.LoginUserBean.user_id))
 	{
         parent.msgAlert(WCMLang.Publish_success);
 		
@@ -542,7 +542,7 @@ function showSurveyAttr(flag)
 	if(flag == "bath")
 	{
 		var selectIDS = table.getSelecteCheckboxValue("s_id");
-        parent.addTab(true,'/sys/survey/setSurveyAttr.jsp?s_id='+selectIDS+"&top_index="+curTabIndex,'问卷调查属性设置');
+        parent.addTab(true,'/sys/survey/setSurveyAttr.jsp?s_id='+selectIDS+"&top_index="+parent.curTabIndex,'问卷调查属性设置');
 	}	
 }
 
@@ -605,7 +605,7 @@ function setSurveyAttrHandl()
 	{
         parent.msgAlert("保存成功");
         parent.getCurrentFrameObj(top_index).showList();
-        parent.tab_colseOnclick(curTabIndex)
+        parent.tab_colseOnclick(parent.curTabIndex)
 	}else
 	{
         parent.msgAlert("保存失败,请重新提交");

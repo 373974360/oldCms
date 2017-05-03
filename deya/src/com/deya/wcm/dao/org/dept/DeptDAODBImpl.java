@@ -335,13 +335,21 @@ public class DeptDAODBImpl implements IDeptDAO {
     /* **********************同步银海组织机构 开始******************************** */
 
     @Override
-    public boolean inserSynctDept(List<DeptBean> deptList) {
-        if (DBManager.delete("deleteDept", null)) {
+    public boolean inserSynctDept(List<DeptBean> deptList,boolean isAdd) {
+        if(isAdd){
             if (DBManager.insert("insertDeptBatch", deptList)) {
                 System.out.println("**********************同步银海部门成功***********************");
                 return true;
             }
+        }else{
+            if (DBManager.delete("deleteDept", null)) {
+                if (DBManager.insert("insertDeptBatch", deptList)) {
+                    System.out.println("**********************同步银海部门成功***********************");
+                    return true;
+                }
+            }
         }
+
         return false;
     }
 
