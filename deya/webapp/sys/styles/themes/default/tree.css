@@ -48,13 +48,24 @@
 }
 .tree-folder{
 	display:inline-block;
-	background:url('images/tree_folder.gif') no-repeat;
+	background:url('images/tree_folder_open.gif') no-repeat;
 	width:16px;
 	height:20px;
 	vertical-align:middle;
 }
+.tree-folder2{
+	display:inline-block;
+	background:url('images/tree_folder_open2.png') no-repeat center;
+	width:20px;
+	height:20px;
+	vertical-align:middle;
+}
+
 .tree-folder-open{
 	background:url('images/tree_folder_open.gif') no-repeat;
+}
+.tree-folder-open2{
+	background:url('images/tree_folder_open2.png') no-repeat center;
 }
 .tree-file{
 	display:inline-block;
@@ -75,12 +86,13 @@
 }
 
 .tree-node-hover{
-	background-color:#64C56F;
+	background-color:#f2f2f2;
 	color:#454545;
 }
 .tree-node-selected{
-	background-color: #1da02c;
-	color:#FFF;
+	/* background-color: #1da02c; */
+	color: #1da02c;
+	font-weight: bold;
 }
 .tree-checkbox{
 	display:inline-block;

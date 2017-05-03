@@ -248,14 +248,14 @@
 			</td>
 		</tr>
 
-		<tr style="height:10px; line-height:10px;overflow:hidden"><td  colspan="3" style="height:10px; line-height:10px;overflow:hidden"></td></tr>
+		
 		<tr>
 			<td align="left" width="" colspan="3">
 				<ul class="fromTabs">
 					<li class="hidden list_tab list_tab_cur addInfo delInfo unPublishInfo modifyInfo getInfo moveInfo pushInfo">
-						<div class="tab_left">
+						<!--<div class="tab_left">
 							<div class="tab_right">已发</div>
-						</div>
+						</div>-->
 					</li>
 					<!--
                     <li class="list_tab">
@@ -265,34 +265,34 @@
                     </li>
                      -->
 					<li class="hidden list_tab  unPublishedInfo">
-						<div class="tab_left">
+						<!--<div class="tab_left">
 							<div class="tab_right">已撤</div>
-						</div>
+						</div>-->
 					</li>
 					<li class=" hidden list_tab checkInfo">
-						<div class="tab_left">
+						<!--<div class="tab_left">
 							<div class="tab_right">待审</div>
-						</div>
+						</div>-->
 					</li>
 					<li class="hidden list_tab">
-						<div class="tab_left">
+						<!--<div class="tab_left">
 							<div class="tab_right">审核中</div>
-						</div>
+						</div>-->
 					</li>
 					<li class="hidden list_tab noPassInfo">
-						<div class="tab_left">
+						<!--<div class="tab_left">
 							<div class="tab_right">退稿</div>
-						</div>
+						</div>-->
 					</li>
 					<li class="hidden list_tab drafgInfo">
-						<div class="tab_left">
+						<!--<div class="tab_left">
 							<div class="tab_right">草稿</div>
-						</div>
+						</div>-->
 					</li>
 					<li class="hidden list_tab rubbyInfo">
-						<div class="tab_left">
+						<!--<div class="tab_left">
 							<div class="tab_right">回收站</div>
-						</div>
+						</div>-->
 					</li>
 				</ul>
 			</td>

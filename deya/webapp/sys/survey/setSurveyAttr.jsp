@@ -195,8 +195,8 @@
 		 </tr>
 		 <tr>
 		  
-		  <th>焦点图片：</th>
-		  <td >
+		  <th class="hidden">焦点图片：</th>
+		  <td class="hidden">
 			<div style="float:left;margin:auto;"><input type="text" id="pic_path" name="pic_path" class="width500" maxlength="80"></div>
 			<div style="float:left;margin:auto;"><input type="file" id="fileName" name="fileName" style="width:300px" maxlength="80"></div>
 			<div style="float:left;margin:auto;">&nbsp;<input type="button" id="" name="" maxlength="80" value="预览" onclick="prevImg()"></div>

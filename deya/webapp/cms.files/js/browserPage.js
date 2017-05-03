@@ -116,7 +116,8 @@ function fnOK()
 {			
 	if(SurveyBean.ip_fre != "" && SurveyBean.ip_fre != 0)
 	{
-		if(parseInt(AnswerRPC.getAnswerCountByIP(s_id)) > parseInt(SurveyBean.ip_fre)-1)
+        var count = AnswerRPC.getAnswerCountByIP(s_id);
+		if(parseInt(count) > parseInt(SurveyBean.ip_fre)-1)
 		{
 			alert("该IP提交次数已超过最大限制，无法再提交");
 			return;

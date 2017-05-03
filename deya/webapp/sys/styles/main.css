@@ -1,7 +1,7 @@
 @charset "utf-8";
 /*全局样式*/
 body {font-family:"\5FAE\8F6F\96C5\9ED1","\5B8B\4F53",Arial Narrow,arial,serif;background:#f7f7f7;font-size:12px;}
-body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,blockquote,p{padding:0; margin:0; color:#2b2b2b;}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,blockquote,p{padding:0; margin:0; color:#2b2b2b;font-family:"\5FAE\8F6F\96C5\9ED1","\5B8B\4F53",Arial Narrow,arial,serif;}
 table,td,tr,th{font-size:12px;}
 li{list-style-type:none;list-style:none;}
 table{ margin:0 auto;border-spacing:0; border-collapse:collapse;/*white-space:nowrap*/}
@@ -47,7 +47,7 @@ a:active {color:#ba2636;}
 
 .f13B{ font-size:13px; font-weight:bold; color:#2b2b2b;}
 .f14B{ font-size:14px; font-weight:bold; color:#2b2b2b;}
-.f_red{color: red;vertical-align:middle;font-weight:bold;padding:0 3px;}
+.f_red{color: #1DA02C;vertical-align:middle;font-weight:bold;padding:0 3px;}
 
 .lineHeight140{line-height:140%;}
 .lineHeight160{line-height:160%;}
@@ -64,26 +64,29 @@ a:active {color:#ba2636;}
 
 .line2h{ width:100%; height:2px; font-size:1px; background:url(../images/line2h.gif) repeat-x;}
 
-.input_text{ height:18px; line-height:18px; font-size:12px; vertical-align:middle; border:1px solid #bdbdbd; background-color:#FFF; padding-left:3px; margin:0 4px 0 0; }
+.input_text{ height:24px; line-height:24px; font-size:12px; vertical-align:middle; border:1px solid #bdbdbd; background-color:#FFF; padding-left:3px; margin:0 4px 0 0; }
 .input_text_focus{border:1px solid #bdbdbd;}
 .input_checkbox{ vertical-align:middle; margin:0 4px 0 0;}
 .input_radio{ vertical-align:middle; margin:0 4px 0 0;}
 .input_textarea{line-height:18px; font-size:12px; vertical-align:middle; border:1px solid #bdbdbd; background-color:#FFF; padding-left:3px; margin:0 4px 0 0;}
 .input_textarea_focus{border:1px solid #bdbdbd;}
-.input_select{ height:20px; line-height:20px; font-size:12px;vertical-align:middle; border:1px solid #bdbdbd; background-color:#FFF;}
-.input_select option{font-size:12px; line-height:19px;}
+.input_select{ height:26px; line-height:26px; font-size:12px;vertical-align:middle; border:1px solid #bdbdbd; background-color:#FFF;}
+.input_select option{font-size:12px; line-height:26px;}
+#turn .input_select2{ height:22px; line-height:22px; font-size:12px;vertical-align:middle; border:1px solid #bdbdbd; background-color:#FFF;}
+#turn .input_select2 option{font-size:12px; line-height:22px;}
 
+#info_article_table .input{height:20px;line-height:20px;}
 /*各种大小按钮*/
-.btn{border:0px; font-size:12px; letter-spacing:2px; vertical-align:middle;}
-.x2{width:41px;height:21px; background:url(../images/btn_x2.gif) 0 0 no-repeat;}
-.x3{width:56px;height:21px; background:url(../images/btn_x3.gif) 0 0 no-repeat;}
-.x4{width:71px;height:21px; background:url(../images/btn_x4.gif) 0 0 no-repeat;}
-.x5{width:86px;height:21px; background:url(../images/btn_x5.gif) 0 0 no-repeat;}
-.x6{width:101px;height:21px; background:url(../images/btn_x6.gif) 0 0 no-repeat;}
-.x_add{width:67px; height:21px; border:0px; font-size:12px; letter-spacing:2px; vertical-align:middle; background:url(../images/btn_add.png) no-repeat;}
-.btn-over{background-position:left -21px;}
+.btn{border:0px;font-size:12px;letter-spacing:0px;vertical-align:middle;color: #ffffff;cursor:pointer}
+.x2{width:68px;height:26px; background:url(../images/btn_x2.png) 0 0 no-repeat;}
+.x3{width:68px;height:26px; background:url(../images/btn_x2.png) 0 0 no-repeat;}
+.x4{width:68px;height:26px; background:url(../images/btn_x2.png) 0 0 no-repeat;}
+.x5{width:86px;height:26px; background:url(../images/btn_x3.png) 0 0 no-repeat;}
+.x6{width:100px;height:26px; background:url(../images/btn_x4.png) 0 0 no-repeat;}
+.x_add{width: 68px;height:21px;border:0px;font-size:12px;letter-spacing:2px;vertical-align:middle;background:url(../images/btn_add.png) no-repeat;}
+/*.btn-over{background-position:left -21px;}
 .btn-click{background-position:left -42px;}
-
+*/
 /*Tip提示效果*/
 .tip{position: absolute;z-index:9999;}
 

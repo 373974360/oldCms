@@ -291,8 +291,7 @@
 					<div class="area_frame_tabs_left">
 						<div class="area_frame_tabs_right">
 							<div class="tabs-header" style=" padding-left:5px;">
-								<span class="blank5"></span>
-
+								
 								<div class="tabs-scroller-left" style="display:none; "></div>
 								<div class="tabs-scroller-right" style="display:none; "></div>
 

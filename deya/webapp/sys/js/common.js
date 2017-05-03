@@ -391,7 +391,7 @@ try {
 				}
 				else
 			    {
-					table += '<select id="pageSize" name="pageSize" class="input_select" onchange="ObjectPool['+this.name+'].changePageSize($(\'#pageSize\').val())">';
+					table += '<select id="pageSize" name="pageSize" class="input_select2" onchange="ObjectPool['+this.name+'].changePageSize($(\'#pageSize\').val())">';
 					for(var i=0;i<pageArr.length;i++)
 					{
 						if(this.pageSize == pageArr[i])
@@ -403,7 +403,7 @@ try {
 				table += '</select>&nbsp;'+
 				'条记录&nbsp;'+
 				'转到第&nbsp;'+
-				'<select id="pageGoNum" name="pageGoNum" class="input_select" onchange="ObjectPool['+this.name+'].goPage2(this.value)">';
+				'<select id="pageGoNum" name="pageGoNum" class="input_select2" onchange="ObjectPool['+this.name+'].goPage2(this.value)">';
 					if(this.getPageCount() == 0)
 						table += '<option value="0">0/0</option>';
 					else
