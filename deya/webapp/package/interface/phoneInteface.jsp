@@ -2,7 +2,7 @@
 <%@ page language="java" import="java.util.*,com.deya.wcm.services.cms.info.*,org.w3c.dom.Node,com.deya.util.xml.*,com.deya.wcm.bean.template.TurnPageBean" %>
 <%@page import="com.deya.wcm.bean.cms.info.*,com.deya.wcm.services.system.formodel.*,com.deya.wcm.services.zwgk.info.*,com.deya.wcm.bean.cms.category.CategoryBean"%>
 <%@page import="com.deya.util.*,com.deya.wcm.template.velocity.data.*,com.deya.wcm.bean.appeal.sq.*,com.deya.wcm.services.appeal.sq.*"%>
-<%@page import="org.apache.ibatis.session.SqlSession,java.net.*,java.io.*,com.deya.wcm.bean.system.formodel.*,com.deya.wcm.bean.interview.*,com.deya.wcm.services.cms.category.CategoryManager"%><%@ page import="com.deya.wcm.services.model.services.InfoCustomService"%><%@ page import="org.json.JSONObject"%><%@ page import="org.json.JSONException"%><%@ page import="com.deya.wcm.services.search.search.SearchManager"%>
+<%@page import="org.apache.ibatis.session.SqlSession,java.net.*,java.io.*,com.deya.wcm.bean.system.formodel.*,com.deya.wcm.bean.interview.*,com.deya.wcm.services.cms.category.CategoryManager"%><%@ page import="com.deya.wcm.services.model.services.InfoCustomService"%><%@ page import="org.json.JSONObject"%><%@ page import="org.json.JSONException"%><%@ page import="com.deya.wcm.services.search.search.SearchManager"%><%@ page import="com.deya.wcm.bean.search.ResultBean"%>
 <%
 String action_type = request.getParameter("action_type");
 String result = "";
@@ -509,10 +509,18 @@ public String searchInfo(HttpServletRequest request){
 	com.deya.wcm.bean.search.SearchResult result = SearchManager.searchGJ(request);
 	JSONObject jsonObject = new JSONObject();
     try {
-        jsonObject.put("maxPage",result.getPageControl().getMaxPage());
-        jsonObject.put("maxRowCount",result.getPageControl().getMaxRowCount());
-        jsonObject.put("rowsPerPage",result.getPageControl().getRowsPerPage());
-        jsonObject.put("items",result.getItems());
+        List<ResultBean> items = result.getItems();
+        if(items != null && items.size() > 0){
+            List<ResultBean> resultBeanList = new ArrayList<>();
+            for (ResultBean item : items) {
+                item.setTitle(replaceFont(item.getTitle()));
+                resultBeanList.add(item);
+            }
+            jsonObject.put("maxPage",result.getPageControl().getMaxPage());
+            jsonObject.put("maxRowCount",result.getPageControl().getMaxRowCount());
+            jsonObject.put("rowsPerPage",result.getPageControl().getRowsPerPage());
+            jsonObject.put("items",resultBeanList);
+        }
     } catch (JSONException e) {
         e.printStackTrace();
     }
