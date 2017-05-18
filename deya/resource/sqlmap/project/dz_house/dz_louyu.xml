@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="project">
+	<select id="getLouYuMaxCode" parameterType="Map" resultType="java.lang.String">
+		select lycode from dz_louyu
+		<where>
+			<if test="lpcode!=null and lpcode!=''">and lycode like '${lpcode}%' </if>
+		</where>
+		order by lycode desc LIMIT 1
+	</select>
+	<select id="getLouYuCount" parameterType="Map" resultType="java.lang.String">
+		select count(id) from dz_louyu
+		<where>
+			<if test="lpcode!=null and lpcode!=''">and lycode like '${lpcode}%' </if>
+			<if test="search!=null and search!=''">and ldh like '%${search}%' </if>
+		</where>
+	</select>
+	<select id="getLouyuList" parameterType="Map"
+		resultType="com.deya.project.dz_house.LouYuBean">
+		select * from dz_louyu
+		<where>
+			<if test="lpcode!=null and lpcode!=''">and lycode like '${lpcode}%' </if>
+			<if test="search!=null and search!=''">and ldh like '%${search}%' </if>
+		</where>
+		order by ldh 
+		limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
+	</select>
+	<select id="getLouyuListByCode" parameterType="Map"
+		resultType="com.deya.project.dz_house.LouYuBean">
+		select * from dz_louyu
+		<where>
+			<if test="lpcode!=null and lpcode!=''">and lycode like '${lpcode}%' </if>
+		</where>
+		order by ldh
+	</select>
+	<select id="getLouYuById" parameterType="Map" resultType="com.deya.project.dz_house.LouYuBean">
+		select * from dz_louyu where id=#{id}
+	</select>
+	<insert id="insertLouYu" parameterType="com.deya.project.dz_house.LouYuBean">
+		insert into
+		dz_louyu(lycode,ldh,dys,fjzs,jzmj,zdmj)
+		values(#{lycode},#{ldh},#{dys},#{fjzs},#{jzmj},#{zdmj})
+	</insert>
+	<update id="updateLouYu" parameterType="com.deya.project.dz_house.LouYuBean">
+		update dz_louyu set ldh=#{ldh},dys=#{dys},fjzs=#{fjzs},jzmj=#{jzmj},zdmj=#{zdmj} where id = #{id}
+	</update>
+	<delete id="deleteLouYu" parameterType="Map">
+		delete from dz_louyu where id=#{id}
+	</delete>
+</mapper>

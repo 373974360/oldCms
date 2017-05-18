@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="project">
+
+	<select id="getLouPanMaxCode" resultType="java.lang.String">
+		select lpcode from dz_loupan order by lpcode desc LIMIT 1
+	</select>
+
+	<select id="getLouPanCount" parameterType="Map" resultType="java.lang.String">
+		select count(id) from dz_loupan
+		<where>
+			<if test="name!=null and name!=''">and name like '%${name}%' </if>
+		</where>
+	</select>
+	<select id="getLouPanList" parameterType="Map"
+		resultType="com.deya.project.dz_house.LouPanBean">
+		select * from dz_loupan
+		<where>
+			<if test="name!=null and name!=''">and name like '%${name}%' </if>
+		</where>
+		 limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
+	</select>
+	<select id="getLouPanAllList" parameterType="Map"
+		resultType="com.deya.project.dz_house.LouPanBean">
+		select * from dz_loupan
+		<where>
+			<if test="name!=null">and name like '%${name}%' </if>
+		</where>
+	</select>
+	<select id="getLouPanById" parameterType="Map" resultType="com.deya.project.dz_house.LouPanBean">
+		select * from dz_loupan where id=#{id}
+	</select>
+	<insert id="insertLouPan" parameterType="com.deya.project.dz_house.LouPanBean">
+		insert into
+		dz_loupan(lpcode,name,coordinate,address,opentime,developers,property,propertytype,jzlx,zxzk,remark,yszh,zts,wyf,lhl,rjl,cwbl,tdsynx,jzjg,jzmj,zdmj,sgdw)
+		values(#{lpcode},#{name},#{coordinate},#{address},#{opentime},#{developers},#{property},#{propertytype},#{jzlx},#{zxzk},#{remark},#{yszh},#{zts},#{wyf},#{lhl},#{rjl},#{cwbl},#{tdsynx},#{jzjg},#{jzmj},#{zdmj},#{sgdw})
+	</insert>
+	<update id="updateLouPan" parameterType="com.deya.project.dz_house.LouPanBean">
+		update dz_loupan set name = #{name},coordinate = #{coordinate},address=#{address},opentime=#{opentime},developers=#{developers},property=#{property},
+		propertytype=#{propertytype},jzlx=#{jzlx},zxzk=#{zxzk},remark=#{remark},yszh=#{yszh},zts=#{zts},wyf=#{wyf},lhl=#{lhl},
+		rjl=#{rjl},cwbl=#{cwbl},tdsynx=#{tdsynx},jzjg=#{jzjg},jzmj=#{jzmj},zdmj=#{zdmj},sgdw=#{sgdw} where id = #{id}
+	</update>
+	<delete id="deleteLouPan" parameterType="Map">
+		delete from dz_loupan where id=#{id}
+	</delete>
+</mapper>
