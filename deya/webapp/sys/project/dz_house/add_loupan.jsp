@@ -70,7 +70,7 @@
             <tr>
                 <th><span class="f_red">*</span>开盘时间：</th>
                 <td colspan="2">
-                    <input id="opentime" name="opentime" type="text" class="width200" value=""/>
+                    <input id="opentime" name="opentime" type="text" class="width200" value="" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="readonly"/>
                 </td>
             </tr>
             <tr>
@@ -88,19 +88,36 @@
             <tr>
                 <th><span class="f_red">*</span>物业类型：</th>
                 <td colspan="2">
-                    <input id="propertytype" name="propertytype" type="text" class="width200" value=""/>
+                    <select id="propertytype" name="propertytype" class="width200">
+                        <option value="">请选择物业类型</option>
+                        <option value="住宅">住宅</option>
+                        <option value="商业">商业</option>
+                        <option value="公寓">公寓</option>
+                        <option value="商住两用">商住两用</option>
+                    </select>
                 </td>
             </tr>
             <tr>
                 <th><span class="f_red">*</span>建筑类型：</th>
                 <td colspan="2">
-                    <input id="jzlx" name="jzlx" type="text" class="width200" value=""/>
+                    <select id="jzlx" name="jzlx" class="width200">
+                        <option value="">请选择建筑类型</option>
+                        <option value="多层">多层</option>
+                        <option value="小高层">小高层</option>
+                        <option value="高层">高层</option>
+                        <option value="别墅">别墅</option>
+                    </select>
                 </td>
             </tr>
             <tr>
                 <th><span class="f_red">*</span>装修状况：</th>
                 <td colspan="2">
-                    <input id="zxzk" name="zxzk" type="text" class="width200" value=""/>
+                    <select id="zxzk" name="zxzk" class="width200">
+                        <option value="">请选择装修类型</option>
+                        <option value="毛坯">毛坯</option>
+                        <option value="精装修">精装修</option>
+                        <option value="豪华装修">豪华装修</option>
+                    </select>
                 </td>
             </tr>
             <tr>
@@ -148,7 +165,12 @@
             <tr>
                 <th><span class="f_red">*</span>建筑结构：</th>
                 <td colspan="2">
-                    <input id="jzjg" name="jzjg" type="text" class="width200" value=""/>
+                    <select id="jzjg" name="jzjg" class="width200">
+                        <option value="">请选择建筑结构</option>
+                        <option value="板式楼">板式楼</option>
+                        <option value="砖混">砖混</option>
+                        <option value="砖木">砖木</option>
+                    </select>
                 </td>
             </tr>
             <tr>

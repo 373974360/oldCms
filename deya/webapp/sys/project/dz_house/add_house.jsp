@@ -78,19 +78,36 @@
             <tr>
                 <th><span class="f_red">*</span>房间朝向：</th>
                 <td>
-                    <input id="cx" name="cx" type="text" class="width200" value=""/>
+                    <select id="cx" name="cx" class="width200">
+                        <option value="">请选择房间朝向</option>
+                        <option value="朝南">朝南</option>
+                        <option value="朝北">朝北</option>
+                        <option value="朝东">朝东</option>
+                        <option value="朝西">朝西</option>
+                        <option value="南北通透">南北通透</option>
+                        <option value="东西通透">东西通透</option>
+                    </select>
                 </td>
             </tr>
             <tr>
                 <th><span class="f_red">*</span>房间类型：</th>
                 <td>
-                    <input id="fjlx" name="fjlx" type="text" class="width200" value=""/>
+                    <select id="fjlx" name="fjlx" class="width200">
+                        <option value="">请选择房间类型</option>
+                        <option value="商品房">商品房</option>
+                        <option value="二手房">二手房</option>
+                        <option value="保障性住房">保障性住房</option>
+                    </select>
                 </td>
             </tr>
             <tr>
                 <th><span class="f_red">*</span>房间状态：</th>
                 <td>
-                    <input id="fjzt" name="fjzt" type="text" class="width200" value=""/>
+                    <select id="fjzt" name="fjzt" class="width200">
+                        <option value="">请选择房间状态</option>
+                        <option value="已售">已售</option>
+                        <option value="待售">待售</option>
+                    </select>
                 </td>
             </tr>
             </tbody>
