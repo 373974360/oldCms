@@ -14,7 +14,6 @@ $(document).ready(function () {
     }else{
         baiduMap.centerAndZoom("西安", 11);  // 初始化地图,设置中心点坐标和地图级别
     }
-    baiduMap.addControl(new BMap.MapTypeControl());   //添加地图类型控件
     baiduMap.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
 
 
