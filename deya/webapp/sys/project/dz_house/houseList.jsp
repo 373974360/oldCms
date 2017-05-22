@@ -63,7 +63,7 @@
                             <td class="fromTabs">
                                 <input id="btn1" name="btn1" type="button" onclick="insertHousePage()" value="添加"/>
                                 <input id="btn1" name="btn1" type="button" onclick="updateRecord(table,'id','updateHousePage()');" value="修改"/>
-                                <input id="btn3" name="btn3" type="button" onclick="deleteRecord(table,'id','batchDelSurveyCategoryHandl()')" value="删除"/>
+                                <input id="btn3" name="btn3" type="button" onclick="deleteRecord(table,'id','deleteHouse()')" value="删除"/>
                                 <span class="blank3"></span>
                             </td>
                             <td align="right" valign="middle" id="dept_search" class="search_td fromTabs">

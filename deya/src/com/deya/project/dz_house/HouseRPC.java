@@ -1,13 +1,18 @@
 package com.deya.project.dz_house;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by MaChaoWei on 2017/5/17.
  */
 public class HouseRPC {
     public static String getHouseCount(String search,String code){
-        return HouseManager.getHouseCount(search,code);
+        Map<String,String> map = new HashMap<String,String>();
+        map.put("search",search);
+        map.put("code",code);
+        return HouseManager.getHouseCount(map);
     }
 
     public static boolean insertHouse(HouseBean house){
@@ -24,10 +29,18 @@ public class HouseRPC {
     }
 
     public static List<HouseBean> getHouseAllList(String search, String code){
-        return HouseManager.getHouseAllList(search, code);
+        Map<String,String> map = new HashMap<String,String>();
+        map.put("search",search);
+        map.put("code",code);
+        return HouseManager.getHouseAllList(map);
     }
 
     public static  List<HouseBean> getHouselist(String search,String code,String start_num, String page_size){
-        return HouseManager.getHouselist(search, code, start_num, page_size);
+        Map<String,String> map = new HashMap<String,String>();
+        map.put("search",search);
+        map.put("code",code);
+        map.put("start_num",start_num);
+        map.put("page_size",page_size);
+        return HouseManager.getHouselist(map);
     }
 }

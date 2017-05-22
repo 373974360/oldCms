@@ -11,10 +11,7 @@ import java.util.Map;
  */
 public class HouseDAO {
 
-    public static String getHouseCount(String search,String code){
-        Map<String,String> map = new HashMap<String,String>();
-        map.put("search",search);
-        map.put("code",code);
+    public static String getHouseCount(Map<String,String> map){
         return DBManager.getString("getHouseCount", map);
     }
 
@@ -36,22 +33,13 @@ public class HouseDAO {
         return DBManager.update("updateHouse",house);
     }
 
-    public static List<HouseBean> getHouseAllList(String search,String code){
-        Map<String,String> map = new HashMap<String,String>();
-        map.put("search",search);
-        map.put("code",code);
+    public static List<HouseBean> getHouseAllList(Map<String,String> map){
         return DBManager.queryFList("getHouseAllList",map);
     }
 
-    public static  List<HouseBean> getHouselist(String search,String code,String start_num, String page_size){
-        Map<String,String> map = new HashMap<String,String>();
-        map.put("search",search);
-        map.put("code",code);
-        map.put("start_num",start_num);
-        map.put("page_size",page_size);
+    public static  List<HouseBean> getHouselist(Map<String,String> map){
         return DBManager.queryFList("getHouselist",map);
     }
-
 
     public static String getHouseMaxCode(String lycode){
         String code = "";

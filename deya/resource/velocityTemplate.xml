@@ -18,6 +18,9 @@
         <property name="MemberData" value="com.deya.wcm.template.velocity.data.MemberData"/>
         <property name="InfoUtilData" value="com.deya.wcm.template.velocity.data.InfoUtilData"/>
         <property name="SerData" value="com.deya.wcm.template.velocity.data.SerData"/>
+        <property name="HouseData" value="com.deya.project.dz_house.HouseData"/>
+        <property name="LouPanData" value="com.deya.project.dz_house.LouPanData"/>
+        <property name="LouYuData" value="com.deya.project.dz_house.LouYuData"/>
     </category>
     <category name="show_list_num">
         <property name="num" value="15"/>

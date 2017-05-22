@@ -46,6 +46,7 @@
             reloadLouYuList();
         }
     </script>
+
 </head>
 <body>
     <table style="width:100%" border="0" cellpadding="0" cellspacing="0" >
@@ -66,7 +67,7 @@
                             <td class="fromTabs">
                                 <input id="btn1" name="btn1" type="button" onclick="insertLouYuPage()" value="添加"/>
                                 <input id="btn1" name="btn1" type="button" onclick="updateRecord(table,'id','updateLouYuPage()');" value="修改"/>
-                                <input id="btn3" name="btn3" type="button" onclick="deleteRecord(table,'id','batchDelSurveyCategoryHandl()')" value="删除"/>
+                                <input id="btn3" name="btn3" type="button" onclick="deleteRecord(table,'id','deleteLouYu()')" value="删除"/>
                                 <span class="blank3"></span>
                             </td>
                             <td align="right" valign="middle" id="dept_search" class="search_td fromTabs">

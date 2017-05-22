@@ -113,4 +113,18 @@ function searchHandl(obj) {
     showTurnPage();
 }
 
+//删除楼盘信息
+function deleteHouse(){
+    var selectIDS = table.getSelecteCheckboxValue("id");
+    var tempA = selectIDS.split(",")
+    for(var i=0;i<tempA.length;i++){
+        HouseRPC.deleteHouse(tempA[i]);
+        reloadHouseList();
+    }
+    if(selectIDS == ""){
+        top.msgAlert("请选择要删除的记录");
+        return;
+    }
+}
+
 

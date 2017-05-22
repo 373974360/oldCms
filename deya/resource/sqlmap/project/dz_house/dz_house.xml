@@ -24,7 +24,7 @@
 			<if test="code!=null and code!=''">and housecode like '${code}%'</if>
 			<if test="search!=null and search!=''">and fjh like '%${search}%' </if>
 		</where>
-		order by fjh
+		order by  ${orderby}
 	</select>
 	<select id="getHouselist" parameterType="Map" resultType="com.deya.project.dz_house.HouseBean">
 		select * from dz_house
@@ -32,7 +32,7 @@
 			<if test="code!=null and code!=''">and housecode like '${code}%'</if>
 			<if test="search!=null and search!=''">and fjh like '%${search}%' </if>
 		</where>
-		order by fjh limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
+		order by  ${orderby} limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
 	</select>
 	<select id="getHouseById" parameterType="Map" resultType="com.deya.project.dz_house.HouseBean">
 		select * from dz_house where id=#{id}

@@ -7,12 +7,12 @@ import java.util.Map;
 import com.deya.util.FormatUtil;
 
 public class LouPanManager {
-	public static String getLouPanCount(String name) {
-		if(name!=null&&name.length()>0){
-			if (!FormatUtil.isValiditySQL(name))
-                return "0";
+	public static String getLouPanCount(Map<String,String> map) {
+		if (map.containsKey("name")) {
+			if (!FormatUtil.isValiditySQL((String) map.get("name")))
+				return "0";
 		}
-        return LouPanDAO.getLouPanCount(name);
+        return LouPanDAO.getLouPanCount(map);
 	}
 	public static List<LouPanBean> getLouPanAllList() {
         return LouPanDAO.getLouPanAllList();
@@ -33,10 +33,13 @@ public class LouPanManager {
 	public static boolean updateLouPan(LouPanBean loupan){
 		return LouPanDAO.updateLouPan(loupan);
 	}
-	public static boolean deleteLouPan(String id){
+	public static int deleteLouPan(String id){
 		return LouPanDAO.deleteLouPan(id);
 	}
 	public static String getLouPanTreeList(){
 		return LouPanDAO.getLouPanTreeList();
+	}
+	public static List<Map<String,String>> getCountList(){
+		return LouPanDAO.getCountList();
 	}
 }

@@ -111,3 +111,25 @@ function searchHandl(obj) {
 }
 
 
+//删除楼盘信息
+function deleteLouYu(){
+    var selectIDS = table.getSelecteCheckboxValue("id");
+    var tempA = selectIDS.split(",")
+    for(var i=0;i<tempA.length;i++){
+        if(LouYuRPC.deleteLouYu(tempA[i]) == -1){
+            top.msgWargin("该楼宇下有房屋信息<br>请先删除房屋信息");
+            return;
+        }
+        if(LouYuRPC.deleteLouYu(tempA[i]) == 0){
+            top.msgWargin("楼宇信息不存在");
+            return;
+        }
+        if(LouYuRPC.deleteLouYu(tempA[i]) == 1){
+            reloadLoupanList();
+        }
+    }
+    if(selectIDS == ""){
+        top.msgAlert("请选择要删除的记录");
+        return;
+    }
+}

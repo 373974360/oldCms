@@ -2,13 +2,14 @@ package com.deya.project.dz_house;
 
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by MaChaoWei on 2017/5/17.
  */
 public class HouseManager {
-    public static String getHouseCount(String search,String code){
-        return HouseDAO.getHouseCount(search,code);
+    public static String getHouseCount(Map<String,String> map){
+        return HouseDAO.getHouseCount(map);
     }
 
     public static boolean insertHouse(HouseBean house){
@@ -24,11 +25,11 @@ public class HouseManager {
         return HouseDAO.updateHouse(house);
     }
 
-    public static List<HouseBean> getHouseAllList(String search, String code){
-        return HouseDAO.getHouseAllList(search, code);
+    public static List<HouseBean> getHouseAllList(Map<String,String>  map){
+        return HouseDAO.getHouseAllList(map);
     }
 
-    public static  List<HouseBean> getHouselist(String search,String code,String start_num, String page_size){
-        return HouseDAO.getHouselist(search,code, start_num, page_size);
+    public static  List<HouseBean> getHouselist(Map<String,String> map){
+        return HouseDAO.getHouselist(map);
     }
 }

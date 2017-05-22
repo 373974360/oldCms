@@ -6,14 +6,14 @@
 	<select id="getLouYuMaxCode" parameterType="Map" resultType="java.lang.String">
 		select lycode from dz_louyu
 		<where>
-			<if test="lpcode!=null and lpcode!=''">and lycode like '${lpcode}%' </if>
+			<if test="code!=null and code!=''">and lycode like '${code}%' </if>
 		</where>
 		order by lycode desc LIMIT 1
 	</select>
 	<select id="getLouYuCount" parameterType="Map" resultType="java.lang.String">
 		select count(id) from dz_louyu
 		<where>
-			<if test="lpcode!=null and lpcode!=''">and lycode like '${lpcode}%' </if>
+			<if test="code!=null and code!=''">and lycode like '${code}%' </if>
 			<if test="search!=null and search!=''">and ldh like '%${search}%' </if>
 		</where>
 	</select>
@@ -21,19 +21,20 @@
 		resultType="com.deya.project.dz_house.LouYuBean">
 		select * from dz_louyu
 		<where>
-			<if test="lpcode!=null and lpcode!=''">and lycode like '${lpcode}%' </if>
+			<if test="code!=null and code!=''">and lycode like '${code}%' </if>
 			<if test="search!=null and search!=''">and ldh like '%${search}%' </if>
 		</where>
-		order by ldh 
+		order by  ${orderby}
 		limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
 	</select>
 	<select id="getLouyuListByCode" parameterType="Map"
 		resultType="com.deya.project.dz_house.LouYuBean">
 		select * from dz_louyu
 		<where>
-			<if test="lpcode!=null and lpcode!=''">and lycode like '${lpcode}%' </if>
+			<if test="code!=null and code!=''">and lycode like '${code}%' </if>
+			<if test="search!=null and search!=''">and ldh like '%${search}%' </if>
 		</where>
-		order by ldh
+		order by  ${orderby}
 	</select>
 	<select id="getLouYuById" parameterType="Map" resultType="com.deya.project.dz_house.LouYuBean">
 		select * from dz_louyu where id=#{id}

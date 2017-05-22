@@ -7,9 +7,7 @@ import java.util.Map;
 import com.deya.wcm.db.DBManager;
 
 public class LouPanDAO {
-	public static String getLouPanCount(String name) {
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("name", name);
+	public static String getLouPanCount(Map<String,String> map) {
         return DBManager.getString("getLouPanCount", map);
     }
 	
@@ -36,10 +34,21 @@ public class LouPanDAO {
 		return DBManager.update("updateLouPan", loupan);
 	}
 	
-	public static boolean deleteLouPan(String id){
+	public static int deleteLouPan(String id){
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("id", id);
-		return DBManager.delete("deleteLouPan", map);
+		LouPanBean lp = getLouPanById(id);
+		if(lp!=null){
+			List<LouYuBean> list = LouYuManager.getLouyuListByCode(lp.getLpcode());
+			if(!list.isEmpty()){
+				return -1;//该楼盘下有设置楼宇信息删除失败
+			}else{
+				if(DBManager.delete("deleteLouPan", map)){
+					return 1;//该楼盘下有设置楼宇信息删除失败
+				}
+			}
+		}
+		return 0;//楼盘信息不存在
 	}
 	
 	public static String getLouPanTreeList(){
@@ -67,5 +76,9 @@ public class LouPanDAO {
 			code=a;
 		}
 		return code;
+	}
+
+	public static List<Map<String,String>> getCountList(){
+		return DBManager.queryFList("getCountList",null);
 	}
 }

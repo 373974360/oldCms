@@ -11,6 +11,7 @@ public class LouPanBean implements Serializable {
 	private int id = 0;
 	private String lpcode="";
 	private String name = "";
+	private String tel="";
 	private String coordinate = "";
 	private String address = "";
 	private String opentime = "";
@@ -170,5 +171,13 @@ public class LouPanBean implements Serializable {
 
 	public void setLpcode(String lpcode) {
 		this.lpcode = lpcode;
+	}
+
+	public String getTel() {
+		return tel;
+	}
+
+	public void setTel(String tel) {
+		this.tel = tel;
 	}
 }

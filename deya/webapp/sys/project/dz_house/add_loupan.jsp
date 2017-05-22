@@ -53,12 +53,18 @@
                 </td>
             </tr>
             <tr>
-                <th><span class="f_red">*</span>地理坐标：</th>
-                <td width="220">
-                    <input id="coordinate" name="coordinate" type="text" readonly="readonly" class="width200"/>
+                <th><span class="f_red">*</span>联系电话：</th>
+                <td>
+                    <input id="tel" name="tel" type="text" class="width200" value=""/>
                 </td>
-                <td rowspan="20">
+                <td rowspan="21">
                     <div id="allmap"></div>
+                </td>
+            </tr>
+            <tr>
+                <th><span class="f_red">*</span>地理坐标：</th>
+                <td colspan="2">
+                    <input id="coordinate" name="coordinate" type="text" readonly="readonly" class="width200"/>
                 </td>
             </tr>
             <tr>

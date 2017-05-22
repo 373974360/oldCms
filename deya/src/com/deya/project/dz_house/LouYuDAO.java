@@ -12,10 +12,7 @@ public class LouYuDAO {
 
 
 
-	public static String getLouYuCount(String lpcode,String search){
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("search", search);
-		map.put("lpcode", lpcode);
+	public static String getLouYuCount(Map<String,Object> map){
         return DBManager.getString("getLouYuCount", map);
 	}
 	
@@ -29,7 +26,7 @@ public class LouYuDAO {
 	
 	public static List<LouYuBean> getLouyuListByCode(String lpcode){
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("lpcode", lpcode);
+		map.put("code", lpcode);
 		return DBManager.queryFList("getLouyuListByCode", map);
 	}
 	
@@ -40,10 +37,24 @@ public class LouYuDAO {
 	public static boolean updateLouYu(LouYuBean louyu){
 		return DBManager.update("updateLouYu", louyu);
 	}
-	public static boolean deleteLouYu(String id){
+	public static int deleteLouYu(String id){
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("id", id);
-		return DBManager.delete("deleteLouYu", map);
+		LouYuBean ly = getLouYuById(id);
+		if(ly!=null){
+			Map<String, String> h_map = new HashMap<String, String>();
+			h_map.put("search","");
+			h_map.put("code",ly.getLycode());
+			List<HouseBean> list = HouseManager.getHouseAllList(h_map);
+			if(!list.isEmpty()){
+				return -1;//该楼宇下有设置房屋信息删除失败
+			}else{
+				if(DBManager.delete("deleteLouYu",map)){
+					return 1;//该楼盘下有设置楼宇信息删除失败
+				}
+			}
+		}
+		return 0;//楼宇信息不存在
 	}
 	public static LouYuBean getLouYuById(String id){
 		Map<String, String> map = new HashMap<String, String>();
@@ -75,7 +86,7 @@ public class LouYuDAO {
 	public static String getLouYuMaxCode(String lpcode){
 		String code = "";
 		Map<String,String> map = new HashMap<String,String>();
-		map.put("lpcode",lpcode);
+		map.put("code",lpcode);
 		String maxCode = DBManager.getString("getLouYuMaxCode",map);
 		if(maxCode==""&&maxCode.length()==0){
 			maxCode="0000";

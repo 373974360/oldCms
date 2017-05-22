@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 public class LouYuManager {
-	public static String getLouYuCount(String lpcode,String search){
-		return LouYuDAO.getLouYuCount(lpcode,search);
+	public static String getLouYuCount(Map<String,Object> map){
+		return LouYuDAO.getLouYuCount(map);
 	}
 	public static List<LouYuBean> getLouyuList(Map<String,Object> map){
 		return LouYuDAO.getLouyuList(map);
@@ -19,7 +19,7 @@ public class LouYuManager {
 	public static boolean updateLouYu(LouYuBean louyu){
 		return LouYuDAO.updateLouYu(louyu);
 	}
-	public static boolean deleteLouYu(String id){
+	public static int deleteLouYu(String id){
 		return LouYuDAO.deleteLouYu(id);
 	}
 	public static LouYuBean getLouYuById(String id){

@@ -6,7 +6,9 @@ import java.util.Map;
 
 public class LouPanRPC {
     public static String getLouPanCount(String name) {
-        return LouPanManager.getLouPanCount(name);
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("name", name);
+        return LouPanManager.getLouPanCount(map);
     }
 
     public static List<LouPanBean> getLouPanList(String con, int start_num, int page_size) {
@@ -37,10 +39,14 @@ public class LouPanRPC {
         return LouPanManager.getLouPanAllList();
     }
 
-    public static boolean deleteLouPan(String id) {
+    public static int deleteLouPan(String id) {
         return LouPanManager.deleteLouPan(id);
     }
     public static String getLouPanTreeList(){
         return LouPanManager.getLouPanTreeList();
     }
+    public static List<Map<String,String>> getCountList(){
+        return LouPanManager.getCountList();
+    }
+
 }

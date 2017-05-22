@@ -19,7 +19,8 @@ function initTable() {
     var colsMap = new Map();
     var colsList = new List();
 
-    colsList.add(setTitleClos("name", "楼盘名称", "200px", "", "", ""));//英文名，显示名，宽，高，样式名，点击事件　
+    colsList.add(setTitleClos("name", "楼盘名称", "100px", "", "", ""));//英文名，显示名，宽，高，样式名，点击事件　
+    colsList.add(setTitleClos("tel", "联系电话", "100px", "", "", ""));
     colsList.add(setTitleClos("address", "地理位置", "200px", "", "", ""));
     colsList.add(setTitleClos("opentime", "开盘时间", "80px", "", "", ""));
     colsList.add(setTitleClos("jzjg", "建筑结构", "80px", "", "", ""));
@@ -111,6 +112,29 @@ function searchHandl(obj) {
     search = con_value;
     showList();
     showTurnPage();
+}
+
+//删除楼盘信息
+function deleteLouPan(){
+    var selectIDS = table.getSelecteCheckboxValue("id");
+    var tempA = selectIDS.split(",")
+    for(var i=0;i<tempA.length;i++){
+        if(LouPanRPC.deleteLouPan(tempA[i]) == -1){
+            top.msgWargin("该楼盘下有楼宇信息<br>请先删除楼宇信息");
+            return;
+        }
+        if(LouPanRPC.deleteLouPan(tempA[i]) == 0){
+            top.msgWargin("楼盘信息不存在");
+            return;
+        }
+        if(LouPanRPC.deleteLouPan(tempA[i]) == 1){
+            reloadLoupanList();
+        }
+    }
+    if(selectIDS == ""){
+        top.msgAlert("请选择要删除的记录");
+        return;
+    }
 }
 
 
