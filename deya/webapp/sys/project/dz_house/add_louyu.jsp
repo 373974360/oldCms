@@ -40,6 +40,7 @@
 <body>
 <span class="blank12"></span>
 <form id="form1" name="form1" action="#" method="post">
+    <ul style="list-style: none"></ul>
     <div id="louyu">
         <input type="hidden" id="id" name="id" value="0"/>
         <input type="hidden" id="lycode" name="lycode" value="<%=lpcode%>"/>

@@ -106,7 +106,7 @@ import java.util.Map;
 /* 149 */     return LouPanManager.getLouPanList(con_map);
 /*     */   }
 /*     */ 
-/*     */   public static List<LouPanBean> getAllLouPanList(String params) {
+/*     */   public static List<LouPanBean> getAllLouPanList() {
 /* 153 */     return LouPanManager.getLouPanAllList();
 /*     */   }
 /*     */
