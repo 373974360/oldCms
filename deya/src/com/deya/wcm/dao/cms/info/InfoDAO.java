@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.deya.util.DateUtil;
+import com.deya.util.jspFilterHandl;
 import com.deya.wcm.bean.cms.count.InfoAccessBean;
 import com.deya.wcm.bean.cms.count.InfoCountBean;
 import com.deya.wcm.bean.cms.info.InfoBean;
@@ -495,6 +496,14 @@ public class InfoDAO {
 	@SuppressWarnings("unchecked")
 	public static List<InfoBean> getInfoBeanList(Map<String, String> map){
 		//System.out.println("getInfoBeanList  map----"+map);
+		if(jspFilterHandl.isTureKey((String)map.get("sort_name"))) {
+			map.put("sort_name", "ci.released_dtime desc,ci.id");
+		}
+
+		if(!((String)map.get("sort_type")).equals("desc") && !((String)map.get("sort_type")).equals("asc")) {
+			map.put("sort_type", "desc");
+		}
+//		System.out.println("getInfoBeanList  map----" + map);
 		return DBManager.queryFList("selectInfoList", map);
 	}
 	
