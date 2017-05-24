@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%
     String code = request.getParameter("code");
+    String site_id = request.getParameter("site_id");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -8,9 +9,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>维护房间信息</title>
     <jsp:include page="../../include/include_tools.jsp"/>
+    <script type="text/javascript" src="../../js/uploadTools.js"></script>
+    <script type="text/javascript" src="../../js/jquery.uploadify.js"></script>
+    <script type="text/javascript" src="../../js/uploadFile/swfobject.js"></script>
     <script type="text/javascript" src="js/houseList.js"></script>
     <SCRIPT LANGUAGE="JavaScript">
         code = "<%=code%>";
+        var site_id = "<%=site_id%>";
         if(code==null){
             code="";
         }
@@ -23,6 +28,7 @@
             initButtomStyle();
             init_FromTabsStyle();
             init_input();
+            initUeditor("hxt");
             if ($.browser.msie && $.browser.version == "6.0" && $("html")[0].scrollHeight > $("html").height()) $("html").css("overflowY", "scroll");
             if (id != null && id.trim() != "") {
                 defaultBean = HouseRPC.getHouseById(id);
@@ -76,6 +82,23 @@
                 </td>
             </tr>
             <tr>
+                <th><span class="f_red">*</span>户型：</th>
+                <td>
+                    <select id="hx" name="hx" class="width200">
+                        <option value="">请选择户型</option>
+                        <option value="一室">一室</option>
+                        <option value="二室">二室</option>
+                        <option value="三室">三室</option>
+                        <option value="四室">四室</option>
+                        <option value="四室以上">四室以上</option>
+                        <option value="跃层">跃层</option>
+                        <option value="错层">错层</option>
+                        <option value="独立开间">独立开间</option>
+                        <option value="其他">其他</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
                 <th><span class="f_red">*</span>房间朝向：</th>
                 <td>
                     <select id="cx" name="cx" class="width200">
@@ -96,7 +119,10 @@
                         <option value="">请选择房间类型</option>
                         <option value="商品房">商品房</option>
                         <option value="二手房">二手房</option>
-                        <option value="保障性住房">保障性住房</option>
+                        <option value="廉租房">廉租房</option>
+                        <option value="写字楼">写字楼</option>
+                        <option value="租赁型保障房">租赁型保障房</option>
+                        <option value="购置型保障房">购置型保障房</option>
                     </select>
                 </td>
             </tr>
@@ -108,6 +134,12 @@
                         <option value="已售">已售</option>
                         <option value="待售">待售</option>
                     </select>
+                </td>
+            </tr>
+            <tr>
+                <th>户型图：</th>
+                <td>
+                    <script id="hxt" type="text/plain" style="width:600px;height:400px;"></script>
                 </td>
             </tr>
             </tbody>

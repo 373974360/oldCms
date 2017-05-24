@@ -3,8 +3,8 @@ $(document).ready(function () {
     function G(id) {
         return document.getElementById(id);
     }
-    $("#allmap").css("height", $("#loupan").height());
-    $("#allmap").css("width", $("#loupan").width()-350);
+    $("#allmap").css("height","350px");
+    $("#allmap").css("width", "500px");
     var coordinate = $("#coordinate").val().split(",");
     var baiduMap = new BMap.Map("allmap");    // 创建Map实例
     if(coordinate!=null && coordinate.length>1){

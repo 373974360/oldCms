@@ -16,6 +16,7 @@ public class HouseBean implements Serializable {
     private String fjh="";
     private String szdy="";
     private String szlc="";
+    private String hx="";
     private String jzmj="";
     private String symj="";
     private String cx="";
@@ -109,5 +110,13 @@ public class HouseBean implements Serializable {
 
     public void setHxt(String hxt) {
         this.hxt = hxt;
+    }
+
+    public String getHx() {
+        return hx;
+    }
+
+    public void setHx(String hx) {
+        this.hx = hx;
     }
 }

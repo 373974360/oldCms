@@ -21,18 +21,15 @@ function initTable() {
 
     colsList.add(setTitleClos("name", "楼盘名称", "100px", "", "", ""));//英文名，显示名，宽，高，样式名，点击事件　
     colsList.add(setTitleClos("tel", "联系电话", "100px", "", "", ""));
-    colsList.add(setTitleClos("address", "地理位置", "200px", "", "", ""));
+    colsList.add(setTitleClos("address", "地理位置", "150px", "", "", ""));
     colsList.add(setTitleClos("opentime", "开盘时间", "80px", "", "", ""));
     colsList.add(setTitleClos("jzjg", "建筑结构", "80px", "", "", ""));
-    colsList.add(setTitleClos("developers", "开发商", "200px", "", "", ""));
-    colsList.add(setTitleClos("property", "物业公司", "200px", "", "", ""));
-    colsList.add(setTitleClos("propertytype", "物业类型", "80px", "", "", ""));
-    colsList.add(setTitleClos("lhl", "绿化率(%)", "80px", "", "", ""));
-    colsList.add(setTitleClos("rjl", "容积率(%)", "80px", "", "", ""));
-    colsList.add(setTitleClos("jzmj", "建筑面积(㎡)", "80px", "", "", ""));
-    colsList.add(setTitleClos("zdmj", "占地面积(㎡)", "80px", "", "", ""));
-    colsList.add(setTitleClos("jzlx", "建筑类型", "80px", "", "", ""));
-    colsList.add(setTitleClos("yszh", "预售证号", "300px", "", "", ""));
+    colsList.add(setTitleClos("developers", "开发商", "150px", "", "", ""));
+    colsList.add(setTitleClos("ckdj", "参考单价", "80px", "", "", ""));
+    colsList.add(setTitleClos("property", "物业公司", "150px", "", "", ""));
+    colsList.add(setTitleClos("propertytype", "物业类型", "150px", "", "", ""));
+    colsList.add(setTitleClos("jzlx", "建筑类型", "150px", "", "", ""));
+    colsList.add(setTitleClos("yszh", "预售证号", "200px", "", "", ""));
 
     table.setColsList(colsList);
     table.setAllColsList(colsList);
@@ -68,7 +65,7 @@ function showTurnPage() {
 /********** 显示table end*************/
 //添加
 function insertLouPanPage() {
-    window.location.href = 'add_loupan.jsp';
+    window.location.href = 'add_loupan.jsp?site_id='+site_id;
 }
 function insertLouPan() {
     var bean = BeanUtil.getCopy(loupanBena);
@@ -81,6 +78,7 @@ function insertLouPan() {
     if (!result) {
         return;
     }
+    bean.remark=getV("remark");
     if (bean.id.trim() == 0) {
         if (LouPanRPC.insertLouPan(bean)) {
             top.msgAlert("楼盘信息" + WCMLang.Add_success);
@@ -100,7 +98,7 @@ function insertLouPan() {
 //修改
 function updateLouPanPage() {
     var selectIDS = table.getSelecteCheckboxValue("id");
-    window.location.href = "add_loupan.jsp?id=" + selectIDS;
+    window.location.href = "add_loupan.jsp?id=" + selectIDS+"&site_id="+site_id;
 }
 //搜索
 function searchHandl(obj) {

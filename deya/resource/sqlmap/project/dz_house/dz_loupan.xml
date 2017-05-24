@@ -34,11 +34,11 @@
 	</select>
 	<insert id="insertLouPan" parameterType="com.deya.project.dz_house.LouPanBean">
 		insert into
-		dz_loupan(lpcode,name,tel,coordinate,address,opentime,developers,property,propertytype,jzlx,zxzk,remark,yszh,zts,wyf,lhl,rjl,cwbl,tdsynx,jzjg,jzmj,zdmj,sgdw)
-		values(#{lpcode},#{name},#{tel},#{coordinate},#{address},#{opentime},#{developers},#{property},#{propertytype},#{jzlx},#{zxzk},#{remark},#{yszh},#{zts},#{wyf},#{lhl},#{rjl},#{cwbl},#{tdsynx},#{jzjg},#{jzmj},#{zdmj},#{sgdw})
+		dz_loupan(lpcode,name,tel,coordinate,address,opentime,developers,ckdj,property,propertytype,jzlx,zxzk,remark,yszh,zts,wyf,lhl,rjl,cwbl,tdsynx,jzjg,jzmj,zdmj,sgdw)
+		values(#{lpcode},#{name},#{tel},#{coordinate},#{address},#{opentime},#{developers},#{ckdj},#{property},#{propertytype},#{jzlx},#{zxzk},#{remark},#{yszh},#{zts},#{wyf},#{lhl},#{rjl},#{cwbl},#{tdsynx},#{jzjg},#{jzmj},#{zdmj},#{sgdw})
 	</insert>
 	<update id="updateLouPan" parameterType="com.deya.project.dz_house.LouPanBean">
-		update dz_loupan set name = #{name},tel=#{tel},coordinate = #{coordinate},address=#{address},opentime=#{opentime},developers=#{developers},property=#{property},
+		update dz_loupan set name = #{name},tel=#{tel},coordinate = #{coordinate},address=#{address},opentime=#{opentime},developers=#{developers},ckdj=#{ckdj},property=#{property},
 		propertytype=#{propertytype},jzlx=#{jzlx},zxzk=#{zxzk},remark=#{remark},yszh=#{yszh},zts=#{zts},wyf=#{wyf},lhl=#{lhl},
 		rjl=#{rjl},cwbl=#{cwbl},tdsynx=#{tdsynx},jzjg=#{jzjg},jzmj=#{jzmj},zdmj=#{zdmj},sgdw=#{sgdw} where id = #{id}
 	</update>
@@ -48,72 +48,158 @@
 
 
 	<select id="getCountList" resultType="com.deya.project.dz_house.HouseCountBean">
-		select
-			l.`name`,
-			IFNULL(h.codes,0) as codes,
-			IFNULL(h.nums,0) as nums,
-			IFNULL(h.jzmj,0) as jzmj,
-			IFNULL(h.symj,0) as symj,
-			IFNULL(h.ysnums,0) as ysnums,
-			IFNULL(h.ysjzmj,0) as ysjzmj,
-			IFNULL(h.yssymj,0) as yssymj,
-			IFNULL(h.wsnum,0) as wsnums,
-			IFNULL(h.wsjzmj,0) as wsjzmj,
-			IFNULL(h.wssymj,0) as wssymj
-		from
-			dz_loupan l
-		left join (
-			select
-				c.*, d.wsnum,
-				d.wsjzmj,
-				d.wssymj
-			from
-				(
-					select
-						a.*, b.ysnums,
-						b.ysjzmj,
-						b.yssymj
-					from
+		SELECT
+			t1.*
+		FROM
+			(
+				SELECT
+					l.`name`,
+					IFNULL(h.codes, 0) AS codes,
+					IFNULL(h.nums, 0) AS nums,
+					IFNULL(h.jzmj, 0) AS jzmj,
+					IFNULL(h.symj, 0) AS symj,
+					IFNULL(h.ysnums, 0) AS ysnums,
+					IFNULL(h.ysjzmj, 0) AS ysjzmj,
+					IFNULL(h.yssymj, 0) AS yssymj,
+					IFNULL(h.wsnum, 0) AS wsnums,
+					IFNULL(h.wsjzmj, 0) AS wsjzmj,
+					IFNULL(h.wssymj, 0) AS wssymj
+				FROM
+					dz_loupan l
+				LEFT JOIN (
+					SELECT
+						c.*, d.wsnum,
+						d.wsjzmj,
+						d.wssymj
+					FROM
 						(
-							select
-								substring(house.housecode, 1, 2) as codes,
-								count(house.id) as nums,
-								sum(house.jzmj) as jzmj,
-								sum(house.symj) as symj
-							from
-								dz_house house
-							group by
-								substring(house.housecode, 1, 2)
-						) a
-					left join (
-						select
-							substring(house.housecode, 1, 2) as codes,
-							count(house.id) as ysnums,
-							sum(house.jzmj) as ysjzmj,
-							sum(house.symj) as yssymj
-						from
+							SELECT
+								a.*, b.ysnums,
+								b.ysjzmj,
+								b.yssymj
+							FROM
+								(
+									SELECT
+										substring(house.housecode, 1, 2) AS codes,
+										count(house.id) AS nums,
+										sum(house.jzmj) AS jzmj,
+										sum(house.symj) AS symj
+									FROM
+										dz_house house
+									GROUP BY
+										substring(house.housecode, 1, 2)
+								) a
+							LEFT JOIN (
+								SELECT
+									substring(house.housecode, 1, 2) AS codes,
+									count(house.id) AS ysnums,
+									sum(house.jzmj) AS ysjzmj,
+									sum(house.symj) AS yssymj
+								FROM
+									dz_house house
+								WHERE
+									house.fjzt = '已售'
+								GROUP BY
+									substring(house.housecode, 1, 2)
+							) b ON a.codes = b.codes
+						) c
+					LEFT JOIN (
+						SELECT
+							substring(house.housecode, 1, 2) AS codes,
+							count(house.id) AS wsnum,
+							sum(house.jzmj) AS wsjzmj,
+							sum(house.symj) AS wssymj
+						FROM
 							dz_house house
-						where
-							house.fjzt = '已售'
-						group by
+						WHERE
+							house.fjzt = '未售'
+						GROUP BY
 							substring(house.housecode, 1, 2)
-					) b on a.codes = b.codes
-				) c
-			left join (
-				select
-					substring(house.housecode, 1, 2) as codes,
-					count(house.id) as wsnum,
-					sum(house.jzmj) as wsjzmj,
-					sum(house.symj) as wssymj
-				from
-					dz_house house
-				where
-					house.fjzt = '未售'
-				group by
-					substring(house.housecode, 1, 2)
-			) d on c.codes = d.codes
-		) h on l.lpcode = h.codes
-		order by
-			l.lpcode
+					) d ON c.codes = d.codes
+				) h ON l.lpcode = h.codes
+				ORDER BY
+					l.lpcode
+			) t1
+		UNION ALL
+			SELECT
+				'合计' AS `name`,
+				'99' AS codes,
+				sum(t.nums) AS nums,
+				sum(t.jzmj) AS jzmj,
+				sum(t.symj) AS symj,
+				sum(t.ysnums) AS ysnums,
+				sum(t.ysjzmj) AS ysjzmj,
+				sum(t.yssymj) AS yssymj,
+				sum(t.wsnums) AS wsnums,
+				sum(t.wsjzmj) AS wsjzmj,
+				sum(t.wssymj) AS wssymj
+			FROM
+				(
+					SELECT
+						IFNULL(h.nums, 0) AS nums,
+						IFNULL(h.jzmj, 0) AS jzmj,
+						IFNULL(h.symj, 0) AS symj,
+						IFNULL(h.ysnums, 0) AS ysnums,
+						IFNULL(h.ysjzmj, 0) AS ysjzmj,
+						IFNULL(h.yssymj, 0) AS yssymj,
+						IFNULL(h.wsnum, 0) AS wsnums,
+						IFNULL(h.wsjzmj, 0) AS wsjzmj,
+						IFNULL(h.wssymj, 0) AS wssymj
+					FROM
+						dz_loupan l
+					LEFT JOIN (
+						SELECT
+							c.*, d.wsnum,
+							d.wsjzmj,
+							d.wssymj
+						FROM
+							(
+								SELECT
+									a.*, b.ysnums,
+									b.ysjzmj,
+									b.yssymj
+								FROM
+									(
+										SELECT
+											substring(house.housecode, 1, 2) AS codes,
+											count(house.id) AS nums,
+											sum(house.jzmj) AS jzmj,
+											sum(house.symj) AS symj
+										FROM
+											dz_house house
+										GROUP BY
+											substring(house.housecode, 1, 2)
+									) a
+								LEFT JOIN (
+									SELECT
+										substring(house.housecode, 1, 2) AS codes,
+										count(house.id) AS ysnums,
+										sum(house.jzmj) AS ysjzmj,
+										sum(house.symj) AS yssymj
+									FROM
+										dz_house house
+									WHERE
+										house.fjzt = '已售'
+									GROUP BY
+										substring(house.housecode, 1, 2)
+								) b ON a.codes = b.codes
+							) c
+						LEFT JOIN (
+							SELECT
+								substring(house.housecode, 1, 2) AS codes,
+								count(house.id) AS wsnum,
+								sum(house.jzmj) AS wsjzmj,
+								sum(house.symj) AS wssymj
+							FROM
+								dz_house house
+							WHERE
+								house.fjzt = '未售'
+							GROUP BY
+								substring(house.housecode, 1, 2)
+						) d ON c.codes = d.codes
+					) h ON l.lpcode = h.codes
+					ORDER BY
+						l.lpcode
+				) t
 	</select>
 </mapper>

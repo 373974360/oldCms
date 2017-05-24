@@ -39,12 +39,12 @@
 	</select>
 	<insert id="insertHouse" parameterType="com.deya.project.dz_house.HouseBean">
 		insert into
-		dz_house(housecode,fjh,szdy,szlc,jzmj,symj,cx,fjlx,fjzt,hxt)
-		values(#{housecode},#{fjh},#{szdy},#{szlc},#{jzmj},#{symj},#{cx},#{fjlx},#{fjzt},#{hxt})
+		dz_house(housecode,fjh,szdy,szlc,hx,jzmj,symj,cx,fjlx,fjzt,hxt)
+		values(#{housecode},#{fjh},#{szdy},#{szlc},#{hx},#{jzmj},#{symj},#{cx},#{fjlx},#{fjzt},#{hxt})
 	</insert>
 
 	<update id="updateHouse" parameterType="com.deya.project.dz_house.HouseBean">
-		update dz_house set fjh=#{fjh},szdy=#{szdy},szlc=#{szlc},jzmj=#{jzmj},
+		update dz_house set fjh=#{fjh},szdy=#{szdy},szlc=#{szlc},jzmj=#{jzmj},hx=#{hx},
 		symj=#{symj},cx=#{cx},fjlx=#{fjlx},fjzt=#{fjzt},hxt=#{hxt} where id = #{id}
 	</update>
 	<delete id="deleteHouse" parameterType="Map">

@@ -25,6 +25,7 @@ function initTable() {
     colsList.add(setTitleClos("szlc", "所在楼层", "80px", "", "", ""));
     colsList.add(setTitleClos("jzmj", "建筑面积", "80px", "", "", ""));
     colsList.add(setTitleClos("symj", "使用面积", "80px", "", "", ""));
+    colsList.add(setTitleClos("hx", "户型", "80px", "", "", ""));
     colsList.add(setTitleClos("cx", "房间朝向", "80px", "", "", ""));
     colsList.add(setTitleClos("fjlx", "房间类型", "80px", "", "", ""));
     colsList.add(setTitleClos("fjzt", "房间状态", "80px", "", "", ""));
@@ -64,7 +65,7 @@ function showTurnPage() {
 //添加
 function insertHousePage() {
     if(code.length==4){
-        window.location.href = 'add_house.jsp?code='+code;
+        window.location.href = 'add_house.jsp?code='+code+'&site_id='+site_id;
     }else{
         top.msgWargin("请选中楼宇添加房间信息");
     }
@@ -80,17 +81,18 @@ function insertHouse() {
     if (!result) {
         return;
     }
+    bean.hxt=getV("hxt");
     if (bean.id.trim() == 0) {
         if (HouseRPC.insertHouse(bean)) {
             top.msgAlert("房间信息" + WCMLang.Add_success);
-            window.location.href = 'houseList.jsp?code='+code;
+            window.location.href = 'houseList.jsp?code='+code+'&site_id='+site_id;
         } else {
             top.msgWargin("房间信息" + WCMLang.Add_fail);
         }
     } else {
         if (HouseRPC.updateHouse(bean)) {
             top.msgAlert("房间信息" + WCMLang.Add_success);
-            window.location.href = 'houseList.jsp?code='+code;
+            window.location.href = 'houseList.jsp?code='+code+'&site_id='+site_id;
         } else {
             top.msgWargin("房间信息" + WCMLang.Add_fail);
         }
@@ -99,7 +101,7 @@ function insertHouse() {
 //修改
 function updateHousePage() {
     var selectIDS = table.getSelecteCheckboxValue("id");
-    window.location.href = "add_house.jsp?id=" + selectIDS+"&code="+code;
+    window.location.href = "add_house.jsp?id=" + selectIDS+"&code="+code+'&site_id='+site_id;
 }
 //搜索
 function searchHandl(obj) {

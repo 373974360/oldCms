@@ -10,6 +10,7 @@
     <jsp:include page="../../include/include_tools.jsp"/>
     <script src="js/loupanList.js"></script>
     <script type="text/javascript">
+        var site_id="<%=site_id%>";
         $(document).ready(function () {
             initButtomStyle();
             init_FromTabsStyle();
