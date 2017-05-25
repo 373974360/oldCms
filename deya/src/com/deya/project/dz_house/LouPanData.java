@@ -17,22 +17,22 @@ import java.util.Map;
 /*  20 */     String[] tempA = params.split(";");
 /*  21 */     for (int i = 0; i < tempA.length; i++)
 /*     */     {
-/*  23 */       if (tempA[i].toLowerCase().startsWith("kw="))
+/*  42 */       if (tempA[i].toLowerCase().startsWith("search="))
 /*     */       {
-/*  25 */         String kw = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
-/*     */ 
-/*  27 */         if ((!"".equals(kw)) && (!kw.startsWith("$kw")) && (FormatUtil.isValiditySQL(kw)))
+/*  44 */         String  search= FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
+/*     */
+/*  46 */         if ((!"".equals(search)) && (!search.startsWith("search")) && (FormatUtil.isValiditySQL(search)))
 /*     */         {
-/*  29 */           con_map.put("keyword", kw);
+/*  48 */           con_map.put("name", search);
 /*     */         }
 /*     */       }
-/*  42 */       if (tempA[i].toLowerCase().startsWith("name="))
+/*  42 */       if (tempA[i].toLowerCase().startsWith("type="))
 /*     */       {
-/*  44 */         String name = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
-/*     */ 
-/*  46 */         if ((!"".equals(name)) && (!name.startsWith("name")) && (FormatUtil.isValiditySQL(name)))
+/*  44 */         String  type= FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
+/*     */
+/*  46 */         if ((!"".equals(type)) && (!type.startsWith("type")) && (FormatUtil.isValiditySQL(type)))
 /*     */         {
-/*  48 */           con_map.put("name", name);
+/*  48 */           con_map.put("type", type);
 /*     */         }
 /*     */       }
 /*  79 */       if (tempA[i].toLowerCase().startsWith("orderby="))

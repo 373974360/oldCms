@@ -17,22 +17,40 @@ import java.util.Map;
 /*  20 */     String[] tempA = params.split(";");
 /*  21 */     for (int i = 0; i < tempA.length; i++)
 /*     */     {
-/*  23 */       if (tempA[i].toLowerCase().startsWith("kw="))
+/*  42 */       if (tempA[i].toLowerCase().startsWith("fjlx="))
 /*     */       {
-/*  25 */         String kw = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
+/*  44 */         String fjlx = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
 /*     */ 
-/*  27 */         if ((!"".equals(kw)) && (!kw.startsWith("$kw")) && (FormatUtil.isValiditySQL(kw)))
+/*  46 */         if ((!"".equals(fjlx)) && (!fjlx.startsWith("fjlx")) && (FormatUtil.isValiditySQL(fjlx)))
 /*     */         {
-/*  29 */           con_map.put("keyword", kw);
+/*  48 */           con_map.put("fjlx", fjlx);
 /*     */         }
 /*     */       }
-/*  42 */       if (tempA[i].toLowerCase().startsWith("search="))
+/*  42 */       if (tempA[i].toLowerCase().startsWith("hx="))
 /*     */       {
-/*  44 */         String search = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
-/*     */ 
-/*  46 */         if ((!"".equals(search)) && (!search.startsWith("search")) && (FormatUtil.isValiditySQL(search)))
+/*  44 */         String hx = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
+/*     */
+/*  46 */         if ((!"".equals(hx)) && (!hx.startsWith("hx")) && (FormatUtil.isValiditySQL(hx)))
 /*     */         {
-/*  48 */           con_map.put("search", search);
+/*  48 */           con_map.put("hx", hx);
+/*     */         }
+/*     */       }
+/*  42 */       if (tempA[i].toLowerCase().startsWith("cx="))
+/*     */       {
+/*  44 */         String cx = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
+/*     */
+/*  46 */         if ((!"".equals(cx)) && (!cx.startsWith("cx")) && (FormatUtil.isValiditySQL(cx)))
+/*     */         {
+/*  48 */           con_map.put("cx", cx);
+/*     */         }
+/*     */       }
+/*  42 */       if (tempA[i].toLowerCase().startsWith("fjzt="))
+/*     */       {
+/*  44 */         String fjzt = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
+/*     */
+/*  46 */         if ((!"".equals(fjzt)) && (!fjzt.startsWith("fjzt")) && (FormatUtil.isValiditySQL(fjzt)))
+/*     */         {
+/*  48 */           con_map.put("fjzt", fjzt);
 /*     */         }
 /*     */       }
 /*  51 */       if (tempA[i].toLowerCase().startsWith("code="))

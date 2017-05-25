@@ -4,7 +4,7 @@ $(document).ready(function () {
         return document.getElementById(id);
     }
     $("#allmap").css("height","350px");
-    $("#allmap").css("width", "500px");
+    $("#allmap").css("width", "560px");
     var coordinate = $("#coordinate").val().split(",");
     var baiduMap = new BMap.Map("allmap");    // 创建Map实例
     if(coordinate!=null && coordinate.length>1){

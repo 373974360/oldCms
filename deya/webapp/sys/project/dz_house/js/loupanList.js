@@ -1,5 +1,10 @@
 var LouPanRPC = jsonrpc.LouPanRPC;
-
+function getV(){
+    return KE.html("remark");
+}
+function setV(v){
+    KE.html("remark", v);
+}
 var loupanBena = new Bean("com.deya.project.dz_house.LouPanBean", true);
 
 var val = new Validator();

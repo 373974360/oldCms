@@ -12,12 +12,14 @@
 		select count(id) from dz_loupan
 		<where>
 			<if test="name!=null and name!=''">and name like '%${name}%' </if>
+			<if test="type!=null and type!=''">and propertytype like '%${type}%' </if>
 		</where>
 	</select>
 	<select id="getLouPanList" parameterType="Map" resultType="com.deya.project.dz_house.LouPanBean">
 		select * from dz_loupan
 		<where>
 			<if test="name!=null and name!=''">and name like '%${name}%' </if>
+			<if test="type!=null and type!=''">and propertytype like '%${type}%' </if>
 		</where>
 		 order by  ${orderby}
 		 limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}

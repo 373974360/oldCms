@@ -13,10 +13,14 @@
     <script type="text/javascript" src="../../js/jquery.uploadify.js"></script>
     <script type="text/javascript" src="../../js/uploadFile/swfobject.js"></script>
     <script type="text/javascript" src="js/loupanList.js"></script>
+    <script type="text/javascript" src="../../js/kindeditor/kindeditor.js"></script>
+    <link href="../../js/kindeditor/themes/default/default.css" rel="stylesheet"/>
+
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=IaSjbPQY5jjbaGaWFLuLUvRnn6EgPdhP"></script>
     <style type="text/css">
         #allmap {overflow: hidden;margin:0;font-family:"微软雅黑";}
         a{cursor: pointer}
+        .width200{width:260px;}
     </style>
     <SCRIPT LANGUAGE="JavaScript">
         var site_id = "<%=site_id%>";
@@ -29,13 +33,13 @@
             initButtomStyle();
             init_FromTabsStyle();
             init_input();
-            initUeditor("remark");
+            init_editer("remark");
             if ($.browser.msie && $.browser.version == "6.0" && $("html")[0].scrollHeight > $("html").height()) $("html").css("overflowY", "scroll");
             if (id != null && id.trim() != "") {
                 defaultBean = LouPanRPC.getLouPanById(id);
                 if (defaultBean) {
                     $("#loupan").autoFill(defaultBean);
-                    setV("remark",defaultBean.remark);
+                    setV(defaultBean.remark);
                 }
                 $("#addButton").click(insertLouPan);
             }
@@ -143,9 +147,10 @@
                     <input id="propertytype" name="propertytype" type="text" class="width200" value=""/>
                     [<a>商品房</a>]
                     [<a>商业用房</a>]
-                    [<a>廉租房</a>]
+                    [<a>二手房</a>]
                     [<a>限价房</a>]
-                    [<a>保障性住房</a>]
+                    [<a>租赁型保障房</a>]
+                    [<a>购置型保障房</a>]
                 </td>
             </tr>
             <tr>
@@ -230,7 +235,8 @@
             <tr>
                 <th>楼盘描述：</th>
                 <td colspan="4">
-                    <script id="remark" type="text/plain" style="width:1050px;height:400px;"></script>
+                    <textarea id="info_content" name="info_content" style="width:1220px;height:400px;"></textarea>
+                    <div class="hidden" id="word_count_div"></div>
                 </td>
             </tr>
             </tbody>

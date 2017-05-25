@@ -118,9 +118,9 @@
                     <select id="fjlx" name="fjlx" class="width200">
                         <option value="">请选择房间类型</option>
                         <option value="商品房">商品房</option>
+                        <option value="商业用房">商业用房</option>
                         <option value="二手房">二手房</option>
-                        <option value="廉租房">廉租房</option>
-                        <option value="写字楼">写字楼</option>
+                        <option value="限价房">限价房</option>
                         <option value="租赁型保障房">租赁型保障房</option>
                         <option value="购置型保障房">购置型保障房</option>
                     </select>
@@ -133,6 +133,7 @@
                         <option value="">请选择房间状态</option>
                         <option value="已售">已售</option>
                         <option value="待售">待售</option>
+                        <option value="不可售">不可售</option>
                     </select>
                 </td>
             </tr>

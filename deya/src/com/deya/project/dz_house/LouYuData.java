@@ -17,24 +17,6 @@ import java.util.Map;
 /*  20 */     String[] tempA = params.split(";");
 /*  21 */     for (int i = 0; i < tempA.length; i++)
 /*     */     {
-/*  23 */       if (tempA[i].toLowerCase().startsWith("kw="))
-/*     */       {
-/*  25 */         String kw = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
-/*     */ 
-/*  27 */         if ((!"".equals(kw)) && (!kw.startsWith("$kw")) && (FormatUtil.isValiditySQL(kw)))
-/*     */         {
-/*  29 */           con_map.put("keyword", kw);
-/*     */         }
-/*     */       }
-/*  42 */       if (tempA[i].toLowerCase().startsWith("search="))
-/*     */       {
-/*  44 */         String search = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
-/*     */ 
-/*  46 */         if ((!"".equals(search)) && (!search.startsWith("search")) && (FormatUtil.isValiditySQL(search)))
-/*     */         {
-/*  48 */           con_map.put("search", search);
-/*     */         }
-/*     */       }
 /*  51 */       if (tempA[i].toLowerCase().startsWith("code="))
 /*     */       {
 /*  53 */         String code = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));

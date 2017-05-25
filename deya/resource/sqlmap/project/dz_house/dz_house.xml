@@ -15,6 +15,10 @@
 		<where>
 			<if test="code!=null and code!=''">and housecode like '${code}%'</if>
 			<if test="search!=null and search!=''">and fjh like '%${search}%' </if>
+			<if test="fjlx!=null and fjlx!=''">and fjlx = #{fjlx} </if>
+			<if test="hx!=null and hx!=''">and hx = #{hx} </if>
+			<if test="cx!=null and cx!=''">and hx = #{cx} </if>
+			<if test="fjzt!=null and fjzt!=''">and fjzt = #{fjzt} </if>
 		</where>
 	</select>
 
@@ -23,6 +27,10 @@
 		<where>
 			<if test="code!=null and code!=''">and housecode like '${code}%'</if>
 			<if test="search!=null and search!=''">and fjh like '%${search}%' </if>
+			<if test="fjlx!=null and fjlx!=''">and fjlx = #{fjlx} </if>
+			<if test="hx!=null and hx!=''">and hx = #{hx} </if>
+			<if test="cx!=null and cx!=''">and hx = #{cx} </if>
+			<if test="fjzt!=null and fjzt!=''">and fjzt = #{fjzt} </if>
 		</where>
 		order by  ${orderby}
 	</select>
@@ -31,6 +39,10 @@
 		<where>
 			<if test="code!=null and code!=''">and housecode like '${code}%'</if>
 			<if test="search!=null and search!=''">and fjh like '%${search}%' </if>
+			<if test="fjlx!=null and fjlx!=''">and fjlx = #{fjlx} </if>
+			<if test="hx!=null and hx!=''">and hx = #{hx} </if>
+			<if test="cx!=null and cx!=''">and hx = #{cx} </if>
+			<if test="fjzt!=null and fjzt!=''">and fjzt = #{fjzt} </if>
 		</where>
 		order by  ${orderby} limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
 	</select>
