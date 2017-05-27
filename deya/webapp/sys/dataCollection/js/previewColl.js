@@ -266,22 +266,22 @@ function pubCollDataInfotoCat()
 		if(artBeanList.get(i).model_id == "11")
 		{
 			article_bean.id = infoNextId;
-			article_bean.info_id = infoNextId;
-			article_bean.info_status = info_status;
-			article_bean.info_content = artBeanList.get(i).art_content;
-			article_bean.page_count = "1";
-			article_bean.cat_id = artBeanList.get(i).cat_id;
+            article_bean.info_id = infoNextId;
+            article_bean.info_status = info_status;
+            article_bean.info_content = artBeanList.get(i).art_content;
+            article_bean.page_count = "1";
+            article_bean.cat_id = artBeanList.get(i).cat_id;
             var site_id = CategoryRPC.getCategoryBean(artBeanList.get(i).cat_id).site_id;
-			article_bean.title = artBeanList.get(i).art_title.replace(/\"/g,"＂");;
-			article_bean.source = artBeanList.get(i).art_source;
-			article_bean.info_keywords = artBeanList.get(i).art_keyWords;
-			article_bean.app_id = "cms";
-			article_bean.site_id = site_id;
-			article_bean.model_id= "11";
-			article_bean.released_dtime = artBeanList.get(i).art_pubTime;
-			article_bean.is_am_tupage = 0;
-			article_bean.input_user = top.LoginUserBean.user_id;
-			article_bean.weight = 60;
+            article_bean.title = artBeanList.get(i).art_title.replace(/\"/g,"＂");;
+            article_bean.source = artBeanList.get(i).art_source;
+            article_bean.info_keywords = artBeanList.get(i).art_keyWords;
+            article_bean.app_id = "cms";
+            article_bean.site_id = site_id;
+            article_bean.model_id= "11";
+            article_bean.released_dtime = artBeanList.get(i).art_pubTime;
+            article_bean.is_am_tupage = 0;
+            article_bean.input_user = top.LoginUserBean.user_id;
+            article_bean.weight = 60;
 			if(ModelUtilRPC.insert(article_bean,"article"))
 			{	
 				CollectionDataRPC.changeCollInfoStatus(artBeanList.get(i).id);

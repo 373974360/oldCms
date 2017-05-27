@@ -146,6 +146,7 @@ function initHandName()
 		<td colspan="3" style="width:90%" >
 			<select id="model_id" name="model_id">
 				<option value="11" selected="selected">新闻模型</option>
+				<option value="12" selected="selected">链接模型</option>
 				<option value="14">公开模型</option>
 			</select>
 		</td>

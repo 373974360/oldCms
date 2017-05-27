@@ -1,6 +1,7 @@
 package com.deya.wcm.dataCollection.services;
 
 import com.deya.util.DateUtil;
+import com.deya.wcm.bean.cms.info.ArticleBean;
 import com.deya.wcm.dataCollection.bean.ArticleInfoBean;
 import com.deya.wcm.dataCollection.bean.CollRuleBean;
 import com.deya.wcm.dataCollection.dao.CollectionDataDAO;
@@ -8,6 +9,10 @@ import com.deya.wcm.dataCollection.util.DownHtmlUtil;
 import com.deya.wcm.dataCollection.util.FormatDate;
 import com.deya.wcm.dataCollection.util.FormatString;
 import com.deya.wcm.dataCollection.util.URLUtil;
+import com.deya.wcm.services.cms.category.CategoryRPC;
+import com.deya.wcm.services.cms.info.InfoBaseRPC;
+import com.deya.wcm.services.cms.info.ModelUtil;
+import com.deya.wcm.services.cms.info.ModelUtilRPC;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -301,8 +306,7 @@ public class ResolveHtml {
                 }
 
             }
-
-            if ((FormatString.strIsNull(articleBean.getArt_title())) && (FormatString.strIsNull(articleBean.getArt_content()))) {
+            if ((FormatString.strIsNull(articleBean.getArt_title()))) {
                 addCollDataInfo(articleBean, url, collBean.getRule_id() + "");
             }
 //            System.out.println(ToStringBuilder.reflectionToString(articleBean));
@@ -341,12 +345,31 @@ public class ResolveHtml {
             logger.info("【链接为】:" + url + "   【标题】:" + articleBean.getArt_title() + "  的信息已经采集过，不再重复采集!");
 
         } else {
-            if (!CollectionDataManager.addCollDataInfo(articleBean)) {
-                logger.info("【链接为】:" + url + "   【标题】:" + articleBean.getArt_title() + "  的信息入库失败!");
+            if(articleBean.getModel_id().equals("12")){
+                ArticleBean bean = new ArticleBean();
+                bean.setId(InfoBaseRPC.getInfoId());
+                bean.setInfo_id(InfoBaseRPC.getInfoId());
+                bean.setInfo_status(8);
+                bean.setInfo_content(articleBean.getArt_content());
+                bean.setPage_count(1);
+                bean.setCat_id(Integer.parseInt(articleBean.getCat_id()));
+                String site_id = CategoryRPC.getCategoryBean(Integer.parseInt(articleBean.getCat_id())).getSite_id();
+                bean.setTitle(articleBean.getArt_title().replace("/g","＂"));
+                bean.setApp_id("cms");
+                bean.setSite_id(site_id);
+                bean.setModel_id(Integer.parseInt(articleBean.getModel_id()));
+                bean.setReleased_dtime(articleBean.getArt_pubTime());
+                bean.setIs_am_tupage(0);
+                bean.setWeight(60);
+                bean.setContent_url(articleBean.getUrl());
+                ModelUtil.insert(bean,"article",null);
+            }else{
+                if (!CollectionDataManager.addCollDataInfo(articleBean)) {
+                    logger.info("【链接为】:" + url + "   【标题】:" + articleBean.getArt_title() + "  的信息入库失败!");
+                } else {
+                    logger.info("【链接为】:" + url + "   【标题】:" + articleBean.getArt_title() + "  的信息入库成功!");
 
-            } else {
-                logger.info("【链接为】:" + url + "   【标题】:" + articleBean.getArt_title() + "  的信息入库成功!");
-
+                }
             }
         }
     }
