@@ -12,6 +12,7 @@ public class LouYuBean implements Serializable {
 	private String lycode = "";
 	private String ldh = "";
 	private String dys = "";
+	private String cg="";
 	private String fjzs = "";
 	private String jzmj = "";
 	private String zdmj = "";
@@ -61,5 +62,11 @@ public class LouYuBean implements Serializable {
 		this.zdmj = zdmj;
 	}
 
+	public String getCg() {
+		return cg;
+	}
 
+	public void setCg(String cg) {
+		this.cg = cg;
+	}
 }

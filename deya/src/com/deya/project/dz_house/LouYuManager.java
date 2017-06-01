@@ -28,4 +28,10 @@ public class LouYuManager {
 	public static String getLouYuTreeList(){
 		return LouYuDAO.getLouYuTreeList();
 	}
+	public static LouYuBean getFirstLouYuByCode(String code){
+		return LouYuDAO.getFirstLouYuByCode(code);
+	}
+	public static LouYuBean getLouYuByCode(String code){
+		return LouYuDAO.getLouYuByCode(code);
+	}
 }

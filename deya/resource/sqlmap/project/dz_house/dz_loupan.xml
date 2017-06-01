@@ -30,6 +30,7 @@
 		<where>
 			<if test="name!=null">and name like '%${name}%' </if>
 		</where>
+		order by lpcode
 	</select>
 	<select id="getLouPanById" parameterType="Map" resultType="com.deya.project.dz_house.LouPanBean">
 		select * from dz_loupan where id=#{id}

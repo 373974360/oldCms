@@ -99,4 +99,16 @@ public class LouYuDAO {
 		}
 		return code;
 	}
+
+	public static LouYuBean getFirstLouYuByCode(String code){
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("code", code);
+		return (LouYuBean) DBManager.queryFObj("getFirstLouYuByCode", map);
+	}
+
+	public static LouYuBean getLouYuByCode(String code){
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("code", code);
+		return (LouYuBean) DBManager.queryFObj("getLouYuByCode", map);
+	}
 }

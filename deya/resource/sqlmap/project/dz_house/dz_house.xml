@@ -14,6 +14,8 @@
 		select count(id) from dz_house
 		<where>
 			<if test="code!=null and code!=''">and housecode like '${code}%'</if>
+			<if test="dy!=null and dy!=''">and szdy = #{dy} </if>
+			<if test="lc!=null and lc!=''">and szlc = #{lc} </if>
 			<if test="search!=null and search!=''">and fjh like '%${search}%' </if>
 			<if test="fjlx!=null and fjlx!=''">and fjlx = #{fjlx} </if>
 			<if test="hx!=null and hx!=''">and hx = #{hx} </if>
@@ -26,6 +28,8 @@
 		select * from dz_house
 		<where>
 			<if test="code!=null and code!=''">and housecode like '${code}%'</if>
+			<if test="dy!=null and dy!=''">and szdy = #{dy} </if>
+			<if test="lc!=null and lc!=''">and szlc = #{lc} </if>
 			<if test="search!=null and search!=''">and fjh like '%${search}%' </if>
 			<if test="fjlx!=null and fjlx!=''">and fjlx = #{fjlx} </if>
 			<if test="hx!=null and hx!=''">and hx = #{hx} </if>
@@ -38,6 +42,8 @@
 		select * from dz_house
 		<where>
 			<if test="code!=null and code!=''">and housecode like '${code}%'</if>
+			<if test="dy!=null and dy!=''">and szdy = #{dy} </if>
+			<if test="lc!=null and lc!=''">and szlc = #{lc} </if>
 			<if test="search!=null and search!=''">and fjh like '%${search}%' </if>
 			<if test="fjlx!=null and fjlx!=''">and fjlx = #{fjlx} </if>
 			<if test="hx!=null and hx!=''">and hx = #{hx} </if>

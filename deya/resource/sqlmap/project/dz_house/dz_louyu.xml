@@ -10,6 +10,13 @@
 		</where>
 		order by lycode desc LIMIT 1
 	</select>
+	<select id="getFirstLouYuByCode" parameterType="Map" resultType="com.deya.project.dz_house.LouYuBean">
+		select * from dz_louyu
+		<where>
+			<if test="code!=null and code!=''">and lycode like '${code}%' </if>
+		</where>
+		order by lycode LIMIT 1
+	</select>
 	<select id="getLouYuCount" parameterType="Map" resultType="java.lang.String">
 		select count(id) from dz_louyu
 		<where>
@@ -39,13 +46,16 @@
 	<select id="getLouYuById" parameterType="Map" resultType="com.deya.project.dz_house.LouYuBean">
 		select * from dz_louyu where id=#{id}
 	</select>
+	<select id="getLouYuByCode" parameterType="Map" resultType="com.deya.project.dz_house.LouYuBean">
+		select * from dz_louyu where lycode=#{code}
+	</select>
 	<insert id="insertLouYu" parameterType="com.deya.project.dz_house.LouYuBean">
 		insert into
-		dz_louyu(lycode,ldh,dys,fjzs,jzmj,zdmj)
-		values(#{lycode},#{ldh},#{dys},#{fjzs},#{jzmj},#{zdmj})
+		dz_louyu(lycode,ldh,dys,cg,fjzs,jzmj,zdmj)
+		values(#{lycode},#{ldh},#{dys},#{cg},#{fjzs},#{jzmj},#{zdmj})
 	</insert>
 	<update id="updateLouYu" parameterType="com.deya.project.dz_house.LouYuBean">
-		update dz_louyu set ldh=#{ldh},dys=#{dys},fjzs=#{fjzs},jzmj=#{jzmj},zdmj=#{zdmj} where id = #{id}
+		update dz_louyu set ldh=#{ldh},dys=#{dys},cg=#{cg},fjzs=#{fjzs},jzmj=#{jzmj},zdmj=#{zdmj} where id = #{id}
 	</update>
 	<delete id="deleteLouYu" parameterType="Map">
 		delete from dz_louyu where id=#{id}

@@ -62,6 +62,24 @@ import java.util.Map;
 /*  57 */           con_map.put("code", code);
 /*     */         }
 /*     */       }
+/*  51 */       if (tempA[i].toLowerCase().startsWith("dy="))
+/*     */       {
+/*  53 */         String dy = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
+/*     */
+/*  55 */         if ((!"".equals(dy)) && (!dy.startsWith("dy")) && (FormatUtil.isValiditySQL(dy)))
+/*     */         {
+/*  57 */           con_map.put("dy", dy);
+/*     */         }
+/*     */       }
+/*  51 */       if (tempA[i].toLowerCase().startsWith("lc="))
+/*     */       {
+/*  53 */         String lc = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
+/*     */
+/*  55 */         if ((!"".equals(lc)) && (!lc.startsWith("lc")) && (FormatUtil.isValiditySQL(lc)))
+/*     */         {
+/*  57 */           con_map.put("lc", lc);
+/*     */         }
+/*     */       }
 /*  79 */       if (tempA[i].toLowerCase().startsWith("orderby="))
 /*     */       {
 /*  81 */         String o_by = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));

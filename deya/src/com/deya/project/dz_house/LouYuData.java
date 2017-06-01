@@ -96,7 +96,10 @@ import java.util.Map;
 /* 148 */     con_map.put("page_size", Integer.valueOf(page_size));
 /* 149 */     return LouYuManager.getLouyuList(con_map);
 /*     */   }
-/*     */ 
+
+/*     */  public static LouYuBean getFirstLouYuByCode(String code){
+                return LouYuManager.getFirstLouYuByCode(code);
+            }
 /*     */   public static List<LouYuBean> getAllLouYuList(String params) {
                 Map con_map = new HashMap();
                 getLouYuSearchCon(params, con_map);
@@ -107,5 +110,9 @@ import java.util.Map;
 /*     */   public static LouYuBean getLouYuObject(String id)
 /*     */   {
 /* 169 */     return LouYuManager.getLouYuById(id);
+/*     */   }
+             public static LouYuBean getLouYuByCode(String code)
+/*     */   {
+/* 169 */     return LouYuManager.getLouYuByCode(code);
 /*     */   }
 /*     */ }
