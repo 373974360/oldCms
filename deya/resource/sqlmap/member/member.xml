@@ -247,10 +247,11 @@
         <if test="search_name != null">
             and ${search_name} like '%${search_value}%'
         </if>
-
-        <if test="sort_name != null">
+        <!-- 马超伟：2017-05-18-->
+        order by cs_member_register.me_account asc
+        <!--<if test="sort_name != null">
             order by ${sort_name} ${sort_type}
-        </if>
+        </if>-->
         limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
     </select>
 
