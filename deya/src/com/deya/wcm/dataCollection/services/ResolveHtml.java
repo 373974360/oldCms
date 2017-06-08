@@ -346,23 +346,30 @@ public class ResolveHtml {
 
         } else {
             if(articleBean.getModel_id().equals("12")){
-                ArticleBean bean = new ArticleBean();
-                bean.setId(InfoBaseRPC.getInfoId());
-                bean.setInfo_id(InfoBaseRPC.getInfoId());
-                bean.setInfo_status(8);
-                bean.setInfo_content(articleBean.getArt_content());
-                bean.setPage_count(1);
-                bean.setCat_id(Integer.parseInt(articleBean.getCat_id()));
-                String site_id = CategoryRPC.getCategoryBean(Integer.parseInt(articleBean.getCat_id())).getSite_id();
-                bean.setTitle(articleBean.getArt_title().replace("/g","＂"));
-                bean.setApp_id("cms");
-                bean.setSite_id(site_id);
-                bean.setModel_id(Integer.parseInt(articleBean.getModel_id()));
-                bean.setReleased_dtime(articleBean.getArt_pubTime());
-                bean.setIs_am_tupage(0);
-                bean.setWeight(60);
-                bean.setContent_url(articleBean.getUrl());
-                ModelUtil.insert(bean,"article",null);
+                //默认写入已采用库
+                articleBean.setArtis_user(1);
+                if (!CollectionDataManager.addCollDataInfo(articleBean)) {
+                    logger.info("【链接为】:" + url + "   【标题】:" + articleBean.getArt_title() + "  的信息入库失败!");
+                } else {
+                    logger.info("【链接为】:" + url + "   【标题】:" + articleBean.getArt_title() + "  的信息入库成功!");
+                    ArticleBean bean = new ArticleBean();
+                    bean.setId(InfoBaseRPC.getInfoId());
+                    bean.setInfo_id(InfoBaseRPC.getInfoId());
+                    bean.setInfo_status(8);
+                    bean.setInfo_content(articleBean.getArt_content());
+                    bean.setPage_count(1);
+                    bean.setCat_id(Integer.parseInt(articleBean.getCat_id()));
+                    String site_id = CategoryRPC.getCategoryBean(Integer.parseInt(articleBean.getCat_id())).getSite_id();
+                    bean.setTitle(articleBean.getArt_title().replace("/g","＂"));
+                    bean.setApp_id("cms");
+                    bean.setSite_id(site_id);
+                    bean.setModel_id(Integer.parseInt(articleBean.getModel_id()));
+                    bean.setReleased_dtime(articleBean.getArt_pubTime());
+                    bean.setIs_am_tupage(0);
+                    bean.setWeight(60);
+                    bean.setContent_url(articleBean.getUrl());
+                    ModelUtil.insert(bean,"article",null);
+                }
             }else{
                 if (!CollectionDataManager.addCollDataInfo(articleBean)) {
                     logger.info("【链接为】:" + url + "   【标题】:" + articleBean.getArt_title() + "  的信息入库失败!");
