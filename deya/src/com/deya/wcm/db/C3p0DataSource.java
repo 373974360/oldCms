@@ -95,7 +95,6 @@ public class C3p0DataSource implements DataSource {
 		return null;
 	}
 
-	@Override
 	public Logger getParentLogger() throws SQLFeatureNotSupportedException {
 		// TODO Auto-generated method stub
 		return null;

@@ -321,7 +321,7 @@ public class ResolveHtml {
             URL absoluteUrl = new URL(absolutePath);
             URL parseUrl = new URL(absoluteUrl, relativePath);
             String s = parseUrl.toString();
-            List<String> urlPart = new ArrayList<>();
+            List<String> urlPart = new ArrayList<String>();
             String rootUrl = s.substring(0, s.indexOf("/", s.indexOf("//")));
             urlPart.add(rootUrl);
             for (String part : s.substring(s.indexOf("/", s.indexOf("//") + 1)).split("/")) {
