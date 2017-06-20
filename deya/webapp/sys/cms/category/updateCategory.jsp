@@ -101,6 +101,10 @@ function updateCate()
 	{
 		map.put("is_show",$(":checked[id='is_show']").val());
 	}
+    if($("#is_show_tree_checkbox").is(':checked'))
+    {
+        map.put("is_show_tree",$(":checked[id='is_show_tree']").val());
+    }
 	
 	var model_list = getSelectCategoryModelList(0);
 	var cat_ids = getLeftMenuChecked();
@@ -193,6 +197,14 @@ function updateCate()
 				<input id="is_show" name="is_show" type="radio" value="1" checked="true"/><label>是</label>
 				<input id="is_show" name="is_show" type="radio" value="0" /><label>否</label>
 			</td>		
+		</tr>
+		<tr>
+			<td align="center"><input type="checkbox" id="is_show_tree_checkbox" name="is_show_tree"></td>
+			<th>前台栏目树显示：</th>
+			<td>
+				<input id="is_show_tree" name="is_show_tree" type="radio" value="1" checked="true"/><label>是</label>
+				<input id="is_show_tree" name="is_show_tree" type="radio" value="0" /><label>否</label>
+			</td>
 		</tr>
 		<tr>
 			<td align="left" valign="middle" colspan="2">

@@ -47,7 +47,8 @@
 			<if test="template_index">template_index=#{template_index},</if>
 			<if test="template_list">template_list=#{template_list},</if>
 			<if test="is_allow_comment">is_allow_comment=#{is_allow_comment},</if>
-			<if test="is_show">is_show=#{is_show}</if>
+			<if test="is_show">is_show=#{is_show},</if>
+			<if test="is_show_tree">is_show_tree=#{is_show_tree}</if>
 		</set>
 		where cat_id in (${cat_ids}) and site_id=#{site_id}
 	</update>
