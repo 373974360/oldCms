@@ -1,14 +1,15 @@
 package com.deya.wcm.services.cms.category;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.deya.wcm.bean.cms.category.CategoryBean;
 import com.deya.wcm.bean.cms.category.CategoryReleBean;
 import com.deya.wcm.catchs.ISyncCatch;
 import com.deya.wcm.catchs.SyncCatchHandl;
 import com.deya.wcm.dao.cms.category.CategoryReleDAO;
 import com.deya.wcm.services.org.group.GroupManager;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *  目录与人员关联逻辑处理类.
@@ -18,33 +19,33 @@ import com.deya.wcm.services.org.group.GroupManager;
  * <p>Company: Cicro</p>
  * @author liqi
  * @version 1.0
- * * 
+ * *
  */
 
 public class CategoryReleManager implements ISyncCatch{
 	private static List<CategoryReleBean> cr_list = new ArrayList<CategoryReleBean>();
-	
+
 	static{
 		reloadCatchHandl();
 	}
-	
+
 	public void reloadCatch()
 	{
 		reloadCatchHandl();
 	}
-	
+
 	public static void reloadCatchHandl()
 	{
 		cr_list.clear();
 		cr_list = CategoryReleDAO.getCategoryReleUserList();
 		CategoryTreeUtil.reloadMap();
 	}
-	
+
 	public static void reloadCategoryRele()
 	{
 		SyncCatchHandl.reladCatchForRMI("com.deya.wcm.services.cms.category.CategoryReleManager");
 	}
-	
+
 	/**
 	 * 根据目录ID得到关联列表
 	 * @param int cat_id
@@ -63,7 +64,7 @@ public class CategoryReleManager implements ISyncCatch{
 		}
 		return list;
 	}
-	
+
 	/**
 	 * 根据用户，或用户组得到它所能管理的栏目ID
 	 * @param int cat_id
@@ -84,7 +85,7 @@ public class CategoryReleManager implements ISyncCatch{
 		}
 		return ids;
 	}
-	
+
 	/**
 	 * 插入目录与人员的关联(用于在站点用户管理中插入关联)
 	 * @param String cat_ids
@@ -106,20 +107,20 @@ public class CategoryReleManager implements ISyncCatch{
 				crb.setSite_id(site_id);
 				for(int i=0;i<tempA.length;i++)
 				{
-					crb.setCat_id(Integer.parseInt(tempA[i]));				
+					crb.setCat_id(Integer.parseInt(tempA[i]));
 					CategoryReleDAO.insertCategoryReleUser(crb);
 				}
-				
+
 			}catch(Exception e)
 			{
 				e.printStackTrace();
 				return false;
 			}
-		}	
+		}
 		reloadCategoryRele();
 		return true;
 	}
-		
+
 	/**
 	 * 根据类型，ID，站点ID删除用户或用户组同栏目的关联
 	 * @param int priv_type
@@ -136,7 +137,7 @@ public class CategoryReleManager implements ISyncCatch{
 		}else
 			return false;
 	}
-	
+
 	/**
 	 * 插入目录与人员的关联
 	 * @param List<CategoryReleBean> list
@@ -163,22 +164,22 @@ public class CategoryReleManager implements ISyncCatch{
 		reloadCategoryRele();
 		return true;
 	}
-	
+
 	/**
 	 * 根据目录ID删除关联
 	 * @param String cat_id
 	 * @param String prv_id
-	 * @return boolean		
+	 * @return boolean
 	 */
 	public static boolean deleteCategoryReleUserByCatID(String cat_id,String site_id)
 	{
 		return CategoryReleDAO.deleteCategoryReleUserByCatID(cat_id,site_id);
 	}
-	
+
 	/**
 	 * 根据站点ID删除关联
 	 * @param Sting site_id
-	 * @return boolean		
+	 * @return boolean
 	 */
 	public static boolean deleteCategoryReleUserBySiteID(String site_id)
 	{
@@ -189,13 +190,13 @@ public class CategoryReleManager implements ISyncCatch{
 		}else
 			return false;
 	}
-	
+
 	/**
 	 * 根据人员ID，站点ID，栏目ID判断它是否是这个栏目的管理员
 	 * @param int user_id
 	 * @param String site_id
 	 * @param int cat_id
-	 * @return boolean		
+	 * @return boolean
 	 */
 	public static boolean isCategoryManagerByUser(int user_id,String site_id,int cat_id)
 	{
@@ -212,12 +213,14 @@ public class CategoryReleManager implements ISyncCatch{
 					if(site_id.equals(cr_list.get(i).getSite_id()))
 					{
 						cgb2 = CategoryManager.getCategoryBean(cr_list.get(i).getCat_id());
-						if(cr_list.get(i).getCat_id() == cat_id || cgb.getCat_position().indexOf(cr_list.get(i).getCat_id()+"") > 0 || cgb2.getCat_position().indexOf(cat_id+"") > 0)
-						{
-							boolean tmp1 = cr_list.get(i).getPriv_type() == 0 && cr_list.get(i).getPrv_id() == user_id;
-							boolean tmp2 = cr_list.get(i).getPriv_type() == 1 && user_group_ids.contains(","+cr_list.get(i).getPrv_id()+",");
-							if(tmp1 || tmp2 || user_id == 1)
-								return true;		
+						if(cgb2!=null){
+							if(cr_list.get(i).getCat_id() == cat_id || cgb.getCat_position().indexOf(cr_list.get(i).getCat_id()+"") > 0 || cgb2.getCat_position().indexOf(cat_id+"") > 0)
+							{
+								boolean tmp1 = cr_list.get(i).getPriv_type() == 0 && cr_list.get(i).getPrv_id() == user_id;
+								boolean tmp2 = cr_list.get(i).getPriv_type() == 1 && user_group_ids.contains(","+cr_list.get(i).getPrv_id()+",");
+								if(tmp1 || tmp2 || user_id == 1)
+									return true;
+							}
 						}
 					}
 				}
@@ -225,7 +228,7 @@ public class CategoryReleManager implements ISyncCatch{
 		}
 		return false;
 	}
-	
+
 	public static void main(String[] args)
 	{
 		System.out.println(getCategoryIDSByUser(1,116,"11111ddd"));
