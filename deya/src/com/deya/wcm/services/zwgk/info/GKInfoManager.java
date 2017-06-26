@@ -25,10 +25,10 @@ public class GKInfoManager {
 		int start_page = Integer.parseInt(map.get("current_page"));
 		int page_size = Integer.parseInt(map.get("page_size"));
 		map.put("start_num", ((start_page-1)*page_size)+"");
-		map.put("page_size", page_size+"");		
+		map.put("page_size", page_size+"");
 		return GKInfoDAO.getBroGKInfoList(map);
 	}
-	
+
 	/**
 	 * 得到公开办事指南表单信息列表（前台使用）
 	 * @param Map<String, String> m
@@ -39,10 +39,10 @@ public class GKInfoManager {
 		int start_page = Integer.parseInt(map.get("current_page"));
 		int page_size = Integer.parseInt(map.get("page_size"));
 		map.put("start_num", ((start_page-1)*page_size)+"");
-		map.put("page_size", page_size+"");		
+		map.put("page_size", page_size+"");
 		return GKInfoDAO.getBroGKBSZNInfoList(map);
 	}
-	
+
 	/**
 	 * 根据共享目录得到公开信息总数（前台使用）
 	 * @param Map<String, String> m
@@ -52,7 +52,7 @@ public class GKInfoManager {
 	{
 		return GKInfoDAO.getBroGKInfoCountForSharedCategory(m);
 	}
-	
+
 	/**
 	 * 根据共享目录得到公开信息列表（前台使用）
 	 * @param Map<String, String> m
@@ -63,10 +63,10 @@ public class GKInfoManager {
 		int start_page = Integer.parseInt(map.get("current_page"));
 		int page_size = Integer.parseInt(map.get("page_size"));
 		map.put("start_num", ((start_page-1)*page_size)+"");
-		map.put("page_size", page_size+"");		
+		map.put("page_size", page_size+"");
 		return GKInfoDAO.getBroGKInfoListForSharedCategory(map);
 	}
-	
+
 	/**
 	 * 得到公开信息总数（前台使用）
 	 * @return String
@@ -75,12 +75,12 @@ public class GKInfoManager {
 	{
 		return GKInfoDAO.getBroGKInfoCount(m);
 	}
-	
+
 	public static GKInfoBean getGKInfoBean(String info_id)
 	{
 		return GKInfoDAO.getGKInfoBean(info_id);
 	}
-	
+
 	/**
 	 * 得到所有公开信息列表
 	 * @return List
@@ -90,27 +90,27 @@ public class GKInfoManager {
 		InfoBaseManager.getSearchSQL(m);
 		return GKInfoDAO.getGKInfoList(m);
 	}
-	
+
 	/**
 	 * 得到公开附件公用表
 	 * @param String info_id
 	 * @return boolean
-	 */	
+	 */
 	public static List<GKResFileBean> getGKResFileList(String info_id)
 	{
 		return GKInfoDAO.getGKResFileList(info_id);
 	}
-	
+
 	/**
 	 * 判断索引号是否已存在，返回info_id
 	 * @param String
 	 * @return String
 	 */
-	public static String getInfoIdForGKIndex(String gk_index)
+	public static String getInfoIdForGKIndex(Map<String,String> map)
 	{
-		return GKInfoDAO.getInfoIdForGKIndex(gk_index);
+		return GKInfoDAO.getInfoIdForGKIndex(map);
 	}
-	
+
 	/**
 	 * 得到所有公开信息总数
 	 * @return String
@@ -120,7 +120,7 @@ public class GKInfoManager {
 		InfoBaseManager.getSearchSQL(m);
 		return GKInfoDAO.getGKInfoCount(m);
 	}
-	
+
 	/**
 	 * 重新生成索引号
 	 * @return String node_id
@@ -153,7 +153,7 @@ public class GKInfoManager {
 				{
 					ymd = input_time;
 				}
-				
+
 				Map<String, String> m = IndexManager.getIndex(site_id, cat_id+"", ymd, "");
 				if(GKInfoDAO.updateGKIndex(info_id+"", m.get("gk_index"), m.get("gk_num")))
 				{//得到该信息被引用 的
@@ -175,7 +175,7 @@ public class GKInfoManager {
 		}
 		return true;
 	}
-	
+
 	/**
 	 * 得到gk_year内容，用于移动时重新生成索引号用
 	 * @param String info_id
@@ -185,7 +185,7 @@ public class GKInfoManager {
 	{
 		return GKInfoDAO.getGKYearStr(info_id);
 	}
-	
+
 	/**
 	 * 按年度或季度统计公开的发布量
 	 * @param String type  year,quarter
@@ -228,9 +228,9 @@ public class GKInfoManager {
 		}//System.out.println(m);
 		return GKInfoDAO.getGKPublishStatistics(m);
 	}
-	
+
 	public static void main(String[] args)
 	{
-		System.out.println(getGKPublishStatistics("quarter"));		
+		System.out.println(getGKPublishStatistics("quarter"));
 	}
 }

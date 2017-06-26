@@ -211,7 +211,7 @@ function getNewGKIndex()
 	index_map = Map.toJSMap(index_map);
 	if(index_map != null)
 	{
-		if(GKInfoRPC.getInfoIdForGKIndex(index_map.get("gk_index")) == "")
+		if(GKInfoRPC.getInfoIdForGKIndex(index_map.get("gk_index"),site_id) == "")
 		{
 			//$("#gk_year").val(index_map.get("gk_year"));
 			$("#gk_num").val(index_map.get("gk_num"));
@@ -234,7 +234,7 @@ function setGKNumHandlForInsert(bean)
 	bean.gk_num = 100;
 	if($("#gk_index_handl").is(':checked') && $("#gk_index").val() != "")
 	{//手动生成的,且索引号不为空	
-		if(GKInfoRPC.getInfoIdForGKIndex($("#gk_index").val()) == "")
+		if(GKInfoRPC.getInfoIdForGKIndex($("#gk_index").val(),site_id) == "")
 		{//判断是否重复
 			bean.gk_index = $("#gk_index").val();
 			bean.gk_year = $("#gk_year").val();
@@ -273,7 +273,7 @@ function getGKIndexAuto()
 	if(index_map != null)
 	{
 		//判断是否重复		
-		if(GKInfoRPC.getInfoIdForGKIndex(index_map.get("gk_index")) == "")
+		if(GKInfoRPC.getInfoIdForGKIndex(index_map.get("gk_index"),site_id) == "")
 		{
 			return index_map;
 		}else
