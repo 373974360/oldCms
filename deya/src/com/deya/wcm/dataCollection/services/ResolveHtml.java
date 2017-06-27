@@ -363,7 +363,7 @@ public class ResolveHtml {
                     bean.setTitle(articleBean.getArt_title().replace("/g","＂"));
                     bean.setApp_id("cms");
                     bean.setSite_id(site_id);
-                    bean.setModel_id(Integer.parseInt(articleBean.getModel_id()));
+                    bean.setModel_id(12);
                     bean.setReleased_dtime(articleBean.getArt_pubTime());
                     bean.setIs_am_tupage(0);
                     bean.setWeight(60);
