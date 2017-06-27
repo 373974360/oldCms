@@ -129,7 +129,9 @@ function getFirstChileCateID()
 	{
 		//如果是，得到选中节点下的第一个叶子节点ID
 		cid = top.getFirstChildNodeID();
-		
+		if(typeof(cid)=="undefined"){
+			cid=_cid;
+		}
 		$("#cat_id").val(cid);
 		//$("#showCatId").text(top.getFirstChildNodeValue());
 	}		

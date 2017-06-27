@@ -37,16 +37,17 @@ var contentId = "info_content";
 var linksInfo = "";
 var focusInfo = "";
 var mFlag = false;
+var _cid = "";
 
 $(document).ready(function(){
     initUeditor(contentId);
-	init_input();	
-	reloadPublicGKInfo();
+	init_input();
 	publicUploadButtomLoad("uploadify",true,false,"",0,5,getReleSiteID(),"savePicUrl");
 
 	if(infoid != "" && infoid != "null" && infoid != null){		
 		defaultBean = ArticleRPC.getArticle(infoid,site_id);
 		if(defaultBean){
+            _cid = defaultBean.cat_id;
 			$("#info_article_table").autoFill(defaultBean);	
 			setV(contentId,defaultBean.info_content);
 			publicReloadUpdateGKInfos();
@@ -59,6 +60,7 @@ $(document).ready(function(){
 		$("#addButton").click(addInfoData);		
 		mFlag = false;
 	}
+    reloadPublicGKInfo();
 	initButtomStyle();
 });
 
