@@ -81,13 +81,13 @@ function updateCollDataInfobyid()
 		<tr>
 			<th>关键词：</th>
 			<td>
-				<textarea id="art_keyWords" name="info_keywords" style="width:620px;height:70px"></textarea>
+				<textarea id="art_keyWords" name="info_keywords" style="width:90%;height:70px"></textarea>
 			</td>
 		</tr>
 		<tr>
 			<th style="vertical-align:top;">详细内容：</th>
 			<td style="">
-                <script id="art_content" type="text/plain" style="width:620px;height:300px;"></script>
+                <script id="art_content" type="text/plain" style="width:100%;height:300px;"></script>
 				<div class="hidden" id="word_count_div"></div>
 			<span class="blank9"></span>
 		</tr>

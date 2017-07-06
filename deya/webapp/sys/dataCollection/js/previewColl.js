@@ -275,6 +275,9 @@ function pubCollDataInfotoCat()
 			article_bean.title = artBeanList.get(i).art_title.replace(/\"/g,"＂");;
 			article_bean.source = artBeanList.get(i).art_source;
 			article_bean.info_keywords = artBeanList.get(i).art_keyWords;
+            article_bean.doc_no = artBeanList.get(i).art_docNo;
+			article_bean.gk_input_dept = artBeanList.get(i).gk_input_dept;
+			article_bean.gk_signer_dtime = artBeanList.get(i).gk_signer_dtime;
 			article_bean.app_id = "cms";
 			article_bean.site_id = site_id;
 			article_bean.model_id= "11";
@@ -282,6 +285,17 @@ function pubCollDataInfotoCat()
 			article_bean.is_am_tupage = 0;
 			article_bean.input_user = top.LoginUserBean.user_id;
 			article_bean.weight = 60;
+
+			//索引码生成
+			var index_map = IndexRPC.getIndex(site_id,tygs_bean.cat_id,"","");
+			index_map = Map.toJSMap(index_map);
+			if(index_map != null)
+			{
+				article_bean.gk_index = index_map.get("gk_index");
+				article_bean.gk_year = index_map.get("gk_year");
+				article_bean.gk_num = index_map.get("gk_num");
+			}
+
 			if(ModelUtilRPC.insert(article_bean,"article"))
 			{	
 				CollectionDataRPC.changeCollInfoStatus(artBeanList.get(i).id);
@@ -305,6 +319,8 @@ function pubCollDataInfotoCat()
 			tygs_bean.source = artBeanList.get(i).art_source;
 			tygs_bean.info_keywords = artBeanList.get(i).art_keyWords;
             tygs_bean.doc_no = artBeanList.get(i).art_docNo;
+			tygs_bean.gk_input_dept = artBeanList.get(i).gk_input_dept;
+			tygs_bean.gk_signer_dtime = artBeanList.get(i).gk_signer_dtime;
 			tygs_bean.app_id = "zwgk";
 			tygs_bean.site_id = site_id;
 			tygs_bean.model_id= "14";

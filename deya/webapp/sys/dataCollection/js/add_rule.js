@@ -136,6 +136,11 @@ function getCollRuleValue()
 	collRuleBean.keywords_end=$("#keywords_end").val();
     collRuleBean.docNo_start=$("#docNo_start").val();
     collRuleBean.docNo_end=$("#docNo_end").val();
+    collRuleBean.signer_dtime_start=$("#signer_dtime_start").val();
+    collRuleBean.signer_dtime_end=$("#signer_dtime_end").val();
+    collRuleBean.input_dept_start=$("#input_dept_start").val();
+    collRuleBean.input_dept_end=$("#input_dept_end").val();
+    collRuleBean.coll_interval=$("#coll_interval").val();
 	
 	if($("#cat_cname").val()!=""){
 		collRuleBean.cat_name = $("#cat_cname").val();
@@ -144,12 +149,12 @@ function getCollRuleValue()
 		top.msgAlert("请输入栏目信息!");
 	}
 	
-	var s = $("#coll_interval").is(':checked');
+	/*var s = $("#coll_interval").is(':checked');
 	if(s){
 		collRuleBean.coll_interval = "24";
 	}else{
 		collRuleBean.coll_interval = "0";
-	}
+	}*/
 	
 	collRuleBean.site_id = site_id;
 	collRuleBean.model_id = $("#model_id").val();

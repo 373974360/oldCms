@@ -15,7 +15,7 @@
 <head>
 <title>数据采集-添加规则</title>
 <style type="text/css">
-.hover{ cursor: default;}	 
+.hover{ cursor: default;}
 </style>
 <link rel="stylesheet" type="text/css" href="../styles/themes/default/tree.css">
 <jsp:include page="../include/include_tools.jsp"/>
@@ -39,7 +39,7 @@ $(document).ready(function(){
 	initButtomStyle();
 	init_input();
 	init_FromTabsStyle();
-	
+
 	if(id != "" && id != "null" && id != null)
 	{
 		defaultBean = CollectionDataRPC.getCollRuleBeanByID(id);
@@ -65,12 +65,13 @@ $(document).ready(function(){
 			$("#keywords_end").val(defaultBean.keywords_end);
 			$("#catidhidden").val(defaultBean.cat_id);
 			$("#cat_cname").val(defaultBean.cat_name);
+			$("#signer_dtime_start").val(defaultBean.signer_dtime_start);
+			$("#signer_dtime_end").val(defaultBean.signer_dtime_end);
+			$("#input_dept_start").val(defaultBean.input_dept_start);
+			$("#input_dept_end").val(defaultBean.input_dept_end);
+            $("#coll_interval").val(defaultBean.coll_interval);
 
-//			$("#coll_interval").val(defaultBean.coll_interval);
-			if(defaultBean.coll_interval!=null&&defaultBean.coll_interval!="0"&&defaultBean.coll_interval!=""){
-				$("input[name='coll_intervalBox']").attr("checked",true); 
-			}
-			
+
 			if(defaultBean.coll_url != "")
 			{
 				appendCollURL();
@@ -78,9 +79,9 @@ $(document).ready(function(){
 			$("input[type=radio][value="+defaultBean.pic_isGet+"]").attr("checked",'checked');
 			$("select[name=pageEncoding] option[value="+defaultBean.pageEncoding+"]").attr("selected","selected");
 			$("select[name=model_id] option[value="+defaultBean.model_id+"]").attr("selected","selected");
-//			$("select[name=timeFormatType] option[value="+defaultBean.timeFormatType+"]").attr("selected","selected");  
+//			$("select[name=timeFormatType] option[value="+defaultBean.timeFormatType+"]").attr("selected","selected");
 		}
-		$("#addButton").click(updateCollectionRule);	
+		$("#addButton").click(updateCollectionRule);
 	}else{
 		$("#addButton").click(addCollectionRule);
 	}
@@ -135,9 +136,9 @@ function initHandName()
 	addStartURL("saveStartURL");
 }
 
-</script> 
+</script>
 </head>
-  
+
 <body>
 <form id="form1" name="form1" action="#" method="post">
 <table class="table_form" id="collRuleTab">
@@ -145,9 +146,9 @@ function initHandName()
 		<th style="width:10%"><span style="color: red">*</span>选择内容模型:</th>
 		<td colspan="3" style="width:90%" >
 			<select id="model_id" name="model_id">
-				<option value="11" selected="selected">新闻模型</option>
+				<option value="11" selected="selected">文章模型</option>
 				<option value="12">链接模型</option>
-				<option value="14">公开模型</option>
+				<option value="20">服务模型</option>
 			</select>
 		</td>
  	</tr>
@@ -213,22 +214,22 @@ function initHandName()
 				<tr>
 					<td style="font-size:13px;color:#32609E; text-align:left; width:15%">标签名</td>
 					<td style="font-size:13px;color:#32609E; text-align:center; width:20%">开始标签</td>
-					<td style="font-size:13px;color:#32609E; text-align:center; width:20%">结束标签</td>
+					<td style="font-size:13px;color:#32609E; text-align:center; width:20%">解析格式</td>
 				</tr>
 				<tr>
 					<th style="text-align:left">标&nbsp;&nbsp;&nbsp;题:</th>
 					<td><textarea style="width:300px; height:40px; resize:none;overflow-y:visible;" id="infotitle_start" name="infotitle_start" class="input_textarea" onblur="checkInputValue('infotitle_start',false,200,'标题开始规则','')"></textarea></td>
-					<td><textarea style="width:300px; height:40px; resize:none;overflow-y:visible;" id="infotitle_end" name="infotitle_end" class="input_textarea" onblur="checkInputValue('infotitle_end',false,200,'标题结束规则','')"></textarea></td>
+					<td><textarea style="width:300px; height:40px; resize:none;overflow-y:visible;" id="infotitle_end" name="infotitle_end" class="input_textarea" onblur="checkInputValue('infotitle_end',false,200,'标题结束规则','')" readonly>无需填写</textarea></td>
 				</tr>
 				<tr>
 					<th style="text-align:left">内&nbsp;&nbsp;&nbsp;容:</th>
 					<td><textarea style="width:300px; height:40px; resize:none;overflow-y:visible;" id="content_start" name="content_start" class="input_textarea" onblur="checkInputValue('content_start',false,200,'内容开始规则','')"></textarea></td>
-					<td><textarea style="width:300px; height:40px; resize:none;overflow-y:visible;" id="content_end" name="content_end" class="input_textarea" onblur="checkInputValue('content_end',false,200,'内容结束规则','')"></textarea></td>
+					<td><textarea style="width:300px; height:40px; resize:none;overflow-y:visible;" id="content_end" name="content_end" class="input_textarea" onblur="checkInputValue('content_end',false,200,'内容结束规则','')" readonly>无需填写</textarea></td>
 				</tr>
 				<tr>
 					<th style="text-align:left">作&nbsp;&nbsp;&nbsp;者:</th>
-					<td><textarea style="width:300px; height:40px; resize:none;overflow-y:visible;" id="author_start" name="author_start" class="input_textarea"></textarea></td>
-					<td><textarea style="width:300px; height:40px; resize:none;overflow-y:visible;" id="author_end" name="author_end" class="input_textarea"></textarea></td>
+					<td><textarea style="width:300px; height:40px; resize:none;overflow-y:visible;" id="author_start" name="author_start" class="input_textarea" placeholder="填写包含作者的最小Selector"></textarea></td>
+					<td><textarea style="width:300px; height:40px; resize:none;overflow-y:visible;" id="author_end" name="author_end" class="input_textarea" placeholder="用XXX 隔开前缀和后缀，如果没有前缀和后缀，写 XXX"></textarea></td>
 				</tr>
 				<tr>
                     <th style="text-align:left">文&nbsp;&nbsp;&nbsp;号:</th>
@@ -242,22 +243,32 @@ function initHandName()
 				</tr>
 				<tr>
 					<th style="text-align:left">来&nbsp;&nbsp;&nbsp;源:</th>
-					<td><textarea style="width:300px; height:40px; resize:none;overflow-y:visible;" id="source_start" name="source_start" class="input_textarea"></textarea></td>
-					<td><textarea style="width:300px; height:40px; resize:none;overflow-y:visible;" id="source_end" name="source_end" class="input_textarea"></textarea></td>
+					<td><textarea style="width:300px; height:40px; resize:none;overflow-y:visible;" id="source_start" name="source_start" class="input_textarea" placeholder="填写包含来源的最小Selector"></textarea></td>
+					<td><textarea style="width:300px; height:40px; resize:none;overflow-y:visible;" id="source_end" name="source_end" class="input_textarea" placeholder="用XXX 隔开前缀和后缀，如果没有前缀和后缀，写 XXX"></textarea></td>
 				</tr>
 				<tr>
 					<th style="text-align:left">关键字:</th>
 					<td><textarea style="width:300px; height:40px; resize:none;overflow-y:visible;" id="keywords_start" name="keywords_start" class="input_textarea"></textarea></td>
 					<td><textarea style="width:300px; height:40px; resize:none;overflow-y:visible;" id="keywords_end" name="keywords_end" class="input_textarea"></textarea></td>
 				</tr>
+				<tr>
+					<th style="text-align:left">签发日期:</th>
+					<td><textarea style="width:300px; height:40px; resize:none;overflow-y:visible;" id="signer_dtime_start" name="signer_dtime_start" class="input_textarea"></textarea></td>
+					<td><textarea style="width:300px; height:40px; resize:none;overflow-y:visible;" id="signer_dtime_end" name="signer_dtime_end" class="input_textarea"></textarea></td>
+				</tr>
+				<tr>
+					<th style="text-align:left">发布机构:</th>
+					<td><textarea style="width:300px; height:40px; resize:none;overflow-y:visible;" id="input_dept_start" name="input_dept_start" class="input_textarea"></textarea></td>
+					<td><textarea style="width:300px; height:40px; resize:none;overflow-y:visible;" id="input_dept_end" name="input_dept_end" class="input_textarea"></textarea></td>
+				</tr>
 			</table>
 		</td>
 	</tr>
 	<tr>
 		<th>定时采集:</th>
-		<td style="width:20%">
+		<td colspan="3">
 			<%--<input type="text" id="coll_interval" name="coll_interval" size="11" class="input_text" value="" onFocus="WdatePicker({isShowClear:true,readOnly:true,dateFmt:'HH'})" readonly="true">(整点)--%>
-			<input type="checkbox" id="coll_interval" name="coll_intervalBox" value="0" />是否定时采集(默认零点采集)
+			<input type="text" id="coll_interval" name="coll_interval" style="width:550px;"/>整点；（如08：00，多个时间用引文“,”隔开）
 		</td>
 	</tr>
 </table>
