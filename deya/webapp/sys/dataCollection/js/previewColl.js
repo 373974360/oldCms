@@ -275,6 +275,7 @@ function pubCollDataInfotoCat()
 			article_bean.title = artBeanList.get(i).art_title.replace(/\"/g,"＂");;
 			article_bean.source = artBeanList.get(i).art_source;
 			article_bean.info_keywords = artBeanList.get(i).art_keyWords;
+			article_bean.topic_key = artBeanList.get(i).art_keyWords;
             article_bean.doc_no = artBeanList.get(i).art_docNo;
 			article_bean.gk_input_dept = artBeanList.get(i).gk_input_dept;
 			article_bean.gk_signer_dtime = artBeanList.get(i).gk_signer_dtime;
@@ -318,6 +319,7 @@ function pubCollDataInfotoCat()
 			tygs_bean.title = artBeanList.get(i).art_title.replace(/\"/g,"＂");;
 			tygs_bean.source = artBeanList.get(i).art_source;
 			tygs_bean.info_keywords = artBeanList.get(i).art_keyWords;
+			tygs_bean.topic_key = artBeanList.get(i).art_keyWords;
             tygs_bean.doc_no = artBeanList.get(i).art_docNo;
 			tygs_bean.gk_input_dept = artBeanList.get(i).gk_input_dept;
 			tygs_bean.gk_signer_dtime = artBeanList.get(i).gk_signer_dtime;
