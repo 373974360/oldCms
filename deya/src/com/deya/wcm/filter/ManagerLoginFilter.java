@@ -14,7 +14,7 @@ import com.deya.util.Javascript;
 import com.deya.util.jspFilterHandl;
 import com.deya.wcm.services.org.user.UserLogin;
 
-public class ManagerLoginFilter implements javax.servlet.Filter{
+public class ManagerLoginFilter implements javax.servlet.Filter {
     private FilterConfig config;
 
     public static boolean isContains(String container, String[] regx) {
@@ -55,38 +55,28 @@ public class ManagerLoginFilter implements javax.servlet.Filter{
         }
 
         //对前台的jsp进行xss漏洞过滤
-        if(!requestUri.startsWith("/sys"))
-        {
-            if(!jspFilterHandl.isRightParam(request,requestUri))
-            {
+        if (!requestUri.startsWith("/sys")) {
+            if (!jspFilterHandl.isRightParam(request, requestUri)) {
                 response.setContentType("text/html; charset=utf-8");
                 response.sendRedirect("/");
                 return;
-            }else
-            {
+            } else {
                 chain.doFilter(request, response);
             }
-        }else
-        {
-            if(UserLogin.checkLoginBySession(request))
-            {
+        } else {
+            if (UserLogin.checkLoginBySession(request)) {
                 chain.doFilter(request, response);
-            }
-            else
-            {
+            } else {
                 //response.sendRedirect(loginPage);
                 response.setContentType("text/html; charset=utf-8");
-                if(requestUri.contains("/sys/JSON-RPC"))
-                {
-                    response.getWriter().write("top.location.href='" + loginPage +"'");
-                }
-                else{
-                    response.getWriter().write(Javascript.location(loginPage,"top"));
+                if (requestUri.contains("/sys/JSON-RPC")) {
+                    response.getWriter().write("top.location.href='" + loginPage + "'");
+                } else {
+                    response.getWriter().write(Javascript.location(loginPage, "top"));
                 }
             }
         }
     }
-
 
 
     public void destroy() {
