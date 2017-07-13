@@ -21,7 +21,7 @@
 			<if test="name!=null and name!=''">and name like '%${name}%' </if>
 			<if test="type!=null and type!=''">and propertytype like '%${type}%' </if>
 		</where>
-		 order by  ${orderby}
+		 order by id desc
 		 limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
 	</select>
 	<select id="getLouPanAllList" parameterType="Map"
@@ -37,13 +37,13 @@
 	</select>
 	<insert id="insertLouPan" parameterType="com.deya.project.dz_house.LouPanBean">
 		insert into
-		dz_loupan(lpcode,name,tel,coordinate,address,opentime,developers,ckdj,property,propertytype,jzlx,zxzk,remark,yszh,zts,wyf,lhl,rjl,cwbl,tdsynx,jzjg,jzmj,zdmj,sgdw)
-		values(#{lpcode},#{name},#{tel},#{coordinate},#{address},#{opentime},#{developers},#{ckdj},#{property},#{propertytype},#{jzlx},#{zxzk},#{remark},#{yszh},#{zts},#{wyf},#{lhl},#{rjl},#{cwbl},#{tdsynx},#{jzjg},#{jzmj},#{zdmj},#{sgdw})
+		dz_loupan(lpcode,name,tel,coordinate,address,opentime,developers,ckdj,property,propertytype,jzlx,zxzk,remark,yszh,zts,wyf,lhl,rjl,cwbl,tdsynx,jzjg,jzmj,zdmj,sgdw,minmj,maxmj)
+		values(#{lpcode},#{name},#{tel},#{coordinate},#{address},#{opentime},#{developers},#{ckdj},#{property},#{propertytype},#{jzlx},#{zxzk},#{remark},#{yszh},#{zts},#{wyf},#{lhl},#{rjl},#{cwbl},#{tdsynx},#{jzjg},#{jzmj},#{zdmj},#{sgdw},#{minmj},#{maxmj})
 	</insert>
 	<update id="updateLouPan" parameterType="com.deya.project.dz_house.LouPanBean">
 		update dz_loupan set name = #{name},tel=#{tel},coordinate = #{coordinate},address=#{address},opentime=#{opentime},developers=#{developers},ckdj=#{ckdj},property=#{property},
 		propertytype=#{propertytype},jzlx=#{jzlx},zxzk=#{zxzk},remark=#{remark},yszh=#{yszh},zts=#{zts},wyf=#{wyf},lhl=#{lhl},
-		rjl=#{rjl},cwbl=#{cwbl},tdsynx=#{tdsynx},jzjg=#{jzjg},jzmj=#{jzmj},zdmj=#{zdmj},sgdw=#{sgdw} where id = #{id}
+		rjl=#{rjl},cwbl=#{cwbl},tdsynx=#{tdsynx},jzjg=#{jzjg},jzmj=#{jzmj},zdmj=#{zdmj},sgdw=#{sgdw},minmj=#{minmj},maxmj=#{maxmj} where id = #{id}
 	</update>
 	<delete id="deleteLouPan" parameterType="Map">
 		delete from dz_loupan where id=#{id}

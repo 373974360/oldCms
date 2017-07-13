@@ -117,7 +117,7 @@
                 <td>
                     <input id="address" name="address" type="text" class="width200" value=""/>
                 </td>
-                <td rowspan="12" valign="top">
+                <td rowspan="13" valign="top">
                     <div id="allmap"></div>
                 </td>
             </tr>
@@ -180,6 +180,16 @@
                     [<a>板式楼</a>]
                     [<a>砖混</a>]
                     [<a>钢混</a>]
+                </td>
+            </tr>
+            <tr>
+                <th><span class="f_red">*</span>最小面积：</th>
+                <td>
+                    <input id="minmj" name="minmj" type="text" class="width200" value=""/>
+                </td>
+                <th><span class="f_red">*</span>最大面积：</th>
+                <td>
+                    <input id="maxmj" name="maxmj" type="text" class="width200" value=""/>
                 </td>
             </tr>
             <tr>

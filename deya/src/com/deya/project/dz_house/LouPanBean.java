@@ -33,6 +33,24 @@ public class LouPanBean implements Serializable {
     private String jzmj = "";
     private String zdmj = "";
     private String sgdw = "";
+    private String minmj="";
+    private String maxmj="";
+
+    public String getMinmj() {
+        return minmj;
+    }
+
+    public void setMinmj(String minmj) {
+        this.minmj = minmj;
+    }
+
+    public String getMaxmj() {
+        return maxmj;
+    }
+
+    public void setMaxmj(String maxmj) {
+        this.maxmj = maxmj;
+    }
 
     public int getId() {
         return id;
