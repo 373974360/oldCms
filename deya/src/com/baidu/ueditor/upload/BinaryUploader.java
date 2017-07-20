@@ -44,7 +44,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 public class BinaryUploader {
 
     public static String[] NOTUPLOAT_FILE_EXT = {"php ","php3","php5","phtml","asp ","aspx","ascx","jsp","cfm","cfc",
-            "pl","bat","exe","dll","reg","cgi","js","html","do","sh","action","vm"};
+            "pl","bat","exe","dll","reg","cgi","js","html","sh","action","vm"};
 
     public static final State save(HttpServletRequest request,
                                    Map<String,Object> conf) {
