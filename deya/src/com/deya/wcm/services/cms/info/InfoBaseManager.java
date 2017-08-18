@@ -695,7 +695,7 @@ public class InfoBaseManager {
             List<InfoBean> from_list = InfoDAO.getFromInfoListByIDS(info_ids);
             if(from_list != null && from_list.size() > 0)
             {
-                for(InfoBean ib : l)
+                for(InfoBean ib : from_list)
                 {
                     cat_id.add(ib.getCat_id());
                     //发布状态下要删除页面,必须不是链接类型的

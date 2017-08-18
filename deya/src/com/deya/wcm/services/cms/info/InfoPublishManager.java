@@ -43,7 +43,7 @@ public class InfoPublishManager {
             if (ib.getSite_id().startsWith("GK")) {
                 ZYMLEventHandl.removeFormData(ib.getInfo_id() + "");
             }
-            deleteQuoteInfoList(ib);
+            //deleteQuoteInfoList(ib);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -395,6 +395,7 @@ public class InfoPublishManager {
             savePath = savePath + ".htm";
             deleteHtmlPageHandl(savePath);
         }
+        deleteQuoteInfoList(ib);
     }
 
     /**

@@ -821,7 +821,7 @@ public class DeptManager implements ISyncCatch{
      */
     public static boolean inserSynctDept(List<DeptBean> deptList) {
         DeptBean parent = null;
-        Map<Integer,DeptBean> map = new HashMap<>();
+        Map<Integer,DeptBean> map = new HashMap<Integer,DeptBean>();
         for (DeptBean bean : deptList) {
             map.put(bean.getDept_id(),bean);
         }
