@@ -24,6 +24,9 @@
 			server_name  $domain$;  LINE_SEPARATOR
 			#add_header Set-Cookie 'HttpOnly=true';   LINE_SEPARATOR
 			#access_log  logs/$site_id$.access.log  main;  LINE_SEPARATOR
+			if ($request_method !~* GET|POST|HEAD) { LINE_SEPARATOR
+				return 403; LINE_SEPARATOR
+			} LINE_SEPARATOR
 			location ~ ^/sys/.+\.(js|jpg|jpeg|JPG|gif|GIF|bmp|htm|html|swf|css|wmv|mp3|avi|wma|rar|zip|doc|docx|ppt|xls|pdf|png|PNG|rmvb|rm|rmi|xsl|xml|txt|chm)$  {  LINE_SEPARATOR
 				root    ${rootPath}/vhosts/common;  LINE_SEPARATOR
 				expires 30d;  LINE_SEPARATOR
