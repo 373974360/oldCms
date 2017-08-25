@@ -1,6 +1,5 @@
 <%@ page contentType="text/html; charset=utf-8"%>
-<%@page import="com.deya.wcm.server.LicenseCheck,com.deya.util.CryptoTools"%>
-<%@ page import="com.deya.wcm.services.org.user.UserLogin" %>
+<%@page import="com.deya.wcm.services.org.user.UserLogin"%>
 <%
     /*
     String key = request.getParameter("key"); 
@@ -17,7 +16,7 @@
 	    	return;
 	    }
 	}
-    */p;.
+    */
 
     boolean isLogin = UserLogin.checkLoginBySession(request);
     if(isLogin){
