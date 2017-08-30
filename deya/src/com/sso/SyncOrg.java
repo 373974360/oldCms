@@ -164,7 +164,7 @@ public class SyncOrg {
             Element rootElement = xmlDoc.getRootElement();
             if (syncName.equals("dept")) {
                 Iterator departs = rootElement.elementIterator("depart");
-                List<DeptBean> deptBeanList = new ArrayList<>();
+                List<DeptBean> deptBeanList = new ArrayList<DeptBean>();
                 if (departs != null) {
                     while (departs.hasNext()) {
                         Element depart = (Element) departs.next();
