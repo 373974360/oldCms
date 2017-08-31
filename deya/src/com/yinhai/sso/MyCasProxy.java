@@ -1,4 +1,4 @@
-package com.sso;
+package com.yinhai.sso;
 
 import com.deya.wcm.services.org.user.UserLogin;
 import org.jasig.cas.client.authentication.AttributePrincipal;

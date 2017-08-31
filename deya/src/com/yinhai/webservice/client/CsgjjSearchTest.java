@@ -1,4 +1,4 @@
-package com.webService;
+package com.yinhai.webservice.client;
 
 import org.jdom.Document;
 import org.jdom.Element;

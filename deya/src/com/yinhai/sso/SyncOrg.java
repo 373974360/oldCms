@@ -1,4 +1,4 @@
-package com.sso;
+package com.yinhai.sso;
 
 import com.deya.util.CryptoTools;
 import com.deya.util.DateUtil;

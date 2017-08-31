@@ -1,4 +1,4 @@
-package com.webService;
+package com.yinhai.webservice.client;
 
 import com.deya.util.Encode;
 import com.deya.wcm.dataCollection.util.FormatString;

@@ -1,4 +1,4 @@
-package com.sso;
+package com.yinhai.sso;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;

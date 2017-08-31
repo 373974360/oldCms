@@ -1,4 +1,4 @@
-package com.sso;
+package com.yinhai.sso;
 
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;

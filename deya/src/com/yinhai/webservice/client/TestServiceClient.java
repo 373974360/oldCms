@@ -1,4 +1,4 @@
-package com.webService;
+package com.yinhai.webservice.client;
 
 /**
  * Created with IntelliJ IDEA.
