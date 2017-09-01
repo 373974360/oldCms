@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans>
-	<service xmlns="http://xfire.codehaus.org/config/1.0">
-		<name>SendInfo</name>
-		<serviceClass>com.deya.wcm.webServices.sendInfo.ISendInfo</serviceClass>
-		<implementationClass>
-			com.deya.wcm.webServices.sendInfo.SendInfoImpl
-		</implementationClass>
-		<style>wrapped</style>
-		<use>literal</use>
-		<scope>application</scope>
-	</service>
-	</beans>
+    <service xmlns="http://xfire.codehaus.org/config/1.0">
+        <name>SendInfo</name>
+        <serviceClass>com.deya.wcm.webServices.sendInfo.ISendInfo</serviceClass>
+        <implementationClass>
+            com.deya.wcm.webServices.sendInfo.SendInfoImpl
+        </implementationClass>
+        <style>wrapped</style>
+        <use>literal</use>
+        <scope>application</scope>
+    </service>
+    <service xmlns="http://xfire.codehaus.org/config/1.0">
+        <name>InfoCount</name>
+        <serviceClass>com.yinhai.webservice.server.InfoCountService</serviceClass>
+        <implementationClass>
+            com.yinhai.webservice.server.InfoCountServiceImpl
+        </implementationClass>
+        <style>wrapped</style>
+        <use>literal</use>
+        <scope>application</scope>
+    </service>
+</beans>

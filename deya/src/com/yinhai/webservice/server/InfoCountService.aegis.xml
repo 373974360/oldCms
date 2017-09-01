@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings>
+    <mapping>
+        <method name="getInfoCount">
+            <parameter index="0" mappedName="qrdate"/>
+            <parameter index="1" mappedName="siteId"/>
+        </method>
+        <method name="getHotInfoList">
+            <parameter index="0" mappedName="start"/>
+            <parameter index="1" mappedName="end"/>
+            <parameter index="2" mappedName="siteId"/>
+        </method>
+    </mapping>
+</mappings>
