@@ -21,7 +21,8 @@
         ca.cat_cname,
         ca.cat_id,
         ca.parent_id,
-        ca.cat_position
+        ca.cat_position,
+        ca.cat_sort
         FROM
         cs_info_category ca
         LEFT JOIN (
@@ -45,9 +46,7 @@
         cat_id
         ) info
         ON ca.cat_id = info.cat_id
-        <if test="site_id != null">
-            WHERE ca.site_id = #{site_id}
-        </if>
+        WHERE ca.site_id like 'CMS%'
         order by ca.cat_id asc
     </select>
 
@@ -55,11 +54,7 @@
     <select id="getPublishCount" parameterType="Map" resultType="Map">
         SELECT
         total,
-        publish_source,
-        ca.cat_cname,
-        ca.cat_id,
-        ca.parent_id,
-        ca.cat_position
+        ca.cat_id
         FROM
         cs_info_category ca
         LEFT JOIN (
@@ -79,54 +74,54 @@
         cat_id,publish_source
         ) info
         ON ca.cat_id = info.cat_id
-        <if test="site_id != null">
-            WHERE ca.site_id = #{site_id}
-        </if>
+        WHERE ca.site_id like 'CMS%'
         order by ca.cat_id asc
     </select>
 
     <!-- 统计访问量排行前十条信息 -->
-    <select id="getHotInfoList" parameterType="Map" resultType="com.yinhai.model.HotInfoBean">
+    <select id="getHotInfoList" parameterType="Map" resultType="Map">
         select
         info_id,title,subtitle,top_title,author,editor,source,hits,input_dtime,thumb_url,content_url,released_dtime from
         cs_info where <![CDATA[ rownum <= 10 ]]>
-        <if test="site_id != null">and site_id = #{site_id}</if>
+        and site_id like 'CMS%'
         <if test="start_day != null"><![CDATA[ and released_dtime >= #{start_day}]]></if>
         <if test="end_day != null"><![CDATA[ and released_dtime <= #{end_day}]]></if>
         order by hits desc
     </select>
 
-    <select id="getHotInfoList_mysql" parameterType="Map" resultType="com.yinhai.model.HotInfoBean">
+    <select id="getHotInfoList_mysql" parameterType="Map" resultType="Map">
         select
         info_id,title,subtitle,top_title,author,editor,source,hits,input_dtime,thumb_url,content_url,released_dtime from
-        cs_info where 1=1
-        <if test="site_id != null">and site_id = #{site_id}</if>
+        cs_info where site_id like 'CMS%'
         <if test="start_day != null"><![CDATA[ and released_dtime >= #{start_day}]]></if>
         <if test="end_day != null"><![CDATA[ and released_dtime <= #{end_day}]]></if>
         order by hits desc limit 0,10
     </select>
 
-    <select id="getHotInfoList_mssql" parameterType="Map" resultType="com.yinhai.model.HotInfoBean">
+    <select id="getHotInfoList_mssql" parameterType="Map" resultType="Map">
         select
         info_id,title,subtitle,top_title,author,editor,source,hits,input_dtime,thumb_url,content_url,released_dtime from
-        cs_info where 1=1
-        <if test="site_id != null">and site_id = #{site_id}</if>
+        cs_info where site_id like 'CMS%'
         <if test="start_day != null"><![CDATA[ and released_dtime >= #{start_day}]]></if>
         <if test="end_day != null"><![CDATA[ and released_dtime <= #{end_day}]]></if>
         order by hits desc
     </select>
 
+    <!-- 根据父栏目id获取子栏目信息 -->
+    <select id="getCategoryByParentId" parameterType="Map" resultType="Map">
+        select cat_cname,cat_id from cs_info_category where 1=1
+        <if test="colid != null"> and parent_id = #{colid}</if>
+    </select>
 
-    <!-- 统计访问量排行前十条信息 -->
-    <select id="getInfoListByCatId" parameterType="Map" resultType="com.yinhai.model.HotInfoBean">
+    <!-- 根据栏目id查找该栏目下的信息 -->
+    <select id="getInfoListByCatId" parameterType="Map" resultType="Map">
         select * from (
         select row_.*, rownum rownum_ from (
         select
         info_id,title,subtitle,top_title,author,editor,source,hits,input_dtime,thumb_url,content_url,released_dtime from
         cs_info
-        where info_status = 8 and final_status = 0
+        where info_status = 8 and final_status = 0 and site_id like 'CMS%'
         <if test="cat_id != null">and cat_id = #{cat_id}</if>
-        <if test="site_id != null">and site_id = #{site_id}</if>
         <if test="publish_source != null">and publish_source like #{publish_source}</if>
         order by released_dtime desc
         <![CDATA[
@@ -136,43 +131,38 @@
 
     </select>
 
-    <!-- 根据栏目id查找该栏目下的信息 -->
+    <select id="getInfoListCountByCatId" parameterType="Map" resultType="java.lang.String">
+        select count(*) total from cs_info
+        where info_status = 8 and final_status = 0 and site_id like 'CMS%'
+        <if test="cat_id != null">and cat_id = #{cat_id}</if>
+        <if test="publish_source != null">and publish_source like #{publish_source}</if>
+    </select>
 
     <select id="getInfoListByCatId_mysql" parameterType="Map"
-            resultType="com.yinhai.model.HotInfoBean">
+            resultType="Map">
         select
         info_id,title,subtitle,top_title,author,editor,source,hits,input_dtime,thumb_url,content_url,released_dtime from
         cs_info
-        where info_status = 8 and final_status = 0
+        where info_status = 8 and final_status = 0 and site_id like 'CMS%'
         <if test="cat_id != null">and cat_id = #{cat_id}</if>
-        <if test="site_id != null">and site_id = #{site_id}</if>
         <if test="publish_source != null">and publish_source like #{publish_source}</if>
         order by released_dtime desc limit #{start,,jdbcType=INTEGER},#{limit,,jdbcType=INTEGER}
     </select>
 
     <select id="getInfoListByCatId_mssql" parameterType="Map"
-            resultType="com.yinhai.model.HotInfoBean">
+            resultType="Map">
         select
         info_id,title,subtitle,top_title,author,editor,source,hits,input_dtime,thumb_url,content_url,released_dtime from
         cs_info
-        where info_status = 8 and final_status = 0
+        where info_status = 8 and final_status = 0 and site_id like 'CMS%'
         <if test="cat_id != null">and cat_id = #{cat_id}</if>
-        <if test="site_id != null">and site_id = #{site_id}</if>
         <if test="publish_source != null">and publish_source like #{publish_source}</if>
         order by released_dtime desc
     </select>
 
-    <select id="getInfoListCountByCatId" parameterType="Map" resultType="java.lang.String">
-        select  count(*) total from  cs_info
-        where info_status = 8 and final_status = 0
-        <if test="cat_id != null">and cat_id = #{cat_id}</if>
-        <if test="site_id != null">and site_id = #{site_id}</if>
-        <if test="publish_source != null">and publish_source like #{publish_source}</if>
-    </select>
-
     <!-- 根据信息id获取信息内容 -->
     <select id="getInfoContentByInfoId" parameterType="Map"
-            resultType="com.yinhai.model.HotInfoBean">
+            resultType="Map">
         select
         info.info_id,title,subtitle,top_title,author,editor,source,hits,input_dtime,thumb_url,content_url,released_dtime,art.info_content from
         cs_info info left join cs_info_article art on info.info_id = art.info_id

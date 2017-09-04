@@ -1,6 +1,6 @@
 package com.yinhai.model;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 /**
  * @Description:
@@ -11,13 +11,23 @@ import java.util.HashMap;
  */
 public class InfoCountResult {
 
-    private HashMap<String,InfoCount[]> infoCountMap; // 不要用Map类型
+    private String source;
 
-    public HashMap<String, InfoCount[]> getInfoCountMap() {
-        return infoCountMap;
+    private ArrayList<InfoCount> infoCounts;
+
+    public String getSource() {
+        return source;
     }
 
-    public void setInfoCountMap(HashMap<String, InfoCount[]> infoCountMap) {
-        this.infoCountMap = infoCountMap;
+    public void setSource(String source) {
+        this.source = source;
+    }
+
+    public ArrayList<InfoCount> getInfoCounts() {
+        return infoCounts;
+    }
+
+    public void setInfoCounts(ArrayList<InfoCount> infoCounts) {
+        this.infoCounts = infoCounts;
     }
 }

@@ -29,15 +29,15 @@ public class InfoContent extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String info_id = request.getParameter("infoId");
+        String info_id = request.getParameter("newsid");
         Map<String, String> params = new HashMap<String, String>();
         if (info_id != null) {
             params.put("info_id", info_id);
         }
-        List infoContentByInfoId = DBManager.queryFList("getInfoContentByInfoId", params);
-        HotInfoBean hotInfoBean = new HotInfoBean();
+        List<Map> infoContentByInfoId = DBManager.queryFList("getInfoContentByInfoId", params);
+        HotInfoBean hotInfoBean = null;
         if (infoContentByInfoId != null && infoContentByInfoId.size() > 0) {
-            hotInfoBean = (HotInfoBean) infoContentByInfoId.get(0);
+            hotInfoBean = new HotInfoBean(infoContentByInfoId.get(0));
         }
         String s = JSON.toJSONString(hotInfoBean);
         response.setCharacterEncoding("UTF-8");

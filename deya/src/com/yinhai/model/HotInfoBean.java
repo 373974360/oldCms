@@ -1,5 +1,7 @@
 package com.yinhai.model;
 
+import java.util.Map;
+
 /**
  * @Description:
  * @Author: like
@@ -9,26 +11,72 @@ package com.yinhai.model;
  */
 public class HotInfoBean {
 
-    private int info_id;
+    private int newsid;
     private String title;
+    private String newstitle;
     private String subtitle;
     private String top_title;
     private String author;
-    private String editor;
+    private String pubname;
     private String source;
-    private int hits;
+    private int tvisitnum;
+    private int look;
     private String input_dtime;
-    private String released_dtime;
-    private String content_url;
-    private String thumb_url;
-    private String info_content;
+    private String pubdate;
+    private String newsurl;
+    private String newspic;
+    private String content;
 
-    public int getInfo_id() {
-        return info_id;
+    public HotInfoBean(Map m) {
+        if (m.get("info_id") != null) {
+            this.newsid = Integer.parseInt(m.get("info_id").toString());
+        }
+        if (m.get("title") != null) {
+            this.title = m.get("title").toString();
+            this.newstitle = m.get("title").toString();
+        }
+        if (m.get("subtitle") != null) {
+            this.subtitle = m.get("subtitle").toString();
+        }
+        if (m.get("top_title") != null) {
+            this.top_title = m.get("top_title").toString();
+        }
+        if (m.get("author") != null) {
+            this.author = m.get("author").toString();
+        }
+        if (m.get("editor") != null) {
+            this.pubname = m.get("editor").toString();
+        }
+        if (m.get("source") != null) {
+            this.source = m.get("source").toString();
+        }
+        if (m.get("hits") != null) {
+            this.look = Integer.parseInt(m.get("hits").toString());
+            this.tvisitnum = Integer.parseInt(m.get("hits").toString());
+        }
+        if (m.get("input_dtime") != null) {
+            this.input_dtime = m.get("input_dtime").toString();
+        }
+        if (m.get("thumb_url") != null) {
+            this.newspic = m.get("thumb_url").toString();
+        }
+        if (m.get("content_url") != null) {
+            this.newsurl = m.get("content_url").toString();
+        }
+        if (m.get("released_dtime") != null) {
+            this.pubdate = m.get("released_dtime").toString();
+        }
+        if (m.get("info_content") != null) {
+            this.content = m.get("info_content").toString();
+        }
     }
 
-    public void setInfo_id(int info_id) {
-        this.info_id = info_id;
+    public int getNewsid() {
+        return newsid;
+    }
+
+    public void setNewsid(int newsid) {
+        this.newsid = newsid;
     }
 
     public String getTitle() {
@@ -37,6 +85,14 @@ public class HotInfoBean {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getNewstitle() {
+        return newstitle;
+    }
+
+    public void setNewstitle(String newstitle) {
+        this.newstitle = newstitle;
     }
 
     public String getSubtitle() {
@@ -63,12 +119,12 @@ public class HotInfoBean {
         this.author = author;
     }
 
-    public String getEditor() {
-        return editor;
+    public String getPubname() {
+        return pubname;
     }
 
-    public void setEditor(String editor) {
-        this.editor = editor;
+    public void setPubname(String pubname) {
+        this.pubname = pubname;
     }
 
     public String getSource() {
@@ -79,12 +135,20 @@ public class HotInfoBean {
         this.source = source;
     }
 
-    public int getHits() {
-        return hits;
+    public int getTvisitnum() {
+        return tvisitnum;
     }
 
-    public void setHits(int hits) {
-        this.hits = hits;
+    public void setTvisitnum(int tvisitnum) {
+        this.tvisitnum = tvisitnum;
+    }
+
+    public int getLook() {
+        return look;
+    }
+
+    public void setLook(int look) {
+        this.look = look;
     }
 
     public String getInput_dtime() {
@@ -95,35 +159,35 @@ public class HotInfoBean {
         this.input_dtime = input_dtime;
     }
 
-    public String getReleased_dtime() {
-        return released_dtime;
+    public String getPubdate() {
+        return pubdate;
     }
 
-    public void setReleased_dtime(String released_dtime) {
-        this.released_dtime = released_dtime;
+    public void setPubdate(String pubdate) {
+        this.pubdate = pubdate;
     }
 
-    public String getContent_url() {
-        return content_url;
+    public String getNewsurl() {
+        return newsurl;
     }
 
-    public void setContent_url(String content_url) {
-        this.content_url = content_url;
+    public void setNewsurl(String newsurl) {
+        this.newsurl = newsurl;
     }
 
-    public String getThumb_url() {
-        return thumb_url;
+    public String getNewspic() {
+        return newspic;
     }
 
-    public void setThumb_url(String thumb_url) {
-        this.thumb_url = thumb_url;
+    public void setNewspic(String newspic) {
+        this.newspic = newspic;
     }
 
-    public String getInfo_content() {
-        return info_content;
+    public String getContent() {
+        return content;
     }
 
-    public void setInfo_content(String info_content) {
-        this.info_content = info_content;
+    public void setContent(String content) {
+        this.content = content;
     }
 }

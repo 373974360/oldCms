@@ -2,7 +2,6 @@ package com.yinhai.webservice.server;
 
 import com.deya.wcm.db.DBManager;
 import com.yinhai.model.HotInfoBean;
-import com.yinhai.model.HotInfoResult;
 import com.yinhai.model.InfoCount;
 import com.yinhai.model.InfoCountResult;
 
@@ -25,12 +24,14 @@ public class InfoCountServiceImpl implements InfoCountService {
      * @return
      */
     @Override
-    public InfoCountResult getInfoCount(String qrdate, String siteId) {
+    public InfoCountResult[] getInfoCount(String qrdate, String siteId) {
         List<Map> publishSource = DBManager.queryFList("getPublishSource", null);
-        InfoCountResult infoCountResult = new InfoCountResult();
+        InfoCountResult[] infoCountResults = null;
         if (publishSource != null && publishSource.size() > 0) {
-            HashMap<String, InfoCount[]> result = new HashMap<String, InfoCount[]>();
-            for (Map map : publishSource) {
+            infoCountResults = new InfoCountResult[publishSource.size()];
+            for (int i = 0; i < publishSource.size(); i++) {
+                Map map = publishSource.get(i);
+                InfoCountResult infoCountResult = new InfoCountResult();
                 if (map.get("publish_source") != null) {
                     Map<String, String> params = new HashMap<String, String>();
                     params.put("publish_source", map.get("publish_source").toString());
@@ -48,9 +49,10 @@ public class InfoCountServiceImpl implements InfoCountService {
                     for (Map visitMap : visitCount) {
                         InfoCount infoCount = new InfoCount();
                         infoCount.setCatId(Integer.parseInt(visitMap.get("cat_id").toString()));
-                        infoCount.setParentId(Integer.parseInt(visitMap.get("parent_id").toString()));
-                        infoCount.setCatName(visitMap.get("cat_cname").toString());
-                        infoCount.setCatPosition(visitMap.get("cat_position").toString());
+//                        infoCount.setParentId(Integer.parseInt(visitMap.get("parent_id").toString()));
+                        infoCount.setColname(visitMap.get("cat_cname").toString());
+                        infoCount.setSortno(visitMap.get("cat_sort").toString());
+//                        infoCount.setCatPosition(visitMap.get("cat_position").toString());
                         if (visitMap.get("total") != null) {
                             infoCount.setTpubnum(Integer.parseInt(visitMap.get("total").toString()));
                         } else {
@@ -76,12 +78,13 @@ public class InfoCountServiceImpl implements InfoCountService {
                         infoCounts.add(infoCount);
                     }
                     System.out.println(infoCounts.size() + "************");
-                    result.put(map.get("publish_source").toString(), infoCounts.toArray(new InfoCount[infoCounts.size()]));
+                    infoCountResult.setSource(map.get("publish_source").toString());
+                    infoCountResult.setInfoCounts(infoCounts);
+                    infoCountResults[i] = infoCountResult;
                 }
             }
-            infoCountResult.setInfoCountMap(result);
         }
-        return infoCountResult;
+        return infoCountResults;
     }
 
     /**
@@ -93,7 +96,7 @@ public class InfoCountServiceImpl implements InfoCountService {
      * @return
      */
     @Override
-    public HotInfoResult getHotInfoList(String start, String end, String siteId) {
+    public HotInfoBean[] getHotInfoList(String start, String end, String siteId) {
         Map<String, String> params = new HashMap<String, String>();
         if (start != null && !"".equals(start)) {
             params.put("start_day", start);
@@ -104,17 +107,16 @@ public class InfoCountServiceImpl implements InfoCountService {
         if (siteId != null && !"".equals(siteId)) {
             params.put("site_id", siteId);
         }
-        List hotInfoList = DBManager.queryFList("getHotInfoList", params);
-        ArrayList<HotInfoBean> hotInfoBeans = new ArrayList<HotInfoBean>();
+        List<Map> hotInfoList = DBManager.queryFList("getHotInfoList", params);
+        HotInfoBean[] hotInfoBeans = null;
         if (hotInfoList != null && hotInfoList.size() > 0) {
-            for (Object o : hotInfoList) {
-                HotInfoBean hotInfoBean = (HotInfoBean) o;
-                hotInfoBeans.add(hotInfoBean);
+            hotInfoBeans = new HotInfoBean[hotInfoList.size()];
+            for (int i = 0; i < hotInfoList.size(); i++) {
+                HotInfoBean hotInfoBean = new HotInfoBean(hotInfoList.get(i));
+                hotInfoBeans[i] = hotInfoBean;
             }
         }
-        HotInfoResult hotInfoResult = new HotInfoResult();
-        hotInfoResult.setHotInfoBeans(hotInfoBeans);
-        return hotInfoResult;
+        return hotInfoBeans;
     }
 
 }

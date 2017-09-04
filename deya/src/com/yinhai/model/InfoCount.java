@@ -9,12 +9,11 @@ import java.io.Serializable;
  * @Version: 1.0
  * @Created in idea by autoCode
  */
-public class InfoCount implements Serializable{
+public class InfoCount implements Serializable {
 
     private int catId;
-    private int parentId;
-    private String catName;
-    private String catPosition;
+    private String colname;
+    private String sortno;
     private int tpubnum;
     private int pubnum;
     private int tvisitnum;
@@ -28,28 +27,20 @@ public class InfoCount implements Serializable{
         this.catId = catId;
     }
 
-    public int getParentId() {
-        return parentId;
+    public String getColname() {
+        return colname;
     }
 
-    public void setParentId(int parentId) {
-        this.parentId = parentId;
+    public void setColname(String colname) {
+        this.colname = colname;
     }
 
-    public String getCatPosition() {
-        return catPosition;
+    public String getSortno() {
+        return sortno;
     }
 
-    public void setCatPosition(String catPosition) {
-        this.catPosition = catPosition;
-    }
-
-    public String getCatName() {
-        return catName;
-    }
-
-    public void setCatName(String catName) {
-        this.catName = catName;
+    public void setSortno(String sortno) {
+        this.sortno = sortno;
     }
 
     public int getTpubnum() {

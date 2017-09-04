@@ -31,7 +31,7 @@ public class InfoList extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String catId = request.getParameter("catId");
+        String catId = request.getParameter("colid");
         String source = request.getParameter("source");
         String start = request.getParameter("start");
         String limit = request.getParameter("limit");
@@ -51,17 +51,17 @@ public class InfoList extends HttpServlet {
             params.put("limit",limit);
             infoListResult.setLimit(Integer.parseInt(limit));
         }
-        List infoListByCatId = DBManager.queryFList("getInfoListByCatId", params);
+        List<Map> infoListByCatId = DBManager.queryFList("getInfoListByCatId", params);
         ArrayList<HotInfoBean> hotInfoBeans = new ArrayList<HotInfoBean>();
         if (infoListByCatId != null && infoListByCatId.size() > 0) {
-            for (Object o : infoListByCatId) {
-                HotInfoBean hotInfoBean = (HotInfoBean) o;
+            for (Map m : infoListByCatId) {
+                HotInfoBean hotInfoBean = new HotInfoBean(m);
                 hotInfoBeans.add(hotInfoBean);
             }
         }
         Object count = DBManager.queryFObj("getInfoListCountByCatId", params);
         infoListResult.setTotal(Integer.parseInt(count.toString()));
-        infoListResult.setInfoList(hotInfoBeans);
+        infoListResult.setList(hotInfoBeans);
         String s = JSON.toJSONString(infoListResult);
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json; charset=utf-8");

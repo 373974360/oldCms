@@ -1,6 +1,6 @@
 package com.yinhai.webservice.server;
 
-import com.yinhai.model.HotInfoResult;
+import com.yinhai.model.HotInfoBean;
 import com.yinhai.model.InfoCountResult;
 
 /**
@@ -18,7 +18,7 @@ public interface InfoCountService {
      * @param siteId
      * @return
      */
-    public InfoCountResult getInfoCount(String qrdate, String siteId);
+    public InfoCountResult[] getInfoCount(String qrdate, String siteId);
 
     /**
      * 按照开始时间和结束时间获取该时间段内访问量排行前十的信息
@@ -27,6 +27,6 @@ public interface InfoCountService {
      * @param siteId
      * @return
      */
-    public HotInfoResult getHotInfoList(String start, String end, String siteId);
+    public HotInfoBean[] getHotInfoList(String start, String end, String siteId);
 
 }

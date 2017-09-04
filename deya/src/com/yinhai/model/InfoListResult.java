@@ -12,17 +12,17 @@ import java.util.List;
  */
 public class InfoListResult implements Serializable{
 
-    private List<HotInfoBean> infoList;
+    private List<HotInfoBean> list;
     private Integer total;
     private Integer start;
     private Integer limit;
 
-    public List<HotInfoBean> getInfoList() {
-        return infoList;
+    public List<HotInfoBean> getList() {
+        return list;
     }
 
-    public void setInfoList(List<HotInfoBean> infoList) {
-        this.infoList = infoList;
+    public void setList(List<HotInfoBean> list) {
+        this.list = list;
     }
 
     public Integer getTotal() {
