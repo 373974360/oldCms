@@ -34,7 +34,7 @@ public class UserInfoRPC {
     }
 
     public static List<InfoBean> getZpxxInfoList(Integer user_id, Integer start_num, Integer page_size) {
-        Map<String, String> con_map = new HashMap<>();
+        Map<String, String> con_map = new HashMap<String, String>();
         String orderby = "info.id desc";
         con_map.put("user_id", user_id + "");
         con_map.put("page_size", page_size + "");
@@ -48,7 +48,7 @@ public class UserInfoRPC {
     }
 
     public static List<UserInfoBean> getUserInfoList(Integer info_id, Integer start_num, Integer page_size) {
-        Map<String, String> con_map = new HashMap<>();
+        Map<String, String> con_map = new HashMap<String, String>();
         String orderby = "ur.info_id desc";
         con_map.put("info_id", info_id + "");
         con_map.put("page_size", page_size + "");

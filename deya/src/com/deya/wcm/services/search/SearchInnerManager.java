@@ -1,13 +1,6 @@
 package com.deya.wcm.services.search;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 import com.deya.util.DateUtil;
 import com.deya.wcm.services.search.index.IndexManager;
@@ -25,16 +18,16 @@ public class SearchInnerManager {
 	private static Set infoSetAdd = new HashSet();   //存放信息Id  来实现增量创建索引  -- 添加
 	private static Set infoSetDel = new HashSet();   //存放信息Id  来实现增量创建索引  -- 删除
 	
-	private static Queue queue = new Queue();   //存放信息Id  来实现增量创建索引
+	private static ArrayList<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
     
 	
 	static{
 		Timer timer = new Timer();
 		Date now = new Date();
         SearchIndexTask task = new SearchIndexTask();
-        Date endOfDay = DateUtil.getEndOfDay(now);
-        timer.schedule(new SearchResourceIndexTask(), endOfDay, 1000 * 60 * 60 * 24); //每天晚上12点
-        timer.schedule(task, now, 1000 * 60 * 10); //每10分钟
+//        Date endOfDay = DateUtil.getEndOfDay(now);
+//        timer.schedule(new SearchResourceIndexTask(), endOfDay, 1000 * 60 * 60 * 24); //每天晚上12点
+        timer.schedule(task, now, 1000 * 60 * 3); //每3分钟
         //timer.schedule(task, now, 1000 * 60 * 1); //每1分钟，测试用
 	}
 	
@@ -43,7 +36,7 @@ public class SearchInnerManager {
 		Map map = new HashMap();
 		map.put("id",id);
 		map.put("flag","1"); //1 表示是添加
-		queue.put(map);
+		list.add(map);
 	}
 	
 	//存放信息Id  来实现增量创建索引  -- 删除
@@ -51,7 +44,7 @@ public class SearchInnerManager {
 		Map map = new HashMap();
 		map.put("id",id);
 		map.put("flag","0"); //0表示是删除
-		queue.put(map);
+		list.add(map);
 	}
 	
 	
@@ -94,21 +87,22 @@ public class SearchInnerManager {
 //	        initSetDelete(setDelete);
 //	        System.out.println("End DeleteSearchIndex Task!!!");
 	    	
-	    	//System.out.println("Start SearchIndex Task!!!");
-	    	while(!queue.isEmpty()) {
-	    		Map map = (Map)queue.get();
-	    		//String id = (String)map.get("id");
-	    		String flag = (String)map.get("flag");
-	    		if(flag.equals("1")){
-					//System.out.println("Create SearchIndex map =====" + map);
-					IndexManager.appendSingleDocument(map);
-	    		}
-	    		if(flag.equals("0")){  
-					//System.out.println("Delete SearchIndex map =====" + map);
-					IndexManager.deleteSingleDocument(map);
-	    		}
-	        } 
-			//System.out.println("End SearchIndex Task!!!");
+	    	System.out.println("Start SearchIndex Task!!!");
+			if(list != null && list.size() > 0){
+				for (Map<String, Object> stringObjectMap : list) {
+					String id = (String)stringObjectMap.get("id");
+					String flag = (String)stringObjectMap.get("flag");
+					if(flag.equals("1")){
+						System.out.println("Create SearchIndex map =====" + id);
+						IndexManager.appendSingleDocument(stringObjectMap);
+					}
+					if(flag.equals("0")){
+						System.out.println("Delete SearchIndex map =====" + id);
+						IndexManager.deleteSingleDocument(stringObjectMap);
+					}
+				}
+			}
+			System.out.println("End SearchIndex Task!!!");
 	    }
 	    
 	    
