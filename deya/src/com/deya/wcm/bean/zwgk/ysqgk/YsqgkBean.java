@@ -65,7 +65,15 @@ public class YsqgkBean implements java.io.Serializable{
 	private int month_hits=0;
 	private String lasthit_dtime="";
 	private int weight=60;
-	
+	private String site_id="";
+
+	public String getSite_id() {
+		return site_id;
+	}
+
+	public void setSite_id(String site_id) {
+		this.site_id = site_id;
+	}
 
 	public int getWeight() {
 		return weight;
