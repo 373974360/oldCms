@@ -27,6 +27,13 @@ public class YsqgkRPC{
 	{
 		return YsqgkConfigManager.getYsqgkConfigBean();
 	}
+
+
+	public static YsqgkConfigBean getYsqgkConfigBean(String site_id)
+	{
+
+		return YsqgkConfigManager.getYsqgkConfigBean(site_id);
+	}
 	
 	/**
      * 插入依申请公开配置对象

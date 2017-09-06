@@ -5,16 +5,26 @@
 	<!-- *****************************依申请公开业务配置开始*****************************  -->
 	<select id="getYsqgkConfigBean" resultType="com.deya.wcm.bean.zwgk.ysqgk.YsqgkConfigBean">
 		select * from cs_gk_ysq_config
+		<where>
+			<if test="site_id!=null">
+				and site_id = '${site_id}'
+			</if>
+		</where>
 	</select>
 	
 	<insert id="insert_ysqgk_config" parameterType="com.deya.wcm.bean.zwgk.ysqgk.YsqgkConfigBean">
-		insert into cs_gk_ysq_config (id,time_limit,code_pre,code_rule,code_num,query_num,file_url,must_member,remind_type,user_secret,is_auto_publish,template_form,template_list,template_content,template_over,template_print,template_query)
-		values (#{id},#{time_limit},#{code_pre},#{code_rule},#{code_num},#{query_num},#{file_url},#{must_member},
-		#{remind_type},#{user_secret},#{is_auto_publish},#{template_form},#{template_list},#{template_content},#{template_over},#{template_print},#{template_query})
+		insert into cs_gk_ysq_config (time_limit,code_pre,code_rule,code_num,query_num,file_url,must_member,remind_type,user_secret,is_auto_publish,template_form,template_list,template_content,template_over,template_print,template_query,site_id)
+		values (#{time_limit},#{code_pre},#{code_rule},#{code_num},#{query_num},#{file_url},#{must_member},
+		#{remind_type},#{user_secret},#{is_auto_publish},#{template_form},#{template_list},#{template_content},#{template_over},#{template_print},#{template_query},#{site_id})
 	</insert>
 	
 	<delete id="delete_ysqgk_config" parameterType="Map">
 		delete from cs_gk_ysq_config
+		<where>
+			<if test="site_id!=null">
+				and site_id = '${site_id}'
+			</if>
+		</where>
 	</delete>
 	
 	<!-- *****************************依申请公开业务配置结束*****************************  -->
@@ -73,7 +83,8 @@
 				      week_hits,
 				      month_hits,
 				      lasthit_dtime,
-				      weight
+				      weight,
+				      site_id
 		)  values (
 				      #{ysq_id},
 				      #{ysq_code},
@@ -125,7 +136,8 @@
 				      #{week_hits},
 				      #{month_hits},
 				      #{lasthit_dtime},
-				      #{weight}
+				      #{weight},
+				      #{site_id}
 		    )
 	</insert>
 	
@@ -146,6 +158,9 @@
 	<select id="getYsqgkListsCount" parameterType="Map" resultType="java.lang.Integer" >
 	    select count(ysq_id) from cs_gk_ysq 
 	            <where>
+					<if test="site_id != null">
+						and site_id = '${site_id}'
+					</if>
 					<if test="node_id != null">
 						and node_id = '${node_id}'
 					</if>
@@ -316,6 +331,9 @@
 	<!-- *******************************需替换sql 开始******************************* -->
 	<sql id="getYsqgkLists_sql_conn">
 		<where>
+					<if test="site_id != null">
+						and site_id = '${site_id}'
+					</if>
 					<if test="node_id != null">
 						and node_id = '${node_id}'
 					</if>

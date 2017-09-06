@@ -21,16 +21,24 @@ public class YsqgkConfigManager {
      * */
 	public static boolean insertYsqgkConfig(YsqgkConfigBean ysqgk,SettingLogsBean stl)
 	{
-		if(deleteYsqgkConfig(stl)){
-			int ysq_id = PublicTableDAO.getIDByTableName(PublicTableDAO.YSQGK_CONFIG_TABLE_NAME );
-			ysqgk.setId(ysq_id);
-			
+		if(getYsqgkConfigBean(ysqgk.getSite_id())==null){
 			if(YsqgkConfigDAO.insertYsqgkConfig(ysqgk,stl))
 			{
-				ykcb = ysqgk;
 				return true;
 			}else
 				return false;
+		}else{
+			if(deleteYsqgkConfig(ysqgk.getSite_id())){
+				int ysq_id = PublicTableDAO.getIDByTableName(PublicTableDAO.YSQGK_CONFIG_TABLE_NAME );
+				ysqgk.setId(ysq_id);
+
+				if(YsqgkConfigDAO.insertYsqgkConfig(ysqgk,stl))
+				{
+					ykcb = ysqgk;
+					return true;
+				}else
+					return false;
+			}
 		}
 		return true;
 	}
@@ -49,6 +57,16 @@ public class YsqgkConfigManager {
 		}else
 			return false;
 	}
+
+
+	public static boolean deleteYsqgkConfig(String site_id)
+	{
+		if(YsqgkConfigDAO.deleteYsqgkConfig(site_id))
+		{
+			return true;
+		}else
+			return false;
+	}
 	/**
      * 得到依申请公开配置对象
      * @param 
@@ -57,6 +75,11 @@ public class YsqgkConfigManager {
 	public static YsqgkConfigBean getYsqgkConfigBean()
 	{
 		return ykcb;
+	}
+
+	public static YsqgkConfigBean getYsqgkConfigBean(String site_id)
+	{
+		return YsqgkConfigDAO.getYsqgkConfigBean(site_id);
 	}
 	
 	public static void getYsqgkConfigBeanForDB()

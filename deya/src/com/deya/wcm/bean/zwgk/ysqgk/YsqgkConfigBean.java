@@ -32,6 +32,15 @@ public class YsqgkConfigBean implements java.io.Serializable{
 	private int template_over  =0;
 	private int template_print  =0;
 	private int template_query  =0;
+	private String site_id="";
+
+	public String getSite_id() {
+		return site_id;
+	}
+
+	public void setSite_id(String site_id) {
+		this.site_id = site_id;
+	}
 	
 	
 	public int getId() {
