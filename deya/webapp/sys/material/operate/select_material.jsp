@@ -39,9 +39,13 @@ if(f_id =="" || f_id == null || f_id == "null"){
 
 var aidnum = window.dialogArguments;
 
+if(!aidnum){
+    aidnum = window.opener;
+}
+
 var site_id ="<%=request.getParameter("site_id")%>";
 var handl_name ="<%=request.getParameter("handl_name")%>";
-var user_id = aidnum.top.LoginUserBean.user_id;
+var user_id = aidnum.LoginUserBean.user_id;
 var json_data;
 var imgDomain="";
 var pageSize = 20;
@@ -160,15 +164,17 @@ function returnSelectedPic()
 		urls += $(this).parent().parent().find("a").attr("href");		
 		names += $(this).parent().parent().find("a").attr("title");
 	});
-	eval("aidnum."+handl_name+"('"+urls+"','"+names+"')");
+
+
+    eval("aidnum."+handl_name+"('"+urls+"','"+names+"')");
 	window.close();
 }
 
 //选择图片，并返回路径
 function selectPicUrlHandl(url,oldname)
 {
-	eval("aidnum."+handl_name+"('"+url+"','"+oldname+"')");
-	window.close();
+    eval("aidnum."+handl_name+"('"+url+"','"+oldname+"')");
+    window.close();
 }
 
 function searchMaterial()
