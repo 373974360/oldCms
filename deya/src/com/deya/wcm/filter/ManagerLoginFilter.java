@@ -53,7 +53,7 @@ public class ManagerLoginFilter implements javax.servlet.Filter {
         if(null == requestWrapper) {
             requestWrapper = request;
         }
-            //对前台的jsp进行xss漏洞过滤
+        //对前台的jsp进行xss漏洞过滤
         if (!jspFilterHandl.isRightParam(requestWrapper, requestUri)) {
             if (requestUri.startsWith("/sys") || requestUri.startsWith("/manager") || requestUri.startsWith("/admin")) {
                 SessionManager.remove(request, "cicro_wcm_user");
