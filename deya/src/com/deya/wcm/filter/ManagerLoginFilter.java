@@ -1,20 +1,16 @@
 package com.deya.wcm.filter;
 
-import java.io.IOException;
-
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import com.deya.util.Javascript;
 import com.deya.util.jspFilterHandl;
+import com.deya.wcm.services.org.user.SessionManager;
 import com.deya.wcm.services.org.user.UserLogin;
 
-public class ManagerLoginFilter implements javax.servlet.Filter{
+import javax.servlet.*;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+public class ManagerLoginFilter implements javax.servlet.Filter {
     private FilterConfig config;
 
     public static boolean isContains(String container, String[] regx) {
@@ -40,53 +36,49 @@ public class ManagerLoginFilter implements javax.servlet.Filter{
                          FilterChain chain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) _request;
         HttpServletResponse response = (HttpServletResponse) _response;
-        //System.out.println("doFilter------------"+request.getSession().getId());
         String requestUri = request.getRequestURI();
-        //System.out.println("requestUri--------------" + requestUri);
         String loginPage = config.getInitParameter("loginPage");
         String notFilterPage = config.getInitParameter("notFilterPage");
         String[] notArr = notFilterPage.split(";");
-
         request.setCharacterEncoding("utf-8");
-
+        request.getParameterNames();
         if (isContains(request.getRequestURI(), notArr)) {
             chain.doFilter(request, response);
             return;
         }
-
-        //对前台的jsp进行xss漏洞过滤
-        if(!requestUri.startsWith("/sys"))
-        {
-            if(!jspFilterHandl.isRightParam(request,requestUri))
-            {
+        ServletRequest requestWrapper = null;
+        if(request instanceof HttpServletRequest) {
+            requestWrapper = new MyHttpServletRequestWrapper(request);
+        }
+        if(null == requestWrapper) {
+            requestWrapper = request;
+        }
+            //对前台的jsp进行xss漏洞过滤
+        if (!jspFilterHandl.isRightParam(requestWrapper, requestUri)) {
+            if (requestUri.startsWith("/sys") || requestUri.startsWith("/manager") || requestUri.startsWith("/admin")) {
+                SessionManager.remove(request, "cicro_wcm_user");
+                response.sendRedirect(loginPage);
+            }else{
                 response.setContentType("text/html; charset=utf-8");
                 response.sendRedirect("/");
-                return;
-            }else
-            {
-                chain.doFilter(request, response);
             }
-        }else
-        {
-            if(UserLogin.checkLoginBySession(request))
-            {
-                chain.doFilter(request, response);
-            }
-            else
-            {
-                //response.sendRedirect(loginPage);
-                response.setContentType("text/html; charset=utf-8");
-                if(requestUri.contains("/sys/JSON-RPC"))
-                {
-                    response.getWriter().write("top.location.href='" + loginPage +"'");
+        } else {
+            if (requestUri.startsWith("/sys") || requestUri.startsWith("/manager") || requestUri.startsWith("/admin")) {
+                if (UserLogin.checkLoginBySession(request)) {
+                    chain.doFilter(requestWrapper, response);
+                } else {
+                    response.setContentType("text/html; charset=utf-8");
+                    if (requestUri.contains("/sys/JSON-RPC")) {
+                        response.getWriter().write("top.location.href='" + loginPage + "'");
+                    } else {
+                        response.getWriter().write(Javascript.location(loginPage, "top"));
+                    }
                 }
-                else{
-                    response.getWriter().write(Javascript.location(loginPage,"top"));
-                }
+            } else {
+                chain.doFilter(requestWrapper, response);
             }
         }
     }
-
 
 
     public void destroy() {
