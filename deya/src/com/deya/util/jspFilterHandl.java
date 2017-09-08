@@ -1,21 +1,14 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by Fernflower decompiler)
-//
-
 package com.deya.util;
 
 import com.deya.util.jconfig.JconfigUtilContainer;
 
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.Enumeration;
-import java.util.Iterator;
-import java.util.Set;
-import javax.servlet.ServletRequest;
-import javax.servlet.http.HttpServletRequest;
 
 public class jspFilterHandl {
     private static String[] filter_str = {"%df", "%5c", "%27", "%20", "%22", "%27", "%3E", "%3e", "%3C", "%3c", "/*", "\\", "union", "--", "1=1", "and ", "concat", "acustart", "application", "script", "location", "limit ", "alert", "iframe", "set-cookie", "+", "or ", "drop table", "asc\\(", "mid\\(", "char\\(", "net user", "exists", "alter",
@@ -24,6 +17,15 @@ public class jspFilterHandl {
     private static String no_filter_jsp;
 
     private static String[] sqlFilterStr = {"header", "exec ", "insert ", "select ", "delete ", "trancate", "update ", "drop table"};
+
+    static {
+        String[] jspArr = JconfigUtilContainer.bashConfig().getPropertyNamesByCategory("filter_jsp_page");
+        if (jspArr != null && jspArr.length > 0) {
+            for (int i = jspArr.length; i > 0; --i) {
+                no_filter_jsp = no_filter_jsp + "," + JconfigUtilContainer.bashConfig().getProperty(jspArr[i - 1], "", "filter_jsp_page");
+            }
+        }
+    }
 
     //李苏培加
     public static boolean isTureKey(String content, String[] filterStr) {
@@ -137,25 +139,14 @@ public class jspFilterHandl {
     public static void main(String[] args) {
         String content = "http://www.ylwsw.gov.cn/appeal/list.jsp?model_id=(SELECT%20(CASE%20WHEN%20(3627=3627)))&tm_id=373&tab=3";
         String contentold = "http://www.ylwsw.gov.cn/appeal/list.jsp?model_id=(SELECT%20(CASE%20WHEN%20(3627=3627)))&tm_id=373&tab=3";
-
         try {
             content = URLDecoder.decode(contentold.replaceAll("%20", " ").replaceAll("&lt;", "<"), "utf-8").toLowerCase();
-            (new StringBuilder()).append(content).append(URLDecoder.decode(contentold, "utf-8")).toString();
-        } catch (UnsupportedEncodingException var4) {
-            var4.printStackTrace();
+            content = content + URLDecoder.decode(contentold, "utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
 
         String s = "aa=123";
         System.out.println(s.substring(s.indexOf("=") + 1));
-    }
-
-    static {
-        Set<String> jspArr = JconfigUtilContainer.bashConfig().getPropertyNamesByCategory("filter_jsp_page");
-
-        String j;
-        for(Iterator var1 = jspArr.iterator(); var1.hasNext(); no_filter_jsp = no_filter_jsp + "," + JconfigUtilContainer.bashConfig().getProperty(j, "", "filter_jsp_page")) {
-            j = (String)var1.next();
-        }
-
     }
 }
