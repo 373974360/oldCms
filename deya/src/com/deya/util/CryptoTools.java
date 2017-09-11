@@ -10,6 +10,8 @@ import javax.crypto.spec.IvParameterSpec;
 import java.security.Key;
 
 import java.security.spec.AlgorithmParameterSpec;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 /**
@@ -75,10 +77,35 @@ public class CryptoTools {
 		}
     }
 
+	public String license(String value) {
+		String cp_code = decode(value);
+		String[] codes = cp_code.split("[*]");
+		String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+		int site_num = 20;
+		String app_ids = "system,org,cms,control,appeal,zwgk,ggfw";
+		if (codes != null && codes.length > 0) {
+			String cupid = codes[1].replaceAll("[$]", "");
+			String mac = codes[2].replaceAll("[$]", "");
+			//System.out.println(cupid);
+			//System.out.println(mac);
+			String xml = "<license><cpuid><![CDATA[" + cupid + "]]></cpuid>" +
+					"<mac><![CDATA[" + mac + "]]></mac>" +
+					"<wcm><start_time>" + date + "</start_time>" +
+					"<time_limit><![CDATA[]]></time_limit>" +
+					"<site_num>" + site_num + "</site_num>" +
+					"<app_ids>" + app_ids + "</app_ids>" +
+					"</wcm></license>";
+			//System.out.println(xml);
+			return encode(xml);
+		}
+		return "";
+	}
+
     public static void main(String args[])
     {             
-        CryptoTools ct = new CryptoTools();  
+        CryptoTools ct = new CryptoTools();
+		System.out.println(ct.license("=#=rU65f7rwo/hWXSyuhaYqPioVVeczo0hDDum40B5uR8yS40SobA8G4gbWMBfTOMoN7zvxLzxj4GnZAtMqnP/c1g=="));
         System.out.println(ct.encode("zzzz"));
-        System.out.println(ct.decode("=#=mCX1K3glErs="));
+        System.out.println(ct.decode("=#=rU65f7rwo/hWXSyuhaYqPioVVeczo0hDDum40B5uR8yS40SobA8G4gbWMBfTOMoN7zvxLzxj4GnZAtMqnP/c1g=="));
     }
 }
