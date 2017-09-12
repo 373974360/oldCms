@@ -65,13 +65,14 @@ public class UserLoginRPC {
 	 */
 	public static String checkUserLogin(String user_name,String pass_word,String auth_code,HttpServletRequest request)
 	{
-		String codeSession = (String)request.getSession().getAttribute("valiCode");
-		
-		if(!codeSession.equals(auth_code))
-		{
+
+		String codeSession = (String) request.getSession().getAttribute("valiCode");
+		if (codeSession == null || "".equals(codeSession)) {
+			System.out.println("**************系统session错误！************");
+		} else if (!codeSession.equals(auth_code)) {
 			return "auth_code_error";
 		}
-		return UserLogin.checkUserLogin(user_name,pass_word,request);
+		return UserLogin.checkUserLogin(user_name, pass_word, request);
 	}
 	
 	/**
