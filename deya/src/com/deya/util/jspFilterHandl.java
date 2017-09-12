@@ -11,12 +11,12 @@ import java.net.URLDecoder;
 import java.util.Enumeration;
 
 public class jspFilterHandl {
-    private static String[] filter_str = {"%df", "%5c", "%27", "%20", "%22", "%27", "%3E", "%3e", "%3C", "%3c", "/*", "\\", "union", "--", "1=1", "and ", "concat", "acustart", "application", "script", "location", "limit ", "alert", "iframe", "set-cookie", "+", "or ", "drop table", "asc\\(", "mid\\(", "char\\(", "net user", "exists", "alter",
+    private static String[] filter_str = {"%df", "%5c", "%27", "%20", "%22", "%27", "%3E", "%3e", "%3C", "%3c", "\\", "union", "--", "1=1", "and ", "concat", "acustart", "application", "script", "location", "limit ", "alert", "iframe", "set-cookie", "+", "or ", "drop table", "asc\\(", "mid\\(", "char\\(", "net user", "exists", "alter",
             "+acu+", "onmouseover", "header", "exec ", "insert ", "select ", "delete ", "trancate", "update ", "updatexml", "extractvalue", "href=", "data:text", "declare", "master", "execute", "xp_cmdshell", "netlocalgroup", "count\\(", "restore", "floor", "ExtractValue", "UpdateXml",
-            "injected", "ACUstart", "ACUend", "():;", "acu:Expre", "window.location.href", "document", "parameter: ", "<OBJECT", "javascript", "confirm", "<script>", "</script>", "..", "cat ", "click", "function", "prompt(", "<", ">",";", "'", "“", "”", "‘", "’"};
+            "injected", "ACUstart", "ACUend", "():;", "acu:Expre", "window.location.href", "document", "parameter: ", "<OBJECT", "javascript", "confirm", "<script>", "</script>", "..", "cat ", "click", "function", "prompt(", "<", ">","'", "“", "”", "‘", "’"};
     private static String no_filter_jsp;
 
-    private static String[] sqlFilterStr = {"header", "exec ", "insert ", "select ", "delete ", "trancate", "update ", "drop table"};
+    private static String[] sqlFilterStr = {"exec ", "insert ", "select ", "delete ", "trancate", "update ", "drop table"};
 
     static {
         String[] jspArr = JconfigUtilContainer.bashConfig().getPropertyNamesByCategory("filter_jsp_page");
@@ -41,7 +41,8 @@ public class jspFilterHandl {
                         content = URLDecoder.decode(contentold.replaceAll("%20", " ").replaceAll("&lt;", "<").replaceAll("&gt;", ">"), "utf-8").toLowerCase();
                         content = (content + URLDecoder.decode(contentold, "utf-8")).replaceAll("<select", "");
                     } catch (Exception e1) {
-                        e1.printStackTrace();
+                        content = contentold.replaceAll("%20", " ").replaceAll("&lt;", "<").replaceAll("&gt;", ">").toLowerCase();
+                        content = (content + contentold).replaceAll("<select", "");
                     }
                     result = content.toLowerCase().contains(s);
                     if (result) {
@@ -76,6 +77,12 @@ public class jspFilterHandl {
             if (queryString == null) {
                 queryString = "";
             }
+            if (servletPath.indexOf("JSON-RPC") >= 0) {
+                String params = getRequestPayload(request);
+                if (isTureKey(params, sqlFilterStr)) {
+                    return true;  //包含要过滤的关键字
+                }
+            }
             for (Enumeration e = request.getParameterNames(); e.hasMoreElements(); ) {
                 Object o = e.nextElement();
                 String arr = (String) o;
@@ -85,7 +92,7 @@ public class jspFilterHandl {
                 }
                 if ("cat_id".equals(arr) || "model_id".equals(arr) || "sq_id".equals(arr) || "tm_id".equals(arr) || "info_id".equals(arr) || "id".equals(arr)) {
                     try {
-                        if (value != null && !"".equals(value)) {
+                        if (value != null && !"".equals(value) && !"null".equals(value)) {
                             int i = Integer.parseInt(value);
                         }
                     } catch (Exception ex) {
@@ -98,12 +105,6 @@ public class jspFilterHandl {
             }
             if ((queryString != null) && (!("".equals(queryString)))) {
                 if (isTureKey(queryString, filter_str)) {
-                    return true;  //包含要过滤的关键字
-                }
-            }
-            if (servletPath.indexOf("JSON-RPC") >= 0) {
-                String params = getRequestPayload(request);
-                if (isTureKey(params, sqlFilterStr)) {
                     return true;  //包含要过滤的关键字
                 }
             }

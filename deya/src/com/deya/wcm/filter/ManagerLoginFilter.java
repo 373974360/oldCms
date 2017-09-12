@@ -4,6 +4,7 @@ import com.deya.util.Javascript;
 import com.deya.util.jspFilterHandl;
 import com.deya.wcm.services.org.user.SessionManager;
 import com.deya.wcm.services.org.user.UserLogin;
+import org.apache.poi.util.SystemOutLogger;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -42,19 +43,20 @@ public class ManagerLoginFilter implements javax.servlet.Filter {
         String[] notArr = notFilterPage.split(";");
         request.setCharacterEncoding("utf-8");
         request.getParameterNames();
-        if (isContains(request.getRequestURI(), notArr)) {
-            chain.doFilter(request, response);
-            return;
-        }
         ServletRequest requestWrapper = null;
-        if(request instanceof HttpServletRequest && requestUri.indexOf("ueditor/jsp/controller.jsp") < 0) {
+        if(request instanceof HttpServletRequest && requestUri.contains("JSON-RPC")) {
             requestWrapper = new MyHttpServletRequestWrapper(request);
         }
         if(null == requestWrapper) {
             requestWrapper = request;
         }
+        if (isContains(request.getRequestURI(), notArr)) {
+            chain.doFilter(requestWrapper, response);
+            return;
+        }
         //对前台的jsp进行xss漏洞过滤
         if (!jspFilterHandl.isRightParam(requestWrapper, requestUri)) {
+            System.out.println("*******************验证参数错误，跳转到首页或者后台登录页！**********************");
             if (requestUri.startsWith("/sys") || requestUri.startsWith("/manager") || requestUri.startsWith("/admin")) {
                 SessionManager.remove(request, "cicro_wcm_user");
                 response.sendRedirect(loginPage);
