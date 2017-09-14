@@ -94,7 +94,7 @@ public class jspFilterHandl {
                 Object o = e.nextElement();
                 String arr = (String) o;
                 String value = request.getParameter(arr);
-                if ("ware_content".equals(arr) || "t_content".equals(arr) || "sq_content".equals(arr) || "ExcelContent".equals(arr)) {
+                if ("ware_content".equals(arr) || "t_content".equals(arr) || "sq_content".equals(arr) || "ExcelContent".equals(arr) || "info_content".equals(arr)) {
                     continue;
                 }
                 if ("cat_id".equals(arr) || "model_id".equals(arr) || "sq_id".equals(arr) || "tm_id".equals(arr) || "info_id".equals(arr) || "id".equals(arr))              {
