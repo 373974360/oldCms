@@ -337,7 +337,9 @@ function pubCollDataInfotoCat()
 }
 
 function showCollRules(){
-	var collRuleList = CollectionDataRPC.getAllCollRuleBeanList();
+    var m = new Map();
+    m.put("site_id",site_id);
+	var collRuleList = CollectionDataRPC.getAllCollRuleBeanList(m);
 	collRuleList = List.toJSList(collRuleList);
 	$("#selectCollRule").append("<option value=\"-1\" selected=\"selected\">全部</option>")
 	if(collRuleList!=null && collRuleList.size()>0){

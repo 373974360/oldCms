@@ -42,8 +42,8 @@ public class CollectionDataManager {
         return CollectionDataDAO.getRuleList(m);
     }
 
-    public static List<CollRuleBean> getAllCollRuleBeanList() {
-        return CollectionDataDAO.getAllCollRuleBeanList();
+    public static List<CollRuleBean> getAllCollRuleBeanList(Map<String, String> m) {
+        return CollectionDataDAO.getAllCollRuleBeanList(m);
     }
 
     public static String getRuleListCount() {

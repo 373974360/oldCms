@@ -51,6 +51,7 @@ function showList()
 	m.put("sort_name", sortCol);
 	m.put("sort_type", sortType);
     m.put("rcat_id", id);
+    m.put("site_id", site_id);
 	
 	beanList = CollectionDataRPC.getRuleList(m);
 	beanList =  List.toJSList(beanList);

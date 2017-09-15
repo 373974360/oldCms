@@ -16,7 +16,7 @@ public class CollTimerImpl implements Job {
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
         System.out.println("定时采集信息开始执行*****" + DateUtil.getCurrentDateTime());
-        List<CollRuleBean> col_list = CollectionDataDAO.getAllCollRuleBeanList();
+        List<CollRuleBean> col_list = CollectionDataDAO.getAllCollRuleBeanList(null);
         if ((col_list != null) && (col_list.size() > 0)) {
             System.out.println("------------Timer caollDate start....  ---------");
             for (CollRuleBean collBean : col_list) {
