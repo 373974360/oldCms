@@ -77,35 +77,37 @@ public class jspFilterHandl {
             if (queryString == null) {
                 queryString = "";
             }
-            if (servletPath.indexOf("JSON-RPC") >= 0) {
-                String params = getRequestPayload(request);
-                if (isTureKey(params, sqlFilterStr)) {
-                    return true;  //包含要过滤的关键字
-                }
-            }
-            for (Enumeration e = request.getParameterNames(); e.hasMoreElements(); ) {
-                Object o = e.nextElement();
-                String arr = (String) o;
-                String value = request.getParameter(arr);
-                if ("ware_content".equals(arr) || "t_content".equals(arr) || "sq_content".equals(arr)) {
-                    continue;
-                }
-                if ("cat_id".equals(arr) || "model_id".equals(arr) || "sq_id".equals(arr) || "tm_id".equals(arr) || "info_id".equals(arr) || "id".equals(arr)) {
-                    try {
-                        if (value != null && !"".equals(value) && !"null".equals(value)) {
-                            int i = Integer.parseInt(value);
-                        }
-                    } catch (Exception ex) {
-                        return true;
+            if(queryString.indexOf("collURL")==-1){
+                if (servletPath.indexOf("JSON-RPC") >= 0) {
+                    String params = getRequestPayload(request);
+                    if (isTureKey(params, sqlFilterStr)) {
+                        return true;  //包含要过滤的关键字
                     }
                 }
-                if (isTureKey(value, filter_str)) {
-                    return true;  //包含要过滤的关键字
+                for (Enumeration e = request.getParameterNames(); e.hasMoreElements(); ) {
+                    Object o = e.nextElement();
+                    String arr = (String) o;
+                    String value = request.getParameter(arr);
+                    if ("ware_content".equals(arr) || "t_content".equals(arr) || "sq_content".equals(arr)) {
+                        continue;
+                    }
+                    if ("cat_id".equals(arr) || "model_id".equals(arr) || "sq_id".equals(arr) || "tm_id".equals(arr) || "info_id".equals(arr)) {
+                        try {
+                            if (value != null && !"".equals(value) && !"null".equals(value)) {
+                                int i = Integer.parseInt(value);
+                            }
+                        } catch (Exception ex) {
+                            return true;
+                        }
+                    }
+                    if (isTureKey(value, filter_str)) {
+                        return true;  //包含要过滤的关键字
+                    }
                 }
-            }
-            if ((queryString != null) && (!("".equals(queryString)))) {
-                if (isTureKey(queryString, filter_str)) {
-                    return true;  //包含要过滤的关键字
+                if ((queryString != null) && (!("".equals(queryString)))) {
+                    if (isTureKey(queryString, filter_str)) {
+                        return true;  //包含要过滤的关键字
+                    }
                 }
             }
             return false;//不包含要过滤的关键字
