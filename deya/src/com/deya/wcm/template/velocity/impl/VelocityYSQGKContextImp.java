@@ -23,7 +23,7 @@ public class VelocityYSQGKContextImp extends VelocityContextAbstract {
 	{
 		site_id = site_ids;
 		vcontext.put("site_id", site_ids);
-		YsqgkConfigBean ycb = YsqgkConfigManager.getYsqgkConfigBean();
+		YsqgkConfigBean ycb = YsqgkConfigManager.getYsqgkConfigBeanBySiteId(site_ids);
 		if(ycb != null)
 		{
 			if("form".equals(temp_type))

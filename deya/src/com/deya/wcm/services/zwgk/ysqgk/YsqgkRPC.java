@@ -21,14 +21,14 @@ public class YsqgkRPC {
      *
      * @return YsqgkConfigBean
      */
-    public static YsqgkConfigBean getYsqgkConfigBean() {
-        return YsqgkConfigManager.getYsqgkConfigBean();
-    }
+//    public static YsqgkConfigBean getYsqgkConfigBean() {
+//        return YsqgkConfigManager.getYsqgkConfigBean();
+//    }
 
 
-    public static YsqgkConfigBean getYsqgkConfigBean(String site_id) {
+    public static YsqgkConfigBean getYsqgkConfigBeanBySiteId(String site_id) {
 
-        return YsqgkConfigManager.getYsqgkConfigBean(site_id);
+        return YsqgkConfigManager.getYsqgkConfigBeanBySiteId(site_id);
     }
 
     /**

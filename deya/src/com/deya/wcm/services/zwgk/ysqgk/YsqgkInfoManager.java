@@ -24,7 +24,7 @@ public class YsqgkInfoManager {
         String ysqCode = ycf.getCode_pre() + DateUtil.getCurrentDateTime(ycf.getCode_rule()) + RandomStrg.getRandomStr(defalut_randon_str, new StringBuilder().append(ycf.getCode_num()).append("").toString());
         String query_code = "";
 
-        YsqgkConfigBean ycb = YsqgkConfigManager.getYsqgkConfigBean(ysqgk.getSite_id());
+        YsqgkConfigBean ycb = YsqgkConfigManager.getYsqgkConfigBeanBySiteId(ysqgk.getSite_id());
         query_code = RandomStrg.getRandomStr(defalut_randon_str, ycb.getQuery_num() + "");
 
         ysqgk.setYsq_code(ysqCode);
