@@ -24,6 +24,7 @@ public class Category extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+//
         String source = request.getParameter("source");
         String colid = request.getParameter("colid");
 
@@ -32,9 +33,10 @@ public class Category extends HttpServlet {
             params.put("source", source);
         }
         if (colid != null) {
-            params.put("colid", colid);
+            params.put("colid", CategoryMap.getCidByColid(colid));
         }
         List<Map> hotInfoList = DBManager.queryFList("getCategoryByParentId", params);
+        System.out.println(hotInfoList);
         JSONArray jsonArray = new JSONArray();
         if (hotInfoList != null && hotInfoList.size() > 0) {
             for (Map map : hotInfoList) {

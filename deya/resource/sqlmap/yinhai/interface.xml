@@ -36,17 +36,17 @@
         cs_info
         where 1=1
         <if test="date != null">
-            and released_dtime >= #{date}
+            and released_dtime &lt;= #{date}
         </if>
         <if test="publish_source != null">
-            and (publish_source = 'wx' or publish_source is null)
+            and (publish_source = #{publish_source} or publish_source is null)
         </if>
         GROUP BY
         publish_source,
         cat_id
         ) info
         ON ca.cat_id = info.cat_id
-        WHERE ca.site_id like 'CMS%'
+        WHERE ca.site_id like 'CMS%' and ca.parent_id = 0
         order by ca.cat_id asc
     </select>
 
@@ -68,7 +68,7 @@
             and released_dtime LIKE #{date}
         </if>
         <if test="publish_source != null">
-            and (publish_source = 'wx' or publish_source is null)
+            and (publish_source = #{publish_source} or publish_source is null)
         </if>
         GROUP BY
         cat_id,publish_source

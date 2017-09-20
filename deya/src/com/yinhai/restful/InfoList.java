@@ -38,18 +38,25 @@ public class InfoList extends HttpServlet {
         InfoListResult infoListResult = new InfoListResult();
         Map<String, String> params = new HashMap<String, String>();
         if (catId != null) {
-            params.put("cat_id",catId);
+            params.put("cat_id",CategoryMap.getCidByColid(catId));
         }
-        if (source != null) {
-            params.put("publish_source",source + "%");
-        }
+//        TODO 有数据后再放开
+//        if (source != null) {
+//            params.put("publish_source",source + "%");
+//        }
         if (start != null) {
             params.put("start",start);
             infoListResult.setStart(Integer.parseInt(start));
+        }else{
+            infoListResult.setStart(0);
+
         }
         if (limit != null) {
             params.put("limit",limit);
             infoListResult.setLimit(Integer.parseInt(limit));
+        }else{
+            infoListResult.setLimit(20);
+
         }
         List<Map> infoListByCatId = DBManager.queryFList("getInfoListByCatId", params);
         ArrayList<HotInfoBean> hotInfoBeans = new ArrayList<HotInfoBean>();
