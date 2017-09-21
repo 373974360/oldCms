@@ -8,7 +8,7 @@
     <insert id="insertCategorySource" parameterType="Map">
       insert into dz_cdgjj_source_info_category(cat_id, source) VALUES (#{catId},#{source})
     </insert>
-    <select id="getCategorySource" parameterType="Map">
+    <select id="getCategorySource" parameterType="Map" resultType="java.lang.String">
       select DISTINCT `source` from dz_cdgjj_source_info_category where cat_id = #{catId}
     </select>
 </mapper>

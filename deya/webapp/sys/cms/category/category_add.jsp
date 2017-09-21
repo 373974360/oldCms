@@ -105,7 +105,7 @@
                     console.log(source_list);
                     //选中source
                     $('input[name=cdgjj_category_source]').each(function(){
-                        if (source_list.indexOf($(this).val()) !=-1) {
+                        if (source_list.list.indexOf($(this).val()) !=-1) {
                             $(this).attr('checked', true);
                         }else{
                             $(this).removeAttr('checked');
@@ -211,7 +211,7 @@
                     insertToInfoCategory(bean.id);
                 insertCategoryReleUser(bean.id);
 
-                insertCdgjjSource(bean.id,$('input[name=cdgjj_category_source]:checked').map(function(){return this.value}).toArray().join(','))
+                insertCategorySource(bean.id,$('input[name=cdgjj_category_source]:checked').map(function(){return this.value}).toArray().join(','))
 
                 parent.msgAlert("目录信息" + WCMLang.Add_success);
                 try {
@@ -340,9 +340,9 @@
 
         //插入目录与成都公积金的分类映射
 
-        function insertCdgjjSource(c_id,source) {
+        function insertCategorySource(c_id, source) {
             console.log("设置" + c_id  + '的渠道为' + source);
-            CategoryRPC.insertCategorySource(c_id, source);
+            CategorySourceRPC.insertCategorySource(c_id, source);
         }
 
         function updateCategory() {
@@ -380,7 +380,7 @@
                 insertCategoryReleUser(cat_id);
 
 
-                insertCdgjjSource(bean.id,$('input[name=cdgjj_category_source]:checked').map(function(){return this.value}).toArray().join(','))
+                insertCategorySource(bean.id,$('input[name=cdgjj_category_source]:checked').map(function(){return this.value}).toArray().join(','))
 
 
                 parent.msgAlert("目录信息" + WCMLang.Add_success);
@@ -998,9 +998,9 @@
             <tr >
                 <th>关联渠道：</th>
                 <td>
-                    <input name="cdgjj_category_source" type="checkbox" value="pc" checked/><label>PC</label>
-                    <input name="cdgjj_category_source" type="checkbox" value="wx" checked/><label>微信</label>
-                    <input name="cdgjj_category_source" type="checkbox" value="app" checked/><label>APP</label>
+                    <label><input name="cdgjj_category_source" type="checkbox" value="pc" checked/>PC</label>
+                    <label><input name="cdgjj_category_source" type="checkbox" value="wx" checked/>微信</label>
+                    <label><input name="cdgjj_category_source" type="checkbox" value="app" checked/>APP</label>
                 </td>
             </tr>
             <tr class="hidden">

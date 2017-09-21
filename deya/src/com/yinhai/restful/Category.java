@@ -30,7 +30,7 @@ public class Category extends HttpServlet {
 
         Map<String, String> params = new HashMap<String, String>();
         if (source != null) {
-            params.put("source", source);
+            params.put("source", CategoryMap.getCategorySourceBySourceParamValue(source));
         }
         if (colid != null) {
             params.put("colid", CategoryMap.getCidByColid(colid));

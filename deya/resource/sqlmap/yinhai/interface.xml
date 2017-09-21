@@ -145,8 +145,10 @@
 
     <!-- 根据父栏目id获取子栏目信息 -->
     <select id="getCategoryByParentId" parameterType="Map" resultType="Map">
-        select cat_cname,cat_id from cs_info_category where 1=1
-        <if test="colid != null"> and parent_id = #{colid}</if>
+        select c.cat_cname,c.cat_id from cs_info_category c LEFT JOIN dz_cdgjj_source_info_category s on s.cat_id = c.cat_id where 1=1
+        <if test="colid != null"> and c.parent_id = #{colid}</if>
+        <if test="source != null"> and s.source = #{source}</if>
+
     </select>
 
     <!-- 根据栏目id查找该栏目下的信息 -->
