@@ -25,7 +25,7 @@ public class CategoryMap {
     }
 
     /**
-     * 转换参数为内部的栏目id，如果无法转换则直接返回参数
+     * 转换参数为内部的栏目id，如果无法转换则直接返回参数，表示直接使用传入的值作为栏目id
      *
      * @param colid
      * @return
@@ -40,7 +40,7 @@ public class CategoryMap {
     }
 
     /**
-     * 转换参数为内部的渠道id，如果无法转换则直接返回参数
+     * 转换参数为内部的渠道id，如果无法转换则直接返回null,表示不限制渠道
      *
      * @param value
      * @return
