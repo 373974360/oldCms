@@ -19,67 +19,75 @@ public class InfoCountServiceImpl implements InfoCountService {
     /**
      * 根据时间和站点id按发布渠道统计所有栏目的当日发布量、当日访问量、总发布量以及总访问量
      *
-     * @param qrdate
+     * @param date
      * @param siteId
      * @return
      */
     @Override
-    public InfoCountResult[] getInfoCount(String qrdate, String siteId) {
+    public InfoCountResult[] getInfoCount(String date, String siteId) {
+        //
+
+        //不同渠道各个根栏目的  今日访问、总访问、今日发表，总发表
+
         List<Map> publishSource = DBManager.queryFList("getPublishSource", null);
         InfoCountResult[] infoCountResults = null;
         if (publishSource != null && publishSource.size() > 0) {
             infoCountResults = new InfoCountResult[publishSource.size()];
+
+            //不同来源
             for (int i = 0; i < publishSource.size(); i++) {
                 Map map = publishSource.get(i);
                 InfoCountResult infoCountResult = new InfoCountResult();
                 if (map.get("publish_source") != null) {
                     Map<String, String> params = new HashMap<String, String>();
                     params.put("publish_source", map.get("publish_source").toString());
-                    if (qrdate != null && !"".equals(qrdate)) {
-                        params.put("date", qrdate + " 23:59:59");
+                    if (date != null && !"".equals(date)) {
+                        params.put("date", date + " 23:59:59");
                     }
                     if (siteId != null && !"".equals(siteId)) {
                         params.put("site_id", siteId);
                     }
-                    List<Map> visitCount = DBManager.queryFList("getVisitCount", params);
-                    params.remove("date");
-                    params.put("date", qrdate + "%");
-                    List<Map> publishCount = DBManager.queryFList("getPublishCount", params);
+                    params.put("today", date + "%");
+//                     访问量
+                    List<InfoCount> visitCount = DBManager.queryFList("getVisitCount", params);
+
+//                    发布量
+//                    List<Map> publishCount = DBManager.queryFList("getPublishCount", params);
                     ArrayList<InfoCount> infoCounts = new ArrayList<InfoCount>();
-                    for (Map visitMap : visitCount) {
-                        InfoCount infoCount = new InfoCount();
-                        infoCount.setCatId(Integer.parseInt(visitMap.get("cat_id").toString()));
-//                        infoCount.setParentId(Integer.parseInt(visitMap.get("parent_id").toString()));
-                        infoCount.setColname(visitMap.get("cat_cname").toString());
-                        infoCount.setSortno(visitMap.get("cat_sort").toString());
-//                        infoCount.setCatPosition(visitMap.get("cat_position").toString());
-                        if (visitMap.get("total") != null) {
-                            infoCount.setTpubnum(Integer.parseInt(visitMap.get("total").toString()));
-                        } else {
-                            infoCount.setTpubnum(0);
-                        }
-                        if (visitMap.get("hits") != null) {
-                            infoCount.setTvisitnum(Integer.parseInt(visitMap.get("hits").toString()));
-                        } else {
-                            infoCount.setTvisitnum(0);
-                        }
-                        if (visitMap.get("day_hits") != null) {
-                            infoCount.setVisitnum(Integer.parseInt(visitMap.get("day_hits").toString()));
-                        } else {
-                            infoCount.setVisitnum(0);
-                        }
-                        for (Map publishMap : publishCount) {
-                            if (publishMap.get("cat_id") != null && infoCount.getCatId() == Integer.parseInt(publishMap.get("cat_id").toString())) {
-                                if (publishMap.get("total") != null) {
-                                    infoCount.setPubnum(Integer.parseInt(publishMap.get("total").toString()));
-                                }
-                            }
-                        }
-                        infoCounts.add(infoCount);
+                    for (InfoCount infoCount : visitCount) {
+////                        InfoCount infoCount = new InfoCount();
+//                        infoCount.setCatId(Integer.parseInt(visitMap.get("cat_id").toString()));
+////                        infoCount.setParentId(Integer.parseInt(visitMap.get("parent_id").toString()));
+//                        infoCount.setColname(visitMap.get("cat_cname").toString());
+//                        infoCount.setSortno(visitMap.get("cat_sort").toString());
+////                        infoCount.setCatPosition(visitMap.get("cat_position").toString());
+//                        if (visitMap.get("total") != null) {
+//                            infoCount.setTpubnum(Integer.parseInt(visitMap.get("total").toString()));
+//                        } else {
+//                            infoCount.setTpubnum(0);
+//                        }
+//                        if (visitMap.get("hits") != null) {
+//                            infoCount.setTvisitnum(Integer.parseInt(visitMap.get("hits").toString()));
+//                        } else {
+//                            infoCount.setTvisitnum(0);
+//                        }
+//                        if (visitMap.get("day_hits") != null) {
+//                            infoCount.setVisitnum(Integer.parseInt(visitMap.get("day_hits").toString()));
+//                        } else {
+//                            infoCount.setVisitnum(0);
+//                        }
+//                        for (Map publishMap : publishCount) {
+//                            if (publishMap.get("cat_id") != null && infoCount.getCatId() == Integer.parseInt(publishMap.get("cat_id").toString())) {
+//                                if (publishMap.get("total") != null) {
+//                                    infoCount.setPubnum(Integer.parseInt(publishMap.get("total").toString()));
+//                                }
+//                            }
+//                        }
+//                        infoCounts.add(infoCount);
                     }
                     System.out.println(infoCounts.size() + "************");
                     infoCountResult.setSource(map.get("publish_source").toString());
-                    infoCountResult.setInfoCounts(infoCounts);
+                    infoCountResult.setInfoCounts(visitCount);
                     infoCountResults[i] = infoCountResult;
                 }
             }

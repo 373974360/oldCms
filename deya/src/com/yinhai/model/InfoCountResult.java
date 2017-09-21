@@ -1,6 +1,6 @@
 package com.yinhai.model;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Description:
@@ -13,7 +13,7 @@ public class InfoCountResult {
 
     private String source;
 
-    private ArrayList<InfoCount> infoCounts;
+    private List<InfoCount> infoCounts;
 
     public String getSource() {
         return source;
@@ -23,11 +23,11 @@ public class InfoCountResult {
         this.source = source;
     }
 
-    public ArrayList<InfoCount> getInfoCounts() {
+    public List<InfoCount> getInfoCounts() {
         return infoCounts;
     }
 
-    public void setInfoCounts(ArrayList<InfoCount> infoCounts) {
+    public void setInfoCounts(List<InfoCount> infoCounts) {
         this.infoCounts = infoCounts;
     }
 }
