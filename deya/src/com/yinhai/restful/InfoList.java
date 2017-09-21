@@ -43,7 +43,7 @@ public class InfoList extends HttpServlet {
         if (catId != null) {
             params.put("cat_id",CategoryMap.getCidByColid(catId));
         }
-//        TODO 有数据后再放开
+//        通过渠道限制了栏目，不需要通过来源查询了
 //        if (source != null) {
 //            params.put("publish_source",source + "%");
 //        }

@@ -15,103 +15,53 @@
 
     <!-- *****************根据渠道信息获取每个栏目的信息发布和信息访问统计******************* -->
     <select id="getVisitCount" parameterType="Map" resultType="com.yinhai.model.InfoCount">
+
+
         SELECT
-        c.id        AS catId,
-        c.cat_cname AS colname,
-        c.cat_sort  AS sortno,
-        (
-        SELECT sum(hits)
+        c.id                                                                                   AS catId,
+        c.cat_cname                                                                            AS colname,
+        c.cat_sort                                                                             AS sortno,
+        (SELECT ifnull(sum(hits), 0)
         FROM cs_info
         WHERE cat_id IN (
-        SELECT id
-        FROM cs_info_category
-        WHERE cat_position LIKE concat(c.cat_position, '%')
-        )
-                <if test="date != null">
-                    and released_dtime &lt;= #{date}
-                </if>
-                 <if test="publish_source != null">
-                     and (publish_source = #{publish_source} or publish_source is null)
-                 </if>
-        )           AS tvisitnum,
-        (
-        SELECT sum(day_hits)
+        SELECT y.id
+        FROM cs_info_category y LEFT JOIN dz_cdgjj_source_info_category s ON s.cat_id = y.cat_id
+        WHERE y.cat_position LIKE concat(c.cat_position, '%') AND s.source = #{publish_source}
+        )  <if test="date != null">
+        and released_dtime &lt;= #{date}
+    </if>
+        AND info_status = 8 AND final_status = 0)                                       AS tvisitnum,
+        (SELECT ifnull(sum(day_hits), 0)
         FROM cs_info
         WHERE cat_id IN (
-        SELECT id
-        FROM cs_info_category
-        WHERE cat_position LIKE concat(c.cat_position, '%')
-
+        SELECT y.id
+        FROM cs_info_category y LEFT JOIN dz_cdgjj_source_info_category s ON s.cat_id = y.cat_id
+        WHERE y.cat_position LIKE concat(c.cat_position, '%') AND s.source = #{publish_source}
         )
-
-               <if test="today != null">
-                     and released_dtime LIKE #{today}
-                 </if>
-                 <if test="publish_source != null">
-                     and (publish_source = #{publish_source} or publish_source is null)
-                 </if>
-        )           AS visitnum,
-        (
-        SELECT count(*)
+        <if test="today != null">
+            and released_dtime LIKE #{today}
+        </if> AND info_status = 8 AND final_status = 0) AS visitnum,
+        (SELECT ifnull(count(*), 0)
         FROM cs_info
         WHERE cat_id IN (
-        SELECT id
-        FROM cs_info_category
-        WHERE cat_position LIKE concat(c.cat_position, '%')
-        )
-                <if test="date != null">
-                    and released_dtime &lt;= #{date}
-                </if>
-                 <if test="publish_source != null">
-                     and (publish_source = #{publish_source} or publish_source is null)
-                 </if>
-        )           AS tpubnum,
-        (
-        SELECT count(*)
+        SELECT y.id
+        FROM cs_info_category y LEFT JOIN dz_cdgjj_source_info_category s ON s.cat_id = y.cat_id
+        WHERE y.cat_position LIKE concat(c.cat_position, '%') AND s.source = #{publish_source}
+        ) <if test="date != null">
+        and released_dtime &lt;= #{date}
+    </if> AND info_status = 8 AND final_status = 0)                          AS tpubnum,
+        (SELECT ifnull(count(*), 0)
         FROM cs_info
         WHERE cat_id IN (
-        SELECT id
-        FROM cs_info_category
-        WHERE cat_position LIKE concat(c.cat_position, '%')
-        )
-                 <if test="today != null">
-                     and released_dtime LIKE #{today}
-                 </if>
-                 <if test="publish_source != null">
-                     and (publish_source = #{publish_source} or publish_source is null)
-                 </if>
-        )           AS pubnum
+        SELECT y.id
+        FROM cs_info_category y LEFT JOIN dz_cdgjj_source_info_category s ON s.cat_id = y.cat_id
+        WHERE y.cat_position LIKE concat(c.cat_position, '%') AND s.source = #{publish_source}
+        ) <if test="today != null">
+        and released_dtime LIKE #{today}
+    </if> AND info_status = 8 AND final_status = 0)                         AS pubnum
         FROM cs_info_category c
         WHERE c.parent_id = 0 AND c.site_id LIKE 'CMS%'
         ORDER BY c.cat_id ASC
-    </select>
-
-    <!-- *****************根据日期获取每个栏目当天的信息发布总量******************* -->
-    <select id="getPublishCount" parameterType="Map" resultType="Map">
-        SELECT
-        total,
-        ca.cat_id
-        FROM
-        cs_info_category ca
-        LEFT JOIN (
-        SELECT
-        count(*) total,
-        cat_id,publish_source
-        FROM
-        cs_info
-        where 1=1
-        <if test="date != null">
-            and released_dtime LIKE #{date}
-        </if>
-        <if test="publish_source != null">
-            and (publish_source = #{publish_source} or publish_source is null)
-        </if>
-        GROUP BY
-        cat_id,publish_source
-        ) info
-        ON ca.cat_id = info.cat_id
-        WHERE ca.site_id like 'CMS%'
-        order by ca.cat_id asc
     </select>
 
     <!-- 统计访问量排行前十条信息 -->
