@@ -38,6 +38,7 @@ public class InfoContent extends HttpServlet {
         HotInfoBean hotInfoBean = null;
         if (infoContentByInfoId != null && infoContentByInfoId.size() > 0) {
             hotInfoBean = new HotInfoBean(infoContentByInfoId.get(0));
+            hotInfoBean.setNewsurl(InfoList.SERVER_URL+hotInfoBean.getNewsurl());
         }
         String s = JSON.toJSONString(hotInfoBean);
         response.setCharacterEncoding("UTF-8");

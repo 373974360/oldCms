@@ -24,6 +24,9 @@ import java.util.Map;
  */
 public class InfoList extends HttpServlet {
 
+    public static final String SERVER_URL = "http://124.114.203.213:9999";
+
+
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         this.doPost(request, response);
@@ -63,6 +66,8 @@ public class InfoList extends HttpServlet {
         if (infoListByCatId != null && infoListByCatId.size() > 0) {
             for (Map m : infoListByCatId) {
                 HotInfoBean hotInfoBean = new HotInfoBean(m);
+                hotInfoBean.setNewsurl(SERVER_URL +hotInfoBean.getNewsurl());
+
                 hotInfoBeans.add(hotInfoBean);
             }
         }
