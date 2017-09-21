@@ -125,5 +125,9 @@
         <mapper resource="sqlmap/project/searchkeys.xml"/>
         <mapper resource="sqlmap/system/rmiserverconf.xml"/>
         <mapper resource="sqlmap/appeal/sqmyddc.xml"/>
+
+
+        <mapper resource="sqlmap/yinhai/category_source.xml"/>
+        <mapper resource="sqlmap/yinhai/interface.xml"/>
     </mappers>
 </configuration>

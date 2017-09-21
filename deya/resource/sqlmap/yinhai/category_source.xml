@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="category_source">
+    <update id="deleteCategorySourceByCatId" parameterType="Map">
+      delete from dz_cdgjj_source_info_category WHERE  cat_id = #{catId}
+    </update>
+    <insert id="insertCategorySource" parameterType="Map">
+      insert into dz_cdgjj_source_info_category(cat_id, source) VALUES (#{catId},#{source})
+    </insert>
+    <select id="getCategorySource" parameterType="Map">
+      select DISTINCT `source` from dz_cdgjj_source_info_category where cat_id = #{catId}
+    </select>
+</mapper>
