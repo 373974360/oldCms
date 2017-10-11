@@ -2,6 +2,7 @@ package com.deya.wcm.services.cms.info;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import com.deya.util.jconfig.JconfigFactory;
 import com.deya.util.jconfig.JconfigUtil;
@@ -26,16 +27,16 @@ public class ModelConfig {
 	private static void readConfig()
 	{
 		JconfigUtil jf = JconfigFactory.getJconfigUtilInstance("model_config");
-		String[] modelNames = jf.getCategorys();
-		for(int i=0; i< modelNames.length; i++)
+		Set<String> categorys = jf.getCategorys();
+		for(String s : categorys)
 		{
 			Map<String, String> model_values_mp = new HashMap<String, String>();			
-			model_values_mp.put("TableName", jf.getProperty("TableName", "", modelNames[i]));
-			model_values_mp.put("AddSQL", jf.getProperty("AddSQL", "", modelNames[i]));
-			model_values_mp.put("UpdateSQL", jf.getProperty("UpdateSQL", "", modelNames[i]));
-			model_values_mp.put("SelectSQL", jf.getProperty("SelectSQL", "", modelNames[i]));
-			model_values_mp.put("class_name", jf.getProperty("class_name", "", modelNames[i]));
-			mp.put(modelNames[i], model_values_mp);
+			model_values_mp.put("TableName", jf.getProperty("TableName", "", s));
+			model_values_mp.put("AddSQL", jf.getProperty("AddSQL", "", s));
+			model_values_mp.put("UpdateSQL", jf.getProperty("UpdateSQL", "", s));
+			model_values_mp.put("SelectSQL", jf.getProperty("SelectSQL", "", s));
+			model_values_mp.put("class_name", jf.getProperty("class_name", "", s));
+			mp.put(s, model_values_mp);
 		}
 	}
 	

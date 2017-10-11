@@ -3,7 +3,9 @@ package com.deya.wcm.services.control.site;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 import com.deya.util.FormatUtil;
 import com.deya.util.JarManager;
@@ -566,42 +568,37 @@ public class SiteOperation {
 	public static void cloneSite(String site_id,String s_site_id)
 	{
 		JconfigUtil bc = JconfigFactory.getJconfigUtilInstance("startListener");
-		String[] class_arr = bc.getPropertyNamesByCategory("clonesiteclass");
-		if(class_arr != null && class_arr.length > 0)
-    	{			 
-			for(int i=class_arr.length;i > 0;i--)
-    		{
-				String class_path = bc.getProperty(class_arr[i-1], "", "clonesiteclass");
-				try {
-					Class c = Class.forName(class_path);
-					ICloneSite ics = (ICloneSite)c.newInstance();
-					ics.cloneSite(site_id, s_site_id);
-				} catch (InstantiationException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-    		}
-    	}
+		Set<String> class_arr = bc.getPropertyNamesByCategory("clonesiteclass");
+		Iterator<String> iterator = class_arr.iterator();
+		while (iterator.hasNext()){
+			String class_path = bc.getProperty(iterator.next(), "", "clonesiteclass");
+			try {
+				Class c = Class.forName(class_path);
+				ICloneSite ics = (ICloneSite)c.newInstance();
+				ics.cloneSite(site_id, s_site_id);
+			} catch (InstantiationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	public static void main(String[] args)
 	{
 		JconfigUtil bc = JconfigFactory.getJconfigUtilInstance("startListener");
-		String[] class_arr = bc.getPropertyNamesByCategory("clonesiteclass");
-		if(class_arr != null && class_arr.length > 0)
-    	{			 
-			for(int i=class_arr.length;i > 0;i--)
-    		{
-				String class_path = bc.getProperty(class_arr[i-1], "", "clonesiteclass");
-				System.out.println(class_arr[i-1]+"   "+bc.getProperty(class_arr[i-1], "", "clonesiteclass"));
-    		}
-    	}
+		Set<String> class_arr = bc.getPropertyNamesByCategory("clonesiteclass");
+		Iterator<String> iterator = class_arr.iterator();
+		while (iterator.hasNext()){
+			String next = iterator.next();
+			String class_path = bc.getProperty(next, "", "clonesiteclass");
+			System.out.println(next+"   "+bc.getProperty(next, "", "clonesiteclass"));
+		}
 		/*
 		try {
 			Class c = Class.forName("com.deya.wcm.services.page.PageTimerImpl");

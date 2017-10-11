@@ -4,6 +4,10 @@ import com.deya.util.jconfig.JconfigFactory;
 import com.deya.util.jconfig.JconfigUtil;
 import com.deya.util.quartz.CicroTaskScheduler;
 import org.quartz.Job;
+
+import java.util.Iterator;
+import java.util.Set;
+
 public class StartUpTask{
 	private static final String groupName = "timerTask";
 
@@ -22,16 +26,14 @@ public class StartUpTask{
 	{
 		try
 		{
-            String[] class_arr = bc.getPropertyNamesByCategory("timerlistenerclass");
-            if(class_arr != null && class_arr.length > 0)
-            {
-                for (String classStr : class_arr) {
-                    Job cl = (Job)Class.forName(classStr).newInstance();
-                    CicroTaskScheduler.addCornTask(classStr, groupName, cl, bc.getProperty(classStr,"","timerlistenerclass"));
-                }
-            }
+            Set<String> class_arr = bc.getPropertyNamesByCategory("timerlistenerclass");
+			Iterator<String> iterator = class_arr.iterator();
+			while (iterator.hasNext()){
+				String next = iterator.next();
+				Job cl = (Job)Class.forName(next).newInstance();
+				CicroTaskScheduler.addCornTask(next, groupName, cl, bc.getProperty(next,"","timerlistenerclass"));
+			}
 
-			
 			/*Job cl_d = (Job)Class.forName("com.deya.wcm.timer.TimerTaskJobForDay").newInstance();
 			CicroTaskScheduler.addCornTask("wcm_timer_day", "timerTask_day", cl_d, "00 00 00 * * ?");
 

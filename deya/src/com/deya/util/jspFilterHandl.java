@@ -18,9 +18,9 @@ import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
 public class jspFilterHandl {
-    private static String[] filter_str = {"%df", "%5c", "%27", "%20", "%22", "%27", "%3E", "%3e", "%3C", "%3c", "\\", "union", "--", "1=1", "and ", "concat", "acustart", "application", "script", "location", "limit ", "alert", "iframe", "set-cookie", "+", "or ", "drop table", "asc\\(", "mid\\(", "char\\(", "net user", "exists", "alter",
-            "+acu+", "onmouseover", "header", "exec ", "insert ", "select ", "delete ", "trancate", "update ", "updatexml", "extractvalue", "href=", "data:text", "declare", "master", "execute", "xp_cmdshell", "netlocalgroup", "count\\(", "restore", "floor", "ExtractValue", "UpdateXml",
-            "injected", "ACUstart", "ACUend", "():;", "acu:Expre", "window.location.href", "document", "parameter: ", "<OBJECT", "javascript", "confirm", "<script>", "</script>", "..", "cat ", "click", "function", "prompt(", "<", ">", "'", "“", "”", "‘", "’"};
+    private static String[] filter_str = {"%df", "%5c", "%27", "%20", "%22", "%27","%28","%29", "%3E", "%3e", "%3C", "%3c", "\\", "union", "--", "1=1", "and ", "concat", "acustart", "application", "script", "location", "limit ", "alert", "iframe", "set-cookie", "+", "or ", "drop table", "asc\\(", "mid\\(", "char\\(", "net user", "exists", "alter",
+            "+acu+", "onmouseover", "header", "exec ", "insert ", "select ","select+1", "delete ", "trancate", "update ", "updatexml", "extractvalue", "href=", "data:text", "declare", "master", "execute", "xp_cmdshell", "netlocalgroup", "count\\(", "restore", "floor", "ExtractValue", "UpdateXml",
+            "injected", "ACUstart", "ACUend", "():;", "acu:Expre", "window.location.href", "document", "parameter: ", "<OBJECT", "javascript", "confirm", "<script>", "</script>", "..", "cat ", "click", "function", "prompt(", "<", ">","'", "“", "”", "‘", "’","�"};
     private static String no_filter_jsp;
 
     private static String[] sqlFilterStr = {"exec ", "insert ", "select ", "delete ", "trancate", "update ", "drop table"};
@@ -45,8 +45,8 @@ public class jspFilterHandl {
                 if (s != null && !"".equals(s)) {
                     s = s.toString();
                     try {
-                        content = URLDecoder.decode(contentold.replaceAll("%20", " ").replaceAll("&lt;", "<").replaceAll("&gt;", ">"), "utf-8").toLowerCase();
-                        content = (content + URLDecoder.decode(contentold, "utf-8")).replaceAll("<select", "");
+                        content = contentold.replaceAll("%20", " ").replaceAll("&lt;", "<").replaceAll("&gt;", ">").toLowerCase();
+                        content = (content + contentold).replaceAll("<select", "");
                     } catch (Exception e1) {
                         content = contentold.replaceAll("%20", " ").replaceAll("&lt;", "<").replaceAll("&gt;", ">").toLowerCase();
                         content = (content + contentold).replaceAll("<select", "");

@@ -43,7 +43,7 @@ public abstract class VelocityContextAbstract {
 		//从配置文件中得来
 		try {
 			JconfigUtil jc = JconfigFactory.getJconfigUtilInstance("velocityTemplate");
-			String[] classes = jc.getPropertyNamesByCategory("LoaderTemplateContextClass");
+			Set<String> classes = jc.getPropertyNamesByCategory("LoaderTemplateContextClass");
 			for(String name : classes){
 				try{
 					map.put(name, Class.forName(jc.getProperty(name, null, "LoaderTemplateContextClass")));

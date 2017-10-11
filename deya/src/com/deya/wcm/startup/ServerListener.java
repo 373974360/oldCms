@@ -21,6 +21,8 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
+import java.util.Iterator;
+import java.util.Set;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.servlet.ServletContextEvent;
@@ -48,22 +50,20 @@ public class ServerListener
             registerRMI(namingContext);
 
             JconfigUtil bc = JconfigFactory.getJconfigUtilInstance("startListener");
-            String[] class_arr = bc.getPropertyNamesByCategory("startloadclass");
-            if ((class_arr != null) && (class_arr.length > 0)) {
-                DebugLog.info("tomcat startup load classes begin");
-
-                for (int i = class_arr.length; i > 0; i--) {
-                    try {
-                        //System.out.println("class_arr---" + i + "   " + class_arr[(i - 1)] + "   " + bc.getProperty(class_arr[(i - 1)], "", "startloadclass"));
-                        Class.forName(bc.getProperty(class_arr[(i - 1)], "", "startloadclass"));
-                        DebugLog.info(bc.getProperty(class_arr[(i - 1)], "", "startloadclass"));
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+            Set<String> class_arr = bc.getPropertyNamesByCategory("startloadclass");
+            Iterator<String> iterator = class_arr.iterator();
+            DebugLog.info("tomcat startup load classes begin");
+            while (iterator.hasNext()) {
+                try {
+                    //System.out.println("class_arr---" + i + "   " + class_arr[(i - 1)] + "   " + bc.getProperty(class_arr[(i - 1)], "", "startloadclass"));
+                    String next = iterator.next();
+                    Class.forName(bc.getProperty(next, "", "startloadclass"));
+                    DebugLog.info(bc.getProperty(next, "", "startloadclass"));
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-                DebugLog.info("tomcat startup load classes end");
             }
-
+            DebugLog.info("tomcat startup load classes end");
             checkLicense();
         } catch (Exception e) {
             e.printStackTrace(System.out);

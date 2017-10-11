@@ -1,48 +1,40 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by Fernflower decompiler)
+//
+
 package com.deya.util.jconfig;
 
 import com.deya.util.FormatUtil;
+import java.io.File;
 
 public class JconfigFactory {
-	
-	private static String defaultPath = JconfigFactory.class.getClassLoader().getResource("AllConfigDescrion_WCM.xml").getFile();
-	
-	private static JconfigUtil jfu = null;	
-				
-	private JconfigFactory(){
-		
-	}	
-	
-	public static JconfigUtil getJconfigUtilInstance(String configName){	
-				
-		String AllConfigPath = null;
-		if(AllConfigPath == null)
-			AllConfigPath = defaultPath;
-		if(jfu == null)
-			jfu = new JconfigUtil(AllConfigPath);
-		
-		String path = jfu.getProperty("path", null, configName);
-		
-		if(path == null)
-			return null;
-		else
-			return new JconfigUtil(path);
+	private static String configFileLocation = "/deya/cms/shared/classes";
+	private static String defaultPath;
+	private static JconfigUtil jfu;
+
+	private JconfigFactory() {
 	}
 
-	public static void setConfigInfo(String path, String configName){
-		if(jfu == null)
+	public static JconfigUtil getJconfigUtilInstance(String configName) {
+		if (jfu == null) {
 			jfu = new JconfigUtil(defaultPath);
-		jfu.setProperty("path", path, configName);
+		}
+
+		String path = jfu.getProperty("path", (String)null, configName);
+		return new JconfigUtil((new File(configFileLocation, path)).getAbsolutePath());
 	}
-	
-	public static String getAllConfigPath()
-	{
+
+	public static String getAllConfigPath() {
 		return defaultPath;
 	}
-	
-	public static void main(String[] args)
-	{		
-		//System.out.println(getAllConfigPath());
+
+	public static void main(String[] args) {
 		System.out.println(FormatUtil.formatPath(JconfigUtilContainer.bashConfig().getProperty("path", "", "log4jFile")));
 	}
-}
 
+	static {
+		defaultPath = (new File(configFileLocation, "AllConfigDescrion_WCM.xml")).getAbsolutePath();
+		jfu = null;
+	}
+}
