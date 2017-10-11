@@ -329,10 +329,10 @@
                 <form id="form1" name="form1" method="post" action="login.jsp" target="submitFrame">
                     <span class="left tp_name" style="padding-left:202px;">用户名：</span>
                     <span class="left"><input id="username" name="username" type="text" class="loginInput"
-                                              maxlength="20" value=""/></span>
+                                              maxlength="20" value="" autocomplete="off"/></span>
                     <span class="left tp_name">密码：</span>
                     <span class="left"><input id="password" name="password" type="password" class="loginInput"
-                                              maxlength="20" value=""/></span>
+                                              maxlength="20" value="" autocomplete="off"/></span>
                     <span class="left tp_name">验证码：</span>
                     <span class="left "><input id="auth_code" name="auth_code" type="text" class="loginInput"
                                                style="width:52px;" maxlength="6" value=""/>&nbsp;&nbsp;<img id="img"
