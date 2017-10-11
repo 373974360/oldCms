@@ -35,7 +35,7 @@ public class YsqgkConfigDAO {
 	{
 		return (YsqgkConfigBean)DBManager.queryFObj("getYsqgkConfigBean","");
 	}
-	public static YsqgkConfigBean getYsqgkConfigBean(String site_id)
+	public static YsqgkConfigBean getYsqgkConfigBeanBySiteId(String site_id)
 	{
 		Map<String,String> map = new HashMap<String,String>();
 		map.put("site_id",site_id);

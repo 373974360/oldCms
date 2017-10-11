@@ -26,8 +26,8 @@ public class CollectionDataRPC {
         return CollectionDataManager.getRuleList(m);
     }
 
-    public static List<CollRuleBean> getAllCollRuleBeanList() {
-        return CollectionDataManager.getAllCollRuleBeanList();
+    public static List<CollRuleBean> getAllCollRuleBeanList(Map<String, String> m) {
+        return CollectionDataManager.getAllCollRuleBeanList(m);
     }
 
     public static String getRuleListCount() {

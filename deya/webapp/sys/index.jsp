@@ -131,7 +131,7 @@ function getDeptTreeJsonData()
 				<div id="top_right" class="right textRight" >
 					<span class="blank9"></span>
 					<div id="help_or_exit" class="textRight" >
-					<a href="javascript:;" onclick="">帮助</a> | <a href="http://118.112.188.111:6537/Portal/logout" target="_self">注销</a></div>
+					<a href="javascript:;" onclick="">帮助</a> | <a href="javascript:loginOut();">注销</a></div>
 					<span class="blank18"></span>
 					<div id="user_info">
 						<span id="user_name"></span>，欢迎您！

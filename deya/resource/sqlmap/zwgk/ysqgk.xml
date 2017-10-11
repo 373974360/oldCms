@@ -368,6 +368,9 @@
 					<if test="highSearchString != null">
 					 	${highSearchString}
 					</if>
+					<if test="publish_state != null">
+						and publish_state = #{publish_state}
+					</if>
 				</where>
 	</sql>
 	<select id="getYsqgkLists" parameterType="Map" resultType="com.deya.wcm.bean.zwgk.ysqgk.YsqgkListBean">  

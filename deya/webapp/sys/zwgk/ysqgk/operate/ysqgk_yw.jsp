@@ -25,7 +25,7 @@
             //上传文档
             publicUploadDOC("uploadify",true,false,"",0,'',site_id,"saveFile_url");
 
-            defaultBean = YsqgkRPC.getYsqgkConfigBean('<%=site_id%>');
+            defaultBean = YsqgkRPC.getYsqgkConfigBeanBySiteId('<%=site_id%>');
             if(defaultBean)
             {
                 $("#YsqgkConfig_table").autoFill(defaultBean);

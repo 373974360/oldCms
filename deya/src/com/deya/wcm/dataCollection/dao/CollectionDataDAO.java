@@ -18,8 +18,8 @@ public class CollectionDataDAO {
         return DBManager.queryFList("getRuleList", m);
     }
 
-    public static List<CollRuleBean> getAllCollRuleBeanList() {
-        return DBManager.queryFList("getAllCollRuleBeanList", "");
+    public static List<CollRuleBean> getAllCollRuleBeanList(Map<String, String> m) {
+        return DBManager.queryFList("getAllCollRuleBeanList", m);
     }
 
     public static String getRuleListCount() {

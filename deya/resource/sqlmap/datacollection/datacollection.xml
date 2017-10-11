@@ -108,6 +108,9 @@
         <if test="rcat_id != null">
             and rcat_id=#{rcat_id}
         </if>
+		<if test="site_id != null">
+			and site_id=#{site_id}
+		</if>
         order by ${sort_name} ${sort_type}
         limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
 	</select>
@@ -129,6 +132,11 @@
 	
 	<select id="getAllCollRuleBeanList" resultType="com.deya.wcm.dataCollection.bean.CollRuleBean">
 		select * from cs_collection
+		<where>
+			<if test="site_id != null">
+				and site_id=#{site_id}
+			</if>
+		</where>
 	</select>
 	
 	<select id="getRuleListCount" resultType="java.lang.String">
@@ -260,6 +268,9 @@
 			<if test="eTime != null">
 				<![CDATA[ and cart.coll_time <= #{eTime}]]>
 			</if>
+			<if test="site_id != null">
+				and site_id=#{site_id}
+			</if>
 		</where>
 	</sql>
 	
@@ -282,7 +293,7 @@
 	
 	<select id="getCollDataList_mysql" parameterType="Map" resultType="com.deya.wcm.dataCollection.bean.ArticleInfoBean">
 		select cart.* , cle.cat_name,cle.title from cs_collection cle, cs_artInfo cart
-			<include refid="getCollInfoListForDB_sql_conn" /> 
+			<include refid="getCollInfoListForDB_sql_conn" />
 	            order by ${sort_name} ${sort_type} 
 	            limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}  
 	</select>

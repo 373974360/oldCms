@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="priceMonitor">
+    <sql id="getProductTypeList_sql_conn">
+        where status != '-1'
+        <if test="marketId != null">
+            and marketId = #{marketId}
+        </if>
+        <if test="typeName != null">
+            and typeName like  '%#{typeName}%'
+        </if>
+        <if test="status != null">
+            and status = #{status}
+        </if>
+    </sql>
+    <select id="getProductTypeCount" parameterType="Map" resultType="java.lang.String" >
+        select count(id) from dz_productType
+        <include refid="getProductTypeList_sql_conn"/>
+    </select>
+
+    <insert id="insertProductType" parameterType="com.deya.project.priceMonitor.ProductTypeBean">
+        insert into dz_productType(
+        id,
+        marketId,
+        typeName,
+        comments,
+        addTime,
+        status
+        ) values(
+        #{id},
+        #{marketId},
+        #{typeName},
+        #{comments},
+        #{addTime},
+        #{status}
+        )
+    </insert>
+
+    <update id="updateProductType"  parameterType="com.deya.project.priceMonitor.ProductTypeBean">
+        update dz_productType set
+        marketId=#{marketId},
+        typeName=#{typeName},
+        comments=#{comments},
+        addTime=#{addTime},
+        status=#{status}
+        where id=#{id}
+    </update>
+
+
+
+    <update id="changeStatus" parameterType="Map" >
+        update dz_productType set status = #{status}  where id in (${ids})
+    </update>
+
+    <!-- 根据条件删除纠错信息 -->
+    <update id="deleteProductType" parameterType="Map" >
+        update dz_productType set status = '-1' where id in (${ids})
+
+    </update>
+
+    <select id="getAllProductType" resultType="com.deya.project.priceMonitor.ProductTypeBean" >
+        select id,marketId,typeName,comments,addTime,status from dz_productType <include refid="getProductTypeList_sql_conn"/>
+        order by id asc
+    </select>
+
+    <select id="getProductTypeList" parameterType="Map" resultType="com.deya.project.priceMonitor.ProductTypeBean" >
+        select * from (
+        select row_.*, rownum rownum_ from (
+        select id,marketId,typeName,comments,addTime,status from dz_productType <include refid="getProductTypeList_sql_conn"/>
+        <if test="orderby!=null and orderby!=''">         order by ${orderby}         </if>
+        <![CDATA[
+		        ) row_ where rownum <=#{page_size,jdbcType=INTEGER}+#{start_num,jdbcType=INTEGER}
+	    	) where rownum_ >=#{start_num,jdbcType=INTEGER} + 1
+	    ]]>
+    </select>
+
+    <select id="getProductTypeList_mysql" parameterType="Map" resultType="com.deya.project.priceMonitor.ProductTypeBean" >
+        select id,marketId,typeName,comments,addTime,status from dz_productType <include refid="getProductTypeList_sql_conn"/>
+        <if test="orderby!=null and orderby!=''">         order by ${orderby}         </if> limit #{start_num,jdbcType=INTEGER},#{page_size,jdbcType=INTEGER}
+    </select>
+
+    <select id="getProductTypeList_mssql" parameterType="Map" resultType="com.deya.project.priceMonitor.ProductTypeBean" >
+        select top #{page_size} id,marketId,typeName,comments,addTime,status
+        from dz_productType
+        <include refid="getProductTypeList_sql_conn"/>
+        and id not in
+        (select top #{start_num} id
+        from dz_productType
+        <include refid="getProductTypeList_sql_conn"/>
+        <if test="orderby!=null and orderby!=''">         order by ${orderby}         </if> )
+        <if test="orderby!=null and orderby!=''">         order by ${orderby}         </if>
+    </select>
+
+    <select id="getProductTypeBean"  parameterType="Map" resultType="com.deya.project.priceMonitor.ProductTypeBean" >
+        select id,marketId,typeName,comments,addTime,status from dz_productType where id=#{id}
+    </select>
+
+</mapper>
