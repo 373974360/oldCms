@@ -111,4 +111,12 @@
         <property name="3" value="/guestbook/submit.jsp"/>
     </category>
 
+    <category name="sendMessage">
+        <property name="sendUrl" value="http://api.submail.cn/message/multixsend.json"/>
+        <property name="templateUrl" value="http://api.submail.cn/message/template.json"/>
+        <property name="appId" value="15405"/>
+        <property name="appKey" value="9cc98c9b60670c7aa00bc8db6c770ddf"/>
+        <property name="projectId" value="l8XWU1"/>
+    </category>
+
 </properties>
