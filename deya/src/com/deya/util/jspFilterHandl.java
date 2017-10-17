@@ -78,7 +78,7 @@ public class jspFilterHandl {
                 queryString = "";
             }
             if(queryString.indexOf("collURL")==-1){
-                if (servletPath.indexOf("JSON-RPC") >= 0) {
+                if (servletPath.indexOf("/sys/JSON-RPC") >= 0 || servletPath.indexOf("/manager/JSON-RPC") >= 0 ) {
                     String params = getRequestPayload(request);
                     if (isTureKey(params, sqlFilterStr)) {
                         return true;  //包含要过滤的关键字
