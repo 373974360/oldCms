@@ -440,7 +440,6 @@ public class CategoryManager implements ISyncCatch{
 			for(int i : set){
 				cgb = category_m.get(i);
 				if(cgb.getCat_position().startsWith(cat_position) && !cat_position.equals(cgb.getCat_position()) && site_id.equals(cgb.getSite_id())){
-					System.out.println("**********************"+cgb.getCat_id());
 					cat_ids += ","+cgb.getCat_id();
 				}
 			}
