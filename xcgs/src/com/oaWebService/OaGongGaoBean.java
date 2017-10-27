@@ -1,4 +1,4 @@
-package com.webService;
+package com.oaWebService;
 
 /**
  * Created with IntelliJ IDEA.

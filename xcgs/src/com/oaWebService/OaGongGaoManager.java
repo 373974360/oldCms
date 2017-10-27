@@ -1,4 +1,4 @@
-package com.webService;
+package com.oaWebService;
 
 /**
  * Created with IntelliJ IDEA.
@@ -29,8 +29,7 @@ import org.apache.axis2.rpc.client.RPCServiceClient;
 
 public class OaGongGaoManager {
 
-    public static void getOaData()
-    {
+    public static void getOaData() {
         String url = "http://webserviceiis.xayc.cbpm:7010/OA.asmx";
 
         String action = "http://tempuri.org/GetOAContractByName";
@@ -41,21 +40,19 @@ public class OaGongGaoManager {
 
         String tns = "";
 
-        String[] pars = {"ViewName","ODBCName"};
+        String[] pars = {"ViewName", "ODBCName"};
 
-        String[] vals = {"vwAllBoardDocWeb","LOTUSGONGGAO"};
+        String[] vals = {"vwAllBoardDocWeb", "LOTUSGONGGAO"};
 
         OMElement result = null;
 
-        result = getOAContractByName(url,action, methodStr, namespace, tns, pars, vals);
+        result = getOAContractByName(url, action, methodStr, namespace, tns, pars, vals);
 
         List<OaGongGaoBean> list = getResults(result);
 
-        if(list != null && list.size() > 0)
-        {
+        if (list != null && list.size() > 0) {
             System.out.println("获取OA信息总条数：" + list.size());
-            for(OaGongGaoBean ggbean : list)
-            {
+            for (OaGongGaoBean ggbean : list) {
                 if (ggbean.getUrl() != null && !"".equals(ggbean.getUrl())) {
                     if (!getInfoByUrl(ggbean.getUrl()) && ggbean.getTitle() != null && !"".equals(ggbean.getTitle())) {
                         GKInfoBean ifb = new GKInfoBean();
@@ -87,7 +84,7 @@ public class OaGongGaoManager {
         }
     }
 
-    public static OMElement getOAContractByName(String url,String action,String methodStr,String namespace,String tns,String[] pars,String[] vals){
+    public static OMElement getOAContractByName(String url, String action, String methodStr, String namespace, String tns, String[] pars, String[] vals) {
 
         OMElement result = null;
 
@@ -95,9 +92,9 @@ public class OaGongGaoManager {
 
             RPCServiceClient serviceClient = new RPCServiceClient();
 
-            serviceClient.setOptions(getClientOptions(url,action));
+            serviceClient.setOptions(getClientOptions(url, action));
 
-            result = serviceClient.sendReceive(getOMMethod(methodStr,namespace,tns,pars,vals));
+            result = serviceClient.sendReceive(getOMMethod(methodStr, namespace, tns, pars, vals));
 
         } catch (AxisFault e) {
 
@@ -109,7 +106,7 @@ public class OaGongGaoManager {
 
     }
 
-    public static Options getClientOptions(String url,String action){
+    public static Options getClientOptions(String url, String action) {
 
         //有抽象OM工厂获取OM工厂，创建request SOAP包
 
@@ -139,7 +136,7 @@ public class OaGongGaoManager {
 
     }
 
-    public static OMElement getOMMethod(String methodStr,String namespace,String tns,String[] pars,String[] vals){
+    public static OMElement getOMMethod(String methodStr, String namespace, String tns, String[] pars, String[] vals) {
 
         //有抽象OM工厂获取OM工厂，创建request SOAP包
 
@@ -155,11 +152,11 @@ public class OaGongGaoManager {
 
         //添加方法参数名和参数值
 
-        for(int i=0;i<pars.length;i++){
+        for (int i = 0; i < pars.length; i++) {
 
             //创建方法参数OMElement元素
 
-            OMElement param = fac.createOMElement(pars[i],nms);
+            OMElement param = fac.createOMElement(pars[i], nms);
 
             //设置键值对 参数值
 
@@ -197,19 +194,19 @@ public class OaGongGaoManager {
 
             Iterator innerItr = result.getChildElements();
 
-            while(innerItr.hasNext()){
+            while (innerItr.hasNext()) {
 
                 OMElement result2 = (OMElement) innerItr.next();
 
                 Iterator innerItr2 = result2.getChildElements();
 
-                while(innerItr2.hasNext()){
+                while (innerItr2.hasNext()) {
 
                     OMElement result3 = (OMElement) innerItr2.next();
 
                     Iterator innerItr3 = result3.getChildElements();
 
-                    while(innerItr3.hasNext()){
+                    while (innerItr3.hasNext()) {
 
                         OMElement result4 = (OMElement) innerItr3.next();
 
@@ -219,33 +216,28 @@ public class OaGongGaoManager {
 
                         OaGongGaoBean ggbean = new OaGongGaoBean();
 
-                        while(innerItr4.hasNext()){
+                        while (innerItr4.hasNext()) {
 
                             OMElement result5 = (OMElement) innerItr4.next();
-
-                            if(result5 != null)
-                            {
+                            if (result5 != null) {
                                 String text = result5.getText();
-
-                                if(i == 0)
-                                {
+                                System.out.println("***************" + text + "***************************");
+//                                if (i == 0) {
+//                                    if (text != null && !"".equals(text)) {
+//                                        ggbean.setIsNew(Integer.parseInt(text));
+//                                    }
+//                                }
+                                if (i == 0) {
                                     ggbean.setDeptName(text);
                                 }
-                                if(i == 1)
-                                {
+                                if (i == 1) {
                                     ggbean.setTitle(text);
                                 }
-                                if(i == 2)
-                                {
-                                    ggbean.setPublishTime(text);
-                                }
-                                if(i == 3)
-                                {
-                                    ggbean.setIsNew(Integer.parseInt(text));
-                                }
-                                if(i == 4)
-                                {
+                                if (i == 2) {
                                     ggbean.setUrl(text);
+                                }
+                                if (i == 3) {
+                                    ggbean.setPublishTime(text);
                                 }
                             }
 
@@ -260,17 +252,14 @@ public class OaGongGaoManager {
         return list;
     }
 
-    private static boolean getInfoByUrl(String url)
-    {
+    private static boolean getInfoByUrl(String url) {
         String count = InfoBaseManager.getInfoByUrl(url);
-        if(count != null && !"".equals(count))
-        {
+        if (count != null && !"".equals(count)) {
             int result = Integer.parseInt(count);
-            if(result > 0)
-            {
+            if (result > 0) {
                 return true;
             }
-            return  false;
+            return false;
         }
         return false;
     }
