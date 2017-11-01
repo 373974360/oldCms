@@ -9,7 +9,6 @@
         <property name="com.deya.wcm.timer.PageTimerImpl" value="0 0/1 * * * ?"/>
         <property name="com.deya.wcm.timer.WareTimerImpl" value="0 0/1 * * * ?"/>
         <property name="com.deya.wcm.timer.InfoTimerImpl" value="0 0/1 * * * ?"/>
-        <property name="com.sso.SyncOrgTimerImpl" value="0 0 0/1 * * ?"/>
         <property name="com.deya.wcm.timer.InfoTimerForDayImpl" value="0 0 0 * * ?"/>
         <property name="com.deya.wcm.timer.SQTimerImpl" value="0 0 0 * * ?"/>
         <property name="com.deya.wcm.timer.CollTimerImpl" value="0 0 0 * * ?"/>
