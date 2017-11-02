@@ -176,7 +176,11 @@
 				
 				sort NUMBER(4) default 999,
 				
-				bein_dept VARCHAR2(250) default ''
+				bein_dept VARCHAR2(250) default '',
+
+				locked NUMBER(4) default 0,
+
+				locked_time VARCHAR2(20) default ''
 				)
 				
 		   ]]> 

@@ -41,6 +41,8 @@ public class UserBean implements java.io.Serializable {
 	private String summary = "";//个人简介
 	private int sort = 999;
 	private String to_work_time = "";//参加工作时间
+	private int locked;
+	private String locked_time;
 	
 	public String getTo_work_time() {
 		return to_work_time;
@@ -260,5 +262,21 @@ public class UserBean implements java.io.Serializable {
 	}
 	public void setUserlevel_value(int userlevelValue) {
 		userlevel_value = userlevelValue;
-	}	
+	}
+
+	public int getLocked() {
+		return locked;
+	}
+
+	public void setLocked(int locked) {
+		this.locked = locked;
+	}
+
+	public String getLocked_time() {
+		return locked_time;
+	}
+
+	public void setLocked_time(String locked_time) {
+		this.locked_time = locked_time;
+	}
 }

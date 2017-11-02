@@ -176,8 +176,11 @@
 				
 				sort int(4) default 999,
 				
-				bein_dept varchar(250) default ''
-				
+				bein_dept varchar(250) default '',
+
+				locked int(4) default 0,
+
+				locked_time varchar(20) default ''
 				)
 
 		   ]]> 

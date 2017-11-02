@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8" %>
-<%@page import="com.deya.wcm.services.org.user.UserLogin" %>
-<%@ page import="com.deya.wcm.services.org.user.SessionManager" %>
+<%@ page import="com.deya.wcm.services.org.user.*" %>
+<%@ page import="com.deya.wcm.bean.org.user.UserBean" %>
+<%@ page import="com.deya.util.DateUtil" %>
 <%
     boolean isLogin = UserLogin.checkLoginBySession(request);
     if (isLogin) {
@@ -12,13 +13,36 @@
     String auth_code = request.getParameter("auth_code");
     response.setCharacterEncoding("UTF-8");
     if (user_name != null && !"".equals(user_name)) {
-        String res = com.deya.wcm.services.org.user.UserLoginRPC.checkUserLogin(user_name, pass_word, auth_code, request);
-        SessionManager.remove(request,"valiCode");
-        if ("auth_code_error".equals(res)) {
-            response.getWriter().print("{\"loginCode\":-1}");
-        } else {
-            int msg = Integer.parseInt(res);
-            response.getWriter().print("{\"loginCode\":" + msg + "}");
+        UserBean userBean = UserRegisterManager.getUserBeanByUname(user_name);
+        if (userBean != null) {
+            int locked = userBean.getLocked();
+            String locked_time = userBean.getLocked_time();
+            String now = DateUtil.getCurrentDateTime();
+            if (locked >= 5) {
+                if (DateUtil.compareDatetime(now, locked_time) <= 1) {
+                    response.getWriter().print("{\"loginCode\":6}");
+                } else {
+                    userBean.setLocked(0);
+                    userBean.setLocked_time("");
+                    UserManager.updateUser(userBean, null);
+                }
+            } else {
+                String res = UserLoginRPC.checkUserLogin(user_name, pass_word, auth_code, request);
+                SessionManager.remove(request, "valiCode");
+                if ("auth_code_error".equals(res)) {
+                    response.getWriter().print("{\"loginCode\":-1}");
+                } else {
+                    int msg = Integer.parseInt(res);
+                    if (msg >= 1) {
+                        userBean.setLocked(userBean.getLocked() + 1);
+                        userBean.setLocked_time(DateUtil.getCurrentDateTime());
+                        UserManager.updateUser(userBean, null);
+                    }
+                    response.getWriter().print("{\"loginCode\":" + msg + "}");
+                }
+            }
+        }else{
+            response.getWriter().print("{\"loginCode\":5}");
         }
     }
 %>
@@ -40,7 +64,7 @@
     <script type="text/javascript" src="js/jquery-plugin/jquery.cookie.js?v=20161215"></script>
     <script type="text/javascript" src="js/md5.js"></script>
     <script type="text/javascript">
-        var username,password,auth_code;
+        var username, password, auth_code;
         $(document).ready(function () {
             $("#sysname").html('政务信息管理平台');
             if ($.browser.msie && ($.browser.version == "6.0") && !$.support.style) {
@@ -65,11 +89,11 @@
             if (loginErrorTimes != null && loginErrorTimes >= 3) {
                 var errorDate = $.cookie("loginErrorDate-" + $.md5(username));
                 var now = new Date();
-                if(now.getTime() - parseInt(errorDate) > 60*1000){
-                    $.cookie("loginErrorTimes-" + $.md5(username),null,{expires:now});
-                    $.cookie("loginErrorDate-" + $.md5(username),null,{expires:now});
+                if (now.getTime() - parseInt(errorDate) > 60 * 1000) {
+                    $.cookie("loginErrorTimes-" + $.md5(username), null, {expires: now});
+                    $.cookie("loginErrorDate-" + $.md5(username), null, {expires: now});
                     login();
-                }else{
+                } else {
                     alert("该帐号登录错误次数过多，已被限制登录1小时！");
                 }
             } else {
@@ -77,7 +101,7 @@
             }
         }
 
-        function login(){
+        function login() {
             if (username == "") {
                 alert("用户名不能为空！");
                 $("#username").focus();
@@ -95,8 +119,8 @@
             }
 
             $.post("login.jsp", {username: username, password: password, auth_code: auth_code}, function (data) {
-                data = data.substring(0,data.indexOf("}") + 1);
-                data = eval("("+data+")");
+                data = data.substring(0, data.indexOf("}") + 1);
+                data = eval("(" + data + ")");
                 switch (data.loginCode) {
                     case -1:
                         alert("验证码不正确");
@@ -125,6 +149,11 @@
                         break;
                     case 5:
                         alert("该用户不存在");
+                        changeCreateImage();
+                        setLoginErrorTimes(username);
+                        break;
+                    case 6:
+                        alert("该帐号登录错误次数过多，已被限制登录1小时！");
                         changeCreateImage();
                         setLoginErrorTimes(username);
                         break;
