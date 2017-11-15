@@ -11,7 +11,8 @@
 		gk.gk_range,gk.gk_proc,gk.gk_duty_dept,gk.gk_input_dept,gk.file_head,gk.gk_signer,
 		ty.info_id,ty.gk_fwlb,ty.gk_bsjg,ty.gk_sxyj,ty.gk_bldx,ty.gk_bltj,ty.gk_blsx,ty.gk_bllc,
 		ty.gk_gsfs,ty.gk_blshixian,ty.gk_sfbz,ty.gk_sfyj,ty.gk_zxqd,ty.gk_bgsj,ty.gk_cclx,
-		ty.gk_jgwz,ty.gk_jdjc,ty.gk_zrzj,ty.gk_wszx,ty.gk_wsbl,ty.gk_ztcx,ty.gk_wsts,ty.gk_memo
+		ty.gk_jgwz,ty.gk_jdjc,ty.gk_zrzj,ty.gk_wszx,ty.gk_wsbl,ty.gk_ztcx,ty.gk_wsts,ty.gk_memo,ty.gk_xzcj,ty.gk_tbfw,ty.gk_ssztxz,ty.gk_lbjg,ty.gk_fdbjsx,
+		ty.gk_jddh,ty.gk_bljg,ty.gk_bgxz
 		from cs_info ci,cs_gk_info gk,cs_gk_f_bszn ty 
 		where ci.info_id=#{info_id} and ci.info_id = gk.info_id and gk.info_id = ty.info_id
 	</select>
@@ -21,13 +22,13 @@
 		info_id,gk_fwlb,gk_bsjg,gk_sxyj,gk_bldx,gk_bltj,
 		gk_blsx,gk_bllc,gk_gsfs,gk_blshixian,gk_sfbz,gk_sfyj,
 		gk_zxqd,gk_bgsj,gk_cclx,gk_jgwz,gk_jdjc,gk_zrzj,gk_wszx,
-		gk_wsbl,gk_ztcx,gk_wsts,gk_memo
+		gk_wsbl,gk_ztcx,gk_wsts,gk_memo,gk_xzcj,gk_tbfw,gk_ssztxz,gk_lbjg,gk_fdbjsx,gk_jddh,gk_bljg,gk_bgxz
 		)
 		values(
 		#{info_id},#{gk_fwlb},#{gk_bsjg},#{gk_sxyj},#{gk_bldx},#{gk_bltj},
 		#{gk_blsx},#{gk_bllc},#{gk_gsfs},#{gk_blshixian},#{gk_sfbz},#{gk_sfyj},
 		#{gk_zxqd},#{gk_bgsj},#{gk_cclx},#{gk_jgwz},#{gk_jdjc},#{gk_zrzj},#{gk_wszx},
-		#{gk_wsbl},#{gk_ztcx},#{gk_wsts},#{gk_memo}
+		#{gk_wsbl},#{gk_ztcx},#{gk_wsts},#{gk_memo},#{gk_xzcj},#{gk_tbfw},#{gk_ssztxz},#{gk_lbjg},#{gk_fdbjsx},#{gk_jddh},#{gk_bljg},#{gk_bgxz}
 		)
 	</insert>
 	
@@ -55,7 +56,15 @@
 		gk_wsbl = #{gk_wsbl},
 		gk_ztcx = #{gk_ztcx},
 		gk_wsts = #{gk_wsts},
-		gk_memo = #{gk_memo}
+		gk_memo = #{gk_memo},
+		gk_xzcj = #{gk_xzcj},
+		gk_tbfw = #{gk_tbfw},
+		gk_ssztxz = #{gk_ssztxz},
+		gk_lbjg = #{gk_lbjg},
+		gk_fdbjsx = #{gk_fdbjsx},
+		gk_jddh = #{gk_jddh},
+		gk_bljg = #{gk_bljg},
+		gk_bgxz = #{gk_bgxz}
 		where info_id = #{info_id}
 	</update>
 	

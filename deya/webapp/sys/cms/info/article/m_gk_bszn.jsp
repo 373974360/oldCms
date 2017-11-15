@@ -44,6 +44,8 @@ var gk_sfbz ="gk_sfbz";
 var gk_bllc ="gk_bllc";
 var gk_cclx ="gk_cclx";
 var gk_sfyj ="gk_sfyj";
+var gk_bljg ="gk_bljg";
+var gk_bgxz ="gk_bgxz";
 
 
 	$(document).ready(function(){
@@ -55,6 +57,8 @@ var gk_sfyj ="gk_sfyj";
         initUeditor(gk_bllc);
         initUeditor(gk_cclx);
         initUeditor(gk_sfyj);
+        initUeditor(gk_bljg);
+        initUeditor(gk_bgxz);
 
 		reloadPublicGKInfo();
 		
@@ -71,6 +75,8 @@ var gk_sfyj ="gk_sfyj";
                 setV(gk_bllc,defaultBean.gk_bllc);
                 setV(gk_cclx,defaultBean.gk_cclx);
                 setV(gk_sfyj,defaultBean.gk_sfyj);
+                setV(gk_bljg,defaultBean.gk_bljg);
+                setV(gk_bgxz,defaultBean.gk_bgxz);
 				publicReloadUpdateGKInfos();
 			}
 			$("#addButton").click(updateInfoData);		
@@ -97,17 +103,35 @@ var gk_sfyj ="gk_sfyj";
 
 <table id="" class="table_form" border="0" cellpadding="0" cellspacing="0">
 	<tbody>
-		<!--
     	<tr>
-			<th>服务类别：</th>
+			<th>事项类型：</th>
 			<td>
-				<select id="gk_fwlb" class="input_select" style="width:150px;">
-					
-				</select>
+				<select id="gk_fwlb" class="input_select" style="width:150px;"></select>
 			</td>
 		</tr>
-		-->
-		<input id="gk_fwlb" type="hidden" value="行政许可项目" class="input_select" style="width:150px;">
+        <tr>
+            <th>办理依据：</th>
+            <td>
+                <script id="gk_sxyj" type="text/plain" style="width:95%;height:160px;"></script>
+            </td>
+        </tr>
+        <tr>
+            <th>行使层级：</th>
+            <td>
+                <input id="gk_xzcj" name="gk_xzcj" type="text" class="width350" maxlength="80" value=""/>
+            </td>
+        </tr>
+        <tr>
+            <th>通办范围：</th>
+            <td>
+                <select id="gk_tbfw" name="gk_tbfw" class="input_select" style="width:150px;">
+                    <option value="无">请选择</option>
+                    <option value="跨省">跨省</option>
+                    <option value="跨市">跨市</option>
+                    <option value="跨县">跨县</option>
+                </select>
+            </td>
+        </tr>
     	<tr>
 			<th>受理机构：</th>
 			<td>
@@ -115,20 +139,79 @@ var gk_sfyj ="gk_sfyj";
 			</td>
 		</tr>
         <tr>
-			<th>设定依据：</th>
-			<td>				
-				<script id="gk_sxyj" type="text/plain" style="width:95%;height:160px;"></script>
-			</td>
-		</tr>
-		<input id="gk_bldx" name="gk_bldx" type="hidden" class="width350" maxlength="80" value="" />
+            <th>实施主体性质：</th>
+            <td>
+                <input id="gk_ssztxz" name="gk_ssztxz" type="text" class="width350" maxlength="80" value=""/>
+            </td>
+        </tr>
         <tr>
-			<th>申请条件：</th>
+            <th>服务对象：</th>
+            <td>
+                <input id="gk_bldx" name="gk_bldx" type="text" class="width350" maxlength="80" value=""/>
+            </td>
+        </tr>
+        <tr>
+			<th>受理条件：</th>
 			<td>
 				<script id="gk_bltj" type="text/plain" style="width:95%;height:160px;"></script>
 			</td>
 		</tr>
         <tr>
-			<th>办理材料：</th>
+            <th>联办机构：</th>
+            <td>
+                <input id="gk_lbjg" name="gk_lbjg" type="text" class="width350" maxlength="80" value=""/>
+            </td>
+        </tr>
+        <tr>
+            <th>承诺办结时限：</th>
+            <td>
+                <input id="gk_blshixian" name="gk_blshixian" type="text" class="width350" maxlength="80" value="" />
+            </td>
+        </tr>
+        <tr>
+            <th>法定办结时限：</th>
+            <td>
+                <input id="gk_fdbjsx" name="gk_fdbjsx" type="text" class="width350" maxlength="80" value="" />
+            </td>
+        </tr>
+        <tr>
+            <th>办理地点：</th>
+            <td>
+                <input id="gk_gsfs" name="gk_gsfs" type="text" class="width350" maxlength="80" value="" />
+            </td>
+        </tr>
+        <tr>
+            <th>乘车路线：</th>
+            <td>
+                <script id="gk_cclx" type="text/plain" style="width:95%;height:160px;"></script>
+            </td>
+        </tr>
+        <tr>
+            <th>办理时间：</th>
+            <td>
+                <input id="gk_bgsj" name="gk_bgsj" type="text" class="width350" maxlength="80" value="" />
+            </td>
+        </tr>
+        <tr>
+            <th>联系电话：</th>
+            <td>
+                <input id="gk_zxqd" name="gk_zxqd" type="text" class="width350" maxlength="80" value="" />
+            </td>
+        </tr>
+        <tr>
+            <th>监督电话：</th>
+            <td>
+                <input id="gk_jddh" name="gk_jddh" type="text" class="width350" maxlength="80" value="" />
+            </td>
+        </tr>
+        <tr>
+            <th>办理结果：</th>
+            <td>
+                <script id="gk_bljg" type="text/plain" style="width:95%;height:160px;"></script>
+            </td>
+        </tr>
+        <tr>
+			<th>申请材料：</th>
 			<td>
 				<script id="gk_blsx" type="text/plain" style="width:95%;height:160px;"></script>
 			</td>
@@ -137,12 +220,6 @@ var gk_sfyj ="gk_sfyj";
 			<th>办理流程：</th>
 			<td>
 				<script id="gk_bllc" type="text/plain" style="width:95%;height:160px;"></script>
-			</td>
-		</tr>
-		 <tr>
-			<th>办理时限：</th>
-			<td>
-				<input id="gk_blshixian" name="gk_blshixian" type="text" class="width350" maxlength="80" value="" />
 			</td>
 		</tr>
 		<tr>
@@ -157,30 +234,12 @@ var gk_sfyj ="gk_sfyj";
 				<script id="gk_sfyj" type="text/plain" style="width:95%;height:160px;"></script>
 			</td>
 		</tr>
-		<tr>
-			<th>联系电话：</th>
-			<td>
-				<input id="gk_zxqd" name="gk_zxqd" type="text" class="width350" maxlength="80" value="" />
-			</td>
-		</tr>
         <tr>
-			<th>办理时间：</th>
-			<td>
-				<input id="gk_bgsj" name="gk_bgsj" type="text" class="width350" maxlength="80" value="" />
-			</td>
-		</tr>
-		<tr>
-			<th>办理地点：</th>
-			<td>
-				<input id="gk_gsfs" name="gk_gsfs" type="text" class="width350" maxlength="80" value="" />
-			</td>
-		</tr>
-        <tr>
-			<th>乘车路线：</th>
-			<td>
-				<script id="gk_cclx" type="text/plain" style="width:95%;height:160px;"></script>
-			</td>
-		</tr>
+            <th>表格及样表下载：</th>
+            <td>
+                <script id="gk_bgxz" type="text/plain" style="width:95%;height:160px;"></script>
+            </td>
+        </tr>
 		<!--
         <tr>
 			<th>机构网址：</th>
@@ -203,7 +262,6 @@ var gk_sfyj ="gk_sfyj";
 			<span class="blank9"></span>
 			</td>
 		</tr>
-		-->
         <tr>
 			<th style="vertical-align:top;">网上咨询：</th>
 			<td style="">
@@ -211,8 +269,8 @@ var gk_sfyj ="gk_sfyj";
 			<span class="blank9"></span>
 			</td>
 		</tr>
-    
-    
+
+
 		<tr>
 			<th style="vertical-align:top;">网上办理：</th>
 			<td style="">
@@ -220,7 +278,6 @@ var gk_sfyj ="gk_sfyj";
 			<span class="blank9"></span>
 			</td>
 		</tr>
-        <!--
         <tr>
 			<th style="vertical-align:top;">状态查询：</th>
 			<td style="">
