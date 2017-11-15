@@ -20,8 +20,8 @@ function addInfoData()
 	bean.gk_blsx = getV(gk_blsx);
 	bean.gk_sfbz = getV(gk_sfbz);
 	bean.gk_bllc = getV(gk_bllc);
-	bean.gk_cclx = getV(gk_cclx);
-    bean.gk_sfyj = getV(gk_sfyj);
+	//bean.gk_cclx = getV(gk_cclx);
+    //bean.gk_sfyj = getV(gk_sfyj);
     bean.gk_bljg = getV(gk_bljg);
     bean.gk_bgxz = getV(gk_bgxz);
 
@@ -68,8 +68,8 @@ function updateInfoData()
     bean.gk_blsx = getV(gk_blsx);
     bean.gk_sfbz = getV(gk_sfbz);
     bean.gk_bllc = getV(gk_bllc);
-    bean.gk_cclx = getV(gk_cclx);
-    bean.gk_sfyj = getV(gk_sfyj);
+    //bean.gk_cclx = getV(gk_cclx);
+    //bean.gk_sfyj = getV(gk_sfyj);
     bean.gk_bljg = getV(gk_bljg);
     bean.gk_bgxz = getV(gk_bgxz);
 	

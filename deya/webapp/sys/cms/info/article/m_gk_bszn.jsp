@@ -42,8 +42,8 @@ var gk_bltj ="gk_bltj";
 var gk_blsx ="gk_blsx";
 var gk_sfbz ="gk_sfbz";
 var gk_bllc ="gk_bllc";
-var gk_cclx ="gk_cclx";
-var gk_sfyj ="gk_sfyj";
+//var gk_cclx ="gk_cclx";
+//var gk_sfyj ="gk_sfyj";
 var gk_bljg ="gk_bljg";
 var gk_bgxz ="gk_bgxz";
 
@@ -55,8 +55,8 @@ var gk_bgxz ="gk_bgxz";
         initUeditor(gk_blsx);
         initUeditor(gk_sfbz);
         initUeditor(gk_bllc);
-        initUeditor(gk_cclx);
-        initUeditor(gk_sfyj);
+        //initUeditor(gk_cclx);
+        //initUeditor(gk_sfyj);
         initUeditor(gk_bljg);
         initUeditor(gk_bgxz);
 
@@ -73,8 +73,8 @@ var gk_bgxz ="gk_bgxz";
                 setV(gk_blsx,defaultBean.gk_blsx);
                 setV(gk_sfbz,defaultBean.gk_sfbz);
                 setV(gk_bllc,defaultBean.gk_bllc);
-                setV(gk_cclx,defaultBean.gk_cclx);
-                setV(gk_sfyj,defaultBean.gk_sfyj);
+                //setV(gk_cclx,defaultBean.gk_cclx);
+                //setV(gk_sfyj,defaultBean.gk_sfyj);
                 setV(gk_bljg,defaultBean.gk_bljg);
                 setV(gk_bgxz,defaultBean.gk_bgxz);
 				publicReloadUpdateGKInfos();
@@ -100,7 +100,8 @@ var gk_bgxz ="gk_bgxz";
 <jsp:include page="../include/include_public_gk.jsp"/>
 
 <!-- 内容主体不同部分　开始 -->
-
+<input id="gk_cclx" name="gk_cclx" type="hidden" value=""/>
+<input id="gk_sfyj" name="gk_sfyj" type="hidden" value=""/>
 <table id="" class="table_form" border="0" cellpadding="0" cellspacing="0">
 	<tbody>
     	<tr>
@@ -181,12 +182,6 @@ var gk_bgxz ="gk_bgxz";
             </td>
         </tr>
         <tr>
-            <th>乘车路线：</th>
-            <td>
-                <script id="gk_cclx" type="text/plain" style="width:95%;height:160px;"></script>
-            </td>
-        </tr>
-        <tr>
             <th>办理时间：</th>
             <td>
                 <input id="gk_bgsj" name="gk_bgsj" type="text" class="width350" maxlength="80" value="" />
@@ -228,12 +223,6 @@ var gk_bgxz ="gk_bgxz";
 				<script id="gk_sfbz" type="text/plain" style="width:95%;height:160px;"></script>
 			</td>
 		</tr>
-		<tr>
-			<th>收费依据：</th>
-			<td>				
-				<script id="gk_sfyj" type="text/plain" style="width:95%;height:160px;"></script>
-			</td>
-		</tr>
         <tr>
             <th>表格及样表下载：</th>
             <td>
@@ -241,6 +230,18 @@ var gk_bgxz ="gk_bgxz";
             </td>
         </tr>
 		<!--
+        <tr>
+            <th>收费依据：</th>
+            <td>
+            <script id="gk_sfyj" type="text/plain" style="width:95%;height:160px;"></script>
+            </td>
+        </tr>
+        <tr>
+            <th>乘车路线：</th>
+            <td>
+                <script id="gk_cclx" type="text/plain" style="width:95%;height:160px;"></script>
+            </td>
+        </tr>
         <tr>
 			<th>机构网址：</th>
 			<td>
