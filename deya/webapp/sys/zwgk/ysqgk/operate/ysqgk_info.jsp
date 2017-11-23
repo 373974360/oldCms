@@ -31,7 +31,7 @@ $(document).ready(function(){
     initUeditor("deal_content");
 	iniSQbox();
 	initTabAndStatus();
-	YsqgkConfigBean = jsonrpc.YsqgkRPC.getYsqgkConfigBean();
+	YsqgkConfigBean = jsonrpc.YsqgkRPC.getYsqgkConfigBeanBySiteId(site_id);
 	
 	if(ysq_id != "" && ysq_id != "null" && ysq_id != null)
     {		
