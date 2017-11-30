@@ -18,7 +18,13 @@ public class DownHtmlUtil {
             "Openwave/UCWEB7.0.2.37/28/978",
             "Mozilla/4.0 (compatible; MSIE 6.0; ) Opera/UCWEB7.0.2.37/28/989"};
 
-    public static String downLoadHtml(String StrUrl, String Encode) {
+    public static String downLoadHtml(String StrUrl, String Encode,int type) {
+
+        if(type==1&&StrUrl.startsWith("http://www.xa.gov.cn")){
+            String conId = StrUrl.substring(StrUrl.indexOf("?trid=")+6,StrUrl.length());
+            StrUrl = "http://www.xa.gov.cn/websac/cat/"+conId+".html";
+        }
+
         String htmlStr = "";
         String str = "";
         HttpURLConnection con = null;
@@ -42,12 +48,11 @@ public class DownHtmlUtil {
                     con.setRequestProperty("Cookie", cookie);
                 con.setInstanceFollowRedirects(false);
                 int httpCode = con.getResponseCode();
-                System.out.println(httpCode
-                        + "**********httpCode********************");
+                System.out.println(httpCode + "**********httpCode********************");
+                System.out.println("StrUrl:" + StrUrl);
                 if (httpCode == HttpURLConnection.HTTP_MOVED_TEMP) {
                     cookie += con.getHeaderField("Set-Cookie") + ";";
-                    System.out.println(cookie
-                            + "******************cookie************");
+                    System.out.println(cookie  + "******************cookie************");
                 }
                 if (httpCode != 200)
                     break label160;

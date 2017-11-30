@@ -112,10 +112,8 @@ public class ResolveHtml {
                     i--;
                 } else {
                     String url = (String) waitgetArtInfoSet.iterator().next();
-                    String contentHtml =
-                            DownHtmlUtil.downLoadHtml(url, collBean.getPageEncoding());
+                    String contentHtml = DownHtmlUtil.downLoadHtml(url, collBean.getPageEncoding(),1);
                     waitgetArtInfoSet.remove(url);
-
                     if (FormatString.strIsNull(contentHtml)) {
                         getArticleInfo(collBean, contentHtml, url);
                     }
@@ -186,15 +184,13 @@ public class ResolveHtml {
                     pubTime = select.text();
                 }
                 if (FormatString.strIsNull(pubTime)) {
-                    pubTime = pubTime.replaceAll("-", "/");
-                    pubTime = pubTime.replaceAll("年", "/");
-                    pubTime = pubTime.replaceAll("月", "/");
-                    pubTime = pubTime.replaceAll("日", "/");
-                    //尝试剔除日期以外的内容
-                    pubTime = parseDateFromString(pubTime);
-//                    pubTime = FormatString.filterHtmlTag(pubTime);
-//                    pubTime = FormatString.filterStrForKeyword(pubTime);
-                    articleBean.setArt_pubTime(FormatDate.formatTime(pubTime, "yyyy/MM/dd"));
+                    pubTime = pubTime.replaceAll("年", "-");
+                    pubTime = pubTime.replaceAll("月", "-");
+                    pubTime = pubTime.replaceAll("日", "");
+                    if (pubTime.length() > 16) {
+                        pubTime = pubTime.substring(0, 16);
+                    }
+                    articleBean.setArt_pubTime(pubTime);
                 }
 
             }
