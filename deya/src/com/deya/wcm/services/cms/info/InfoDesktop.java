@@ -42,6 +42,20 @@ public class InfoDesktop {
 		
 		//第一步，根据站点和用户ID得到它所能管理的所有栏目ID
 		String cat_ids = CategoryUtil.getCategoryIDSByUser(0,site_id , user_id);
+
+		/***********************************按照栏目大类筛选待审核信息  开始***************************************/
+		//int cat_id = 0;
+		//String cat_ids = "";
+		//if (m.containsKey("select_cat_id"))
+		//{
+		//	cat_id = Integer.parseInt(((String)m.get("select_cat_id")).toString());
+		//	cat_ids = getCatIds(cat_ids, cat_id, site_id, user_id) + "," + cat_id;
+		//}
+		//else
+		//{
+		//	cat_ids = CategoryUtil.getCategoryIDSByUser(cat_id, site_id, user_id);
+		//}
+		/***********************************按照栏目大类筛选待审核信息  结束***************************************/
 		//第二步，得到需要审核栏目的sql
 		String sql = getWaitVerifyInfoSql(user_id+"",cat_ids,m.get("app_id"),site_id);
 		
@@ -103,7 +117,6 @@ public class InfoDesktop {
 				conn = " and ("+conn+")";
 			}						
 		}
-		//System.out.println(conn);
 		return conn;
 	}
 	
@@ -123,4 +136,21 @@ public class InfoDesktop {
 		//System.out.println(CategoryUtil.getCategoryIDSByUser(0,"HIWCMdemo" , 199));
 		//System.out.println(getWaitVerifyInfoSql("199","1020,1021,1023,1024,1026,2049,1113,1118,1130,1148,1172,2000,2001,2002,1999,1997,2036,2045,2046,2047,2042,2043,2044","cms","HIWCMdemo"));
 	}
+
+	//public static String getCatIds(String cat_ids, int cat_id, String site_id, int user_id)
+	//{
+	//	cat_ids = CategoryUtil.getCategoryIDSByUser(cat_id, site_id, user_id);
+	//	if ((cat_ids != null) && (cat_ids.length() > 0))
+	//	{
+	//		String[] idArray = cat_ids.split(",");
+	//		for (String id : idArray)
+	//		{
+	//			String ids = CategoryUtil.getCategoryIDSByUser(Integer.parseInt(id), site_id, user_id);
+	//			if ((ids != null) && (ids.length() > 0)) {
+	//				cat_ids = cat_ids + "," + ids;
+	//			}
+	//		}
+	//	}
+	//	return cat_ids;
+	//}
 }
