@@ -56,13 +56,15 @@ public class ManagerLoginFilter implements javax.servlet.Filter {
         }
         //对前台的jsp进行xss漏洞过滤
         if (!jspFilterHandl.isRightParam(requestWrapper, requestUri)) {
-            System.out.println("*******************验证参数错误，跳转到首页或者后台登录页！**********************");
             if (requestUri.startsWith("/sys") || requestUri.startsWith("/manager") || requestUri.startsWith("/admin")) {
+                System.out.println("*******************验证参数错误，跳转到后台登录页！'"+loginPage+"'**********************");
                 SessionManager.remove(request, "cicro_wcm_user");
                 response.sendRedirect(loginPage);
             }else{
+                String paths = request.getScheme() + "://" + request.getServerName() + ":9007";//临时
+                System.out.println("*******************验证参数错误，跳转到首页！'"+paths+"'**********************");
                 response.setContentType("text/html; charset=utf-8");
-                response.sendRedirect("/");
+                response.sendRedirect(paths);
             }
         } else {
             if (requestUri.startsWith("/sys") || requestUri.startsWith("/manager") || requestUri.startsWith("/admin")) {

@@ -169,7 +169,7 @@
 				keywords_start               = #{keywords_start},
 				keywords_end                 = #{keywords_end},
 				docNo_start                  = #{docNo_start},
-				docNo_end,                   = #{docNo_end},
+				docNo_end                  	 = #{docNo_end},
 				hits_start                   = #{hits_start},
 				hits_end                     = #{hits_end},
 				author_start                 = #{author_start},

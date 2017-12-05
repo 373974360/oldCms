@@ -318,7 +318,7 @@
     <!-- ******************** 需要处理的部分 开始 ****************************** -->
     <!-- 得到诉求列表 -->
     <sql id="getSqList_sql_item">
-        pur_id,sq_code,sq_id,model_id,me_id,sq_realname,do_dept,sq_dtime,sq_title2,submit_name,supervise_flag,alarm_flag,timeout_flag,publish_status,sq_status,weight,sq_all_number,sq_number
+        pur_id,sq_code,sq_id,model_id,me_id,sq_realname,do_dept,sq_dtime,sq_title2,submit_name,supervise_flag,alarm_flag,timeout_flag,publish_status,sq_status,weight,sq_all_number,sq_number,sq_phone,sq_email,sq_content,sq_reply
     </sql>
     <sql id="getSqList_sql_conn">
         where model_id in (${model_id}) and sq_status != '-99'
