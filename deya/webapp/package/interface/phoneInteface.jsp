@@ -1,8 +1,8 @@
 <%@ page contentType="application/json; charset=utf-8"%>
-<%@ page language="java" import="java.util.*,com.deya.wcm.services.cms.info.*,org.w3c.dom.Node,com.deya.util.xml.*,com.deya.wcm.bean.template.TurnPageBean" %>
-<%@page import="com.deya.wcm.bean.cms.info.*,com.deya.wcm.services.system.formodel.*,com.deya.wcm.services.zwgk.info.*,com.deya.wcm.bean.cms.category.CategoryBean"%>
-<%@page import="com.deya.util.*,com.deya.wcm.template.velocity.data.*,com.deya.wcm.bean.appeal.sq.*,com.deya.wcm.services.appeal.sq.*"%>
-<%@page import="org.apache.ibatis.session.SqlSession,java.net.*,java.io.*,com.deya.wcm.bean.system.formodel.*,com.deya.wcm.bean.interview.*,com.deya.wcm.services.cms.category.CategoryManager"%><%@ page import="com.deya.wcm.services.model.services.InfoCustomService"%><%@ page import="org.json.JSONObject"%><%@ page import="org.json.JSONException"%><%@ page import="com.deya.wcm.services.search.search.SearchManager"%>
+<%@ page language="java" import="com.deya.util.FormatUtil,com.deya.wcm.bean.appeal.sq.SQBean,com.deya.wcm.bean.cms.category.CategoryBean,com.deya.wcm.bean.cms.info.*,com.deya.wcm.bean.interview.SubjectActor" %>
+<%@page import="com.deya.wcm.bean.interview.SubjectBean,com.deya.wcm.bean.system.formodel.ModelBean,com.deya.wcm.bean.template.TurnPageBean,com.deya.wcm.services.appeal.sq.SQManager"%>
+<%@page import="com.deya.wcm.services.cms.category.CategoryManager,com.deya.wcm.services.cms.info.InfoBaseManager,com.deya.wcm.services.cms.info.ModelUtil,com.deya.wcm.services.model.services.InfoCustomService"%>
+<%@page import="com.deya.wcm.services.search.search.SearchManager,com.deya.wcm.services.system.formodel.ModelManager,com.deya.wcm.services.zwgk.info.GKInfoManager,com.deya.wcm.template.velocity.data.AppealData,com.deya.wcm.template.velocity.data.InfoUtilData,com.deya.wcm.template.velocity.data.InterViewData"%><%@ page import="org.json.JSONException"%><%@ page import="org.json.JSONObject"%><%@ page import="java.util.Iterator"%><%@ page import="java.util.List"%><%@ page import="java.util.Map"%><%@ page import="java.util.Set"%>
 <%
 String action_type = request.getParameter("action_type");
 String result = "";
@@ -74,16 +74,16 @@ if("custom_info".equals(action_type))
 {
 	result = getCustomInfoMap(request);
 }
-if("isToudi".equals(action_type))
-{
-	result = isToudi(request);
-}
 if("searchInfo".equals(action_type))
 {
 	result = searchInfo(request);
 }
-
-out.println(result);
+String callback = request.getParameter("callback");
+if(callback != null && !"".equals(callback)){
+    out.println(callback + "(" + result + ")");
+}else{
+	out.println(result);
+}
 
 %>
 <%!
@@ -518,17 +518,6 @@ public String searchInfo(HttpServletRequest request){
     }
 	return jsonObject.toString();
 }
-
-
-public String isToudi(HttpServletRequest request){
-	String json = "";
-	String info_id = FormatUtil.formatNullString(request.getParameter("info_id"));
-	boolean isToudi = com.deya.project.dz_recruit.UserInfoRPC.isToudi(Integer.parseInt(info_id),request);
-	JSONObject jsonObject = new JSONObject();
-    jsonObject.put("isToudi",isToudi);
-	return jsonObject.toString();
-}
-
 
 
 public static String replaceStr(String str)
