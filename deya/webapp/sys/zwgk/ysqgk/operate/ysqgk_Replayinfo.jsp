@@ -29,7 +29,7 @@ $(document).ready(function(){
     initUeditor("deal_content");
 	initButtomStyle();
 	init_input();
-	YsqgkConfigBean = jsonrpc.YsqgkRPC.getYsqgkConfigBean();
+	YsqgkConfigBean = jsonrpc.YsqgkRPC.getYsqgkConfigBeanBySiteId(site_id);
 	iniSQbox();
 	initTabAndStatus();
 	
