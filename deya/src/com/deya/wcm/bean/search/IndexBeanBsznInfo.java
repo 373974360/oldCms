@@ -19,8 +19,8 @@ public class IndexBeanBsznInfo extends IndexBean {
     private String typed ; //政务公开中的小分类
     
 	public IndexBeanBsznInfo() {
-		super("zwgk");  
-		setTyped("bszn"); 
+		super("info");
+		setTyped("info");
 	}
 	public String getBszn_type() {
 		return bszn_type;

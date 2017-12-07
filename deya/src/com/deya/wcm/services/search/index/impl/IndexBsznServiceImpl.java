@@ -80,7 +80,7 @@ public class IndexBsznServiceImpl implements IndexService {
 	    		  int start_num = s_count*k;
 	    		  mapSite.put("start_num", start_num);
 	    		  mapSite.put("page_size", s_count);
-	    		  
+	    		  mapSite.put("app_id","cms");
 	    		  //List<Map> infoList = indexInfoDao.getInfoListBySiteIdPages(mapSite); 
 	    		  List<Map> infoList = s.selectList(DBManager.getSqlNameByDataType("search.getBsznListBySiteIdPages"),mapSite);
 	    		  
@@ -377,8 +377,8 @@ public class IndexBsznServiceImpl implements IndexService {
 			  sb.append(FormatUtil.formatNullString((String)infoMap.get("gk_memo")));
 			  indexBeanBsznInfo.setContent(HtmlRegexpUtil.filterHtml(sb.toString()));
 			  indexBeanBsznInfo.setUrl(com.deya.util.FormatUtil.formatNullString((String)infoMap.get("content_url")));
-			  String site_id = com.deya.wcm.services.control.site.SiteAppRele.getSiteIDByAppID("zwgk");
-			  indexBeanBsznInfo.setSite_id(site_id);
+			  String site_id = com.deya.wcm.services.control.site.SiteAppRele.getSiteIDByAppID("cms");
+			  indexBeanBsznInfo.setSite_id(com.deya.util.FormatUtil.formatNullString((String)infoMap.get("site_id")));
 			  
 			  indexBeanBsznInfo.setNode_id(com.deya.util.FormatUtil.formatNullString((String)infoMap.get("site_id")));
 			  
