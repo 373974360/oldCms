@@ -365,6 +365,7 @@
         <if test="sq_content2 != null">and sq_content2 like '%${sq_content2}%'</if>
         <if test="sq_code != null">and sq_code = #{sq_code}</if>
         <if test="me_id != null">and me_id = #{me_id}</if>
+        <if test="sq_id != null">and sq_id in (${sq_id})</if>
     </sql>
     <select id="getSqList" parameterType="Map" resultType="com.deya.wcm.bean.appeal.sq.SQBean">
         select * from (

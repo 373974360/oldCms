@@ -1,13 +1,4 @@
 <%@ page contentType="text/html; charset=utf-8"%>
-<%@page import="com.deya.util.DateUtil"%>
-<%@page import="java.util.*"%>
-<%@page import="com.deya.util.jconfig.*"%>
-<%@page import="com.deya.util.FormatUtil"%>
-<%@page import="com.deya.wcm.services.appeal.count.CountUtil"%>
-<%@page import="java.io.File"%>
-<%@page import="com.deya.wcm.services.appeal.count.OutExcel"%>
-<%@ page import="com.deya.wcm.services.appeal.sq.SQRPC" %>
-<%@ page import="com.deya.wcm.bean.appeal.sq.SQBean" %>
 <%
 	String sq_status = request.getParameter("sq_status");
 	String publish_status = request.getParameter("publish_status");
@@ -19,72 +10,6 @@
 	String supervise_flag = request.getParameter("supervise_flag");
 	String page_type = request.getParameter("page_type");
 	String is_manager_page = request.getParameter("is_manager_page");//是否是信件管理页面
-
-
-
-
-	String now = DateUtil.getCurrentDateTime();
-	//now = now.substring(0,7);
-	pageContext.setAttribute("now",now);
-
-	Map map = new HashMap();
-
-	map.put("start_num", 0);
-	map.put("page_size",10000);
-	map.put("sort_name", "sq_dtime");
-	map.put("sort_type", "desc");
-	map.put("sq_status", sq_status);
-	map.put("publish_status", publish_status);
-	map.put("sq_flag", sq_flag);
-	map.put("is_back", is_back);
-	map.put("alarm_flag", alarm_flag);
-	map.put("limit_flag", limit_flag);
-	map.put("prove_type", prove_type);
-	map.put("supervise_flag", supervise_flag);
-	map.put("page_type", page_type);
-	map.put("is_manager_page", is_manager_page);
-
-	//删除今天以前的文件夹
-	String root_path = JconfigUtilContainer.bashConfig().getProperty("path", "", "manager_path");
-	String path = FormatUtil.formatPath(root_path + "/appeal/sq/");
-	CountUtil.deleteFile(path);
-
-	//创建今天的文件夹和xls文件
-	String nowDate = CountUtil.getNowDayDate();
-	String fileTemp2 = FormatUtil.formatPath(path+File.separator+nowDate);
-	File file2 = new File(fileTemp2);
-	if(!file2.exists()){
-		file2.mkdir();
-	}
-	String nowTime = CountUtil.getNowDayDateTime();
-	String xls = nowTime + CountUtil.getEnglish(1)+".xls";
-	String xlsFile = fileTemp2+File.separator+xls;
-	String urlFile = "/sys/appeal/sq/"+nowDate+File.separator+xls;
-
-
-
-	List<SQBean> list = SQRPC.getSqList(map,request);
-	pageContext.setAttribute("list",list);
-
-	String[] head = {"信件编号","留言标题","办理单位","留言内容","来信日期","姓名","电话","邮箱","回复内容"};
-	String[][] data = new String[list.size()][9];
-	for(int i=0;i<list.size();i++){
-		SQBean sqBean = list.get(i);
-		data[i][0] = sqBean.getSq_code();//编号
-		data[i][1] = sqBean.getSq_title2();//标题
-		data[i][2] = sqBean.getDo_dept_name();//办理部门
-		data[i][3] = sqBean.getSq_content();//来信内容
-		data[i][4] = sqBean.getSq_dtime();//来信日期
-		data[i][5] = sqBean.getSq_realname();//姓名
-		data[i][6] = sqBean.getSq_phone();//电话
-		data[i][7] = sqBean.getSq_email();//邮箱
-		data[i][8] = sqBean.getSq_reply();//回复内容
-	}
-
-	OutExcel oe=new OutExcel("来信列表");
-	oe.doOut(xlsFile,head,data);
-
-	request.setAttribute("url",urlFile);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -197,7 +122,13 @@ function sortSQList(val)
 }
 
 function downFile(){
-    window.open("<%=request.getAttribute("url")%>");
+    var selectIDS = "";
+    var selectIDS = table.getSelecteCheckboxValue("sq_id");
+    if(selectIDS!=null&&selectIDS.length>0){
+        m.put("sq_id",selectIDS);
+	}
+	m.put("page_size",100000);
+    window.open(SQRPC.getSqExcelList(m));
 }
 
 </script>

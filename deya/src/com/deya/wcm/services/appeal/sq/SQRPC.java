@@ -1,11 +1,15 @@
 package com.deya.wcm.services.appeal.sq;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.deya.util.FormatUtil;
+import com.deya.util.OutExcel;
+import com.deya.util.jconfig.JconfigUtilContainer;
 import com.deya.wcm.bean.appeal.sq.ProcessBean;
 import com.deya.wcm.bean.appeal.sq.SQAttachment;
 import com.deya.wcm.bean.appeal.sq.SQBean;
@@ -14,6 +18,7 @@ import com.deya.wcm.bean.logs.SettingLogsBean;
 import com.deya.wcm.bean.org.user.LoginUserBean;
 import com.deya.wcm.bean.system.assist.TagsBean;
 import com.deya.wcm.services.Log.LogManager;
+import com.deya.wcm.services.appeal.count.CountUtil;
 import com.deya.wcm.services.appeal.myddc.SqMyddcBean;
 import com.deya.wcm.services.appeal.myddc.SqMyddcManager;
 import com.deya.wcm.services.org.user.UserLogin;
@@ -290,5 +295,54 @@ public class SQRPC {
 	{
 		List<SqMyddcBean> sqMyddcList = SqMyddcManager.getSqMyddcList(m);
 		return sqMyddcList;
+	}
+
+	/**
+	 * 根据选择的行导出Excel
+	 * */
+	public static String getSqExcelList(Map<String,String> m,HttpServletRequest request){
+		List<SQBean> list = SQManager.getSqList(m,UserLogin.getUserBySession(request).getUser_id());
+		//删除今天以前的文件夹
+		String root_path = JconfigUtilContainer.bashConfig().getProperty("path", "", "manager_path");
+		String path = FormatUtil.formatPath(root_path + "/appeal/sq/");
+		CountUtil.deleteFile(path);
+
+		//创建今天的文件夹和xls文件
+		String nowDate = CountUtil.getNowDayDate();
+		String fileTemp2 = FormatUtil.formatPath(path+ File.separator+nowDate);
+		File file2 = new File(fileTemp2);
+		if(!file2.exists()){
+			file2.mkdir();
+		}
+		String nowTime = CountUtil.getNowDayDateTime();
+		String xls = nowTime + CountUtil.getEnglish(1)+".xls";
+		String xlsFile = fileTemp2+File.separator+xls;
+		String urlFile = "/sys/appeal/sq/"+nowDate+File.separator+xls;
+
+		String[] head = {"信件编号","留言标题","办理单位","留言内容","来信日期","姓名","电话","邮箱","回复内容"};
+		String[][] data = new String[list.size()][9];
+		for(int i=0;i<list.size();i++){
+			SQBean sqBean = list.get(i);
+			data[i][0] = sqBean.getSq_code();//编号
+			data[i][1] = sqBean.getSq_title2();//标题
+			data[i][2] = sqBean.getDo_dept_name();//办理部门
+			data[i][3] = delHtmlTag(sqBean.getSq_content());//来信内容
+			data[i][4] = sqBean.getSq_dtime();//来信日期
+			data[i][5] = sqBean.getSq_realname();//姓名
+			data[i][6] = sqBean.getSq_phone();//电话
+			data[i][7] = sqBean.getSq_email();//邮箱
+			data[i][8] = delHtmlTag(sqBean.getSq_reply());//回复内容
+		}
+
+		OutExcel oe=new OutExcel("来信列表");
+		oe.doOut(xlsFile,head,data);
+		return urlFile;
+	}
+
+	public static String delHtmlTag(String str){
+		String newstr = "";
+		newstr = str.replaceAll("<[.[^>]]*>","");
+		newstr = newstr.replaceAll(" ", "");
+		return newstr;
 	}
 }
