@@ -198,12 +198,12 @@ public class IndexInfoServiceImpl implements IndexService {
 //	    		  List<Map> infoList = indexInfoDao.getInfoListBySiteIdPages(mapSite); 
 	    		  //List<Map> infoList = s.selectList(DBManager.getSqlNameByDataType("search.getInfoListBySiteIdPages"),mapSite);
 			      String site_id = (String)mapSite.get("site_id");
-			      List<Map> infoList = PublicTableDAO.executeSearchSql("select i.id from cs_info i where i.site_id ='"+site_id+"' and i.info_status=8 and i.final_status=0 and i.model_id=12");
+			      List<Map> infoList = PublicTableDAO.executeSearchSql("select i.info_id from cs_info i where i.site_id ='"+site_id+"' and i.info_status=8 and i.final_status=0 and i.model_id=12");
 	    		  for(Map infoMap : infoList){
 	    			  
 	    			    Map map = null;
 	    			    //判断是不是链接信息
-	    			    String id = (String)(infoMap.get("id")+"");
+	    			    String id = (String)(infoMap.get("info_id")+"");
 						InfoBean infoBean = InfoBaseManager.getInfoById(id+"");
 						if(infoBean.getModel_id()==12){
 							map = new HashMap();
