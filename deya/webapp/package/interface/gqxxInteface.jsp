@@ -9,6 +9,7 @@
 <%@ page contentType="text/html; charset=utf-8" %>
 <%
     String action_type = request.getParameter("action_type");
+    String callback = request.getParameter("callback");
     String result = "";
 
     if("news_list".equals(action_type))
@@ -19,8 +20,11 @@
     {
         result = getNewsListCount(request);
     }
-
-    out.println(result);
+    if(callback!=null){
+        out.println(callback+"("+result+")");
+    }else{
+        out.println(result);
+    }
 %>
 <%!
     String title = "阎良";
