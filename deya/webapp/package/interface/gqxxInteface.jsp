@@ -59,7 +59,7 @@
         TurnPageBean tpb = InfoUtilData.getInfoCount(params);
         if(tpb != null)
         {
-            json += "{\"count\":\"" + tpb.getCount() + "\",\"page_count\":\""+tpb.getPage_count()+"\",\"prev_num\":\""+tpb.getPrev_num()+"\":\"next_num\":\""+tpb.getNext_num()+"\"}";
+            json += "{\"count\":\"" + tpb.getCount() + "\",\"page_count\":\""+tpb.getPage_count()+"\",\"prev_num\":\""+tpb.getPrev_num()+"\",\"next_num\":\""+tpb.getNext_num()+"\"}";
         }
         return json;
     }
