@@ -148,7 +148,16 @@ public class SQRPC {
 	{
 		return SQManager.setSQClickCount(sq_id);
 	}
-	
+
+
+	public static boolean insertSQ(SQBean sb, SQAttachment sqa){
+		sb = SQManager.insertSQ(sb,sqa);
+		if(sb!=null){
+			return true;
+		}
+		return false;
+	}
+
 	/**
 	 * 修改信件内容 
 	 * @param SQBean sb
