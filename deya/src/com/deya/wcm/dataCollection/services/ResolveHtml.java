@@ -112,7 +112,7 @@ public class ResolveHtml {
                     i--;
                 } else {
                     String url = (String) waitgetArtInfoSet.iterator().next();
-                    String contentHtml = DownHtmlUtil.downLoadHtml(url, collBean.getPageEncoding(),1);
+                    String contentHtml = DownHtmlUtil.downLoadHtml(url, collBean.getPageEncoding());
                     waitgetArtInfoSet.remove(url);
                     if (FormatString.strIsNull(contentHtml)) {
                         getArticleInfo(collBean, contentHtml, url);
