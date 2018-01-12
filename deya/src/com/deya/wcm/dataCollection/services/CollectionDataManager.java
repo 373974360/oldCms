@@ -75,7 +75,7 @@ public class CollectionDataManager {
             String url = (String) set.iterator().next();
             json_str = json_str + "{";
             json_str = json_str + "\"text\":\"" + url + "\",\"state\":\"closed\"";
-            String strHtml = DownHtmlUtil.downLoadHtml(url, Encode,0);
+            String strHtml = DownHtmlUtil.downLoadHtml(url, Encode);
             set.remove(url);
 
             if (FormatString.strIsNull(strHtml)) {
@@ -143,7 +143,7 @@ public class CollectionDataManager {
 
             System.out.println("开始采集链接地址为: " + url + " 的列表");
 
-                String listPagehStr = DownHtmlUtil.downLoadHtml(url, collBean.getPageEncoding(),0);
+                String listPagehStr = DownHtmlUtil.downLoadHtml(url, collBean.getPageEncoding());
                 urlSet.remove(url);
 
                 if (FormatString.strIsNull(listPagehStr))

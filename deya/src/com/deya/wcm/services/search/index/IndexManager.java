@@ -10,21 +10,7 @@ import com.deya.util.io.FileOperation;
 import com.deya.wcm.dao.search.impl.InfoServiceUtil;
 import com.deya.wcm.services.search.SearchForInterface;
 import com.deya.wcm.services.search.SearchForManager;
-import com.deya.wcm.services.search.index.impl.IndexBsznServiceImpl;
-import com.deya.wcm.services.search.index.impl.IndexFileServiceImpl;
-import com.deya.wcm.services.search.index.impl.IndexFwServiceImpl;
-import com.deya.wcm.services.search.index.impl.IndexInfoServiceImpl;
-import com.deya.wcm.services.search.index.impl.IndexLawServiceImpl;
-import com.deya.wcm.services.search.index.impl.IndexLeaderServiceImpl;
-import com.deya.wcm.services.search.index.impl.IndexOrgDServiceImpl;
-import com.deya.wcm.services.search.index.impl.IndexOrgServiceImpl;
-import com.deya.wcm.services.search.index.impl.IndexPicServiceImpl;
-import com.deya.wcm.services.search.index.impl.IndexResourcePdfServiceImpl;
-import com.deya.wcm.services.search.index.impl.IndexResourcePicServiceImpl;
-import com.deya.wcm.services.search.index.impl.IndexResourceShkwWsjcServiceImpl;
-import com.deya.wcm.services.search.index.impl.IndexResourceVideoServiceImpl;
-import com.deya.wcm.services.search.index.impl.IndexResourceWordServiceImpl;
-import com.deya.wcm.services.search.index.impl.IndexXxgkServiceImpl;
+import com.deya.wcm.services.search.index.impl.*;
 
 /**
  * <p>搜索所需要的管理类</p>
@@ -40,7 +26,7 @@ public class IndexManager{
 	
 	public static IndexService indexInfoService = new IndexInfoServiceImpl(); //一般信息类型的实现类
 	public static IndexService indexPicService = new IndexPicServiceImpl(); //一般图文信息类型的实现类
-	//public static IndexService indexVideoService = new IndexVideoServiceImpl(); //一般视频信息类型的实现类
+	public static IndexService indexVideoService = new IndexVideoServiceImpl(); //一般视频信息类型的实现类
 	public static IndexService indexXxgkService = new IndexXxgkServiceImpl(); //信息公开 一般信息类型的实现类
 	public static IndexService indexFileService = new IndexFileServiceImpl(); //信息公开 法律法规文件类型的实现类
 	public static IndexService indexLeaderService = new IndexLeaderServiceImpl(); //信息公开 领导成员类型的实现类
@@ -50,8 +36,8 @@ public class IndexManager{
 	public static IndexService indexBsznService = new IndexBsznServiceImpl(); //办事指南类型的实现类
 	public static IndexService indexFwService = new IndexFwServiceImpl(); //服务的实现类
 	
-//	public static IndexService indexCustomService = new IndexCustomServiceImpl(); //自定义表单信息 -- 一般信息
-//	public static IndexService indexCustomGkService = new IndexCustomGkServiceImpl(); 
+	public static IndexService indexCustomService = new IndexCustomServiceImpl(); //自定义表单信息 -- 一般信息
+	public static IndexService indexCustomGkService = new IndexCustomGkServiceImpl();
 	
 	public static IndexService indexResourcePicService = new IndexResourcePicServiceImpl(); //素材图片的实现类
 	public static IndexService indexResourceVideoService = new IndexResourceVideoServiceImpl(); //素材视频的实现类
@@ -62,7 +48,7 @@ public class IndexManager{
 	public static void createAllIndexByAppId(Map map){
 		indexInfoService.appendALlDocument(map); 
 		indexPicService.appendALlDocument(map); 
-		//indexVideoService.appendALlDocument(map);
+		indexVideoService.appendALlDocument(map);
 		indexXxgkService.appendALlDocument(map);  
 		indexFileService.appendALlDocument(map);
 		indexLeaderService.appendALlDocument(map); 
@@ -70,8 +56,8 @@ public class IndexManager{
 		indexOrgDService.appendALlDocument(map);
 		indexLawService.appendALlDocument(map);
 		indexBsznService.appendALlDocument(map);
-//		indexCustomService.appendALlDocument(map);
-//		indexCustomGkService.appendALlDocument(map);
+		indexCustomService.appendALlDocument(map);
+		indexCustomGkService.appendALlDocument(map);
 	}
 	
 	//IndexFwServiceImpl.java 要调用 
@@ -88,12 +74,15 @@ public class IndexManager{
 		if(indexPicService.appendSingleDocument(map)){
 			return;
 		}
-//		if(indexVideoService.appendSingleDocument(map)){
-//			return;
-//		}
-//		if(indexCustomService.appendSingleDocument(map)){
-//			return;
-//		}
+		if(indexVideoService.appendSingleDocument(map)){
+			return;
+		}
+		if(indexBsznService.appendSingleDocument(map)){
+			return;
+		}
+		if(indexCustomService.appendSingleDocument(map)){
+			return;
+		}
 	}
 	
 	//政务公开类信息
@@ -116,20 +105,18 @@ public class IndexManager{
 		if(indexLawService.appendSingleDocument(map)){
 			return;
 		}
-		if(indexBsznService.appendSingleDocument(map)){
+		if(indexCustomGkService.appendSingleDocument(map)){
 			return;
 		}
-//		if(indexCustomGkService.appendSingleDocument(map)){
-//			return;
-//		}
 	}
 	  
 	//通过站点ID读该所有类型的信息到Index中
 	public static void createAllIndexBySite(Map mapSite){
 		indexInfoService.appendALlDocument(mapSite); 
 		indexPicService.appendALlDocument(mapSite); 
-//		indexVideoService.appendALlDocument(mapSite);
-//		indexCustomService.appendALlDocument(mapSite);
+		indexVideoService.appendALlDocument(mapSite);
+		indexCustomService.appendALlDocument(mapSite);
+		indexBsznService.appendALlDocument(mapSite);
 		
 		//创建 公务公开 类类的信息索引  
 		String site_id1 = (String)mapSite.get("site_id"); 
@@ -145,8 +132,7 @@ public class IndexManager{
 				indexOrgService.appendALlDocument(map);
 				indexOrgDService.appendALlDocument(map);  
 				indexLawService.appendALlDocument(map);
-//				indexCustomGkService.appendALlDocument(map);
-				indexBsznService.appendALlDocument(mapSite);
+				indexCustomGkService.appendALlDocument(map);
 			} 
 			
 			//服务类信息

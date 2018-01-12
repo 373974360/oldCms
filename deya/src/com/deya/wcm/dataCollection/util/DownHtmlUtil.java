@@ -18,12 +18,12 @@ public class DownHtmlUtil {
             "Openwave/UCWEB7.0.2.37/28/978",
             "Mozilla/4.0 (compatible; MSIE 6.0; ) Opera/UCWEB7.0.2.37/28/989"};
 
-    public static String downLoadHtml(String StrUrl, String Encode,int type) {
+    public static String downLoadHtml(String StrUrl, String Encode) {
 
-        if(type==1&&StrUrl.startsWith("http://www.xa.gov.cn")){
-            String conId = StrUrl.substring(StrUrl.indexOf("?trid=")+6,StrUrl.length());
-            StrUrl = "http://www.xa.gov.cn/websac/cat/"+conId+".html";
-        }
+//        if(type==1&&StrUrl.startsWith("http://www.xa.gov.cn")){
+//            String conId = StrUrl.substring(StrUrl.indexOf("?trid=")+6,StrUrl.length());
+//            StrUrl = "http://www.xa.gov.cn/websac/cat/"+conId+".html";
+//        }
 
         String htmlStr = "";
         String str = "";

@@ -126,7 +126,10 @@ function setUserOperate()
             if(step_id == 100)
             {
                 isChangeDelete = true;
-            }
+            }else{
+                $("#btn302").hide();
+                $("#btn303").hide();
+			}
         }else{
 
         }
@@ -299,7 +302,7 @@ function getSelectInfoBeans()
 	<tr> 
 		<td align="left" valign="middle"> 
 			<input id="btn303" name="btn1" type="button" onclick="publicSelectCheckbox(table,'info_id','onPass()');" value="通过" /> 
-			<input id="btn303" name="btn2" type="button" onclick="publicSelectCheckbox(table,'info_id','noPassDesc()');" value="退稿" />
+			<input id="btn303_1" name="btn2" type="button" onclick="publicSelectCheckbox(table,'info_id','noPassDesc()');" value="退稿" />
 			<input id="btn305" name="btn2" type="button" onclick="publicSelectCheckbox(table,'info_id','openWindowForPush()');" value="推送" />
 			<input id="btn306" name="btn3" type="button" onclick="publicSelectCheckbox(table,'info_id','openWindowForMov()');" value="移动" /> 
             <input id="btn332" name="btn3" type="button" onclick="deleteRecord(table,'info_id','deleteInfoData()');" value="删除" />
