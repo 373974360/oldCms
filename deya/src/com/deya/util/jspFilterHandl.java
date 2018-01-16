@@ -16,7 +16,7 @@ public class jspFilterHandl {
             "injected", "ACUstart", "ACUend", "():;", "acu:Expre", "window.location.href", "document", "parameter: ", "<OBJECT", "javascript", "confirm", "<script>", "</script>", "..", "cat ", "click", "function", "prompt(", "<", ">","'", "‘", "’","�","ndhlmt:expre","ssion","ndhlmt"};
     private static String no_filter_jsp;
 
-    private static String[] sqlFilterStr = {"exec ", "insert ", "select ", "delete ", "trancate", "update ", "drop table"};
+    private static String[] sqlFilterStr = {"exec ", "insert ", "delete ", "trancate", "update ", "drop table"};
 
     static {
         String[] jspArr = JconfigUtilContainer.bashConfig().getPropertyNamesByCategory("filter_jsp_page");
