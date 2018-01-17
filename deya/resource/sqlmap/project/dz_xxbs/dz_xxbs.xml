@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="dz_xxbs">
+    <resultMap id="BaseResultMap" type="com.deya.project.dz_xxbs.XxbsBean" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="title" property="title" jdbcType="VARCHAR" />
+        <result column="do_dept" property="do_dept" jdbcType="INTEGER" />
+        <result column="do_dept_name" property="do_dept_name" jdbcType="VARCHAR" />
+        <result column="thumb_url" property="thumb_url" jdbcType="VARCHAR" />
+        <result column="islink" property="islink" jdbcType="INTEGER" />
+        <result column="content_url" property="content_url" jdbcType="VARCHAR" />
+        <result column="author" property="author" jdbcType="VARCHAR" />
+        <result column="description" property="description" jdbcType="VARCHAR" />
+        <result column="keywords" property="keywords" jdbcType="VARCHAR" />
+        <result column="editor" property="editor" jdbcType="VARCHAR" />
+        <result column="released_dtime" property="released_dtime" jdbcType="VARCHAR" />
+        <result column="contents" property="contents" jdbcType="VARCHAR" />
+        <result column="info_status" property="info_status" jdbcType="INTEGER" />
+        <result column="input_user" property="input_user" jdbcType="INTEGER" />
+        <result column="input_dtime" property="input_dtime" jdbcType="VARCHAR" />
+        <result column="modify_user" property="modify_user" jdbcType="INTEGER" />
+        <result column="modify_dtime" property="modify_dtime" jdbcType="VARCHAR" />
+    </resultMap>
+
+</mapper>
