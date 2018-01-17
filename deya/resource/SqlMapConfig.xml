@@ -125,5 +125,6 @@
         <mapper resource="sqlmap/project/searchkeys.xml"/>
         <mapper resource="sqlmap/system/rmiserverconf.xml"/>
         <mapper resource="sqlmap/appeal/sqmyddc.xml"/>
+        <mapper resource="sqlmap/project/dz_xxbs/dz_xxbs.xml"/>
     </mappers>
 </configuration>

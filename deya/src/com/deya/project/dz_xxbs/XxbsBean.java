@@ -19,11 +19,12 @@ public class XxbsBean implements Serializable {
     private String editor="";//网络编辑
     private String released_dtime="";//发布时间
     private String contents="";//正文内容
-    private int info_status=0;//报送状态，0等待，1已采用，2已退稿
+    private int info_status=1;//报送状态，1等待，2已采用，3已退稿
     private int input_user=0;//录入人ID
     private String input_dtime="";//入库时间
     private int modify_user=0;//修改人ID
     private String modify_dtime="";//修改时间
+    private String auto_desc="";//退稿意见
 
     public int getId() {
         return id;
@@ -167,5 +168,13 @@ public class XxbsBean implements Serializable {
 
     public void setModify_dtime(String modify_dtime) {
         this.modify_dtime = modify_dtime;
+    }
+
+    public String getAuto_desc() {
+        return auto_desc;
+    }
+
+    public void setAuto_desc(String auto_desc) {
+        this.auto_desc = auto_desc;
     }
 }

@@ -23,4 +23,75 @@
         <result column="modify_dtime" property="modify_dtime" jdbcType="VARCHAR" />
     </resultMap>
 
+    <insert id="insertXxbs" parameterType="com.deya.project.dz_xxbs.XxbsBean">
+        insert into dz_xxbs(
+        id,
+        title,
+        do_dept,
+        do_dept_name,
+        thumb_url,
+        islink,
+        content_url,
+        author,
+        description,
+        keywords,
+        editor,
+        released_dtime,
+        contents,
+        info_status,
+        input_user,
+        input_dtime,
+        modify_user,
+        modify_dtime,
+        auto_desc
+        ) values(
+        ${id},
+        #{title},
+        ${do_dept},
+        #{do_dept_name},
+        #{thumb_url},
+        ${islink},
+        #{content_url},
+        #{author},
+        #{description},
+        #{keywords},
+        #{editor},
+        #{released_dtime},
+        #{contents},
+        ${info_status},
+        ${input_user},
+        #{input_dtime},
+        ${modify_user},
+        #{modify_dtime},
+        #{auto_desc})
+    </insert>
+
+    <select id="getXxbsInfoList" parameterType="Map" resultMap="BaseResultMap">
+      select * from dz_xxbs
+        <include refid="getXxbsInfoList_sql_conn"/>
+        <if test="orderByFields != null and orderByFields == 1">
+            order by released_dtime desc
+        </if>
+        <if test="orderByFields != null and orderByFields == 2">
+            order by released_dtime
+        </if>
+        limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
+    </select>
+
+
+    <select id="getXxbsInfoCount" parameterType="Map" resultType="java.lang.String">
+        select count(*) from dz_xxbs
+        <include refid="getXxbsInfoList_sql_conn"/>
+    </select>
+
+
+    <sql id="getXxbsInfoList_sql_conn">
+        where 1=1
+        <if test="search != null and search!=''">
+            and title like '%${search}%'
+        </if>
+        <if test="info_status != null and info_status>0">
+            and info_status = #{info_status}
+        </if>
+    </sql>
 </mapper>
