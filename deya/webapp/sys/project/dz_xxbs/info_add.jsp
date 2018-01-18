@@ -2,6 +2,7 @@
 <%
     String siteid = request.getParameter("site_id");
     String topnum = request.getParameter("topnum");
+    String infoid = request.getParameter("id");
     if(topnum == null || topnum.trim().equals("") || topnum.trim().equals("null") ){
         topnum = "0";
     }
@@ -18,21 +19,42 @@
         var app_id = "cms";
         var contentId = "contents";
         var topnum = "<%=topnum%>";
+        var infoid = "<%=infoid%>";
         $(function(){
             initUeditor(contentId);
             init_input();
             initButtomStyle();
             reloadPublicInfo();
             publicUploadButtomLoad("uploadify",true,false,"",0,5,getReleSiteID(),"savePicUrl");
+            if(infoid != "" && infoid != "null" && infoid != null){
+                defaultBean = XxbsRPC.getXxbs(infoid);
+                if(defaultBean){
+                    $("#info_article_table").autoFill(defaultBean);
+                    setV(contentId,defaultBean.contents);
+                    reloadPublicUpdateInfo();
+                }
+                $("#addButton").click(updateInfoData);
+            } else {
+                $("#addButton").click(addInfoData);
+            }
         });
+        function savePicUrl(url)
+        {
+            $("#thumb_url").val(url);
+        }
     </script>
 </head>
 <body>
 <span class="blank12"></span>
 <form action="#" name="form1">
     <div id="info_article_table">
-        <input type="hidden" id="input_user"/>
-        <input type="hidden" id="do_dept"/>
+        <input type="hidden" id="id" value="0"/>
+        <input type="hidden" id="input_user" value="0"/>
+        <input type="hidden" id="do_dept" value="0"/>
+        <input type="hidden" id="modify_user" value="0"/>
+        <input type="hidden" id="input_dtime" value=""/>
+        <input type="hidden" id="modify_dtime" value=""/>
+        <input type="hidden" id="info_status" value="1"/>
         <table class="table_form" border="0" cellpadding="0" cellspacing="0">
             <tbody>
             <tr>
@@ -122,9 +144,6 @@
                     <div style="float:left">
                         <input type="file" name="uploadify" id="uploadify"/>
                     </div>
-                    <div style="float:left">
-                        <input id="i005" name="i005" type="button" onclick="selectPageHandle()" value="图片库"/>
-                    </div>
                 </td>
             </tr>
             <tr>
@@ -147,7 +166,7 @@
 <table class="table_option" border="0" cellpadding="0" cellspacing="0">
 <tr>
 <td align="left" valign="middle" style="text-indent:100px;">
-<input id="addButton" name="btn1" type="button" onclick="addInfoData()" value="保存" />
+<input id="addButton" name="btn1" type="button" value="保存" />
 <input id="addReset" name="btn1" type="button" onclick="window.location.reload()" value="重置" />
 <input id="addCancel" name="btn1" type="button" onclick="top.tab_colseOnclick(top.curTabIndex)" value="取消" />
 </td>

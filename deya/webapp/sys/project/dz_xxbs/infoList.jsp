@@ -22,6 +22,7 @@
 		$(function(){
             setUserOperate();
             initButtomStyle();
+            initTabAndStatus();
             reloadInfoDataList();
 		});
 
@@ -101,9 +102,19 @@
 		<table class="table_option" border="0" cellpadding="0" cellspacing="0">
 			<tr>
 				<td align="left" valign="middle">
-					<input id="btn539" name="btn1" type="button" value="采用"/>
-					<input id="btn540" name="btn2" type="button" value="退稿"/>
-					<input id="btn538" name="btn3" type="button" value="删除"/>
+					<input id="btn539" name="btn1" type="button" value="采用" onclick="publicSelectCheckbox(table,'id','openWindowForMov()');"/>
+					<input id="btn540" name="btn2" type="button" value="退稿" onclick="publicSelectCheckbox(table,'id','noPassDesc()');"/>
+					<input id="btn538" name="btn3" type="button" value="删除" onclick="deleteRecord(table,'id','deleteInfoData()');"/>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="infoListTable hidden" id="listTable_2">
+		<table class="table_option" border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td align="left" valign="middle">
+					<input id="btn536" name="btn1" type="button" value="报送" onclick="publicSelectCheckbox(table,'id','toPass()');"/>
+					<input id="btn538" name="btn3" type="button" value="删除" onclick="deleteRecord(table,'id','deleteInfoData()');"/>
 				</td>
 			</tr>
 		</table>

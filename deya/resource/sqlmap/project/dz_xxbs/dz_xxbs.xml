@@ -17,6 +17,9 @@
         <result column="released_dtime" property="released_dtime" jdbcType="VARCHAR" />
         <result column="contents" property="contents" jdbcType="VARCHAR" />
         <result column="info_status" property="info_status" jdbcType="INTEGER" />
+        <result column="auto_desc" property="auto_desc" jdbcType="VARCHAR" />
+        <result column="cat_id" property="cat_id" jdbcType="INTEGER" />
+        <result column="cat_name" property="cat_name" jdbcType="VARCHAR" />
         <result column="input_user" property="input_user" jdbcType="INTEGER" />
         <result column="input_dtime" property="input_dtime" jdbcType="VARCHAR" />
         <result column="modify_user" property="modify_user" jdbcType="INTEGER" />
@@ -66,6 +69,54 @@
         #{auto_desc})
     </insert>
 
+
+
+    <update id="updateXxbs" parameterType="com.deya.project.dz_xxbs.XxbsBean">
+        update dz_xxbs set
+        title = #{title},
+        do_dept = ${do_dept},
+        do_dept_name = #{do_dept_name},
+        thumb_url = #{thumb_url},
+        islink = ${islink},
+        content_url = #{content_url},
+        author = #{author},
+        description = #{description},
+        keywords = #{keywords},
+        editor = #{editor},
+        released_dtime = #{released_dtime},
+        contents = #{contents},
+        info_status = ${info_status},
+        input_user = ${input_user},
+        input_dtime = #{input_dtime},
+        modify_user = ${modify_user},
+        modify_dtime = #{modify_dtime},
+        auto_desc = #{auto_desc}
+        where id = ${id}
+    </update>
+
+
+
+    <update id="updateInfoStatus" parameterType="Map">
+        update dz_xxbs set info_status = ${info_status} where id in (${ids})
+    </update>
+
+    <update id="updateNoPassStatus" parameterType="Map">
+        update dz_xxbs set info_status = 3,auto_desc=#{auto_desc} where id in (${ids})
+    </update>
+
+    <update id="infoPass" parameterType="Map">
+        update dz_xxbs set info_status = 2,cat_id=${cat_id},cat_name=#{cat_name},auto_desc='' where id in (${ids})
+    </update>
+
+    <delete id="deleteXxbs" parameterType="Map">
+         delete from dz_xxbs
+        <where>
+            <if test="ids != null and ids != ''">
+                and id in (${ids})
+            </if>
+        </where>
+    </delete>
+
     <select id="getXxbsInfoList" parameterType="Map" resultMap="BaseResultMap">
       select * from dz_xxbs
         <include refid="getXxbsInfoList_sql_conn"/>
@@ -84,6 +135,9 @@
         <include refid="getXxbsInfoList_sql_conn"/>
     </select>
 
+    <select id="getXxbs" parameterType="Map" resultMap="BaseResultMap">
+        select * from dz_xxbs where id = ${id}
+    </select>
 
     <sql id="getXxbsInfoList_sql_conn">
         where 1=1
@@ -92,6 +146,9 @@
         </if>
         <if test="info_status != null and info_status>0">
             and info_status = #{info_status}
+        </if>
+        <if test="dept_ids != null and dept_ids!=''">
+            and do_dept in (${dept_ids})
         </if>
     </sql>
 </mapper>

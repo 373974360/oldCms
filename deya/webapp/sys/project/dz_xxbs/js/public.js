@@ -1,5 +1,6 @@
 var DeptRPC = jsonrpc.DeptRPC;
 var SiteRPC = jsonrpc.SiteRPC;
+var defaultBean;
 
 //公用初始加载方法
 function reloadPublicInfo()
@@ -13,6 +14,16 @@ function reloadPublicInfo()
     $("#input_user").val(LoginUserBean.user_id);
 }
 
+//把选中的图片的thumb_url添加进input框中
+function addthumb_url(thumb_url) {
+    $("#thumb_url").empty();
+    $("#thumb_url").val(thumb_url);
+}
+//修改信息时页面加载方法
+function reloadPublicUpdateInfo()
+{
+    $("#modify_user").val(LoginUserBean.user_id);
+}
 
 function getReleSiteID() {
     var temp_site_id = site_id;

@@ -25,6 +25,8 @@ public class XxbsBean implements Serializable {
     private int modify_user=0;//修改人ID
     private String modify_dtime="";//修改时间
     private String auto_desc="";//退稿意见
+    private int cat_id=0;
+    private String cat_name="";
 
     public int getId() {
         return id;
@@ -176,5 +178,21 @@ public class XxbsBean implements Serializable {
 
     public void setAuto_desc(String auto_desc) {
         this.auto_desc = auto_desc;
+    }
+
+    public int getCat_id() {
+        return cat_id;
+    }
+
+    public void setCat_id(int cat_id) {
+        this.cat_id = cat_id;
+    }
+
+    public String getCat_name() {
+        return cat_name;
+    }
+
+    public void setCat_name(String cat_name) {
+        this.cat_name = cat_name;
     }
 }
