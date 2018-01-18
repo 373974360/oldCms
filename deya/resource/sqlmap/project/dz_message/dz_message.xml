@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="dz_message">
+    <resultMap id="BaseResultMap" type="com.deya.project.dz_message.MessageBean" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="title" property="title" jdbcType="VARCHAR" />
+        <result column="jimi" property="jimi" jdbcType="VARCHAR" />
+        <result column="jinji" property="jinji" jdbcType="VARCHAR" />
+        <result column="released_dtime" property="released_dtime" jdbcType="VARCHAR" />
+        <result column="contents" property="contents" jdbcType="VARCHAR" />
+        <result column="info_status" property="info_status" jdbcType="INTEGER" />
+        <result column="input_user" property="input_user" jdbcType="INTEGER" />
+        <result column="input_dtime" property="input_dtime" jdbcType="VARCHAR" />
+        <result column="modify_user" property="modify_user" jdbcType="INTEGER" />
+        <result column="modify_dtime" property="modify_dtime" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <insert id="insertMessage" parameterType="com.deya.project.dz_message.MessageBean">
+        insert into dz_message(
+        id,
+        title,
+        released_dtime,
+        contents,
+        jimi,
+        jinji,
+        info_status,
+        input_user,
+        input_dtime,
+        modify_user,
+        modify_dtime
+        ) values(
+        ${id},
+        #{title},
+        #{released_dtime},
+        #{contents},
+        #{jimi},
+        #{jinji},
+        ${info_status},
+        ${input_user},
+        #{input_dtime},
+        ${modify_user},
+        #{modify_dtime})
+    </insert>
+
+
+
+    <update id="updateMessage" parameterType="com.deya.project.dz_message.MessageBean">
+        update dz_message set
+        title = #{title},
+        released_dtime = #{released_dtime},
+        contents = #{contents},
+        jimi = #{jimi},
+        jinji = #{jinji},
+        info_status = ${info_status},
+        input_user = ${input_user},
+        input_dtime = #{input_dtime},
+        modify_user = ${modify_user},
+        modify_dtime = #{modify_dtime}
+        where id = ${id}
+    </update>
+
+
+
+    <update id="updateMessageInfoStatus" parameterType="Map">
+        update dz_message set info_status = ${info_status} where id in (${ids})
+    </update>
+
+    <delete id="deleteMessage" parameterType="Map">
+         delete from dz_message
+        <where>
+            <if test="ids != null and ids != ''">
+                and id in (${ids})
+            </if>
+        </where>
+    </delete>
+
+    <select id="getMessageInfoList" parameterType="Map" resultMap="BaseResultMap">
+      select * from dz_message
+        <include refid="getMessageInfoList_sql_conn"/>
+        <if test="orderByFields != null and orderByFields == 1">
+            order by released_dtime desc
+        </if>
+        <if test="orderByFields != null and orderByFields == 2">
+            order by released_dtime
+        </if>
+        limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
+    </select>
+
+
+    <select id="getMessageInfoCount" parameterType="Map" resultType="java.lang.String">
+        select count(*) from dz_message
+        <include refid="getMessageInfoList_sql_conn"/>
+    </select>
+
+    <select id="getMessage" parameterType="Map" resultMap="BaseResultMap">
+        select * from dz_message where id = ${id}
+    </select>
+
+    <sql id="getMessageInfoList_sql_conn">
+        where 1=1
+        <if test="search != null and search!=''">
+            and title like '%${search}%'
+        </if>
+        <if test="info_status != null and info_status>0">
+            and info_status = #{info_status}
+        </if>
+    </sql>
+</mapper>
