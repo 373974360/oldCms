@@ -98,6 +98,7 @@ public class XxbsRPC {
                     article.setReleased_dtime(b.getReleased_dtime());
                     article.setInfo_content(b.getContents());
                     article.setInfo_status(8);
+                    article.setWeight(60);
                     article.setInput_user(b.getInput_user());
                     article.setInput_dtime(b.getInput_dtime());
                     article.setModify_dtime(b.getModify_dtime());
