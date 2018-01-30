@@ -151,4 +151,10 @@
             and do_dept in (${dept_ids})
         </if>
     </sql>
+
+    <select id="getXxbsDeptCount" parameterType="Map" resultType="java.lang.String">
+        <![CDATA[
+          select count(*) as totle from dz_xxbs where do_dept=#{do_dept} and info_status=#{info_status} and input_dtime>='${start_time}' and input_dtime<='${end_time}'
+        ]]>
+    </select>
 </mapper>

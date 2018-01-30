@@ -14,6 +14,8 @@ import com.deya.wcm.services.org.user.UserLogin;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -132,4 +134,36 @@ public class XxbsRPC {
         }
         return deptids;
     }
+
+    public static List<Map<String,String>> getXxbsDeptCount(Map<String, String> map) {
+        List<Map<String,String>> resultList = new ArrayList<>();
+        String deptids = getDeptIds(map.get("dept_id"));
+        String[] arrDeptIds = deptids.split(",");
+        for(String id:arrDeptIds){
+            if(Integer.parseInt(id)>2){
+                map.put("do_dept",id);
+                Map<String,String> resMap = new HashMap<>();
+                DeptBean dept = DeptManager.getDeptBeanByID(id);
+                resMap.put("deptName",dept.getDept_name());
+
+                map.put("info_status","1");
+                int count_a = Integer.parseInt(XxbsManager.getXxbsDeptCount(map));
+                resMap.put("deptCount_a",count_a+"");
+
+                map.put("info_status","2");
+                int count_b = Integer.parseInt(XxbsManager.getXxbsDeptCount(map));
+                resMap.put("deptCount_b",count_b+"");
+
+                map.put("info_status","3");
+                int count_c = Integer.parseInt(XxbsManager.getXxbsDeptCount(map));
+                resMap.put("deptCount_c",count_c+"");
+
+                int count_d = count_a+count_b+count_c;
+                resMap.put("deptCount_d",count_d+"");
+                resultList.add(resMap);
+            }
+        }
+        return resultList;
+    }
+
 }

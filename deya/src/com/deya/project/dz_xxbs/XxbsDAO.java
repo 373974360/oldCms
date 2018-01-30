@@ -112,4 +112,8 @@ public class XxbsDAO {
         }
         return false;
     }
+
+    public static String getXxbsDeptCount(Map<String, String> map) {
+        return DBManager.getString("getXxbsDeptCount", map);
+    }
 }

@@ -54,4 +54,8 @@ public class XxbsManager {
         return XxbsDAO.infoPass(list, cat_id, cat_name, stl);
     }
 
+    public static String getXxbsDeptCount(Map<String, String> map) {
+        return XxbsDAO.getXxbsDeptCount(map);
+    }
+
 }
