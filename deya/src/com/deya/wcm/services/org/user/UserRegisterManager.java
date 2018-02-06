@@ -167,7 +167,7 @@ public class UserRegisterManager implements ISyncCatch{
 			if(user_id == ulbo.getUser_id())
 			{
 				CryptoTools ct = new CryptoTools();
-				new_ub.setPassword(ct.decode(ulbo.getPassword()));
+				new_ub.setPassword(ulbo.getPassword());
 				new_ub.setRegister_id(ulbo.getRegister_id());
 				new_ub.setRegister_status(ulbo.getRegister_status());
 				new_ub.setUser_id(ulbo.getUser_id());

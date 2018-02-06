@@ -45,7 +45,7 @@ public class UploadFileIfy extends HttpServlet {
     public static String hd_url = "";
     public static String thum_url = "";
     public static String pic_name = "";
-    public static String NOTUPLOAT_FILE_EXT = ",php,php3,php5,phtml,asp,aspx,ascx,jsp,cfm,cfc,pl,bat,exe,dll,reg,cgi,";
+    public static String NOTUPLOAT_FILE_EXT = ",php,php3,php5,phtml,asp,aspx,ascx,jsp,cfm,cfc,pl,bat,exe,dll,reg,cgi,com,vbs,js,sh,";
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String delete_file = request.getParameter("delete_file");

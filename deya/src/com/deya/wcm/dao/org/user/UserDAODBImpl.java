@@ -22,21 +22,21 @@ import com.deya.wcm.db.DBManager;
  * <p>Company: Cicro</p>
  * @author zhuliang
  * @version 1.0
- * * 
+ * *
  */
 
 public class UserDAODBImpl implements IUserDAO{
-	
+
 	/**
      * 得到所有用户列表
-     * @param 
+     * @param
      * @return List
      * */
 	@SuppressWarnings("unchecked")
 	public List getAllUserList(){
 		return DBManager.queryFList("getAllUserList", "");
 	}
-	
+
 	/**
      * 根据部门ID得到下面用户列表（用于用户管理界面）
      * @param Map conn_m　传递参数，包含dept_id,start_num,page_size,sort_name,sort_type,conn_name,conn_value
@@ -47,7 +47,7 @@ public class UserDAODBImpl implements IUserDAO{
 	{
 		return DBManager.queryFList("getAllUserListByDeptID", conn_m);
 	}
-	
+
 
 	/**
      * 根据部门ID得到下面用户总数（用于用户管理界面）
@@ -58,7 +58,7 @@ public class UserDAODBImpl implements IUserDAO{
 	{
 		return DBManager.getString("getUserCountByDeptIDForDB", con_m);
 	}
-	
+
 	/**
      * 根据ID返回用户对象
      * @param String id
@@ -67,7 +67,7 @@ public class UserDAODBImpl implements IUserDAO{
 	public UserBean getUserBeanByID(String id){
 		return (UserBean)DBManager.queryFObj("getUserBeanByID", id);
 	}
-	
+
 	/**
      * 插入用户信息
      * @param UserBean ub
@@ -91,7 +91,7 @@ public class UserDAODBImpl implements IUserDAO{
 		}else
 			return false;
 	}
-	
+
 	/**
      * 修改用户信息
      * @param UserBean ub
@@ -107,14 +107,14 @@ public class UserDAODBImpl implements IUserDAO{
 		else
 			return false;
 	}
-	
+
 	/**
 	 * 保存用户排序
-	 * 
+	 *
 	 * @param String
 	 *            ids 用户ID
-	 * @param HttpServletRequest request	           
-	 * @return 
+	 * @param HttpServletRequest request
+	 * @return
 	 */
 	public boolean saveUserSort(String ids,SettingLogsBean stl)
 	{
@@ -135,9 +135,9 @@ public class UserDAODBImpl implements IUserDAO{
 		{
 			e.printStackTrace();
 			return false;
-		}		
+		}
 	}
-	
+
 	/**
      * 移动用户
      * @param Map<String,String> m
@@ -153,7 +153,7 @@ public class UserDAODBImpl implements IUserDAO{
 		else
 			return false;
 	}
-	
+
 	/**
      * 修改用户状态
      * @param int user_status
@@ -174,7 +174,7 @@ public class UserDAODBImpl implements IUserDAO{
 		else
 			return false;
 	}
-	
+
 	/**
      * 删除用户信息
      * @param String　user_ids
@@ -193,7 +193,7 @@ public class UserDAODBImpl implements IUserDAO{
 		}else
 			return false;
 	}
-	
+
 	/**
      * 根据部门ID删除用户信息
      * @param String　detp_ids
@@ -210,18 +210,18 @@ public class UserDAODBImpl implements IUserDAO{
 		}else
 			return false;
 	}
-	
+
 	/* **********************用户级别管理　开始******************************** */
 	/**
      * 得到所有用户级别列表
-     * @param 
+     * @param
      * @return List
      * */
 	@SuppressWarnings("unchecked")
 	public List getAllUserLevelList(){
 		return DBManager.queryFList("getAllUserLevelList", "");
 	}
-	
+
 	/**
      * 根据ID返回用户级别对象
      * @param String id
@@ -230,7 +230,7 @@ public class UserDAODBImpl implements IUserDAO{
 	public UserLevelBean getUserLevelBeanByID(String id){
 		return (UserLevelBean)DBManager.queryFObj("getUserLevelBeanByID", id);
 	}
-	
+
 	/**
      * 插入用户级别信息
      * @param UserLevelBean ulb
@@ -247,7 +247,7 @@ public class UserDAODBImpl implements IUserDAO{
 		}else
 			return false;
 	}
-	
+
 	/**
      * 修改用户级别信息
      * @param UserLevelBean ulb
@@ -263,8 +263,8 @@ public class UserDAODBImpl implements IUserDAO{
 		else
 			return false;
 	}
-	
-	
+
+
 	/**
      * 删除用户级别信息
      * @param String　ids
@@ -282,18 +282,18 @@ public class UserDAODBImpl implements IUserDAO{
 			return false;
 	}
 	/* **********************用户级别管理　结束******************************** */
-	
+
 	/* **********************帐号管理　开始******************************** */
 	/**
      * 得到所有帐号列表
-     * @param 
+     * @param
      * @return List
      * */
 	@SuppressWarnings("unchecked")
 	public List getAllUserRegister(){
 		return DBManager.queryFList("getAllUserRegister", "");
 	}
-	
+
 	/**
      * 得到所有用户帐号总数(用于后台管理列表)
      * @param Map<String,String> con_m
@@ -302,30 +302,30 @@ public class UserDAODBImpl implements IUserDAO{
 	public String getUserRegisterCount(Map<String,String> con_m){
 		return DBManager.getString("getUserRegisterCount", con_m);
 	}
-	
+
 	/**
      * 得到所有用户帐号列表(用于后台管理列表)
-     * @param 
+     * @param
      * @return List
-     * */	
+     * */
 	@SuppressWarnings("unchecked")
 	public List<UserRegisterBean> getAllUserRegisterForDB(Map<String,String> con_m)
 	{
 		return DBManager.queryFList("getAllUserRegisterForDB", con_m);
 	}
-	
+
 	/**
 	 * 根据帐号名得到帐号对象
-	 * 
+	 *
 	 * @param String user_name
-	 *            
+	 *
 	 * @return UserRegisterBean
 	 */
 	public UserRegisterBean getUserRegisterBeanByUname(String user_name)
 	{
 		return (UserRegisterBean)DBManager.queryFObj("getUserRegisterBeanByUname", user_name);
 	}
-	
+
 	/**
      * 插入帐号信息
      * @param UserRegisterBean urb
@@ -344,7 +344,7 @@ public class UserDAODBImpl implements IUserDAO{
 		}else
 			return false;
 	}
-	
+
 	/**
      * 修改帐号信息
      * @param UserRegisterBean urb
@@ -353,7 +353,9 @@ public class UserDAODBImpl implements IUserDAO{
      * */
 	public boolean updateRegister(UserRegisterBean urb,SettingLogsBean stl){
 		CryptoTools ct = new CryptoTools();
-		urb.setPassword(ct.encode(urb.getPassword()));
+		if(!urb.getPassword().substring(0,3).equals("=#=")){
+			urb.setPassword(ct.encode(urb.getPassword()));
+		}
 		if(DBManager.update("update_register", urb))
 		{
 			PublicTableDAO.insertSettingLogs("修改","帐号",urb.getRegister_id()+"",stl);
@@ -362,10 +364,10 @@ public class UserDAODBImpl implements IUserDAO{
 		else
 			return false;
 	}
-	
+
 	/**
      * 修改帐号状态
-     * @param int reg_status 
+     * @param int reg_status
      * @param String reg_ids
      * @return boolean
      * */
@@ -382,7 +384,7 @@ public class UserDAODBImpl implements IUserDAO{
 		else
 			return false;
 	}
-	
+
 	/**
      * 删除帐号信息
      * @param String　ids
@@ -399,7 +401,7 @@ public class UserDAODBImpl implements IUserDAO{
 		}else
 			return false;
 	}
-	
+
 	/**
      * 根据用户ID删除帐号信息
      * @param String　user_ids
@@ -416,7 +418,7 @@ public class UserDAODBImpl implements IUserDAO{
 		}else
 			return false;
 	}
-	
+
 	/**
      * 根据部门ID删除帐号信息
      * @param String　dept_ids
@@ -433,7 +435,7 @@ public class UserDAODBImpl implements IUserDAO{
 		}else
 			return false;
 	}
-	
+
 	/**
      * 根据用户ID批量修改用户密码
      * @param UserRegisterBean urb
@@ -447,7 +449,7 @@ public class UserDAODBImpl implements IUserDAO{
 			PublicTableDAO.insertSettingLogs("修改","帐号密码 用户",urb.getUser_id()+"",stl);
 			return true;
 		}else
-			return false; 
+			return false;
 	}
 	/* **********************帐号管理　结束******************************** */
 

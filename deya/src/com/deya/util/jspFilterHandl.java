@@ -18,6 +18,8 @@ public class jspFilterHandl {
 
     private static String[] sqlFilterStr = {"exec ", "insert ", "delete ", "trancate", "update ", "drop table"};
 
+    private static String[] integerParamStr = {"cat_id","model_id","sq_id","tm_id","info_id","info_status","dept_id","final_status","f_id"};
+
     static {
         String[] jspArr = JconfigUtilContainer.bashConfig().getPropertyNamesByCategory("filter_jsp_page");
         if (jspArr != null && jspArr.length > 0) {
@@ -91,10 +93,24 @@ public class jspFilterHandl {
                     if ("ware_content".equals(arr) || "t_content".equals(arr) || "sq_content".equals(arr) || "correct_content".equals(arr)) {
                         continue;
                     }
-                    if ("cat_id".equals(arr) || "model_id".equals(arr) || "sq_id".equals(arr) || "tm_id".equals(arr) || "info_id".equals(arr)) {
+                    for(String str:integerParamStr){
+                        if(str.equals(arr)){
+                            try {
+                                if (value != null && !"".equals(value) && !"null".equals(value)) {
+                                    int i = Integer.parseInt(value);
+                                }
+                            } catch (Exception ex) {
+                                return true;
+                            }
+                        }
+                    }
+                    if("sq_flag".equals(arr)){
                         try {
                             if (value != null && !"".equals(value) && !"null".equals(value)) {
-                                int i = Integer.parseInt(value);
+                                String[] sqFlag = value.split(",");
+                                for(String s:sqFlag){
+                                    int i = Integer.parseInt(s);
+                                }
                             }
                         } catch (Exception ex) {
                             return true;
