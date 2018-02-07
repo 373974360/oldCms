@@ -109,9 +109,9 @@ public class GKInfoDAO {
 	 * @param String
 	 * @return String
 	 */
-	public static String getInfoIdForGKIndex(String gk_index)
+	public static String getInfoIdForGKIndex(Map<String, String> map)
 	{
-		return DBManager.getString("getInfoIdForGKIndex", gk_index);
+		return DBManager.getString("getInfoIdForGKIndex", map);
 	}
 	
 	/**

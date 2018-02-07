@@ -8,7 +8,7 @@ var is_valid = "is_valid";
 
 function initTable()
 {
-	beanList = IndexRPC.getRoleList();// 取得索引生成规则列表
+	beanList = IndexRPC.getRoleListBySiteId(site_id);// 取得索引生成规则列表
 	beanList = List.toJSList(beanList);//把list转成JS的List对象	
 	
 	for(var i=0; i<beanList.size(); i++)
@@ -31,11 +31,21 @@ function updateRoleList()
 	{
 		var str_pre = "cell_" + i +"_";
 		var roleBean = BeanUtil.getCopy(indexRoleBean);
-	 	roleBean.id = $("#"+str_pre+id).val();
+		console.log($("#"+str_pre+id).val());
+		if($("#"+str_pre+id).val().length>0 && $("#"+str_pre+id).val()>0){
+            roleBean.id = $("#"+str_pre+id).val();
+		}else{
+            roleBean.id = 0;
+		}
+        roleBean.ir_id = $("#"+str_pre+"ir_id").val();
+        roleBean.ir_item = $("#"+str_pre+"ir_item").val();
 		roleBean.ir_value = $("#"+str_pre+value).val();
 		roleBean.ir_space = $("#"+str_pre+space).val();
 		var box_id  = str_pre+is_valid;
 		roleBean.is_valid = getCheckBox(box_id,1,0);
+        roleBean.sort_id = $("#"+str_pre+"sort_id").val();
+        roleBean.ir_type = $("#"+str_pre+"ir_type").val();
+		roleBean.site_id = site_id;
 		list.add(roleBean);
 	}
 

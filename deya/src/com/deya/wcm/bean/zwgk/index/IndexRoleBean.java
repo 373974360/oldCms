@@ -20,6 +20,7 @@ public class IndexRoleBean implements java.io.Serializable{
 	private int is_valid;
 	private int sort_id;
 	private int ir_type;
+	private String site_id="";
 	
 	// get方法
 	public int getId() {
@@ -72,7 +73,13 @@ public class IndexRoleBean implements java.io.Serializable{
 	public void setIr_type(int irType) {
 		ir_type = irType;
 	}
-	
-	
 
+
+	public String getSite_id() {
+		return site_id;
+	}
+
+	public void setSite_id(String site_id) {
+		this.site_id = site_id;
+	}
 }

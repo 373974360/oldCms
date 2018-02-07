@@ -14,11 +14,25 @@
 	<!-- ***********修改索引生成规则************* -->
 	<update id="updateIndexRole" parameterType="com.deya.wcm.bean.zwgk.index.IndexRoleBean">
 		update cs_gk_indexrole set
+			ir_id = #{ir_id},
+			ir_item = #{ir_item},
 			ir_value = #{ir_value},
 			ir_space = #{ir_space},
-			is_valid = #{is_valid}
+			is_valid = #{is_valid},
+			sort_id = #{sort_id},
+			ir_type = #{ir_type},
+			site_id = #{site_id}
 		where
 		 id = #{id}
+	</update>
+
+
+	<select id="getIndexRoleBySiteId" resultType="com.deya.wcm.bean.zwgk.index.IndexRoleBean">
+		select * from cs_gk_indexrole where site_id=#{siteId} order by sort_id
+	</select>
+	<!-- ***********新增索引生成规则************* -->
+	<update id="insertIndexRole" parameterType="com.deya.wcm.bean.zwgk.index.IndexRoleBean">
+		insert into cs_gk_indexrole (id,ir_id,ir_item,ir_value,ir_space,is_valid,sort_id,ir_type,site_id) values (#{id},#{ir_id},#{ir_item},#{ir_value},#{ir_space},#{is_valid},#{sort_id},#{ir_type},#{site_id})
 	</update>
 
 </mapper>

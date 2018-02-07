@@ -1,5 +1,6 @@
 package com.deya.wcm.services.zwgk.info;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,9 +31,12 @@ public class GKInfoRPC {
 	 * @param String
 	 * @return String
 	 */
-	public static String getInfoIdForGKIndex(String gk_index)
+	public static String getInfoIdForGKIndex(String gk_index, String site_id)
 	{
-		return GKInfoManager.getInfoIdForGKIndex(gk_index); 
+		Map<String, String> map = new HashMap<>();
+		map.put("gk_index", gk_index);
+		map.put("site_id", site_id);
+		return GKInfoManager.getInfoIdForGKIndex(map);
 	}
 	
 	/**

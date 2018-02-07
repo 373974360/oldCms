@@ -21,10 +21,12 @@ import com.deya.wcm.bean.zwgk.index.IndexSequenceBean;
 import com.deya.wcm.bean.zwgk.node.GKNodeBean;
 import com.deya.wcm.catchs.ISyncCatch;
 import com.deya.wcm.catchs.SyncCatchHandl;
+import com.deya.wcm.dao.PublicTableDAO;
 import com.deya.wcm.dao.zwgk.index.IndexRoleDAO;
 import com.deya.wcm.dao.zwgk.index.IndexSequenceDAO;
 import com.deya.wcm.services.cms.category.CategoryManager;
 import com.deya.wcm.services.zwgk.node.GKNodeManager;
+import org.apache.commons.lang3.StringUtils;
 
 public class IndexManager implements ISyncCatch{
 
@@ -81,6 +83,16 @@ public class IndexManager implements ISyncCatch{
 		List<IndexRoleBean> lt = new ArrayList<IndexRoleBean>(role_mp.values());
 		return lt;
 	}
+
+	/**
+	 * 取得全部索引生成规则
+	 * @return
+	 */
+	public static List<IndexRoleBean> getRoleListBySiteId(String siteId)
+	{
+		List<IndexRoleBean> lt = IndexRoleDAO.getAllIndexRoleBySiteId(siteId);
+		return lt;
+	}
 	
 	/**
 	 * 更新索引规则
@@ -93,7 +105,12 @@ public class IndexManager implements ISyncCatch{
 		boolean flg = true;
 		for(int i=0; i<lt.size(); i++)
 		{
-			flg = IndexRoleDAO.updateIndexRole(lt.get(i), stl)? flg : false;
+			if(lt.get(i).getId()>0){
+				flg = IndexRoleDAO.updateIndexRole(lt.get(i), stl)? flg : false;
+			}else{
+				lt.get(i).setId(PublicTableDAO.getIDByTableName("cs_gk_indexrole"));
+				flg = IndexRoleDAO.insertIndexRole(lt.get(i), stl)? flg : false;
+			}
 		}
 		reLoadRoleMap();
 		return flg;
@@ -131,13 +148,19 @@ public class IndexManager implements ISyncCatch{
 	{
 		Map<String, String> retMp = new HashMap<String, String>();
 		String ret = "";
+
+		List<IndexRoleBean> roleBeanList = getRoleListBySiteId(nodeId);
+		if(roleBeanList.isEmpty()){
+			return null;
+		}
+
 		// 流水号生成规则对象 key=F
-		IndexRoleBean roleBean = role_mp.get("F");
+		IndexRoleBean roleBean = roleBeanList.get(5);
 		// 信息编制年份格式 key=D
 		//IndexRoleBean yearRoleBean = role_mp.get("D");
 		
 		// 添加前段码  key=A
-		IndexRoleBean irb = role_mp.get("A");
+		IndexRoleBean irb = roleBeanList.get(0);
 		//System.out.println(role_mp);
 		//System.out.println(VALID_NUM);
 		//System.out.println(irb.getIs_valid());
@@ -146,14 +169,14 @@ public class IndexManager implements ISyncCatch{
 			ret += irb.getIr_value() + irb.getIr_space();
 		}
 		// 添加区域及部门编码 key=B
-		irb = role_mp.get("B");
+		irb = roleBeanList.get(1);
 		if(irb.getIs_valid() == VALID_NUM)
 		{
 			GKNodeBean gkNodeBean = GKNodeManager.getGKNodeBeanByNodeID(nodeId);
 			ret += gkNodeBean.getDept_code() + irb.getIr_space();
 		}
 		// 添加信息分类号 key=C
-		irb = role_mp.get("C");
+		irb = roleBeanList.get(2);
 		if(irb.getIs_valid() == VALID_NUM)
 		{
 			CategoryBean cb = CategoryManager.getCategoryBeanCatID(Integer.parseInt(catId), nodeId);
@@ -189,7 +212,7 @@ public class IndexManager implements ISyncCatch{
 		}
 		
 		// 添加编制年份
-		irb = role_mp.get("D");
+		irb = roleBeanList.get(3);
 		String date = getSeqYMD(isb.getSeq_ymd(), irb.getIr_value());
 		isb.setSeq_ymd(date);
 		retMp.put("gk_year", date);
@@ -213,7 +236,7 @@ public class IndexManager implements ISyncCatch{
 			sequence = Integer.valueOf(seq);
 		}
 		// 取得信息流水号位数信息 key=E
-		IndexRoleBean digitBean = role_mp.get("E");
+		IndexRoleBean digitBean = roleBeanList.get(4);
 		int digit = Integer.valueOf(digitBean.getIr_value());
 		// 字符串补齐位数后拼接
 		ret += FormatUtil.intToString(sequence, digit, "0");

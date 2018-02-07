@@ -197,7 +197,7 @@
 	<!-- 判断索引号是否存在 -->
 	<select id="getInfoIdForGKIndex" parameterType="java.lang.String" resultType="java.lang.String">
 		select info_id from cs_info where info_id in(
-			select 	info_id from cs_gk_info where gk_index =#{gk_index})
+			select 	info_id from cs_gk_info where gk_index =#{gk_index}) and site_id=#{site_id}
 	</select>
 	
 	<!-- 得到gk_year内容，用于移动时重新生成索引号用 -->

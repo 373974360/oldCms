@@ -106,9 +106,9 @@ public class GKInfoManager {
 	 * @param String
 	 * @return String
 	 */
-	public static String getInfoIdForGKIndex(String gk_index)
+	public static String getInfoIdForGKIndex(Map<String, String> map)
 	{
-		return GKInfoDAO.getInfoIdForGKIndex(gk_index);
+		return GKInfoDAO.getInfoIdForGKIndex(map);
 	}
 	
 	/**
@@ -155,16 +155,19 @@ public class GKInfoManager {
 				}
 				
 				Map<String, String> m = IndexManager.getIndex(site_id, cat_id+"", ymd, "");
-				if(GKInfoDAO.updateGKIndex(info_id+"", m.get("gk_index"), m.get("gk_num")))
-				{//得到该信息被引用 的
-					List<InfoBean> il =  InfoDAO.getFromInfoListByIDS(info_id+"");
-					if(il != null && il.size() > 0)
-					{
-						for(InfoBean ib : il)
+				if(m!=null){
+					if(GKInfoDAO.updateGKIndex(info_id+"", m.get("gk_index"), m.get("gk_num"))) {//得到该信息被引用 的
+						List<InfoBean> il =  InfoDAO.getFromInfoListByIDS(info_id+"");
+						if(il != null && il.size() > 0)
 						{
-							GKInfoDAO.updateGKIndex(ib.getInfo_id()+"", m.get("gk_index"), m.get("gk_num"));
+							for(InfoBean ib : il)
+							{
+								GKInfoDAO.updateGKIndex(ib.getInfo_id()+"", m.get("gk_index"), m.get("gk_num"));
+							}
 						}
 					}
+				}else{
+					continue;
 				}
 				}catch(Exception e)
 				{

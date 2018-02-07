@@ -34,6 +34,15 @@ public class IndexRPC {
 	{
 		return IndexManager.getRoleList();
 	}
+
+	/**
+	 * 根据站点ID取得所有的索引生成规则
+	 * @return
+	 */
+	public static List<IndexRoleBean> getRoleListBySiteId(String siteId)
+	{
+		return IndexManager.getRoleListBySiteId(siteId);
+	}
 	
 	/**
 	 * 修改索引生成规则
