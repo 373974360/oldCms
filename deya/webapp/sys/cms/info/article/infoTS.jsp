@@ -65,6 +65,8 @@ function setUserPublishOperate()
 	if(top.isSiteManager(app_id,site_id) == true || opt_ids.indexOf(",302,") > -1)
 	{
 		$(".tsResult").show();
+	}else{
+	    $("#isPublish").prop("checked", false);
 	}
 }
 
