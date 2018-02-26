@@ -92,7 +92,7 @@ function setUserOperate()
 	$(":button[name!='btn']").hide();
 
 	if(opt_ids.indexOf(",299,") > -1)
-        $(":button[name='btn299']").show();
+        $("#btn299").show();
 
     if(opt_ids.indexOf(",531,") > -1){
         $("#btnzpxx").show();
