@@ -1247,10 +1247,29 @@ function selectPageHandle() {
     openSelectMaterialPage('savePicUrl', getReleSiteID(), 'radio');
 }
 
+
 function errorFontCompare() {
     var content = getV(contentId);
     var data = {
         url: 'http://47.94.3.30/jeesite/api/correct',
+        token: '4612D7D77261D19F9DDF6716226F152169817F652F628BE71844BB66744B6FAD92B42DFC837369A0',
+        correct_content: content
+    }
+    $.post('/sys/interface/FontCorrect.jsp', data, function (result) {
+        if (result != "" && result != null && result.indexOf("null") < 0) {
+            setV(contentId, result);
+            errorWordCompare();
+        }
+    })
+}
+
+
+
+
+function errorWordCompare() {
+    var content = getV(contentId);
+    var data = {
+        url: 'http://47.94.3.30/jeesite/api/word',
         token: '4612D7D77261D19F9DDF6716226F152169817F652F628BE71844BB66744B6FAD92B42DFC837369A0',
         correct_content: content
     }
