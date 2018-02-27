@@ -20,10 +20,12 @@ public class DownHtmlUtil {
 
     public static String downLoadHtml(String StrUrl, String Encode) {
 
-//        if(type==1&&StrUrl.startsWith("http://www.xa.gov.cn")){
-//            String conId = StrUrl.substring(StrUrl.indexOf("?trid=")+6,StrUrl.length());
-//            StrUrl = "http://www.xa.gov.cn/websac/cat/"+conId+".html";
-//        }
+        if(StrUrl.startsWith("http://www.xa.gov.cn")){
+            String conId = StrUrl.substring(StrUrl.indexOf("?trid=")+6,StrUrl.length());
+            if(conId.length()==7){
+                StrUrl = "http://www.xa.gov.cn/websac/cat/"+conId+".html";
+            }
+        }
 
         String htmlStr = "";
         String str = "";
