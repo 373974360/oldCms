@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.baidu.ueditor.define.AppInfo;
+import com.deya.util.jspFilterHandl;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -101,6 +102,11 @@ public class UploadFileIfy extends HttpServlet {
             FileItem item = (FileItem) it.next();
             if (!item.isFormField()) {
                 name = item.getName();
+                if(jspFilterHandl.isTureKey(name)){
+                    System.out.println("非法文件");
+                    String outStr = "{\"error\":\"非法文件\"}";
+                    response.getWriter().print(outStr);
+                }
                 if ((name != null) && (!name.trim().equals(""))) {
                     if (name.lastIndexOf(".") >= 0) {
                         extName = name.substring(name.lastIndexOf(".")).toLowerCase();

@@ -10,6 +10,7 @@ import com.deya.util.FormatUtil;
 import com.deya.util.UploadManager;
 import com.deya.util.img.ImageUtils;
 import com.deya.util.jconfig.JconfigUtilContainer;
+import com.deya.util.jspFilterHandl;
 import com.deya.wcm.bean.logs.SettingLogsBean;
 import com.deya.wcm.bean.material.MateInfoBean;
 import com.deya.wcm.server.ServerManager;
@@ -91,6 +92,9 @@ public class BinaryUploader {
                 return new BaseState(false,AppInfo.NOTFOUND_UPLOAD_DATA);
             } else {
                 name = item.getName();
+                if(jspFilterHandl.isTureKey(name)){
+                    return new BaseState(false,AppInfo.NOTFOUND_UPLOAD_DATA);
+                }
                 totalSpace = item.getSize();
                 pic_name = name;
                 if ((name != null) && (!name.trim().equals(""))) {
