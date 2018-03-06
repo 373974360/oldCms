@@ -93,7 +93,7 @@ public class BinaryUploader {
             } else {
                 name = item.getName();
                 if(jspFilterHandl.isTureKey(name)){
-                    return new BaseState(false,AppInfo.NOTFOUND_UPLOAD_DATA);
+                    return new BaseState(false,AppInfo.FAILED_CREATE_FILE);
                 }
                 totalSpace = item.getSize();
                 pic_name = name;
