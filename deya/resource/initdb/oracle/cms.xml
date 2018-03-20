@@ -440,7 +440,8 @@
 					tupage_num			NUMBER(7) default 1000,
 					istop      number(4) default 0,
 					info_level varchar2(4),
-					isIpLimit varchar2(4)
+					isIpLimit varchar2(4),
+					publish_source varchar2(255)
 				)
 
 		   ]]> 

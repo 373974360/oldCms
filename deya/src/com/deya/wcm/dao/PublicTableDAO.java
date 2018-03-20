@@ -10,6 +10,7 @@ import com.deya.util.DateUtil;
 import com.deya.wcm.bean.logs.SettingLogsBean;
 
 import com.deya.wcm.db.DBManager;
+import org.apache.poi.util.SystemOutLogger;
 
 /**
  * 
@@ -430,6 +431,8 @@ public class PublicTableDAO {
 		try {
 
 			DBManager.update("initSql_createSql", map);
+
+			System.out.println(map);
 
 			return true;
 
