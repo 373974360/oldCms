@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8"%>
 <%
 	String site_id = request.getParameter("site_id");
-	String app_id = request.getParameter("app_id");
+	String app_id = "cms";
 	String cat_id = request.getParameter("cat_id");
 	if(cat_id == null || "".equals(cat_id) || "null".equals(cat_id))
 		cat_id = "0";

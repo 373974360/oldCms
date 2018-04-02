@@ -21,9 +21,9 @@ body{background:#f7f7f7 none repeat scroll 0 0;font-family:"\5FAE\8F6F\96C5\9ED1
 #menu ul li{display:block;width:100%}
 #menu li:hover ul{display:block}
 #menu li.iehover ul{display:block}
-#menu li:hover li{background:rgba(0,0,0,0) none repeat scroll 0 0;color:#0a6d15;cursor:pointer;font-weight:400;height:21px;line-height:21px;text-align:left;text-indent:22px;width:100%}
+#menu li:hover li{background:rgba(0,0,0,0) none repeat scroll 0 0;color: #0056AC;cursor:pointer;font-weight:400;height:21px;line-height:21px;text-align:left;text-indent:22px;width:100%;}
 #menu li:hover li:hover{background:rgba(0,0,0,0) url(../images/menu_down_bg_cur.png) repeat-y scroll center center;color:#fff}
-#menu li.iehover li{background:rgba(0,0,0,0) none repeat scroll 0 0;color:#0a6d15;font-weight:400;height:21px;line-height:21px;text-align:left;text-indent:22px;width:100%}
+#menu li.iehover li{background:rgba(0,0,0,0) none repeat scroll 0 0;color:#0056AC;font-weight:400;height:21px;line-height:21px;text-align:left;text-indent:22px;width:100%}
 #menu li.iehover li:hover{background:rgba(0,0,0,0) url(../images/menu_down_bg_cur.png) repeat-y scroll center center;color:#fff}
 #menu li.iehover li.iehover{background:rgba(0,0,0,0) url(../images/menu_down_bg_cur.png) repeat-y scroll center center;color:#fff}
 #top_menu li ul li.levelTop{background-color:#d6e5f8;color:#36b;font-weight:700;text-indent:10px}
@@ -41,15 +41,15 @@ body{background:#f7f7f7 none repeat scroll 0 0;font-family:"\5FAE\8F6F\96C5\9ED1
 #cms_ul li{color:#fff;cursor:pointer;display:block;float:left;font-weight:700;height:23px;line-height:23px;position:relative;text-align:left;text-decoration:none;text-indent:22px;width:188px}
 #cms_ul li:hover{color:#fc0}
 #cms_ul li.iehover{color:#fc0}
-#cms_ul li.focused{background:rgba(0,0,0,0) url(../images/cms_ul_title_bg.png) no-repeat scroll center center;color:#0a6d15;display:block;font-weight:700;height:23px;line-height:23px;text-decoration:none;width:188px}
-#cms_ul li.focused:hover{color:#0a6d15;text-decoration:none}
+#cms_ul li.focused{background:rgba(0,0,0,0) url(../images/cms_ul_title_bg.png) no-repeat scroll center center;color:#0056AC;display:block;font-weight:700;height:23px;line-height:23px;text-decoration:none;width:188px}
+#cms_ul li.focused:hover{color:#0056AC;text-decoration:none}
 #cms_ul li ul{background:rgba(0,0,0,0) url(../images/cms_ul_title_down_bg.png) repeat scroll 0 0;border:1px solid #b4c8db;display:none;height:300px;left:2px;overflow:auto;padding:3px 0;position:absolute;top:100%;width:363px}
 #cms_ul ul li{display:block;float:left;font-size:12px;width:182px}
 #cms_ul li:hover ul{display:block}
 #cms_ul li.iehover ul{display:block}
-#cms_ul li:hover li{background:rgba(0,0,0,0) none repeat scroll 0 0;color:#0a6d15;cursor:pointer;font-weight:400;height:21px;line-height:21px;text-align:left;text-indent:22px}
+#cms_ul li:hover li{background:rgba(0,0,0,0) none repeat scroll 0 0;color:#0056AC;cursor:pointer;font-weight:400;height:21px;line-height:21px;text-align:left;text-indent:22px}
 #cms_ul li:hover li:hover{background:rgba(0,0,0,0) url(../images/cms_ul_title_down_bg_cur.png) repeat-y scroll center center;color:#fff}
-#cms_ul li.iehover li{background:rgba(0,0,0,0) none repeat scroll 0 0;color:#0a6d15;font-weight:400;height:21px;line-height:21px;text-align:left;text-indent:22px;width:182px}
+#cms_ul li.iehover li{background:rgba(0,0,0,0) none repeat scroll 0 0;color:#0056AC;font-weight:400;height:21px;line-height:21px;text-align:left;text-indent:22px;width:182px}
 #cms_ul li.iehover li:hover{background:rgba(0,0,0,0) url(../images/cms_ul_title_down_bg_cur.png) repeat-y scroll center center;color:#fff}
 #cms_ul li.iehover li.iehover{background:rgba(0,0,0,0) url(../images/cms_ul_title_down_bg_cur.png) repeat-y scroll center center;color:#fff}
 #area_main{width:100%}
@@ -59,7 +59,7 @@ body{background:#f7f7f7 none repeat scroll 0 0;font-family:"\5FAE\8F6F\96C5\9ED1
 #area_left #area_leftContent{height:100%;width:209px}
 #leftMenuBox{padding:0 3px}
 #area_cut{cursor:pointer;padding-top:128px;width:7px}
-#nav_title{background:rgba(0,0,0,0) none repeat scroll 0 0;border-bottom:1px solid #c4c4c4;border-top:1px solid #c4c4c4;color:#1da02c;font-weight:700;height:29px;line-height:29px;overflow:hidden;text-align:left;text-indent:10px;text-overflow:ellipsis;width:209px}
+#nav_title{background:rgba(0,0,0,0) none repeat scroll 0 0;border-bottom:1px solid #c4c4c4;border-top:1px solid #c4c4c4;color:#2e76d1;font-weight:700;height:29px;line-height:29px;overflow:hidden;text-align:left;text-indent:10px;text-overflow:ellipsis;width:209px}
 #leftMenu{height:100%;overflow:auto}
 .easyui-tree a{color:#323232;text-decoration:none}
 .easyui-tree a:visited{color:#323232;text-decoration:none}
@@ -79,7 +79,7 @@ body{background:#f7f7f7 none repeat scroll 0 0;font-family:"\5FAE\8F6F\96C5\9ED1
 .tabs li a.tabs-inner{border-top-left-radius:5px;border-top-right-radius:5px;color: #777777;display:inline-block;height: 42px;line-height: 42px;margin:0;padding:0 10px;text-align:center;text-decoration:none;white-space:nowrap;}
 
 
-.tabs li.tabs-selected {border-top:2px solid #1DA02C;}
+.tabs li.tabs-selected {border-top:2px solid #2e76d1;}
 .tabs li.tabs-selected div {height:auto;overflow:hidden;}
 .tabs li.tabs-selected div div {height:auto;overflow:hidden;}
 .tabs li.tabs-selected a {color:#222222;font-weight:bold;outline:none;}

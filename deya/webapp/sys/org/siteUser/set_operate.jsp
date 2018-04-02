@@ -26,7 +26,7 @@ var user_id = <%=user_id%>;
 var app_id = parent.getCurrentFrameObj().appId;
 var site_id = parent.getCurrentFrameObj().siteId;
 if(site_id == "" || site_id == "null" || site_id == null){
-    site_id = "CMScdgjj";````
+    site_id = "CMSmsgjj";
 }
 var CategoryRPC = jsonrpc.CategoryRPC;
 var json_data;
@@ -292,12 +292,13 @@ function checkAllTree2(obj)
 		</td>
 		<td align="left" width="100%">
 			<ul class="fromTabs">
-				<li class="list_tab list_tab_cur">
+		
+				<li class="list_tab list_tab_over list_tab_cur ">
 					<div class="tab_left">
 						<div class="tab_right" >角色</div>
 					</div>
 				</li>
-				<li class="list_tab">
+				<li class="list_tab list_tab_over list_tab_cur">
 					<div class="tab_left">
 						<div class="tab_right" onclick="showCategoryLabelInfo('cate')">栏目</div>
 					</div>

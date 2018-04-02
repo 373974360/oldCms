@@ -63,8 +63,8 @@ $(document).ready(function(){
 	{
 		//treeNodeSelected(parent_id);
 		//changeLabShowList(lab_num);
-		$(".fromTabs li:nth-child("+lab_num+") .tab_right").click();
-		$(".fromTabs li:nth-child("+lab_num+")").click();		
+		$(".fromTabs2 li:nth-child("+lab_num+") .tab_right2").click();
+		$(".fromTabs2 li:nth-child("+lab_num+")").click();		
 	}
 
 	initTemplateUpLoad();
@@ -146,38 +146,38 @@ function showImageList()
 			<span class="blank3"></span>
 		</td>
 		<td align="left" width="50%">
-			<ul class="fromTabs">
+			<ul class="fromTabs2">
 				<li class="list_tab list_tab_cur">
 					<div class="tab_left">
-						<div class="tab_right" onclick="changeLabShowList('t')">模板列表</div>
+						<div class="tab_right2" onclick="changeLabShowList('t')">模板列表</div>
 					</div>
 				</li>
 				<li class="list_tab">
 					<div class="tab_left">
-						<div class="tab_right" onclick="changeLabShowList('tc')">模板目录列表</div>
+						<div class="tab_right2" onclick="changeLabShowList('tc')">模板目录列表</div>
 					</div>
 				</li>
 				<li class="list_tab">
 					<div class="tab_left">
-						<div class="tab_right" onclick="changeLabShowList('file')">资源文件</div>
+						<div class="tab_right2" onclick="changeLabShowList('file')">资源文件</div>
 					</div>
 				</li>
 				<li class="list_tab hidden">
 					<div class="tab_left">
-						<div class="tab_right" onclick="changeLabShowList('img')">资源图片</div>
+						<div class="tab_right2" onclick="changeLabShowList('img')">资源图片</div>
 					</div>
 				</li>
 			</ul>
 		</td> 
-		<td align="right" valign="middle" id="dept_search" class="search_td fromTabs" >
+		<td align="right" valign="middle" id="dept_search" class="search_td fromTabs2" >
 		&nbsp;
 			<span class="blank3"></span>
 		</td>
-		<td align="right" valign="middle" id="user_search" class="search_td fromTabs" >
+		<td align="right" valign="middle" id="user_search" class="search_td fromTabs2" >
 			<div id="uploadify_div" class="hidden"><input type="file" name="uploadify" id="uploadify" /></div>
 			<span class="blank3"></span>
 		</td>
-		<td align="right" valign="middle" id="manager_search" class="search_td fromTabs" width="10px">			
+		<td align="right" valign="middle" id="manager_search" class="search_td fromTabs2" width="10px">			
 			&nbsp;<span class="blank3"></span>
 		</td>
 	</tr>

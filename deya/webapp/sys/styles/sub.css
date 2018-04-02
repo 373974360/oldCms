@@ -46,6 +46,28 @@ body{background:#f7f7f7 none repeat scroll 0 0;margin-left:6px;margin-right:3px;
 .table_border thead td{border-bottom:1px solid #bbccde;color:#000000;cursor:default;font-weight:700}
 .table_border td{padding:0 7px}
 .table_border tbody td{border-bottom:1px solid #efefef}
+
+
+
+.fromTabs2{border-collapse:collapse;height:26px;float:left;line-height:26px;}
+.fromTabs2 li{line-height:26px;height:26px;cursor: pointer;}
+.fromTabs2 .list_tab{background:rgba(0,0,0,0) url(../images/btn_x4.png) repeat-x scroll 0 0;;float:left;height: 26px;margin:0 2px;line-height: 26px;float: left;padding:0 5px;text-align: center;}
+.fromTabs2 .list_tab div{color: #ffffff;}
+.fromTabs2 .list_tab_cur {background:rgba(0,0,0,0) url(../images/btn_x4.png) repeat-x scroll 0 0;float:left;height:0px;margin:0 2px;line-height:0px;height: 26px;line-height: 26px;text-align: center;padding:0 5px;color: #ffffff;}
+
+.fromTabs2 .list_tab_cur div{color:#ffffff}
+.fromTabs2 .list_tab_over{background:rgba(0,0,0,0) url(../images/btn_x4.png) repeat-x scroll 0 0;float:left;height:27px;margin:0 2px}
+
+
+.fromTabs3{border-collapse:collapse;height:26px;float:left;line-height:26px;}
+.fromTabs3 li{line-height:26px;height:26px;cursor: pointer;}
+.fromTabs3 .list_tab{background:rgba(0,0,0,0) url(../images/btn_x4.png) repeat-x scroll 0 0;;float:left;height: 26px;margin:0 2px;line-height: 26px;float: left;width: 42px;text-align: center;}
+.fromTabs3 .list_tab div{color: #ffffff;}
+.fromTabs3 .list_tab_cur {background:rgba(0,0,0,0) url(../images/btn_x4.png) repeat-x scroll 0 0;float:left;height:0px;margin:0 2px;line-height:0px;height: 26px;line-height: 26px;text-align: center;width: 42px;color: #ffffff;}
+
+.fromTabs3 .list_tab_cur div{color:#ffffff}
+.fromTabs3 .list_tab_over{background:rgba(0,0,0,0) url(../images/btn_x4.png) repeat-x scroll 0 0;float:left;height:27px;margin:0 2px}
+
 .tr_odd{background-color:#efefef;height:30px}
 .tr_even{background-color:#fff;height:30px}
 .tr_hover{height:30px}
@@ -128,25 +150,25 @@ body{background:#f7f7f7 none repeat scroll 0 0;margin-left:6px;margin-right:3px;
 .ico_custom{background:rgba(0,0,0,0) url(../images/mx_custom.png) no-repeat scroll left center;padding-left:20px}
 .infoadd_area{height:21px}
 .infoadd_area{position:relative;z-index:100}
-.infoadd_area li{color:#fff;cursor:pointer;display:block;float:left;font-weight:700;height: 26px;line-height: 26px;position:relative;text-align:center;text-decoration:none;}
+.infoadd_area li{color:#333333;cursor:pointer;display:block;float:left;font-weight:700;height: 26px;line-height: 26px;position:relative;text-align:center;text-decoration:none;}
 .infoadd_area li.focused{color:#369;display:block;font-weight:700;height:23px;line-height:23px;text-decoration:none}
 .infoadd_area li.focused:hover{color:#369;text-decoration:none}
 .infoadd_area li ul{background-color:#f2f2f2;border:1px solid #dddddd;display:none;left:0;padding:3px 0;position:absolute;top:100%}
 .infoadd_area ul li{display:block}
 .infoadd_area li:hover ul{display:block}
 .infoadd_area li.iehover ul{display:block}
-.infoadd_area li:hover li{color:#1da02c;cursor:pointer;font-weight:400;height:21px;line-height:21px;margin:0 5px;text-align:left;width:80px}
-.infoadd_area li:hover li:hover{background-color:#1da02c;color:#fff}
-.infoadd_area li.iehover li{color:#fff;font-weight:400;height:21px;line-height:21px;text-align:left;width:100%}
-.infoadd_area li.iehover li:hover{color:#fff}
-.infoadd_area li.iehover li.iehover{color:#fff}
+.infoadd_area li:hover li{color:#2e76d1;cursor:pointer;font-weight:400;height:21px;line-height:21px;margin:0 5px;text-align:left;width:80px}
+.infoadd_area li:hover li:hover{background-color:#2e76d1;color:#333333}
+.infoadd_area li.iehover li{color:#333333;font-weight:400;height:21px;line-height:21px;text-align:left;width:100%}
+.infoadd_area li.iehover li:hover{color:#333333}
+.infoadd_area li.iehover li.iehover{color:#333333}
 .treeTableCSS thead th{border-bottom:1px solid #bfbfbf;padding:0 1.5em}
 .treeTableCSS tr td .expander{background-position:left center;background-repeat:no-repeat;cursor:pointer;padding:0}
 .treeTableCSS tr.collapsed td .expander{background-image:url(../images/toggle-expand-dark.png)}
 .treeTable tr.expanded td .expander{background-image:url(../images/toggle-collapse-dark.png)}
-.treeTableCSS tbody tr{background-color:#fff;height:25px}
-.treeTable tr.accept,.treeTableCSS tr.selected{background-color:#1da02c;color:#fff}
-.treeTable tr.accept,.treeTableCSS tr.selected{background-color:#1da02c;color:#fff}
+.treeTableCSS tbody tr{background-color:#333333;height:25px}
+.treeTable tr.accept,.treeTableCSS tr.selected{background-color:#2e76d1;color:#333333}
+.treeTable tr.accept,.treeTableCSS tr.selected{background-color:#2e76d1;color:#333333}
 .treeTable tr.collapsed.accept td .expander,.treeTableCSS tr.collapsed.selected td .expander{background-image:url(../images/toggle-expand-light.png)}
 .treeTable tr.expanded.accept td .expander,.treeTableCSS tr.expanded.selected td .expander{background-image:url(../images/toggle-collapse-light.png)}
 .treeTableCSS .ui-draggable-dragging{color:#000;z-index:1}

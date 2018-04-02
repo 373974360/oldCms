@@ -212,7 +212,7 @@
                             <td align="left" valign="middle" style="width:110px;">
                                 已显示<span id="sucaiPageCount"></span>/<span id="sucaiFolderCount"></span>项
                             </td>
-                            <td align="right" valign="middle" style="width:129px;overflow:hidden;">
+                            <td align="right" valign="middle" style="width:149px;overflow:hidden;">
                                 <div style="float:left;text-align:left;"><input type="file" name="uploadify"
                                                                                 id="uploadify"/></div>
                                 <div style="float:left;text-align:left;">&#160;

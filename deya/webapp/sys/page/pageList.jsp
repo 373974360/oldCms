@@ -1,6 +1,6 @@
  <%@ page contentType="text/html; charset=utf-8"%>
 <%
-	String app_id = request.getParameter("app_id");
+	String app_id = "cms";
 	String site_id = request.getParameter("site_id");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

@@ -90,8 +90,8 @@
 	color:#454545;
 }
 .tree-node-selected{
-	/* background-color: #1da02c; */
-	color: #1da02c;
+	background-color: #c7d9f1;
+	color: #2E76D1;
 	font-weight: bold;
 }
 .tree-checkbox{

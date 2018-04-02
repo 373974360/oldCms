@@ -81,7 +81,7 @@ function changeLabShowList(labname)
 			<span class="blank3"></span>
 		</td>
 		<td align="left" width="50%">
-			<ul class="fromTabs">
+			<ul class="fromTabs2">
 				<li class="list_tab list_tab_cur">
 					<div class="tab_left">
 						<div class="tab_right" onclick="changeLabShowList('user')">用户列表</div>

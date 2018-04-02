@@ -40,7 +40,6 @@
         var CategoryGetRegu = new Bean("com.deya.wcm.bean.cms.category.CategoryGetRegu", true);
         var defaultBean;
         var SiteRPC = jsonrpc.SiteRPC;
-        var CategorySourceRPC = jsonrpc.CategorySourceRPC;
 
         $(document).ready(function () {
             setModelInfoList();
@@ -80,7 +79,6 @@
                 defaultBean = CategoryRPC.getCategoryBean(id);
                 if (defaultBean) {
                     $("#category_table").autoFill(defaultBean);
-
                     parent_id = defaultBean.parent_id;
                     cat_id = defaultBean.cat_id;
                     if (defaultBean.cat_class_id != 0) {
@@ -100,18 +98,6 @@
                     if (app_id == "zwgk")
                         changeLabShowList("listTable_6");
                     changeLabShowList("listTable_0");
-
-                    var source_list = CategorySourceRPC.getCategorySource(id);
-                    console.log(source_list);
-                    //选中source
-                    $('input[name=cdgjj_category_source]').each(function(){
-                        if (source_list.list.indexOf($(this).val()) !=-1) {
-                            $(this).attr('checked', true);
-                        }else{
-                            $(this).removeAttr('checked');
-                        }
-                    })
-
                 }
                 $("#addButton").click(updateCategory);
             }
@@ -210,8 +196,6 @@
                 if (app_id == "zwgk")
                     insertToInfoCategory(bean.id);
                 insertCategoryReleUser(bean.id);
-
-                insertCategorySource(bean.id,$('input[name=cdgjj_category_source]:checked').map(function(){return this.value}).toArray().join(','))
 
                 parent.msgAlert("目录信息" + WCMLang.Add_success);
                 try {
@@ -338,13 +322,6 @@
             CategoryRPC.insertCategoryReleUser(p_list, c_id, site_id);
         }
 
-        //插入目录与成都公积金的分类映射
-
-        function insertCategorySource(c_id, source) {
-            console.log("设置" + c_id  + '的渠道为' + source);
-            CategorySourceRPC.insertCategorySource(c_id, source);
-        }
-
         function updateCategory() {
             var bean = BeanUtil.getCopy(CategoryBean);
             $("#category_table").autoBind(bean);
@@ -378,10 +355,6 @@
                 if (app_id == "zwgk")
                     insertToInfoCategory(cat_id);
                 insertCategoryReleUser(cat_id);
-
-
-                insertCategorySource(bean.id,$('input[name=cdgjj_category_source]:checked').map(function(){return this.value}).toArray().join(','))
-
 
                 parent.msgAlert("目录信息" + WCMLang.Add_success);
                 try {
@@ -995,14 +968,6 @@
                            onblur="checkInputValue('cat_ename',false,15,'英文名称','checkLower')"/>
                 </td>
             </tr>
-            <tr >
-                <th>关联渠道：</th>
-                <td>
-                    <label><input name="cdgjj_category_source" type="checkbox" value="pc" checked/>PC</label>
-                    <label><input name="cdgjj_category_source" type="checkbox" value="wx" checked/>微信</label>
-                    <label><input name="cdgjj_category_source" type="checkbox" value="app" checked/>APP</label>
-                </td>
-            </tr>
             <tr class="hidden">
                 <th>类目编号：</th>
                 <td>
@@ -1030,7 +995,7 @@
                 <th style="vertical-align:top;">内容模型：</th>
                 <td>
                     <table border="0" cellpadding="0" cellspacing="0" align="left" id="model_select_table"
-                           width="505px">
+                           width="635px">
                         <td width="30px">选择</td>
                         <td width="100px" align="center">内容</td>
                         <td width="" align="center">内容页模板</td>
