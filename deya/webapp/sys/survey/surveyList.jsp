@@ -12,7 +12,7 @@ String site_id = request.getParameter("site_id");
 <jsp:include page="../include/include_tools.jsp"/>
 <script src="js/surveyList.js"></script>	
 <script type="text/javascript">
-var site_id = "CMScdgjj";
+var site_id = "CMScqgjj";
 var div_height = 0;	
 
 var current_date = SurveyRPC.getCurrentDate();

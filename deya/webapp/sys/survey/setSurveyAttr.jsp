@@ -19,7 +19,7 @@
 <script type="text/javascript" src="/cms.files/component/common/htmledit/fckeditor.js"></script> -->
 <SCRIPT LANGUAGE="JavaScript">
 	<!--
-		var site_id = "CMScdgjj";
+		var site_id = "CMScqgjj";
 		var s_id = request.getParameter("s_id");
 		var top_index = request.getParameter("top_index");
 		$(document).ready(function () {	

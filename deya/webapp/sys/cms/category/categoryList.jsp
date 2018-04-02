@@ -27,7 +27,7 @@
 <script type="text/javascript">
 var cate_type = "";
 var cat_type = "<%=cat_type%>";//目录类型：0：普通栏目1：专题2：服务应用目录
-var site_id = "CMScdgjj";
+var site_id = "CMScqgjj";
 var app_id = "<%=app_id%>";//应用ID
 var cat_id = "<%=cat_id%>";
 var class_id = 0;

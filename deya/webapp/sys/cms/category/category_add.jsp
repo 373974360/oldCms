@@ -33,7 +33,7 @@
         var parent_id = <%=parent_id%>;//父节点ID
         var id = "<%=id%>";//栏目ID，用于修改
         var class_id = "<%=class_id%>";//分类方式ID
-        var site_id = "CMScdgjj";//站点ID
+        var site_id = "CMScqgjj";//站点ID
         var app_id = "<%=app_id%>";//应用ID
         var is_update = false;//是否是修改
         var cat_id;

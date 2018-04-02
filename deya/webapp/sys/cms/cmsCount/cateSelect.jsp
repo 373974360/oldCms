@@ -31,7 +31,7 @@
 ****************************** --%>
 
 var CategoryRPC = jsonrpc.CategoryRPC;
-var site_id = "CMScdgjj";
+var site_id = "CMScqgjj";
 var cat_str = getCurrentFrameObj().cat_str;
 var json_cat; // 站点栏目json对象
 var zt_jdata;

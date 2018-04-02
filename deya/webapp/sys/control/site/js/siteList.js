@@ -98,7 +98,7 @@ function openAddSitePage()
 	var create_flag = SiteRPC.isCreateSite();//创建站点时判断站点是否超出，可以创建返回true,不能创建返回站点总数用于提示
 	if(create_flag == "true")
 	{
-		addTab(true,'/sys/control/site/site_add.jsp?parentID='+site_id+"&tab_index="+curTabIndex,'修改站点');
+		addTab(true,'/sys/control/site/site_add.jsp?parentID='+site_id+"&tab_index=",'修改站点');
 	}else
 	{
 		msgWargin("您所购站点数已创建完成，如需要增加站点，请联系厂商");

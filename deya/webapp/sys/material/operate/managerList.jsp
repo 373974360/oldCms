@@ -35,7 +35,7 @@
         if (f_id == "" || f_id == null || f_id == "null") {
             f_id = "0";
         }
-        var site_id = "CMScdgjj";
+        var site_id = "CMScqgjj";
         var app_id = "cms";
         var user_id = parent.LoginUserBean.user_id;
         var json_data;
