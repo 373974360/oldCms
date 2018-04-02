@@ -1,0 +1,40 @@
+export GMAGICK_HOME="/deya/cms/GraphicsMagick"
+        export PATH="$GMAGICK_HOME/bin:$PATH"
+        LD_LIBRARY_PATH=$GMAGICK_HOME/lib:$LD_LIBRARY_PATH
+        export LD_LIBRARY_PATH
+export HISTTIMEFORMAT="%F %T `whoami` "
+
+
+
+cp /deya/cms/shared/classes/AllConfigDescrion_WCM.xml	AllConfigDescrion_WCM.xml		 
+cp /deya/cms/shared/classes/config.xml config.xml	
+cp /deya/cms/shared/classes/startListener.xml	startListener.xml	
+ln -s /deya/cms/shared/classes/META-INF META-INF
+ln -s /deya/cms/shared/classes/apacheConfigInfo.xml			    apacheConfigInfo.xml	
+ln -s /deya/cms/shared/classes/initdb/ initdb		
+ln -s /deya/cms/shared/classes/bjsonrpc.properties			    bjsonrpc.properties			
+ln -s /deya/cms/shared/classes/cicro_ext_stopword.dic		    cicro_ext_stopword.dic		
+ln -s /deya/cms/shared/classes/cicro_ext_stopword.dic_bak	    cicro_ext_stopword.dic_bak	
+ln -s /deya/cms/shared/classes/CICROIKAnalyzer.cfg.xml		CICROIKAnalyzer.cfg.xml		
+ln -s /deya/cms/shared/classes/cms_iresource_cat.properties	    cms_iresource_cat.properties	
+ln -s /deya/cms/shared/classes/com com							
+ln -s /deya/cms/shared/classes/config.xml_bt					config.xml_bt										
+ln -s /deya/cms/shared/classes/jdbc.properties jdbc.properties									
+ln -s /deya/cms/shared/classes/jdbc.properties_mssql			jdbc.properties_mssql										
+ln -s /deya/cms/shared/classes/jdbc.properties_mysql			jdbc.properties_mysql												
+ln -s /deya/cms/shared/classes/jsonrpc.properties				jsonrpc.properties												
+ln -s /deya/cms/shared/classes/log4j.properties					log4j.properties													
+ln -s /deya/cms/shared/classes/META-INF							META-INF													
+ln -s /deya/cms/shared/classes/modelConfig.xml					modelConfig.xml												
+ln -s /deya/cms/shared/classes/m_page_config.xml				m_page_config.xml												
+ln -s /deya/cms/shared/classes/mydict.dic						mydict.dic												
+ln -s /deya/cms/shared/classes/projectConfig.xml				projectConfig.xml																
+ln -s /deya/cms/shared/classes/QQWry.Dat						QQWry.Dat																			
+ln -s /deya/cms/shared/classes/quartz.properties				quartz.properties																						
+ln -s /deya/cms/shared/classes/search.xml						search.xml												
+ln -s /deya/cms/shared/classes/sqlmap sqlmap																									
+ln -s /deya/cms/shared/classes/SqlMapConfig_bak.xml				SqlMapConfig_bak.xml												
+ln -s /deya/cms/shared/classes/SqlMapConfig.xml					SqlMapConfig.xml											
+ln -s /deya/cms/shared/classes/systemRole_config.xml			systemRole_config.xml												
+ln -s /deya/cms/shared/classes/velocity.properties				velocity.properties																	
+ln -s /deya/cms/shared/classes/velocityTemplate.xml				velocityTemplate.xml						
