@@ -22,6 +22,8 @@ public class jspFilterHandl {
 
     private static String[] integerParamStr = {"cat_id", "model_id", "sq_id", "tm_id", "info_id", "info_status", "dept_id", "final_status", "f_id"};
 
+    private static String[] editorParams = {"ware_content","t_content","sq_content","correct_content","c_spyj","c_sqtj","c_jzxyq","c_sqclml","c_sfyj","c_fulu"};
+
     static {
         String[] jspArr = JconfigUtilContainer.bashConfig().getPropertyNamesByCategory("filter_jsp_page");
         if (jspArr != null && jspArr.length > 0) {
@@ -91,23 +93,28 @@ public class jspFilterHandl {
     }
 
     public static boolean isRPCParames(String params){
-        params = params.substring(params.indexOf("[")+9,params.indexOf("}")+1);
-        JSONObject jsonObject = new JSONObject(params);
-        Iterator iterator = jsonObject.keys();
-        while (iterator.hasNext()) {
-            String json_key = iterator.next().toString();
-            String json_value = jsonObject.get(json_key).toString();
-            for (String str : integerParamStr) {
-                if (str.equals(json_key)) {
-                    try {
-                        if (json_value != null && !"".equals(json_value) && !"null".equals(json_value)) {
-                            int i = Integer.parseInt(json_value);
+        try{
+            params = params.substring(params.indexOf("[")+9,params.indexOf("}")+1);
+            JSONObject jsonObject = new JSONObject(params);
+            Iterator iterator = jsonObject.keys();
+            while (iterator.hasNext()) {
+                String json_key = iterator.next().toString();
+                String json_value = jsonObject.get(json_key).toString();
+                for (String str : integerParamStr) {
+                    if (str.equals(json_key)) {
+                        try {
+                            if (json_value != null && !"".equals(json_value) && !"null".equals(json_value)) {
+                                int i = Integer.parseInt(json_value);
+                            }
+                        } catch (Exception ex) {
+                            return true;
                         }
-                    } catch (Exception ex) {
-                        return true;
                     }
                 }
             }
+        } catch (Exception e){
+            e.printStackTrace();
+            return false;
         }
         return false;
     }
@@ -135,18 +142,28 @@ public class jspFilterHandl {
             if (queryString.indexOf("collURL") == -1) {
                 if ((path.equals("/sys") && servletPath.indexOf("/JSON-RPC") >= 0) || (path.equals("/manager") && servletPath.indexOf("/JSON-RPC") >= 0)) {
                     String params = getRequestPayload(request);
+                    System.out.println("params：" + params);
                     if (isTureKey(params, sqlFilterStr)) {
                         return true;  //包含要过滤的关键字
                     }
                     if(params.indexOf("map") >= 0){//jsonRPC携带的参数集合
-                        isRPCParames(params);
+                        if(isRPCParames(params)){
+                            return true;
+                        }
                     }
                 }
                 for (Enumeration e = request.getParameterNames(); e.hasMoreElements(); ) {
                     Object o = e.nextElement();
                     String arr = (String) o;
                     String value = request.getParameter(arr);
-                    if ("ware_content".equals(arr) || "t_content".equals(arr) || "sq_content".equals(arr) || "correct_content".equals(arr)) {
+                    boolean isEditorParam = false;
+                    for (String editorParam : editorParams) {
+                        if(editorParam.equals(arr)){
+                            isEditorParam = true;
+                            break;
+                        }
+                    }
+                    if(isEditorParam){
                         continue;
                     }
                     for (String str : integerParamStr) {

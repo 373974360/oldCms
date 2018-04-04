@@ -18913,12 +18913,12 @@ UE.plugins['video'] = function (){
                 for (var r = 0; r < rowsNum; r++) {
                     html.push('<tr' + (r == 0 ? ' class="firstRow"':'') + '>');
                     for (var c = 0; c < colsNum; c++) {
-                        html.push('<td width="' + tdWidth + '"  vAlign="' + opt.tdvalign + '" >' + (browser.ie && browser.version < 11 ? domUtils.fillChar : '<br/>') + '</td>')
+                        html.push('<td style="border:1px solid #ccc;" width="' + tdWidth + '"  vAlign="' + opt.tdvalign + '" >' + (browser.ie && browser.version < 11 ? domUtils.fillChar : '<br/>') + '</td>')
                     }
                     html.push('</tr>')
                 }
                 //禁止指定table-width
-                return '<table><tbody>' + html.join('') + '</tbody></table>'
+                return '<table style="border-collapse:collapse;"><tbody>' + html.join('') + '</tbody></table>'
             }
 
             if (!opt) {
@@ -21854,6 +21854,7 @@ UE.plugins['tablesort'] = function () {
         execCommand: function (cmd) {
             var table = getTableItemsByRange(this).table;
             table.setAttribute("data-sort", cmd == "enablesort" ? "sortEnabled" : "sortDisabled");
+            table.setAttribute("style", "border-collapse:collapse;");
             cmd == "enablesort" ? domUtils.addClass(table,"sortEnabled"):domUtils.removeClasses(table,"sortEnabled");
         }
     };
