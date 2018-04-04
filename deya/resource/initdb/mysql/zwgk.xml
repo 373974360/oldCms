@@ -60,6 +60,7 @@
 			ir_item varchar(250) default '0',
 			ir_value varchar(250) default '',
 			ir_space varchar(250) default '',
+			site_id varchar(250) default '',
 			is_valid int(4) default 1,
 			sort_id int(4) default 0,
 			ir_type int(4) default 0
@@ -287,7 +288,8 @@
 			template_content int(4) default 0,
 			template_over int(4) default 0,
 			template_print int(4) default 0,
-			template_query int(4) default 0
+			template_query int(4) default 0,
+			site_id  varchar(250) default ''
 		)
 	   ]]>
 	   </sql>
@@ -345,7 +347,8 @@
 					week_hits bigint(20) default 0,
 					month_hits bigint(20) default 0,
 					lasthit_dtime varchar(20) default '',
-					weight int(4) default 60
+					weight int(4) default 60,
+			        site_id  varchar(250) default ''
 				)
 		   ]]> 
        </sql>
