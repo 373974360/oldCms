@@ -20,6 +20,8 @@ public class YsqgkConfigManager {
      * @return boolean
      */
     public static boolean insertYsqgkConfig(YsqgkConfigBean ysqgk, SettingLogsBean stl) {
+        int ysq_id = PublicTableDAO.getIDByTableName(PublicTableDAO.YSQGK_CONFIG_TABLE_NAME);
+        ysqgk.setId(ysq_id);
         if (getYsqgkConfigBeanBySiteId(ysqgk.getSite_id()) == null) {
             if (YsqgkConfigDAO.insertYsqgkConfig(ysqgk, stl)) {
                 return true;
@@ -27,9 +29,6 @@ public class YsqgkConfigManager {
                 return false;
         } else {
             if (deleteYsqgkConfig(ysqgk.getSite_id())) {
-                int ysq_id = PublicTableDAO.getIDByTableName(PublicTableDAO.YSQGK_CONFIG_TABLE_NAME);
-                ysqgk.setId(ysq_id);
-
                 if (YsqgkConfigDAO.insertYsqgkConfig(ysqgk, stl)) {
 //                    ykcb = ysqgk;
                     return true;

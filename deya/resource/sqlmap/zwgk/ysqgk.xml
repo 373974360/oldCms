@@ -13,8 +13,8 @@
 	</select>
 	
 	<insert id="insert_ysqgk_config" parameterType="com.deya.wcm.bean.zwgk.ysqgk.YsqgkConfigBean">
-		insert into cs_gk_ysq_config (time_limit,code_pre,code_rule,code_num,query_num,file_url,must_member,remind_type,user_secret,is_auto_publish,template_form,template_list,template_content,template_over,template_print,template_query,site_id)
-		values (#{time_limit},#{code_pre},#{code_rule},#{code_num},#{query_num},#{file_url},#{must_member},
+		insert into cs_gk_ysq_config (id,time_limit,code_pre,code_rule,code_num,query_num,file_url,must_member,remind_type,user_secret,is_auto_publish,template_form,template_list,template_content,template_over,template_print,template_query,site_id)
+		values (#{id},#{time_limit},#{code_pre},#{code_rule},#{code_num},#{query_num},#{file_url},#{must_member},
 		#{remind_type},#{user_secret},#{is_auto_publish},#{template_form},#{template_list},#{template_content},#{template_over},#{template_print},#{template_query},#{site_id})
 	</insert>
 	

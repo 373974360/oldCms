@@ -1063,7 +1063,7 @@
 	</sql>
 	<sql>
 		<![CDATA[
-			insert into cs_org_opt (opt_id, parent_id, tree_position, opt_name, app_id, controller, action, opt_flag, opt_memo)values (311, 218, '$1$3$218$311$', '索引规则管理', 'system', '', '', '', '')
+			insert into cs_org_opt (opt_id, parent_id, tree_position, opt_name, app_id, controller, action, opt_flag, opt_memo)values (311, 214, '$1$6$214$311$', '索引规则管理', 'cms', '', '', '', '')
 		]]> 
 	</sql>
 	<sql>
@@ -2471,7 +2471,7 @@
 	</sql>
 	<sql>
 		<![CDATA[
-			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (384, 353, '索引规则管理', '/sys/zwgk/index/indexRoleList.jsp', 311, '0', '$1$396$3$353$384$', 4, '', '')
+			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (384, 349, '索引规则管理', '/sys/zwgk/index/indexRoleList.jsp', 311,  0, '$1$396$6$349$384$', 4, '','')
 		]]> 
 	</sql>
 	<sql>
@@ -4827,6 +4827,11 @@
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6094, 11, 311)
 		]]> 
 	</sql>
+		<sql>
+			<![CDATA[
+			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (11242, 5, 311)
+		]]>
+		</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6098, 11, 385)
