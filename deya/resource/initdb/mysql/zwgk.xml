@@ -205,8 +205,15 @@
 					gk_wsbl longtext,
 					gk_ztcx longtext,
 					gk_wsts longtext,
-					gk_memo varchar(1000) default ''
-					
+					gk_memo varchar(1000) default '',
+					gk_xzcj varchar(500) default '',
+					gk_tbfw varchar(500) default '',
+					gk_ssztxz varchar(500) default '',
+					gk_lbjg varchar(500) default '',
+					gk_fdbjsx varchar(500) default '',
+					gk_jddh varchar(500) default '',
+					gk_bljg longtext,
+					gk_bgxz longtext
 				)
 		   ]]> 
        </sql>
