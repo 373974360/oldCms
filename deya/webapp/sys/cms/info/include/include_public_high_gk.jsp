@@ -119,8 +119,8 @@
 	<div class="sq_title sq_title_plus">高级属性</div>
 	<div class="sq_title_right">点击展开</div>
 </div>
-<div class="sq_box_content  hidden">
-<table id="" class="table_form hidden" border="0" cellpadding="0" cellspacing="0">
+<div class="sq_box_content">
+<table id="" class="table_form" border="0" cellpadding="0" cellspacing="0">
 	<tbody>
     	<tr>
 			<th>主题分类：</th>
@@ -153,7 +153,7 @@
  	</tbody>
 </table>
         
-<table id="" class="table_form hidden" border="0" cellpadding="0" cellspacing="0">
+<table id="" class="table_form" border="0" cellpadding="0" cellspacing="0">
 	<tbody>
 		<tr>
         	 <th>信息有效性：</th>

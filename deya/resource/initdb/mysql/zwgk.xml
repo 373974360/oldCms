@@ -118,7 +118,11 @@
 					gk_duty_dept varchar(250) default '',
 					gk_input_dept varchar(250) default '',
 					file_head varchar(250) default '',
-					gk_signer varchar(250) default ''
+					gk_signer varchar(250) default '',
+					gkbzh_id bigint(20) default 0,
+					gkbzh_name varchar(250) default '',
+					gkhj_id bigint(20) default 0,
+					gkhj_name varchar(250) default ''
 				)
 		   ]]> 
        </sql>
@@ -205,7 +209,15 @@
 					gk_wsbl longtext,
 					gk_ztcx longtext,
 					gk_wsts longtext,
-					gk_memo varchar(1000) default ''
+					gk_memo varchar(1000) default '',
+					gk_xzcj varchar(500) default '',
+					gk_tbfw varchar(500) default '',
+					gk_ssztxz varchar(500) default '',
+					gk_lbjg varchar(500) default '',
+					gk_fdbjsx varchar(500) default '',
+					gk_jddh varchar(500) default '',
+					gk_bljg longtext,
+					gk_bgxz longtext
 					
 				)
 		   ]]> 

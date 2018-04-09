@@ -2847,6 +2847,16 @@
 			insert into cs_info_category (id, cat_id, class_id, parent_id, wf_id, is_wf_publish, cat_code, cat_ename, cat_cname, cat_position, cat_level, is_mutilpage, template_index, template_list, is_generate_index, urlrule_index, urlrule_list, urlrule_content, is_allow_submit, is_allow_comment, is_comment_checked, is_show, cat_keywords, cat_description, cat_sort, is_sync, cat_source_id, cat_class_id, is_disabled, cat_type, zt_cat_id, is_archive, cat_memo, app_id, site_id, jump_url, hj_sql, is_show_tree)values (383, 383, 76, 0, 0, 0, '', 'fwdxfl', '服务对象分类', '$0$383$', 1, 0, 0, 0, 0, '', '', '', 0, 0, 0, 1, '', '', 9999, 0, 383, 0, 1, 0, 0, 0, '', 'system', '', '', '', 1)
 		]]> 
 	</sql>
+		<sql>
+			<![CDATA[
+			insert into cs_info_category (id, cat_id, class_id, parent_id, wf_id, is_wf_publish, cat_code, cat_ename, cat_cname, cat_position, cat_level, is_mutilpage, template_index, template_list, is_generate_index, urlrule_index, urlrule_list, urlrule_content, is_allow_submit, is_allow_comment, is_comment_checked, is_show, cat_keywords, cat_description, cat_sort, is_sync, cat_source_id, cat_class_id, is_disabled, cat_type, zt_cat_id, is_archive, cat_memo, app_id, site_id, jump_url, hj_sql, is_show_tree)values (384, 384, 77, 0, 0, 0, '', 'zwgkbzhfl', '政务公开标准化分类', '$0$383$', 1, 0, 0, 0, 0, '', '', '', 0, 0, 0, 1, '', '', 9999, 0, 383, 0, 1, 0, 0, 0, '', 'system', '', '', '', 1)
+		]]>
+		</sql>
+		<sql>
+			<![CDATA[
+			insert into cs_info_category (id, cat_id, class_id, parent_id, wf_id, is_wf_publish, cat_code, cat_ename, cat_cname, cat_position, cat_level, is_mutilpage, template_index, template_list, is_generate_index, urlrule_index, urlrule_list, urlrule_content, is_allow_submit, is_allow_comment, is_comment_checked, is_show, cat_keywords, cat_description, cat_sort, is_sync, cat_source_id, cat_class_id, is_disabled, cat_type, zt_cat_id, is_archive, cat_memo, app_id, site_id, jump_url, hj_sql, is_show_tree)values (385, 385, 78, 0, 0, 0, '', 'gkhjfl', '公开环节分类', '$0$383$', 1, 0, 0, 0, 0, '', '', '', 0, 0, 0, 1, '', '', 9999, 0, 383, 0, 1, 0, 0, 0, '', 'system', '', '', '', 1)
+		]]>
+		</sql>
 	<sql>
 	<![CDATA[
 		insert into cs_info_class (class_id, class_ename, class_cname, class_codo, class_define, class_type, app_ids)values (74, 'tcfl', '体裁分类', '', '', 0, 'zwgk')
@@ -2862,6 +2872,16 @@
 			insert into cs_info_class (class_id, class_ename, class_cname, class_codo, class_define, class_type, app_ids)values (70, 'ztfl', '主题分类', '', '', 0, 'zwgk')
 		]]> 
 	</sql>
+		<sql>
+			<![CDATA[
+			insert into cs_info_class (class_id, class_ename, class_cname, class_codo, class_define, class_type, app_ids)values (77, 'zwgkbzhfl', '政务公开标准化分类', '', '', 0, 'zwgk')
+		]]>
+		</sql>
+		<sql>
+			<![CDATA[
+			insert into cs_info_class (class_id, class_ename, class_cname, class_codo, class_define, class_type, app_ids)values (78, 'gkhjfl', '公开环节分类', '', '', 0, 'zwgk')
+		]]>
+		</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_site (site_id, parent_id, server_id, dept_id, site_name, site_cdkey, site_createtime, site_pausetime, site_position, site_status, site_sort, site_path, sgroup_id, site_demo)values ('HIWCMcgroup', '0', 1, 1, 'SITE.SERVER', '', '', '', '0$HIWCMcgroup', 0, 0, '', '', '')

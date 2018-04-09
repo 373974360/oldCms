@@ -228,7 +228,7 @@ function checkedCategoryModelInfo_shared(cat_id)
 		<tr>
 			<th><span class="f_red">*</span>目录名称：</th>
 			<td>
-				<input id="cat_cname" name="cat_cname" type="text" class="width300" value="" onblur="checkInputValue('cat_cname',false,80,'目录名称','')"/>
+				<input id="cat_cname" name="cat_cname" type="text" class="width300" value="" onblur="checkInputValue('cat_cname',false,120,'目录名称','')"/>
 				<input type="hidden" id="class_id" name="class_id" value="<%=class_id%>">
 				<input type="hidden" id="parent_id" name="parent_id" value="<%=parent_id%>">
 				<input type="hidden" id="site_id" name="site_id" value="<%=site_id%>">

@@ -176,7 +176,13 @@
 					
 					  hj_sql             varchar(1000) default '',
 					
-					  is_show_tree       int(4) default 1			
+					  is_show_tree       int(4) default 1,
+					  gkzt             varchar(250) default '',
+					  gksx             varchar(500) default '',
+					  sxyj             varchar(500) default '',
+					  gkfs             varchar(500) default '',
+					  gkgs             varchar(250) default '',
+					  gkbz             varchar(1000) default ''
 
 				)
 
