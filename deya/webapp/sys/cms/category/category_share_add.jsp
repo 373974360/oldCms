@@ -254,6 +254,42 @@ function checkedCategoryModelInfo_shared(cat_id)
 				</select>
 			</td>			
 		</tr>
+		<tr>
+			<th>公开主体：</th>
+			<td>
+				<input id="gkzt" name="gkzt" type="text" class="width300"/>
+			</td>
+		</tr>
+		<tr>
+			<th>公开时限：</th>
+			<td>
+				<input id="gksx" name="gksx" type="text" class="width300"/>
+			</td>
+		</tr>
+		<tr>
+			<th>事项依据：</th>
+			<td>
+				<input id="sxyj" name="sxyj" type="text" class="width300"/>
+			</td>
+		</tr>
+		<tr>
+			<th>公开方式：</th>
+			<td>
+				<input id="gkfs" name="gkfs" type="text" class="width300"/>
+			</td>
+		</tr>
+		<tr>
+			<th>公开格式：</th>
+			<td>
+				<input id="gkgs" name="gkgs" type="text" class="width300"/>
+			</td>
+		</tr>
+		<tr>
+			<th>公开备注：</th>
+			<td>
+				<input id="gkbz" name="gkbz" type="text" class="width300"/>
+			</td>
+		</tr>
 		<tr id="wf_publish_tr" class="hidden">
 			<th>终审后自动发布：</th>
 			<td>

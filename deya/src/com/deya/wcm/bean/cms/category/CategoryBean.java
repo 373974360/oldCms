@@ -44,6 +44,13 @@ public class CategoryBean implements java.io.Serializable{
 	private int is_archive = 0;//是否已归档 0：正常 1：已归档 归档的栏目不显示在 填报栏目中
 	private boolean is_sub = false;//是否是枝节点
 	private String hj_sql = "";
+
+	private String gkzt = "";//公开主体
+	private String gksx="";//公开时限
+	private String sxyj="";//公开事项依据
+	private String gkfs="";//公开方式
+	private String gkgs="";//公开格式
+	private String gkbz="";//公开备注
 	public int getIs_show_tree() {
 		return is_show_tree;
 	}
@@ -278,5 +285,53 @@ public class CategoryBean implements java.io.Serializable{
 	}
 	public void setSite_id(String siteId) {
 		site_id = siteId;
+	}
+
+	public String getGkzt() {
+		return gkzt;
+	}
+
+	public void setGkzt(String gkzt) {
+		this.gkzt = gkzt;
+	}
+
+	public String getGksx() {
+		return gksx;
+	}
+
+	public void setGksx(String gksx) {
+		this.gksx = gksx;
+	}
+
+	public String getSxyj() {
+		return sxyj;
+	}
+
+	public void setSxyj(String sxyj) {
+		this.sxyj = sxyj;
+	}
+
+	public String getGkfs() {
+		return gkfs;
+	}
+
+	public void setGkfs(String gkfs) {
+		this.gkfs = gkfs;
+	}
+
+	public String getGkgs() {
+		return gkgs;
+	}
+
+	public void setGkgs(String gkgs) {
+		this.gkgs = gkgs;
+	}
+
+	public String getGkbz() {
+		return gkbz;
+	}
+
+	public void setGkbz(String gkbz) {
+		this.gkbz = gkbz;
 	}
 }

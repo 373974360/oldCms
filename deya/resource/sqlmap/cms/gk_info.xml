@@ -206,8 +206,8 @@
 	</select>
 	
 	<insert id="insert_gk_info" parameterType="com.deya.wcm.bean.cms.info.GKInfoBean">
-		insert into cs_gk_info(info_id,gk_index,gk_year,gk_num,doc_no,gk_file,generate_dtime,effect_dtime,aboli_dtime,topic_id,topic_name,theme_id,theme_name,serve_id,serve_name,topic_key,place_key,language,carrier_type,gk_validity,gk_format,gk_way,gk_type,gk_no_reason,gk_time_limit ,gk_range,gk_proc,gk_duty_dept,gk_input_dept,file_head,gk_signer)
-		values(#{info_id},#{gk_index},#{gk_year},#{gk_num},#{doc_no},#{gk_file},#{generate_dtime},#{effect_dtime},#{aboli_dtime},#{topic_id},#{topic_name},#{theme_id},#{theme_name},#{serve_id},#{serve_name},#{topic_key},#{place_key},#{language},#{carrier_type},#{gk_validity},#{gk_format},#{gk_way},#{gk_type},#{gk_no_reason},#{gk_time_limit },#{gk_range},#{gk_proc},#{gk_duty_dept},#{gk_input_dept},#{file_head},#{gk_signer})
+		insert into cs_gk_info(info_id,gk_index,gk_year,gk_num,doc_no,gk_file,generate_dtime,effect_dtime,aboli_dtime,topic_id,topic_name,theme_id,theme_name,serve_id,serve_name,topic_key,place_key,language,carrier_type,gk_validity,gk_format,gk_way,gk_type,gk_no_reason,gk_time_limit ,gk_range,gk_proc,gk_duty_dept,gk_input_dept,file_head,gk_signer,gkbzh_id,gkbzh_name,gkhj_id,gkhj_name)
+		values(#{info_id},#{gk_index},#{gk_year},#{gk_num},#{doc_no},#{gk_file},#{generate_dtime},#{effect_dtime},#{aboli_dtime},#{topic_id},#{topic_name},#{theme_id},#{theme_name},#{serve_id},#{serve_name},#{topic_key},#{place_key},#{language},#{carrier_type},#{gk_validity},#{gk_format},#{gk_way},#{gk_type},#{gk_no_reason},#{gk_time_limit },#{gk_range},#{gk_proc},#{gk_duty_dept},#{gk_input_dept},#{file_head},#{gk_signer},${gkbzh_id},#{gkbzh_name},#{gkhj_id},#{gkhj_name})
 	</insert>
 	
 	<update id="update_gk_info" parameterType="com.deya.wcm.bean.cms.info.GKInfoBean">
@@ -217,7 +217,7 @@
 		topic_key = #{topic_key},place_key = #{place_key},language = #{language},carrier_type = #{carrier_type},gk_validity = #{gk_validity},
 		gk_format = #{gk_format},gk_way = #{gk_way},gk_type = #{gk_type},gk_no_reason = #{gk_no_reason},gk_time_limit = #{gk_time_limit},
 		gk_range = #{gk_range},gk_proc = #{gk_proc},gk_duty_dept = #{gk_duty_dept},gk_input_dept = #{gk_input_dept},file_head=#{file_head},
-		gk_signer=#{gk_signer}
+		gk_signer=#{gk_signer},gkbzh_id=${gkbzh_id},gkbzh_name=#{gkbzh_name},gkhj_id=#{gkhj_id},gkhj_name=#{gkhj_name}
 		where info_id = #{info_id}
 	</update>
 	

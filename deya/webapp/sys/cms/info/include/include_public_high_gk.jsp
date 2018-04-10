@@ -150,6 +150,24 @@
                
 			</td>
 		</tr>
+		<tr>
+			<th>公开标准化分类：</th>
+			<td id="gkbzh_id_td">
+				<input type="hidden" id="gkbzh_id" name="gkbzh_id" value="0"><input type="text" id="gkbzh_name" name="gkbzh_name" value="" style="width:80px" readOnly="readOnly">
+				<select class="input_select" style="width:150px;" onchange="setChileListToSelect(0,this.value,'gkbzh_id_td')">
+					<option value="0"></option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<th>公开环节分类：</th>
+			<td id="gkhj_id_td">
+				<input type="hidden" id="gkhj_id" name="gkhj_id" value="0"><input type="text" id="gkhj_name" name="gkhj_name" value="" style="width:80px" readOnly="readOnly">
+				<select class="input_select" style="width:150px;" onchange="setChileListToSelect(0,this.value,'gkhj_id_td')">
+					<option value="0"></option>
+				</select>
+			</td>
+		</tr>
  	</tbody>
 </table>
         

@@ -42,6 +42,11 @@ public class GKInfoBean extends InfoBean implements java.io.Serializable{
 	protected String file_head = "";//文件题头
 	protected String gk_signer = "";//签发人
 
+	protected int gkbzh_id = 0;//政务公开标准化分类ID
+	protected String gkbzh_name="";//政务公开标准化分类名称
+	protected int gkhj_id = 0;//公开环节分类ID
+	protected String gkhj_name="";//公开环节分类名称
+
 	
 	public String getGk_signer() {
 		return gk_signer;
@@ -228,5 +233,37 @@ public class GKInfoBean extends InfoBean implements java.io.Serializable{
 	}
 	public void setGk_input_dept(String gkInputDept) {
 		gk_input_dept = gkInputDept;
+	}
+
+	public int getGkbzh_id() {
+		return gkbzh_id;
+	}
+
+	public void setGkbzh_id(int gkbzh_id) {
+		this.gkbzh_id = gkbzh_id;
+	}
+
+	public String getGkbzh_name() {
+		return gkbzh_name;
+	}
+
+	public void setGkbzh_name(String gkbzh_name) {
+		this.gkbzh_name = gkbzh_name;
+	}
+
+	public int getGkhj_id() {
+		return gkhj_id;
+	}
+
+	public void setGkhj_id(int gkhj_id) {
+		this.gkhj_id = gkhj_id;
+	}
+
+	public String getGkhj_name() {
+		return gkhj_name;
+	}
+
+	public void setGkhj_name(String gkhj_name) {
+		this.gkhj_name = gkhj_name;
 	}
 }

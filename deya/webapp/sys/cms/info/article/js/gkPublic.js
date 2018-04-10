@@ -140,6 +140,8 @@ function loadCateClass()
 	getCateClassList("topic_id_td","ztfl");
 	getCateClassList("theme_id_td","tcfl");
 	getCateClassList("serve_id_td","fwdxfl");
+    getCateClassList("gkbzh_id_td","zwgkbzhfl");
+    getCateClassList("gkhj_id_td","gkhjfl");
 }
 
 //根据应用目英文名称取得栏目列表加载到列表中
