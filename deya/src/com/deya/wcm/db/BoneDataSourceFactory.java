@@ -17,7 +17,7 @@ public class BoneDataSourceFactory {
 	static {
     	try{
     		//System.out.println("BoneDataSourceFactory -----  start ");
-    		InputStream input =new BoneDataSourceFactory().getClass().getClassLoader().getResourceAsStream("jdbc.properties_mysql");
+    		InputStream input =new BoneDataSourceFactory().getClass().getClassLoader().getResourceAsStream("jdbc.properties");
     		Properties p =new Properties();
     		try {
     			p.load(input);

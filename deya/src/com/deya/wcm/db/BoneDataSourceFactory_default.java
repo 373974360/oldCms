@@ -14,7 +14,7 @@ public class BoneDataSourceFactory_default {
     
     static {
     	try{
-    		InputStream input =new BoneDataSourceFactory_default().getClass().getClassLoader().getResourceAsStream("jdbc.properties_mysql");
+    		InputStream input =new BoneDataSourceFactory_default().getClass().getClassLoader().getResourceAsStream("jdbc.properties");
     		Properties p =new Properties();
     		try {
     			p.load(input);
