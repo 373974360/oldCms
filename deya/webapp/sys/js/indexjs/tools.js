@@ -1011,6 +1011,35 @@ function getInfoCategoryTreeByUserID()
 	 });   
 }
 
+
+
+//得到政务公开标准化栏目分类
+function getZWGKBZHCategoryTreeByUserID()
+{
+    $('#leftMenuTree').tree({
+        checkbox: false,
+        url: '/servlet/Category?site_id=' + current_site_id + '&user_id=' + LoginUserBean.user_id + '&pid=384',
+        onBeforeExpand:function(node,param){
+            $('#leftMenuTree').tree('options').url = '/servlet/Category?site_id=' + current_site_id + '&user_id=' + LoginUserBean.user_id + '&pid=' + node.id;	// change the url
+            //param.myattr = 'test';    // or change request parameter
+        },
+        onClick:function(node){
+            if(node.state == "open")
+            {
+                $(this).tree('collapse',node.target);
+            }
+            else
+            {
+                $(this).tree('expand',node.target);
+            }
+            if(node.attributes!=undefined)
+            {
+                setMainIframeUrl(node.attributes.url,node.text.replace(/\(\d*\)$/ig,""),node.attributes.handls);
+            }
+        }
+    });
+}
+
 //返回值处理
 function reloadLeftMenuTree(result,e)
 {

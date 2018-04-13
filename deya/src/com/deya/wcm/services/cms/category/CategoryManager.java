@@ -1242,6 +1242,27 @@ public class CategoryManager implements ISyncCatch{
 		
 		return list;
 	}
+	/**
+	 * 根据站点或节点ID获得根目录节点列表
+	 * @param String pid 父节点ID
+	 * @return List<CategoryBean>
+	 * */
+	public static List<CategoryBean> getCategoryListByPid(int pid)
+	{
+		List<CategoryBean> list = new ArrayList<CategoryBean>();
+		Set<Integer> set = category_m.keySet();
+		for(int i : set){
+			CategoryBean cgb = category_m.get(i);
+			if(cgb.getParent_id() == pid)
+			{
+				list.add(cgb);
+			}
+		}
+		if(list != null && list.size() > 0)
+			Collections.sort(list,new CategoryComparator());
+
+		return list;
+	}
 	
 	/*************************************栏目异步树结构**************************************************/
 	
