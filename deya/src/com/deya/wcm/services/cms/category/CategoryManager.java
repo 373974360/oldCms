@@ -157,6 +157,29 @@ public class CategoryManager implements ISyncCatch{
 		}
 		return null;
 	}
+
+	/**
+	 * 根据cat_ID返回目录对象
+	 * @param int cat_id
+	 * @return CategoryBean
+	 * */
+	public static CategoryBean getCategoryBeanCatID(int cat_id)
+	{
+		if(cat_id == 0)
+		{
+			CategoryBean cgb = new CategoryBean();
+			cgb.setCat_id(cat_id);
+			cgb.setCat_position("$0$");
+			return cgb;
+		}
+		Set<Integer> set = category_m.keySet();
+		for(int i : set){
+			CategoryBean cgb = category_m.get(i);
+			if(cgb.getCat_id() == cat_id)
+				return cgb;
+		}
+		return null;
+	}
 	
 	/**
      * 根据cat_ID,站点id得到该栏目的工作流程ID
@@ -372,7 +395,23 @@ public class CategoryManager implements ISyncCatch{
 		}
 		return false;
 	}
-	
+
+	/**
+	 * 根据cat_id判断它是否有子级
+	 * @param int cat_id
+	 * @param String site_id
+	 * @return boolean
+	 * */
+	public static boolean isHasChildNode(int cat_id)
+	{
+		Set<Integer> set = category_m.keySet();
+		for(int i : set){
+			CategoryBean cgb = category_m.get(i);
+			if(cgb.getParent_id() == cat_id)
+				return true;
+		}
+		return false;
+	}
 	/**
 	 * 根据栏目对象返回简单的Bean对象，并包含层级的枝叶节点
 	 * @param String ename

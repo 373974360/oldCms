@@ -24,11 +24,12 @@ public class Category extends HttpServlet {
 		String site_id = request.getParameter("site_id");
 		String user_id = request.getParameter("user_id");
 		String pid = request.getParameter("pid");
+		String type = request.getParameter("type");
 		if(user_id == null || "".equals(user_id))
 		{
 			user_id = "0";
 		}
-		String jsonStr = CategoryTreeUtil.getInfoCategoryTreeByUserIDSync(site_id,Integer.parseInt(user_id), Integer.parseInt(pid));
+		String jsonStr = CategoryTreeUtil.getInfoCategoryTreeByUserIDSync(site_id,Integer.parseInt(user_id), Integer.parseInt(pid),type);
 		response.setCharacterEncoding("UTF-8"); 
 		response.getWriter().print(jsonStr);
 	}

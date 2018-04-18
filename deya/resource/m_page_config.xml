@@ -12,6 +12,7 @@
         <property name="menu_list" value="${org_path}/operate/menuList.jsp"/>
         <property name="ware_update" value="${manager_path}/system/ware/ware_content.jsp"/>
         <property name="article_page" value="${manager_path}/cms/info/article/articleDataList.jsp"/>
+        <property name="gkbzh_article_page" value="${manager_path}/cms/info/article/gkbzh_articleDataList.jsp"/>
         <property name="fw_page" value="${manager_path}/cms/info/article/fwInfoList.jsp"/>
     </category>
 </properties>

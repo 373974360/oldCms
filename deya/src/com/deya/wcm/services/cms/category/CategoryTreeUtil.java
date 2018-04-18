@@ -18,6 +18,7 @@ public class CategoryTreeUtil {
     public static HashMap<String, String> uset_cate_map = new HashMap<String, String>();
     private static String article_page_path = JconfigUtilContainer.managerPagePath().getProperty("article_page", "", "m_org_path");
     private static String fw_page_path = JconfigUtilContainer.managerPagePath().getProperty("fw_page", "", "m_org_path");
+    private static String gkbzh_article_page_path = JconfigUtilContainer.managerPagePath().getProperty("gkbzh_article_page", "", "m_org_path");
 
     //CategoryManager类调用此方法刷新
     public static void reloadMap() {
@@ -407,7 +408,7 @@ public class CategoryTreeUtil {
      * @param int    cat_type 目录类型
      * @return String
      */
-    public static String getInfoCategoryTreeByUserIDSync(String site_id, int uesr_id, int pid) {
+    public static String getInfoCategoryTreeByUserIDSync(String site_id, int uesr_id, int pid,String type) {
         String key = uesr_id + "_" + site_id + "_p" + pid;
         if (uset_cate_map.containsKey(key)) {
             return uset_cate_map.get(key);
@@ -415,23 +416,26 @@ public class CategoryTreeUtil {
             String json_str = "";
             String roo_name = "";
             List<CategoryBean> list = null;
-            if (pid != 384) {
+            if (StringUtils.isNotEmpty(site_id)) {
                 SiteBean sb = SiteManager.getSiteBeanBySiteID(site_id);
                 roo_name = sb.getSite_name();
                 list = CategoryManager.getCategoryListBySiteIDPid(site_id, pid);
-            } else if (pid == 384) {
+            } else {
                 roo_name = CategoryManager.getCategoryBean(pid).getCat_cname();
                 list = CategoryManager.getCategoryListByPid(pid);
             }
             //System.out.println("****************pid**************" + pid + "***********子节点数：**********" + list.size());
             if (pid == 0 || pid == 384) {
                 json_str = "[{\"id\":0,\"text\":\"" + roo_name + "\",\"attributes\":{\"url\":\"\",\"handl\":\"\"}";
-
                 if (list != null && list.size() > 0) {
                     json_str += ",\"children\":[";
                     for (int i = 0; i < list.size(); i++) {
-                        String str = isCategoryOprate(list.get(i).getCat_id(), site_id, uesr_id);
-
+                        String str = "";
+                        if(type.equals("info")){
+                            str = isCategoryOprate(list.get(i).getCat_id(), site_id, uesr_id);
+                        }else{
+                            str = isCategoryOprate(list.get(i).getCat_id(), uesr_id);
+                        }
                         if (str != null && !"".equals(str)) {
                             if (json_str.endsWith("}"))
                                 json_str += ",";
@@ -445,8 +449,12 @@ public class CategoryTreeUtil {
                 json_str = "[";
                 if (list != null && list.size() > 0) {
                     for (int i = 0; i < list.size(); i++) {
-                        String str = isCategoryOprate(list.get(i).getCat_id(), site_id, uesr_id);
-
+                        String str = "";
+                        if(type.equals("info")){
+                            str = isCategoryOprate(list.get(i).getCat_id(), site_id, uesr_id);
+                        }else{
+                            str = isCategoryOprate(list.get(i).getCat_id(), uesr_id);
+                        }
                         if (str != null && !"".equals(str)) {
                             if (json_str.endsWith("}"))
                                 json_str += ",";
@@ -461,6 +469,7 @@ public class CategoryTreeUtil {
             return json_str;
         }
     }
+
 
     /**
      * 根据cat_id，site_id和user_id得到它能管理的目录节点树
@@ -502,6 +511,39 @@ public class CategoryTreeUtil {
                                 + manager_page + "?app_id=" + cbg.getApp_id() + "&cat_id=" + cbg.getCat_id() + "\",\"handl\":\"\"}}";
                     }
                 }
+            }
+        }
+
+        return json_str;
+    }
+
+    /**
+     * 根据cat_id，site_id和user_id得到它能管理的目录节点树
+     *
+     * @param int    cat_id
+     * @param String site_id
+     * @param int    user_id
+     * @return CategoryBean
+     */
+    public static String isCategoryOprate(int cat_id,int user_id) {
+        String json_str = "";
+        CategoryBean cbg = CategoryManager.getCategoryBeanCatID(cat_id);
+        String manager_page = gkbzh_article_page_path;
+        if (user_id == 0) {
+            if (CategoryManager.isHasChildNode(cat_id)) {
+                json_str = "{\"id\":" + cbg.getCat_id() + ",\"text\":\"" + FormatUtil.formatJsonStr(cbg.getCat_cname()) + "\",\"state\":\"closed\",\"attributes\":{\"url\":\""
+                        + manager_page + "?app_id=" + cbg.getApp_id() + "&cat_id=" + cbg.getCat_id() + "\",\"handl\":\"\"}}";
+            } else {
+                json_str = "{\"id\":" + cbg.getCat_id() + ",\"text\":\"" + FormatUtil.formatJsonStr(cbg.getCat_cname()) + "\",\"attributes\":{\"url\":\""
+                        + manager_page + "?app_id=" + cbg.getApp_id() + "&cat_id=" + cbg.getCat_id() + "\",\"handl\":\"\"}}";
+            }
+        } else {
+            if (CategoryManager.isHasChildNode(cat_id)) {
+                json_str = "{\"id\":" + cbg.getCat_id() + ",\"text\":\"" + FormatUtil.formatJsonStr(cbg.getCat_cname()) + "\",\"state\":\"closed\",\"attributes\":{\"url\":\""
+                        + manager_page + "?app_id=" + cbg.getApp_id() + "&cat_id=" + cbg.getCat_id() + "\",\"handl\":\"\"}}";
+            } else {
+                json_str = "{\"id\":" + cbg.getCat_id() + ",\"text\":\"" + FormatUtil.formatJsonStr(cbg.getCat_cname()) + "\",\"attributes\":{\"url\":\""
+                        + manager_page + "?app_id=" + cbg.getApp_id() + "&cat_id=" + cbg.getCat_id() + "\",\"handl\":\"\"}}";
             }
         }
 
