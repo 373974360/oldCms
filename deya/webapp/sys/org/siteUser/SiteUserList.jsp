@@ -14,7 +14,7 @@
 <script type="text/javascript" src="js/SiteUserList.js"></script>
 <script type="text/javascript">
 	var appId = "<%=appId%>";
-	var siteId = "CMSmsgjj";
+	var siteId = "CMScqgjj";
 
 $(document).ready(function(){
 

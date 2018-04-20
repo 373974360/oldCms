@@ -26,7 +26,7 @@ var user_id = <%=user_id%>;
 var app_id = parent.getCurrentFrameObj().appId;
 var site_id = parent.getCurrentFrameObj().siteId;
 if(site_id == "" || site_id == "null" || site_id == null){
-    site_id = "CMSmsgjj";
+    site_id = "CMScqgjj";
 }
 var CategoryRPC = jsonrpc.CategoryRPC;
 var json_data;
