@@ -427,7 +427,7 @@
 	<sql id="getBroGKInfoListForSharedCategory_sql_conn">
 		where 		
 					<if test="cat_id != null">
-						( gk.topic_id=${cat_id} or gk.theme_id=${cat_id} or gk.serve_id=${cat_id} )
+						( gk.topic_id=${cat_id} or gk.theme_id=${cat_id} or gk.serve_id=${cat_id} or gk.gkbzh_id=${cat_id} or gk.gkhj_id=${cat_id})
 					</if>
 					<if test="weight != null">
 						 and ci.weight = ${weights}
