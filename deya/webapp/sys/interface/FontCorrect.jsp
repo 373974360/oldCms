@@ -33,7 +33,7 @@
             if(jsonArray.size()>0){
                 for(int i=0;i<jsonArray.size();i++) {
                     JSONObject jsonArrayObj = jsonArray.getJSONObject(i);
-                    resultHtml += "<p><span style='color:red;'>"+jsonArrayObj.get("word")+"</span><span style='color:red;padding-left:20px;'>"+jsonArrayObj.get("description")+"</span></p>";
+                    resultHtml += "<p><span style='color:red;'>"+jsonArrayObj.get("word")+"</span><span style='color:red;padding-left:10px;'>建议修改为:"+jsonArrayObj.get("suggest")+"</span></p>";
                 }
             }
         }
