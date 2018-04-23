@@ -389,7 +389,7 @@
 	
 	<!-- 前台信息列表查询sql　,gk.gk_duty_dept,gk.gk_input_dept -->
 	<sql id="getBroGKInfoList_sql_item">
-		ci.*,gk.gk_index,gk.gk_year,gk.gk_num,gk.doc_no,gk.gk_file,gk.generate_dtime,gk.effect_dtime,gk.aboli_dtime,gk.topic_id,gk.topic_name,gk.theme_id,gk.theme_name,gk.serve_id,gk.serve_name,gk.topic_key,gk.place_key,gk.language,gk.carrier_type,gk.gk_validity,gk.gk_format,gk.gk_way,gk.gk_type,gk.gk_no_reason,gk.gk_time_limit ,gk.gk_range,gk.gk_proc,ca.cat_cname,gk.file_head,gk.gk_signer,gk.gk_duty_dept,gk.gk_input_dept
+		ci.*,gk.gk_index,gk.gk_year,gk.gk_num,gk.doc_no,gk.gk_file,gk.generate_dtime,gk.effect_dtime,gk.aboli_dtime,gk.topic_id,gk.topic_name,gk.theme_id,gk.theme_name,gk.serve_id,gk.serve_name,gk.topic_key,gk.place_key,gk.language,gk.carrier_type,gk.gk_validity,gk.gk_format,gk.gk_way,gk.gk_type,gk.gk_no_reason,gk.gk_time_limit ,gk.gk_range,gk.gk_proc,ca.cat_cname,gk.file_head,gk.gk_signer,gk.gk_duty_dept,gk.gk_input_dept,gk.gkbzh_id,gk.gkbzh_name,gk.gkhj_id,gk.gkhj_name
 	</sql>
 	
 	<select id="getBroGKInfoList" parameterType="Map" resultType="com.deya.wcm.bean.cms.info.GKInfoBean" >
