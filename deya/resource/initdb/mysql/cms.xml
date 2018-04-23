@@ -182,7 +182,8 @@
 					  sxyj             varchar(500) default '',
 					  gkfs             varchar(500) default '',
 					  gkgs             varchar(250) default '',
-					  gkbz             varchar(1000) default ''
+					  gkbz             varchar(1000) default '',
+					  mlsx       int(4) default 1
 
 				)
 

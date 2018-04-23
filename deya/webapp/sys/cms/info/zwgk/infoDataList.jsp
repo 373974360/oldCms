@@ -48,6 +48,12 @@ $(document).ready(function(){
 	if($.browser.msie&&$.browser.version=="6.0"&&$("html")[0].scrollHeight>$("html").height()) $("html").css("overflowY","scroll");
 
 	$(".list_tab").eq(snum).click();
+
+    showModels();
+    if(subNode){
+        $(":button[name='btn404']").hide();
+    }
+
 });
 function openSendInfoPage()
 {

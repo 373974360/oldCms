@@ -24,7 +24,24 @@
     String result = basicPost(url, params);
     System.out.println(">>>>"+result.toString());
     JSONObject jsonObject = JSONObject.fromObject(result);
-    out.println(jsonObject.get("text"));
+    if(jsonObject.get("text")!=null){
+        String resultHtml = jsonObject.get("text")+"innerHtml";
+        String html = "";
+        String check = jsonObject.get("check").toString();
+        if(check!=null&&check!=""){
+            JSONArray jsonArray = JSONArray.fromObject(check);
+            if(jsonArray.size()>0){
+                for(int i=0;i<jsonArray.size();i++) {
+                    JSONObject jsonArrayObj = jsonArray.getJSONObject(i);
+                    resultHtml += "<p><span style='color:red;'>"+jsonArrayObj.get("word")+"</span><span style='color:red;padding-left:20px;'>"+jsonArrayObj.get("description")+"</span></p>";
+                }
+            }
+        }
+        System.out.println(">>>>"+resultHtml);
+        out.println(resultHtml);
+    }else{
+        out.println(jsonObject.get("text"));
+    }
 
 %>
 <%!

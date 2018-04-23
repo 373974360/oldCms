@@ -1156,6 +1156,13 @@ function returnCategoryReguList(c_id)
 			</td>			
 		</tr>
 		<tr>
+			<th>目录属性：</th>
+			<td>
+				<input id="mlsx" name="mlsx" type="radio" value="1" checked="true"/><label>新闻目录</label>
+				<input id="mlsx" name="mlsx" type="radio" value="2"/><label>公开目录</label>
+			</td>
+		</tr>
+		<tr>
 			<th>前台导航显示：</th>
 			<td>
 				<input id="is_show" name="is_show" type="radio" value="1" checked="true"/><label>是</label>
