@@ -1,3 +1,5 @@
+<%@ page import="com.deya.wcm.bean.cms.category.CategoryBean" %>
+<%@ page import="com.deya.wcm.services.cms.category.CategoryManager" %>
 <%@ page contentType="text/html; charset=utf-8"%>
 <%
 String cid = request.getParameter("cid");
@@ -5,6 +7,7 @@ String siteid = request.getParameter("site_id");
 String infoid = request.getParameter("info_id");
 String app_id = request.getParameter("app_id");
 String model = request.getParameter("model");
+CategoryBean cb = CategoryManager.getCategoryBeanCatID(Integer.parseInt(cid));
 if(cid == null || cid.equals("null")){
 	cid = "0";
 }
@@ -111,8 +114,17 @@ function savePicUrl(url)
 	  </tbody>
 	</table>
 <!-- 内容主体不同部分　结束 -->
-
-<jsp:include page="../include/include_public_high_gk.jsp"/>
+<%
+if(cb.getMlsx()==1){
+    %>
+	<jsp:include page="../include/include_public_high.jsp"/>
+	<%
+}else if(cb.getMlsx()==2){
+    %>
+    <jsp:include page="../include/include_public_high_gk.jsp"/>
+    <%
+}
+%>
 
 </div>
 

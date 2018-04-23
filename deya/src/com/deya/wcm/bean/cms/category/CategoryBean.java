@@ -51,7 +51,7 @@ public class CategoryBean implements java.io.Serializable {
     private String gkfs = "";//公开方式
     private String gkgs = "";//公开格式
     private String gkbz = "";//公开备注
-    private String mlsx = "";//目录属性，1:新闻目录，2:公开目录
+    private int mlsx = 0;//目录属性，1:新闻目录，2:公开目录
 
     public int getIs_show_tree() {
         return is_show_tree;
@@ -413,11 +413,11 @@ public class CategoryBean implements java.io.Serializable {
         this.gkbz = gkbz;
     }
 
-    public String getMlsx() {
+    public int getMlsx() {
         return mlsx;
     }
 
-    public void setMlsx(String mlsx) {
+    public void setMlsx(int mlsx) {
         this.mlsx = mlsx;
     }
 }
