@@ -116,6 +116,24 @@ public class CategorySharedManager implements ISyncCatch{
 		}
 		return "["+str+"]";
 	}
+
+
+	public static String getGKBZHSiteJSONStr()
+	{
+		String str = "";
+		List<SiteBean> l = SiteManager.getSiteChildListByID("HIWCMcgroup");
+		if(l != null && l.size() > 0)
+		{
+			for(int i=0;i<l.size();i++)
+			{
+				if(l.get(i) != null)
+					str += ",{\"id\":"+(1000+i)+",\"text\":\""+l.get(i).getSite_name()+"\",\"attributes\":{\"real_site_id\":\""+l.get(i).getSite_id()+"\"}}";
+			}
+			if(!"".equals(str))
+				str = str.substring(1);
+		}
+		return "["+str+"]";
+	}
 	
 	/**
      * 根据站点ID得到所有允许共享给该站点信息的站点集合    

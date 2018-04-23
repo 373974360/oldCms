@@ -477,6 +477,49 @@
     <select id="getAllInfoCounts" parameterType="Map" resultType="java.lang.Integer">
         select count(ci.id) from cs_info ci,cs_info_category ca <include refid="selectInfoList_sql_conn"/>
     </select>
+    <select id="getAllGKBZHInfoCounts" parameterType="Map" resultType="java.lang.Integer">
+        select count(ci.id) from cs_info ci,cs_gk_info gk,cs_info_category ca
+        where ci.info_id = gk.info_id and ci.cat_id = ca.cat_id
+        <if test="input_user != null">
+            and ci.input_user = #{input_user}
+        </if>
+        <if test="is_auto_up != null">
+            and ci.is_auto_up = ${is_auto_up}
+        </if>
+        <if test="is_host != null">
+            and ci.is_host = ${is_host}
+        </if>
+        <if test="info_status != null">
+            and ci.info_status = ${info_status}
+        </if>
+        <if test="final_status != null">
+            and ci.final_status = ${final_status}
+        </if>
+        <if test="cat_id != null">
+            and gk.gkbzh_id = ${cat_id}
+        </if>
+        <if test="cat_ids != null and cat_ids != ''">
+            and gk.gkbzh_id in (${cat_ids})
+        </if>
+        <if test="search_cat_ids != null and search_cat_ids != ''">
+            and gk.gkbzh_id in (${search_cat_ids})
+        </if>
+        <if test="shared_cat_ids != null">
+            and ca.cat_class_id = ${shared_cat_ids}
+        </if>
+        <if test="con_value != null">
+            and ( ci.title like '%${con_value}%' or ci.subtitle like '%${con_value}%' or ci.tags like '%${con_value}%')
+        </if>
+        <if test="searchString != null">
+            and ${searchString}
+        </if>
+        <if test="searchString2 != null">
+            ${searchString2}
+        </if>
+        <if test="highSearchString != null">
+            ${highSearchString}
+        </if>
+    </select>
 
     <insert id="insertRelatedInfo" parameterType="com.deya.wcm.bean.cms.info.RelatedInfoBean">
         insert into cs_info_info(info_id,related_info_id,title,thumb_url,content_url,sort_id,model_id)
@@ -639,6 +682,51 @@
 
     <select id="selectInfoList_mysql" parameterType="Map" resultType="com.deya.wcm.bean.cms.info.InfoBean" >
         select ci.*,ca.cat_cname from cs_info ci,cs_info_category ca <include refid="selectInfoList_sql_conn"/>
+        order by ci.istop desc,ci.weight desc,${sort_name} ${sort_type} limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectGKBZHInfoList_mysql" parameterType="Map" resultType="com.deya.wcm.bean.cms.info.InfoBean" >
+        select ci.*,ca.cat_cname from cs_info ci,cs_gk_info gk,cs_info_category ca
+        where ci.info_id = gk.info_id and ci.cat_id = ca.cat_id
+        <if test="input_user != null">
+            and ci.input_user = #{input_user}
+        </if>
+        <if test="is_auto_up != null">
+            and ci.is_auto_up = ${is_auto_up}
+        </if>
+        <if test="is_host != null">
+            and ci.is_host = ${is_host}
+        </if>
+        <if test="info_status != null">
+            and ci.info_status = ${info_status}
+        </if>
+        <if test="final_status != null">
+            and ci.final_status = ${final_status}
+        </if>
+        <if test="cat_id != null">
+            and gk.gkbzh_id = ${cat_id}
+        </if>
+        <if test="cat_ids != null and cat_ids != ''">
+            and gk.gkbzh_id in (${cat_ids})
+        </if>
+        <if test="search_cat_ids != null and search_cat_ids != ''">
+            and gk.gkbzh_id in (${search_cat_ids})
+        </if>
+        <if test="shared_cat_ids != null">
+            and ca.cat_class_id = ${shared_cat_ids}
+        </if>
+        <if test="con_value != null">
+            and ( ci.title like '%${con_value}%' or ci.subtitle like '%${con_value}%' or ci.tags like '%${con_value}%')
+        </if>
+        <if test="searchString != null">
+            and ${searchString}
+        </if>
+        <if test="searchString2 != null">
+            ${searchString2}
+        </if>
+        <if test="highSearchString != null">
+            ${highSearchString}
+        </if>
         order by ci.istop desc,ci.weight desc,${sort_name} ${sort_type} limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
     </select>
 

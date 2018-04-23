@@ -488,6 +488,35 @@ public class CategoryManager implements ISyncCatch{
 		}else
 			return null;
 	}
+
+
+
+	/**
+	 * 根据cat_id得到它所有的子级cat_id(deep+n)
+	 * @param int cat_id
+	 * @return String
+	 * */
+	public static String getAllChildCategoryIDS(int cat_id)
+	{
+		CategoryBean cgb = getCategoryBeanCatID(cat_id);
+		if(cgb != null)
+		{
+			String cat_position = cgb.getCat_position();
+			Set<Integer> set = category_m.keySet();
+			String cat_ids = "";
+			for(int i : set){
+				cgb = category_m.get(i);
+				if(cgb.getCat_position().startsWith(cat_position) && !cat_position.equals(cgb.getCat_position())){
+					cat_ids += ","+cgb.getCat_id();
+				}
+			}
+			if(cat_ids.length() > 0){
+				cat_ids = cat_ids.substring(1);
+			}
+			return cat_ids;
+		}else
+			return null;
+	}
 	
 	/**
      * 根据cat_ID得到它所有的子级ID(deep+n)(可用多个ID)
@@ -507,6 +536,28 @@ public class CategoryManager implements ISyncCatch{
 		if(ids.length() > 0)
 			ids = ids.substring(1);
 		
+		return ids;
+	}
+
+
+	/**
+	 * 根据cat_ID得到它所有的子级ID(deep+n)(可用多个ID)
+	 * @param String cat_ids
+	 * @return String
+	 * */
+	public static String getAllChildCategoryIDS(String cat_ids)
+	{
+		String ids = "";
+		String[] tempA = cat_ids.split(",");
+		for(int i=0;i<tempA.length;i++)
+		{
+			String c_ids = getAllChildCategoryIDS(Integer.parseInt(tempA[i]));
+			if(c_ids != null && !"".equals(c_ids))
+				ids += ","+c_ids;
+		}
+		if(ids.length() > 0)
+			ids = ids.substring(1);
+
 		return ids;
 	}
 	

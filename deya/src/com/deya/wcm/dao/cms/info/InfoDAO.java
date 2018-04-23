@@ -480,6 +480,9 @@ public class InfoDAO {
 	public static int getInfoCount(Map<String, String> map){
 		return Integer.parseInt(DBManager.getString("getAllInfoCounts", map));
 	}
+	public static int getGKBZHInfoCount(Map<String, String> map){
+		return Integer.parseInt(DBManager.getString("getAllGKBZHInfoCounts", map));
+	}
 	
 	/**
 	 * 批量发布静态内容页,根据栏目,站点和发布时间得到信息
@@ -496,6 +499,10 @@ public class InfoDAO {
 	public static List<InfoBean> getInfoBeanList(Map<String, String> map){
 		//System.out.println("getInfoBeanList  map----"+map);
 		return DBManager.queryFList("selectInfoList", map);
+	}
+	public static List<InfoBean> getGKBZHInfoBeanList(Map<String, String> map){
+		//System.out.println("getInfoBeanList  map----"+map);
+		return DBManager.queryFList("selectGKBZHInfoList", map);
 	}
 	
 	//相关信息处理
@@ -601,7 +608,52 @@ public class InfoDAO {
 		m.put("cat_id", cat_id+"");
 		return DBManager.getString("getQuoteInfoCount", m);
 	}
-	
+
+	public static boolean infoGKBZHGet(List<InfoBean> l,int cat_id)
+	{
+		if(!l.isEmpty()){
+			String info_ids = "";
+			for(InfoBean bean:l){
+				info_ids+=bean.getInfo_id()+",";
+			}
+			info_ids = info_ids.substring(0,info_ids.length()-1);
+			Map<String,String> m = new HashMap<String,String>();
+			m.put("info_ids",info_ids);
+			m.put("cat_id",cat_id+"");
+			return DBManager.update("infoGKBZHGet",m);
+		}
+		return false;
+	}
+	public static boolean deleteGKBZHInfo(List<InfoBean> l)
+	{
+		if(!l.isEmpty()){
+			String info_ids = "";
+			for(InfoBean bean:l){
+				info_ids+=bean.getInfo_id()+",";
+			}
+			info_ids = info_ids.substring(0,info_ids.length()-1);
+			Map<String,String> m = new HashMap<String,String>();
+			m.put("info_ids",info_ids);
+			return DBManager.update("deleteGKBZHInfo",m);
+		}
+		return false;
+	}
+
+	public static boolean MoveGKBZHInfo(List<InfoBean> l,int cat_id)
+	{
+		if(!l.isEmpty()){
+			String info_ids = "";
+			for(InfoBean bean:l){
+				info_ids+=bean.getInfo_id()+",";
+			}
+			info_ids = info_ids.substring(0,info_ids.length()-1);
+			Map<String,String> m = new HashMap<String,String>();
+			m.put("info_ids",info_ids);
+			m.put("cat_id",cat_id+"");
+			return DBManager.update("MoveGKBZHInfo",m);
+		}
+		return false;
+	}
 	/**
 	 * 根据栏目ID得到所以已发布过的信息（用于删除栏目时，得到信息ID，删除搜索引擎中的数据）
 	 * @param Map<String,String> m

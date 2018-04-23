@@ -502,7 +502,11 @@ public class CategoryRPC {
 	{
 		return CategorySharedManager.getAllowSharedSiteJSONStr(t_site_id);
 	}
-	
+
+	public static String getGKBZHSiteJSONStr()
+	{
+		return CategorySharedManager.getGKBZHSiteJSONStr();
+	}
 	/**
      * 根据站点ID得到所有可以接收站点信息的站点集合    
      * @param String s_site_id

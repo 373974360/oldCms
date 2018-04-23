@@ -71,7 +71,12 @@ public class InfoBaseRPC {
 		else
 			return InfoBaseManager.infoGet(l, s_site_id, s_app_id, cat_id, get_type, is_publish, user_id);
 	}
-	
+
+
+	public static boolean infoGKBZHGet(List<InfoBean> l,int cat_id)
+	{
+			return InfoBaseManager.infoGKBZHGet(l, cat_id);
+	}
 	/**
 	 * 根据信息ID得到点击次数
 	 * @param String info_id
@@ -180,6 +185,14 @@ public class InfoBaseRPC {
 	public static int getInfoCount(Map<String, String> map){
 		return InfoBaseManager.getInfoCount(map);
 	}
+
+	public static List<InfoBean> getGKBZHInfoList(Map<String, String> map){
+		return InfoBaseManager.getGKBZHInfoList(map);
+	}
+
+	public static int getGKBZHInfoCount(Map<String, String> map){
+		return InfoBaseManager.getGKBZHInfoCount(map);
+	}
 	
 	/**
 	 * 删除信息
@@ -192,6 +205,11 @@ public class InfoBaseRPC {
 			return FileRmiFactory.deleteInfo(InfoBaseManager.getInfoReleSiteID(l.get(0).getSite_id(),l.get(0).getApp_id()), l, stl);
 		}else
 			return false;		
+	}
+
+
+	public static boolean deleteGKBZHInfo(List<InfoBean> l){
+		return InfoBaseManager.deleteGKBZHInfo(l);
 	}
 	
 	/**
@@ -224,7 +242,13 @@ public class InfoBaseRPC {
 		}else
 			return false; 
 	}
-	
+
+
+	public static boolean MoveGKBZHInfo(List<InfoBean> l,int to_cat_id)
+	{
+			return InfoBaseManager.MoveGKBZHInfo(l,to_cat_id);
+	}
+
 	/**
 	 * 通过cat_id,site_id清空回收站
 	 * @param String cat_ids

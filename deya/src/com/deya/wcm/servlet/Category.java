@@ -29,6 +29,10 @@ public class Category extends HttpServlet {
 		{
 			user_id = "0";
 		}
+		if(type == null || "".equals(type))
+		{
+			type = "info";
+		}
 		String jsonStr = CategoryTreeUtil.getInfoCategoryTreeByUserIDSync(site_id,Integer.parseInt(user_id), Integer.parseInt(pid),type);
 		response.setCharacterEncoding("UTF-8"); 
 		response.getWriter().print(jsonStr);

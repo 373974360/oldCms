@@ -170,6 +170,41 @@ public class InfoBaseManager {
         return result;
     }
 
+
+    /**
+     * 查询列表
+     * @param map
+     * @return List<InfoBean>
+     */
+    public static List<InfoBean> getGKBZHInfoList(Map<String, String> map){
+        getSearchSQL(map);
+        List<InfoBean> infoBeanList = InfoDAO.getGKBZHInfoBeanList(map);
+        List<InfoBean> result = new ArrayList<InfoBean>();
+        if(infoBeanList != null && infoBeanList.size() > 0)
+        {
+            Map<String, UserBean> userMap = UserManager.getUserMap();
+            for(InfoBean bean : infoBeanList)
+            {
+                if(bean.getInput_user() != 0)
+                {
+                    if(userMap.get(bean.getInput_user()+"") != null)
+                    {
+                        bean.setInput_user_name(userMap.get(bean.getInput_user()+"").getUser_realname());
+                    }
+                }
+                if(bean.getModify_user() != 0)
+                {
+                    if(userMap.get(bean.getModify_user()+"") != null)
+                    {
+                        bean.setModify_user_name(userMap.get(bean.getModify_user()+"").getUser_realname());
+                    }
+                }
+                result.add(bean);
+            }
+        }
+        return result;
+    }
+
     public static String getTimeStr(String searchTime){
         String time= "";
         if(searchTime.trim().equals("searchType_1b")){
@@ -239,26 +274,46 @@ public class InfoBaseManager {
         {
             cids = map.get("cat_ids");
             String resultIds = "";
-            String ids = com.deya.wcm.services.cms.category.CategoryManager.getAllChildCategoryIDS(cids,map.get("site_id"));
-            //String ids = CategoryReleManager.getCategoryIDSByUser(0,Integer.parseInt(user_id),map.get("site_id"));
-            if(ids != null && ids.length() > 0){
-                String[] idArr = ids.split(",");
-                for(String temp : idArr)
-                {
-                    if(RoleUserManager.isSiteManager(user_id+"",app_id,site_id) || CategoryReleManager.isCategoryManagerByUser(Integer.parseInt(user_id),map.get("site_id"),Integer.parseInt(temp)))
+            String ids = "";
+            if(map.get("site_id").equals("GKBZH")){
+                ids = com.deya.wcm.services.cms.category.CategoryManager.getAllChildCategoryIDS(cids);
+                if(ids != null && ids.length() > 0){
+                    String[] idArr = ids.split(",");
+                    for(String temp : idArr)
                     {
                         resultIds = resultIds + temp + ",";
                     }
+                    if(!"".equals(resultIds))
+                    {
+                        resultIds = resultIds.substring(0,resultIds.length() - 1);
+                    }
+                    map.put("cat_ids", resultIds);
+                    map.remove("cat_id");
+                }else{
+                    map.remove("cat_ids");
+                    map.put("cat_id", cids);
                 }
-                if(!"".equals(resultIds))
-                {
-                    resultIds = resultIds.substring(0,resultIds.length() - 1);
-                }
-                map.put("cat_ids", resultIds);
-                map.remove("cat_id");
             }else{
-                map.remove("cat_ids");
-                map.put("cat_id", cids);
+                ids = com.deya.wcm.services.cms.category.CategoryManager.getAllChildCategoryIDS(cids,map.get("site_id"));
+                if(ids != null && ids.length() > 0){
+                    String[] idArr = ids.split(",");
+                    for(String temp : idArr)
+                    {
+                        if(RoleUserManager.isSiteManager(user_id+"",app_id,site_id) || CategoryReleManager.isCategoryManagerByUser(Integer.parseInt(user_id),map.get("site_id"),Integer.parseInt(temp)))
+                        {
+                            resultIds = resultIds + temp + ",";
+                        }
+                    }
+                    if(!"".equals(resultIds))
+                    {
+                        resultIds = resultIds.substring(0,resultIds.length() - 1);
+                    }
+                    map.put("cat_ids", resultIds);
+                    map.remove("cat_id");
+                }else{
+                    map.remove("cat_ids");
+                    map.put("cat_id", cids);
+                }
             }
         }
         //不是取录入员自己待审中的信息走下面
@@ -292,6 +347,11 @@ public class InfoBaseManager {
     public static int getInfoCount(Map<String, String> map){
         getSearchSQL(map);
         return InfoDAO.getInfoCount(map);
+    }
+
+    public static int getGKBZHInfoCount(Map<String, String> map){
+        getSearchSQL(map);
+        return InfoDAO.getGKBZHInfoCount(map);
     }
 
     /**
@@ -386,6 +446,12 @@ public class InfoBaseManager {
         }
 
     }
+
+    public static boolean MoveGKBZHInfo(List<InfoBean> l,int to_cat_id)
+    {
+        return InfoDAO.MoveGKBZHInfo(l, to_cat_id);
+    }
+
 
     /**
      * 转移信息
@@ -962,6 +1028,14 @@ public class InfoBaseManager {
             n_site_id = site_id;
 
         return n_site_id;
+    }
+
+
+    public static boolean infoGKBZHGet(List<InfoBean> l,int cat_id){
+        return InfoDAO.infoGKBZHGet(l,cat_id);
+    }
+    public static boolean deleteGKBZHInfo(List<InfoBean> l){
+        return InfoDAO.deleteGKBZHInfo(l);
     }
 
     /**

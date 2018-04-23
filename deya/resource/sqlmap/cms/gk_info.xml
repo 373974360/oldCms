@@ -604,4 +604,14 @@
             order by ci.released_dtime asc
         ) as t2
     </select>
+
+	<update id="infoGKBZHGet" parameterType="Map">
+		update cs_gk_info set gkbzh_id=#{cat_id} where info_id in (${info_ids})
+	</update>
+	<update id="MoveGKBZHInfo" parameterType="Map">
+		update cs_gk_info set gkbzh_id=#{cat_id} where info_id in (${info_ids})
+	</update>
+	<update id="deleteGKBZHInfo" parameterType="Map">
+		update cs_gk_info set gkbzh_id='0' where info_id in (${info_ids})
+	</update>
 </mapper>

@@ -532,18 +532,19 @@ public class CategoryTreeUtil {
         if (user_id == 0) {
             if (CategoryManager.isHasChildNode(cat_id)) {
                 json_str = "{\"id\":" + cbg.getCat_id() + ",\"text\":\"" + FormatUtil.formatJsonStr(cbg.getCat_cname()) + "\",\"state\":\"closed\",\"attributes\":{\"url\":\""
-                        + manager_page + "?app_id=" + cbg.getApp_id() + "&cat_id=" + cbg.getCat_id() + "\",\"handl\":\"\"}}";
+                        + manager_page + "?app_id=cms&cat_id=" + cbg.getCat_id() + "\",\"handl\":\"\"}}";
             } else {
                 json_str = "{\"id\":" + cbg.getCat_id() + ",\"text\":\"" + FormatUtil.formatJsonStr(cbg.getCat_cname()) + "\",\"attributes\":{\"url\":\""
-                        + manager_page + "?app_id=" + cbg.getApp_id() + "&cat_id=" + cbg.getCat_id() + "\",\"handl\":\"\"}}";
+                        + manager_page + "?app_id=cms&cat_id=" + cbg.getCat_id() + "\",\"handl\":\"\"}}";
             }
+
         } else {
             if (CategoryManager.isHasChildNode(cat_id)) {
                 json_str = "{\"id\":" + cbg.getCat_id() + ",\"text\":\"" + FormatUtil.formatJsonStr(cbg.getCat_cname()) + "\",\"state\":\"closed\",\"attributes\":{\"url\":\""
-                        + manager_page + "?app_id=" + cbg.getApp_id() + "&cat_id=" + cbg.getCat_id() + "\",\"handl\":\"\"}}";
+                        + manager_page + "?app_id=cms&cat_id=" + cbg.getCat_id() + "\",\"handl\":\"\"}}";
             } else {
                 json_str = "{\"id\":" + cbg.getCat_id() + ",\"text\":\"" + FormatUtil.formatJsonStr(cbg.getCat_cname()) + "\",\"attributes\":{\"url\":\""
-                        + manager_page + "?app_id=" + cbg.getApp_id() + "&cat_id=" + cbg.getCat_id() + "\",\"handl\":\"\"}}";
+                        + manager_page + "?app_id=cms&cat_id=" + cbg.getCat_id() + "\",\"handl\":\"\"}}";
             }
         }
 
