@@ -6,11 +6,12 @@ import com.deya.wcm.bean.logs.SettingLogsBean;
 import com.deya.wcm.bean.zwgk.ysqgk.YsqgkBean;
 import com.deya.wcm.bean.zwgk.ysqgk.YsqgkConfigBean;
 import com.deya.wcm.bean.zwgk.ysqgk.YsqgkListBean;
+import com.deya.wcm.bean.zwgk.ysqgk.YsqgkProcessBean;
 import com.deya.wcm.dao.PublicTableDAO;
 import com.deya.wcm.dao.zwgk.ysqgk.YsqgkInfoDAO;
+import com.deya.wcm.dao.zwgk.ysqgk.YsqgkProessDAO;
 import com.deya.wcm.services.zwgk.node.GKNodeManager;
 
-import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -88,15 +89,31 @@ public class YsqgkInfoManager {
     }
 
     public static boolean updateStatus(Map<String, String> map, SettingLogsBean stl) {
-        if (map.size() > 0) {
-            if ("0".equals(map.get("dealtype"))) {
-                map.put("accept_dtime", DateUtil.getCurrentDateTime());
-                map.put("reply_dtime", "");
-            } else if ("1".equals(map.get("dealtype"))) {
-                map.put("reply_dtime", DateUtil.getCurrentDateTime());
-            } else if ("2".equals("dealtype")) {
-                map.put("accept_dtime", DateUtil.getCurrentDateTime());
+        if(Integer.parseInt(map.get("do_state"))>-2){
+            if (map.size() > 0) {
+                if ("0".equals(map.get("dealtype"))) {
+                    map.put("accept_dtime", DateUtil.getCurrentDateTime());
+                    map.put("reply_dtime", "");
+                } else if ("1".equals(map.get("dealtype"))) {
+                    map.put("reply_dtime", DateUtil.getCurrentDateTime());
+                } else if ("2".equals("dealtype")) {
+                    map.put("accept_dtime", DateUtil.getCurrentDateTime());
+                }
             }
+        }else{
+            YsqgkBean ysq = YsqgkInfoManager.getYsqgkBean(map.get("ysq_id"));
+            Map<String,String> proessMap = new HashMap<>();
+            proessMap.put("pro_id",PublicTableDAO.getIDByTableName("cs_gk_ysq_process")+"");
+            proessMap.put("ysq_id",ysq.getYsq_id()+"");
+            proessMap.put("do_dept",map.get("node_id"));
+            proessMap.put("do_dept_name",map.get("node_name"));
+            proessMap.put("old_dept",ysq.getNode_id());
+            proessMap.put("old_dept_name",ysq.getNode_name());
+            proessMap.put("pro_content",map.get("reply_content"));
+            proessMap.put("pro_dtime",DateUtil.getCurrentDateTime());
+            YsqgkProessDAO.insertYsqgkProess(proessMap);
+            map.remove("reply_content");
+            map.remove("do_state");
         }
         if (YsqgkInfoDAO.updateStatus(map, stl)) {
             return true;
@@ -139,5 +156,11 @@ public class YsqgkInfoManager {
     public static void main(String[] args) {
         String d = "2011-09-01 00:11:38";
         System.out.println(getYsqgkBeanForQuery("YSQ201202108488", "577200"));
+    }
+
+
+    public static List<YsqgkProcessBean> getYsqgkProessList(Map<String,String> m)
+    {
+        return YsqgkProessDAO.getYsqgkProessList(m);
     }
 }

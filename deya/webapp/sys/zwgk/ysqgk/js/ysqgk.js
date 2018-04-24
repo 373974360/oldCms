@@ -448,7 +448,12 @@ function insertProcess(pro_type,node_id,ysq_id)
 				dealMap.put("reply_user","");
 				dealMap.put("reply_type","");
 				dealMap.put("publish_state","0");		       		       	
-	}
+	}else if(pro_type == 3){
+        dealMap.put("reply_content",deal_content);
+        dealMap.put("node_id",$("#node_id").val());
+        dealMap.put("node_name",$("#node_name").val());
+        dealMap.put("do_state","-2");//转办信件
+    }
 	if(YsqgkRPC.updateStatus(dealMap))
 	{
 		top.msgAlert("操作成功!");

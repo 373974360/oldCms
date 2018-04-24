@@ -34,7 +34,9 @@ $(document).ready(function(){
 	YsqgkConfigBean = jsonrpc.YsqgkRPC.getYsqgkConfigBeanBySiteId(site_id);
 	
 	if(ysq_id != "" && ysq_id != "null" && ysq_id != null)
-    {		
+    {
+        getProcessList();
+        iniDoList();
 		defaultBean = YsqgkRPC.getYsqgkBean(ysq_id);
 		do_state = defaultBean.do_state;
 		if(defaultBean.final_status == -1){
@@ -139,6 +141,41 @@ function check_do_state(do_state){
 		default:break;
 	}
 }
+
+
+function iniDoList()
+{
+    $(".openAllContent").bind('click',function(){
+        if($(this).text()=="处理内容:全部展开")
+        {
+            $(this).text("处理内容:全部闭合");
+            $(".trContent").show(300);
+            $(".openContent").text("闭合详细");
+        }
+        else
+        {
+            $(this).text("处理内容:全部展开");
+            $(".trContent").hide(300);
+            $(".openContent").text("展开详细");
+        }
+    })
+
+    $(".openContent").bind('click',function(){
+        var tmpObj = $(this).parent().parent().next(".trContent");
+        if($(this).text()=="展开详细")
+        {
+            $(this).text("闭合详细");
+            $(tmpObj).show(300);
+        }
+        else
+        {
+            $(this).text("展开详细");
+            $(tmpObj).hide(300);
+        }
+    })
+}
+
+
 //信件处理开始
 function doVoid(id,pro_type)
 {
@@ -154,7 +191,8 @@ function doVoid(id,pro_type)
 	switch(pro_type)
 	{
 		case 0:$("div #sq_title_div").text("受理信件");	
-			   $("#common_deal_title").text("受理内容:");			   
+			   $("#common_deal_title").text("受理内容:");
+            	$("#zbdw_tr").hide();
 				break;
 		case 1:$("div #sq_title_div").text("回复信件");
 		       $("#common_deal_title").text("回复内容:");	
@@ -162,6 +200,10 @@ function doVoid(id,pro_type)
 			   $("#publish_status_tr").show();
 			   $("#replay_type_tr").show();
 			   $("#is_mail_tr").show();
+            	$("#weight_tr").show();
+            	$("#is_third").show();
+            	$("#is_extend").show();
+            	$("#zbdw_tr").hide();
 
 			   $("select[@name=reply_type] option").each(function(){
 					 if($(this).val() == 0)
@@ -171,6 +213,17 @@ function doVoid(id,pro_type)
 					 getType(1);					 
 				});
 			   break;
+
+        case 3:$("div #sq_title_div").text("转办信件");
+            $("#common_deal_title").text("转办意见:");
+            $("#publish_status_tr").hide();
+            $("#replay_type_tr").hide();
+            $("#is_mail_tr").hide();
+            $("#weight_tr").hide();
+            $("#is_third").hide();
+            $("#is_extend").hide();
+            $("#zbdw_tr").show();
+		break;
 		default:break;
 	}
     $("#submitButton").unbind("click").click(function(){
@@ -182,6 +235,46 @@ function doVoid(id,pro_type)
 function openPrintPage()
 {
 	window.open("print.jsp?ysq_id="+ysq_id+"&tm_id="+YsqgkConfigBean.template_print);
+}//往输入框里填写部门信息
+function setCpDept(id,name){
+    $("#node_id").val(id);
+    $("#node_name").val(name);
+}
+
+
+//得到流程列表
+function getProcessList()
+{
+    var pro_ids = "";
+    var pl = YsqgkRPC.getYsqgkProessList(ysq_id);
+    pl = List.toJSList(pl);
+    var str = "";
+    if(pl != null && pl.size() > 0)
+    {
+        for(var i=0;i<pl.size();i++)
+        {
+            str += '<tr class="trList">';
+            str += '<td align="center">'+(i+1)+'</td>';
+            str += '<td align="left">'+pl.get(i).old_dept_name+'</td>';
+            str += '<td align="center">'+pl.get(i).do_dept_name+'</td>';
+            str += '<td align="center">'+pl.get(i).pro_dtime+'</td>';
+            str += '<td align="left"><a class="openContent" href="javascript:void(0)">展开详细</a></td></tr>';
+            str += '<tr class="trContent hidden">';
+            str += '<td colspan="6">';
+            str += '<table class="table_noborder" border="0" cellpadding="0" cellspacing="0">';
+            str += '<tr>';
+            str += '<td width="80" align="right">处理内容:</td>';
+            str += '<td><div id="pro_node_'+pl.get(i).pro_id+'">'+pl.get(i).pro_content.replace(/\n/,"</br>")+'</div>';
+            str += '</td>';
+            str += '</tr>';
+            str += '</table>';
+            str += '</td>';
+            str += '</tr>';
+            pro_ids += ","+pl.get(i).pro_id;
+        }
+        $("#process_list").append(str);
+        pro_ids = pro_ids.substring(1);
+    }
 }
 
 </script>
@@ -357,7 +450,29 @@ function openPrintPage()
 </div>
 
 <span class="blank6"></span>
-<div class="line2h"></div>
+	<!--处理记录-->
+	<div class="sq_box">
+		<div class="sq_title_box" >
+			<div class="sq_title sq_title_minus">转办记录</div>
+			<div class="sq_title_right">点击闭合</div>
+		</div>
+		<div class="sq_box_content">
+			<table id="infoList" class="table_dolist" border="0" cellpadding="0" cellspacing="0">
+				<thead>
+				<tr>
+					<td width="25" align="center">序号</td>
+					<td align="left" width="100">处理部门</td>
+					<td width="100" align="center">移交部门</td>
+					<td width="120" align="center">处理时间</td>
+					<td align="left"><a class="openAllContent" href="javascript:void(0)">处理内容:全部展开</a></td>
+				</tr>
+				</thead>
+				<tbody id="process_list">
+
+				</tbody>
+			</table>
+		</div>
+	</div>
 <span class="blank6"></span>
 <!--操作按扭区-->
 <table  id="dealButton" class="table_option" border="0" cellpadding="0" cellspacing="0">
@@ -365,6 +480,7 @@ function openPrintPage()
 		<td align="left" valign="middle" style="text-indent:10px;">
 			<input id="btn165sl" name="btn1" type="button" onclick="doVoid('do_0',0)" value="受理" />
 			<input id="btn166hf" name="btn2" type="button" onclick="doVoid('do_0',1);" value="回复" />
+			<input id="btn165zb" name="btn5" type="button" onclick="doVoid('do_0',3)" value="转办" />
 			<input id="btn167wx" name="btn3" type="button" onclick="setWuxiao(node_id,ysq_id)" value="置为无效" />
 			<input id="btn167hf" name="btn2" type="button" onclick="openPrintPage()" value="打印" />
 			<input id="" name="btn4" type="button" onclick="top.tab_colseOnclick(top.curTabIndex)" value="返回" />
@@ -381,7 +497,16 @@ function openPrintPage()
 	</div>
 	<div class="sq_box_content">
 	<table id="" class="table_view" border="0" cellpadding="0" cellspacing="0">
-		<tbody>    
+		<tbody>
+			<tr id="zbdw_tr" style="display: table-row;">
+				<th id="zbdw_th">转办单位：</th>
+				<td>
+					<ul id="dept_list">
+						<input readonly="true" value="" id="node_name" name="node_name" class="input_text" type="text">
+						<input readonly="true" value="" id="node_id" name="node_id" class="input_text" type="hidden">
+						<input id="btn3" name="btn3" value="选择部门" onclick="openSelectCpDeptPage('选择部门','setCpDept')" class="btn x4 btn-over" type="button"></ul>
+				</td>
+			</tr>
 			<tr id="publish_status_tr">
 				<th>是否发布：</th>
 				<td>
@@ -391,7 +516,7 @@ function openPrintPage()
 				</ul>
 				</td>
 			</tr>           
-            <tr>
+            <tr id="is_third">
 				<th><nobr>征询第三方意见：</nobr></th>
 				<td>
 				<ul id="a123">
@@ -400,7 +525,7 @@ function openPrintPage()
 				</ul>
 				</td>
 			</tr>
-             <tr>
+             <tr id="is_extend">
 				<th><nobr>延长答复期限：</nobr></th>
 				<td>
 				<ul id="a123">

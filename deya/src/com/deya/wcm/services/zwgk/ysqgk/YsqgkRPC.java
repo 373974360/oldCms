@@ -1,13 +1,11 @@
 package com.deya.wcm.services.zwgk.ysqgk;
 
 import com.deya.wcm.bean.logs.SettingLogsBean;
-import com.deya.wcm.bean.zwgk.ysqgk.YsqgkBean;
-import com.deya.wcm.bean.zwgk.ysqgk.YsqgkConfigBean;
-import com.deya.wcm.bean.zwgk.ysqgk.YsqgkListBean;
-import com.deya.wcm.bean.zwgk.ysqgk.YsqgkPhrasalBean;
+import com.deya.wcm.bean.zwgk.ysqgk.*;
 import com.deya.wcm.services.Log.LogManager;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -286,6 +284,7 @@ public class YsqgkRPC {
 
     /**
      * 保存常用语排序
+     * 保存常用语排序
      *
      * @param String          gph_id
      * @param SettingLogsBean stl
@@ -300,4 +299,14 @@ public class YsqgkRPC {
         }
     }
     //依申请公开常用语结束****************************************s
+
+
+
+    public static List<YsqgkProcessBean> getYsqgkProessList(String ysq_id)
+    {
+        Map<String,String> map = new HashMap<>();
+        map.put("ysq_id",ysq_id);
+        return YsqgkInfoManager.getYsqgkProessList(map);
+    }
+
 }
