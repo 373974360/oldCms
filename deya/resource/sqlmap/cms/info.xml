@@ -55,6 +55,9 @@
         <if test="input_user != null">
             and ci.input_user = ${input_user}
         </if>
+        <if test="dept_user != null">
+            and ci.input_user in (${dept_user})
+        </if>
         <if test="is_host != null">
             and ci.is_host = ${is_host}
         </if>
@@ -433,6 +436,9 @@
         where ci.cat_id = ca.cat_id
         <if test="input_user != null">
             and ci.input_user = #{input_user}
+        </if>
+        <if test="dept_user != null">
+            and ci.input_user in (${dept_user})
         </if>
         <if test="site_id != null">
             and ci.site_id = #{site_id} and ci.site_id = ca.site_id

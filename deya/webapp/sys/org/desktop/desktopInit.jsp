@@ -91,6 +91,10 @@
                 sq_con_map.put("sort_type", "desc");
                 sq_con_map.put("site_id", det.getK_v());
                 sq_con_map.put("app_id", "cms");
+                String opt_ids = UserLogin.getOptIDSByUserAPPSite(user_id+"", "cms", det.getK_v());
+                if(opt_ids.indexOf("531") > -1){
+                    sq_con_map.put("dept_id",UserLogin.getUserBySession(request).getDept_id()+"");
+                }
                 Map<String, Object> return_map = InfoBaseRPC.getWaitVerifyInfoList(sq_con_map);
                 String info_count = return_map.get("info_count") + "";
                 List<InfoBean> list = (List<InfoBean>) return_map.get("info_List");

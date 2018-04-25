@@ -9,10 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import com.deya.wcm.bean.cms.info.InfoBean;
 import com.deya.wcm.bean.cms.info.RelatedInfoBean;
 import com.deya.wcm.bean.logs.SettingLogsBean;
+import com.deya.wcm.bean.org.user.UserBean;
 import com.deya.wcm.bean.org.user.UserRegisterBean;
 import com.deya.wcm.dao.cms.info.InfoDAO;
 import com.deya.wcm.rmi.file.FileRmiFactory;
 import com.deya.wcm.services.Log.LogManager;
+import com.deya.wcm.services.org.user.UserManager;
 
 /**
  * @author 符江波
@@ -179,6 +181,19 @@ public class InfoBaseRPC {
 	}
 
 	public static List<InfoBean> getInfoList(Map<String, String> map){
+
+		if(map.containsKey("dept_id")){
+			String dept_user="";
+			List<UserBean> list = UserManager.getUserListByDeptID(map.get("dept_id"));
+			if(!list.isEmpty()){
+				for(UserBean userBean:list){
+					dept_user+=userBean.getUser_id()+",";
+				}
+				dept_user = dept_user.substring(0,dept_user.length()-1);
+			}
+			map.put("dept_user",dept_user);
+			System.out.println("DEPT_USER===============>>>>>"+dept_user);
+		}
 		return InfoBaseManager.getInfoList(map);
 	}
 	
@@ -462,6 +477,18 @@ public class InfoBaseRPC {
      * */
 	public static Map<String,Object> getWaitVerifyInfoList(Map<String,String> m)
 	{
+		if(m.containsKey("dept_id")){
+			String dept_user="";
+			List<UserBean> list = UserManager.getUserListByDeptID(m.get("dept_id"));
+			if(!list.isEmpty()){
+				for(UserBean userBean:list){
+					dept_user+=userBean.getUser_id()+",";
+				}
+				dept_user = dept_user.substring(0,dept_user.length()-1);
+			}
+			m.put("dept_user",dept_user);
+			System.out.println("DEPT_USER===============>>>>>"+dept_user);
+		}
 		return InfoDesktop.getWaitVerifyInfoList(m);
 	}
 	

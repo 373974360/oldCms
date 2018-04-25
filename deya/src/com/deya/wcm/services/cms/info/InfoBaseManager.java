@@ -322,7 +322,7 @@ public class InfoBaseManager {
             String sql = "";
             if(category_ids == null || category_ids.trim().equals("")){
                 if(map.get("step_id") != null && !map.get("step_id").trim().equals("")){
-                    sql = " and ci.step_id="+map.get("step_id");
+                    //sql = " and ci.step_id="+map.get("step_id");
                 }
             }else{
                 if(category_ids.trim().startsWith(",")){

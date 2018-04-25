@@ -134,6 +134,10 @@ function showList(){
 	if(opt_ids.indexOf("508") > -1){
 		is_my_info = true;
 	}
+
+    if(opt_ids.indexOf("531") > -1){
+        m.put("dept_id",LoginUserBean.dept_id+"");
+    }
 	if(is_my_info)
 	{
 		m.put("input_user",LoginUserBean.user_id+"");
@@ -420,6 +424,10 @@ function showTurnPage(){
 	if(opt_ids.indexOf("508") > -1){
         	is_my_info = true;
     	}
+
+    if(opt_ids.indexOf("531") > -1){
+        m.put("dept_id",LoginUserBean.dept_id+"");
+    }
 	if(is_my_info)
 	{
 		m.put("input_user",LoginUserBean.user_id+"");
