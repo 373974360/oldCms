@@ -32,7 +32,7 @@
 				root    ${rootPath};  LINE_SEPARATOR
 				expires 30d;  LINE_SEPARATOR
 			}  LINE_SEPARATOR
-			location  /sys/  {  LINE_SEPARATOR
+			location ~ ^/sys/  {  LINE_SEPARATOR
 				alias    $manager_path$;  LINE_SEPARATOR
 				index login.jsp;  LINE_SEPARATOR
 				proxy_pass http://127.0.0.1:9999;  LINE_SEPARATOR
