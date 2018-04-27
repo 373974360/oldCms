@@ -110,7 +110,8 @@ public class UploadFileIfy extends HttpServlet {
                 if ((name != null) && (!name.trim().equals(""))) {
                     if (name.lastIndexOf(".") >= 0) {
                         extName = name.substring(name.lastIndexOf(".")).toLowerCase();
-                        if (NOTUPLOAT_FILE_EXT.contains("," + extName.substring(1) + ","))
+                        if (NOTUPLOAT_FILE_EXT.indexOf("," + extName.substring(1) + ",")>-1)
+                            System.out.println("+==========上传出错========+");
                             return;
                     }
                     File file = null;

@@ -106,8 +106,8 @@ public class BinaryUploader {
                             String s = str[i];
                             if(s!=null && !"".equals(s)){
                                 s = s.toString();
-                                result = extName.toLowerCase().contains(s);
-                                if(result){
+                                if(extName.toLowerCase().indexOf(s)>-1){
+                                    System.out.println("+==========上传出错========+");
                                     break;
                                 }
                             }
