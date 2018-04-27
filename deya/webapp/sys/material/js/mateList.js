@@ -447,7 +447,7 @@ function showMateInfosList(f_id,site_id,ctype,imgDomain,page_size,time)
 	for(var i=0;i<beanList.size();i++)
 	{
 		// var t_att_ename = imgDomain+beanList.get(i).att_path + beanList.get(i).att_ename;
-        var t_att_ename = "http://www.cdzfgjj.gov.cn"+beanList.get(i).att_path + beanList.get(i).att_ename;
+        var t_att_ename = "http://www.dtgjj.gov.cn"+beanList.get(i).att_path + beanList.get(i).att_ename;
 		var t_thumb_url = imgDomain+beanList.get(i).att_path + beanList.get(i).att_ename;
 		var temp_name = beanList.get(i).alias_name.subString2(5);
 		var full_name = beanList.get(i).alias_name;

@@ -704,7 +704,7 @@ function openViewPage(i_id) {
     if(i_id.indexOf("http://")>=0 || i_id.indexOf("https://")>=0){
         parent.addTab(true, i_id, "查看信息");
     }else{
-        parent.addTab(true, "http://www.cdzfgjj.gov.cn" + i_id, "查看信息");
+        parent.addTab(true, "http://www.dtgjj.gov.cn" + i_id, "查看信息");
     }
 
 }
@@ -1041,7 +1041,7 @@ function doView(num) {
     }
     else {
         //window.open(SiteRPC.getDefaultSiteDomainBySiteID(getRealSiteIDByApp(beanList.get(num).app_id,beanList.get(num).site_id))+url);
-        window.open("http://www.cdzfgjj.gov.cn" + url);
+        window.open("http://www.dtgjj.gov.cn" + url);
     }
 }
 
