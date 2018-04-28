@@ -10,6 +10,7 @@ import com.deya.wcm.bean.zwgk.ysqgk.YsqgkProcessBean;
 import com.deya.wcm.dao.PublicTableDAO;
 import com.deya.wcm.dao.zwgk.ysqgk.YsqgkInfoDAO;
 import com.deya.wcm.dao.zwgk.ysqgk.YsqgkProessDAO;
+import com.deya.wcm.services.appeal.cpUser.CpUserManager;
 import com.deya.wcm.services.zwgk.node.GKNodeManager;
 
 import java.util.HashMap;
@@ -55,8 +56,9 @@ public class YsqgkInfoManager {
         return YsqgkInfoDAO.getYsqgkBeanForQuery(m);
     }
 
-    public static List<YsqgkListBean> getYsqgkLists(Map<String, String> m) {
+    public static List<YsqgkListBean> getYsqgkLists(Map<String, String> m,int user_id) {
         setTimeCon(m);
+        m.put("dept_id",CpUserManager.getSQDeptIDbyUserID(user_id) + "");
         return YsqgkInfoDAO.getYsqgkLists(m);
     }
 
@@ -76,8 +78,9 @@ public class YsqgkInfoManager {
         }
     }
 
-    public static int getYsqgkListsCount(Map<String, String> m) {
+    public static int getYsqgkListsCount(Map<String, String> m,int user_id) {
         setTimeCon(m);
+        m.put("dept_id",CpUserManager.getSQDeptIDbyUserID(user_id) + "");
         return YsqgkInfoDAO.getYsqgkListsCount(m);
     }
 

@@ -164,6 +164,9 @@
 					<if test="node_id != null">
 						and node_id = '${node_id}'
 					</if>
+					<if test="dept_id != null">
+						and node_id in (${dept_id})
+					</if>
 					<if test="do_state != null">
 						and do_state = ${do_state}
 					</if>
@@ -338,6 +341,9 @@
 					</if>
 					<if test="node_id != null">
 						and node_id = '${node_id}'
+					</if>
+					<if test="dept_id != null">
+						and node_id in (${dept_id})
 					</if>
                     <if test="kw != null">
                         and (name like '%${kw}%' or content like '%${kw}%')

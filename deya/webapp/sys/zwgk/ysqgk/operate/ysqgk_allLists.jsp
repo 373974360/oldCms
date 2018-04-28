@@ -17,9 +17,6 @@
 	<script type="text/javascript" src="../js/allysqgk.js"></script>
 	<script type="text/javascript">
         var node_id = null;
-        if(LoginUserBean.dept_id>1){
-            node_id = LoginUserBean.dept_id;
-		}
         var app_id = "zwgk";
         var site_id = "<%=site_id%>";
         var snum = "<%=request.getParameter("snum")%>";

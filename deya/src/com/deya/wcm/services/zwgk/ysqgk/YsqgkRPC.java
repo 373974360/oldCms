@@ -3,6 +3,7 @@ package com.deya.wcm.services.zwgk.ysqgk;
 import com.deya.wcm.bean.logs.SettingLogsBean;
 import com.deya.wcm.bean.zwgk.ysqgk.*;
 import com.deya.wcm.services.Log.LogManager;
+import com.deya.wcm.services.org.user.UserLogin;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -90,8 +91,8 @@ public class YsqgkRPC {
      * @return List
      */
     @SuppressWarnings("unchecked")
-    public static List<YsqgkListBean> getYsqgkLists(Map<String, String> m) {
-        return YsqgkInfoManager.getYsqgkLists(m);
+    public static List<YsqgkListBean> getYsqgkLists(Map<String, String> m,HttpServletRequest request) {
+        return YsqgkInfoManager.getYsqgkLists(m, UserLogin.getUserBySession(request).getUser_id());
     }
 
     /**
@@ -100,8 +101,8 @@ public class YsqgkRPC {
      * @param map
      * @return int
      */
-    public static int getYsqgkListsCount(Map<String, String> m) {
-        return YsqgkInfoManager.getYsqgkListsCount(m);
+    public static int getYsqgkListsCount(Map<String, String> m,HttpServletRequest request) {
+        return YsqgkInfoManager.getYsqgkListsCount(m, UserLogin.getUserBySession(request).getUser_id());
     }
 
 
