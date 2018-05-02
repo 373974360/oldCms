@@ -704,7 +704,10 @@ function openViewPage(i_id) {
     if(i_id.indexOf("http://")>=0 || i_id.indexOf("https://")>=0){
         parent.addTab(true, i_id, "查看信息");
     }else{
-        parent.addTab(true, "http://www.dtgjj.gov.cn" + i_id, "查看信息");
+        var SiteRPC = jsonrpc.SiteRPC;
+        var domain_url = SiteRPC.getDefaultSiteDomainBySiteID(site_id);
+        // parent.addTab(true, "http://www.dtgjj.gov.cn" + i_id, "查看信息");
+        parent.addTab(true, domain_url + i_id, "查看信息");
     }
 
 }
@@ -1041,7 +1044,9 @@ function doView(num) {
     }
     else {
         //window.open(SiteRPC.getDefaultSiteDomainBySiteID(getRealSiteIDByApp(beanList.get(num).app_id,beanList.get(num).site_id))+url);
-        window.open("http://www.dtgjj.gov.cn" + url);
+        var domain_url = SiteRPC.getDefaultSiteDomainBySiteID(getRealSiteIDByApp(beanList.get(num).app_id,beanList.get(num).site_id));
+        // window.open("http://www.dtgjj.gov.cn" + url);
+        window.open(domain_url + url);
     }
 }
 

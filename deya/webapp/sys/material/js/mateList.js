@@ -444,10 +444,14 @@ function showMateInfosList(f_id,site_id,ctype,imgDomain,page_size,time)
 		$("#sucaiList").append(tmpstr);
 	}
 	var tmpLi="";
+    var SiteRPC = jsonrpc.SiteRPC;
+    var domain_url = SiteRPC.getDefaultSiteDomainBySiteID(beanList.get(0).site_id);
 	for(var i=0;i<beanList.size();i++)
 	{
 		// var t_att_ename = imgDomain+beanList.get(i).att_path + beanList.get(i).att_ename;
-        var t_att_ename = "http://www.dtgjj.gov.cn"+beanList.get(i).att_path + beanList.get(i).att_ename;
+
+        // var t_att_ename = "http://www.dtgjj.gov.cn"+beanList.get(i).att_path + beanList.get(i).att_ename;
+        var t_att_ename = domain_url+beanList.get(i).att_path + beanList.get(i).att_ename;
 		var t_thumb_url = imgDomain+beanList.get(i).att_path + beanList.get(i).att_ename;
 		var temp_name = beanList.get(i).alias_name.subString2(5);
 		var full_name = beanList.get(i).alias_name;

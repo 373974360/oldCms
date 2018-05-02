@@ -22,8 +22,8 @@ var site_id = "<%=site_id%>";
 if(site_id == null || site_id == "null")
 	site_id = "";
 
-//var domain_url = SiteRPC.getDefaultSiteDomainBySiteID(site_id);
-var domain_url = "http://www.dtgjj.gov.cn";
+var domain_url = SiteRPC.getDefaultSiteDomainBySiteID(site_id);
+//var domain_url = "http://www.dtgjj.gov.cn";
 $(document).ready(function(){
 	initButtomStyle();
 	init_input();
