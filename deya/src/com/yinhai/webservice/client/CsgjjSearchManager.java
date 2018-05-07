@@ -1,12 +1,8 @@
 package com.yinhai.webservice.client;
 
-import com.deya.util.Encode;
-import com.deya.wcm.dataCollection.util.FormatString;
-import com.deya.wcm.services.org.user.SessionManager;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
-import org.jdom.Namespace;
 import org.jdom.input.SAXBuilder;
 import org.xml.sax.InputSource;
 
@@ -15,13 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.StringReader;
-import java.net.URL;
-
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.StringReader;
 import java.net.HttpURLConnection;
-import java.net.URLDecoder;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
