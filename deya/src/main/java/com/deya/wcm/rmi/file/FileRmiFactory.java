@@ -618,5 +618,28 @@ public class FileRmiFactory {
 			}
 		}
 	}
+
+	/**
+	 * 删除信息
+	 * @param List<InfoBean> l
+	 * @throws IOException
+	 */
+	public static boolean backInfo(String rmi_site_id,String info_ids, SettingLogsBean stl)
+	{
+		if(SiteServerManager.IS_MUTILPUBLISHSERVER == false || SiteServerManager.isTheSameServer(rmi_site_id))
+		{
+			return InfoBaseManager.backInfo(info_ids,stl);
+		}else
+		{
+			IFileRmi ifr = getFileRmiObj(rmi_site_id);
+			try {
+				return ifr.backInfo(info_ids,stl);
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return false;
+			}
+		}
+	}
 	
 }

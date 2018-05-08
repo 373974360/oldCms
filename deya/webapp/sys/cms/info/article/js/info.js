@@ -26,7 +26,7 @@ var table = new Table();
 table.table_name = "info_article_table";
 var infoIdGoble = 0;
 var infoStatus = "8";
-var finalStatus = "0";
+var finalStatus = "99";
 var stepID = "100";
 var subNode = false;
 var current_page_num = 1;
@@ -151,7 +151,7 @@ function showList() {
     if (finalStatus != "none") {
         m.put("final_status", finalStatus);
     } else {
-        m.put("final_status", "0");
+        m.put("final_status", "99");
     }
 
     if (tj != "") {
@@ -449,7 +449,7 @@ function showTurnPage() {
     if (finalStatus != "none") {
         m.put("final_status", finalStatus);
     } else {
-        m.put("final_status", "0");
+        m.put("final_status", "99");
     }
 
     if (tj != "") {
@@ -535,7 +535,7 @@ function clickLabelHandl(num) {
         case 0:
             infoStatus = "8";
             stepID = "100";
-            finalStatus = "0";
+            finalStatus = "99";
             search_steps = "";
             break;
         /*
@@ -549,7 +549,7 @@ function clickLabelHandl(num) {
         case 1:
             infoStatus = "3";
             stepID = "100";
-            finalStatus = "0";
+            finalStatus = "99";
             search_steps = "";
             break;
         case 2:
@@ -564,7 +564,7 @@ function clickLabelHandl(num) {
             }
             infoStatus = "2";
             getTheLeafNodes();
-            finalStatus = "0";
+            finalStatus = "99";
             break;
         case 3:
             infoStatus = "2";
@@ -574,19 +574,19 @@ function clickLabelHandl(num) {
                 stepID = temp_step_id - 1 + "";
             }
             getTheLeafNodes();
-            finalStatus = "0";
+            finalStatus = "99";
             is_my_info = true;
             break;
         case 4:
             infoStatus = "1";
             stepID = "0";
-            finalStatus = "0";
+            finalStatus = "99";
             search_steps = "";
             break;
         case 5:
             infoStatus = "0";
             stepID = "";
-            finalStatus = "0";
+            finalStatus = "99";
             search_steps = "";
             break;
         case 6:
@@ -594,6 +594,12 @@ function clickLabelHandl(num) {
             finalStatus = "-1";
             search_steps = "";
             stepID = "";
+            break;
+        case 7:
+            infoStatus = "8";
+            stepID = "100";
+            finalStatus = "0";
+            search_steps = "";
             break;
     }
 }
@@ -740,17 +746,6 @@ function cancleInfo() {
         parent.msgWargin("信息撤销失败");
     }
 }
-
-//信息归档
-function backInfo() {
-    var selectIDS = table.getSelecteCheckboxValue("info_id");
-    if (InfoBaseRPC.backInfo(selectIDS)) {
-        parent.msgAlert("信息归档成功");
-        reloadInfoDataList();
-    } else {
-        parent.msgWargin("信息归档失败");
-    }
-}
 /*
  //信息还原
  function goBackInfo(){
@@ -772,6 +767,18 @@ function deleteInfoData() {
         reloadInfoDataList();
     } else {
         parent.msgWargin("信息" + WCMLang.Delete_fail);
+    }
+}
+
+//信息归档
+function backInfoData() {
+    var selectList = table.getSelecteBeans();
+
+    if (InfoBaseRPC.backInfo(selectList)) {
+        parent.msgAlert("信息" + WCMLang.ArchiveStatus_success);
+        reloadInfoDataList();
+    } else {
+        parent.msgWargin("信息" + WCMLang.ArchiveStatus_fail);
     }
 }
 

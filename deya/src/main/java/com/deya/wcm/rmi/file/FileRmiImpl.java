@@ -284,4 +284,14 @@ public class FileRmiImpl extends UnicastRemoteObject implements IFileRmi{
 	{
 		return InfoBaseManager.deleteInfo(l,stl);
 	}
+
+	/**
+	 * 归档信息
+	 * @param List<InfoBean> l
+	 * @throws IOException
+	 */
+	@Override
+	public boolean backInfo(String info_ids, SettingLogsBean stl) throws RemoteException {
+		return InfoBaseManager.backInfo(info_ids,stl);
+	}
 }

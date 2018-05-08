@@ -484,8 +484,11 @@
         <if test="info_status != null">
             and ci.info_status = ${info_status}
         </if>
-        <if test="final_status != null">
-            and ci.final_status = ${final_status}
+        <if test="final_status != null and final_status == '99'">
+            and ci.final_status in (0,1)
+        </if>
+        <if test="final_status != null and final_status != '99'">
+            and ci.final_status  = ${final_status}
         </if>
         <if test="cat_id != null">
             and ci.cat_id = ${cat_id}

@@ -1,90 +1,89 @@
 <%@ page contentType="application/json; charset=utf-8"%>
-<%@ page language="java" import="java.util.*,com.deya.wcm.services.cms.info.*,org.w3c.dom.Node,com.deya.util.xml.*,com.deya.wcm.bean.template.TurnPageBean" %>
-<%@page import="com.deya.wcm.bean.cms.info.*,com.deya.wcm.services.system.formodel.*,com.deya.wcm.services.zwgk.info.*,com.deya.wcm.bean.cms.category.CategoryBean"%>
-<%@page import="com.deya.util.*,com.deya.wcm.template.velocity.data.*,com.deya.wcm.bean.appeal.sq.*,com.deya.wcm.services.appeal.sq.*"%>
-<%@page import="org.apache.ibatis.session.SqlSession,java.net.*,java.io.*,com.deya.wcm.bean.system.formodel.*,com.deya.wcm.bean.interview.*,com.deya.wcm.services.cms.category.CategoryManager"%><%@ page import="com.deya.wcm.services.model.services.InfoCustomService"%><%@ page import="org.json.JSONObject"%><%@ page import="org.json.JSONException"%><%@ page import="com.deya.wcm.services.search.search.SearchManager"%><%@ page import="com.deya.wcm.bean.search.ResultBean"%>
+<%@ page language="java" import="com.deya.util.FormatUtil,com.deya.wcm.bean.appeal.sq.SQBean,com.deya.wcm.bean.cms.category.CategoryBean,com.deya.wcm.bean.cms.info.*,com.deya.wcm.bean.interview.SubjectActor" %>
+<%@page import="com.deya.wcm.bean.interview.SubjectBean,com.deya.wcm.bean.search.ResultBean,com.deya.wcm.bean.system.formodel.ModelBean,com.deya.wcm.bean.template.TurnPageBean"%>
+<%@page import="com.deya.wcm.services.appeal.sq.SQManager,com.deya.wcm.services.cms.category.CategoryManager,com.deya.wcm.services.cms.info.InfoBaseManager,com.deya.wcm.services.cms.info.ModelUtil"%>
+<%@page import="com.deya.wcm.services.model.services.InfoCustomService,com.deya.wcm.services.search.search.SearchManager,com.deya.wcm.services.system.formodel.ModelManager,com.deya.wcm.services.zwgk.info.GKInfoManager,com.deya.wcm.template.velocity.data.AppealData,com.deya.wcm.template.velocity.data.InfoUtilData"%><%@ page import="com.deya.wcm.template.velocity.data.InterViewData"%><%@ page import="org.json.JSONException"%><%@ page import="org.json.JSONObject"%><%@ page import="java.util.*"%>
 <%
-String action_type = request.getParameter("action_type");
-String result = "";
-if("news_list".equals(action_type))
-{
-	result = getNewsList(request);
-}
-if("news_count".equals(action_type))
-{
-	result = getNewsListCount(request);
-}
-if("newsPic_count".equals(action_type))
-{
-	result = getNewsPicCount(request);
-}
-if("newsPic_list".equals(action_type))
-{
-	result = getNewsPicList(request);
-}
-if("cmsLd_list".equals(action_type))
-{
-	result = getCmsLdInfoList(request);
-}
-if("news_content".equals(action_type))
-{
-	result = getNewsContent(request);
-}
-if("gkShared_list".equals(action_type))
-{
-	result = getGkSharedInfoList(request);
-}
-if("gkShared_count".equals(action_type))
-{
-	result = getGkSharedInfoCount(request);
-}
-if("gk_list".equals(action_type))
-{
-	result = getGkInfoList(request);
-}
-if("ld_list".equals(action_type))
-{
-	result = getLdInfoList(request);
-}
-if("gk_count".equals(action_type))
-{
-	result = getGkInfoCount(request);
-}
-if("fw_list".equals(action_type))
-{
-	result = getFWInfoList(request);
-}
-if("sq_list".equals(action_type))
-{
-	result = getSQInfoList(request);
-}
-if("sq_content".equals(action_type))
-{
-	result = getSQContent(request);
-}
-if("ft_list".equals(action_type))
-{
-	result = getFTInfoList(request);
-}
-if("cat_list".equals(action_type))
-{
-	result = getChildCategoryList(request);
-}
-if("custom_info".equals(action_type))
-{
-	result = getCustomInfoMap(request);
-}
-if("isToudi".equals(action_type))
-{
-	result = isToudi(request);
-}
-if("searchInfo".equals(action_type))
-{
-	result = searchInfo(request);
-}
+    String action_type = request.getParameter("action_type");
+    String result = "";
+    if("news_list".equals(action_type))
+    {
+        result = getNewsList(request);
+    }
+    if("news_count".equals(action_type))
+    {
+        result = getNewsListCount(request);
+    }
+    if("newsPic_count".equals(action_type))
+    {
+        result = getNewsPicCount(request);
+    }
+    if("newsPic_list".equals(action_type))
+    {
+        result = getNewsPicList(request);
+    }
+    if("cmsLd_list".equals(action_type))
+    {
+        result = getCmsLdInfoList(request);
+    }
+    if("news_content".equals(action_type))
+    {
+        result = getNewsContent(request);
+    }
+    if("gkShared_list".equals(action_type))
+    {
+        result = getGkSharedInfoList(request);
+    }
+    if("gkShared_count".equals(action_type))
+    {
+        result = getGkSharedInfoCount(request);
+    }
+    if("gk_list".equals(action_type))
+    {
+        result = getGkInfoList(request);
+    }
+    if("ld_list".equals(action_type))
+    {
+        result = getLdInfoList(request);
+    }
+    if("gk_count".equals(action_type))
+    {
+        result = getGkInfoCount(request);
+    }
+    if("fw_list".equals(action_type))
+    {
+        result = getFWInfoList(request);
+    }
+    if("sq_list".equals(action_type))
+    {
+        result = getSQInfoList(request);
+    }
+    if("sq_content".equals(action_type))
+    {
+        result = getSQContent(request);
+    }
+    if("ft_list".equals(action_type))
+    {
+        result = getFTInfoList(request);
+    }
+    if("cat_list".equals(action_type))
+    {
+        result = getChildCategoryList(request);
+    }
+    if("custom_info".equals(action_type))
+    {
+        result = getCustomInfoMap(request);
+    }
+    if("isToudi".equals(action_type))
+    {
+        result = isToudi(request);
+    }
+    if("searchInfo".equals(action_type))
+    {
+        result = searchInfo(request);
+    }
 
-out.println(result);
-
+    out.println(result);
 %>
 <%!
 

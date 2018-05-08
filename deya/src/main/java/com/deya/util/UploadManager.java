@@ -154,6 +154,36 @@ public class UploadManager {
     }
 
     /**
+     * 根据站点ID得到附件的保存全路径
+     *
+     * @param String site_id
+     *            站点ID
+     * @param return
+     *            路径
+     */
+    public static String getUploadSavePath(String site_id)
+    {
+        String savePath = "";
+        if ((img_domain != null) && (!"".equals(img_domain.trim())))
+        {
+            savePath = FormatUtil.formatPath(public_save_path);
+        }
+        else
+        {
+            if(public_path != null && !"".equals(public_path))
+            {
+                savePath = FormatUtil.formatPath(public_path);
+            }
+            else
+            {
+                savePath = hostRoot_path + "/" + SiteDomainManager.getDefaultSiteDomainBySiteID(site_id) + "/ROOT";
+            }
+
+        }
+        return savePath;
+    }
+
+    /**
      * 根据站点ID得到附件的保存路径
      *
      * @param String site_id

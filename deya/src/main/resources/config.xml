@@ -119,4 +119,13 @@
         <property name="certcode" value="yhadmin"/>
     </category>
 
+    <category name="sftp">
+        <property name="pdfdir" value="/deya/pdf/"/>
+        <property name="ip" value="35.10.28.126"/>
+        <property name="port" value="22"/>
+        <property name="user" value="sxuser"/>
+        <property name="password" value="111111"/>
+        <property name="dpath" value="/home/cqgjjuser/sxuser/MHfiles"/>
+    </category>
+
 </properties>

@@ -105,6 +105,7 @@
                     $(":button[id='btn305']").hide();
                     $(":button[id='btn306']").hide();
                     $(":button[id='btn307']").hide();
+                    $(":button[id='btn999']").hide();
                 }
                 //撤销信息
                 if("unPublishInfo" == sso_method_cookie_value){
@@ -115,6 +116,7 @@
                     $(":button[id='btn305']").hide();
                     $(":button[id='btn306']").hide();
                     $(":button[id='btn332']").hide();
+                    $(":button[id='btn999']").hide();
                 }
                 //已撤销信息
                 if("unPublishedInfo" == sso_method_cookie_value){
@@ -125,6 +127,7 @@
                     $(":button[id='btn305']").hide();
                     $(":button[id='btn306']").hide();
                     $(":button[id='btn332']").hide();
+                    $(":button[id='btn999']").hide();
                 }
                 //审核信息
                 if("checkInfo" == sso_method_cookie_value){
@@ -154,6 +157,7 @@
                     $(":button[id='btn306']").hide();
                     $(":button[id='btn307']").hide();
                     $(":button[id='btn332']").hide();
+                    $(":button[id='btn999']").hide();
                 }
                 //移动信息
                 if("moveInfo" == sso_method_cookie_value){
@@ -163,12 +167,26 @@
                     $(":button[id='btn305']").hide();
                     $(":button[id='btn307']").hide();
                     $(":button[id='btn332']").hide();
+                    $(":button[id='btn999']").hide();
                 }
                 //推送信息
                 if("pushInfo" == sso_method_cookie_value){
                     $(".pushInfo").css("display","inline-block");
                     $(".infoListTable").removeClass("hidden");
                     $(":button[id='btn404']").hide();
+                    $(":button[id='btn306']").hide();
+                    $(":button[id='btn307']").hide();
+                    $(":button[id='btn332']").hide();
+                    $(":button[id='btn999']").hide();
+                }
+
+                //归档信息
+                if("backInfo" == sso_method_cookie_value){
+                    $(".list_tab").eq(7).click();
+                    $(".backInfo").css("display","inline-block");
+                    $(".infoListTable").removeClass("hidden");
+                    $(":button[id='btn404']").hide();
+                    $(":button[id='btn305']").hide();
                     $(":button[id='btn306']").hide();
                     $(":button[id='btn307']").hide();
                     $(":button[id='btn332']").hide();
@@ -294,6 +312,11 @@
 							<div class="tab_right">回收站</div>
 						</div>-->
 					</li>
+					<li class="hidden list_tab backInfo">
+						<!--<div class="tab_left">
+							<div class="tab_right">待归档</div>
+						</div>-->
+					</li>
 				</ul>
 			</td>
 		</tr>
@@ -310,6 +333,7 @@
 					<input class="moveInfo" id="btn306" name="btn3" type="button" onclick="publicSelectCheckbox(table,'info_id','openWindowForMov()');" value="移动" />
 					<input class="unPublishInfo" id="btn307" name="btn5" type="button" onclick="cancleInfo()" value="撤销" />
 					<input class="delInfo" id="btn332" name="btn4" type="button" onclick="deleteRecord(table,'info_id','deleteInfoData()');" value="删除" />
+					<input class="backInfo" id="btn999" name="btn9" type="button" onclick="backRecord(table,'info_id','backInfoData()');" value="归档" />
 				</td>
 			</tr>
 		</table>

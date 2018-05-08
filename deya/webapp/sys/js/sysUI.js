@@ -254,6 +254,36 @@ function deleteRecord(table_obj,value_name,handl_name)
 	}
 }
 
+/*归档所调用的方法,
+@param table_obj  table对象
+@param value_name 要提取的ID属性名称
+@param handl_name 成功后要执行的函数名
+*/
+function backRecord(table_obj,value_name,handl_name)
+{
+    var selectIDS = table_obj.getSelecteCheckboxValue(value_name);
+
+    if(selectIDS == "" || selectIDS == null)
+    {
+        try{
+            msgWargin(WCMLang.Select_empty);
+            return false;
+        }catch (e){
+            parent.msgWargin(WCMLang.Select_empty);
+            return false;
+        }
+    }else
+    {
+        try{
+            msgConfirm(WCMLang.ArchiveStatus_confirm,handl_name);
+            return false;
+        }catch (e){
+            parent.msgConfirm(WCMLang.ArchiveStatus_confirm,handl_name);
+            return false;
+        }
+    }
+}
+
 function deleteSinglRecord(table_obj,value_name,handl_name)
 {
 	var selectIDS = table_obj.getSelecteCheckboxValue(value_name);

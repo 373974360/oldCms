@@ -31,6 +31,7 @@ var WCMLang =
 	Set_fail: "设置失败，请重新设置",
 
 	//
+    ArchiveStatus_confirm:"确定要归档选中的记录？",
 	ArchiveStatus_success : "归档状态设置成功",
     ArchiveStatus_fail:"归档状态设置失败",
 

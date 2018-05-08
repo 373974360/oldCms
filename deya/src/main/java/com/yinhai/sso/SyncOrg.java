@@ -42,13 +42,9 @@ public class SyncOrg {
     public static void initParams() {
         wsdlUrl = JconfigUtilContainer.bashConfig().getProperty("syncOrgOrUserUrl", "", "sso");
         reqident = JconfigUtilContainer.bashConfig().getProperty("reqident", "", "sso");
-        ;
         forgcode = JconfigUtilContainer.bashConfig().getProperty("forgcode", "", "sso");
-        ;
         torgcode = JconfigUtilContainer.bashConfig().getProperty("torgcode", "", "sso");
-        ;
         certcode = JconfigUtilContainer.bashConfig().getProperty("certcode", "", "sso");
-        ;
     }
 
     public static String getparamValue(Integer type) {

@@ -143,5 +143,12 @@ public interface IFileRmi extends Remote{
 	 * @throws IOException 
 	 */
 	public boolean deleteInfo(List<InfoBean> l, SettingLogsBean stl)throws RemoteException;
+
+	/**
+	 * 归档信息
+	 * @param List<InfoBean> l
+	 * @throws IOException
+	 */
+	public boolean backInfo(String info_ids, SettingLogsBean stl)throws RemoteException;
 	
 }

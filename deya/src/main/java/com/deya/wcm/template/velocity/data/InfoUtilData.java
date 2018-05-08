@@ -1011,6 +1011,26 @@ public class InfoUtilData {
     }
 
     /**
+     * 根据信息ID,得到组图模型对象
+     * @param String info_id
+     * @return ArticleBean
+     */
+    public static PicBean getPicObject(String info_id)
+    {
+        return (PicBean)ModelUtil.select(info_id, "", "pic");
+    }
+
+    /**
+     * 根据信息ID,得到组图模型对象
+     * @param String info_id
+     * @return ArticleBean
+     */
+    public static VideoBean getVideoObject(String info_id)
+    {
+        return (VideoBean)ModelUtil.select(info_id, "", "video");
+    }
+
+    /**
      * 根据信息ID,得到自定义模型对象 --
      * @param String info_id
      * @return ArticleBean
