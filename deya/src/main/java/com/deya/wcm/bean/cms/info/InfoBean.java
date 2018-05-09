@@ -71,7 +71,6 @@ public class InfoBean  implements java.io.Serializable,Cloneable{
     protected String info_level = "";//稿件评级
     protected String isIpLimit = "";//是否IP限制
 	protected String publish_source = "";//发布渠道
-	private int file_status = 0;
 	protected int wxhits = 0;// bigint 20
 	protected int wxday_hits = 0;// bigint 20
 	protected int wxweek_hits = 0;// bigint 20
@@ -533,13 +532,5 @@ public class InfoBean  implements java.io.Serializable,Cloneable{
 
 	public void setAppmonth_hits(int appmonth_hits) {
 		this.appmonth_hits = appmonth_hits;
-	}
-
-	public int getFile_status() {
-		return file_status;
-	}
-
-	public void setFile_status(int file_status) {
-		this.file_status = file_status;
 	}
 }

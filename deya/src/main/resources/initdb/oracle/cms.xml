@@ -441,8 +441,7 @@
 					istop      number(4) default 0,
 					info_level varchar2(4),
 					isIpLimit varchar2(4),
-					publish_source varchar2(255),
-					file_status number(4) default 0
+					publish_source varchar2(255)
 				)
 
 		   ]]> 

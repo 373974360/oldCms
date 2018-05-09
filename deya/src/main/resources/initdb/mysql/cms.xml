@@ -413,8 +413,7 @@
 					istop      int(4) default 0,
 					info_level varchar(4) default '',
 					isIpLimit varchar(4) default '',
-					publish_source varchar(255),
-					file_status int(4) default 0
+					publish_source varchar(255)
 				)
 
 		   ]]> 

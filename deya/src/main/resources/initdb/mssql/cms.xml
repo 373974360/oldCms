@@ -412,8 +412,7 @@
 					tupage_num			int default 1000,
 					istop           int default 0,
 					info_level varchar(4) default '',
-					isIpLimit varchar(4) default '',
-					file_status int default 0
+					isIpLimit varchar(4) default ''
 				)
 
 		   ]]> 
