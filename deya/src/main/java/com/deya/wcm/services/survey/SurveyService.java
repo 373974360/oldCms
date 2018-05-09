@@ -407,6 +407,25 @@ public class SurveyService implements ISyncCatch{
 		else
 			return false;
 	}
+
+	/**
+	 * 归档问卷
+	 * @param String ids
+	 * @param String user_name
+	 * @return boolean　true or false
+	 * */
+	public static boolean backSurvey(String ids,SettingLogsBean stl)
+	{
+		Map<String,String> m = new HashMap<String,String>();
+		m.put("ids", ids);
+		if(SurveyDAO.backSurvey(m,stl))
+		{
+			reLoadSurveyBean();
+			return true;
+		}
+		else
+			return false;
+	}
 	
 	public static void main(String[] args)
 	{

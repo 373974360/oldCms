@@ -53,8 +53,9 @@ public class SurveyBean implements IBean,java.io.Serializable{
 	private String is_end = "0";//是否截止，不做为表字段 0为进行状态　1为截止状态
 	private String site_id = ""; 
 	private int is_checkcode = 1;//是否需要验证码  0;1
-	
-	
+
+	private int back_status = 0;
+
 	public int getIs_checkcode() {
 		return is_checkcode;
 	}
@@ -317,5 +318,13 @@ public class SurveyBean implements IBean,java.io.Serializable{
 
 	public void setIs_end(String is_end) {
 		this.is_end = is_end;
+	}
+
+	public int getBack_status() {
+		return back_status;
+	}
+
+	public void setBack_status(int back_status) {
+		this.back_status = back_status;
 	}
 }

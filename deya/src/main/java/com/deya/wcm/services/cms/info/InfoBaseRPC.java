@@ -233,7 +233,10 @@ public class InfoBaseRPC {
                     site_id = infoBean.getSite_id();
                 }
             }
-            if (ArticleToPdf.backInfo(request, info_ids)) {
+            if(info_ids.length() > 0){
+                info_ids = info_ids.substring(1);
+            }
+            if (ArticleToPdf.toPdf(request, info_ids)) {
                 return FileRmiFactory.backInfo(site_id, info_ids, stl);
             } else {
                 return false;

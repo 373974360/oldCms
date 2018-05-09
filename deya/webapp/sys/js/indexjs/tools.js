@@ -12,6 +12,7 @@ var myPlatform_jsonData;//我的平台树字符串
 var defalut_menu_li;//默认的第一级菜单节点
 //初始化顶级功能菜单
 var sso_method_cookie_name = "sso_method_cookie_name";
+
 function initTopMenu() {
     $.each(jsonData, function (i, item) {
         initTopNextLeve(jsonData[i].children);
@@ -72,7 +73,7 @@ function initTopNextLeve(nextJsonData) {
 //触发用户最后选择的应用节点
 function initLastSelectMenu() {
     //if (init_top_menu_id != "")
-        $("#top_menu li[id='" + 6 + "']").click();
+    $("#top_menu li[id='" + 6 + "']").click();
     $("#main_nav > ul li[id='350']").click();
 
 }
@@ -178,6 +179,7 @@ function iniMenuHandl(jData, if_flag) {
 
 //显示诉求统计数字
 var appeal_sq_map = new Map();
+
 function getAppealSQCount(f_type) {
     var show_0 = false;
     if (f_type == 0)
@@ -470,9 +472,9 @@ function setMainIframeUrl(url, title, handls) {
     var curIframe = null;
     var curTab = null;
     var index = 0;
-    try{
+    try {
         index = curTabIndex;
-    }catch(e){
+    } catch (e) {
         index = parent.curTabIndex;
     }
     if ($("#iframe_" + index).length == 0) {
@@ -560,6 +562,7 @@ function setTabsheaderWidth() {
 
 //左侧菜单打开关闭
 var switch_flip = 1;
+
 function switchSysBar() {
     $("#area_left").toggle(switch_flip++ % 2 == 0);
     if (switch_flip % 2 == 0) {
@@ -661,13 +664,14 @@ function iniBannerTakeUpDown() {
 }
 
 var tabIndex = 100;
+
 /*isColseBar是否要关闭按钮
  @param value_name 要提取的ID属性名称
  @param handl_name 成功后要执行的函数名
  */
 function addTab(isColseBar, page_path, titles) {
     var index = tabIndex;
-    if ($(".tabs").length == 0){
+    if ($(".tabs").length == 0) {
         index = parent.tabIndex;
     }
     var strColseBar = "";
@@ -716,9 +720,9 @@ function addTab(isColseBar, page_path, titles) {
 function showTabsScroller() {
     var tabsWidth = 0;
     var vp = null;
-    if($(".tabs > li").length == 0){
+    if ($(".tabs > li").length == 0) {
         vp = parent.$(".tabs > li").last();
-    }else{
+    } else {
         vp = $(".tabs > li").last();
     }
     var offset = vp.offset();
@@ -731,7 +735,7 @@ function showTabsScroller() {
     }
     tabsWidth = offset.left - leftAreaWidht + vp.width() + 15;
 
-    if($(".tabs-header").length == 0){
+    if ($(".tabs-header").length == 0) {
         var tWidth = parent.$(".tabs-header").width()
         //alert(tabsWidth+"==="+tWidth);
         if (tabsWidth >= tWidth) {
@@ -744,7 +748,7 @@ function showTabsScroller() {
             parent.$(".tabs-scroller-right").hide();
             parent.$("#tab_add").css("left", tabsWidth);
         }
-    }else{
+    } else {
         var tWidth = $(".tabs-header").width()
         //alert(tabsWidth+"==="+tWidth);
         if (tabsWidth >= tWidth) {
@@ -765,7 +769,7 @@ function showTabsScroller() {
 function tabOnclick(index) {
     //alert(index);
     //alert($("#tab_"+index).attr("id"));
-    if($(".tabs > li").length == 0){
+    if ($(".tabs > li").length == 0) {
         parent.$(".tabs > li").removeClass("tabs-selected");
         parent.$("#tab_" + index).addClass("tabs-selected");
 
@@ -773,7 +777,7 @@ function tabOnclick(index) {
         parent.$("#iframe_" + index).show();
 
         parent.curTabIndex = index;
-    }else{
+    } else {
         $(".tabs > li").removeClass("tabs-selected");
         $("#tab_" + index).addClass("tabs-selected");
 
@@ -788,7 +792,7 @@ function tabOnclick(index) {
 
 function tab_colseOnclick(index) {
     var preLiIndex = null;
-    if($(".tabs > li").length == 0){
+    if ($(".tabs > li").length == 0) {
         parent.$(".tabs > li").each(function (i) {
             if (parent.$(this).attr("id") == ("tab_" + index)) {
                 return false;
@@ -802,7 +806,7 @@ function tab_colseOnclick(index) {
         parent.$("#tab_" + index).detach();
         parent.$("#iframe_" + index).detach();
 
-    }else{
+    } else {
         $(".tabs > li").each(function (i) {
             if ($(this).attr("id") == ("tab_" + index)) {
                 return false;
@@ -844,6 +848,7 @@ function OpenModalWindow(title, url, width, height) {
     }
 
 }
+
 function CloseModalWindow() {
     if ($("#sysDialog").length == 0) {
         parent.$("#sysDialog").dialog('close');
@@ -905,9 +910,9 @@ function msgHandl(type, msg) {
         parent.$("#msgAlert input").unbind('click');
         //给操作按钮加上点击事件
         parent.$("#msgAlert input").click(function () {
-            try{
+            try {
                 $("#msgAlert").dialog('close');
-            }catch (e){
+            } catch (e) {
                 parent.$("#msgAlert").dialog('close');
             }
         });
@@ -1007,9 +1012,9 @@ function msgConfirm(msg, fun) {
 
         parent.$("#msgConfirm input:first").click(function () {
             parent.$("#msgConfirm").dialog('close');
-            try{
+            try {
                 eval('parent.document.getElementById("iframe_' + parent.curTabIndex + '").contentWindow.' + fun);
-            }catch (e){
+            } catch (e) {
                 eval('parent.document.getElementById("iframe_1").contentWindow.' + fun);
             }
         });
@@ -1076,7 +1081,7 @@ function getCurrentFrameObj(c_index) {
         } catch (e) {
             result = parent.document.getElementById("iframe_" + c_index).contentWindow;
         }
-    else{
+    else {
         try {
             result = document.getElementById("iframe_" + curTabIndex).contentWindow;
         } catch (e) {
@@ -1194,6 +1199,7 @@ function getCurrentNodeChileLeftNodeIDS() {
 function getFirstChildNodeID() {
     return $('#leftMenuTree .tree-node-selected').parent().find('.tree-file').first().parent().attr("node-id");
 }
+
 //得到选中节点的第一个叶子节点名称
 function getFirstChildNodeValue() {
     return $('#leftMenuTree .tree-node-selected').parent().find('.tree-file').first().parent().text();
@@ -1201,6 +1207,7 @@ function getFirstChildNodeValue() {
 
 //根据站点ID，应用ID，人员ID得到他所拥有的权限ID
 var user_opt_ids = new Map();
+
 function getOptIDSByUser(app_id, site_id) {
     if (user_opt_ids.containsKey(site_id)) {
         return user_opt_ids.get(site_id);

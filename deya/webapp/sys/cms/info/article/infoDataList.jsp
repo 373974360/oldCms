@@ -181,7 +181,7 @@ $(document).ready(function(){
 <%--				&nbsp;&nbsp;&nbsp;&nbsp;--%>
 <%--				<input id="btn3" name="btn3" type="button" onclick="publishInfo()" value="发布" />--%>
 <%--				<input id="btn3" name="btn3" type="button" onclick="cancleInfo()" value="撤销" />--%>
-<%--				<input id="btn3" name="btn3" type="button" onclick="backInfo()" value="归档" />--%>
+<%--				<input id="btn3" name="btn3" type="button" onclick="toPdf()" value="归档" />--%>
 <%--				<span class="blank3"></span>--%>
 <%--			</td>		--%>
 <%--		</tr>--%>

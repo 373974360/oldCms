@@ -29,7 +29,7 @@
 		colsList.add(setTitleClos("end_time","结束时间","80px","","",""));
 		colsList.add(setTitleClos("publish_status","发布状态","60px","","",""));	
 		//colsList.add(setTitleClos("add_time","创建时间","80px","","",""));		
-		colsList.add(setTitleClos("recommend_flag","推荐","30px","","",""));
+		colsList.add(setTitleClos("back_status","归档状态","60px","","",""));
 		
 		table.setColsList(colsList);
 		table.setAllColsList(colsList);				
@@ -117,10 +117,20 @@
 				if(beanList.get(i-1).publish_status == -1)
 					$(this).html("已撤消&#160;");
 			}
-		});	
-			
+		});
 
-		table.getCol("actionCol").each(function(i){//为某一列的每个单元格增加点击事件(常用于给按钮增加事件)
+        table.getCol("back_status").each(function(i){//为某一列的每个单元格增加点击事件(常用于给按钮增加事件)
+            if(i>0)
+            {
+                if(beanList.get(i-1).back_status == 0)
+                    $(this).html("<font color='red'>未归档</font>");
+                if(beanList.get(i-1).back_status == 1)
+                    $(this).html("<font color='green'>已归档</font>");
+            }
+        });
+
+
+        table.getCol("actionCol").each(function(i){//为某一列的每个单元格增加点击事件(常用于给按钮增加事件)
 			if(i>0)
 			{	
 				$(this).html('<img src="../images/update.png" alt="修改" onclick="showUpdatePage(\''+beanList.get(i-1).s_id+'\')">&nbsp;<img src="../images/delete2.png" alt="删除" onclick="deleteSurveyA('+beanList.get(i-1).id+')">');								
@@ -481,6 +491,27 @@ function batchDelSurveyHandl()
         parent.msgWargin("问卷调查主题"+WCMLang.Delete_fail);
 }
 /**********************删除操作　结束*************************************/
+
+
+
+function backSurveyHandl()
+{
+    var s_ids = table.getSelecteCheckboxValue("s_id");
+    var ids = table.getSelecteCheckboxValue("id");
+    if(s_ids == "" || ids == "")
+    {
+        parent.msgWargin("请选择要归档的记录");
+        return;
+    }
+    if(SurveyRPC.backSurvey(s_ids,ids))
+    {
+        parent.msgAlert("问卷调查主题"+WCMLang.ArchiveStatus_success);
+        showTurnPage();
+        showList();
+    }
+    else
+        parent.msgWargin("问卷调查主题"+WCMLang.ArchiveStatus_fail);
+}
 
 /**********************修改操作　开始*************************************/
 function showUpdatePage(s_id)

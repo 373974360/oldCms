@@ -94,11 +94,13 @@
                 //修改信息
                 if("modifyInfo" == sso_method_cookie_value){
                     $(".modifyInfo").css("display","inline-block");
+                    $(".btn299").removeAttr("width");
                     $(".list_tab").eq(0).click();
                 }
                 //删除信息
                 if("delInfo" == sso_method_cookie_value){
                     $(".delInfo").css("display","inline-block");
+                    $(".btn299").removeAttr("width");
                     $(".list_tab").eq(0).click();
                     $(".infoListTable").removeClass("hidden");
                     $(":button[id='btn404']").hide();
@@ -110,6 +112,7 @@
                 //撤销信息
                 if("unPublishInfo" == sso_method_cookie_value){
                     $(".unPublishInfo").css("display","inline-block");
+                    $(".btn299").removeAttr("width");
                     $(".list_tab").eq(0).click();
                     $(".infoListTable").removeClass("hidden");
                     $(":button[id='btn404']").hide();
@@ -121,6 +124,7 @@
                 //已撤销信息
                 if("unPublishedInfo" == sso_method_cookie_value){
                     $(".unPublishedInfo").css("display","inline-block");
+                    $(".btn299").removeAttr("width");
                     $(".list_tab").eq(1).click();
                     $(".infoListTable").removeClass("hidden");
                     $(":button[id='btn404']").hide();
@@ -132,26 +136,31 @@
                 //审核信息
                 if("checkInfo" == sso_method_cookie_value){
                     $(".checkInfo").css("display","inline-block");
+                    $(".btn299").removeAttr("width");
                     $(".list_tab").eq(2).click();
                 }
                 //退稿信息
                 if("noPassInfo" == sso_method_cookie_value){
                     $(".noPassInfo").css("display","inline-block");
+                    $(".btn299").removeAttr("width");
                     $(".list_tab").eq(4).click();
                 }
                 //草稿信息
                 if("drafgInfo" == sso_method_cookie_value){
                     $(".drafgInfo").css("display","inline-block");
+                    $(".btn299").removeAttr("width");
                     $(".list_tab").eq(5).click();
                 }
                 //回收站信息
                 if("rubbyInfo" == sso_method_cookie_value){
                     $(".rubbyInfo").css("display","inline-block");
+                    $(".btn299").removeAttr("width");
                     $(".list_tab").eq(6).click();
                 }
                 //获取信息
                 if("getInfo" == sso_method_cookie_value){
                     $(".getInfo").css("display","inline-block");
+                    $(".btn299").removeAttr("width");
                     $(".infoListTable").removeClass("hidden");
                     $(":button[id='btn305']").hide();
                     $(":button[id='btn306']").hide();
@@ -162,6 +171,7 @@
                 //移动信息
                 if("moveInfo" == sso_method_cookie_value){
                     $(".moveInfo").css("display","inline-block");
+                    $(".btn299").removeAttr("width");
                     $(".infoListTable").removeClass("hidden");
                     $(":button[id='btn404']").hide();
                     $(":button[id='btn305']").hide();
@@ -172,6 +182,7 @@
                 //推送信息
                 if("pushInfo" == sso_method_cookie_value){
                     $(".pushInfo").css("display","inline-block");
+                    $(".btn299").removeAttr("width");
                     $(".infoListTable").removeClass("hidden");
                     $(":button[id='btn404']").hide();
                     $(":button[id='btn306']").hide();
@@ -183,6 +194,7 @@
                 //归档信息
                 if("backInfo" == sso_method_cookie_value){
                     $(".list_tab").eq(7).click();
+                    $(".btn299").removeAttr("width");
                     $(".backInfo").css("display","inline-block");
                     $(".infoListTable").removeClass("hidden");
                     $(":button[id='btn404']").hide();
@@ -201,8 +213,11 @@
             $("#btn299").hide();
             $(":button[id!='btn']").hide();
 
-            if(opt_ids.indexOf(",299,") > -1)
+            if(opt_ids.indexOf(",299,") > -1){
                 $("#btn299").show();
+                $(".btn299").attr("width","80");
+			}
+
 
             $(":button[id!='btn']").each(function(){
                 var o_id = ","+$(this).attr("id").replace("btn","")+",";
@@ -241,7 +256,7 @@
 					<option value="4b">一月内</option>
 				</select>
 			</td>
-			<td align="left" width="80">
+			<td align="left" class="btn299">
 				<ul class="infoadd_area" id="btn299">
 					<li class="x_add addInfo" style="display: none;" value="0" >
 						<ul class="MUL" id="addLabList">
@@ -265,63 +280,59 @@
 				<input id="btnSearch" name="btn6" type="button" onclick="openHighSearchPage()" value="高级搜索" />-->
 			</td>
 		</tr>
-
-		
-		<tr>
-			<td align="left" width="" colspan="3">
-				<ul class="fromTabs">
-					<li class="hidden list_tab list_tab_cur addInfo delInfo unPublishInfo modifyInfo getInfo moveInfo pushInfo">
-						<!--<div class="tab_left">
-							<div class="tab_right">已发</div>
-						</div>-->
-					</li>
-					<!--
-                    <li class="list_tab">
-                        <div class="tab_left">
-                            <div class="tab_right">待发</div>
-                        </div>
-                    </li>
-                     -->
-					<li class="hidden list_tab  unPublishedInfo">
-						<!--<div class="tab_left">
-							<div class="tab_right">已撤</div>
-						</div>-->
-					</li>
-					<li class=" hidden list_tab checkInfo">
-						<!--<div class="tab_left">
-							<div class="tab_right">待审</div>
-						</div>-->
-					</li>
-					<li class="hidden list_tab">
-						<!--<div class="tab_left">
-							<div class="tab_right">审核中</div>
-						</div>-->
-					</li>
-					<li class="hidden list_tab noPassInfo">
-						<!--<div class="tab_left">
-							<div class="tab_right">退稿</div>
-						</div>-->
-					</li>
-					<li class="hidden list_tab drafgInfo">
-						<!--<div class="tab_left">
-							<div class="tab_right">草稿</div>
-						</div>-->
-					</li>
-					<li class="hidden list_tab rubbyInfo">
-						<!--<div class="tab_left">
-							<div class="tab_right">回收站</div>
-						</div>-->
-					</li>
-					<li class="hidden list_tab backInfo">
-						<!--<div class="tab_left">
-							<div class="tab_right">待归档</div>
-						</div>-->
-					</li>
-				</ul>
-			</td>
-		</tr>
 	</table>
-	<span class="blank3"></span>
+	<div>
+		<ul class="fromTabs">
+			<li class="hidden list_tab list_tab_cur addInfo delInfo unPublishInfo modifyInfo getInfo moveInfo pushInfo">
+				<!--<div class="tab_left">
+                    <div class="tab_right">已发</div>
+                </div>-->
+			</li>
+			<!--
+            <li class="list_tab">
+                <div class="tab_left">
+                    <div class="tab_right">待发</div>
+                </div>
+            </li>
+             -->
+			<li class="hidden list_tab  unPublishedInfo">
+				<!--<div class="tab_left">
+                    <div class="tab_right">已撤</div>
+                </div>-->
+			</li>
+			<li class=" hidden list_tab checkInfo">
+				<!--<div class="tab_left">
+                    <div class="tab_right">待审</div>
+                </div>-->
+			</li>
+			<li class="hidden list_tab">
+				<!--<div class="tab_left">
+                    <div class="tab_right">审核中</div>
+                </div>-->
+			</li>
+			<li class="hidden list_tab noPassInfo">
+				<!--<div class="tab_left">
+                    <div class="tab_right">退稿</div>
+                </div>-->
+			</li>
+			<li class="hidden list_tab drafgInfo">
+				<!--<div class="tab_left">
+                    <div class="tab_right">草稿</div>
+                </div>-->
+			</li>
+			<li class="hidden list_tab rubbyInfo">
+				<!--<div class="tab_left">
+                    <div class="tab_right">回收站</div>
+                </div>-->
+			</li>
+			<li class="hidden list_tab backInfo">
+				<!--<div class="tab_left">
+                    <div class="tab_right">待归档</div>
+                </div>-->
+			</li>
+		</ul>
+	</div>
+	<span class="blank9"></span>
 	<div id="table"></div>
 	<div id="turn"></div>
 	<div class="infoListTable">

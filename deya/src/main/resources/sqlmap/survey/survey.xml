@@ -176,6 +176,11 @@
 	<update id="deleteSurvey" parameterType="Map">		
 		update cp_survey set is_delete=1 where id in (${ids})
 	</update>
+
+	<!-- 归档问卷 -->
+	<update id="backSurvey" parameterType="Map">
+		update cp_survey set back_status=1 where id in (${ids})
+	</update>
 	
 	<!-- 得到所有已发布的问卷对象，用于初始时存入缓存 -->	
 	<select id="getAllSurveyObjBYPublish" resultType="com.deya.wcm.bean.survey.SurveyBean" >
@@ -324,7 +329,7 @@
 	<![CDATA[
 		select * from (
 	       select row_.*, rownum rownum_ from (       
-	            select cs.id,cs.s_id,cs.s_name,cs.start_time,cs.end_time,cs.publish_status,cs.add_time,cc.c_name,cs.show_result_status,cs.recommend_flag 
+	            select cs.id,cs.s_id,cs.s_name,cs.start_time,cs.end_time,cs.publish_status,cs.add_time,cc.c_name,cs.show_result_status,cs.recommend_flag,cs.back_status
 	            from cp_survey cs,cp_survey_category cc  
 	            where cs.is_delete = 0 and cs.category_id = cc.category_id 
 	     ]]>
@@ -336,7 +341,7 @@
 	]]></select>
 	<select id="getSurveyList_mysql" parameterType="Map" resultType="com.deya.wcm.bean.survey.SurveyBean">
 		<![CDATA[      
-			select cs.id,cs.s_id,cs.s_name,cs.start_time,cs.end_time,cs.publish_status,cs.add_time,cc.c_name,cs.show_result_status,cs.recommend_flag 
+			select cs.id,cs.s_id,cs.s_name,cs.start_time,cs.end_time,cs.publish_status,cs.add_time,cc.c_name,cs.show_result_status,cs.recommend_flag,cs.back_status
 			from cp_survey cs,cp_survey_category cc  
 			where cs.is_delete = 0 and cs.category_id = cc.category_id 
 		]]>
@@ -348,7 +353,7 @@
 	<select id="getSurveyList_mssql" parameterType="Map" resultType="com.deya.wcm.bean.survey.SurveyBean">
 		<![CDATA[      
 			select top ${page_size} 
-			cs.id,cs.s_id,cs.s_name,cs.start_time,cs.end_time,cs.publish_status,cs.add_time,cc.c_name,cs.show_result_status,cs.recommend_flag 
+			cs.id,cs.s_id,cs.s_name,cs.start_time,cs.end_time,cs.publish_status,cs.add_time,cc.c_name,cs.show_result_status,cs.recommend_flag,cs.back_status
 			  from cp_survey cs,cp_survey_category cc  
 			  where cs.is_delete = 0 
 				and cs.category_id = cc.category_id 

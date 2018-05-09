@@ -166,7 +166,7 @@ body{background:#f7f7f7 none repeat scroll 0 0;margin-left:6px;margin-right:3px;
 .treeTableCSS tr td .expander{background-position:left center;background-repeat:no-repeat;cursor:pointer;padding:0}
 .treeTableCSS tr.collapsed td .expander{background-image:url(../images/toggle-expand-dark.png)}
 .treeTable tr.expanded td .expander{background-image:url(../images/toggle-collapse-dark.png)}
-.treeTableCSS tbody tr{background-color:#333333;height:25px}
+.treeTableCSS tbody tr{height:25px}
 .treeTable tr.accept,.treeTableCSS tr.selected{background-color:#2e76d1;color:#333333}
 .treeTable tr.accept,.treeTableCSS tr.selected{background-color:#2e76d1;color:#333333}
 .treeTable tr.collapsed.accept td .expander,.treeTableCSS tr.collapsed.selected td .expander{background-image:url(../images/toggle-expand-light.png)}

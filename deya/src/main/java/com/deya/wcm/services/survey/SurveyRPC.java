@@ -10,6 +10,8 @@ import com.deya.wcm.bean.survey.SurveyBean;
 import com.deya.wcm.bean.survey.SurveySub;
 import com.deya.wcm.services.Log.LogManager;
 import com.deya.util.DateUtil;
+import com.yinhai.pdf.QuestionToPdf;
+
 /**
  * 访谈主题前台访问交互类.
  * <p>Title: CicroDate</p>
@@ -170,6 +172,25 @@ public class SurveyRPC {
 		if(stl != null)
 		{
 			return SurveyService.deleteSurvey(ids, user_name,stl);
+		}else
+			return false;
+	}
+
+	/**
+	 * 删除问卷
+	 * @param M
+	 * @return boolean　true or false
+	 * */
+	public static boolean backSurvey(String s_ids,String ids,HttpServletRequest request)
+	{
+		SettingLogsBean stl = LogManager.getSettingLogsByRequest(request);
+		if(stl != null)
+		{
+			if(QuestionToPdf.toPdf(s_ids,request)){
+				return SurveyService.backSurvey(ids, stl);
+			}else{
+				return false;
+			}
 		}else
 			return false;
 	}

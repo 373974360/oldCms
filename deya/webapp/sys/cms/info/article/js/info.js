@@ -773,7 +773,6 @@ function deleteInfoData() {
 //信息归档
 function backInfoData() {
     var selectList = table.getSelecteBeans();
-
     if (InfoBaseRPC.backInfo(selectList)) {
         parent.msgAlert("信息" + WCMLang.ArchiveStatus_success);
         reloadInfoDataList();
@@ -1048,7 +1047,7 @@ function doView(num) {
     }
     else {
         //window.open(SiteRPC.getDefaultSiteDomainBySiteID(getRealSiteIDByApp(beanList.get(num).app_id,beanList.get(num).site_id))+url);
-        window.open("http://www.cqgjj.gov.cn" + url);
+        window.open("http://" + window.location.host + url);
     }
 }
 
