@@ -249,7 +249,7 @@ function saveThumbUrl(path)
 </table>
 <!-- 内容主体不同部分　结束 -->
 
-<jsp:include page="../include/include_public_high_gk.jsp"/>
+<jsp:include page="../include/include_public_high.jsp"/>
 </div>
 
 <!--隔线开始-->
