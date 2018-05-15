@@ -378,7 +378,32 @@ public class CategoryManager implements ISyncCatch{
 			Collections.sort(list,new CategoryComparator());
 		return list;
 	}
-	
+
+
+
+	/**
+	 * 根据ID得到它的子级列表(deep+1) 用于前台取子栏目列表，过滤掉不能在前台显示的栏目　is_sow==0的不显示
+	 * @param int cat_id
+	 * @param String site_id
+	 * @return List
+	 * */
+	public static List<CategoryBean> getChildCategoryListForBrowser(int cat_id)
+	{
+		Set<Integer> set = category_m.keySet();
+		List<CategoryBean> list = new ArrayList<CategoryBean>();
+		for(int i : set){
+			CategoryBean cgb = category_m.get(i);
+			if(cgb.getParent_id() == cat_id && cgb.getIs_show() == 1)
+			{
+				//category_m.get(i).setIs_sub(isHasChildNode(category_m.get(i).getCat_id(), category_m.get(i).getSite_id()));
+				cgb.setIs_sub(isHasChildNode(category_m.get(i).getCat_id()));
+				list.add(cgb);
+			}
+		}
+		if(list != null && list.size() > 0)
+			Collections.sort(list,new CategoryComparator());
+		return list;
+	}
 	/**
      * 根据cat_id判断它是否有子级
      * @param int cat_id

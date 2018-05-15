@@ -742,6 +742,11 @@ public class InfoUtilData
         return CategoryManager.getChildCategoryListForBrowser(Integer.parseInt(cat_id), site_id);
     }
 
+    public static List<CategoryBean> getChildCategoryList(String cat_id)
+    {
+        return CategoryManager.getChildCategoryListForBrowser(Integer.parseInt(cat_id));
+    }
+
     public static List<AppCatalogBean> getChildGKAppCatalogList(String cata_id)
     {
         return AppCatalogManager.getChildCatalogList(Integer.parseInt(cata_id));
