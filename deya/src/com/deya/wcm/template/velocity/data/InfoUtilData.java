@@ -737,6 +737,22 @@ public class InfoUtilData
         return null;
     }
 
+
+
+    public static CategoryBean getCategoryObject(String cat_id)
+    {
+        try
+        {
+            CategoryBean cb = CategoryManager.getCategoryBeanCatID(Integer.parseInt(cat_id));
+            if (cb != null) {
+                cb.setIs_sub(CategoryManager.isHasChildNode(cb.getCat_id()));
+            }
+            return cb;
+        }
+        catch (Exception e) {}
+        return null;
+    }
+
     public static List<CategoryBean> getChildCategoryList(String cat_id, String site_id)
     {
         return CategoryManager.getChildCategoryListForBrowser(Integer.parseInt(cat_id), site_id);

@@ -101,6 +101,10 @@ function updateCate()
 	{
 		map.put("is_show",$(":checked[id='is_show']").val());
 	}
+    if($("#mlsx_checkbox").is(':checked'))
+    {
+        map.put("mlsx",$(":checked[id='mlsx']").val());
+    }
 	
 	var model_list = getSelectCategoryModelList(0);
 	var cat_ids = getLeftMenuChecked();
@@ -194,6 +198,14 @@ function updateCate()
 				<input id="is_show" name="is_show" type="radio" value="0" /><label>否</label>
 			</td>		
 		</tr>
+			<tr>
+				<td align="center"><input type="checkbox" id="mlsx_checkbox" name="is_show"></td>
+				<th>目录属性：</th>
+				<td>
+					<input id="mlsx" name="mlsx" type="radio" value="1" checked="true"/><label>新闻目录</label>
+					<input id="mlsx" name="mlsx" type="radio" value="2" /><label>公开目录</label>
+				</td>
+			</tr>
 		<tr>
 			<td align="left" valign="middle" colspan="2">
 				<span class="blank12"></span>	
