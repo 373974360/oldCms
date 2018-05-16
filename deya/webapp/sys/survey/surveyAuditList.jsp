@@ -35,11 +35,9 @@
 	<table class="table_option" border="0" cellpadding="0" cellspacing="0" >
 		<tr>
 			<td class="fromTabs">
-				<input id="btn1" name="btn1" type="button" onclick="fnAddSurvey('')" value="添加" />
-				<input id="btn1" name="btn1" type="button" onclick="publicSelectSinglCheckbox(table,'id','showSurveyAttr(\'bath\')')" value="属性设置" />
-				<input id="btn1" name="btn1" type="button" onclick="updateRecord(table,'id','fnUpdateSurvey()');" value="修改" />
-				<input id="btn3" name="btn3" type="button" onclick="deleteRecord(table,'id','batchDelSurveyHandl()')" value="删除" />
-				<!-- <input id="btn1" name="btn1" type="button" onclick="fnSearch()" value="查询" /> -->
+				<input id="btn3" name="btn3" type="button" onclick="publicSelectCheckbox(table,'id','batchPublishSurvey(1)')" value="发布" />
+				<input id="btn3" name="btn3" type="button" onclick="publicSelectCheckbox(table,'id','batchPublishSurvey(2)')" value="退回" />
+				<input id="btn3" name="btn3" type="button" onclick="backRecord(table,'id','backSurveyHandl()')" value="归档" />
 				<span class="blank3"></span>
 			</td>
 			<td align="right" valign="middle" id="dept_search" class="search_td fromTabs" >
@@ -59,6 +57,8 @@
 				<input class="hidden" id="btn1" name="btn1" type="button" onclick="publicSelectCheckbox(table,'id','updateRecommend(1)')" value="推荐" />
 				<input class="hidden" id="btn1" name="btn1" type="button" onclick="publicSelectCheckbox(table,'id','updateRecommend(0)')" value="不推荐" />
 				<input class="hidden" id="btn1" name="btn1" type="button" onclick="updateRecord(table,'id','fnUpdateSurvey()');" value="修改" />
+				<input class="hidden" id="btn3" name="btn3" type="button" onclick="publicSelectCheckbox(table,'id','batchPublishSurvey(1)')" value="发布" />
+				<input class="hidden" id="btn3" name="btn3" type="button" onclick="publicSelectCheckbox(table,'id','batchPublishSurvey(-1)')" value="撤销" />
 				<input id="btn1" name="btn1" type="button" onclick="publicSelectSinglCheckbox(table,'id','showAnswer()')" value="查看问卷" />
 				<input id="btn1" name="btn1" type="button" onclick="publicSelectSinglCheckbox(table,'id','openSubject()')" value="数据统计" />
 				<input id="btn1" name="btn1" type="button" onclick="publicSelectSinglCheckbox(table,'id','openAnswer()')" value="所有答卷" />

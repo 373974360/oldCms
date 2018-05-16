@@ -43,7 +43,7 @@ $(document).ready(function(){
 	showCategoryTree();
 	initTable();
 	loadCategoryTable();
-    setLeftTreeHeight();
+    //setLeftTreeHeight();
 });
 
 function showCategoryTree()

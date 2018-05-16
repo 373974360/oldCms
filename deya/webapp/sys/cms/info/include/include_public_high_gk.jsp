@@ -52,6 +52,17 @@
 				<input id="gk_input_dept" name="gk_input_dept" type="text" style="width:350px;" value="" onblur="checkInputValue('gk_input_dept',true,240,'发布机构','')"/>
 			</td>
 		</tr>
+		<%--<tr>
+			<th>定时发布：</th>
+			<td style="width:100px;">
+				<input id="up_dtime" name="up_dtime" type="text"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:true,readOnly:true})" readonly="readonly" />
+			</td>
+			&lt;%&ndash;<th>定时撤销：</th>
+			<td style="width:100px;">
+				<input id="down_dtime" name="down_dtime" type="text"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:true,readOnly:true})" readonly="readonly" />
+			</td>
+			<td></td>&ndash;%&gt;
+		</tr>--%>
     </tbody>
 </table>
 <table id="" class="table_form hidden" border="0" cellpadding="0" cellspacing="0">

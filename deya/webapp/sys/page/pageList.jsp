@@ -18,7 +18,7 @@
     <script type="text/javascript">
         var SiteRPC = jsonrpc.SiteRPC;
         var app_id = "<%=app_id%>";
-        var site_id = "<%=site_id%>";
+        var site_id = "CMScqgjj";
         if (site_id == null || site_id == "null")
             site_id = "";
 

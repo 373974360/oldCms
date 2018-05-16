@@ -415,13 +415,19 @@
 
     <!-- 信息审核不通过sql -->
     <update id="noPass_info_status" parameterType="Map">
-        update cs_info set info_status = 1,step_id = 0,opt_dtime = #{opt_dtime},auto_desc=#{auto_desc},modify_user=#{modify_user} where info_id in (${info_ids})
+        update cs_info set info_status = 1,opt_dtime = #{opt_dtime},auto_desc=#{auto_desc},modify_user=#{modify_user} where info_id in (${info_ids})
     </update>
 
     <!-- 信息审核通过sql -->
     <update id="pass_info_status" parameterType="Map">
         update cs_info set info_status = #{info_status},step_id = #{step_id},opt_dtime = #{opt_dtime}
         <if test="released_dtime != null">,released_dtime=#{released_dtime}</if> where info_id = #{info_id}
+    </update>
+
+    <!-- 审核中信息撤回 -->
+    <update id="backPassInfoStatus" parameterType="Map">
+        update cs_info set info_status = #{info_status},step_id = #{step_id},opt_dtime = #{opt_dtime}
+        where info_id = #{info_id}
     </update>
 
     <!-- 根据栏目ID得到所以已发布过的信息（用于删除栏目时，得到信息ID，删除搜索引擎中的数据） -->
@@ -822,5 +828,22 @@
     <select id="getInfoByUrl" parameterType="Map" resultType="java.lang.String">
         select count(*) from cs_info where content_url like '%${content_url}%'
     </select>
+
+
+    <!-- 插入信息审批流程步骤 -->
+    <insert id="insertInfoWorkStep" parameterType="com.yinhai.model.InfoWorkStep">
+        insert into cs_info_workstep(id,info_id,user_id,user_name,step_id,pass_status,description,work_time)
+        values(${id},${info_id},${user_id},#{user_name},${step_id},${pass_status},#{description},#{work_time})
+    </insert>
+    <!-- 根据信息id获取最新的审批流程步骤 -->
+    <select id="getInfoWorkStepByInfoId" parameterType="Map" resultType="com.yinhai.model.InfoWorkStep">
+        select id,info_id,user_id,user_name,step_id,pass_status,description,work_time
+         from cs_info_workstep where info_id = #{info_id}
+        <if test="pass_status != null">
+            and pass_status = #{pass_status}
+        </if>
+        order by work_time desc
+    </select>
+
 
 </mapper>

@@ -27,7 +27,7 @@
 		colsList.add(setTitleClos("survey_status","调查状态","60px","","",""));
 		colsList.add(setTitleClos("start_time","起始时间","80px","","",""));
 		colsList.add(setTitleClos("end_time","结束时间","80px","","",""));
-		colsList.add(setTitleClos("publish_status","发布状态","60px","","",""));	
+		colsList.add(setTitleClos("publish_status","状态","60px","","",""));
 		//colsList.add(setTitleClos("add_time","创建时间","80px","","",""));		
 		colsList.add(setTitleClos("back_status","归档状态","60px","","",""));
 		
@@ -111,11 +111,13 @@
 			if(i>0)
 			{
 				if(beanList.get(i-1).publish_status == 0)
-					$(this).html("未发布&#160;");
+					$(this).html("待审核&#160;");
+				if(beanList.get(i-1).publish_status == 2)
+					$(this).html("已退回&#160;");
 				if(beanList.get(i-1).publish_status == 1)
-					$(this).html("已发布&#160;");	
-				if(beanList.get(i-1).publish_status == -1)
-					$(this).html("已撤消&#160;");
+					$(this).html("已发布&#160;");
+                if(beanList.get(i-1).publish_status == -1)
+                    $(this).html("已撤消&#160;");
 			}
 		});
 
@@ -201,6 +203,9 @@ function saveSurvey()
 	else
 	{
 		bean.update_user = parent.LoginUserBean.user_id;
+		if(bean.publish_status == 2){
+            bean.publish_status = 0;
+		}
 		if(SurveyRPC.updateSurvey(bean,getSurveySubList()))
 		{
             parent.msgAlert("保存成功");

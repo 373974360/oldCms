@@ -293,12 +293,12 @@ function checkAllTree2(obj)
 		<td align="left" width="100%">
 			<ul class="fromTabs">
 		
-				<li class="list_tab list_tab_over list_tab_cur ">
+				<li class="list_tab list_tab_cur ">
 					<div class="tab_left">
 						<div class="tab_right" >角色</div>
 					</div>
 				</li>
-				<li class="list_tab list_tab_over list_tab_cur">
+				<li class="list_tab">
 					<div class="tab_left">
 						<div class="tab_right" onclick="showCategoryLabelInfo('cate')">栏目</div>
 					</div>

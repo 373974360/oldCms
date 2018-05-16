@@ -101,6 +101,9 @@
                 if(menuUrl.indexOf("verifyInfoList") >= 0){
                     pageName = "审核信息";
                 }
+                if(menuUrl.indexOf("publishList") >= 0){
+                    pageName = "已发布信息";
+                }
                 if(menuUrl.indexOf("authorDataList") >= 0){
                     pageName = "作者管理";
                 }
@@ -160,6 +163,9 @@
                 }
                 if(menuUrl.indexOf("csLogList") >= 0){
                     pageName = "审计日志";
+                }
+                if(menuUrl.indexOf("surveySettingList") >= 0){
+                    pageName = "调查问卷配置";
                 }
                 setMainIframeUrl(menuUrl,pageName);
             }else{

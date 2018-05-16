@@ -39,6 +39,7 @@ var sso_method_cookie_value;
 function setInfoGoble(n) {
     infoIdGoble = n;
 }
+
 function getInfoGoble(n) {
     return infoIdGoble;
 }
@@ -60,19 +61,24 @@ function initTable() {
     //标题	管理操作	点击量	权重	发布人	发布时间
     //colsList.add(setTitleClos("info_id","ID","50px","","",""));
     //alert($(window).width());
-    if (app == "zwgk" && gk_article == false)
+    if (app == "zwgk" && gk_article == false) {
         colsList.add(setTitleClos("gk_index", "索引码", "150px", "", "", ""));
+    }
     colsList.add(setTitleClos("title", "标题", "", "", "", ""));//英文名，显示名，宽，高，样式名，点击事件
-    if (app != "zwgk")
+    if (app != "zwgk") {
         colsList.add(setTitleClos("istop", "置顶", "30px", "", "", ""));
+    }
     colsList.add(setTitleClos("actions", "管理操作", "90px", "", "", ""));
     colsList.add(setTitleClos("weight", "权重", "30px", "", "", ""));
     colsList.add(setTitleClos("input_user_name", "录入人", "60px", "", "", ""));
     colsList.add(setTitleClos("modify_user_name", "审核人", "60px", "", "", ""));
     colsList.add(setTitleClos("opt_time", "发布时间", "120px", "", "", ""));
-    if (infoStatus == 1)
+    if (infoStatus == 1) {
         colsList.add(setTitleClos("auto_desc", "退稿意见", "", "", "", ""));
-
+    }
+    if (infoStatus == 2) {
+        colsList.add(setTitleClos("pass_desc", "审核意见", "", "", "", ""));
+    }
     table.setColsList(colsList);
     table.setAllColsList(colsList);
     table.enableSort = false;//禁用表头排序
@@ -89,6 +95,7 @@ function setInfoWeight(weight_o, info_id) {
         jsonrpc.InfoBaseRPC.updateInfoWeight(updateInfoWeightResult, info_id, weight_n);
     }
 }
+
 function updateInfoWeightResult(result, e) {
     if (e != null) {
         return;
@@ -107,6 +114,7 @@ function setInfoIsTop(info_id, value) {
     }
     jsonrpc.InfoBaseRPC.setInfoTop(setInfoTopResult, istop, info_id);
 }
+
 function setInfoTopResult(result, e) {
     if (e != null) {
         return;
@@ -172,7 +180,7 @@ function showList() {
         }
     }
 
-    if (infoStatus == 2 && (cid == 10024 || cid == 10025 || cid == 10026 || cid == 10027 || cid == 10028)) {
+    /*if (infoStatus == 2 && (cid == 10024 || cid == 10025 || cid == 10026 || cid == 10027 || cid == 10028)) {
         var mcat_id = MemberManRPC.getMCatIDByUser(LoginUserBean.user_id, site_id);
         if (mcat_id != "" && mcat_id != 0) {
             var str = mcat_id.split(",");
@@ -181,7 +189,7 @@ function showList() {
                 m.put("con_value", memberCatBean.mcat_name.substring(0, 2));
             }
         }
-    }
+    }*/
 
     if (table.con_value.trim() != "" && table.con_value != null) {
         m.put("con_name", table.con_name);
@@ -243,7 +251,11 @@ function showList() {
             //var model_ename = ModelRPC.getModelEName(beanList.get(i-1).model_id);
             $(this).addClass(model_map.get(beanList.get(i - 1).model_id).model_icon);
             $(this).css("padding-left", "20px");
-            $(this).html('<a href="javascript:openViewPage(' + beanList.get(i - 1).content_url + ')">' + title_flag + beanList.get(i - 1).title + '</a>' + title_end_str);
+            if (beanList.get(i - 1).content_url.indexOf("http") >= 0 || beanList.get(i - 1).content_url.indexOf("https") >= 0) {
+                $(this).html('<a target="blank" href="' + beanList.get(i - 1).content_url + '">' + title_flag + beanList.get(i - 1).title + '</a>' + title_end_str);
+            } else {
+                $(this).html('<a target="blank" href="http://' + window.location.host + '/sys/cms/info/article/contentView.jsp?info_id=' + beanList.get(i - 1).info_id + '&site_id=' + beanList.get(i - 1).site_id + '">' + title_flag + beanList.get(i - 1).title + '</a>' + title_end_str);
+            }
         }
     });
 
@@ -329,6 +341,10 @@ function showList() {
                 if ("addInfo" == sso_method_cookie_value) {
                     str += "<li class='ico_view'><a title='预览' href='javascript:doView(" + (i - 1) + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
                 }
+                //发布信息
+                if ("publishInfo" == sso_method_cookie_value) {
+                    str += "<li id='302' class='ico_publish'><a  title='发布' href='javascript:doPublish(" + (i - 1) + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
+                }
                 //修改信息
                 if ("modifyInfo" == sso_method_cookie_value) {
                     str += "<li class='ico_view'><a title='预览' href='javascript:doView(" + (i - 1) + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
@@ -344,13 +360,15 @@ function showList() {
                 }
                 //已撤销信息
                 if ("unPublishedInfo" == sso_method_cookie_value) {
-                    str += "<li id='302' class='ico_publish'><a  title='发布' href='javascript:doPublish("+(i-1)+")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
-                    str += "<li id='315' class='ico_edit' ><a  title='修改' href='javascript:openUpdatePage("+beanList.get(i-1).info_id+","+beanList.get(i-1).model_id+","+beanList.get(i-1).is_host+")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
-                    str += "<li id='332' class='ico_delete' ><a title='删除' href='javascript:doDelete("+(i-1)+")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
+                    str += "<li id='302' class='ico_publish'><a  title='发布' href='javascript:doPublish(" + (i - 1) + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
+                    str += "<li id='315' class='ico_edit' ><a  title='修改' href='javascript:openUpdatePage(" + beanList.get(i - 1).info_id + "," + beanList.get(i - 1).model_id + "," + beanList.get(i - 1).is_host + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
+                    str += "<li id='332' class='ico_delete' ><a title='删除' href='javascript:doDelete(" + (i - 1) + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
                 }
                 //审核信息
                 if ("checkInfo" == sso_method_cookie_value) {
-                    str += "<li id='303' class='ico_pass'><a title='通过' href='javascript:doPass(" + (i - 1) + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li><li id='303' class='ico_nopass'><a  title='退稿' href='javascript:noPassDesc(" + beanList.get(i - 1).info_id + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
+                    str += "<li class='ico_view'><a title='预览' href='javascript:doView(" + (i - 1) + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
+                    str += "<li id='315' class='ico_edit'><a title='修改' href='javascript:openUpdatePage(" + beanList.get(i - 1).info_id + "," + beanList.get(i - 1).model_id + "," + beanList.get(i - 1).is_host + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
+                    str += "<li id='303' class='ico_pass'><a title='通过' href='javascript:doPass(" + (i - 1) + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li><li id='303' class='ico_nopass'><a  title='退稿' href='javascript:noPassDesc(" + beanList.get(i - 1).info_id + "," + beanList.get(i - 1).step_id + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
                 }
                 //退稿信息
                 if ("noPassInfo" == sso_method_cookie_value) {
@@ -407,6 +425,29 @@ function showList() {
              }
              */
             $(this).html(str + "</ul>");
+        }
+    });
+    table.getCol("pass_desc").each(function (i) {
+        if (i > 0) {
+            var infoWorkStep = InfoBaseRPC.getInfoWorkStepByInfoId(beanList.get(i - 1).info_id, 1);
+            if (infoWorkStep != null) {
+                $(this).html(infoWorkStep.description);
+            } else {
+                $(this).html("");
+            }
+
+        }
+    });
+
+    table.getCol("auto_desc").each(function (i) {
+        if (i > 0) {
+            var infoWorkStep = InfoBaseRPC.getInfoWorkStepByInfoId(beanList.get(i - 1).info_id, 0);
+            if (infoWorkStep != null) {
+                $(this).html(infoWorkStep.description);
+            } else {
+                $(this).html("");
+            }
+
         }
     });
     current_page_num = tp.curr_page;
@@ -556,10 +597,10 @@ function clickLabelHandl(num) {
             var temp_wf_id = CategoryRPC.getWFIDByCatID(cid, site_id);
             if (temp_wf_id != 0) {
                 var temp_step_id = getMaxStepIDByUserID(temp_wf_id, app, site_id);
-                if(temp_step_id != 100){
+                if (temp_step_id != 100) {
                     stepID = temp_step_id - 1 + "";
                 }
-            }else{
+            } else {
                 stepID = "0";
             }
             infoStatus = "2";
@@ -568,18 +609,19 @@ function clickLabelHandl(num) {
             break;
         case 3:
             infoStatus = "2";
-            var temp_wf_id = CategoryRPC.getWFIDByCatID(cid, site_id);
-            var temp_step_id = getMaxStepIDByUserID(temp_wf_id, app, site_id);
-            if(temp_step_id != 100){
-                stepID = temp_step_id - 1 + "";
-            }
-            getTheLeafNodes();
+            // var temp_wf_id = CategoryRPC.getWFIDByCatID(cid, site_id);
+            // var temp_step_id = getMaxStepIDByUserID(temp_wf_id, app, site_id);
+            // if (temp_step_id != 100) {
+            //     stepID = temp_step_id - 1 + "";
+            // }
+            // getTheLeafNodes();
             finalStatus = "99";
             is_my_info = true;
             break;
         case 4:
+            var temp_wf_id = CategoryRPC.getWFIDByCatID(cid, site_id);
             infoStatus = "1";
-            stepID = "0";
+            stepID = getMaxStepIDByUserID(temp_wf_id, app, site_id) + "";
             finalStatus = "99";
             search_steps = "";
             break;
@@ -599,6 +641,12 @@ function clickLabelHandl(num) {
             infoStatus = "8";
             stepID = "100";
             finalStatus = "0";
+            search_steps = "";
+            break;
+        case 8:
+            infoStatus = "2";
+            stepID = "5";
+            finalStatus = "99";
             search_steps = "";
             break;
     }
@@ -642,7 +690,7 @@ function getTreeIdsOfLeavies() {
 
 function isSubNode(node_id) {
     //判断节点是否是叶节点
-    if ($('#leftMenuTree .tree-node-selected').find('.tree-folder').length == 0) {
+    if (parent.$('#leftMenuTree .tree-node-selected').find('.tree-folder').length == 0) {
         subNode = false;
     } else {
         subNode = true;//叶节点
@@ -707,9 +755,9 @@ function openUpdatePage(Infoid, model_id, is_host) {
 function openViewPage(i_id) {
     //window.location.href = "/sys/cms/info/article/infoView.jsp?info_id="+i_id+"&site_id="+site_id+"&snum="+snum;
     //parent.addTab(true, "/sys/cms/info/article/infoView.jsp?info_id=" + i_id + "&site_id=" + site_id + "&topnum=" + parent.curTabIndex, "查看信息");
-    if(i_id.indexOf("http://")>=0 || i_id.indexOf("https://")>=0){
+    if (i_id.indexOf("http://") >= 0 || i_id.indexOf("https://") >= 0) {
         parent.addTab(true, i_id, "查看信息");
-    }else{
+    } else {
         parent.addTab(true, "http://www.cqgjj.gov.cn" + i_id, "查看信息");
     }
 
@@ -746,6 +794,7 @@ function cancleInfo() {
         parent.msgWargin("信息撤销失败");
     }
 }
+
 /*
  //信息还原
  function goBackInfo(){
@@ -931,12 +980,16 @@ function onPass() {
 //不通过
 function noPass(desc) {
     var selectIDS = "";
+    var step_id = "";
     if (temp_info_id != "" && temp_info_id != null)
         selectIDS = temp_info_id;
     else
         selectIDS = table.getSelecteCheckboxValue("info_id");
 
-    if (InfoBaseRPC.noPassInfoStatus(selectIDS, desc)) {
+    if (temp_step_id != "" && temp_step_id != null)
+        step_id = temp_step_id;
+
+    if (InfoBaseRPC.noPassInfoStatus(selectIDS, step_id, desc)) {
         parent.msgAlert("退回操作成功");
     } else {
         parent.msgWargin("退回操作失败");
@@ -946,16 +999,20 @@ function noPass(desc) {
 }
 
 var temp_info_id;
-function noPassDesc(id) {
+var temp_step_id;
+
+function noPassDesc(id, step_id) {
     if (id != null && id != "")
         temp_info_id = id;
+    if (step_id != null && step_id != "")
+        temp_step_id = step_id;
     parent.OpenModalWindow("退稿意见", "/sys/cms/info/article/noPassDesc.jsp", 520, 235);
 }
 
 //单条信息通过
 function doPass(num) {
     //打开选择审核步骤页面
-    parent.OpenModalWindow("选择审核步骤", "/sys/cms/info/article/chooseAudit.jsp?cat_id=" + cid + "&site_id=" + site_id + "&app_id=" + app + "&num=" + num, 400, 200);
+    parent.OpenModalWindow("选择审核步骤", "/sys/cms/info/article/chooseAudit.jsp?cat_id=" + cid + "&site_id=" + site_id + "&app_id=" + app + "&num=" + num, 520, 280);
     /*
      var list = new List();
      list.add(beanList.get(num));
@@ -967,6 +1024,8 @@ function doPass(num) {
      reloadInfoDataList();
      */
 }
+
+
 
 //单条信息不通过
 function doNoPass(id) {

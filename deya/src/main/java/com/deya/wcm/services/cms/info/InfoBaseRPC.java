@@ -13,6 +13,7 @@ import com.deya.wcm.bean.org.user.UserRegisterBean;
 import com.deya.wcm.dao.cms.info.InfoDAO;
 import com.deya.wcm.rmi.file.FileRmiFactory;
 import com.deya.wcm.services.Log.LogManager;
+import com.yinhai.model.InfoWorkStep;
 import com.yinhai.pdf.ArticleToPdf;
 
 /**
@@ -385,10 +386,10 @@ public class InfoBaseRPC {
      * @param stl
      * @return boolean
      */
-    public static boolean passInfoStatus(List<InfoBean> info_list, String user_id, HttpServletRequest request) {
+    public static boolean passInfoStatus(List<InfoBean> info_list,String auto_desc,HttpServletRequest request) {
         SettingLogsBean stl = LogManager.getSettingLogsByRequest(request);
         if (stl != null) {
-            return FileRmiFactory.passInfoStatus(InfoBaseManager.getInfoReleSiteID(info_list.get(0).getSite_id(), info_list.get(0).getApp_id()), info_list, user_id, stl);
+            return FileRmiFactory.passInfoStatus(InfoBaseManager.getInfoReleSiteID(info_list.get(0).getSite_id(), info_list.get(0).getApp_id()), info_list, auto_desc,stl.getUser_id()+"", stl);
         } else
             return false;
     }
@@ -401,10 +402,26 @@ public class InfoBaseRPC {
      * @param stl
      * @return boolean
      */
-    public static boolean noPassInfoStatus(String info_ids, String auto_desc, HttpServletRequest request) {
+    public static boolean noPassInfoStatus(String info_ids,String step_id, String auto_desc, HttpServletRequest request) {
         SettingLogsBean stl = LogManager.getSettingLogsByRequest(request);
         if (stl != null) {
-            return InfoBaseManager.noPassInfoStatus(info_ids, auto_desc, stl);
+            return InfoBaseManager.noPassInfoStatus(info_ids,step_id, auto_desc, stl);
+        } else
+            return false;
+    }
+
+    /**
+     * 审核中信息撤回
+     *
+     * @param List<InfoBean> l
+     * @param String         status
+     * @return boolean
+     */
+    public static boolean backPassInfoStatus(String info_id, String step_id, HttpServletRequest request) {
+        SettingLogsBean stl = LogManager.getSettingLogsByRequest(request);
+        InfoBean infoById = getInfoById(info_id);
+        if (stl != null) {
+            return FileRmiFactory.backPassInfoStatus(InfoBaseManager.getInfoReleSiteID(infoById.getSite_id(), infoById.getApp_id()), info_id, step_id, stl);
         } else
             return false;
     }
@@ -536,8 +553,22 @@ public class InfoBaseRPC {
         return InfoDAO.updateInfoWeight(bean);
     }
 
-    public static boolean setInfoTop(String istop, String info_id) {
-        return InfoExpandManager.setInfoTop(istop, info_id);
+    /**
+     * 根据信息id获取信息的最新审核步骤信息
+     * @param info_id
+     * @return
+     */
+    public static InfoWorkStep getInfoWorkStepByInfoId(String info_id,String pass_status){
+        return InfoBaseManager.getInfoWorkStepByInfoId(info_id,pass_status);
+    }
+
+    /**
+     * 根据信息id获取信息的所有审核步骤信息
+     * @param info_id
+     * @return
+     */
+    public static List<InfoWorkStep> getAllInfoWorkStepByInfoId(String info_id,String pass_status){
+        return InfoBaseManager.getAllInfoWorkStepByInfoId(info_id,pass_status);
     }
 
     public static void main(String[] args) {

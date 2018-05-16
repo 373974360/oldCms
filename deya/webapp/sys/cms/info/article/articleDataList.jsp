@@ -91,6 +91,27 @@
                     $(".addInfo").css("display","inline-block");
                     $(".list_tab").eq(0).click();
                 }
+
+                //审核中信息
+                if("checkingInfo" == sso_method_cookie_value){
+                    $(".checkingInfo").css("display","inline-block");
+                    $(".btn299").removeAttr("width");
+                    $(".list_tab").eq(3).click();
+                }
+
+                //发布信息
+                if("publishInfo" == sso_method_cookie_value){
+                    $(".publishInfo").css("display","inline-block");
+                    $(".list_tab").eq(8).click();
+                    $(":button[id='btn404']").hide();
+                    $(":button[id='btn305']").hide();
+                    $(":button[id='btn306']").hide();
+                    $(":button[id='btn307']").hide();
+                    $(":button[id='btn332']").hide();
+                    $(":button[id='btn999']").hide();
+                    $(":button[id='btn302']").show();
+                }
+
                 //修改信息
                 if("modifyInfo" == sso_method_cookie_value){
                     $(".modifyInfo").css("display","inline-block");
@@ -275,9 +296,9 @@
 					<option value="3">权重倒序</option>
 					<option value="4">权重正序</option>
 				</select>
-				<!--
+
 				&nbsp;&nbsp;&nbsp;&nbsp;
-				<input id="btnSearch" name="btn6" type="button" onclick="openHighSearchPage()" value="高级搜索" />-->
+				<input id="btnSearch" name="btn6" type="button" onclick="openHighSearchPage()" value="高级搜索" />
 			</td>
 		</tr>
 	</table>
@@ -288,13 +309,6 @@
                     <div class="tab_right">已发</div>
                 </div>-->
 			</li>
-			<!--
-            <li class="list_tab">
-                <div class="tab_left">
-                    <div class="tab_right">待发</div>
-                </div>
-            </li>
-             -->
 			<li class="hidden list_tab  unPublishedInfo">
 				<!--<div class="tab_left">
                     <div class="tab_right">已撤</div>
@@ -305,7 +319,7 @@
                     <div class="tab_right">待审</div>
                 </div>-->
 			</li>
-			<li class="hidden list_tab">
+			<li class="hidden list_tab checkingInfo">
 				<!--<div class="tab_left">
                     <div class="tab_right">审核中</div>
                 </div>-->
@@ -330,6 +344,11 @@
                     <div class="tab_right">待归档</div>
                 </div>-->
 			</li>
+			<li class="hidden list_tab  publishedInfo">
+				<%--<div class="tab_left">
+                    <div class="tab_right">待发</div>
+                </div>--%>
+			</li>
 		</ul>
 	</div>
 	<span class="blank9"></span>
@@ -339,9 +358,11 @@
 		<table class="table_option" border="0" cellpadding="0" cellspacing="0">
 			<tr>
 				<td align="left" valign="middle">
+
 					<input class="getInfo" id="btn404" name="btn1" type="button" onclick="getInfoFromOtherCat();" value="获取" />
 					<input class="pushInfo" id="btn305" name="btn2" type="button" onclick="publicSelectCheckbox(table,'info_id','openWindowForPush()');" value="推送" />
 					<input class="moveInfo" id="btn306" name="btn3" type="button" onclick="publicSelectCheckbox(table,'info_id','openWindowForMov()');" value="移动" />
+					<input class="publishInfo" id="btn302" name="btn1" type="button" onclick="publicSelectCheckbox(table,'info_id','publishInfo()')" value="发布" />
 					<input class="unPublishInfo" id="btn307" name="btn5" type="button" onclick="cancleInfo()" value="撤销" />
 					<input class="delInfo" id="btn332" name="btn4" type="button" onclick="deleteRecord(table,'info_id','deleteInfoData()');" value="删除" />
 					<input class="backInfo" id="btn999" name="btn9" type="button" onclick="backRecord(table,'info_id','backInfoData()');" value="归档" />
@@ -455,3 +476,4 @@
 </div>
 </body>
 </html>
+

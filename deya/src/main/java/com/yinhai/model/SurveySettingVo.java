@@ -7,7 +7,7 @@ import java.io.Serializable;
  * @User: Administrator
  * @Date: 2018/5/7 0007
  */
-public class QuestionnaireVo implements Serializable {
+public class SurveySettingVo implements Serializable {
     /**
      * 业务流水号 问卷（唯一标识）
      */

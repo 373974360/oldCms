@@ -4,13 +4,10 @@ import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.deya.wcm.bean.interview.*;
 import com.deya.wcm.bean.logs.SettingLogsBean;
 import com.deya.wcm.bean.survey.SurveyBean;
-import com.deya.wcm.bean.survey.SurveySub;
 import com.deya.wcm.services.Log.LogManager;
-import com.deya.util.DateUtil;
-import com.yinhai.pdf.QuestionToPdf;
+import com.yinhai.pdf.SurveyToPdf;
 
 /**
  * 访谈主题前台访问交互类.
@@ -186,7 +183,7 @@ public class SurveyRPC {
 		SettingLogsBean stl = LogManager.getSettingLogsByRequest(request);
 		if(stl != null)
 		{
-			if(QuestionToPdf.toPdf(s_ids,request)){
+			if(SurveyToPdf.toPdf(s_ids,request)){
 				return SurveyService.backSurvey(ids, stl);
 			}else{
 				return false;

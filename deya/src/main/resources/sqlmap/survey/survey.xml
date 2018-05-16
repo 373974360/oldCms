@@ -137,7 +137,7 @@
 	
 	<!-- 修改问卷调查 -->
 	<update id="updateSurvey" parameterType="com.deya.wcm.bean.survey.SurveyBean">
-		update cp_survey set category_id = #{category_id},s_name = #{s_name},description = #{description},is_register = #{is_register},ip_fre = #{ip_fre},start_time = #{start_time},end_time = #{end_time},is_show_subsort = #{is_show_subsort},survey_content = #{survey_content},model_path = #{model_path},ip_restrict = #{ip_restrict},update_time = #{update_time},update_user = #{update_user},is_show_result = #{is_show_result},is_show_title = #{is_show_title},spacing_interval = #{spacing_interval} where s_id = #{s_id}
+		update cp_survey set category_id = #{category_id},s_name = #{s_name},description = #{description},is_register = #{is_register},ip_fre = #{ip_fre},start_time = #{start_time},end_time = #{end_time},is_show_subsort = #{is_show_subsort},survey_content = #{survey_content},model_path = #{model_path},ip_restrict = #{ip_restrict},update_time = #{update_time},update_user = #{update_user},is_show_result = #{is_show_result},is_show_title = #{is_show_title},spacing_interval = #{spacing_interval},publish_status = #{publish_status} where s_id = #{s_id}
 	</update>
 		
 	<!-- 插入问卷调查 -->

@@ -1,9 +1,7 @@
-package com.yinhai.sso;
+package com.yinhai.webservice.client;
 
 import com.deya.util.CryptoTools;
 import com.deya.util.DateUtil;
-import com.deya.util.RandomStrg;
-import com.deya.util.jconfig.JconfigUtilContainer;
 import com.deya.wcm.bean.org.dept.DeptBean;
 import com.deya.wcm.bean.org.user.UserBean;
 import com.deya.wcm.bean.org.user.UserRegisterBean;
@@ -14,9 +12,6 @@ import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 
-import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -26,45 +21,19 @@ import java.util.List;
  * @User: program
  * @Date: 2016/11/29
  */
-public class SyncOrg {
-
-    private static String wsdlUrl = "";
-    private static String targetNamespace = "http://service.deliverdata2oa.oa.subSystem.yinhai.com/";
-    private static String methodName = "doSync";
-    private static String paramName = "paramXml";
+public class SyncOrgServiceClient {
     private static String syncName = "dept";
-    private static String reqident = "";
-    private static String forgcode = "";
-    private static String torgcode = "";
-    private static String certcode = "";
     private static boolean isAdd = false;
-
-    public static void initParams() {
-        wsdlUrl = JconfigUtilContainer.bashConfig().getProperty("syncOrgOrUserUrl", "", "sso");
-        reqident = JconfigUtilContainer.bashConfig().getProperty("reqident", "", "sso");
-        forgcode = JconfigUtilContainer.bashConfig().getProperty("forgcode", "", "sso");
-        torgcode = JconfigUtilContainer.bashConfig().getProperty("torgcode", "", "sso");
-        certcode = JconfigUtilContainer.bashConfig().getProperty("certcode", "", "sso");
-    }
 
     public static String getparamValue(Integer type) {
         StringBuilder _xmlstr = new StringBuilder();
-        _xmlstr.append("<![CDATA[<data><reqident>").append(reqident).append("</reqident>");
-        if (syncName.equals("dept")) {
-            _xmlstr.append("<txcode>SYSNC_DEPART</txcode>");
-        } else {
-            _xmlstr.append("<txcode>SYSNC_USER</txcode>");
-        }
         _xmlstr.append("<txdate/>");
         _xmlstr.append("<txtime/>");
-        _xmlstr.append("<forgcode>" + forgcode + "</forgcode>");
-        _xmlstr.append("<torgcode>" + torgcode + "</torgcode>");
         _xmlstr.append("<reqfilerows/>");
         _xmlstr.append("<reqtxfile/>");
         _xmlstr.append("<reqfilemny/>");
         _xmlstr.append("<txchannel>0</txchannel>");
         _xmlstr.append("<enccode/>");
-        _xmlstr.append("<certcode>" + certcode + "</certcode>");
         if (type == 1) {
             _xmlstr.append("<type>1</type>");
             _xmlstr.append("<maxid/>");
@@ -84,7 +53,6 @@ public class SyncOrg {
         }
         _xmlstr.append("<startno>1</startno>");
         _xmlstr.append("<pagesize>500</pagesize>");
-        _xmlstr.append("</data>]]>");
         return _xmlstr.toString();
     }
 
@@ -92,65 +60,18 @@ public class SyncOrg {
      * 用http方式调用webservices
      */
     public static List syncOrgDeptOrUser(String name, int type) {
-        initParams();
-        System.out.println("***********************同步" + syncName + " 开始***" + DateUtil.getCurrentDateTime() + "***********************");
-        //服务的地址
-        URL wsUrl = null;
-        HttpURLConnection conn = null;
-        InputStream is = null;
-        OutputStream os = null;
-        try {
-            syncName = name;
-            wsUrl = new URL(wsdlUrl);
-            conn = (HttpURLConnection) wsUrl.openConnection();
-            if (conn != null) {
-                conn.setConnectTimeout(30000);
-                conn.setReadTimeout(30000);
-                conn.setDoInput(true);
-                conn.setDoOutput(true);
-                conn.setRequestMethod("POST");
-                conn.setRequestProperty("Content-Type", "text/xml;charset=UTF-8");
-                os = conn.getOutputStream();
-                //请求体
-                String soap = getSoapStr(type);
-                os.write(soap.getBytes());
-                is = conn.getInputStream();
-                StringBuilder sb = new StringBuilder();
-                BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-                String line = null;
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line);
-                }
-                String s = sb.toString();
-//                System.out.println("*****************返回报文(未处理)************" + s);
-                s = s.replaceAll("&lt;", "<").replaceAll("&gt;", ">").replaceAll("&quot;", "\"");
-//                System.out.println("*****************返回报文(处理过)************" + s);
-                closeConnect(conn, is, os);
-                List result = getResult(s);
-                return result;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            closeConnect(conn, is, os);
-        } finally {
-            closeConnect(conn, is, os);
+        System.out.println("***********************同步" + name + " 开始***" + DateUtil.getCurrentDateTime() + "***********************");
+        String s;
+        syncName = name;
+        if (name.equals("dept")) {
+            s = WebServiceClientUtil.doHttpPost("sso", "SYSNC_DEPART", getparamValue(type));
+        } else {
+            s = WebServiceClientUtil.doHttpPost("sso", "SYSNC_USER", getparamValue(type));
         }
-        System.out.println("***********************同步" + syncName + "结束****" + DateUtil.getCurrentDateTime() + "****************************");
-        return null;
-    }
-
-    public static String getSoapStr(Integer type) {
-        StringBuilder _xmlstr = new StringBuilder();
-        _xmlstr.append("<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"  xmlns:ser=\"");
-        _xmlstr.append(targetNamespace).append("\">");
-        _xmlstr.append("<soapenv:Header/><soapenv:Body>");
-        _xmlstr.append("<ser:").append(methodName).append(">");
-        _xmlstr.append("<").append(paramName).append(">");
-        _xmlstr.append(getparamValue(type));
-        _xmlstr.append("</").append(paramName).append(">");
-        _xmlstr.append("</ser:").append(methodName).append(">");
-        _xmlstr.append("</soapenv:Body> </soapenv:Envelope>");
-        return _xmlstr.toString();
+        s = s.replaceAll("&lt;", "<").replaceAll("&gt;", ">").replaceAll("&quot;", "\"");
+        List result = getResult(s);
+        System.out.println("***********************同步" + name + "结束****" + DateUtil.getCurrentDateTime() + "****************************");
+        return result;
     }
 
     public static List getResult(String s) {
@@ -323,22 +244,6 @@ public class SyncOrg {
             e.printStackTrace();
         }
         return null;
-    }
-
-    public static void closeConnect(HttpURLConnection conn, InputStream is, OutputStream os) {
-        try {
-            if (is != null) {
-                is.close();
-            }
-            if (os != null) {
-                os.close();
-            }
-            if (conn != null) {
-                conn.disconnect();
-            }
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
     }
 
     public static void main(String[] args) {

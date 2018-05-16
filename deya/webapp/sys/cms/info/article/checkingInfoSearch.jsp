@@ -14,11 +14,7 @@
             init_input();
             if ($.browser.msie && $.browser.version == "6.0" && $("html")[0].scrollHeight > $("html").height())
                 $("html").css("overflowY", "scroll");
-
-            $("#lab_num option[value=" + getCurrentFrameObj().snum + "]").attr("selected", true);
             getAllModelList();
-            getAllInuptUserID();
-
         });
 
         //得到所有内容模型列表
@@ -28,26 +24,8 @@
             $("#model_id").addOptions(modelBeanList, "model_id", "model_name");
         }
 
-        //得到所有录入人列表
-        function getAllInuptUserID() {
-            var m = new Map();
-            var cids = parent.getCurrentNodeChileLeftNodeIDS();
-
-            cids = cids.substring(1);
-            if (cids.indexOf(",") > -1)
-                m.put("cat_ids", cids);
-            else
-                m.put("cat_id", cids);
-
-            m.put("site_id", getCurrentFrameObj().site_id);
-            var user_list = InfoBaseRPC.getAllInuptUserID(m);
-            user_list = List.toJSList(user_list);
-            $("#input_user").addOptions(user_list, "user_id", "user_realname");
-        }
-
         function related_ok() {
             var search_con = "";
-            var lab_num = $("#lab_num :selected").val();
             var orderByFields = $("#orderByFields :selected").val();
             var model_id = $("#model_id :selected").val();
             if (model_id != "" && model_id != null) {
@@ -57,14 +35,10 @@
             if (keyWord != "" && keyWord != null) {
                 search_con += " and (ci.title like '%" + keyWord + "%' or ci.subtitle like '%" + keyWord + "%' or ci.tags like '%" + keyWord + "%') ";
             }
-            var input_user = $("#input_user :selected").val();
-            if (input_user != "" && input_user != null) {
-                search_con += " and ci.input_user = " + input_user;
-            }
             var start_time = $("#start_time").val();
             var end_time = $("#end_time").val();
             if (start_time != "" && start_time != null) {
-                search_con += " and ci.released_dtime > '" + start_time + " 00:00:00'";
+                search_con += " and ci.input_dtime > '" + start_time + " 00:00:00'";
                 if (end_time != "" && end_time != null) {
                     if (judgeDate(end_time, start_time)) {
                         msgWargin("结束时间不能小于开始时间");
@@ -73,7 +47,7 @@
                 }
             }
             if (end_time != "" && end_time != null) {
-                search_con += " and ci.released_dtime < '" + end_time + " 23:59:59'";
+                search_con += " and ci.input_dtime < '" + end_time + " 23:59:59'";
             }
             var start_weight = $("#start_weight").val();
             var end_weight = $("#end_weight").val();
@@ -97,19 +71,13 @@
             if (source != "" && source != null) {
                 search_con += " and ci.source like '%" + source + "%' ";
             }
-            getCurrentFrameObj().highSearchHandl(search_con, lab_num, orderByFields);
+            getCurrentFrameObj().highSearchHandl(search_con, orderByFields);
             CloseModalWindow();
         }
 
         function related_cancel() {
             CloseModalWindow();
         }
-
-        function getCheckedLeafNode() {
-
-        }
-
-
     </script>
 </head>
 <body>
@@ -126,35 +94,13 @@
             </td>
         </tr>
         <tr>
-            <th>信息状态：</th>
-            <td>
-                <select id="lab_num" style="width:154px">
-                    <option value="0">已发</option>
-                    <option value="1">待发</option>
-                    <option value="2">已撤</option>
-                    <option value="3">待审</option>
-                    <option value="4">退稿</option>
-                    <option value="5">草稿</option>
-                    <option value="6">回收站</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
             <th>关键字：</th>
             <td><!-- 搜标题和副标题 -->
                 <input type="text" id="keyWord" style="width:150px">
             </td>
         </tr>
         <tr>
-            <th>录入人：</th>
-            <td>
-                <select id="input_user" style="width:154px">
-                    <option value="">全部</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <th>发布时间：</th>
+            <th>录入时间：</th>
             <td>
                 <input id="start_time" name="start_time" type="text"
                        onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:true,readOnly:true})" readonly="readonly"

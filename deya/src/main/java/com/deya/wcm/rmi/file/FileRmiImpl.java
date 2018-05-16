@@ -236,6 +236,17 @@ public class FileRmiImpl extends UnicastRemoteObject implements IFileRmi{
 	{
 		return InfoBaseManager.updateInfoStatus(l, status, stl);
 	}
+
+	/**
+	 * 审核中信息撤回
+	 * @param List<InfoBean> l
+	 * @param String status
+	 * @return boolean
+	 */
+	public boolean backPassInfoStatus(String info_id, String status,SettingLogsBean stl)throws RemoteException
+	{
+		return InfoBaseManager.backPassInfoStatus(info_id, status, stl);
+	}
 	
 	/**
 	 * 纯修改信息（用于修改引用信息的主表内容）
@@ -254,9 +265,9 @@ public class FileRmiImpl extends UnicastRemoteObject implements IFileRmi{
 	 * @param stl
 	 * @return boolean
 	 */
-	public boolean passInfoStatus(List<InfoBean> info_list,String user_id, SettingLogsBean stl)throws RemoteException
+	public boolean passInfoStatus(List<InfoBean> info_list,String auto_desc,String user_id, SettingLogsBean stl)throws RemoteException
 	{
-		return InfoBaseManager.passInfoStatus(info_list, user_id, stl);
+		return InfoBaseManager.passInfoStatus(info_list,auto_desc, user_id, stl);
 	}
 	
 	/**

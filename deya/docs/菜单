@@ -1,0 +1,3 @@
+删除菜单：
+审核信息（分栏目） index.jsp?method=checkInfo
+修改信息：index.jsp?method=modifyInfo

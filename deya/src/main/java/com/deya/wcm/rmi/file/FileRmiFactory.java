@@ -518,6 +518,30 @@ public class FileRmiFactory {
 			}
 		}
 	}
+
+	/**
+	 * 审核中信息撤回
+	 * @param List<InfoBean> l
+	 * @param String status
+	 * @return boolean
+	 */
+	public static boolean backPassInfoStatus(String rmi_site_id,String info_id, String status,SettingLogsBean stl)
+	{
+		if(SiteServerManager.IS_MUTILPUBLISHSERVER == false || SiteServerManager.isTheSameServer(rmi_site_id))
+		{
+			return InfoBaseManager.backPassInfoStatus(info_id, status, stl);
+		}else
+		{
+			IFileRmi ifr = getFileRmiObj(rmi_site_id);
+			try {
+				return ifr.backPassInfoStatus(info_id, status, stl);
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return false;
+			}
+		}
+	}
 	
 	/**
 	 * 纯修改信息（用于修改引用信息的主表内容）
@@ -549,16 +573,16 @@ public class FileRmiFactory {
 	 * @param stl
 	 * @return boolean
 	 */
-	public static boolean passInfoStatus(String rmi_site_id,List<InfoBean> info_list,String user_id,SettingLogsBean stl)
+	public static boolean passInfoStatus(String rmi_site_id,List<InfoBean> info_list,String auto_desc,String user_id,SettingLogsBean stl)
 	{
 		if(SiteServerManager.IS_MUTILPUBLISHSERVER == false || SiteServerManager.isTheSameServer(rmi_site_id))
 		{
-			return InfoBaseManager.passInfoStatus(info_list,user_id, stl);
+			return InfoBaseManager.passInfoStatus(info_list,auto_desc,user_id, stl);
 		}else
 		{
 			IFileRmi ifr = getFileRmiObj(rmi_site_id);
 			try {
-				return ifr.passInfoStatus(info_list,user_id, stl);
+				return ifr.passInfoStatus(info_list,auto_desc,user_id, stl);
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

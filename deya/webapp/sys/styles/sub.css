@@ -28,19 +28,19 @@ body{background:#f7f7f7 none repeat scroll 0 0;margin-left:6px;margin-right:3px;
 .inputUL li{float:left;padding:3px 20px 3px 0}
 .inputUL label{vertical-align:middle}
 .fromTabs{border-collapse:collapse;height:4px}
-.list_tab{background:rgba(0,0,0,0) none repeat scroll 0 0;float:left;height:4px;margin:0 2px}
+.list_tab{background:rgba(0,0,0,0) url(../images/list_tab_cur_bg.png) repeat-x scroll 0 0;float:left;margin:0 2px;height:27px;line-height:27px;cursor: pointer;}
 /*
+.list_tab_cur{background:rgba(0,0,0,0) url(../images/list_tab_cur_bg.png) repeat-x scroll 0 0;float:left;height:27px;margin:0 2px;line-height:27px;}
 .list_tab .tab_left{background:rgba(0,0,0,0) none repeat scroll 0 0;display:block;float:left;height:27px}
 .list_tab .tab_right{background:rgba(0,0,0,0) none repeat scroll 0 0;cursor:default;display:block;float:left;height:27px;line-height:27px;padding:0 7px}
 */
-.list_tab_cur{background:rgba(0,0,0,0) url(../images/list_tab_cur_bg.png) repeat-x scroll 0 0;float:left;height:0px;margin:0 2px;line-height:0px}
 
 /*.list_tab_cur .tab_left{background:rgba(0,0,0,0) url(../images/list_tab_cur_left.gif) no-repeat scroll left center;height:27px}
 .list_tab_cur .tab_right{background:rgba(0,0,0,0) url(../images/list_tab_cur_right.gif) no-repeat scroll right center;cursor:default;height:27px;line-height:27px;padding:0 7px}
 */
-.list_tab_over{background:rgba(0,0,0,0) url(../images/list_tab_over_bg.gif) repeat-x scroll 0 0;float:left;height:27px;margin:0 2px}
-.list_tab_over .tab_left{background:rgba(0,0,0,0) url(../images/list_tab_over_left.gif) no-repeat scroll left center;height:27px}
-.list_tab_over .tab_right{background:rgba(0,0,0,0) url(../images/list_tab_over_right.gif) no-repeat scroll right center;cursor:default;height:27px;line-height:27px;padding:0 7px}
+.list_tab_cur{background:rgba(0,0,0,0) url(../images/list_tab_over_bg.gif) repeat-x scroll 0 0;float:left;height:27px;margin:0 2px}
+.list_tab_cur .tab_left{background:rgba(0,0,0,0) url(../images/list_tab_over_left.gif) no-repeat scroll left center;height:27px;line-height:27px;}
+.list_tab_cur .tab_right{background:rgba(0,0,0,0) url(../images/list_tab_over_right.gif) no-repeat scroll right center;cursor:default;height:27px;line-height:27px;padding:0 7px}
 .table_border{border:1px solid #bfbfbf;border-collapse:collapse;width:100%}
 .table_border thead tr{background-color:#f7f6f2;height:30px}
 .table_border thead td{border-bottom:1px solid #bbccde;color:#000000;cursor:default;font-weight:700}

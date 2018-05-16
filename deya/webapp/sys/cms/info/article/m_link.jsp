@@ -107,7 +107,7 @@ $(document).ready(function(){
 
 function savePicUrl(url)
 {
-	$("#thumb_url").val(url);
+	$("#content_url").val(url);
 }
 </script>
 </head>
@@ -124,17 +124,18 @@ function savePicUrl(url)
 		<tr>
 			<th ><span class="f_red">*</span>链接：</th>
 			<td style="">
-				<input id="content_url" name="content_url" type="text" class="width350" maxlength="900" value="" onblur="checkInputValue('content_url',false,900,'链接','')"/>
-			</td>
-		</tr>
-		<tr>
-			<th>缩略图：</th>
-			<td>
-				<div style="float:left;margin:auto;"><input id="thumb_url" name="thumb_url" type="text" style="width:250px;" value="" /></div>
+				<div style="float:left"><input id="content_url" name="content_url" type="text" class="width350" maxlength="900" value="" onblur="checkInputValue('content_url',false,900,'链接','')"/></div>
 				<div style="float:left"><input type="file" name="uploadify" id="uploadify"/></div>
 				<div style="float:left">&nbsp;<input id="i005" name="i005" type="button" onclick="selectPageHandle()" value="图片库" /></div>
 			</td>
 		</tr>
+		<%--<tr>
+			<th>缩略图：</th>
+			<td>
+				<div style="float:left;margin:auto;"><input id="thumb_url" name="thumb_url" type="text" style="width:250px;" value="" /></div>
+
+			</td>
+		</tr>--%>
 	  </tbody>
 	</table>
 <!-- 内容主体不同部分　结束 -->

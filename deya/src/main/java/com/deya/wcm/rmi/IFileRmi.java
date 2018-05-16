@@ -113,6 +113,14 @@ public interface IFileRmi extends Remote{
 	 * @return boolean
 	 */
 	public boolean updateInfoStatus(List<InfoBean> l, String status,SettingLogsBean stl)throws RemoteException;
+
+	/**
+	 * 审核中信息撤回
+	 * @param List<InfoBean> l
+	 * @param String status
+	 * @return boolean
+	 */
+	public boolean backPassInfoStatus(String info_id, String status,SettingLogsBean stl)throws RemoteException;
 	
 	/**
 	 * 纯修改信息（用于修改引用信息的主表内容）
@@ -128,7 +136,7 @@ public interface IFileRmi extends Remote{
 	 * @param stl
 	 * @return boolean
 	 */
-	public boolean passInfoStatus(List<InfoBean> info_list,String user_id, SettingLogsBean stl)throws RemoteException;
+	public boolean passInfoStatus(List<InfoBean> info_list,String auto_desc,String user_id, SettingLogsBean stl)throws RemoteException;
 	
 	/**
 	 * 生成内容页

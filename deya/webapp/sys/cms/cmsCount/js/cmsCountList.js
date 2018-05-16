@@ -126,7 +126,9 @@ function showTimeInput(){
 		$("#time_year").attr("disabled","disabled");
 		$("#time_month").attr("disabled","disabled");
 		$("#start_day").removeAttr("disabled");
+        $("#start_day").addClass("Wdate");
 		$("#end_day").removeAttr("disabled");
+        $("#end_day").addClass("Wdate");
 		
 		$("#byday").attr("disabled","disabled");
 		$("#bymonth").attr("disabled","disabled");
@@ -136,7 +138,9 @@ function showTimeInput(){
 		$("#time_year").removeAttr("disabled");
 		$("#time_month").removeAttr("disabled");
 		$("#start_day").attr("disabled","disabled");
+        $("#start_day").removeClass("Wdate");
 		$("#end_day").attr("disabled","disabled");
+        $("#end_day").removeClass("Wdate");
 		
 		if($("#time_month").val() !=0 ){
 			$("#byday").removeAttr("disabled");

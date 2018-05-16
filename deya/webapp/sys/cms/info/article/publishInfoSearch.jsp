@@ -14,11 +14,8 @@
             init_input();
             if ($.browser.msie && $.browser.version == "6.0" && $("html")[0].scrollHeight > $("html").height())
                 $("html").css("overflowY", "scroll");
-
-            $("#lab_num option[value=" + getCurrentFrameObj().snum + "]").attr("selected", true);
             getAllModelList();
             getAllInuptUserID();
-
         });
 
         //得到所有内容模型列表
@@ -31,14 +28,6 @@
         //得到所有录入人列表
         function getAllInuptUserID() {
             var m = new Map();
-            var cids = parent.getCurrentNodeChileLeftNodeIDS();
-
-            cids = cids.substring(1);
-            if (cids.indexOf(",") > -1)
-                m.put("cat_ids", cids);
-            else
-                m.put("cat_id", cids);
-
             m.put("site_id", getCurrentFrameObj().site_id);
             var user_list = InfoBaseRPC.getAllInuptUserID(m);
             user_list = List.toJSList(user_list);
@@ -47,7 +36,6 @@
 
         function related_ok() {
             var search_con = "";
-            var lab_num = $("#lab_num :selected").val();
             var orderByFields = $("#orderByFields :selected").val();
             var model_id = $("#model_id :selected").val();
             if (model_id != "" && model_id != null) {
@@ -64,7 +52,7 @@
             var start_time = $("#start_time").val();
             var end_time = $("#end_time").val();
             if (start_time != "" && start_time != null) {
-                search_con += " and ci.released_dtime > '" + start_time + " 00:00:00'";
+                search_con += " and ci.input_dtime > '" + start_time + " 00:00:00'";
                 if (end_time != "" && end_time != null) {
                     if (judgeDate(end_time, start_time)) {
                         msgWargin("结束时间不能小于开始时间");
@@ -73,7 +61,7 @@
                 }
             }
             if (end_time != "" && end_time != null) {
-                search_con += " and ci.released_dtime < '" + end_time + " 23:59:59'";
+                search_con += " and ci.input_dtime < '" + end_time + " 23:59:59'";
             }
             var start_weight = $("#start_weight").val();
             var end_weight = $("#end_weight").val();
@@ -86,6 +74,33 @@
                     }
                 }
             }
+
+            var p_start_time = $("#p_start_time").val();
+            var p_end_time = $("#p_end_time").val();
+            if (p_start_time != "" && p_start_time != null) {
+                search_con += " and ci.released_dtime > '" + p_start_time + " 00:00:00'";
+                if (p_end_time != "" && p_end_time != null) {
+                    if (judgeDate(p_end_time, p_start_time)) {
+                        msgWargin("结束时间不能小于开始时间");
+                        return;
+                    }
+                }
+            }
+            if (p_end_time != "" && p_end_time != null) {
+                search_con += " and ci.released_dtime < '" + p_end_time + " 23:59:59'";
+            }
+            var start_weight = $("#start_weight").val();
+            var end_weight = $("#end_weight").val();
+            if (start_weight != "" && start_weight != null) {
+                search_con += " and ci.weight > " + start_weight;
+                if (end_weight != "" && end_weight != null) {
+                    if (end_weight < start_weight) {
+                        msgWargin("权重结束值不能小于开始值");
+                        return;
+                    }
+                }
+            }
+
             if (end_weight != "" && end_weight != null) {
                 search_con += " and ci.weight < " + end_weight;
             }
@@ -97,19 +112,13 @@
             if (source != "" && source != null) {
                 search_con += " and ci.source like '%" + source + "%' ";
             }
-            getCurrentFrameObj().highSearchHandl(search_con, lab_num, orderByFields);
+            getCurrentFrameObj().highSearchHandl(search_con, orderByFields);
             CloseModalWindow();
         }
 
         function related_cancel() {
             CloseModalWindow();
         }
-
-        function getCheckedLeafNode() {
-
-        }
-
-
     </script>
 </head>
 <body>
@@ -122,20 +131,6 @@
             <td>
                 <select id="model_id" style="width:154px">
                     <option value="">全部</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <th>信息状态：</th>
-            <td>
-                <select id="lab_num" style="width:154px">
-                    <option value="0">已发</option>
-                    <option value="1">待发</option>
-                    <option value="2">已撤</option>
-                    <option value="3">待审</option>
-                    <option value="4">退稿</option>
-                    <option value="5">草稿</option>
-                    <option value="6">回收站</option>
                 </select>
             </td>
         </tr>
@@ -154,12 +149,23 @@
             </td>
         </tr>
         <tr>
-            <th>发布时间：</th>
+            <th>录入时间：</th>
             <td>
                 <input id="start_time" name="start_time" type="text"
                        onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:true,readOnly:true})" readonly="readonly"
                        style="width:80px"/>
                 -&nbsp;<input id="end_time" name="end_time" type="text"
+                              onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:true,readOnly:true})"
+                              readonly="readonly" style="width:80px"/>
+            </td>
+        </tr>
+        <tr>
+            <th>发布时间：</th>
+            <td>
+                <input id="p_start_time" name="p_start_time" type="text"
+                       onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:true,readOnly:true})" readonly="readonly"
+                       style="width:80px"/>
+                -&nbsp;<input id="p_end_time" name="p_end_time" type="text"
                               onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:true,readOnly:true})"
                               readonly="readonly" style="width:80px"/>
             </td>

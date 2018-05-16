@@ -58,7 +58,7 @@ function updateInfoData()
 	if(bean.info_status == "8" || bean.info_status == 8){
 		bean.step_id = 100;
 	}else{
-		bean.step_id = 0;
+        bean.step_id = $("#step_id").val();
 	}
 
     var publish_source = "";

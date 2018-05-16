@@ -180,6 +180,8 @@ public class PublicTableDAO {
 	public static String INFO_PIC_TABLE_NAME = "cs_info_pic";// 图组模型表
 	
 	public static String INFO_VIDEO_TABLE_NAME = "cs_info_video";// 视频模型表
+
+	public static String INFO_WORK_STEP = "cs_info_workstep";// 信息审核流程步骤
 	
 	// public
 

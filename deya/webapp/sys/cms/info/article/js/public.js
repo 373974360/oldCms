@@ -1090,8 +1090,12 @@ function setInfoStatusButton() {
         var workFlowBean = jsonrpc.WorkFlowRPC.getWorkFlowBean(wf_id);
         var workStepList = workFlowBean.workFlowStep_list;
         workStepList = List.toJSList(workStepList);
+        var info_step_id = 0;
+        if(infoid != null && infoid != "" && infoid != "null"){
+            info_step_id = InfoBaseRPC.getInfoById(infoid,site_id).step_id;
+        }
         for (var i = 0; i < workStepList.size(); i++) {
-            // if (workStepList.get(i).step_id > step_id) {
+            if (workStepList.get(i).step_id > info_step_id) {
                 if (workStepList.get(i).required == 1) {
                     $("#audit_tr").removeClass("hidden");
                     var html = '<input id="auditChecked" name="auditStep" type="radio" checked="checked" onclick="setStepId(' + (workStepList.get(i).step_id - 1) + ')"/><label for="e">' + workStepList.get(i).step_name + '</label>&nbsp;&nbsp;';
@@ -1106,7 +1110,7 @@ function setInfoStatusButton() {
                     auditHtml = auditHtml + html;
                     $("#audit_list").append(html);
                 }
-            // }
+            }
         }
         /*
          step_id = getMaxStepIDByUserID(wf_id,app_id,site_id);
@@ -1142,9 +1146,9 @@ function setUserOperate() {
     userOpts = opt_ids;
     //判断是否是站点管理员或超级管理员
     if (isSiteManager(app_id, site_id)) {
-        $("#opt_302").show().find("input").click();
-        $("#audit_tr").addClass("hidden");
-        $("#opt_303").show();
+        // $("#opt_302").show().find("input").click();
+        // $("#audit_tr").addClass("hidden");
+        // $("#opt_303").show();
         $("#timer_publish").hide();//显示出定时发布区域
     } else {
         if (wf_id == 0) {
@@ -1158,13 +1162,13 @@ function setUserOperate() {
         else if (opt_ids.indexOf(",303,") > -1) {
             //得到管理员审核流程中最大的步骤ID, 只有最终审核的人才有终审通过权限
             if (step_id == 100) {
-                $("#opt_303").show();
+                // $("#opt_303").show();
                 //是否有发布权限
-                if (opt_ids.indexOf(",302,") > -1) {
-                    $("#opt_302").show().find("input").click();
-                    $("#audit_tr").addClass("hidden");
-                    $("#timer_publish").hide(); //显示出定时发布区域
-                }
+                // if (opt_ids.indexOf(",302,") > -1) {
+                //     $("#opt_302").show().find("input").click();
+                //     $("#audit_tr").addClass("hidden");
+                //     $("#timer_publish").hide(); //显示出定时发布区域
+                // }
             }
         } else {
 

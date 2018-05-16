@@ -1,34 +1,20 @@
 package com.yinhai.pdf;
 
 import com.deya.util.DateUtil;
-import com.deya.util.UploadManager;
 import com.deya.util.jconfig.JconfigUtilContainer;
-import com.deya.wcm.bean.cms.info.ArticleBean;
-import com.deya.wcm.bean.cms.info.InfoBean;
-import com.deya.wcm.bean.cms.info.PicBean;
-import com.deya.wcm.bean.cms.info.VideoBean;
 import com.deya.wcm.bean.org.user.LoginUserBean;
 import com.deya.wcm.bean.survey.SurveyBean;
-import com.deya.wcm.services.cms.info.InfoBaseManager;
 import com.deya.wcm.services.org.user.SessionManager;
 import com.deya.wcm.services.survey.SurveyService;
-import com.deya.wcm.template.velocity.data.InfoUtilData;
-import com.itextpdf.text.pdf.PdfWriter;
-import com.itextpdf.tool.xml.XMLWorkerFontProvider;
-import com.itextpdf.tool.xml.XMLWorkerHelper;
 import com.yinhai.model.GuiDangVo;
-import com.yinhai.sftp.UpLoadFile;
+import com.yinhai.sftp.SFTPUtils;
 import com.yinhai.webservice.client.GuiDangServiceClient;
-import freemarker.template.Configuration;
-import freemarker.template.Template;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.*;
-import java.nio.charset.Charset;
-import java.util.*;
+import java.io.File;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -42,32 +28,14 @@ import java.util.regex.Pattern;
  */
 
 
-public class QuestionToPdf {
+public class SurveyToPdf {
 
-    private static final String FONT = "font/wryh.ttf";
     private static final String HTML = "question_template.html";
-    private static String dest = "";
-    private static Configuration freemarkerCfg = null;
-    private static String ip = "";
-    private static int port = 0;
-    private static String user = "";
-    private static String pwd = "";
-    private static String dpath = "";
-
+    private static String localPath;
+    private static String remotePath;
     static {
-        freemarkerCfg = new Configuration();
-        dest = JconfigUtilContainer.bashConfig().getProperty("pdfdir", "", "sftp");
-        ip = JconfigUtilContainer.bashConfig().getProperty("ip", "", "sftp");
-        port = Integer.parseInt(JconfigUtilContainer.bashConfig().getProperty("port", "", "sftp"));
-        user = JconfigUtilContainer.bashConfig().getProperty("user", "", "sftp");
-        pwd = JconfigUtilContainer.bashConfig().getProperty("password", "", "sftp");
-        dpath = JconfigUtilContainer.bashConfig().getProperty("dpath", "", "sftp");
-        //freemarker的模板目录
-        try {
-            freemarkerCfg.setDirectoryForTemplateLoading(new File(PathUtil.getCurrentPath() + "/template"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        localPath = JconfigUtilContainer.bashConfig().getProperty("localPath", "", "sftp");
+        remotePath = JconfigUtilContainer.bashConfig().getProperty("remotePath", "", "sftp");
     }
 
     public static boolean toPdf(String sids, HttpServletRequest request) {
@@ -96,15 +64,16 @@ public class QuestionToPdf {
                     guiDangVo.setCurdate(DateUtil.getString(new Date(), "yyyyMMdd"));
                     try {
                         data.put("content", completeHtmlTag(surveyBean.getSurvey_content(), domain));
-                        String content = freeMarkerRender(data, HTML);
+                        String content = PdfUtil.freeMarkerRender(data, HTML);
                         String pdfName = surveyBean.getS_id() + ".pdf";
-                        String pdfPath = dest + pdfName;
-                        createPdf(content, pdfPath);
+                        String pdfPath = localPath + pdfName;
+                        PdfUtil.createPdf(content, pdfPath);
                         String attrFiles = pdfName;
                         guiDangVo.setFiles(attrFiles);
                         //上传文章生成的pdf到sftp服务器
-                        UpLoadFile.sshSftpUpload(ip, user, pwd, port, pdfPath, dpath);
-                        guiDangVo.setFilepath(dpath);
+                        SFTPUtils sftpUtils = new SFTPUtils();
+                        sftpUtils.uploadFile(pdfName,pdfName);
+                        guiDangVo.setFilepath(remotePath);
                         int i = GuiDangServiceClient.doService(guiDangVo);
                         if (i == 0) {
                             status = false;
@@ -123,47 +92,6 @@ public class QuestionToPdf {
         return status;
     }
 
-    public static void createPdf(String content, String dest) throws IOException, com.itextpdf.text.DocumentException {
-        // step 1
-        com.itextpdf.text.Document document = new com.itextpdf.text.Document();
-        // step 2
-        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(dest));
-        // step 3
-        document.open();
-        // step 4
-        XMLWorkerFontProvider fontImp = new XMLWorkerFontProvider(XMLWorkerFontProvider.DONTLOOKFORFONTS);
-        fontImp.register(FONT);
-        XMLWorkerHelper.getInstance().parseXHtml(writer, document,
-                new ByteArrayInputStream(content.getBytes()), null, Charset.forName("UTF-8"), fontImp);
-        // step 5
-        document.close();
-
-    }
-
-    /**
-     * freemarker渲染html
-     */
-    public static String freeMarkerRender(Map<String, Object> data, String htmlTmp) {
-        Writer out = new StringWriter();
-        try {
-            // 获取模板,并设置编码方式
-            Template template = freemarkerCfg.getTemplate(htmlTmp);
-            template.setEncoding("UTF-8");
-            // 合并数据模型与模板
-            template.process(data, out); //将合并后的数据和模板写入到流中，这里使用的字符流
-            out.flush();
-            return out.toString();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                out.close();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        }
-        return null;
-    }
 
     public static String completeHtmlTag(String html, String domain) {
 //        System.out.println(html);

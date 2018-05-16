@@ -84,9 +84,12 @@ if(model == null || !model.matches("[0-9]*")){
 	    <tr>
             <th><span class="f_red">*</span>发布渠道：</th>
             <td>
-                <input  name="publish_source" type="checkbox" class="" value="pc" checked="checked"  />网站&nbsp;&nbsp;&nbsp;&nbsp;
-                <input  name="publish_source" type="checkbox" class="" value="wx" checked="checked" />微信&nbsp;&nbsp;&nbsp;&nbsp;
+                <input  name="publish_source" type="checkbox" class="" value="wt" checked="checked"  />网厅&nbsp;&nbsp;&nbsp;&nbsp;
+                <input  name="publish_source" type="checkbox" class="" value="mh" checked="checked" />门户&nbsp;&nbsp;&nbsp;&nbsp;
                 <input  name="publish_source" type="checkbox" class="" value="app" checked="checked" />APP&nbsp;&nbsp;&nbsp;&nbsp;
+				<input  name="publish_source" type="checkbox" class="" value="wx" checked="checked" />微信&nbsp;&nbsp;&nbsp;&nbsp;
+				<input  name="publish_source" type="checkbox" class="" value="zzzd" checked="checked" />自助终端&nbsp;&nbsp;&nbsp;&nbsp;
+				<input  name="publish_source" type="checkbox" class="" value="dp" checked="checked" />大屏&nbsp;&nbsp;&nbsp;&nbsp;
             </td>
         </tr>
 		<tr>
