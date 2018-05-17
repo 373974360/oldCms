@@ -11,6 +11,7 @@ import com.deya.wcm.dao.PublicTableDAO;
 import com.deya.wcm.dao.zwgk.ysqgk.YsqgkInfoDAO;
 import com.deya.wcm.dao.zwgk.ysqgk.YsqgkProessDAO;
 import com.deya.wcm.services.appeal.cpUser.CpUserManager;
+import com.deya.wcm.services.org.user.UserLogin;
 import com.deya.wcm.services.zwgk.node.GKNodeManager;
 
 import java.util.HashMap;
@@ -58,7 +59,11 @@ public class YsqgkInfoManager {
 
     public static List<YsqgkListBean> getYsqgkLists(Map<String, String> m,int user_id) {
         setTimeCon(m);
-        m.put("dept_id",CpUserManager.getSQDeptIDbyUserID(user_id) + "");
+        //非管理员登录根据所属部门ID查询
+        if(!UserLogin.isSiteManager(user_id+"",m.get("app_id"),m.get("site_id")))
+        {
+            m.put("dept_id",CpUserManager.getSQDeptIDbyUserID(user_id) + "");
+        }
         return YsqgkInfoDAO.getYsqgkLists(m);
     }
 

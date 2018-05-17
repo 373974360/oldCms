@@ -113,7 +113,7 @@
                 sq_con_map.put("sort_type", "desc");
                 sq_con_map.put("do_state", "0");
                 sq_con_map.put("final_status", "0");
-                List<YsqgkListBean> result = YsqgkInfoManager.getYsqgkLists(sq_con_map);
+                List<YsqgkListBean> result = YsqgkInfoManager.getYsqgkLists(sq_con_map,user_id);
 
                 String info_count = "0";
 
