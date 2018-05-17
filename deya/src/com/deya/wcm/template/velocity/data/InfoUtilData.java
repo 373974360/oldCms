@@ -210,7 +210,7 @@ public class InfoUtilData
     public static List<GKInfoBean> getGKInfoListForSharedCate(String params)
     {
         Map<String, String> con_map = new HashMap();
-        getInfoSearchCon(params, con_map, "");
+        getInfoSearchCon(params, con_map, "zwgk");
 
         return GKInfoManager.getBroGKInfoListForSharedCategory(con_map);
     }
@@ -218,7 +218,7 @@ public class InfoUtilData
     public static TurnPageBean getGKInfoCountForSharedCate(String params)
     {
         Map<String, String> con_map = new HashMap();
-        getInfoSearchCon(params, con_map, "");
+        getInfoSearchCon(params, con_map, "zwgk");
 
         TurnPageBean tpb = new TurnPageBean();
         tpb.setCount(Integer.parseInt(GKInfoManager.getBroGKInfoCountForSharedCategory(con_map)));
@@ -626,9 +626,9 @@ public class InfoUtilData
             } else if ("zwgk".equals(app_id))
             {
                 if (cat_id.indexOf(",") > -1) {
-                    con_map.put("cat_sql", "gk.topic_id in (" + cat_id + ") or gk.theme_id in (" + cat_id + ") or gk.serve_id in (" + cat_id + ") or ca.cat_class_id in (" + cat_id + ")");
+                    con_map.put("cat_sql", "(gk.topic_id in (" + cat_id + ") or gk.theme_id in (" + cat_id + ") or gk.serve_id in (" + cat_id + ") or ca.cat_class_id in (" + cat_id + ") or gk.gkbzh_id in (" + cat_id + ") or gk.gkhj_id in (" + cat_id + "))");
                 } else {
-                    con_map.put("cat_sql", "gk.topic_id=" + cat_id + " or gk.theme_id=" + cat_id + " or gk.serve_id=" + cat_id + " or ca.cat_class_id = " + cat_id);
+                    con_map.put("cat_sql", "(gk.topic_id=" + cat_id + " or gk.theme_id=" + cat_id + " or gk.serve_id=" + cat_id + " or ca.cat_class_id = " + cat_id + " or gk.gkbzh_id = " + cat_id + " or gk.gkhj_id = " + cat_id+")");
                 }
             }
             else {
