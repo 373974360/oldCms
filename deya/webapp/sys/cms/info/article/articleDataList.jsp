@@ -183,7 +183,7 @@ function getSelectInfoBeans()
 
 		<td align="left" valign="middle" >
 
-			<input id="searchkey" type="text" class="input_text" style="width:240px;" value=""  /><input id="btn" type="button" value="搜索" onclick="searchInfo()"/>
+			<input id="searchkey" type="text" class="input_text" style="width:240px;" value=""  /><input id="btn" name="btn" type="button" value="搜索" onclick="searchInfo()"/>
 			<select id="orderByFields" class="input_select" onchange="changeTimeSort(this.value)">
 				<option selected="selected" value="1">时间倒序</option>
 				<option value="2">时间正序</option>
