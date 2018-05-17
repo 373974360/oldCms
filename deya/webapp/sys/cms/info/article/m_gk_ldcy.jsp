@@ -1,3 +1,5 @@
+<%@ page import="com.deya.wcm.bean.cms.category.CategoryBean" %>
+<%@ page import="com.deya.wcm.services.cms.category.CategoryManager" %>
 <%@ page contentType="text/html; charset=utf-8"%>
 <%
 	String cid = request.getParameter("cid");
@@ -5,6 +7,7 @@
 	String infoid = request.getParameter("info_id");
 	String app_id = request.getParameter("app_id");
 	String model = request.getParameter("model");
+	CategoryBean cb = CategoryManager.getCategoryBeanCatID(Integer.parseInt(cid));
 	if(cid == null || cid.equals("null")){
 		cid = "0";
 	}
@@ -82,7 +85,17 @@ var rela_site_id = "";//该节点所关联的站点
 <span class="blank12"></span>
 <form action="#" name="form1">
 <div id="info_article_table">
-<jsp:include page="../include/include_public_gk.jsp"/>
+<%
+if(cb.getMlsx()==1){
+%>
+	<jsp:include page="../include/include_public.jsp"/>
+<%
+}else if(cb.getMlsx()==2){
+%>
+	<jsp:include page="../include/include_public_gk.jsp"/>
+<%
+}
+%>
 <!-- 内容主体不同部分　开始 -->
 
 <table id="" class="table_form" border="0" cellpadding="0" cellspacing="0">
@@ -138,8 +151,17 @@ var rela_site_id = "";//该节点所关联的站点
 		</tr>
 </tbody>
 </table>
-<!-- 内容主体不同部分　结束 -->
-<jsp:include page="../include/include_public_high_gk.jsp"/>
+<!-- 内容主体不同部分　结束 --><%
+if(cb.getMlsx()==1){
+    %>
+                <jsp:include page="../include/include_public_high.jsp"/>
+                <%
+            }else if(cb.getMlsx()==2){
+                %>
+                <jsp:include page="../include/include_public_high_gk.jsp"/>
+                <%
+            }
+            %>
 </div>
 <!--隔线开始-->
 <span class="blank12"></span>

@@ -76,7 +76,17 @@ function savePicUrl(url)
 <span class="blank12"></span>
 <form action="#" name="form1">
 <div id="info_article_table">
-<jsp:include page="../include/include_public_gk.jsp"/>
+<%
+if(cb.getMlsx()==1){
+%>
+	<jsp:include page="../include/include_public.jsp"/>
+<%
+}else if(cb.getMlsx()==2){
+%>
+	<jsp:include page="../include/include_public_gk.jsp"/>
+<%
+}
+%>
 
 <!-- 内容主体不同部分　开始 -->
 <table id="" class="table_form" border="0" cellpadding="0" cellspacing="0">
