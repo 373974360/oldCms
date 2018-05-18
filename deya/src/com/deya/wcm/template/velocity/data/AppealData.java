@@ -491,6 +491,7 @@ public class AppealData{
 				{		
 					if("yesterday".equals(count_data))
 					{
+						m.put("yesterday_con",count_data);
 						m.put("start_data", DateUtil.getDateBefore(DateUtil.getCurrentDateTime(),1)+" 00:00:00");
 						m.put("end_data", DateUtil.getDateBefore(DateUtil.getCurrentDateTime(),1)+" 23:59:59");
 					}
@@ -520,6 +521,7 @@ public class AppealData{
 					}
 					if("cur_data".equals(count_data))
 					{
+						m.put("cur_data",count_data);
 						m.put("start_data", DateUtil.getCurrentDate()+" 00:00:00");
 					}
 				}				
