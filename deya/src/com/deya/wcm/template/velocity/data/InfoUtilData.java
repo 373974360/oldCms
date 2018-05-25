@@ -369,6 +369,24 @@ public class InfoUtilData
                     interval = true;
                 }
             }
+            if (tempA[i].toLowerCase().startsWith("gk_hj="))
+            {
+                String gk_hj = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
+                if ((!"".equals(gk_hj)) && (!gk_hj.startsWith("$gk_hj")) && (FormatUtil.isValiditySQL(gk_hj)))
+                {
+                    con_map.put("gk_hj", gk_hj);
+                    interval = true;
+                }
+            }
+            if (tempA[i].toLowerCase().startsWith("fanwei="))
+            {
+                String fanwei = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
+                if ((!"".equals(fanwei)) && (!fanwei.startsWith("$fanwei")) && (FormatUtil.isValiditySQL(fanwei)))
+                {
+                    con_map.put("fanwei", fanwei);
+                    interval = true;
+                }
+            }
             if (tempA[i].toLowerCase().startsWith("start_time="))
             {
                 String start_time = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
