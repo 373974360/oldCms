@@ -680,8 +680,8 @@ public class CountServices {
                 		   map.put("s", s);
                 		   map.put("e", e);
                 		   //已办结总件数
-                		   map.put("sq_status", "2");
-                		   String countEnd = CountDAO.getCountByModelIdAndPur(map);
+                		   map.put("sq_status", "3");
+                		   String countEnd = CountDAO.getCountByModelIdAndDept(map);
                 		   objects[1] = countEnd;
                 		   //已评价信件数
                 		   map.put("sat_score", "0");  

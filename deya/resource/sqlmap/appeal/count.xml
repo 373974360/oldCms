@@ -75,7 +75,7 @@
          <if test="pur_id != null"> 
                and pur_id=${pur_id}   
          </if>  
-         <if test="sat_score != sat_score"> 
+         <if test="sat_score != null">
                and sat_score>${sat_score}  
          </if>  
 	</select>
