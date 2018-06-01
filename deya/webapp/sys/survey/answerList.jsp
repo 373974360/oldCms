@@ -9,20 +9,24 @@
 <jsp:include page="../include/include_tools.jsp"/>
 <script src="js/answerList.js"></script>	
 <script type="text/javascript">
-var div_height = 0;		
 var s_id = request.getParameter("sid");
 $(document).ready(function () {		
 	initTable();
 	initButtomStyle();
-	searchHandl("");			
+    reloadList();
 }); 
 
-function searchHandl(str)
+function searchHandl(sourceParam,str)
 {
 	con = str;
-	showTurnPage();
-	showList();	
-}	
+	source = sourceParam;
+    reloadList();
+}
+
+function reloadList(){
+    showTurnPage();
+    showList();
+}
 
 function goOtherPage()
 {
@@ -31,7 +35,7 @@ function goOtherPage()
 
 function openSearch()
 {
-	OpenModalWindow("数据统计查询","/sys/survey/search_statistics.jsp?s_id="+s_id,800,490);
+	parent.OpenModalWindow("数据统计查询","/sys/survey/search_statistics.jsp?s_id="+s_id,800,490);
 }
 
 
@@ -55,14 +59,6 @@ function openSearch()
 	<span class="blank3"></span>
 	<div id="table"></div><!-- 列表DIV -->
 	<div id="turn"></div><!-- 翻页DIV -->
-	<table class="table_option" border="0" cellpadding="0" cellspacing="0">
-	<tr>
-		<td align="left" valign="middle">
-			<input id="btn1" name="btn1" type="button" onclick="goOtherPage()" value="数据统计" />
-				<input id="btn1" name="btn1" type="button" onclick="openSearch()" value="查询" />
-		</td>
-	</tr>
-   </table>	
 </div>
 </body>
 </html>

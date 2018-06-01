@@ -38,6 +38,7 @@
 								<li><a href="#" onclick="changeUrl('/sys/index.jsp?method=addInfo')">添加信息</a> </li>
 								<li><a href="#" onclick="changeUrl('/sys/index.jsp?method=modifyInfo')">修改信息</a> </li>
 								<li><a href="#" onclick="changeUrl('/sys/index.jsp?method=delInfo')">删除信息</a> </li>
+								<li><a href="#" onclick="changeUrl('/sys/index.jsp?menuUrl=/sys/cms/info/article/publishList.jsp')">发布信息</a> </li>
 								<li><a href="#" onclick="changeUrl('/sys/index.jsp?method=unPublishInfo')">撤销信息</a> </li>
 								<li><a href="#" onclick="changeUrl('/sys/index.jsp?method=unPublishedInfo')">已撤信息</a> </li>
 								<li><a href="#" onclick="changeUrl('/sys/index.jsp?method=checkInfo')">审核信息（分栏目）</a> </li>
@@ -73,42 +74,7 @@
 					</div>
 				</div>
 			</td>
-			<td id="area_cut" onclick="switchSysBar();" valign="top">
-				<img id="switchSysBar_pic" src="images/switchSysBar.gif" title="关闭左栏"  />
-			</td>
 			<td id="area_right" align="left" valign="top">
-				<!--右区域头/页签区域开始-->
-				<div id="area_frame_tabs">
-					<div class="area_frame_tabs_left">
-						<div class="area_frame_tabs_right">
-							<div class="tabs-header" style=" padding-left:5px;">
-								<span class="blank5"></span>
-
-								<div class="tabs-scroller-left" style="display:none; "></div>
-								<div class="tabs-scroller-right" style="display:none; "></div>
-
-
-								<ul class="tabs">
-
-								</ul>
-
-
-							</div>
-						</div>
-					</div>
-				</div>
-				<!--右区域头/页签区域结束-->
-				<!--当前位置开始-->
-				<div id="area_frame_local">
-					<div class="area_frame_local_left">
-						<div class="area_frame_local_right">
-							<div id="cur_local">
-								<!--当前位置&nbsp;:&nbsp;平台管理&nbsp;&gt;&nbsp;注册管理-->
-							</div>
-						</div>
-					</div>
-				</div>
-				<!--当前位置结束-->
 				<!--主工作区开始-->
 				<div id="area_frame_work">
 					<div class="area_frame_work_left">

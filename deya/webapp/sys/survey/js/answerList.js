@@ -8,6 +8,7 @@
 	var table = new Table();	
 	table.table_name = "table";	
 	var con = "";
+	var source = "";
 
 /********** 显示table begin*************/	
 
@@ -40,7 +41,7 @@
 			sortType = "desc";
 		}
 
-		beanList = SurveyRPC.getAnswerList(s_id,con,start,pageSize);//第一个参数为站点ID，暂时默认为空		
+		beanList = SurveyRPC.getAnswerList(s_id,source,con,start,pageSize);//第一个参数为站点ID，暂时默认为空
 		beanList = List.toJSList(beanList);//把list转成JS的List对象		
 		//alert(toJSON(beanList.get(0)));//然后就可以调用get(),add()等方法了
 		//alert(beanList);
@@ -61,7 +62,7 @@
 	}
 	
 	function showTurnPage(){		
-		tp.total = SurveyRPC.getAnswerListCount(s_id,con);		
+		tp.total = SurveyRPC.getAnswerListCount(s_id,source,con);
 		tp.show("turn","");
 		tp.onPageChange = showList;
 	}

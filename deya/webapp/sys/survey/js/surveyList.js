@@ -706,13 +706,21 @@ function updateRecommend(flag)
 //搜索
 function roleSearchHandl(obj)
 {
+    search_con = "";
 	var con_value = $(obj).parent().find("#searchkey").val();
-	if(con_value.trim() == "" ||  con_value == null)
+	if(con_value.trim() != "" &&  con_value != null)
 	{
-        parent.msgAlert(WCMLang.Search_empty);
-		return;
+        search_con += " and cs.s_name like '%"+con_value+"%'";
+    }
+	var timeName = $("#timeSelect").val();
+    var time1 = $("#time1").val();
+    var time2 = $("#time2").val();
+    if(time1 != null && time1 != ""){
+        search_con += " and cs." + timeName + " >= '"+time1+" 00:00:00'";
+    }
+    if(time2 != null && time2 != ""){
+    	search_con += " and cs." + timeName + " <= '"+time2+" 23:59:59'";
 	}
-	search_con = " and cs.s_name like '%"+con_value+"%'";	
 	showList();
 	showTurnPage();
 }

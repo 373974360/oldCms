@@ -8,7 +8,7 @@
 	{
 		boolean res = com.deya.wcm.services.org.user.UserLogin.checkUserLogin(user_name,request);
 		System.out.println("********************"+res);
-		if(res){		out.println("<script>top.location.href = 'index.jsp';</script>");}
+		if(res){		out.println("<script>top.location.href = 'index_new.jsp';</script>");}
 	}
 %>
 <!doctype html>

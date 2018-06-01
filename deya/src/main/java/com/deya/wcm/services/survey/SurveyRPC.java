@@ -228,12 +228,12 @@ public class SurveyRPC {
 	/**
      * 得到所有答卷的统计数据
      * @param String s_id
-     * @param String con
+     * @param String source
      * @return List
      * */
-	public static Map getStatisticsDataBySurvey(String s_id,String con)
+	public static Map getStatisticsDataBySurvey(String s_id,String source)
 	{
-		return StatisticsService.getStatisticsDataBySurvey(s_id,con);
+		return StatisticsService.getStatisticsDataBySurvey(s_id,source);
 	}
 	
 	/**
@@ -272,9 +272,9 @@ public class SurveyRPC {
      * @param String　con 查询条件
      * @return String　条数
      * */
-	public static String getAnswerListCount(String s_id,String con)
+	public static String getAnswerListCount(String s_id,String source,String con)
 	{
-		return StatisticsService.getAnswerListCount(s_id, con);
+		return StatisticsService.getAnswerListCount(s_id, source,con);
 	}
 	
 	/**
@@ -285,9 +285,9 @@ public class SurveyRPC {
      * @param int page_size
      * @return List
      * */
-	public static List getAnswerList(String s_id,String con,int start_num,int page_size)
+	public static List getAnswerList(String s_id,String source,String con,int start_num,int page_size)
 	{
-		return StatisticsService.getAnswerList(s_id, con, start_num, page_size);
+		return StatisticsService.getAnswerList(s_id, source, con, start_num, page_size);
 	}
 	/********************* 数据统计接口　结束 ********************************/
 	

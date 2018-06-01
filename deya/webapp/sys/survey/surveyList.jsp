@@ -43,6 +43,16 @@
 				<span class="blank3"></span>
 			</td>
 			<td align="right" valign="middle" id="dept_search" class="search_td fromTabs" >
+				<select id="timeSelect" style="width:100px" class="input_text">
+					<option value="start_time">起始时间</option>
+					<option value="end_time">结束时间</option>
+				</select>
+				<input id="time1" name="time1" type="text" class="input_text"
+					   onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:true,readOnly:true})" readonly="readonly"
+					   style="width:80px"/>
+				-&nbsp;<input id="time2" name="time2" type="text" class="input_text"
+							  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:true,readOnly:true})"
+							  readonly="readonly" style="width:80px"/>
 				<input id="searchkey" type="text" class="input_text" value=""  /><input id="btnSearch" type="button" class="btn x2" value="搜索" onclick="roleSearchHandl(this)"/>
 				<span class="blank3"></span>
 			</td>

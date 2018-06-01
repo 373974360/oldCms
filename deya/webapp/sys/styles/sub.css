@@ -116,6 +116,7 @@ body{background:#f7f7f7 none repeat scroll 0 0;margin-left:6px;margin-right:3px;
 .optUL li.ico_custom{background:rgba(0,0,0,0) url(../images/mx_custom.png) no-repeat scroll 0 0;cursor:pointer}
 .optUL li.ico_lead{background:rgba(0,0,0,0) url(../images/mx_leader.png) no-repeat scroll 0 0}
 .optUL li.ico_fuwu{background:rgba(0,0,0,0) url(../images/mx_fuwu.png) no-repeat scroll 0 0}
+.optUL li.ico_sucai{background:rgba(0,0,0,0) url(../images/sucai_detail_list.png) no-repeat scroll 0 0}
 .MUL .ico_article{background:rgba(0,0,0,0) url(../images/mx_document.png) no-repeat scroll left center;padding-left:20px}
 .MUL .ico_pic{background:rgba(0,0,0,0) url(../images/mx_pictures.png) no-repeat scroll left center;padding-left:20px}
 .MUL .ico_video{background:rgba(0,0,0,0) url(../images/mx_film.png) no-repeat scroll left center;padding-left:20px}

@@ -78,7 +78,7 @@
                 colsList.add(setTitleClos("gk_index", "索引码", "150px", "", "", ""));
             colsList.add(setTitleClos("title", "标题", "", "", "", ""));//英文名，显示名，宽，高，样式名，点击事件　
             colsList.add(setTitleClos("cat_cname", "所属栏目", "100px", "", "", ""));
-            colsList.add(setTitleClos("actions", "管理操作", "90px", "", "", ""));
+            colsList.add(setTitleClos("actions", "管理操作", "120px", "", "", ""));
             colsList.add(setTitleClos("weight", "权重", "30px", "", "", ""));
             colsList.add(setTitleClos("input_user", "录入人", "60px", "", "", ""));
             colsList.add(setTitleClos("input_dtime", "录入时间", "100px", "", "", ""));
@@ -166,7 +166,7 @@
 
                     var str = "<ul class=\"optUL\">";
                     str += "<li id='315' class='ico_edit'><a title='修改' href='javascript:openUpdatePage(" + beanList.get(i - 1).cat_id + "," + beanList.get(i - 1).info_id + "," + beanList.get(i - 1).model_id + "," + beanList.get(i - 1).is_host + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
-                    str += "<li id='303' class='ico_pass'><a title='通过' href='javascript:doPass(" + beanList.get(i - 1).cat_id + ",\"" + beanList.get(i - 1).site_id + "\",\"" + beanList.get(i - 1).app_id + "\"," + (i - 1) + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li><li id='303' class='ico_nopass'><a  title='退稿' href='javascript:noPassDesc(" + beanList.get(i - 1).info_id + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li> <li id='301' class='ico_delete' ><a title='删除' href='javascript:doDelete(" + (i - 1) + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li> ";
+                    str += "<li id='303' class='ico_pass'><a title='通过' href='javascript:doPass(" + beanList.get(i - 1).cat_id + ",\"" + beanList.get(i - 1).site_id + "\",\"" + beanList.get(i - 1).app_id + "\"," + (i - 1) + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li><li id='303' class='ico_nopass'><a  title='退稿' href='javascript:noPassDesc(" + beanList.get(i - 1).info_id + ","+ beanList.get(i - 1).step_id + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li> <li id='315' class='ico_sucai'><a title='审核流程' href='javascript:auditList(" + beanList.get(i - 1).info_id + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li> <li id='301' class='ico_delete' ><a title='删除' href='javascript:doDelete(" + (i - 1) + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li> ";
                     $(this).html(str + "</ul>");
                 }
             });
@@ -235,21 +235,31 @@
             else
                 selectIDS = table.getSelecteCheckboxValue("info_id");
 
-            if (InfoBaseRPC.noPassInfoStatus(selectIDS, desc)) {
+            if (InfoBaseRPC.noPassInfoStatus(selectIDS,temp_step_id, desc)) {
                 msgAlert("退回操作成功");
             } else {
                 msgWargin("退回操作失败");
             }
             temp_info_id = null;
+            temp_step_id = null;
             reloadInfoDataList();
         }
 
         var temp_info_id;
+        var temp_step_id;
 
-        function noPassDesc(id) {
-            if (id != null && id != "")
+        function noPassDesc(id, step_id) {
+            if (id != null && id != "") {
                 temp_info_id = id;
-            OpenModalWindow("退稿意见", "/sys/cms/info/article/noPassDesc.jsp", 520, 235);
+                temp_step_id = step_id;
+                OpenModalWindow("退稿意见", "/sys/cms/info/article/noPassDesc.jsp", 520, 235);
+            }
+        }
+
+        function auditList(info_id){
+            if (info_id != null && info_id != "") {
+                OpenModalWindow("审核过程信息", "/sys/cms/info/article/auditList.jsp?info_id=" + info_id, 520, 235);
+            }
         }
 
         //单条信息通过

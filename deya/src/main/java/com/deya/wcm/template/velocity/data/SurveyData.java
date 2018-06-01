@@ -139,7 +139,7 @@ public class SurveyData {
 
     public static String getAnswerCountBySis(String sid)
     {
-        return StatisticsService.getAnswerListCount(sid,null);
+        return StatisticsService.getAnswerListCount(sid,null,null);
     }
 	
 	@SuppressWarnings("unchecked")

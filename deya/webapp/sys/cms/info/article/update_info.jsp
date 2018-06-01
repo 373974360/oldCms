@@ -103,6 +103,11 @@ function getAddPagebyModel(model_id)
 		add_page = "m_article.jsp";
 	return add_page;
 }
+
+function closeTab(){
+    parent.tab_colseOnclick(parent.curTabIndex);
+}
+
 </script>
 </head>
 
@@ -143,7 +148,7 @@ function getAddPagebyModel(model_id)
 		<td align="left" valign="middle" style="text-indent:100px;">
 			<input id="addButton" name="btn1" type="button" onclick="" value="保存" />
 			<input id="addReset" name="btn1" type="button" onclick="window.location.reload()" value="重置" />
-			<input id="addCancel" name="btn1" type="button" onclick="tab_colseOnclick(curTabIndex)" value="取消" />&nbsp;&nbsp;&nbsp;
+			<input id="addCancel" name="btn1" type="button" onclick="closeTab()" value="取消" />&nbsp;&nbsp;&nbsp;
 			<input id="from_info_button" class="hidden" name="btn1" type="button" onclick="openFromInfoPage()" value="编辑源信息" />
 		</td>
 	</tr>

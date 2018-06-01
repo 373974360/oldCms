@@ -28,6 +28,7 @@
     <script type="text/javascript" src="../../../js/jquery-easyui/jquery.easyui.min.js"></script>
     <script type="text/javascript" src="../../../js/indexjs/indexList.js"></script>
     <script type="text/javascript" src="../../../js/indexjs/tools.js"></script>
+    <script type="text/javascript" src="js/public.js"></script>
 
     <script type="text/javascript">
 
@@ -50,6 +51,7 @@
             initButtomStyle();
             showModels();
             reloadInfoDataList();
+            showSelectDiv2("cat_tree", "cat_tree_div1", 300);
             if ($.browser.msie && $.browser.version == "6.0" && $("html")[0].scrollHeight > $("html").height()) $("html").css("overflowY", "scroll");
         });
 
@@ -87,6 +89,9 @@
             con_map.put("site_id", site_id);
             con_map.put("page_size", "15");
             con_map.put("start_num", "0");
+            if(selectIds != null && selectIds != ""){
+                con_map.put("cat_ids",selectIds);
+            }
             con_map.put("app_id", app);
             con_map.put("start_num", tp.getStart());
             con_map.put("page_size", tp.pageSize);
@@ -151,7 +156,7 @@
                     $(this).css({"text-align": "center"});
                     var str = "<ul class=\"optUL\">";
                     str += "<li class='ico_cancel'><a  title='撤销' href='javascript:doCancel(" + (i - 1) + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
-                    str += "<li class='ico_edit'><a title='修改' href='javascript:openUpdatePage(" + beanList.get(i - 1).info_id + "," + beanList.get(i - 1).model_id + "," + beanList.get(i - 1).is_host + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
+                    str += "<li class='ico_edit'><a title='修改' href='javascript:openUpdatePage("+ beanList.get(i - 1).cat_id + ","  + beanList.get(i - 1).info_id + "," + beanList.get(i - 1).model_id + "," + beanList.get(i - 1).is_host + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
                     $(this).html(str + "</ul>");
                 }
             });
@@ -202,12 +207,10 @@
         function openUpdatePage(cid, Infoid, model_id, is_host) {
             if (is_host == 1) {
                 //引用信息只修改信息主表内容
-                //window.location.href = "/sys/cms/info/article/update_info.jsp?cid=" + cid + "&info_id=" + Infoid + "&site_id=" + site_id + "&app_id=" + app + "&model=" + model_id + "&topnum=" + window.parent.curTabIndex;
                 parent.addTab(true, "/sys/cms/info/article/update_info.jsp?cid=" + cid + "&info_id=" + Infoid + "&site_id=" + site_id + "&app_id=" + app + "&model=" + model_id + "&topnum=" + parent.curTabIndex, "修改信息");
             }
             else {
                 var model = getAddPagebyModel(model_id);
-                //window.location.href = "/sys/cms/info/article/" + model + "?cid=" + cid + "&info_id=" + Infoid + "&site_id=" + site_id + "&app_id=" + app + "&model=" + model_id + "&topnum=" + window.parent.curTabIndex;
                 parent.addTab(true, "/sys/cms/info/article/" + getAddPagebyModel(model_id) + "?cid=" + cid + "&info_id=" + Infoid + "&site_id=" + site_id + "&app_id=" + app + "&model=" + model_id + "&topnum=" + parent.curTabIndex, "修改信息");
             }
         }
@@ -314,6 +317,17 @@
                 <select id="pageGoNum" name="pageSize" class="input_select width80" onchange="changeFactor()">
 
                 </select>
+            </td>
+            <td style=" width:220px;">
+                <input type="text" id="cat_tree" value="所属栏目" style="width:204px; height:18px; overflow:hidden;"  readonly="readonly" onclick="showCategoryTree()"/>
+                <div id="cat_tree_div1" class="select_div tip hidden border_color" style="width:204px; height:300px; overflow:hidden;border:1px #7f9db9 solid;" >
+                    <div id="leftMenuBox">
+                        <div id="leftMenu" class="contentBox6 textLeft" style="overflow:auto">
+                            <ul id="leftMenuTree1" class="easyui-tree" animate="true" style="width:204px; height:280px;">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </td>
             <td align="left" valign="middle">
                 <input id="searchkey" type="text" class="input_text" style="width:240px;" value=""/>

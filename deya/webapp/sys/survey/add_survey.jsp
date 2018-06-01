@@ -166,7 +166,7 @@ String site_id = request.getParameter("site_id");
 				var htmls = defaultBean.survey_content;				
 				htmls = htmls.replace(/(ObjectPool\[)(.*?)(\])/ig,"$1"+sd.name+"$3");
 
-				var answer_count = SurveyRPC.getAnswerListCount(s_id,"");
+				var answer_count = SurveyRPC.getAnswerListCount(s_id,"","");
 				if(answer_count != 0)
 					is_update = false;
 

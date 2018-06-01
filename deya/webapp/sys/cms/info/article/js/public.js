@@ -35,6 +35,7 @@ var userOpts = "";
 function setInfoGoble(n) {
     infoIdGoble = n;
 }
+
 function getInfoGoble(n) {
     return infoIdGoble;
 }
@@ -314,6 +315,7 @@ function showSelectIds2(t) {
 
 var zt_jdata;
 var cat_jdata;
+
 //点击显示同时发布到里面栏目树
 function showCategoryTree() {
 
@@ -356,6 +358,7 @@ function showCategoryTree() {
      }
      */
 }
+
 //点击显示同时发布到里面的专题栏目树
 function showZTCategoryTree() {
     if (zt_jdata == null) {
@@ -473,6 +476,7 @@ function setLinkInfoIds(info_ids, type) {
 
     resetNum();
 }
+
 /////////////////////
 function updateRelatedInfoAsSort(infoId, siteId) {
     $("#relateInfos td").each(function (i) {
@@ -1074,6 +1078,7 @@ function updateQuoteInfo(bean, model_ename) {
 
 /************权限设置　开始********************/
 var auditHtml = "";
+
 function setInfoStatusButton() {
     //得到该栏目所使用的流程ID
     wf_id = CategoryRPC.getWFIDByCatID(cid, site_id);
@@ -1091,8 +1096,8 @@ function setInfoStatusButton() {
         var workStepList = workFlowBean.workFlowStep_list;
         workStepList = List.toJSList(workStepList);
         var info_step_id = 0;
-        if(infoid != null && infoid != "" && infoid != "null"){
-            info_step_id = InfoBaseRPC.getInfoById(infoid,site_id).step_id;
+        if (infoid != null && infoid != "" && infoid != "null") {
+            info_step_id = InfoBaseRPC.getInfoById(infoid, site_id).step_id;
         }
         for (var i = 0; i < workStepList.size(); i++) {
             if (workStepList.get(i).step_id > info_step_id) {
@@ -1203,6 +1208,7 @@ function showInfoStatusText() {
      $("#info_staus_tr td").empty().text(status_text);
      */
 }
+
 /************权限设置　结束********************/
 
 //替换url中的变量
@@ -1243,6 +1249,7 @@ function getContentThumb() {
         }
     }
 }
+
 //把选中的图片的thumb_url添加进input框中
 function addthumb_url(thumb_url) {
     $("#thumb_url").empty();

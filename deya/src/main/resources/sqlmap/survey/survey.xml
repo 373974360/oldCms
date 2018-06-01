@@ -192,8 +192,11 @@
 		select count(min(cs.id)) from cp_survey cs,cp_survey_answer ca where cs.s_id = ca.s_id and cs.is_delete = 0 group by cs.s_id
 	</select>
 	<!-- 得到某一问卷的答卷总数 -->
-	<select id="getStatisticsCountBySurvey" parameterType="java.lang.String" resultType="java.lang.String" >
+	<select id="getStatisticsCountBySurvey" parameterType="Map" resultType="java.lang.String" >
 		select count(id) from cp_survey_answer where s_id = #{s_id}
+		<if test="source != null">
+			and source in (${source})
+		</if>
 	</select>
 		
 	<!-- 得到某份问卷的所有答卷统计数据 -->
@@ -201,6 +204,9 @@
 		select count(answer_id) as counts,item_id,item_value as item_num from cp_survey_answer_item where s_id=#{s_id} 
 		<if test="con != null">
 		and answer_id in (select answer_id from cp_survey_answer_item where s_id=#{s_id} ${con})
+		</if>
+		<if test="source != null">
+			and answer_id in (select answer_id from cp_survey_answer where source in (${source}))
 		</if>
 		 group by item_id,item_value order by item_id,item_value
 	</select>
@@ -229,8 +235,11 @@
 	</select>
 	
 	<!-- 得到某个主题的答卷列表总数 -->
-	<select id="getAnswerListCount" parameterType="Map" resultType="java.lang.String" >		   
+	<select id="getAnswerListCount" parameterType="Map" resultType="java.lang.String" >
 	    select count(distinct ca.id) from cp_survey_answer ca,cp_survey_answer_item ci where ca.answer_id = ci.answer_id and ca.s_id = #{s_id}
+		<if test="source != null">
+			and ca.source in (${source})
+		</if>
 	    <if test="search_con != null">
 		 and ca.answer_id in (select answer_id from cp_survey_answer_item where s_id=#{s_id} ${search_con})
 		</if>
@@ -489,7 +498,10 @@
 	<![CDATA[
 		select * from (
 	       select row_.*, rownum rownum_ from (       
-	            select answer_id,ip,answer_time,user_name,operate_time from cp_survey_answer where s_id = #{s_id} order by id desc
+	            select answer_id,ip,answer_time,user_name,operate_time from cp_survey_answer where s_id = #{s_id}]]>
+		<if test="source != null"> and source in (${source}) </if>
+		<![CDATA[
+	            order by id desc
 	        ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
     	) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
 	]]>	    
@@ -516,7 +528,10 @@
 		<![CDATA[
 			select * from (
 			   select row_.*, rownum rownum_ from (       
-					select distinct ca.answer_id,ca.id,ca.ip,ca.answer_time,ca.user_name,ca.operate_time from cp_survey_answer ca,cp_survey_answer_item ci where ca.answer_id = ci.answer_id and ca.s_id = #{s_id} and ca.answer_id in (select answer_id from cp_survey_answer_item where s_id=#{s_id} ${search_con}) order by ca.id desc
+					select distinct ca.answer_id,ca.id,ca.ip,ca.answer_time,ca.user_name,ca.operate_time from cp_survey_answer ca,cp_survey_answer_item ci where ca.answer_id = ci.answer_id and ca.s_id = #{s_id} ]]>
+		<if test="source != null"> and ca.source in (${source}) </if>
+					<![CDATA[
+					and ca.answer_id in (select answer_id from cp_survey_answer_item where s_id=#{s_id} ${search_con}) order by ca.id desc
 				) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
 			) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
 		]]>	    

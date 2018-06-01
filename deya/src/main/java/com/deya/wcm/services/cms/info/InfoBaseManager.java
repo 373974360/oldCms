@@ -248,8 +248,13 @@ public class InfoBaseManager {
                 map.put("cat_ids", resultIds);
                 map.remove("cat_id");
             } else {
-                map.remove("cat_ids");
-                map.put("cat_id", cids);
+                if(cids.indexOf(",") >= 0){
+                    map.put("cat_ids", cids);
+                    map.remove("cat_id");
+                }else{
+                    map.remove("cat_ids");
+                    map.put("cat_id", cids);
+                }
             }
         }
         //不是取录入员自己待审中的信息走下面
