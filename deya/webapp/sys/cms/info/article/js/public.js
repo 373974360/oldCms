@@ -1099,6 +1099,9 @@ function setInfoStatusButton() {
         if (infoid != null && infoid != "" && infoid != "null") {
             info_step_id = InfoBaseRPC.getInfoById(infoid, site_id).step_id;
         }
+        if(info_step_id==100){
+            info_step_id = 0;
+        }
         for (var i = 0; i < workStepList.size(); i++) {
             if (workStepList.get(i).step_id > info_step_id) {
                 if (workStepList.get(i).required == 1) {
@@ -1108,8 +1111,7 @@ function setInfoStatusButton() {
                     $("#audit_list").append(html);
                     $("#auditChecked").click();
                     break;
-                }
-                else {
+                } else {
                     $("#audit_tr").removeClass("hidden");
                     var html = '<input name="auditStep" type="radio" onclick="setStepId(' + (workStepList.get(i).step_id - 1) + ')"/><label for="e">' + workStepList.get(i).step_name + '</label>&nbsp;&nbsp;';
                     auditHtml = auditHtml + html;

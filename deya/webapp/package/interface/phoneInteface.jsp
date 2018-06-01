@@ -92,9 +92,10 @@ public String getNewsList(HttpServletRequest request)
 	String json = "";
 	String site_id = FormatUtil.formatNullString(request.getParameter("site_id"));
 	String cat_id = FormatUtil.formatNullString(request.getParameter("cat_id"));
+	String title = FormatUtil.formatNullString(request.getParameter("title"));
 	String page = FormatUtil.formatNullString(request.getParameter("page"));
 	String size = FormatUtil.formatNullString(request.getParameter("size"));
-	String params = "site_id=" + site_id + ";cat_id="+cat_id+";size="+size+";cur_page="+page+";orderby=ci.released_dtime desc;";
+	String params = "site_id=" + site_id + ";cat_id="+cat_id+";size="+size+";cur_page="+page+";title="+title+";orderby=ci.released_dtime desc;";
 	List<InfoBean> info_list = InfoUtilData.getInfoList(params);
 	if(info_list != null && info_list.size() > 0)
 	{
@@ -112,9 +113,10 @@ public String getCmsLdInfoList(HttpServletRequest request)
     String json = "";
 	String site_id = FormatUtil.formatNullString(request.getParameter("site_id"));
 	String cat_id = FormatUtil.formatNullString(request.getParameter("cat_id"));
+	String title = FormatUtil.formatNullString(request.getParameter("title"));
 	String page = FormatUtil.formatNullString(request.getParameter("page"));
 	String size = FormatUtil.formatNullString(request.getParameter("size"));
-	String params = "site_id=" + site_id + ";cat_id="+cat_id+";size="+size+";cur_page="+page+";orderby=ci.released_dtime desc;";
+	String params = "site_id=" + site_id + ";cat_id="+cat_id+";size="+size+";cur_page="+page+";title="+title+";orderby=ci.released_dtime desc;";
 	List<InfoBean> info_list = InfoUtilData.getInfoList(params);
 	if(info_list != null && info_list.size() > 0)
 	{
