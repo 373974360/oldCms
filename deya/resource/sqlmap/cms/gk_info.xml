@@ -436,7 +436,10 @@
 	<sql id="getBroGKInfoListForSharedCategory_sql_conn">
 		where ci.from_id=0 and ci.info_id=gk.info_id and ci.cat_id = ca.cat_id and ci.info_status = 8 and ci.final_status = 0
 					<if test="cat_id != null">
-						and (gk.topic_id=${cat_id} or gk.theme_id=${cat_id} or gk.serve_id=${cat_id} or gk.gkbzh_id=${cat_id} or gk.gkhj_id=${cat_id})
+						and gk.gkbzh_id in (${cat_id})
+					</if>
+					<if test="gkhj_id != null">
+						and gk.gkhj_id=${gkhj_id}
 					</if>
 					<if test="weight != null">
 						 and ci.weight = ${weights}

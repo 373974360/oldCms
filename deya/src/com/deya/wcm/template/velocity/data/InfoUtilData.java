@@ -337,6 +337,7 @@ public class InfoUtilData
         String cat_id = "";
         String node_id = "";
         String orderby = "ci.released_dtime desc";
+        String gkhj_id = "";
         boolean interval = false;
         String[] tempA = params.split(";");
         for (int i = 0; i < tempA.length; i++)
@@ -637,19 +638,28 @@ public class InfoUtilData
                     con_map.put("sort_type", sort_type);
                 }
             }
-        }
-        if ((!"".equals(cat_id)) && (!"0".equals(cat_id)) && (!cat_id.startsWith("$cat_id")) && (FormatUtil.isValiditySQL(cat_id))) {
-            if ((!"".equals(node_id)) && (!"true".equals(is_shared))) {
-                getCategorySearchSql(cat_id, con_map, app_id);
-            } else if ("zwgk".equals(app_id))
-            {
-                if (cat_id.indexOf(",") > -1) {
-                    con_map.put("cat_sql", "(gk.topic_id in (" + cat_id + ") or gk.theme_id in (" + cat_id + ") or gk.serve_id in (" + cat_id + ") or ca.cat_class_id in (" + cat_id + ") or gk.gkbzh_id in (" + cat_id + ") or gk.gkhj_id in (" + cat_id + "))");
-                } else {
-                    con_map.put("cat_sql", "(gk.topic_id=" + cat_id + " or gk.theme_id=" + cat_id + " or gk.serve_id=" + cat_id + " or ca.cat_class_id = " + cat_id + " or gk.gkbzh_id = " + cat_id + " or gk.gkhj_id = " + cat_id+")");
+
+            if (tempA[i].toLowerCase().startsWith("gkhj_id=")) {
+                gkhj_id = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
+                if (!"".equals(gkhj_id) && !gkhj_id.startsWith("$gkhj_id") && FormatUtil.isValiditySQL(gkhj_id)) {
+                    con_map.put("gkhj_id", gkhj_id);
                 }
             }
-            else {
+        }
+
+        if (!"".equals(cat_id) && !"0".equals(cat_id) && !cat_id.startsWith("$cat_id") && FormatUtil.isValiditySQL(cat_id)) {
+            if (!"".equals(node_id) && !"true".equals(is_shared)) {
+                getCategorySearchSql(cat_id, con_map, app_id);
+            } else if ("zwgk".equals(app_id)) {
+                if (!"".equals(cat_id) && !gkhj_id.startsWith("$cat_id") && FormatUtil.isValiditySQL(cat_id)) {
+                    String cat_ids = CategoryManager.getAllChildCategoryIDS(cat_id);
+                    if(!"".equals(cat_ids)){
+                        con_map.put("cat_id", cat_ids);
+                    }else{
+                        con_map.put("cat_id", cat_id);
+                    }
+                }
+            } else {
                 getCategorySearchSql(cat_id, con_map, app_id);
             }
         }
