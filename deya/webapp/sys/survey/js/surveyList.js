@@ -572,6 +572,28 @@ function openAnswer()
 	var selectIDS = table.getSelecteCheckboxValue("s_id");
     parent.addTab(true,'/sys/survey/answerList.jsp?sid='+selectIDS,'查看答卷');
 }
+
+//推送到呼叫中心
+function pushAnswer()
+{
+	var selectIDS = table.getSelecteCheckboxValue("s_id");
+    if(selectIDS == "" || selectIDS == "")
+    {
+        parent.msgWargin("请选择要推送的问卷");
+        return;
+    }
+    if(selectIDS.split(",").length > 1)
+    {
+        parent.msgWargin("只能选择一条记录进行推送操作");
+        return;
+    }
+    if(SurveyRPC.pushAnswer(selectIDS))
+    {
+        parent.msgAlert("推送成功");
+    }else{
+        parent.msgAlert("推送失败");
+	}
+}
 /**********************属性设置操作　开始*************************************/
 function showSurveyAttr(flag)
 {

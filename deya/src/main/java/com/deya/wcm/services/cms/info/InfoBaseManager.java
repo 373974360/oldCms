@@ -458,6 +458,9 @@ public class InfoBaseManager {
                 CategoryBean cb = CategoryManager.getCategoryBeanCatID(info.getCat_id(), info.getSite_id());
                 int wf_id = CategoryManager.getCategoryBean(info.getCat_id()).getWf_id();
                 int stepId = WorkFlowManager.getMaxStepIDByUserID(wf_id, user_id, info.getApp_id(), info.getSite_id());
+                if(stepId==100){
+                    info.setStep_id(100);
+                }
                 String info_status = "2";
 
                 if (wf_id == 0 || stepId == 100) {//步骤ID为100，直接审核通过，改为待发状态
@@ -476,14 +479,14 @@ public class InfoBaseManager {
                 int id = PublicTableDAO.getIDByTableName(PublicTableDAO.INFO_WORK_STEP);
                 infoWorkStep.setId(id);
                 infoWorkStep.setInfo_id(info.getInfo_id());
-                infoWorkStep.setStep_id(stepId);
+                infoWorkStep.setStep_id(info.getStep_id());
                 infoWorkStep.setUser_id(stl.getUser_id());
                 infoWorkStep.setUser_name(stl.getUser_name());
                 infoWorkStep.setDescription(auto_desc);
                 infoWorkStep.setPass_status(1);
                 infoWorkStep.setWork_time(DateUtil.getCurrentDateTime());
                 InfoDAO.insertInfoWorkStep(infoWorkStep);
-                InfoDAO.passInfoStatus(info.getInfo_id() + "", info_status, stepId + "", info.getReleased_dtime());
+                InfoDAO.passInfoStatus(info.getInfo_id() + "", info_status, info.getStep_id() + "", info.getReleased_dtime());
             }
             InfoPublishManager.publishAfterEvent(publish_info_list, cat_ids, site_id);
             //InfoPublishManager.resetCategoryPage(cat_ids, site_id);//更新栏目

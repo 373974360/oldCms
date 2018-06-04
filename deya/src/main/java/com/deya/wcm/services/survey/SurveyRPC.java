@@ -8,6 +8,7 @@ import com.deya.wcm.bean.logs.SettingLogsBean;
 import com.deya.wcm.bean.survey.SurveyBean;
 import com.deya.wcm.services.Log.LogManager;
 import com.yinhai.pdf.SurveyToPdf;
+import com.yinhai.webservice.client.PushSurveyServiceClient;
 
 /**
  * 访谈主题前台访问交互类.
@@ -316,4 +317,14 @@ public class SurveyRPC {
 		return SurveyCountServices.getHotCount(start_time,end_time,category_ids,count_num,time_type,site_id);
 	}
 	/********************* 问卷统计接口　结束 ********************************/
+
+
+	public static boolean pushAnswer(String ids){
+		boolean b = true;
+		int i = PushSurveyServiceClient.doService(ids,"/survey/view.jsp?s_id="+ids);
+		if(i==0){
+			b = false;
+		}
+		return b;
+	}
 }

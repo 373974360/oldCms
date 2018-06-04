@@ -104,6 +104,9 @@
                 if(menuUrl.indexOf("publishList") >= 0){
                     pageName = "已发布信息";
                 }
+                if(menuUrl.indexOf("auditPublishList") >= 0){
+                    pageName = "已审待发布信息";
+                }
                 if(menuUrl.indexOf("authorDataList") >= 0){
                     pageName = "作者管理";
                 }

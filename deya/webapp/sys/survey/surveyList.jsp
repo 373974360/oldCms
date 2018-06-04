@@ -72,9 +72,10 @@
 				<input id="btn1" name="btn1" type="button" onclick="publicSelectSinglCheckbox(table,'id','showAnswer()')" value="查看问卷" />
 				<input id="btn1" name="btn1" type="button" onclick="publicSelectSinglCheckbox(table,'id','openSubject()')" value="数据统计" />
 				<input id="btn1" name="btn1" type="button" onclick="publicSelectSinglCheckbox(table,'id','openAnswer()')" value="所有答卷" />
+				<input id="btn1" name="btn1" type="button" onclick="publicSelectSinglCheckbox(table,'id','pushAnswer()')" value="推送到呼叫中心" />
 				<input class="hidden" id="btn3" name="btn3" type="button" onclick="deleteRecord(table,'id','batchDelSurveyHandl()')" value="删除" />
 				<!-- <input id="btn1" name="btn1" type="button" onclick="fnSearch()" value="查询" />		 -->
-			</td>
+			</td>s
 		</tr>
 	</table>
 </div>

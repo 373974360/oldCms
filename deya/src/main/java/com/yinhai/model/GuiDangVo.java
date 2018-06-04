@@ -17,6 +17,7 @@ public class GuiDangVo implements Serializable{
     private String curdate;
     private String usercode;
     private String filepath;
+    private String xxly;
 
     public String getYwbh() {
         return ywbh;
@@ -88,5 +89,13 @@ public class GuiDangVo implements Serializable{
 
     public void setFilepath(String filepath) {
         this.filepath = filepath;
+    }
+
+    public String getXxly() {
+        return xxly;
+    }
+
+    public void setXxly(String xxly) {
+        this.xxly = xxly;
     }
 }

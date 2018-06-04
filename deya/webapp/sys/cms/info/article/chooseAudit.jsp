@@ -93,7 +93,9 @@
             var list = new List();
             var auto_desc = $("#auto_desc").val();
             if (num != null && num != "null" && num != "") {
-                list.add(getCurrentFrameObj().beanList.get(num));
+                var infoBean = getCurrentFrameObj().beanList.get(num);
+                infoBean.step_id = info_step_id;
+                list.add(infoBean);
             }
             else {
                 var info_list = getCurrentFrameObj().table.getSelecteBeans();

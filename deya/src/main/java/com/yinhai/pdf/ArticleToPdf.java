@@ -66,6 +66,7 @@ public class ArticleToPdf {
                     guiDangVo.setYwbh("MH_" + ib.getInfo_id());
                     guiDangVo.setYwbt(ib.getTitle());
                     guiDangVo.setLcmc("信息发布");
+                    guiDangVo.setXxly("4");
                     guiDangVo.setCurdate(DateUtil.getString(new Date(), "yyyyMMdd"));
                     try {
                         if (ib.getModel_id() == 11) {

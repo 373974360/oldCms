@@ -61,6 +61,7 @@ public class SurveyToPdf {
                     guiDangVo.setYwbh("MH_" + surveyBean.getS_id());
                     guiDangVo.setYwbt(surveyBean.getS_name());
                     guiDangVo.setLcmc("满意度问卷");
+                    guiDangVo.setXxly("3");
                     guiDangVo.setCurdate(DateUtil.getString(new Date(), "yyyyMMdd"));
                     try {
                         data.put("content", completeHtmlTag(surveyBean.getSurvey_content(), domain));
