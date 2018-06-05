@@ -26,6 +26,7 @@ public class GuiDangServiceClient {
     private static String curdate = "";
     private static String usercode = "";
     private static String filepath = "";
+    private static String xxly = "";
 
     public static int doService(GuiDangVo guiDangVo) {
         ywbh = guiDangVo.getYwbh();
@@ -37,6 +38,7 @@ public class GuiDangServiceClient {
         curdate = guiDangVo.getCurdate();
         usercode = guiDangVo.getUsercode();
         filepath = guiDangVo.getFilepath();
+        xxly = guiDangVo.getXxly();
         String s = WebServiceClientUtil.doHttpPost("trader", "NLC065", getparamValue());
         int result = getResult(s);
         return result;
@@ -71,6 +73,9 @@ public class GuiDangServiceClient {
         }
         if (filepath != null && !"".equals(filepath)) {
             _xmlstr.append("<filepath>").append(filepath).append("</filepath>");
+        }
+        if (xxly != null && !"".equals(xxly)) {
+            _xmlstr.append("<xxly>").append(xxly).append("</xxly>");
         }
         return _xmlstr.toString();
     }

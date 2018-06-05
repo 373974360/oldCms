@@ -13,6 +13,7 @@ import com.deya.wcm.bean.org.user.UserRegisterBean;
 import com.deya.wcm.dao.cms.info.InfoDAO;
 import com.deya.wcm.rmi.file.FileRmiFactory;
 import com.deya.wcm.services.Log.LogManager;
+import com.deya.analyzer.AnalyzerManager;
 import com.yinhai.model.InfoWorkStep;
 import com.yinhai.pdf.ArticleToPdf;
 
@@ -29,7 +30,7 @@ public class InfoBaseRPC {
      * @return String
      */
     public static String getTagsForTitle(String title) {
-        return com.deya.analyzer.AnalyzerManager.getWordsByTitle(title);
+        return AnalyzerManager.getWordsByTitle(title);
     }
 
     /**

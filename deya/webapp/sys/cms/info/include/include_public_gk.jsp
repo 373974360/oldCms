@@ -48,7 +48,7 @@ if(model == null || !model.matches("[0-9]*")){
 			<td style=" width:100px;">
 				<span class="f_red" id="showCatId">分类ID</span>
 			</td>
-			<th style=" width:80px;" id="t1">同时发布到：</th>
+			<!-- <th style=" width:80px;" id="t1">同时发布到：</th>
 			<td style=" width:120px;"  id="t2">
 				<input type="text" id="cat_tree" value="" style="width:204px; height:18px; overflow:hidden;" readonly="readonly" onclick="showCategoryTree()"/>
 				<div id="cat_tree_div1" class="select_div tip hidden border_color" style="width:204px; height:300px; overflow:hidden;border:1px #7f9db9 solid;" >
@@ -60,7 +60,7 @@ if(model == null || !model.matches("[0-9]*")){
 					</div>
 				</div>
 			</td>
-			<!-- 
+
 			<th style=" width:80px;"  id="t3">所属专题：</th>
 			<td style=" width:120px;"  id="t4">
 				<input type="text" id="zt_tree" value="" style="width:176px; height:18px; overflow:hidden;" readonly="readonly" onclick="showZTCategoryTree()"/>

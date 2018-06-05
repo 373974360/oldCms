@@ -458,8 +458,9 @@ public class InfoBaseManager {
                 CategoryBean cb = CategoryManager.getCategoryBeanCatID(info.getCat_id(), info.getSite_id());
                 int wf_id = CategoryManager.getCategoryBean(info.getCat_id()).getWf_id();
                 int stepId = WorkFlowManager.getMaxStepIDByUserID(wf_id, user_id, info.getApp_id(), info.getSite_id());
-                if(stepId==100){
+                if(stepId==100||info.getStep_id()==7){
                     info.setStep_id(100);
+                    stepId = 100;
                 }
                 String info_status = "2";
 
