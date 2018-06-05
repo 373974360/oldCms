@@ -20,7 +20,9 @@ public class PushSurveyServiceClient {
     private static String ywlsh = "";
     private static String url = "";
 
-    public static int doService(String ywlsh,String url) {
+    public static int doService(String lsh,String pathUrl) {
+        ywlsh = lsh;
+        url = pathUrl;
         String s = WebServiceClientUtil.doHttpPost("trader", "NLC107", getparamValue());
         int result = getResult(s);
         return result;
@@ -33,7 +35,7 @@ public class PushSurveyServiceClient {
             _xmlstr.append("<ywlsh>").append(ywlsh).append("</ywlsh>");
         }
         if (url != null && !"".equals(url)) {
-            _xmlstr.append("<ywbt>").append(url).append("</ywbt>");
+            _xmlstr.append("<url>").append(url).append("</url>");
         }
         return _xmlstr.toString();
     }

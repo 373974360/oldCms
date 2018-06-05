@@ -321,7 +321,7 @@ public class SurveyRPC {
 
 	public static boolean pushAnswer(String ids){
 		boolean b = true;
-		int i = PushSurveyServiceClient.doService(ids,"/survey/view.jsp?s_id="+ids+"&uaid=12329");
+		int i = PushSurveyServiceClient.doService(ids,"/survey/view.jsp?s_id="+ids);
 		if(i==0){
 			b = false;
 		}
