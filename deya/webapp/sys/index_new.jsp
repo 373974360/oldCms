@@ -61,6 +61,7 @@
 								<li><a href="#" onclick="changeUrl('/sys/index.jsp?menuUrl=/sys/org/role/roleList.jsp?app=system')">站点角色管理</a> </li>
 								<li><a href="#" onclick="changeUrl('/sys/index.jsp?menuUrl=/sys/org/siteUser/SiteUserList.jsp?appId=cms')">站点用户管理</a> </li>
 								<li><a href="#" onclick="changeUrl('/sys/index.jsp?menuUrl=/sys/cms/workflow/workFlowList.jsp?app_id=system')">工作流管理</a> </li>
+								<li><a href="#" onclick="changeUrl('/sys/index.jsp?menuUrl=/sys/survey/surveySettingList.jsp')">问卷配置管理</a> </li>
 								<li><a href="#" onclick="changeUrl('/sys/index.jsp?menuUrl=/sys/survey/surveyCategoryList.jsp')">问卷分类管理</a> </li>
 								<li><a href="#" onclick="changeUrl('/sys/index.jsp?menuUrl=/sys/survey/surveyList.jsp')">问卷调查管理</a> </li>
 								<li><a href="#" onclick="changeUrl('/sys/index.jsp?menuUrl=/sys/survey/surveyAuditList.jsp')">问卷调查审核</a> </li>
