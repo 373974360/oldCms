@@ -164,7 +164,7 @@
         <tr>
             <td align="left" valign="middle" style="text-indent:100px;">
                 <input id="addButton" name="btn1" type="button" onclick="subSearch()" value="确定"/>
-                <input id="userAddCancel" name="btn1" type="button" onclick="CloseModalWindow()" value="关闭"/>
+                <input id="userAddCancel" name="btn1" type="button" onclick="parent.CloseModalWindow()" value="关闭"/>
             </td>
         </tr>
     </table>
