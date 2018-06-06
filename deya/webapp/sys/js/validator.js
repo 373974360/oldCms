@@ -710,12 +710,13 @@ Validator = function(){
 			var reg_ymd=/^([\d]{4})-([\d]{1,2})-([\d]{1,2})$/;
 			var arr_dt1,arr_dt2,dt1,dt2;
 
-			arr_dt1=styear.match(reg_ymd);
+			/*arr_dt1=styear.match(reg_ymd);
 			arr_dt2=endyear.match(reg_ymd);
 		
 			dt1=new Date(arr_dt1[1],arr_dt1[2],arr_dt1[3]);
-			dt2=new Date(arr_dt2[1],arr_dt2[2],arr_dt2[3]);
-
+			dt2=new Date(arr_dt2[1],arr_dt2[2],arr_dt2[3]);*/
+            dt1 = new Date(styear);
+            dt2 = new Date(endyear);
 			if(dt2 > dt1)
 			{
 				return true;

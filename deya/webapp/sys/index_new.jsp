@@ -63,6 +63,7 @@
 								<li><a href="#" onclick="changeUrl('/sys/index.jsp?menuUrl=/sys/cms/workflow/workFlowList.jsp?app_id=system')">工作流管理</a> </li>
 								<li><a href="#" onclick="changeUrl('/sys/index.jsp?menuUrl=/sys/survey/surveyCategoryList.jsp')">问卷分类管理</a> </li>
 								<li><a href="#" onclick="changeUrl('/sys/index.jsp?menuUrl=/sys/survey/surveyList.jsp')">问卷调查管理</a> </li>
+								<li><a href="#" onclick="changeUrl('/sys/index.jsp?menuUrl=/sys/survey/surveyAuditList.jsp')">问卷调查审核</a> </li>
 								<li><a href="#" onclick="changeUrl('/sys/index.jsp?menuUrl=/sys/org/dept/deptList.jsp')">用户管理</a> </li>
 								<li><a href="#" onclick="changeUrl('/sys/index.jsp?menuUrl=/sys/sso/syncYinHaiDeptAdd.jsp')">增量同步组织机构</a> </li>
 								<li><a href="#" onclick="changeUrl('/sys/index.jsp?menuUrl=/sys/sso/syncYinHaiDeptAll.jsp')">全量同步组织机构</a> </li>
