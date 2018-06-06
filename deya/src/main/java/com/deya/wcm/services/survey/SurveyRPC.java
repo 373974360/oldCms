@@ -319,9 +319,9 @@ public class SurveyRPC {
 	/********************* 问卷统计接口　结束 ********************************/
 
 
-	public static boolean pushAnswer(String ids){
+	public static boolean pushAnswer(String ywlsh,String ids){
 		boolean b = true;
-		int i = PushSurveyServiceClient.doService(ids,"/survey/view.jsp?s_id="+ids);
+		int i = PushSurveyServiceClient.doService(ywlsh,"/survey/view.jsp?s_id="+ids);
 		if(i==0){
 			b = false;
 		}

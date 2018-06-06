@@ -137,13 +137,13 @@
 	
 	<!-- 修改问卷调查 -->
 	<update id="updateSurvey" parameterType="com.deya.wcm.bean.survey.SurveyBean">
-		update cp_survey set category_id = #{category_id},s_name = #{s_name},description = #{description},is_register = #{is_register},ip_fre = #{ip_fre},start_time = #{start_time},end_time = #{end_time},is_show_subsort = #{is_show_subsort},survey_content = #{survey_content},model_path = #{model_path},ip_restrict = #{ip_restrict},update_time = #{update_time},update_user = #{update_user},is_show_result = #{is_show_result},is_show_title = #{is_show_title},spacing_interval = #{spacing_interval},publish_status = #{publish_status} where s_id = #{s_id}
+		update cp_survey set category_id = #{category_id},s_name = #{s_name},description = #{description},is_register = #{is_register},ip_fre = #{ip_fre},start_time = #{start_time},end_time = #{end_time},is_show_subsort = #{is_show_subsort},survey_content = #{survey_content},model_path = #{model_path},ip_restrict = #{ip_restrict},update_time = #{update_time},update_user = #{update_user},is_show_result = #{is_show_result},is_show_title = #{is_show_title},spacing_interval = #{spacing_interval},publish_status = #{publish_status},ywlsh = #{ywlsh} where s_id = #{s_id}
 	</update>
 		
 	<!-- 插入问卷调查 -->
 	<insert id="insertSurvey" parameterType="com.deya.wcm.bean.survey.SurveyBean">
-		insert into cp_survey(id,s_id,category_id,s_name,description,is_register,ip_fre,start_time,end_time,is_show_subsort,is_show_result,is_show_title,survey_content,model_path,ip_restrict,add_time,add_user,spacing_interval,site_id)
-		values(#{id},#{s_id},#{category_id},#{s_name},#{description},#{is_register},#{ip_fre},#{start_time},#{end_time},#{is_show_subsort},#{is_show_result},#{is_show_title},#{survey_content},#{model_path},#{ip_restrict},#{add_time},#{add_user},#{spacing_interval},#{site_id})
+		insert into cp_survey(id,s_id,category_id,s_name,description,is_register,ip_fre,start_time,end_time,is_show_subsort,is_show_result,is_show_title,survey_content,model_path,ip_restrict,add_time,add_user,spacing_interval,site_id,ywlsh)
+		values(#{id},#{s_id},#{category_id},#{s_name},#{description},#{is_register},#{ip_fre},#{start_time},#{end_time},#{is_show_subsort},#{is_show_result},#{is_show_title},#{survey_content},#{model_path},#{ip_restrict},#{add_time},#{add_user},#{spacing_interval},#{site_id},#{ywlsh})
 	</insert>
 	
 	<!-- 设置问卷调查属性 -->
@@ -338,7 +338,7 @@
 	<![CDATA[
 		select * from (
 	       select row_.*, rownum rownum_ from (       
-	            select cs.id,cs.s_id,cs.s_name,cs.start_time,cs.end_time,cs.publish_status,cs.add_time,cc.c_name,cs.show_result_status,cs.recommend_flag,cs.back_status
+	            select cs.id,cs.s_id,cs.s_name,cs.start_time,cs.end_time,cs.publish_status,cs.add_time,cc.c_name,cs.show_result_status,cs.recommend_flag,cs.back_status,cs.ywlsh
 	            from cp_survey cs,cp_survey_category cc  
 	            where cs.is_delete = 0 and cs.category_id = cc.category_id 
 	     ]]>
@@ -350,7 +350,7 @@
 	]]></select>
 	<select id="getSurveyList_mysql" parameterType="Map" resultType="com.deya.wcm.bean.survey.SurveyBean">
 		<![CDATA[      
-			select cs.id,cs.s_id,cs.s_name,cs.start_time,cs.end_time,cs.publish_status,cs.add_time,cc.c_name,cs.show_result_status,cs.recommend_flag,cs.back_status
+			select cs.id,cs.s_id,cs.s_name,cs.start_time,cs.end_time,cs.publish_status,cs.add_time,cc.c_name,cs.show_result_status,cs.recommend_flag,cs.back_status,cs.ywlsh
 			from cp_survey cs,cp_survey_category cc  
 			where cs.is_delete = 0 and cs.category_id = cc.category_id 
 		]]>
@@ -362,7 +362,7 @@
 	<select id="getSurveyList_mssql" parameterType="Map" resultType="com.deya.wcm.bean.survey.SurveyBean">
 		<![CDATA[      
 			select top ${page_size} 
-			cs.id,cs.s_id,cs.s_name,cs.start_time,cs.end_time,cs.publish_status,cs.add_time,cc.c_name,cs.show_result_status,cs.recommend_flag,cs.back_status
+			cs.id,cs.s_id,cs.s_name,cs.start_time,cs.end_time,cs.publish_status,cs.add_time,cc.c_name,cs.show_result_status,cs.recommend_flag,cs.back_status,cs.ywlsh
 			  from cp_survey cs,cp_survey_category cc  
 			  where cs.is_delete = 0 
 				and cs.category_id = cc.category_id 

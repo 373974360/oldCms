@@ -2069,7 +2069,10 @@ sDesigner = function(){
 				 str += '<textarea id="s_description" name="s_description" style="height:180px;width:98%" onkeyUP="ObjectPool['+this.name+'].setValue(this)">请填写关于此问卷的说明</textarea>';
 				 str += '<div class="blankH5" ></div>';
 				 str += '<div ><a class="button" href="#" onclick="this.blur(); return false;" hidefocus="true" style="float:left"><span onclick="ObjectPool['+this.name+'].openHTMLEditor(\'s_description\')">&nbsp;HTML编辑器</span></a></div>';
-				str += '</div>';
+				 str += '<div class="blankH5" ></div>';
+				 str += '<div class="text_div">业务流水号</div>';
+				 str += '<div id=""><input type="text" class="input_border" id="ywlsh" name="ywlsh" value="请输入业务流水号" style="width:98%" onkeyUP="ObjectPool['+this.name+'].setValue(this)"></div>';
+				 str += '</div>';
 				str += '</div>';
 			  str += '</div>';
 			 str += '</div>';
