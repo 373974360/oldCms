@@ -170,16 +170,26 @@ function checkUserInfo()
 			val.showError("username","帐号名称不能少于2个字符");
 			return false;
 		}
-		if($("#password").val().length < 6)
-		{
-			val.showError("password","密码不能少于6个字符");
-			return false;
-		}
-		if($("#password").val() != $("#check_password").val())
-		{
-			val.showError("password","两次输入的密码不一致");
-			return false;
-		}
+        if($("#password").val().length < 6)
+        {
+            val.showError("password","密码不能少于6个字符");
+            return false;
+        }
+        else
+        {
+            //校验密码级别
+            var level = $("#password").val().replace(/^(?:(?=.{4})(?=.*([a-z])|.)(?=.*([A-Z])|.)(?=.*(\d)|.)(?=.*(\W)|.).*|.*)$/, "$1$2$3$4").length;
+            if(level < 2)
+            {
+                val.showError("password","密码设置太简单，请重新设置，建议6位以上字母+数字，区分大小写！");
+                return false;
+            }
+        }
+        if($("#password").val() != $("#check_password").val())
+        {
+            val.showError("password","两次输入的密码不一致");
+            return false;
+        }
 	}
 
 	return true;
