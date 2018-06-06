@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8"%>
 <%
 String site_id = request.getParameter("site_id");
+String ywlsh = request.getParameter("ywlsh");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -147,8 +148,7 @@ String site_id = request.getParameter("site_id");
 		var s_id = request.getParameter("s_id");
 		var is_update = true;//是否允许修改,true表示该问卷还没有答卷，false为有答卷，已有的数据不能删除排序，不允许在选项中间进行插入操作
 		var defaultBean;
-		$(document).ready(function () {	
-			
+		$(document).ready(function () {
 			initButtomStyle();
 			init_FromTabsStyle();
 			if($.browser.msie&&$.browser.version=="6.0"&&$("html")[0].scrollHeight>$("html").height()) $("html").css("overflowY","scroll");
@@ -189,6 +189,7 @@ String site_id = request.getParameter("site_id");
 		
 			setContentAreaHeight();
 			$("#addButton").click(saveSurvey);
+            $("#ywlsh").val("<%=ywlsh%>");
 		}); 
 		function setContentAreaHeight()
 		{						

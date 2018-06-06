@@ -95,19 +95,26 @@ function showList() {
 
 /********** 显示table end*************/
 
-function fnUpdateSurveySetting()
+
+
+/**********************添加操作　开始*************************************/
+function fnAddSurvey()
 {
     var ywlsh = table.getSelecteCheckboxValue("ywlsh");
-    searchMap.put("ywlsh",ywlsh);
-    searchMap.put("state","1");
-    if(SurveySettingRPC.updateSurveySettingState(searchMap))
+    if(ywlsh == "" || ywlsh == "")
     {
-        parent.msgAlert("修改调查配置状态成功");
-        showList();
+        parent.msgWargin("请选择要配置的问卷");
+        return;
     }
-    else
-        parent.msgWargin("修改调查配置状态成功失败，请重试");
+    if(ywlsh.split(",").length > 1)
+    {
+        parent.msgWargin("只能选择一条记录进行推送操作");
+        return;
+    }
+    window.location.href = "add_survey.jsp?site_id="+site_id+"&ywlsh="+ywlsh;
 }
+/**********************添加操作　结束*************************************/
+
 
 
 

@@ -1,6 +1,6 @@
 	var SurveyRPC = jsonrpc.SurveyRPC;
 	var SurveyCategoryRPC = jsonrpc.SurveyCategoryRPC;
-	
+    var SurveySettingRPC = jsonrpc.SurveySettingRPC;
 	var SurveyCategory = new Bean("com.deya.wcm.bean.survey.SurveyCategory",true);
 	var SurveyBean = new Bean("com.deya.wcm.bean.survey.SurveyBean",true);
 	var SurveySub = new Bean("com.deya.wcm.bean.survey.SurveySub",true);
@@ -12,8 +12,8 @@
 	var tp = new TurnPage();
 	var beanList = null;
 	var table = new Table();	
-	table.table_name = "table";	
-
+	table.table_name = "table";
+    var searchMap = new Map();
 /********** 显示table begin*************/	
 
 	function initTable(){
@@ -150,11 +150,6 @@
 /********** 显示table end*************/
 
 /**********************添加操作　开始*************************************/
-function fnAddSurvey()
-{
-	window.location.href = "add_survey.jsp?site_id="+site_id;
-}
-
 function saveSurvey()
 {
 	$("#max_item_num").val(sd.item_num);//设置当前选项最大值
@@ -197,7 +192,7 @@ function saveSurvey()
 		if(SurveyRPC.insertSurvey(bean,getSurveySubList()))
 		{
 			parent.msgAlert("保存成功");
-			window.location.href="surveyList.jsp?site_id="+site_id
+            fnUpdateSurveySetting(bean.ywlsh);
 		}
 	}
 	else
@@ -209,7 +204,7 @@ function saveSurvey()
 		if(SurveyRPC.updateSurvey(bean,getSurveySubList()))
 		{
             parent.msgAlert("保存成功");
-			window.location.href="surveyList.jsp?site_id="+site_id
+            fnUpdateSurveySetting(bean.ywlsh);
 		}
 	}
 }
@@ -410,6 +405,19 @@ function getSurveySubList()
 	
 	return subList;
 }
+function fnUpdateSurveySetting(ywlsh)
+{
+	searchMap.put("ywlsh",ywlsh);
+	searchMap.put("state","1");
+	if(SurveySettingRPC.updateSurveySettingState(searchMap))
+	{
+		parent.msgAlert("修改调查配置状态成功");
+		window.location.href="surveyList.jsp?site_id="+site_id
+	}
+	else
+		parent.msgWargin("修改调查配置状态成功失败，请重试");
+}
+
 /**********************添加操作　结束*************************************/
 
 /**********************发布操作　开始*************************************/
@@ -576,18 +584,19 @@ function openAnswer()
 //推送到呼叫中心
 function pushAnswer()
 {
-	var selectIDS = table.getSelecteCheckboxValue("s_id");
-    if(selectIDS == "" || selectIDS == "")
+	var ywlsh = table.getSelecteCheckboxValue("ywlsh");
+    var selectIDS = table.getSelecteCheckboxValue("s_id");
+    if(ywlsh == "" || ywlsh == "")
     {
         parent.msgWargin("请选择要推送的问卷");
         return;
     }
-    if(selectIDS.split(",").length > 1)
+    if(ywlsh.split(",").length > 1)
     {
         parent.msgWargin("只能选择一条记录进行推送操作");
         return;
     }
-    if(SurveyRPC.pushAnswer(selectIDS))
+    if(SurveyRPC.pushAnswer(ywlsh,selectIDS))
     {
         parent.msgAlert("推送成功");
     }else{

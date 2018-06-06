@@ -12,6 +12,7 @@ String site_id = request.getParameter("site_id");
 <jsp:include page="../include/include_tools.jsp"/>
 <script src="js/surveySettingList.js"></script>
 <script type="text/javascript">
+var site_id = "CMScqgjj";
 var tn = request.getParameter("tn");
 $(document).ready(function(){
 	initButtomStyle();
@@ -31,7 +32,7 @@ $(document).ready(function(){
 	<table class="table_option" border="0" cellpadding="0" cellspacing="0" >
 		<tr>
 			<td class="fromTabs">
-                <input id="btn1" name="btn1" type="button" onclick="updateRecord(table,'id','fnUpdateSurveySetting()');" value="完成配置" />
+				<input id="btn1" name="btn1" type="button" onclick="fnAddSurvey('')" value="配置问卷" />
 				<span class="blank3"></span>
 			</td>
 			<td align="right" valign="middle" id="dept_search" class="search_td fromTabs" >
