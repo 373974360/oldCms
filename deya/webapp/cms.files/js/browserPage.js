@@ -225,7 +225,7 @@ function fnOK()
 			if(type == "selectOnly")
 			{
 				var item_id = $(this).find("select").attr("id");
-				var value = $(this).find("select option[selected=true]").val();
+				var value = $(this).find("select").val();
 				var itemB = BeanUtil.getCopy(SurveyAnswerItem);
 				if(value != null && value != "")
 				{
@@ -385,6 +385,7 @@ function fnOK()
 		if(AnswerRPC.insertSurveyAnswer(SurveyAnswer,""))
 		{
 			alert("提交成功，感谢您的参与"+message);
+			window.location.reload();
 			return;
 		}
 	}
