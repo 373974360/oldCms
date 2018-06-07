@@ -42,6 +42,7 @@ public class SurveySettingServiceClient {
         stime = map.get("stime");
         etime = map.get("etime");
         state = map.get("state");
+        ywlsh = "";
         String s = WebServiceClientUtil.doHttpPost("trader", "NLC067", getparamValue());
         return getSurveySettingListResult(s);
     }

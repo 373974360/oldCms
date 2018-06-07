@@ -148,6 +148,7 @@ String ywlsh = request.getParameter("ywlsh");
 		var s_id = request.getParameter("s_id");
 		var is_update = true;//是否允许修改,true表示该问卷还没有答卷，false为有答卷，已有的数据不能删除排序，不允许在选项中间进行插入操作
 		var defaultBean;
+		var ywlsh = "<%=ywlsh%>";
 		$(document).ready(function () {
 			initButtomStyle();
 			init_FromTabsStyle();
@@ -185,11 +186,12 @@ String ywlsh = request.getParameter("ywlsh");
 					$("#spacing_type").val(defaultBean.spacing_interval.substring(0,1));
 					$("#spacing_time").val(defaultBean.spacing_interval.substring(1))
 				}
+                ywlsh = defaultBean.ywlsh;
 			}
 		
 			setContentAreaHeight();
 			$("#addButton").click(saveSurvey);
-            $("#ywlsh").val("<%=ywlsh%>");
+            $("#ywlsh").val(ywlsh);
 		}); 
 		function setContentAreaHeight()
 		{						
