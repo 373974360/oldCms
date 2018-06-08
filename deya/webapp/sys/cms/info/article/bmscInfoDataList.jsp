@@ -227,10 +227,10 @@
             var list = new List();
             list.add(beanList.get(num));
             if(InfoBaseRPC.updateInfoStatus(list,"8")){
-                parent.msgAlert("信息发布成功");
+                parent.msgAlert("信息审核发布成功");
                 reloadInfoDataList();
             }else{
-                parent.msgWargin("信息发布失败");
+                parent.msgWargin("信息审核发布失败");
             }
         }
 
@@ -239,10 +239,10 @@
             var list = new List();
             list.add(beanList.get(num));
             if (InfoBaseRPC.updateInfoStatus(list, "3")) {
-                parent.msgAlert("信息撤销成功");
+                parent.msgAlert("信息退稿成功");
                 reloadInfoDataList();
             } else {
-                parent.msgWargin("信息撤销失败");
+                parent.msgWargin("信息退稿失败");
             }
         }
 
