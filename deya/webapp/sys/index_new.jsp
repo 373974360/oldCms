@@ -40,6 +40,7 @@
 								<li><a href="#" onclick="changeUrl('/sys/index.jsp?method=delInfo')">删除信息</a> </li>
 								<li><a href="#" onclick="changeUrl('/sys/index.jsp?menuUrl=/sys/cms/info/article/publishList.jsp')">发布信息</a> </li>
 								<li><a href="#" onclick="changeUrl('/sys/index.jsp?menuUrl=/sys/cms/info/article/auditPublishList.jsp')">待发信息</a> </li>
+								<li><a href="#" onclick="changeUrl('/sys/index.jsp?menuUrl=/sys/cms/info/article/bmscInfoDataList.jsp')">保密审查</a> </li>
 								<li><a href="#" onclick="changeUrl('/sys/index.jsp?method=unPublishInfo')">撤销信息</a> </li>
 								<li><a href="#" onclick="changeUrl('/sys/index.jsp?method=unPublishedInfo')">已撤信息</a> </li>
 								<li><a href="#" onclick="changeUrl('/sys/index.jsp?method=checkInfo')">审核信息（分栏目）</a> </li>

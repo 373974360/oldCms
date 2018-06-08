@@ -183,7 +183,7 @@ function updateInfoData()
 	bean.info_content = replace_img_content;
 	var st = $(":radio[name='info_status'][checked]").val();
 	bean.info_status = (st == null ? "2" : st);
-	if(bean.info_status == "8" || bean.info_status == 8){
+	if(bean.info_status == "8" || bean.info_status == 8 || bean.info_status == "9" || bean.info_status == 9){
 		bean.step_id = 100;
 	}else{
 		bean.step_id = $("#step_id").val();

@@ -37,6 +37,7 @@ var contentId = "info_content";
 var linksInfo = "";
 var focusInfo = "";
 var mFlag = false;
+var step_id="0"
 
 $(document).ready(function(){
     initUeditor(contentId);
@@ -47,9 +48,15 @@ $(document).ready(function(){
 	if(infoid != "" && infoid != "null" && infoid != null){		
 		defaultBean = ArticleRPC.getArticle(infoid,site_id);
 		if(defaultBean){
+		    defaultBean.step_id=step_id;
 			$("#info_article_table").autoFill(defaultBean);	
 			setV(contentId,defaultBean.info_content);
 			publicReloadUpdateGKInfos();
+			if(defaultBean.info_status=='3'){
+			    $("#opt_bmsc").removeClass("hidden");
+			}else{
+                $("#opt_bmsc").addClass("hidden");
+			}
 		}
 		$("#addButton").click(updateInfoData);		
 		mFlag = true;		

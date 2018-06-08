@@ -415,7 +415,7 @@
 
     <!-- 信息审核不通过sql -->
     <update id="noPass_info_status" parameterType="Map">
-        update cs_info set info_status = 1,opt_dtime = #{opt_dtime},auto_desc=#{auto_desc},modify_user=#{modify_user} where info_id in (${info_ids})
+        update cs_info set info_status = 1,opt_dtime = #{opt_dtime},step_id = #{step_id},auto_desc=#{auto_desc},modify_user=#{modify_user} where info_id in (${info_ids})
     </update>
 
     <!-- 信息审核通过sql -->

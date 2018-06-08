@@ -1146,6 +1146,7 @@ function isShowAudit(isShow) {
 
 function setStepId(stepId) {
     $("#step_id").val(stepId);
+    step_id = stepId;
 }
 
 function setUserOperate() {

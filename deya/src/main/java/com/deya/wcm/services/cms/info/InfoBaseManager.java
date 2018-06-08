@@ -519,7 +519,15 @@ public class InfoBaseManager {
         infoWorkStep.setPass_status(0);
         infoWorkStep.setWork_time(DateUtil.getCurrentDateTime());
         InfoDAO.insertInfoWorkStep(infoWorkStep);
-        return InfoDAO.noPassInfoStatus(info_ids, auto_desc, stl);
+
+        //查询最后一步审核通过的步骤
+        List<InfoWorkStep> stepList = InfoDAO.getInfoWorkStepByInfoId(info_ids,"1");
+        if(!stepList.isEmpty()){
+            step_id = stepList.get(0).getStep_id()+"";
+        }else{
+            step_id = "0";
+        }
+        return InfoDAO.noPassInfoStatus(info_ids,auto_desc, step_id, stl);
     }
 
     /**

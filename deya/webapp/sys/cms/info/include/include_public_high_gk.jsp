@@ -120,6 +120,7 @@
 					<li id="li_ds"><input id="e" name="info_status" type="radio" value="2" checked="checked" onclick="isShowAudit(true)"/><label for="e">待审</label></li>
 					<!--<li id="opt_303" class="hidden"><input id="f" name="info_status" type="radio" value="4" /><label for="f">待发</label></li>-->
 					<li id="opt_302" class="hidden"><input id="3" name="info_status" type="radio" value="8" onclick="isShowAudit(false)"/><label for="g">发布</label></li>
+					<li id="opt_bmsc" class="hidden"><input id="4" name="info_status" type="radio" value="9" onclick="isShowAudit(false)"/><label for="g">保密审查</label></li>
 				</ul>
 			</td>
 		</tr>

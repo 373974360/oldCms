@@ -231,11 +231,12 @@ public class InfoDAO {
      * @param stl
      * @return boolean
      */
-    public static boolean noPassInfoStatus(String info_ids, String auto_desc, SettingLogsBean stl) {
+    public static boolean noPassInfoStatus(String info_ids, String auto_desc,String step_id, SettingLogsBean stl) {
         Map<String, String> m = new HashMap<String, String>();
         m.put("info_ids", info_ids);
         m.put("opt_dtime", DateUtil.getCurrentDateTime());
         m.put("auto_desc", auto_desc);
+        m.put("step_id", step_id);
         if (stl != null) {
             m.put("modify_user", stl.getUser_id() + "");
         } else {
