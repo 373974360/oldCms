@@ -1022,6 +1022,11 @@ function publicSaveInfoEvent(bean, model_ename, save_type) {
             }
         }
 
+        if(bean.step_id=="7" || bean.step_id == 7){
+            bean.step_id = 100;
+            bean.info_status = 4;
+        }
+
         bool = ModelUtilRPC.update(bean, model_ename);
         if (bool == true) {//修改引用此信息的信息
             if (model_ename != "link")
