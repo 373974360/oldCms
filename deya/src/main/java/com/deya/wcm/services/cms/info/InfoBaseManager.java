@@ -51,6 +51,7 @@ import com.deya.wcm.services.zwgk.index.IndexManager;
 import com.deya.wcm.services.zwgk.info.GKInfoManager;
 import com.deya.wcm.services.zwgk.node.GKNodeManager;
 import com.deya.wcm.template.velocity.impl.VelocityInfoContextImp;
+import com.deya.wcm.services.cms.workflow.WorkFlowRPC;
 
 /**
  * @author zhuliang
@@ -480,7 +481,7 @@ public class InfoBaseManager {
                 int id = PublicTableDAO.getIDByTableName(PublicTableDAO.INFO_WORK_STEP);
                 infoWorkStep.setId(id);
                 infoWorkStep.setInfo_id(info.getInfo_id());
-                infoWorkStep.setStep_id(info.getStep_id());
+                infoWorkStep.setStep_id(WorkFlowRPC.getMaxStepIDByUserID(1,stl.getUser_id()+"","cms","CMScqgjj"));
                 infoWorkStep.setUser_id(stl.getUser_id());
                 infoWorkStep.setUser_name(stl.getUser_name());
                 infoWorkStep.setDescription(auto_desc);
@@ -512,7 +513,7 @@ public class InfoBaseManager {
         int id = PublicTableDAO.getIDByTableName(PublicTableDAO.INFO_WORK_STEP);
         infoWorkStep.setId(id);
         infoWorkStep.setInfo_id(Integer.parseInt(info_ids));
-        infoWorkStep.setStep_id(Integer.parseInt(step_id));
+        infoWorkStep.setStep_id(WorkFlowRPC.getMaxStepIDByUserID(1,stl.getUser_id()+"","cms","CMScqgjj"));
         infoWorkStep.setUser_id(stl.getUser_id());
         infoWorkStep.setUser_name(stl.getUser_name());
         infoWorkStep.setDescription(auto_desc);

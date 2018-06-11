@@ -154,7 +154,9 @@
                     $(this).css({"text-align": "center"});
 
                     var str = "<ul class=\"optUL\">";
-                    str += "<li class='ico_cancel'><a  title='撤回' href='javascript:doInfoBack(" + (i - 1) + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
+                    if (beanList.get(i - 1).step_id == "0" || beanList.get(i - 1).step_id == 0) {
+                        str += "<li class='ico_cancel'><a  title='撤回' href='javascript:doInfoBack(" + (i - 1) + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
+                    }
                     $(this).html(str + "</ul>");
                 }
             });
