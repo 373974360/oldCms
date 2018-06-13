@@ -1034,6 +1034,10 @@ function publicSaveInfoEvent(bean, model_ename, save_type) {
         }
     }
     else {
+        if(bean.step_id=="7" || bean.step_id == 7){
+            bean.step_id = 100;
+            bean.info_status = 4;
+        }
         if (Add_dtTimeIsCorrect(bean) == false) {
             return;
         }
@@ -1103,6 +1107,8 @@ function setInfoStatusButton() {
         var info_step_id = 0;
         if (infoid != null && infoid != "" && infoid != "null") {
             info_step_id = InfoBaseRPC.getInfoById(infoid, site_id).step_id;
+        }else{
+            info_step_id = step_id;
         }
         if(info_step_id==100){
             info_step_id = 0;
@@ -1162,14 +1168,14 @@ function setUserOperate() {
         // $("#opt_302").show().find("input").click();
         // $("#audit_tr").addClass("hidden");
         // $("#opt_303").show();
-        $("#timer_publish").hide();//显示出定时发布区域
+        $("#timer_publish").show();//显示出定时发布区域
     } else {
         if (wf_id == 0) {
             //是否有发布权限
             if (opt_ids.indexOf(",302,") > -1) {
                 $("#opt_302").show().find("input").click();
                 $("#audit_tr").addClass("hidden");
-                $("#timer_publish").hide(); //显示出定时发布区域
+                $("#timer_publish").show(); //显示出定时发布区域
             }
         }
         else if (opt_ids.indexOf(",303,") > -1) {

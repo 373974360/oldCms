@@ -399,7 +399,7 @@
             <td class="fromTabs">
                 数据来源：
                 <input name="source" type="checkbox" class="input_checkbox" value="wt" checked="checked">网厅&nbsp;&nbsp;&nbsp;&nbsp;
-                <input name="source" type="checkbox" class="input_checkbox" value="mh" checked="checked">门户&nbsp;&nbsp;&nbsp;&nbsp;
+                <input name="source" type="checkbox" class="input_checkbox" value="pc" checked="checked">门户&nbsp;&nbsp;&nbsp;&nbsp;
                 <input name="source" type="checkbox" class="input_checkbox" value="app" checked="checked">APP&nbsp;&nbsp;&nbsp;&nbsp;
                 <input name="source" type="checkbox" class="input_checkbox" value="wx" checked="checked">微信&nbsp;&nbsp;&nbsp;&nbsp;
                 <input name="source" type="checkbox" class="input_checkbox" value="zzzd" checked="checked">自助终端&nbsp;&nbsp;&nbsp;&nbsp;

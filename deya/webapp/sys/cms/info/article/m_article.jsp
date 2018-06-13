@@ -52,7 +52,7 @@ $(document).ready(function(){
 			$("#info_article_table").autoFill(defaultBean);	
 			setV(contentId,defaultBean.info_content);
 			publicReloadUpdateGKInfos();
-			if(defaultBean.info_status=='3'){
+			if(defaultBean.info_status=='3'||defaultBean.info_status=='8'){
 			    $("#opt_bmsc").removeClass("hidden");
 			}else{
                 $("#opt_bmsc").addClass("hidden");

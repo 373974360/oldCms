@@ -52,6 +52,7 @@
 								<li><a href="#" onclick="changeUrl('/sys/index.jsp?method=getInfo')">获取信息</a> </li>
 								<li><a href="#" onclick="changeUrl('/sys/index.jsp?method=moveInfo')">移动信息</a> </li>
 								<li><a href="#" onclick="changeUrl('/sys/index.jsp?method=pushInfo')">推送信息</a> </li>
+								<li><a href="#" onclick="changeUrl('/sys/index.jsp?method=backInfo')">归档信息</a> </li>
 								<li><a href="#" onclick="changeUrl('/sys/index.jsp?menuUrl=/sys/system/assist/author/authorDataList.jsp')">作者管理</a> </li>
 								<li><a href="#" onclick="changeUrl('/sys/index.jsp?menuUrl=/sys/system/assist/source/sourceDataList.jsp')">来源管理</a> </li>
 								<li><a href="#" onclick="changeUrl('/sys/index.jsp?menuUrl=/sys/material/operate/managerList.jsp')">素材管理</a> </li>

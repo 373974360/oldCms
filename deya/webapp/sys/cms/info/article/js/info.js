@@ -384,6 +384,10 @@ function showList() {
                     str += "<li id='315' class='ico_edit' ><a title='修改' href='javascript:openUpdatePage(" + beanList.get(i - 1).info_id + "," + beanList.get(i - 1).model_id + "," + beanList.get(i - 1).is_host + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
                     str += "<li id='309' class='ico_Clear' ><a title='彻底删除' href='javascript:doClearOneInfo(" + (i - 1) + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
                 }
+                //归档信息
+                if ("backInfo" == sso_method_cookie_value) {
+                    str += "<li id='315' class='ico_sucai'><a title='审核流程' href='javascript:auditList(" + beanList.get(i - 1).info_id + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
+                }
             }
             /*
              switch(nm){
@@ -1241,4 +1245,11 @@ function highSearchHandl(search_cons, lab_num, order_type_num) {
 function getAllocateInfo() {
     is_save_first_page = true;
     parent.OpenModalWindow("信息获取", "/sys/cms/info/article/getAllocateInfo.jsp?cat_id=" + cid + "&site_id=" + site_id + "&app_id=" + app, 800, 530);
+}
+
+
+function auditList(info_id){
+    if (info_id != null && info_id != "") {
+        OpenModalWindow("审核过程信息", "/sys/cms/info/article/auditList.jsp?info_id=" + info_id, 520, 235);
+    }
 }

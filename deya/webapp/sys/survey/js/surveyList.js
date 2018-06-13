@@ -741,7 +741,7 @@ function roleSearchHandl(obj)
 	var con_value = $(obj).parent().find("#searchkey").val();
 	if(con_value.trim() != "" &&  con_value != null)
 	{
-        search_con += " and cs.s_name like '%"+con_value+"%'";
+        search_con += " and (cs.s_name like '%"+con_value+"%' or cs.ywlsh like '%"+con_value+"%')";
     }
 	var timeName = $("#timeSelect").val();
     var time1 = $("#time1").val();

@@ -90,6 +90,21 @@
         </tr>
 	</tbody>
 </table>
+<table id="timer_publish" class="table_form" border="0" cellpadding="0" cellspacing="0">
+	<tbody>
+	<tr>
+		<th>定时发布：</th>
+		<td style="width:100px;">
+			<input id="up_dtime" name="up_dtime" type="text"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:true,readOnly:true})" readonly="readonly" />
+		</td>
+		<!--<th>定时撤销：</th>
+		<td style="width:100px;">
+			<input id="down_dtime" name="down_dtime" type="text"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:true,readOnly:true})" readonly="readonly" />
+		</td>-->
+		<td></td>
+	</tr>
+	</tbody>
+</table>
 <table id="" class="table_form" border="0" cellpadding="0" cellspacing="0">
 	<tbody>
     	<tr class="hidden">
@@ -208,22 +223,6 @@
 				<select id="language" class="input_select" style="width:150px;">
 				
 				</select>
-			</td>
-			<td></td>
-		</tr>
-	</tbody>
-</table>
-
-<table id="timer_publish" class="table_form hidden" border="0" cellpadding="0" cellspacing="0">
-	<tbody>
-		<tr>
-			<th>定时发布：</th>
-			<td style="width:100px;">
-				<input id="up_dtime" name="up_dtime" type="text"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:true,readOnly:true})" readonly="readonly" />
-			</td>
-			<th>定时撤销：</th>
-			<td style="width:100px;">
-				<input id="down_dtime" name="down_dtime" type="text"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:true,readOnly:true})" readonly="readonly" />
 			</td>
 			<td></td>
 		</tr>
