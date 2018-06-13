@@ -138,8 +138,11 @@ function getInfoList()
 				}
 				node_name = "<span style='color:red'>["+n_name+"]</span>";
 			}
-			
-			str += '<li><input type="'+input_type+'" name="infoList" value="'+info_list.get(i).info_id+'" />'+node_name+'<label url="'+info_list.get(i).content_url+'">'+info_list.get(i).title+'</label>&#160;&#160;&#160;&#160;<span>'+info_list.get(i).released_dtime.substring(5,16)+'</span></li>';
+            if(info_list.get(i).is_host==0){
+                str += '<li><input type="'+input_type+'" name="infoList" value="'+info_list.get(i).info_id+'" />'+node_name+'<label url="'+info_list.get(i).content_url+'">'+info_list.get(i).title+'</label>&#160;&#160;&#160;&#160;<span>'+info_list.get(i).released_dtime.substring(5,16)+'</span></li>';
+            }else{
+                str += '<li><input disabled="disabled" type="'+input_type+'" name="infoList" value="'+info_list.get(i).info_id+'" />'+node_name+'<label url="'+info_list.get(i).content_url+'">'+info_list.get(i).title+'</label>&#160;&#160;&#160;&#160;<span>'+info_list.get(i).released_dtime.substring(5,16)+'</span></li>';
+            }
 		}
 		$("#data").append(str);
 		init_input();	
