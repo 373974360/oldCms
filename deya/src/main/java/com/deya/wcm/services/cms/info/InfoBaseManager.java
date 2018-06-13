@@ -459,7 +459,7 @@ public class InfoBaseManager {
                 CategoryBean cb = CategoryManager.getCategoryBeanCatID(info.getCat_id(), info.getSite_id());
                 int wf_id = CategoryManager.getCategoryBean(info.getCat_id()).getWf_id();
                 int stepId = WorkFlowManager.getMaxStepIDByUserID(wf_id, user_id, info.getApp_id(), info.getSite_id());
-                if(stepId==100||info.getStep_id()==7){
+                if(stepId==100||info.getStep_id()==6){
                     info.setStep_id(100);
                     stepId = 100;
                 }
@@ -521,12 +521,15 @@ public class InfoBaseManager {
         infoWorkStep.setWork_time(DateUtil.getCurrentDateTime());
         InfoDAO.insertInfoWorkStep(infoWorkStep);
 
-        //查询最后一步审核通过的步骤
-        List<InfoWorkStep> stepList = InfoDAO.getInfoWorkStepByInfoId(info_ids,"1");
-        if(!stepList.isEmpty()){
-            step_id = stepList.get(0).getStep_id()+"";
-        }else{
-            step_id = "0";
+        int infoStatus = InfoBaseManager.getInfoById(info_ids).getInfo_status();
+        if(infoStatus==2){//正在走流程的信息，退稿的时候从哪里提交的退到那里去
+            //查询最后一步审核通过的步骤
+            List<InfoWorkStep> stepList = InfoDAO.getInfoWorkStepByInfoId(info_ids,"1");
+            if(!stepList.isEmpty()){
+                step_id = stepList.get(0).getStep_id()+"";
+            }else{
+                step_id = "0";
+            }
         }
         return InfoDAO.noPassInfoStatus(info_ids,auto_desc, step_id, stl);
     }

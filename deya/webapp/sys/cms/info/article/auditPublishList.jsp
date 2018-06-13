@@ -156,6 +156,8 @@
                     $(this).css({"text-align": "center"});
                     var str = "<ul class=\"optUL\">";
                     str += "<li class='ico_publish'><a title='发布' href='javascript:doPublish("+(i-1)+")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
+                    str += "<li id='315' class='ico_edit' ><a  title='修改' href='javascript:openUpdatePage("+beanList.get(i - 1).cat_id+"," + beanList.get(i - 1).info_id + "," + beanList.get(i - 1).model_id + "," + beanList.get(i - 1).is_host + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
+                    str += "<li id='303' class='ico_nopass'><a  title='退稿' href='javascript:noPassDesc(" + beanList.get(i - 1).info_id + "," + beanList.get(i - 1).step_id + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
                     $(this).html(str + "</ul>");
                 }
             });
@@ -231,6 +233,33 @@
             }else{
                 parent.msgWargin("信息发布失败");
             }
+        }
+
+        function noPassDesc(id, step_id) {
+            if (id != null && id != "")
+                temp_info_id = id;
+            if (step_id != null && step_id != "")
+                temp_step_id = step_id;
+            parent.OpenModalWindow("退稿意见", "/sys/cms/info/article/noPassDesc.jsp", 520, 235);
+        }//不通过
+        function noPass(desc) {
+            var selectIDS = "";
+            var step_id = "";
+            if (temp_info_id != "" && temp_info_id != null){
+                selectIDS = temp_info_id;
+            } else{
+                selectIDS = table.getSelecteCheckboxValue("info_id");
+            }
+            var infoBean= InfoBaseRPC.getInfoById(selectIDS, site_id);
+            step_id = jsonrpc.WorkFlowRPC.getMaxStepIDByUserID(infoBean.wf_id,infoBean.input_user,infoBean.app_id,infoBean.site_id);
+
+            if (InfoBaseRPC.noPassInfoStatus(selectIDS, step_id, desc)) {
+                parent.msgAlert("退回操作成功");
+            } else {
+                parent.msgWargin("退回操作失败");
+            }
+            temp_info_id = null;
+            reloadInfoDataList();
         }
 
         function showModels() {

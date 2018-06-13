@@ -1022,7 +1022,7 @@ function publicSaveInfoEvent(bean, model_ename, save_type) {
             }
         }
 
-        if(bean.step_id=="7" || bean.step_id == 7){
+        if(bean.step_id=="6" || bean.step_id == 6){
             bean.step_id = 100;
             bean.info_status = 4;
         }
@@ -1034,7 +1034,7 @@ function publicSaveInfoEvent(bean, model_ename, save_type) {
         }
     }
     else {
-        if(bean.step_id=="7" || bean.step_id == 7){
+        if(bean.step_id=="6" || bean.step_id == 6){
             bean.step_id = 100;
             bean.info_status = 4;
         }
@@ -1106,7 +1106,12 @@ function setInfoStatusButton() {
         workStepList = List.toJSList(workStepList);
         var info_step_id = 0;
         if (infoid != null && infoid != "" && infoid != "null") {
-            info_step_id = InfoBaseRPC.getInfoById(infoid, site_id).step_id;
+            var infoBean = InfoBaseRPC.getInfoById(infoid, site_id);
+            if(infoBean.step_id='100'){
+                info_step_id = jsonrpc.WorkFlowRPC.getMaxStepIDByUserID(wf_id,infoBean.input_user,app_id,site_id);
+            }else{
+                info_step_id = infoBean.step_id;
+            }
         }else{
             info_step_id = step_id;
         }
