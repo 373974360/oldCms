@@ -53,7 +53,12 @@ $(document).ready(function(){
 			setV(contentId,defaultBean.info_content);
 			publicReloadUpdateGKInfos();
 			if(defaultBean.info_status=='3'||defaultBean.info_status=='4'||defaultBean.info_status=='8'){//这些状态下修改信息的时候可以选择走保密审查
-			    $("#opt_bmsc").removeClass("hidden");
+			    if(defaultBean.info_status=='4'){
+                    $("#audit_tr").addClass("hidden");
+                    $("#li_ds").addClass("hidden");
+                    $("#opt_bmsc input").attr("checked",'true');
+				}
+				$("#opt_bmsc").removeClass("hidden");
 			}else{
                 $("#opt_bmsc").addClass("hidden");
 			}

@@ -1107,7 +1107,7 @@ function setInfoStatusButton() {
         var info_step_id = 0;
         if (infoid != null && infoid != "" && infoid != "null") {
             var infoBean = InfoBaseRPC.getInfoById(infoid, site_id);
-            if(infoBean.step_id='100'){
+            if(infoBean.step_id == '100'){
                 info_step_id = jsonrpc.WorkFlowRPC.getMaxStepIDByUserID(wf_id,infoBean.input_user,app_id,site_id);
             }else{
                 info_step_id = infoBean.step_id;

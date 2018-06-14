@@ -9,6 +9,11 @@ import com.deya.wcm.bean.survey.SurveyBean;
 import com.deya.wcm.services.Log.LogManager;
 import com.yinhai.pdf.SurveyToPdf;
 import com.yinhai.webservice.client.PushSurveyServiceClient;
+import com.deya.wcm.bean.survey.SurveyAnswer;
+import com.deya.util.DateUtil;
+import com.deya.wcm.dao.survey.AnswerDAO;
+import com.deya.wcm.bean.survey.SurveyAnswerItem;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * 访谈主题前台访问交互类.
@@ -324,6 +329,39 @@ public class SurveyRPC {
 		int i = PushSurveyServiceClient.doService(ywlsh,"/survey/view.jsp?s_id="+ids);
 		if(i==0){
 			b = false;
+		}
+		return b;
+	}
+
+	public static boolean updateAnswer(String sid,String itemId,String itemValue,int num){
+		boolean b = false;
+		String answerId = AnswerServer.getAnswerByIP(sid,"127.0.0.1");
+		if(StringUtils.isEmpty(answerId)){
+			answerId = UUID.randomUUID().toString();
+			SurveyAnswer answer = new SurveyAnswer();
+			answer.setAnswer_id(answerId);
+			answer.setS_id(sid);
+			answer.setAnswer_time(DateUtil.getCurrentDateTime());
+			answer.setIp("127.0.0.1");
+			answer.setOperate_time(0);
+			answer.setSource("xxfb");
+			answer.setUser_name("管理员");
+			b = AnswerDAO.insertSurveyAnswer(answer);
+		}else{
+			b = true;
+		}
+		if(b){
+			for(int i=0;i<num;i++){
+				SurveyAnswerItem item = new SurveyAnswerItem();
+				item.setAnswer_id(answerId);
+				item.setS_id(sid);
+				item.setItem_id(itemId);
+				item.setItem_value(itemValue);
+				item.setItem_text("");
+				b = AnswerDAO.insertSurveyAnswerItem(item);
+			}
+		}else{
+			b =false;
 		}
 		return b;
 	}

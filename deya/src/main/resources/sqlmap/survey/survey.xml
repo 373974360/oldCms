@@ -278,8 +278,14 @@
 	<!-- *****************************问卷前台处理　开始***************************** -->
 	<!-- 插入答卷主表 -->	
 	<insert id="insertAnswer" parameterType="com.deya.wcm.bean.survey.SurveyAnswer">
-		insert into cp_survey_answer(id,answer_id,s_id,ip,answer_time,operate_time,user_name) 
-		values(#{id},#{answer_id},#{s_id},#{ip},#{answer_time},#{operate_time},#{user_name})
+		<if test="source != null and source != ''">
+			insert into cp_survey_answer(id,answer_id,s_id,ip,answer_time,operate_time,user_name,source)
+			values(#{id},#{answer_id},#{s_id},#{ip},#{answer_time},#{operate_time},#{user_name},#{source})
+		</if>
+		<if test="source == null or source == ''">
+			insert into cp_survey_answer(id,answer_id,s_id,ip,answer_time,operate_time,user_name)
+			values(#{id},#{answer_id},#{s_id},#{ip},#{answer_time},#{operate_time},#{user_name})
+		</if>
 	</insert>
 	
 	<!-- 插入答卷选项子表 -->
@@ -291,10 +297,14 @@
 	<select id="getSurveyCount_browser" parameterType="Map" resultType="java.lang.String" >
 		select count(id) from cp_survey where is_delete = 0 and publish_status = 1
 	</select>	
-	
+
 	<!-- 得到该IP的提交的次数 -->
 	<select id="getAnswerCountByIP" parameterType="Map" resultType="java.lang.String" >
 		select count(id) from cp_survey_answer where ip=#{ip} and s_id=#{s_id}
+	</select>
+	<!-- 得到该IP的提交的次数 -->
+	<select id="getAnswerByIP" parameterType="Map" resultType="java.lang.String" >
+		select answer_id from cp_survey_answer where ip=#{ip} and s_id=#{s_id}
 	</select>
 	<!-- *****************************问卷前台处理　结束***************************** -->
 	

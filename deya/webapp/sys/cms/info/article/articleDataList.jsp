@@ -218,11 +218,12 @@
                     $(".btn299").removeAttr("width");
                     $(".backInfo").css("display","inline-block");
                     $(".infoListTable").removeClass("hidden");
-                    $(":button[id='btn404']").hide();
-                    $(":button[id='btn305']").hide();
-                    $(":button[id='btn306']").hide();
-                    $(":button[id='btn307']").hide();
-                    $(":button[id='btn332']").hide();
+                    $(":button[id='btn404']").hide();//获取
+                    $(":button[id='btn305']").hide();//推送
+                    $(":button[id='btn306']").hide();//逸动
+                    $(":button[id='btn307']").hide();//撤销
+                    $(":button[id='btn332']").hide();//删除
+                    $(":button[id='btn302']").hide();//发布
                 }
             }
 

@@ -7,6 +7,9 @@
 
 
     <jsp:include page="../include/include_tools.jsp"/>
+    <script type="text/javascript" src="../js/jquery-easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../js/indexjs/indexList.js"></script>
+    <script type="text/javascript" src="../js/indexjs/tools.js"></script>
     <script src="js/statisticsList.js"></script>
     <style>
         .sub_div {
@@ -151,7 +154,7 @@
 
 
                             str += '<tr>';
-                            str += '<td style="text-align:left" score="' + childList.get(j).score + '">' + childList.get(j).item_name + text_str + '</td>';
+                            str += '<td style="text-align:left" score="' + childList.get(j).score + '">' + childList.get(j).item_name + text_str + '<a href="javascript:editorAnswer(\''+childList.get(j).item_id+'\','+childList.get(j).item_num+');" style="margin-left:10px;">[更改票数]</a></td>';
                             str += '<td id="' + ids + '">' + getStatisBean(ids).counts + '</td>';
                             str += '<td id="pic_' + ids + '" style="text-align:left" width="150px"><div class="pro_back"><div class="pro_fore" style="width:' + getStatisBean(ids).proportion + '"><img height="13" width="149px" alt="" src="../images/pro_fore.png"></div></div></td>'
                             str += '<td id="pro_' + ids + '" style="text-align:left" >' + getStatisBean(ids).proportion + '</td>';
@@ -388,6 +391,23 @@
             window.location.href = "answerList.jsp?sid=" + s_id;
         }
 
+        var s_item_id;
+        var s_item_value;
+        function editorAnswer(item_id,item_value) {
+            s_item_id = item_id;
+            s_item_value = item_value;
+            parent.OpenModalWindow("更改票数", "/sys/survey/editorAnswer.jsp", 520, 235);
+        }
+        function editorAnswerNum(num) {
+            if (SurveyRPC.updateAnswer(s_id,s_item_id, s_item_value, num)) {
+                parent.msgAlert("更改成功");
+            } else {
+                parent.msgWargin("更改失败");
+            }
+            s_item_id = null;
+            s_item_value = null;
+            reload();
+        }
         //-->
     </SCRIPT>
 </head>
@@ -404,6 +424,7 @@
                 <input name="source" type="checkbox" class="input_checkbox" value="wx" checked="checked">微信&nbsp;&nbsp;&nbsp;&nbsp;
                 <input name="source" type="checkbox" class="input_checkbox" value="zzzd" checked="checked">自助终端&nbsp;&nbsp;&nbsp;&nbsp;
                 <input name="source" type="checkbox" class="input_checkbox" value="dp" checked="checked">大屏&nbsp;&nbsp;&nbsp;&nbsp;
+                <input name="source" type="checkbox" class="input_checkbox" value="xxfb" checked="checked">线下发布&nbsp;&nbsp;&nbsp;&nbsp;
                 <input id="btn1" name="btn1" type="button" onclick="reload()" value="开始统计"/>
                 <input id="btn1" name="btn1" type="button" onclick="goOtherPage()" value="所有答卷"/>
                 <span class="blank3"></span>

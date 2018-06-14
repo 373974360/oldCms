@@ -738,19 +738,23 @@ function updateRecommend(flag)
 function roleSearchHandl(obj)
 {
     search_con = "";
-	var con_value = $(obj).parent().find("#searchkey").val();
-	if(con_value.trim() != "" &&  con_value != null)
+	var con_value1 = $("#searchkey1").val();
+    var con_value2 = $("#searchkey2").val();
+	if(con_value1.trim() != "" &&  con_value1 != null)
 	{
-        search_con += " and (cs.s_name like '%"+con_value+"%' or cs.ywlsh like '%"+con_value+"%')";
+    	search_con += " and cs.s_name like '%"+con_value1+"%'";
     }
-	var timeName = $("#timeSelect").val();
+    if(con_value2.trim() != "" &&  con_value2 != null)
+	{
+		search_con += " and cs.ywlsh like '%"+con_value2+"%'";
+	}
     var time1 = $("#time1").val();
     var time2 = $("#time2").val();
     if(time1 != null && time1 != ""){
-        search_con += " and cs." + timeName + " >= '"+time1+" 00:00:00'";
+        search_con += " and cs.start_time >= '"+time1+" 00:00:00'";
     }
     if(time2 != null && time2 != ""){
-    	search_con += " and cs." + timeName + " <= '"+time2+" 23:59:59'";
+    	search_con += " and cs.end_time <= '"+time2+" 23:59:59'";
 	}
 	showList();
 	showTurnPage();
