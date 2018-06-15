@@ -70,7 +70,7 @@ function reloadPublicGKInfo()
 function setPublishSource(){
     if(defaultBean.publish_source != "")
     {
-        if(defaultBean.publish_source.indexOf('pc') < 0 ){
+        if(defaultBean.publish_source.indexOf('mh') < 0 ){
             $("input[name='publish_source']").each(function(){
                 if($(this).val() == "pc"){
                     $(this).removeAttr("checked");
@@ -87,6 +87,27 @@ function setPublishSource(){
         if(defaultBean.publish_source.indexOf('app') < 0 ){
             $("input[name='publish_source']").each(function(){
                 if($(this).val() == "app"){
+                    $(this).removeAttr("checked");
+                }
+            });
+        }
+        if(defaultBean.publish_source.indexOf('wt') < 0 ){
+            $("input[name='publish_source']").each(function(){
+                if($(this).val() == "wt"){
+                    $(this).removeAttr("checked");
+                }
+            });
+        }
+        if(defaultBean.publish_source.indexOf('zzzd') < 0 ){
+            $("input[name='publish_source']").each(function(){
+                if($(this).val() == "zzzd"){
+                    $(this).removeAttr("checked");
+                }
+            });
+        }
+        if(defaultBean.publish_source.indexOf('dp') < 0 ){
+            $("input[name='publish_source']").each(function(){
+                if($(this).val() == "dp"){
                     $(this).removeAttr("checked");
                 }
             });

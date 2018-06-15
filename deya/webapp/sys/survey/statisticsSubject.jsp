@@ -71,7 +71,13 @@
         var s_id = request.getParameter("sid");
         var m;
         var answer_count = 0;//答卷总数
+        var is_answer_editor = false;
         $(document).ready(function () {
+
+            var surveyBean = SurveyRPC.getSurveyBean(s_id);
+            if(surveyBean.fbqd!=null&&surveyBean.fbqd!=''&&surveyBean.fbqd.indexOf("线下发布")!=-1){
+                is_answer_editor = true;
+            }
             initButtomStyle();
             reload();
         });
@@ -154,7 +160,12 @@
 
 
                             str += '<tr>';
-                            str += '<td style="text-align:left" score="' + childList.get(j).score + '">' + childList.get(j).item_name + text_str + '<a href="javascript:editorAnswer(\''+childList.get(j).item_id+'\','+childList.get(j).item_num+');" style="margin-left:10px;">[更改票数]</a></td>';
+                            str += '<td style="text-align:left" score="' + childList.get(j).score + '">' + childList.get(j).item_name + text_str;
+                            if(is_answer_editor){
+                                str += '<a href="javascript:editorAnswer(\''+childList.get(j).item_id+'\','+childList.get(j).item_num+');" style="margin-left:10px;">[更改票数]</a></td>';
+                            }else{
+                                str += '</td>';
+                            }
                             str += '<td id="' + ids + '">' + getStatisBean(ids).counts + '</td>';
                             str += '<td id="pic_' + ids + '" style="text-align:left" width="150px"><div class="pro_back"><div class="pro_fore" style="width:' + getStatisBean(ids).proportion + '"><img height="13" width="149px" alt="" src="../images/pro_fore.png"></div></div></td>'
                             str += '<td id="pro_' + ids + '" style="text-align:left" >' + getStatisBean(ids).proportion + '</td>';
@@ -418,15 +429,13 @@
         <tr>
             <td class="fromTabs">
                 数据来源：
-                <input name="source" type="checkbox" class="input_checkbox" value="wt" checked="checked">网厅&nbsp;&nbsp;&nbsp;&nbsp;
-                <input name="source" type="checkbox" class="input_checkbox" value="pc" checked="checked">门户&nbsp;&nbsp;&nbsp;&nbsp;
-                <input name="source" type="checkbox" class="input_checkbox" value="app" checked="checked">APP&nbsp;&nbsp;&nbsp;&nbsp;
-                <input name="source" type="checkbox" class="input_checkbox" value="wx" checked="checked">微信&nbsp;&nbsp;&nbsp;&nbsp;
-                <input name="source" type="checkbox" class="input_checkbox" value="zzzd" checked="checked">自助终端&nbsp;&nbsp;&nbsp;&nbsp;
-                <input name="source" type="checkbox" class="input_checkbox" value="dp" checked="checked">大屏&nbsp;&nbsp;&nbsp;&nbsp;
-                <input name="source" type="checkbox" class="input_checkbox" value="xxfb" checked="checked">线下发布&nbsp;&nbsp;&nbsp;&nbsp;
+                <input id="wt" name="source" type="checkbox" class="input_checkbox" value="wt" checked="checked">网厅&nbsp;&nbsp;&nbsp;&nbsp;
+                <input id="pc" name="source" type="checkbox" class="input_checkbox" value="pc" checked="checked">门户&nbsp;&nbsp;&nbsp;&nbsp;
+                <input id="app" name="source" type="checkbox" class="input_checkbox" value="app" checked="checked">APP&nbsp;&nbsp;&nbsp;&nbsp;
+                <input id="wx" name="source" type="checkbox" class="input_checkbox" value="wx" checked="checked">微信&nbsp;&nbsp;&nbsp;&nbsp;
+                <input id="xxfb" name="source" type="checkbox" class="input_checkbox" value="xxfb" checked="checked">线下发布&nbsp;&nbsp;&nbsp;&nbsp;
                 <input id="btn1" name="btn1" type="button" onclick="reload()" value="开始统计"/>
-                <input id="btn1" name="btn1" type="button" onclick="goOtherPage()" value="所有答卷"/>
+                <input id="btn2" name="btn2" type="button" onclick="goOtherPage()" value="所有答卷"/>
                 <span class="blank3"></span>
             </td>
             <td align="right" valign="middle" id="dept_search" class="search_td fromTabs">

@@ -35,6 +35,12 @@
 						<input type="text" name="edit_num" id="edit_num"/>
 					</td>
 				</tr>
+				<tr id="auto_desc_tr_1">
+					<th style="vertical-align:top;">备注：</th>
+					<td style="color:red;">
+						此更改只适用于 "线下发布" 渠道
+					</td>
+				</tr>
 			</tbody>
 		</table>
 		<span class="blank12"></span>
