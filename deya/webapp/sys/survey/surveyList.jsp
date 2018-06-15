@@ -49,7 +49,7 @@
 				<input id="time2" name="time2" type="text" class="input_text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:true,readOnly:true})" readonly="readonly" style="width:80px"/>
 				<span>问卷标题:</sapn>
 				<input id="searchkey1" type="text" class="input_text" value=""  />
-				<span>业务流水号:</sapn>
+				<span>问卷编号:</sapn>
 				<input id="searchkey2" type="text" class="input_text" value=""  />
 				<input id="btnSearch" type="button" class="btn x2" value="搜索" onclick="roleSearchHandl(this)"/>
 				<span class="blank3"></span>

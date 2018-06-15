@@ -53,7 +53,10 @@ public class SurveyBean implements IBean,java.io.Serializable{
 	private String is_end = "0";//是否截止，不做为表字段 0为进行状态　1为截止状态
 	private String site_id = ""; 
 	private int is_checkcode = 1;//是否需要验证码  0;1
-	private String ywlsh;
+	private String ywlsh="";//业务流水号
+	private String file_path="";//附件
+	private String wjbh="";//问卷编号
+	private String fbqd="";//发布渠道
 
 	private int back_status = 0;
 
@@ -335,5 +338,29 @@ public class SurveyBean implements IBean,java.io.Serializable{
 
 	public void setYwlsh(String ywlsh) {
 		this.ywlsh = ywlsh;
+	}
+
+	public String getFile_path() {
+		return file_path;
+	}
+
+	public void setFile_path(String file_path) {
+		this.file_path = file_path;
+	}
+
+	public String getWjbh() {
+		return wjbh;
+	}
+
+	public void setWjbh(String wjbh) {
+		this.wjbh = wjbh;
+	}
+
+	public String getFbqd() {
+		return fbqd;
+	}
+
+	public void setFbqd(String fbqd) {
+		this.fbqd = fbqd;
 	}
 }

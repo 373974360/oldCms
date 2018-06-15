@@ -156,7 +156,7 @@
                     $(this).css({"text-align": "center"});
                     var str = "<ul class=\"optUL\">";
                     str += "<li id='302' class='ico_pass'><a  title='发布' href='javascript:doPublish(" + (i - 1) + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
-                    str += "<li id='307' class='ico_nopass'><a  title='退稿' href='javascript:doCancel(" + (i - 1) + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
+                    str += "<li id='307' class='ico_nopass'><a  title='退稿' href='javascript:noPassDesc(" + beanList.get(i - 1).info_id + ","+ beanList.get(i - 1).step_id + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
                     $(this).html(str + "</ul>");
                 }
             });
@@ -256,6 +256,35 @@
                     $("#pageGoNum").append("<option value=\"" + model.model_id + "\">" + model.model_name + "</option> ");
                 }
             }
+        }
+
+
+
+        function noPassDesc(id, step_id) {
+            if (id != null && id != "")
+                temp_info_id = id;
+            if (step_id != null && step_id != "")
+                temp_step_id = step_id;
+            parent.OpenModalWindow("退稿意见", "/sys/cms/info/article/noPassDesc.jsp", 520, 235);
+        }//不通过
+        function noPass(desc) {
+            var selectIDS = "";
+            var step_id = "";
+            if (temp_info_id != "" && temp_info_id != null){
+                selectIDS = temp_info_id;
+            } else{
+                selectIDS = table.getSelecteCheckboxValue("info_id");
+            }
+            var infoBean= InfoBaseRPC.getInfoById(selectIDS, site_id);
+            step_id = jsonrpc.WorkFlowRPC.getMaxStepIDByUserID(infoBean.wf_id,infoBean.input_user,infoBean.app_id,infoBean.site_id);
+
+            if (InfoBaseRPC.noPassInfoStatus(selectIDS, step_id, desc)) {
+                parent.msgAlert("退回操作成功");
+            } else {
+                parent.msgWargin("退回操作失败");
+            }
+            temp_info_id = null;
+            reloadInfoDataList();
         }
 
         //以模型为条件过滤

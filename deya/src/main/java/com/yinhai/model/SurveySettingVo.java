@@ -44,6 +44,19 @@ public class SurveySettingVo implements Serializable {
      * 状态
      */
     private String state;
+    /**
+     * 问卷编号
+     */
+    private String question_code;
+    /**
+     * 发布渠道
+     */
+    private String source;
+    /**
+     * 发布部门
+     */
+    private String depname;
+
 
     public String getYwlsh() {
         return ywlsh;
@@ -115,5 +128,29 @@ public class SurveySettingVo implements Serializable {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public String getQuestion_code() {
+        return question_code;
+    }
+
+    public void setQuestion_code(String question_code) {
+        this.question_code = question_code;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
+
+    public String getDepname() {
+        return depname;
+    }
+
+    public void setDepname(String depname) {
+        this.depname = depname;
     }
 }

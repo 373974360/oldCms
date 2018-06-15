@@ -746,7 +746,7 @@ function roleSearchHandl(obj)
     }
     if(con_value2.trim() != "" &&  con_value2 != null)
 	{
-		search_con += " and cs.ywlsh like '%"+con_value2+"%'";
+		search_con += " and cs.wjbh like '%"+con_value2+"%'";
 	}
     var time1 = $("#time1").val();
     var time2 = $("#time2").val();

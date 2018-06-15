@@ -9,6 +9,7 @@ import com.deya.wcm.services.survey.SurveyService;
 import com.yinhai.model.GuiDangVo;
 import com.yinhai.sftp.SFTPUtils;
 import com.yinhai.webservice.client.GuiDangServiceClient;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
@@ -70,6 +71,9 @@ public class SurveyToPdf {
                         String pdfPath = localPath + pdfName;
                         PdfUtil.createPdf(content, pdfPath);
                         String attrFiles = pdfName;
+                        if(StringUtils.isNotEmpty(surveyBean.getFile_path())){
+                            attrFiles += "|"+surveyBean.getFile_path();
+                        }
                         guiDangVo.setFiles(attrFiles);
                         //上传文章生成的pdf到sftp服务器
                         SFTPUtils sftpUtils = new SFTPUtils();

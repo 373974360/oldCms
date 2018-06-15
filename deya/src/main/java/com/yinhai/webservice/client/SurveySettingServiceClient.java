@@ -147,6 +147,21 @@ public class SurveySettingServiceClient {
                     } else {
                         surveySettingVo.setState("");
                     }
+                    if (questionnaire.element("question_code") != null) {
+                        surveySettingVo.setQuestion_code(questionnaire.element("question_code").getTextTrim());
+                    } else {
+                        surveySettingVo.setQuestion_code("");
+                    }
+                    if (questionnaire.element("source") != null) {
+                        surveySettingVo.setSource(questionnaire.element("source").getTextTrim());
+                    } else {
+                        surveySettingVo.setSource("");
+                    }
+                    if (questionnaire.element("depname") != null) {
+                        surveySettingVo.setDepname(questionnaire.element("depname").getTextTrim());
+                    } else {
+                        surveySettingVo.setDepname("");
+                    }
                     surveySettingVoList.add(surveySettingVo);
                 }
             }

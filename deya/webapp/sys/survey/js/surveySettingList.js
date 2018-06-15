@@ -101,6 +101,13 @@ function showList() {
 function fnAddSurvey()
 {
     var ywlsh = table.getSelecteCheckboxValue("ywlsh");
+    var file_path = table.getSelecteCheckboxValue("question_file_name");
+    var wjbh = table.getSelecteCheckboxValue("question_code");
+    var fbqd = table.getSelecteCheckboxValue("source");
+    //var ywlsh = "45";
+    //var file_path = "/uploadfile/123.xls";
+    //var wjbh = "BH89757321";
+    //var fbqd = "pc,xxfb,wx";
     if(ywlsh == "" || ywlsh == "")
     {
         parent.msgWargin("请选择要配置的问卷");
@@ -111,7 +118,7 @@ function fnAddSurvey()
         parent.msgWargin("只能选择一条记录进行推送操作");
         return;
     }
-    window.location.href = "add_survey.jsp?site_id="+site_id+"&ywlsh="+ywlsh;
+    window.location.href = "add_survey.jsp?site_id="+site_id+"&ywlsh="+ywlsh+"&file_path="+file_path+"&wjbh="+wjbh+"&fbqd="+fbqd;
 }
 /**********************添加操作　结束*************************************/
 

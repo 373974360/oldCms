@@ -223,7 +223,7 @@
                     $(":button[id='btn306']").hide();//逸动
                     $(":button[id='btn307']").hide();//撤销
                     $(":button[id='btn332']").hide();//删除
-                    $(":button[id='btn302']").hide();//发布
+                    $(":button[id='btn302']").css("display","none");//发布
                 }
             }
 
