@@ -1004,6 +1004,7 @@ function publicSaveInfoEvent(bean, model_ename, save_type) {
          }*/
         bean.tags = bean.topic_key;
     }
+    var info_msg= "";
     if (save_type == "update") {
         if (update_dtTimeIsCorrect(bean) == false) {
             return;
@@ -1032,6 +1033,7 @@ function publicSaveInfoEvent(bean, model_ename, save_type) {
             if (model_ename != "link")
                 updateQuoteInfo(bean, model_ename);
         }
+        info_msg="维护";
     }
     else {
         if(bean.step_id=="6" || bean.step_id == 6){
@@ -1041,6 +1043,7 @@ function publicSaveInfoEvent(bean, model_ename, save_type) {
         if (Add_dtTimeIsCorrect(bean) == false) {
             return;
         }
+        info_msg="保存";
         bool = ModelUtilRPC.insert(bean, model_ename);
     }
 
@@ -1048,11 +1051,11 @@ function publicSaveInfoEvent(bean, model_ename, save_type) {
         if (bean.info_status != 0) {
             insertOtherInfos(bean, model_ename, info_id);
         }
-        parent.msgAlert("信息" + WCMLang.Add_success);
+        parent.msgAlert("信息"+info_msg+"成功");
         gotoListPage(bean);
     }
     else {
-        parent.msgWargin("信息" + WCMLang.Add_fail);
+        parent.msgWargin("信息"+info_msg+"失败，请重新提交");
     }
 }
 

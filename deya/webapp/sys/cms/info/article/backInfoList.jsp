@@ -68,7 +68,7 @@
 
             colsList.add(setTitleClos("title", "标题", "", "", "", ""));//英文名，显示名，宽，高，样式名，点击事件　
             colsList.add(setTitleClos("cat_cname", "所属栏目", "100px", "", "", ""));
-            colsList.add(setTitleClos("actions", "管理操作", "90px", "", "", ""));
+            colsList.add(setTitleClos("actions", "管理操作", "120px", "", "", ""));
             colsList.add(setTitleClos("weight", "权重", "30px", "", "", ""));
             colsList.add(setTitleClos("input_user_name", "发起人", "60px", "", "", ""));
             colsList.add(setTitleClos("input_dtime", "发起时间", "100px", "", "", ""));
@@ -85,8 +85,8 @@
 
         function showList() {
             var con_map = new Map();
-            con_map.put("info_status", "9");
-            con_map.put("final_status", "99");
+            con_map.put("info_status", "8");
+            con_map.put("final_status", "0");
             con_map.put("site_id", site_id);
             con_map.put("page_size", "15");
             con_map.put("start_num", "0");
@@ -155,13 +155,12 @@
             table.getCol("actions").each(function (i) {
                 if (i > 0) {
                     $(this).css({"text-align": "center"});
+
                     var str = "<ul class=\"optUL\">";
-                    str += "<li name='btn302' class='ico_publish'><a  title='发布' href='javascript:doPublish(" + (i - 1) + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
-                    str += "<li name='btn303' class='ico_nopass'><a  title='退稿' href='javascript:noPassDesc(" + beanList.get(i - 1).info_id + ","+ beanList.get(i - 1).step_id + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
+                    str += "<li class='ico_sucai'><a title='审核流程' href='javascript:auditList(" + beanList.get(i - 1).info_id + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
                     $(this).html(str + "</ul>");
                 }
             });
-
             table.getCol("opt_dtime").each(function (i) {
                 if (i > 0) {
                     var t = beanList.get(i - 1).opt_dtime;
@@ -203,50 +202,6 @@
             tp.show("turn", "");
             tp.onPageChange = showList;
         }
-
-        //打开修改窗口
-        function openUpdatePage(cid, Infoid, model_id, is_host) {
-            if (is_host == 1) {
-                //引用信息只修改信息主表内容
-                parent.addTab(true, "/sys/cms/info/article/update_info.jsp?cid=" + cid + "&info_id=" + Infoid + "&site_id=" + site_id + "&app_id=" + app + "&model=" + model_id + "&topnum=" + parent.curTabIndex, "修改信息");
-            }
-            else {
-                var model = getAddPagebyModel(model_id);
-                parent.addTab(true, "/sys/cms/info/article/" + getAddPagebyModel(model_id) + "?cid=" + cid + "&info_id=" + Infoid + "&site_id=" + site_id + "&app_id=" + app + "&model=" + model_id + "&topnum=" + parent.curTabIndex, "修改信息");
-            }
-        }
-
-        function getAddPagebyModel(model_id) {
-            var add_page = jsonrpc.ModelRPC.getModelAddPage(model_id);
-            if (add_page == "" || add_page == null)
-                add_page = "m_article.jsp";
-            return add_page;
-        }
-
-        //单条信息发布
-        function doPublish(num){
-            var list = new List();
-            list.add(beanList.get(num));
-            if(InfoBaseRPC.updateInfoStatus(list,"8")){
-                parent.msgAlert("信息审核发布成功");
-                reloadInfoDataList();
-            }else{
-                parent.msgWargin("信息审核发布失败");
-            }
-        }
-
-        //单条信息撤销
-        function doCancel(num) {
-            var list = new List();
-            list.add(beanList.get(num));
-            if (InfoBaseRPC.updateInfoStatus(list, "3")) {
-                parent.msgAlert("信息退稿成功");
-                reloadInfoDataList();
-            } else {
-                parent.msgWargin("信息退稿失败");
-            }
-        }
-
         function showModels() {
             $("#pageGoNum").append("<option value=\"-1\" selected=\"selected\"  >全部</option> ");
             var is_first = false;
@@ -259,35 +214,11 @@
             }
         }
 
-
-
-        function noPassDesc(id, step_id) {
-            if (id != null && id != "")
-                temp_info_id = id;
-            if (step_id != null && step_id != "")
-                temp_step_id = step_id;
-            parent.OpenModalWindow("退稿意见", "/sys/cms/info/article/noPassDesc.jsp", 520, 235);
-        }//不通过
-        function noPass(desc) {
-            var selectIDS = "";
-            var step_id = "";
-            if (temp_info_id != "" && temp_info_id != null){
-                selectIDS = temp_info_id;
-            } else{
-                selectIDS = table.getSelecteCheckboxValue("info_id");
+        function auditList(info_id){
+            if (info_id != null && info_id != "") {
+                OpenModalWindow("审核过程信息", "/sys/cms/info/article/auditList.jsp?info_id=" + info_id, 520, 235);
             }
-            var infoBean= InfoBaseRPC.getInfoById(selectIDS, site_id);
-            step_id = jsonrpc.WorkFlowRPC.getMaxStepIDByUserID(infoBean.wf_id,infoBean.input_user,infoBean.app_id,infoBean.site_id);
-
-            if (InfoBaseRPC.noPassInfoStatus(selectIDS, step_id, desc)) {
-                parent.msgAlert("退回操作成功");
-            } else {
-                parent.msgWargin("退回操作失败");
-            }
-            temp_info_id = null;
-            reloadInfoDataList();
         }
-
         //以模型为条件过滤
         function changeFactor() {
             var cf = $("#pageGoNum").val();
@@ -386,6 +317,16 @@
             user_list = List.toJSList(user_list);
             $("#input_user").addOptions(user_list, "user_id", "user_realname");
         }
+        //信息归档
+        function backInfoData() {
+            var selectList = table.getSelecteBeans();
+            if (InfoBaseRPC.backInfo(selectList)) {
+                parent.msgAlert("信息" + WCMLang.ArchiveStatus_success);
+                reloadInfoDataList();
+            } else {
+                parent.msgWargin("信息" + WCMLang.ArchiveStatus_fail);
+            }
+        }
     </script>
 </head>
 
@@ -427,21 +368,18 @@
                               readonly="readonly" style="width:80px"/>
                 <input id="btn" type="button" value="搜索" onclick="searchInfo()"/>
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                    <!--<input id="btnSearch" name="btn6" type="button" onclick="openHighSearchPage()" value="高级搜索"/>-->
+                <!--<input id="btnSearch" name="btn6" type="button" onclick="openHighSearchPage()" value="高级搜索"/>-->
             </td>
         </tr>
     </table>
     <span class="blank3"></span>
     <div id="table"></div>
     <div id="turn"></div>
-
     <div class="infoListTable">
         <table class="table_option" border="0" cellpadding="0" cellspacing="0">
             <tr>
                 <td align="left" valign="middle">
-                    <%--<input id="btn303" name="btn1" type="button" onclick="publicSelectCheckbox(table,'info_id','onPass()');" value="通过" />
-                    <input id="btn303" name="btn2" type="button" onclick="publicSelectCheckbox(table,'info_id','noPassDesc()');" value="退稿" />
-                    <input id="btn301" name="btn3" type="button" onclick="deleteRecord(table,'info_id','deleteInfoData()');" value="删除" />--%>
+                    <input class="backInfo" id="btn999" name="btn9" type="button" onclick="backRecord(table,'info_id','backInfoData()');" value="归档" />
                 </td>
             </tr>
         </table>

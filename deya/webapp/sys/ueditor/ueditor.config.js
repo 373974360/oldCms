@@ -37,7 +37,7 @@
             'fullscreen', 'source', '|', 'undo', 'redo', '|',
             'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'searchreplace','|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', '|',
             'fontfamily', 'fontsize', '|',
-            'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|',
+            'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', '|','rowspacingtop','rowspacingbottom','lineheight','|',
             'link', 'unlink', '|',
             'insertimage', 'attachment','insertvideo','inserttable', '|',
             //'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', '|',
@@ -174,19 +174,38 @@
 
         //fontfamily
         //字体设置 label留空支持多语言自动切换，若配置，则以配置值为准
-        //,'fontfamily':[
-        //    { label:'',name:'songti',val:'宋体,SimSun'},
-        //    { label:'',name:'kaiti',val:'楷体,楷体_GB2312, SimKai'},
-        //    { label:'',name:'yahei',val:'微软雅黑,Microsoft YaHei'},
-        //    { label:'',name:'heiti',val:'黑体, SimHei'},
-        //    { label:'',name:'lishu',val:'隶书, SimLi'},
-        //    { label:'',name:'andaleMono',val:'andale mono'},
-        //    { label:'',name:'arial',val:'arial, helvetica,sans-serif'},
-        //    { label:'',name:'arialBlack',val:'arial black,avant garde'},
-        //    { label:'',name:'comicSansMs',val:'comic sans ms'},
-        //    { label:'',name:'impact',val:'impact,chicago'},
-        //    { label:'',name:'timesNewRoman',val:'times new roman'}
-        //]
+        ,'fontfamily':[
+            { label:'宋体',name:'songti',val:'宋体,SimSun'},
+            { label:'黑体',name:'heiti',val:'黑体, SimHei'},
+            { label:'微软雅黑',name:'yahei',val:'微软雅黑,Microsoft YaHei'},
+            { label:'微软正黑体',name:'zhengheiti',val:'微软正黑体,Microsoft JhengHei'},
+            { label:'新宋体',name:'xinsongti',val:'新宋体,NSimSun'},
+            { label:'新细明体',name:'xinximingti',val:'新细明体,PMingLiU'},
+            { label:'细明体',name:'ximingti',val:'细明体,MingLiU'},
+            { label:'标楷体',name:'biaokaiti',val:'标楷体,DFKai-SB'},
+            { label:'仿宋',name:'fangsong',val:'仿宋,FangSong_GB2312,FangSong'},
+            { label:'楷体,楷体_GB2312',name:'kaiti',val:'楷体,楷体_GB2312, SimKai'},
+            { label:'华文细黑',name:'huawenxihei',val:'华文细黑,STHeiti Light [STXihei]'},
+            { label:'华文黑体',name:'huawenheiti',val:'华文黑体,STHeiti'},
+            { label:'华文楷体',name:'huawenkaiti',val:'华文楷体,STKaiti'},
+            { label:'华文宋体',name:'huawensongti',val:'华文宋体,STSong'},
+            { label:'华文仿宋',name:'huawenfangsong',val:'华文仿宋,STFangsong'},
+            { label:'幼圆',name:'youyuan',val:'幼圆,YouYuan'},
+            { label:'方正舒体',name:'fangzhengshuti',val:'方正舒体,FZShuTi'},
+            { label:'方正姚体',name:'fangzhengyaoti',val:'方正姚体,FZYaoti'},
+            { label:'华文彩云',name:'huawencaiyun',val:'华文彩云,STCaiyun'},
+            { label:'华文琥珀',name:'huwenhupo',val:'华文琥珀,STHupo'},
+            { label:'华文隶书',name:'huawenlishu',val:'华文隶书,STLiti'},
+            { label:'华文行楷',name:'huawenxingkai',val:'华文行楷,STXingkai'},
+            { label:'华文新魏',name:'huawenxinwei',val:'华文新魏,STXinwei'},
+            { label:'隶书',name:'lishu',val:'隶书, SimLi'},
+            { label:'',name:'andaleMono',val:'andale mono'},
+            { label:'',name:'arial',val:'arial, helvetica,sans-serif'},
+            { label:'',name:'arialBlack',val:'arial black,avant garde'},
+            { label:'',name:'comicSansMs',val:'comic sans ms'},
+            { label:'',name:'impact',val:'impact,chicago'},
+            { label:'',name:'timesNewRoman',val:'times new roman'}
+        ]
 
         //fontsize
         //字号
@@ -198,15 +217,15 @@
 
         //rowspacingtop
         //段间距 值和显示的名字相同
-        //,'rowspacingtop':['5', '10', '15', '20', '25']
+        ,'rowspacingtop':['5', '10', '15', '20', '25']
 
         //rowspacingBottom
         //段间距 值和显示的名字相同
-        //,'rowspacingbottom':['5', '10', '15', '20', '25']
+        ,'rowspacingbottom':['5', '10', '15', '20', '25']
 
         //lineheight
         //行内间距 值和显示的名字相同
-        //,'lineheight':['1', '1.5','1.75','2', '3', '4', '5']
+        ,'lineheight':['1', '1.5','1.75','2', '3', '4', '5']
 
         //customstyle
         //自定义样式，不支持国际化，此处配置值即可最后显示值

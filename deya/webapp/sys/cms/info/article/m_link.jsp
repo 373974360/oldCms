@@ -124,7 +124,7 @@ function savePicUrl(url)
 		<tr>
 			<th ><span class="f_red">*</span>链接：</th>
 			<td style="">
-				<div style="float:left"><input id="content_url" name="content_url" type="text" class="width350" maxlength="900" value="" onblur="checkInputValue('content_url',false,900,'链接','')"/></div>
+				<div style="float:left"><input id="content_url" name="content_url" type="text" class="width350" maxlength="900" value="http://" onblur="checkInputValue('content_url',false,900,'链接','')"/></div>
 				<div style="float:left"><input type="file" name="uploadify" id="uploadify"/></div>
 				<div style="float:left">&nbsp;<input id="i005" name="i005" type="button" onclick="selectPageHandle()" value="图片库" /></div>
 			</td>

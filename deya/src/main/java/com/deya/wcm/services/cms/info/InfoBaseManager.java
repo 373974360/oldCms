@@ -52,6 +52,7 @@ import com.deya.wcm.services.zwgk.info.GKInfoManager;
 import com.deya.wcm.services.zwgk.node.GKNodeManager;
 import com.deya.wcm.template.velocity.impl.VelocityInfoContextImp;
 import com.deya.wcm.services.cms.workflow.WorkFlowRPC;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * @author zhuliang
@@ -583,7 +584,9 @@ public class InfoBaseManager {
             info.setId(id);
             info.setInfo_id(id);
         }
-        info.setInput_dtime(DateUtil.getCurrentDateTime());
+        if(StringUtils.isEmpty(info.getInput_dtime())){
+            info.setInput_dtime(DateUtil.getCurrentDateTime());
+        }
         changeInfoStatus(info);
 
         return InfoDAO.addInfo(info, stl);

@@ -5,6 +5,9 @@ String siteid = request.getParameter("site_id");
 String infoid = request.getParameter("info_id");
 String app_id = request.getParameter("app_id");
 String model = request.getParameter("model");
+if (siteid == null || siteid.equals("null")) {
+	siteid = "CMScqgjj";
+}
 if(cid == null || cid.equals("null")){
 	cid = "0";
 }
@@ -18,6 +21,7 @@ String topnum = request.getParameter("topnum");
 if(topnum == null || topnum.trim().equals("") || topnum.trim().equals("null") ){
 	topnum = "0";
 }
+String currentDateTime = com.deya.util.DateUtil.getCurrentDateTime("yyyy-MM-dd HH:mm");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -59,6 +63,9 @@ $(document).ready(function(){
                     $("#opt_bmsc input").attr("checked",'true');
 				}
 				$("#opt_bmsc").removeClass("hidden");
+			}else if(defaultBean.info_status=='2'){//待审信息修改的时候屏蔽选择审批步骤和发布状态的按钮
+                $("#info_staus_tr").addClass("hidden");
+                $("#audit_tr").addClass("hidden");
 			}else{
                 $("#opt_bmsc").addClass("hidden");
 			}
@@ -67,7 +74,7 @@ $(document).ready(function(){
 		mFlag = true;		
 	}
 	else
-	{			
+	{	$("#input_dtime").val("<%=currentDateTime%>");
 		$("#addButton").click(addInfoData);		
 		mFlag = false;
 	}

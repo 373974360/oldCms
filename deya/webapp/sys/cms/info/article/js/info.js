@@ -70,9 +70,9 @@ function initTable() {
     }
     colsList.add(setTitleClos("actions", "管理操作", "90px", "", "", ""));
     colsList.add(setTitleClos("weight", "权重", "30px", "", "", ""));
-    colsList.add(setTitleClos("input_user_name", "录入人", "60px", "", "", ""));
+    colsList.add(setTitleClos("input_user_name", "发起人", "60px", "", "", ""));
     colsList.add(setTitleClos("modify_user_name", "审核人", "60px", "", "", ""));
-    colsList.add(setTitleClos("opt_time", "发布时间", "120px", "", "", ""));
+    colsList.add(setTitleClos("released_dtime", "发布时间", "120px", "", "", ""));
     if (infoStatus == 1) {
         colsList.add(setTitleClos("auto_desc", "退稿意见", "", "", "", ""));
     }

@@ -26,7 +26,7 @@ if(model == null || !model.matches("[0-9]*")){
 <input id="lasthit_dtime" type="hidden" class="width200" value="" />
 <input id="comment_num" type="hidden" class="width200" value="0" />
 <input id="input_user" type="hidden" class="width200" value="0" />
-<input id="input_dtime" type="hidden" class="width200" value="" />
+<!--<input id="input_dtime" type="hidden" class="width200" value="" />-->
 <input id="modify_user" type="hidden" class="width200" value="0" />
 <input id="modify_dtime" type="hidden" class="width200" value="" />
 <input id="opt_dtime" type="hidden" class="width200" value="" />
@@ -133,25 +133,25 @@ if(model == null || !model.matches("[0-9]*")){
 			<th>来源：</th>
 			<td width="150">
 				<div id="a11">
-					<input type="text" id="source" value="" style="width:145px; height:18px; overflow:hidden;" />
-					<div id="select" class="select_div tip hidden border_color selectDiv" style="width:149px; height:30px; overflow:auto; " >
+					<input type="text" id="source" value="" style="width:145px; height:18px;" />
+					<!--<div id="select" class="select_div tip hidden border_color selectDiv" style="width:149px; height:30px; overflow:auto; " >
 						<div id="leftMenuBox">
 							<ul id="selectList" class="listLi"  style="width:149px; height:30px; text-align: left;">
 							</ul>
 						</div>
-					</div>
+					</div>-->
 				</div>
 			</td>
 			<th style="width:89px;">作者：</th>
 			<td width="142">
 				<div id="a12">
-					<input type="text" id="author" value="" style="width:141px; height:18px; overflow:hidden;" />
-					<div id="select2" class="select_div tip hidden border_color selectDiv" style="width:134px; height:30px; overflow:auto; " >
+					<input type="text" id="author" value="" style="width:141px; height:18px;" />
+					<!--<div id="select2" class="select_div tip hidden border_color selectDiv" style="width:134px; height:30px; overflow:auto; " >
 						<div id="leftMenuBox">
 							<ul id="selectList2" class="listLi"  style="width:134px; height:30px; text-align: left;">
 							</ul>
 						</div>
-					</div>
+					</div>-->
 				</div>
 			</td>			
 
@@ -162,7 +162,16 @@ if(model == null || !model.matches("[0-9]*")){
 <table id="" class="table_form" border="0" cellpadding="0" cellspacing="0">
 	<tbody>
         <tr>
-            <th >编辑：</th>
+			<th>发起时间：</th>
+			<td width="150">
+				<input id="input_dtime" style="width:145px; height:18px;"  name="input_dtime" type="text" readonly="readonly" />
+			</td>
+			<th>定时发布：</th>
+			<td width="150">
+				<input id="up_dtime" style="width:145px; height:18px;" name="up_dtime" type="text"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:true,readOnly:true})" readonly="readonly" />
+			</td>
+			<td></td>
+            <!--<th>编辑：</th>
             <td width="178">
                 <div id="a12">
                     <input type="text" id="editor" value="" style="width:145px; height:18px; overflow:hidden;" />
@@ -173,7 +182,7 @@ if(model == null || !model.matches("[0-9]*")){
                         </div>
                     </div>
                 </div>
-            </td>
+            </td>-->
             <!--
             <th>公开方式：</th>
 			<td width="135">
@@ -182,10 +191,10 @@ if(model == null || !model.matches("[0-9]*")){
 				</select>
 			</td>
 			-->
-            <th style="width:66px;">发布时间：</th>
-            <td>
-                <input id="released_dtime" name="released_dtime" type="text"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:true,readOnly:true})" readonly="readonly" />
-            </td>
+			<!--<th>定时撤销：</th>
+			<td style="width:100px;">
+				<input id="down_dtime" name="down_dtime" type="text"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:true,readOnly:true})" readonly="readonly" />
+			</td>-->
             <!--
 			<th style="width:85px;"></th>
 			<td width="110px">
@@ -200,8 +209,42 @@ if(model == null || !model.matches("[0-9]*")){
 		</tr>
 	</tbody>
 </table>
-
 <table id="" class="table_form" border="0" cellpadding="0" cellspacing="0">
+	<tbody>
+	<!--
+    <tr>
+        <th style="vertical-align:top;">审核程序：</th>
+        <td>
+            <input id="gk_proc" name="gk_proc" type="text" class="width350" maxlength="80" value="" onblur="checkInputValue('gk_proc',true,900,'审核程序','')"/>
+        </td>
+    </tr>
+    <tr>
+        <th>责任部门/科室：</th>
+        <td>
+            <input id="gk_duty_dept" name="gk_duty_dept" type="text" style="width:350px;" value="" onblur="checkInputValue('gk_duty_dept',true,240,'责任部门/科室','')"/>
+        </td>
+    </tr>
+    -->
+	<tr>
+		<th>发起部门：</th>
+		<td>
+			<input id="gk_input_dept" name="gk_input_dept" type="text" style="width:350px;" value="" onblur="checkInputValue('gk_input_dept',true,240,'发布机构','')" readonly="readonly"/>
+		</td>
+	</tr>
+	<%--<tr>
+        <th>定时发布：</th>
+        <td style="width:100px;">
+            <input id="up_dtime" name="up_dtime" type="text"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:true,readOnly:true})" readonly="readonly" />
+        </td>
+        &lt;%&ndash;<th>定时撤销：</th>
+        <td style="width:100px;">
+            <input id="down_dtime" name="down_dtime" type="text"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:true,readOnly:true})" readonly="readonly" />
+        </td>
+        <td></td>&ndash;%&gt;
+    </tr>--%>
+	</tbody>
+</table>
+<table id="" class="table_form hidden" border="0" cellpadding="0" cellspacing="0">
     <tbody>
     <tr>
         <th>关键词：</th>

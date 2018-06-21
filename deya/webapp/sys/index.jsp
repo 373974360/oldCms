@@ -170,11 +170,31 @@
                 if(menuUrl.indexOf("surveySettingList") >= 0){
                     pageName = "调查问卷配置";
                 }
+                if(menuUrl.indexOf("checkingList") >= 0){
+                    pageName = "审核中信息";
+                }
+                if(menuUrl.indexOf("bmscInfoDataList") >= 0){
+                    pageName = "保密性审查";
+                }
+                if(menuUrl.indexOf("upPublishedList") >= 0){
+                    pageName = "已撤信息";
+                }
+                if(menuUrl.indexOf("noPassInfoList") >= 0){
+                    pageName = "退稿信息";
+                }
+                if(menuUrl.indexOf("backInfoList") >= 0){
+                    pageName = "信息归档";
+                }
+                if(menuUrl.indexOf("drafgInfoList") >= 0){
+                    pageName = "草稿信息";
+                }
+                if(menuUrl.indexOf("rubbyInfoList") >= 0){
+                    pageName = "回收站信息";
+                }
                 setMainIframeUrl(menuUrl,pageName);
             }else{
                 //初始化默认点击站点内容管理
                 $('#top_menu #6').click();
-
                 //这里判断method，并且写入cookie
                 if(method != null && method != "null"){
                     request.setCookie(sso_method_cookie_name,method);

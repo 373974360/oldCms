@@ -18,9 +18,9 @@ function reloadPublicGKInfo()
 	setSource();
 	setAuthor();
 	setPreTitle();
-	showSelectDiv2("source","select",300);
-	showSelectDiv2("author","select2",300);
-	showSelectDiv2("editor","select3",300);
+	//showSelectDiv2("source","select",300);
+	//showSelectDiv2("author","select2",300);
+	//showSelectDiv2("editor","select3",300);
 	showSelectDiv2("pre_title","select4",120);
 	
 	showSelectDiv2("cat_tree","cat_tree_div1",300);
@@ -44,9 +44,9 @@ function reloadPublicGKInfo()
 		publicUploadFileButtomLoad("uploadify_file",true,true,"",0,5,rela_site_id,"saveFileUrl");
 		iniOpt();
 
-		$("#source").val(SiteRPC.getSiteBeanBySiteID(rela_site_id).site_name)
-		$("#author").val(LoginUserBean.user_realname);
-		$("#editor").val(LoginUserBean.user_realname);
+		//$("#source").val(SiteRPC.getSiteBeanBySiteID(rela_site_id).site_name)
+		//$("#author").val(LoginUserBean.user_realname);
+		//$("#editor").val(LoginUserBean.user_realname);
 	}
 	
 	initButtomStyle();

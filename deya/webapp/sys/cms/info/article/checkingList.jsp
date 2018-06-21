@@ -4,7 +4,7 @@
     String siteid = request.getParameter("site_id");
     String app_id = request.getParameter("app_id");
     if (siteid == null || siteid.equals("null")) {
-        siteid = "GK";
+        siteid = "CMScqgjj";
     }
     if (app_id == null || app_id.trim().equals("")) {
         app_id = "cms";
@@ -28,10 +28,11 @@
     <script type="text/javascript" src="../../../js/jquery-easyui/jquery.easyui.min.js"></script>
     <script type="text/javascript" src="../../../js/indexjs/indexList.js"></script>
     <script type="text/javascript" src="../../../js/indexjs/tools.js"></script>
+    <script type="text/javascript" src="js/public.js"></script>
 
     <script type="text/javascript">
 
-        var site_id = parent.init_site_id;
+        var site_id = "<%=siteid%>";
         var app = "<%=app_id%>";
         var InfoBaseRPC = jsonrpc.InfoBaseRPC;
         var model_map = jsonrpc.ModelRPC.getModelMap();
@@ -50,6 +51,8 @@
             initButtomStyle();
             showModels();
             reloadInfoDataList();
+            showSelectDiv2("cat_tree", "cat_tree_div1", 300);
+            getAllInuptUserID();
             if ($.browser.msie && $.browser.version == "6.0" && $("html")[0].scrollHeight > $("html").height()) $("html").css("overflowY", "scroll");
         });
 
@@ -68,7 +71,7 @@
             colsList.add(setTitleClos("actions", "管理操作", "90px", "", "", ""));
             colsList.add(setTitleClos("weight", "权重", "30px", "", "", ""));
             // colsList.add(setTitleClos("input_user_name", "录入人", "60px", "", "", ""));
-            colsList.add(setTitleClos("input_dtime", "录入时间", "100px", "", "", ""));
+            colsList.add(setTitleClos("input_dtime", "发起时间", "100px", "", "", ""));
             colsList.add(setTitleClos("modify_user_name", "审核人", "60px", "", "", ""));
             colsList.add(setTitleClos("opt_dtime", "送审时间", "100px", "", "", ""));
             colsList.add(setTitleClos("step_name", "当前审核环节", "", "", "", ""));
@@ -91,6 +94,9 @@
             con_map.put("page_size", "15");
             con_map.put("start_num", "0");
             con_map.put("app_id", app);
+            if(selectIds != null && selectIds != ""){
+                con_map.put("cat_ids",selectIds);
+            }
             con_map.put("start_num", tp.getStart());
             con_map.put("page_size", tp.pageSize);
             con_map.put("highSearchString", highSearchString);
@@ -255,6 +261,12 @@
 
         //搜索
         function searchInfo() {
+            var cf = $("#pageGoNum").val();
+            if (cf == "-1") {
+                tj = "";
+            } else{
+                tj = " ci.model_id=" + cf;
+            }
             var keywords = $("#searchkey").val();
             if (keywords.trim() != "") {
                 table.con_name = "ci.title";
@@ -262,7 +274,31 @@
             } else {
                 table.con_value = "";
             }
-            reloadInfoDataList();
+            var search_con = "";
+            var orderByFields = "1";
+            var input_user = $("#input_user :selected").val();
+            if (input_user != "" && input_user != null) {
+                search_con += " and ci.input_user = " + input_user;
+            }
+            var input_dept = $("#input_dept").val();
+            if (input_dept != "" && input_dept != null) {
+                search_con += " and ci.source = " + input_dept;
+            }
+            var start_time = $("#start_time").val();
+            var end_time = $("#end_time").val();
+            if (start_time != "" && start_time != null) {
+                search_con += " and ci.input_dtime > '" + start_time + " 00:00:00'";
+                if (end_time != "" && end_time != null) {
+                    if (judgeDate(end_time, start_time)) {
+                        msgWargin("结束时间不能小于开始时间");
+                        return;
+                    }
+                }
+            }
+            if (end_time != "" && end_time != null) {
+                search_con += " and ci.input_dtime < '" + end_time + " 23:59:59'";
+            }
+            highSearchHandl(search_con, orderByFields);
         }
 
         //打开高级搜索页面
@@ -302,6 +338,14 @@
             }
         }
 
+        //得到所有录入人列表
+        function getAllInuptUserID() {
+            var m = new Map();
+            m.put("site_id", getCurrentFrameObj().site_id);
+            var user_list = InfoBaseRPC.getAllInuptUserID(m);
+            user_list = List.toJSList(user_list);
+            $("#input_user").addOptions(user_list, "user_id", "user_realname");
+        }
     </script>
 </head>
 
@@ -310,15 +354,40 @@
     <table class="table_option" border="0" cellpadding="0" cellspacing="0">
         <tr>
             <td align="left" width="90">
-                <select id="pageGoNum" name="pageSize" class="input_select width80" onchange="changeFactor()">
+                <select id="pageGoNum" name="pageSize" class="input_select width80">
 
                 </select>
             </td>
+            <td style=" width:220px;">
+                <input type="text" id="cat_tree" value="所属栏目" style="width:204px; height:18px; overflow:hidden;"  readonly="readonly" onclick="showCategoryTree()"/>
+                <div id="cat_tree_div1" class="select_div tip hidden border_color" style="width:204px; height:300px; overflow:hidden;border:1px #7f9db9 solid;" >
+                    <div id="leftMenuBox">
+                        <div id="leftMenu" class="contentBox6 textLeft" style="overflow:auto">
+                            <ul id="leftMenuTree1" class="easyui-tree" animate="true" style="width:204px; height:280px;">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </td>
             <td align="left" valign="middle">
-                <input id="searchkey" type="text" class="input_text" style="width:240px;" value=""/>
+                <span>标题：<span>
+                <input id="searchkey" type="text" class="input_text" style="width:150px;" value=""/>
+                <span>发起人：<span>
+                <select id="input_user" style="width:154px" class="input_select">
+                    <option value="">全部</option>
+                </select>
+                <span>发起部门：</span>
+                <input id="input_dept" type="text" class="input_text" style="width:150px;" value=""/>
+                <span>发起时间：</span>
+                <input class="input_text" id="start_time" name="start_time" type="text"
+                       onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:true,readOnly:true})" readonly="readonly"
+                       style="width:80px"/>
+                -&nbsp;<input class="input_text" id="end_time" name="end_time" type="text"
+                              onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:true,readOnly:true})"
+                              readonly="readonly" style="width:80px"/>
                 <input id="btn" type="button" value="搜索" onclick="searchInfo()"/>
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <input id="btnSearch" name="btn6" type="button" onclick="openHighSearchPage()" value="高级搜索"/>
+                    <!--<input id="btnSearch" name="btn6" type="button" onclick="openHighSearchPage()" value="高级搜索"/>-->
             </td>
         </tr>
     </table>

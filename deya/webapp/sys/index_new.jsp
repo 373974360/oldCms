@@ -36,23 +36,23 @@
 						<div id="leftMenu" class="contentBox6 textLeft">
 							<ul id="leftMenuTree" class="easyui-tree" animate="true">
 								<li><a href="#" onclick="changeUrl('/sys/index.jsp?method=addInfo')">添加信息</a> </li>
-								<li><a href="#" onclick="changeUrl('/sys/index.jsp?method=modifyInfo')">修改信息</a> </li>
-								<li><a href="#" onclick="changeUrl('/sys/index.jsp?method=delInfo')">删除信息</a> </li>
-								<li><a href="#" onclick="changeUrl('/sys/index.jsp?menuUrl=/sys/cms/info/article/publishList.jsp')">发布信息</a> </li>
-								<li><a href="#" onclick="changeUrl('/sys/index.jsp?menuUrl=/sys/cms/info/article/auditPublishList.jsp')">待发信息</a> </li>
-								<li><a href="#" onclick="changeUrl('/sys/index.jsp?menuUrl=/sys/cms/info/article/bmscInfoDataList.jsp')">保密审查</a> </li>
-								<li><a href="#" onclick="changeUrl('/sys/index.jsp?method=unPublishInfo')">撤销信息</a> </li>
-								<li><a href="#" onclick="changeUrl('/sys/index.jsp?method=unPublishedInfo')">已撤信息</a> </li>
-								<li><a href="#" onclick="changeUrl('/sys/index.jsp?method=checkInfo')">审核信息（分栏目）</a> </li>
+								<!--<li><a href="#" onclick="changeUrl('/sys/index.jsp?method=modifyInfo')">修改信息</a> </li>
+								<li><a href="#" onclick="changeUrl('/sys/index.jsp?method=delInfo')">删除信息</a> </li>-->
+								<li><a href="#" onclick="changeUrl('/sys/index.jsp?menuUrl=/sys/cms/info/article/publishList.jsp')">已发布信息</a> </li>
+								<li><a href="#" onclick="changeUrl('/sys/index.jsp?menuUrl=/sys/cms/info/article/auditPublishList.jsp')">待发布信息</a> </li>
+								<li><a href="#" onclick="changeUrl('/sys/index.jsp?menuUrl=/sys/cms/info/article/bmscInfoDataList.jsp')">保密性审查</a> </li>
+								<li><a href="#" onclick="changeUrl('/sys/index.jsp?menuUrl=/sys/cms/info/article/upPublishedList.jsp')">已撤信息</a> </li>
 								<li><a href="#" onclick="changeUrl('/sys/index.jsp?menuUrl=/sys/cms/info/article/verifyInfoList.jsp')">审核信息</a> </li>
 								<li><a href="#" onclick="changeUrl('/sys/index.jsp?menuUrl=/sys/cms/info/article/checkingList.jsp')">审核中信息</a> </li>
-								<li><a href="#" onclick="changeUrl('/sys/index.jsp?method=noPassInfo')">退稿信息</a> </li>
-								<li><a href="#" onclick="changeUrl('/sys/index.jsp?method=drafgInfo')">草稿信息</a> </li>
-								<li><a href="#" onclick="changeUrl('/sys/index.jsp?method=rubbyInfo')">回收站信息</a> </li>
+								<li><a href="#" onclick="changeUrl('/sys/index.jsp?menuUrl=/sys/cms/info/article/noPassInfoList.jsp')">退稿信息</a> </li>
+								<li><a href="#" onclick="changeUrl('/sys/index.jsp?menuUrl=/sys/cms/info/article/backInfoList.jsp')">归档信息</a> </li>
+								<!--<li><a href="#" onclick="changeUrl('/sys/index.jsp?method=unPublishInfo')">撤销信息</a> </li>-->
+								<!--<li><a href="#" onclick="changeUrl('/sys/index.jsp?method=checkInfo')">审核信息（分栏目）</a> </li>-->
+								<li><a href="#" onclick="changeUrl('/sys/index.jsp?menuUrl=/sys/cms/info/article/drafgInfoList.jsp')">草稿信息</a> </li>
+								<li><a href="#" onclick="changeUrl('/sys/index.jsp?menuUrl=/sys/cms/info/article/rubbyInfoList.jsp')">回收站信息</a> </li>
 								<li><a href="#" onclick="changeUrl('/sys/index.jsp?method=getInfo')">获取信息</a> </li>
 								<li><a href="#" onclick="changeUrl('/sys/index.jsp?method=moveInfo')">移动信息</a> </li>
 								<li><a href="#" onclick="changeUrl('/sys/index.jsp?method=pushInfo')">推送信息</a> </li>
-								<li><a href="#" onclick="changeUrl('/sys/index.jsp?method=backInfo')">归档信息</a> </li>
 								<li><a href="#" onclick="changeUrl('/sys/index.jsp?menuUrl=/sys/system/assist/author/authorDataList.jsp')">作者管理</a> </li>
 								<li><a href="#" onclick="changeUrl('/sys/index.jsp?menuUrl=/sys/system/assist/source/sourceDataList.jsp')">来源管理</a> </li>
 								<li><a href="#" onclick="changeUrl('/sys/index.jsp?menuUrl=/sys/material/operate/managerList.jsp')">素材管理</a> </li>

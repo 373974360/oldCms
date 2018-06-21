@@ -4,7 +4,7 @@
     String siteid = request.getParameter("site_id");
     String app_id = request.getParameter("app_id");
     if (siteid == null || siteid.equals("null")) {
-        siteid = "GK";
+        siteid = "CMScqgjj";
     }
     if (app_id == null || app_id.trim().equals("")) {
         app_id = "cms";
@@ -28,10 +28,11 @@
     <script type="text/javascript" src="../../../js/jquery-easyui/jquery.easyui.min.js"></script>
     <script type="text/javascript" src="../../../js/indexjs/indexList.js"></script>
     <script type="text/javascript" src="../../../js/indexjs/tools.js"></script>
+    <script type="text/javascript" src="js/public.js"></script>
 
     <script type="text/javascript">
 
-        var site_id = parent.init_site_id;
+        var site_id = "<%=siteid%>";
         var app = "<%=app_id%>";
         var opt_ids = "," + getOptIDSByUser(app, site_id) + ",";//登录人所拥有管理权限ID
         var gk_article = false;//特殊栏目标识，在政务公开中使用的是内容管理中的文章模型
@@ -47,6 +48,10 @@
         var table = new Table();
         table.table_name = "table";
 
+        //搜索条件
+        var tj = "";
+        var highSearchString = "";
+
         var con_map = new Map();
         con_map.put("user_id", LoginUserBean.user_id + "");
         con_map.put("info_status", "2");
@@ -58,8 +63,11 @@
 
         $(document).ready(function () {
             setUserOperate();
+            showModels();
             initButtomStyle();
             reloadInfoDataList();
+            showSelectDiv2("cat_tree", "cat_tree_div1", 300);
+            getAllInuptUserID();
             if ($.browser.msie && $.browser.version == "6.0" && $("html")[0].scrollHeight > $("html").height()) $("html").css("overflowY", "scroll");
         });
 
@@ -80,8 +88,8 @@
             colsList.add(setTitleClos("cat_cname", "所属栏目", "100px", "", "", ""));
             colsList.add(setTitleClos("actions", "管理操作", "120px", "", "", ""));
             colsList.add(setTitleClos("weight", "权重", "30px", "", "", ""));
-            colsList.add(setTitleClos("input_user", "录入人", "60px", "", "", ""));
-            colsList.add(setTitleClos("input_dtime", "录入时间", "100px", "", "", ""));
+            colsList.add(setTitleClos("input_user", "发起人", "60px", "", "", ""));
+            colsList.add(setTitleClos("input_dtime", "发起时间", "100px", "", "", ""));
             colsList.add(setTitleClos("modify_user", "审核人", "100px", "", "", ""));
             colsList.add(setTitleClos("opt_dtime", "送审时间", "100px", "", "", ""));
 
@@ -97,6 +105,28 @@
 
             con_map.put("start_num", tp.getStart());
             con_map.put("page_size", tp.pageSize);
+
+            if(selectIds != null && selectIds != ""){
+                con_map.put("cat_ids",selectIds);
+            }
+            if (tj != "") {
+                con_map.put("modelString", tj);
+            } else {
+                con_map.remove("modelString");
+            }
+            var sortCol = table.sortCol;
+            var sortType = table.sortType;
+            if (sortCol == "" || sortCol == null) {
+                sortCol = "ci.released_dtime desc,ci.id";
+                sortType = "desc";
+            }
+            con_map.put("sort_name", sortCol);
+            con_map.put("sort_type", sortType);
+            if (table.con_value.trim() != "" && table.con_value != null) {
+                con_map.put("con_name", table.con_name);
+                con_map.put("con_value", table.con_value);
+            }
+            con_map.put("highSearchString", highSearchString);
 
             tp.total = 0;
             var return_map = InfoBaseRPC.getWaitVerifyInfoList(con_map);
@@ -165,8 +195,11 @@
                     $(this).css({"text-align": "center"});
 
                     var str = "<ul class=\"optUL\">";
-                    str += "<li id='315' class='ico_edit'><a title='修改' href='javascript:openUpdatePage(" + beanList.get(i - 1).cat_id + "," + beanList.get(i - 1).info_id + "," + beanList.get(i - 1).model_id + "," + beanList.get(i - 1).is_host + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
-                    str += "<li id='303' class='ico_pass'><a title='通过' href='javascript:doPass(" + beanList.get(i - 1).cat_id + ",\"" + beanList.get(i - 1).site_id + "\",\"" + beanList.get(i - 1).app_id + "\"," + (i - 1) + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li><li id='303' class='ico_nopass'><a  title='退稿' href='javascript:noPassDesc(" + beanList.get(i - 1).info_id + ","+ beanList.get(i - 1).step_id + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li> <li id='315' class='ico_sucai'><a title='审核流程' href='javascript:auditList(" + beanList.get(i - 1).info_id + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li> <li id='301' class='ico_delete' ><a title='删除' href='javascript:doDelete(" + (i - 1) + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li> ";
+                    str += "<li name='btn300' class='ico_edit'><a title='修改' href='javascript:openUpdatePage(" + beanList.get(i - 1).cat_id + "," + beanList.get(i - 1).info_id + "," + beanList.get(i - 1).model_id + "," + beanList.get(i - 1).is_host + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
+                    str += "<li name='btn303' class='ico_pass'><a title='通过' href='javascript:doPass(" + beanList.get(i - 1).cat_id + ",\"" + beanList.get(i - 1).site_id + "\",\"" + beanList.get(i - 1).app_id + "\"," + (i - 1) + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>" +
+                        "<li name='btn303' class='ico_nopass'><a  title='退稿' href='javascript:noPassDesc(" + beanList.get(i - 1).info_id + ","+ beanList.get(i - 1).step_id + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>" +
+                        "<li class='ico_sucai'><a title='审核流程' href='javascript:auditList(" + beanList.get(i - 1).info_id + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>" +
+                        "<li name='btn301' class='ico_delete' ><a title='删除' href='javascript:doDelete(" + (i - 1) + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li> ";
                     $(this).html(str + "</ul>");
                 }
             });
@@ -325,18 +358,147 @@
             }
         }
 
+        function showModels() {
+            $("#pageGoNum").append("<option value=\"-1\" selected=\"selected\"  >全部</option> ");
+            var is_first = false;
+            var keys = model_map.keySet();
+            for (var i = 0; i < 4; i++) {
+                var model = model_map.get(keys[i]);
+                if (model.app_id == app) {
+                    $("#pageGoNum").append("<option value=\"" + model.model_id + "\">" + model.model_name + "</option> ");
+                }
+            }
+        }
         function getAddPagebyModel(model_id) {
             var add_page = jsonrpc.ModelRPC.getModelAddPage(model_id);
             if (add_page == "" || add_page == null)
                 add_page = "m_article.jsp";
             return add_page;
         }
+        //搜索
+        function searchInfo() {
+            var cf = $("#pageGoNum").val();
+            if (cf == "-1") {
+                tj = "";
+            } else{
+                tj = " ci.model_id=" + cf;
+            }
+            var keywords = $("#searchkey").val();
+            if (keywords.trim() != "") {
+                table.con_name = "ci.title";
+                table.con_value = keywords;
+            } else {
+                table.con_value = "";
+            }
+            var search_con = "";
+            var orderByFields = "1";
+            var input_user = $("#input_user :selected").val();
+            if (input_user != "" && input_user != null) {
+                search_con += " and ci.input_user = " + input_user;
+            }
+            var input_dept = $("#input_dept").val();
+            if (input_dept != "" && input_dept != null) {
+                search_con += " and ci.source = " + input_dept;
+            }
+            var start_time = $("#start_time").val();
+            var end_time = $("#end_time").val();
+            if (start_time != "" && start_time != null) {
+                search_con += " and ci.input_dtime > '" + start_time + " 00:00:00'";
+                if (end_time != "" && end_time != null) {
+                    if (judgeDate(end_time, start_time)) {
+                        msgWargin("结束时间不能小于开始时间");
+                        return;
+                    }
+                }
+            }
+            if (end_time != "" && end_time != null) {
+                search_con += " and ci.input_dtime < '" + end_time + " 23:59:59'";
+            }
+            highSearchHandl(search_con, orderByFields);
+        }
+        //高级搜索处理
+        function highSearchHandl(search_cons, order_type_num) {
+            highSearchString = search_cons;//给搜索字符串付值
+            changeTimeSortHandl(order_type_num);//得到排序方式
+            current_page_num = 1;
+            reloadInfoDataList();
+        }
+        function changeTimeSortHandl(val) {
+            table.sortCol = "";
+            table.sortType = "";
 
+            switch (val) {
+                case "1":
+                    table.sortCol = "ci.released_dtime desc,ci.info_id";
+                    table.sortType = "desc";
+                    break;
+                case "2":
+                    table.sortCol = "ci.released_dtime asc,ci.info_id";
+                    table.sortType = "asc";
+                    break;
+                case "3":
+                    table.sortCol = "ci.weight desc,ci.info_id";
+                    table.sortType = "desc";
+                    break;
+                case "4":
+                    table.sortCol = "ci.weight asc,ci.info_id";
+                    table.sortType = "desc";
+                    break;
+            }
+        }
+        //得到所有录入人列表
+        function getAllInuptUserID() {
+            var m = new Map();
+            m.put("site_id", getCurrentFrameObj().site_id);
+            var user_list = InfoBaseRPC.getAllInuptUserID(m);
+            user_list = List.toJSList(user_list);
+            $("#input_user").addOptions(user_list, "user_id", "user_realname");
+        }
     </script>
 </head>
 
 <body>
 <div>
+    <table class="table_option" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td align="left" width="90">
+            <select id="pageGoNum" name="pageSize" class="input_select width80">
+
+            </select>
+        </td>
+        <td style=" width:220px;">
+            <input type="text" id="cat_tree" value="所属栏目" style="width:204px; height:18px; overflow:hidden;"  readonly="readonly" onclick="showCategoryTree()"/>
+            <div id="cat_tree_div1" class="select_div tip hidden border_color" style="width:204px; height:300px; overflow:hidden;border:1px #7f9db9 solid;" >
+                <div id="leftMenuBox">
+                    <div id="leftMenu" class="contentBox6 textLeft" style="overflow:auto">
+                        <ul id="leftMenuTree1" class="easyui-tree" animate="true" style="width:204px; height:280px;">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </td>
+        <td align="left" valign="middle">
+                <span>标题：<span>
+                <input id="searchkey" type="text" class="input_text" style="width:150px;" value=""/>
+                <span>发起人：<span>
+                <select id="input_user" style="width:154px" class="input_select">
+                    <option value="">全部</option>
+                </select>
+                <span>发起部门：</span>
+                <input id="input_dept" type="text" class="input_text" style="width:150px;" value=""/>
+                <span>发起时间：</span>
+                <input class="input_text" id="start_time" name="start_time" type="text"
+                       onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:true,readOnly:true})" readonly="readonly"
+                       style="width:80px"/>
+                -&nbsp;<input class="input_text" id="end_time" name="end_time" type="text"
+                              onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:true,readOnly:true})"
+                              readonly="readonly" style="width:80px"/>
+                <input id="btn" type="button" value="搜索" onclick="searchInfo()"/>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                    <!--<input id="btnSearch" name="btn6" type="button" onclick="openHighSearchPage()" value="高级搜索"/>-->
+        </td>
+    </tr>
+</table>
     <span class="blank3"></span>
     <div id="table"></div>
     <div id="turn"></div>

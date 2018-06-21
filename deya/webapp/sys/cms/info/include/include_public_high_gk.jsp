@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=utf-8"%>
-<table id="" class="table_form" border="0" cellpadding="0" cellspacing="0">
+<table id="" class="table_form hidden" border="0" cellpadding="0" cellspacing="0">
 	<tbody>		
 		<tr>
 			<th style="vertical-align:top;">内容概述：</th>
@@ -30,41 +30,7 @@
 		</tr>				     
 	</tbody>
 </table>
-<table id="" class="table_form" border="0" cellpadding="0" cellspacing="0">
-	<tbody>
-        <!--
-        <tr>
-			<th style="vertical-align:top;">审核程序：</th>
-			<td>
-            	<input id="gk_proc" name="gk_proc" type="text" class="width350" maxlength="80" value="" onblur="checkInputValue('gk_proc',true,900,'审核程序','')"/>
-			</td>
-		</tr>
-        <tr>
-			<th>责任部门/科室：</th>
-			<td>
-				<input id="gk_duty_dept" name="gk_duty_dept" type="text" style="width:350px;" value="" onblur="checkInputValue('gk_duty_dept',true,240,'责任部门/科室','')"/>
-			</td>
-		</tr>
-		-->
-        <tr>
-			<th>发布机构：</th>
-			<td>
-				<input id="gk_input_dept" name="gk_input_dept" type="text" style="width:350px;" value="" onblur="checkInputValue('gk_input_dept',true,240,'发布机构','')"/>
-			</td>
-		</tr>
-		<%--<tr>
-			<th>定时发布：</th>
-			<td style="width:100px;">
-				<input id="up_dtime" name="up_dtime" type="text"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:true,readOnly:true})" readonly="readonly" />
-			</td>
-			&lt;%&ndash;<th>定时撤销：</th>
-			<td style="width:100px;">
-				<input id="down_dtime" name="down_dtime" type="text"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:true,readOnly:true})" readonly="readonly" />
-			</td>
-			<td></td>&ndash;%&gt;
-		</tr>--%>
-    </tbody>
-</table>
+
 <table id="" class="table_form hidden" border="0" cellpadding="0" cellspacing="0">
 	<tbody>
 		<tr>
@@ -90,21 +56,6 @@
         </tr>
 	</tbody>
 </table>
-<table id="timer_publish" class="table_form" border="0" cellpadding="0" cellspacing="0">
-	<tbody>
-	<tr>
-		<th>定时发布：</th>
-		<td style="width:100px;">
-			<input id="up_dtime" name="up_dtime" type="text"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:true,readOnly:true})" readonly="readonly" />
-		</td>
-		<!--<th>定时撤销：</th>
-		<td style="width:100px;">
-			<input id="down_dtime" name="down_dtime" type="text"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:true,readOnly:true})" readonly="readonly" />
-		</td>-->
-		<td></td>
-	</tr>
-	</tbody>
-</table>
 <table id="" class="table_form" border="0" cellpadding="0" cellspacing="0">
 	<tbody>
     	<tr class="hidden">
@@ -121,7 +72,7 @@
 				 顺序号：<input type="text" id="gk_num" name="gk_num" class="width70"  value="0" maxlength="8" onkeypress="var k=event.keyCode; return k>=48&&k<=57" onpaste="return !clipboardData.getData('text').match(/\D/)" ondragenter="return false" style="ime-mode:Disabled"/>&#160;<input type="button" value="重新生成" onclick="getNewGKIndex()"/>
 			</td>
 		</tr>
-		<tr>
+		<tr class="hidden">
 			<th>权重：</th>
 			<td>
 				<input id="weight" name="weight" type="text" style="width:50px;" value="60"  maxlength="2" onblur="checkInputValue('weight',true,2,'权重','checkNumber')"/>默认值：60，取值范围（0-99）

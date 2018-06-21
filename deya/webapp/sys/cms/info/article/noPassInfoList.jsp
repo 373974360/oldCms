@@ -31,7 +31,6 @@
     <script type="text/javascript" src="js/public.js"></script>
 
     <script type="text/javascript">
-
         var site_id = "<%=siteid%>";
         var app = "<%=app_id%>";
         var InfoBaseRPC = jsonrpc.InfoBaseRPC;
@@ -42,6 +41,7 @@
         var beanList = null;
         var table = new Table();
         table.table_name = "table";
+        var stepID="100";
 
         //搜索条件
         var tj = "";
@@ -72,8 +72,8 @@
             colsList.add(setTitleClos("weight", "权重", "30px", "", "", ""));
             colsList.add(setTitleClos("input_user_name", "发起人", "60px", "", "", ""));
             colsList.add(setTitleClos("input_dtime", "发起时间", "100px", "", "", ""));
-            colsList.add(setTitleClos("released_dtime", "发布时间", "100px", "", "", ""));
-            colsList.add(setTitleClos("hits", "点击次数", "100px", "", "", ""));
+            colsList.add(setTitleClos("modify_user_name", "审核人", "60px", "", "", ""));
+            colsList.add(setTitleClos("auto_desc", "退稿意见", "", "", "", ""));
 
             table.setColsList(colsList);
             table.setAllColsList(colsList);
@@ -85,7 +85,8 @@
 
         function showList() {
             var con_map = new Map();
-            con_map.put("info_status", "9");
+            con_map.put("user_id", LoginUserBean.user_id + "");
+            con_map.put("info_status", "1");
             con_map.put("final_status", "99");
             con_map.put("site_id", site_id);
             con_map.put("page_size", "15");
@@ -97,7 +98,12 @@
             con_map.put("start_num", tp.getStart());
             con_map.put("page_size", tp.pageSize);
             con_map.put("highSearchString", highSearchString);
-
+            var temp_step_id = getMaxStepIDByUserID("1", app, site_id);
+            if (temp_step_id != 100) {
+                stepID = temp_step_id + "";
+            }
+            con_map.put("step_id", stepID);
+            con_map.put("modelString", tj);
             if (tj != "") {
                 con_map.put("modelString", tj);
             } else {
@@ -156,8 +162,8 @@
                 if (i > 0) {
                     $(this).css({"text-align": "center"});
                     var str = "<ul class=\"optUL\">";
-                    str += "<li name='btn302' class='ico_publish'><a  title='发布' href='javascript:doPublish(" + (i - 1) + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
-                    str += "<li name='btn303' class='ico_nopass'><a  title='退稿' href='javascript:noPassDesc(" + beanList.get(i - 1).info_id + ","+ beanList.get(i - 1).step_id + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
+                    str += "<li name='btn300' class='ico_edit' ><a  title='修改' href='javascript:openUpdatePage("+beanList.get(i - 1).cat_id+"," + beanList.get(i - 1).info_id + "," + beanList.get(i - 1).model_id + "," + beanList.get(i - 1).is_host + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
+                    str += "<li name='btn301' class='ico_delete' ><a title='删除' href='javascript:doDelete(" + (i - 1) + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
                     $(this).html(str + "</ul>");
                 }
             });
@@ -228,38 +234,12 @@
             var list = new List();
             list.add(beanList.get(num));
             if(InfoBaseRPC.updateInfoStatus(list,"8")){
-                parent.msgAlert("信息审核发布成功");
+                parent.msgAlert("信息发布成功");
                 reloadInfoDataList();
             }else{
-                parent.msgWargin("信息审核发布失败");
+                parent.msgWargin("信息发布失败");
             }
         }
-
-        //单条信息撤销
-        function doCancel(num) {
-            var list = new List();
-            list.add(beanList.get(num));
-            if (InfoBaseRPC.updateInfoStatus(list, "3")) {
-                parent.msgAlert("信息退稿成功");
-                reloadInfoDataList();
-            } else {
-                parent.msgWargin("信息退稿失败");
-            }
-        }
-
-        function showModels() {
-            $("#pageGoNum").append("<option value=\"-1\" selected=\"selected\"  >全部</option> ");
-            var is_first = false;
-            var keys = model_map.keySet();
-            for (var i = 0; i < 4; i++) {
-                var model = model_map.get(keys[i]);
-                if (model.app_id == app) {
-                    $("#pageGoNum").append("<option value=\"" + model.model_id + "\">" + model.model_name + "</option> ");
-                }
-            }
-        }
-
-
 
         function noPassDesc(id, step_id) {
             if (id != null && id != "")
@@ -286,6 +266,32 @@
             }
             temp_info_id = null;
             reloadInfoDataList();
+        }
+        //单条信息逻辑删除
+        function doDelete(num) {
+            parent.msgConfirm(WCMLang.Delete_confirm, "doDeleteHandl(" + num + ")");
+        }
+
+        function doDeleteHandl(num) {
+            var list = new List();
+            list.add(beanList.get(num));
+            if (InfoBaseRPC.deleteInfo(list)) {
+                parent.msgAlert("信息" + WCMLang.Delete_success);
+                reloadInfoDataList();
+            } else {
+                parent.msgWargin("信息" + WCMLang.Delete_fail);
+            }
+        }
+        function showModels() {
+            $("#pageGoNum").append("<option value=\"-1\" selected=\"selected\"  >全部</option> ");
+            var is_first = false;
+            var keys = model_map.keySet();
+            for (var i = 0; i < 4; i++) {
+                var model = model_map.get(keys[i]);
+                if (model.app_id == app) {
+                    $("#pageGoNum").append("<option value=\"" + model.model_id + "\">" + model.model_name + "</option> ");
+                }
+            }
         }
 
         //以模型为条件过滤
@@ -386,6 +392,7 @@
             user_list = List.toJSList(user_list);
             $("#input_user").addOptions(user_list, "user_id", "user_realname");
         }
+
     </script>
 </head>
 
