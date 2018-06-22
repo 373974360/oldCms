@@ -35,6 +35,8 @@ import com.deya.wcm.services.zwgk.info.GKInfoManager;
 import com.deya.wcm.services.zwgk.node.GKNodeCateManager;
 import com.deya.wcm.services.zwgk.node.GKNodeManager;
 import com.deya.wcm.services.zwgk.ysqgk.YsqgkInfoManager;
+import com.yinhai.model.WangDianVo;
+import com.yinhai.webservice.client.WangDianServiceClient;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -1968,6 +1970,18 @@ public class InfoUtilData {
         return allInfo;
     }
 
+
+    public static List<WangDianVo> getWangdianResultList(String deptype1,String bustype,String keyword){
+        Map<String,String> map = new HashMap<>();
+        map.put("depcode","");//机构代码
+        map.put("deptype1",deptype1);//机构类型0 所有 1 机构 2 网点
+        map.put("bktype","");//银行航别
+        map.put("noparentnode","1");//1表示不显示根节点，其他表示显示
+        map.put("bustype",bustype);//业务类型默认层级：0， 归集：1， 贷款：2
+        map.put("centercode","");//中心编号
+        map.put("keyword",keyword);//搜索关键字 机构地址  机构名称  服务范围
+        return WangDianServiceClient.getWangdianResultList(map);
+    }
     public static void main(String[] args)
     {
         System.out.println(getGKPubInfoCount("count_type=ultimo"));
