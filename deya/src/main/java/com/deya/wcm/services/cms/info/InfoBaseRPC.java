@@ -569,7 +569,7 @@ public class InfoBaseRPC {
      * @return
      */
     public static List<InfoWorkStep> getAllInfoWorkStepByInfoId(String info_id,String pass_status){
-        return InfoBaseManager.getAllInfoWorkStepByInfoId(info_id,pass_status);
+        return InfoBaseManager.getAllInfoWorkStepByInfoId(info_id,pass_status,"desc");
     }
 
     public static void main(String[] args) {

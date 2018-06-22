@@ -21,6 +21,7 @@ import com.deya.wcm.db.BoneDataSourceFactory;
 import com.deya.wcm.db.DBManager;
 import com.deya.wcm.server.ServerManager;
 import com.yinhai.model.InfoWorkStep;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * 基础信息的数据库操作类，被各个从表所引用
@@ -721,11 +722,14 @@ public class InfoDAO {
      * 根据信息id查找审批流程步骤
      */
 
-    public static List<InfoWorkStep> getInfoWorkStepByInfoId(String info_id, String pass_status) {
+    public static List<InfoWorkStep> getInfoWorkStepByInfoId(String info_id, String pass_status,String order) {
         Map<String, String> m = new HashMap<String, String>();
         m.put("info_id", info_id);
         if (pass_status != null && pass_status.length() > 0) {
             m.put("pass_status", pass_status);
+        }
+        if(StringUtils.isNotEmpty(order)){
+            m.put("order",order);
         }
         return DBManager.queryFList("getInfoWorkStepByInfoId", m);
     }

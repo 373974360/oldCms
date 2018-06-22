@@ -14,6 +14,9 @@ import com.deya.wcm.template.velocity.data.InfoUtilData;
 import com.yinhai.model.GuiDangVo;
 import com.yinhai.sftp.SFTPUtils;
 import com.yinhai.webservice.client.GuiDangServiceClient;
+import com.yinhai.model.InfoWorkStep;
+import com.deya.wcm.bean.org.user.UserBean;
+import com.deya.wcm.services.org.user.UserManager;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
@@ -34,6 +37,7 @@ import java.util.regex.Pattern;
 public class ArticleToPdf {
 
     private static final String HTML = "article_template.html";
+    private static final String HTML_STEP = "article_step_template.html";
     private static String localPath = "";
     private static String remotePath = "";
     private static final String files[] = {".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".rar", ".zip", ".pdf", ".txt"};
@@ -48,16 +52,21 @@ public class ArticleToPdf {
         boolean status = true;
         if (info_ids != null && info_ids.length() > 0) {
             String[] split = info_ids.split(",");
+            Map<String, UserBean> userMap = UserManager.getUserMap();
             for (String s : split) {
                 Map<String, Object> data = new HashMap();
                 InfoBean ib = InfoBaseManager.getInfoById(s);
+                List<InfoWorkStep> stepList = InfoBaseManager.getAllInfoWorkStepByInfoId(s,null,"asc");
                 if (ib != null) {
                     data.put("top_title", ib.getTop_title());
                     data.put("title", ib.getTitle());
                     data.put("sub_title", ib.getSubtitle());
                     data.put("author", ib.getAuthor());
+                    data.put("source", ib.getSource());
                     data.put("publish_time", ib.getReleased_dtime());
                     data.put("hits", ib.getHits());
+                    data.put("input_dtime", ib.getInput_dtime());
+                    data.put("input_user", userMap.get(ib.getInput_user() + "").getUser_realname());
                     GuiDangVo guiDangVo = new GuiDangVo();
                     LoginUserBean loginUserBean = (LoginUserBean) SessionManager.get(request, "cicro_wcm_user");
                     guiDangVo.setBuscode(String.valueOf(loginUserBean.getDept_id()));
@@ -83,10 +92,31 @@ public class ArticleToPdf {
                         } else {
                             Map articleCustomObject = InfoUtilData.getArticleCustomObject(s);
                         }
+                        //生成文章的PDF
                         String content = PdfUtil.freeMarkerRender(data, HTML);
                         String pdfName = ib.getInfo_id() + ".pdf";
                         String pdfPath = localPath + pdfName;
                         PdfUtil.createPdf(content, pdfPath);
+
+                        //生成审批流程的PDF
+                        String stepHtml = "";
+                        if(!stepList.isEmpty()){
+                            for(InfoWorkStep step:stepList){
+                                String pass = "";
+                                if(step.getPass_status()==1){
+                                    pass = "通过";
+                                }else{
+                                    pass = "退稿";
+                                }
+                                stepHtml+="<tr><td>"+step.getUser_name()+"</td><td>"+pass+"</td><td colspan='3'>"+step.getDescription()+"</td><td>"+step.getWork_time()+"</td></tr>";
+                            }
+                        }
+                        data.put("stepHtml",stepHtml);
+                        String stepContent = PdfUtil.freeMarkerRender(data, HTML_STEP);
+                        String stepPdfName = ib.getInfo_id() + "_step.pdf";
+                        String stepPdfPath = localPath + stepPdfName;
+                        PdfUtil.createPdf(stepContent, stepPdfPath);
+
                         //上传文章生成的pdf到sftp服务器
                         SFTPUtils sftpUtils = new SFTPUtils();
                         sftpUtils.uploadFile(pdfName, pdfName);
@@ -99,6 +129,11 @@ public class ArticleToPdf {
                                 attrFiles += "|" + fileName;
                             }
                         }
+
+                        //上传审核流程pdf
+                        sftpUtils.uploadFile(stepPdfName, stepPdfName);
+                        attrFiles += "|"+stepPdfName;
+
                         guiDangVo.setFiles(attrFiles);
                         guiDangVo.setFilepath(remotePath);
                         int i = GuiDangServiceClient.doService(guiDangVo);

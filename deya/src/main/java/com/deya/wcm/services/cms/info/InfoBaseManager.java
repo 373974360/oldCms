@@ -21,6 +21,7 @@ import com.deya.wcm.services.cms.category.*;
 import com.deya.wcm.services.model.services.BeanToMapUtil;
 import com.deya.wcm.services.org.role.RoleUserManager;
 import com.yinhai.model.InfoWorkStep;
+import com.yinhai.webservice.client.DaiBanServiceClient;
 import org.apache.commons.beanutils.BeanUtils;
 
 import com.deya.util.DateUtil;
@@ -454,7 +455,9 @@ public class InfoBaseManager {
             String ids = "";
             Set<Integer> cat_ids = new HashSet<Integer>();//删除的信息有可能是多个栏目下的，所以这里用set来排重
             List<InfoBean> publish_info_list = new ArrayList<InfoBean>();
+            String info_ids = "";
             for (InfoBean info : info_list) {
+                info_ids += ","+info.getInfo_id();
                 info.setModify_user(stl.getUser_id());
                 updateInfo(info, stl);
                 CategoryBean cb = CategoryManager.getCategoryBeanCatID(info.getCat_id(), info.getSite_id());
@@ -494,6 +497,9 @@ public class InfoBaseManager {
             InfoPublishManager.publishAfterEvent(publish_info_list, cat_ids, site_id);
             //InfoPublishManager.resetCategoryPage(cat_ids, site_id);//更新栏目
             PublicTableDAO.insertSettingLogs("审核", "信息状态为通过", ids, stl);
+
+            //推送待办信息
+            DaiBanServiceClient.doService();
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -510,29 +516,42 @@ public class InfoBaseManager {
      * @return boolean
      */
     public static boolean noPassInfoStatus(String info_ids, String step_id, String auto_desc, SettingLogsBean stl) {
-        InfoWorkStep infoWorkStep = new InfoWorkStep();
-        int id = PublicTableDAO.getIDByTableName(PublicTableDAO.INFO_WORK_STEP);
-        infoWorkStep.setId(id);
-        infoWorkStep.setInfo_id(Integer.parseInt(info_ids));
-        infoWorkStep.setStep_id(WorkFlowRPC.getMaxStepIDByUserID(1,stl.getUser_id()+"","cms","CMScqgjj"));
-        infoWorkStep.setUser_id(stl.getUser_id());
-        infoWorkStep.setUser_name(stl.getUser_name());
-        infoWorkStep.setDescription(auto_desc);
-        infoWorkStep.setPass_status(0);
-        infoWorkStep.setWork_time(DateUtil.getCurrentDateTime());
-        InfoDAO.insertInfoWorkStep(infoWorkStep);
+        try {
+            if(StringUtils.isNotEmpty(info_ids)){
+                String[] arryIds = info_ids.split(",");
+                for(String ids:arryIds){
+                    InfoWorkStep infoWorkStep = new InfoWorkStep();
+                    int id = PublicTableDAO.getIDByTableName(PublicTableDAO.INFO_WORK_STEP);
+                    infoWorkStep.setId(id);
+                    infoWorkStep.setInfo_id(Integer.parseInt(ids));
+                    infoWorkStep.setStep_id(WorkFlowRPC.getMaxStepIDByUserID(1,stl.getUser_id()+"","cms","CMScqgjj"));
+                    infoWorkStep.setUser_id(stl.getUser_id());
+                    infoWorkStep.setUser_name(stl.getUser_name());
+                    infoWorkStep.setDescription(auto_desc);
+                    infoWorkStep.setPass_status(0);
+                    infoWorkStep.setWork_time(DateUtil.getCurrentDateTime());
+                    InfoDAO.insertInfoWorkStep(infoWorkStep);
 
-        int infoStatus = InfoBaseManager.getInfoById(info_ids).getInfo_status();
-        if(infoStatus==2){//正在走流程的信息，退稿的时候从哪里提交的退到那里去
-            //查询最后一步审核通过的步骤
-            List<InfoWorkStep> stepList = InfoDAO.getInfoWorkStepByInfoId(info_ids,"1");
-            if(!stepList.isEmpty()){
-                step_id = stepList.get(0).getStep_id()+"";
-            }else{
-                step_id = "0";
+                    int infoStatus = InfoBaseManager.getInfoById(ids).getInfo_status();
+                    if(infoStatus==2){//正在走流程的信息，退稿的时候从哪里提交的退到那里去
+                        //查询最后一步审核通过的步骤
+                        List<InfoWorkStep> stepList = InfoDAO.getInfoWorkStepByInfoId(ids,"1","desc");
+                        if(!stepList.isEmpty()){
+                            step_id = stepList.get(0).getStep_id()+"";
+                        }else{
+                            step_id = "0";
+                        }
+                    }
+                    InfoDAO.noPassInfoStatus(ids,auto_desc, step_id, stl);
+                }
             }
+            //推送待办信息
+            DaiBanServiceClient.doService();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
         }
-        return InfoDAO.noPassInfoStatus(info_ids,auto_desc, step_id, stl);
     }
 
     /**
@@ -1857,7 +1876,7 @@ public class InfoBaseManager {
      * @return
      */
     public static InfoWorkStep getInfoWorkStepByInfoId(String info_id, String pass_status) {
-        List<InfoWorkStep> infoWorkStepByInfoId = InfoDAO.getInfoWorkStepByInfoId(info_id, pass_status);
+        List<InfoWorkStep> infoWorkStepByInfoId = InfoDAO.getInfoWorkStepByInfoId(info_id, pass_status,"desc");
         if (infoWorkStepByInfoId != null && infoWorkStepByInfoId.size() > 0) {
             return infoWorkStepByInfoId.get(0);
         } else {
@@ -1871,8 +1890,8 @@ public class InfoBaseManager {
      * @param info_id
      * @return
      */
-    public static List<InfoWorkStep> getAllInfoWorkStepByInfoId(String info_id, String pass_status) {
-        return InfoDAO.getInfoWorkStepByInfoId(info_id, pass_status);
+    public static List<InfoWorkStep> getAllInfoWorkStepByInfoId(String info_id, String pass_status,String order) {
+        return InfoDAO.getInfoWorkStepByInfoId(info_id, pass_status,order);
     }
 
     public static void main(String[] args) {

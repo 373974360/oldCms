@@ -224,6 +224,16 @@
             return add_page;
         }
 
+        //信息发布
+        function publishInfo() {
+            var selectList = table.getSelecteBeans();
+            if (InfoBaseRPC.updateInfoStatus(selectList, "8")) {
+                parent.msgAlert("信息发布成功");
+                reloadInfoDataList();
+            } else {
+                parent.msgWargin("信息发布失败");
+            }
+        }
         //单条信息发布
         function doPublish(num){
             var list = new List();
@@ -364,7 +374,6 @@
                     break;
             }
         }
-
         //得到所有录入人列表
         function getAllInuptUserID() {
             var m = new Map();
@@ -422,14 +431,11 @@
     <span class="blank3"></span>
     <div id="table"></div>
     <div id="turn"></div>
-
     <div class="infoListTable">
         <table class="table_option" border="0" cellpadding="0" cellspacing="0">
             <tr>
                 <td align="left" valign="middle">
-                    <%--<input id="btn303" name="btn1" type="button" onclick="publicSelectCheckbox(table,'info_id','onPass()');" value="通过" />
-                    <input id="btn303" name="btn2" type="button" onclick="publicSelectCheckbox(table,'info_id','noPassDesc()');" value="退稿" />
-                    <input id="btn301" name="btn3" type="button" onclick="deleteRecord(table,'info_id','deleteInfoData()');" value="删除" />--%>
+                    <input id="btn302" name="btn1" type="button" onclick="publicSelectCheckbox(table,'info_id','publishInfo()')" value="发布" />
                 </td>
             </tr>
         </table>

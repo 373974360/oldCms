@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <style>
+        body{font-family:"Microsoft YaHei";}
+        .top_title{text-align: center;font-size: 28px;line-height: 40px;}
+        .title{text-align: center;font-size: 20px;line-height: 30px;}
+        table,table tr th, table tr td { border:1px solid #000; }
+        table { width: 100%; min-height: 25px; line-height: 40px; text-align: center; border-collapse: collapse;margin-top:20px;}
+    </style>
+</head>
+<body>
+<div class="top_title">
+    重庆市住房公积金管理中心
+</div>
+<div class="title">
+    信息审批流程-发布归档
+</div>
+<table>
+    <tr>
+        <td>信息标题：</td>
+        <td colspan="5">${title}</td>
+    </tr>
+    <tr>
+        <td>发起时间：</td>
+        <td>${input_dtime}</td>
+        <td>发起人：</td>
+        <td>${input_user}</td>
+        <td>结束时间：</td>
+        <td>${publish_time}</td>
+    </tr>
+    ${stepHtml}
+</table>
+</body>
+</html>

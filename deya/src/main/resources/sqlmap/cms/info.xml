@@ -842,7 +842,7 @@
         <if test="pass_status != null">
             and pass_status = #{pass_status}
         </if>
-        order by work_time desc
+        order by work_time ${order}
     </select>
 
 

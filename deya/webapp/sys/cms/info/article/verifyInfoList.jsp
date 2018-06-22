@@ -34,12 +34,10 @@
 
         var site_id = "<%=siteid%>";
         var app = "<%=app_id%>";
-        var opt_ids = "," + getOptIDSByUser(app, site_id) + ",";//登录人所拥有管理权限ID
         var gk_article = false;//特殊栏目标识，在政务公开中使用的是内容管理中的文章模型
 
         var UserManRPC = jsonrpc.UserManRPC;
         var InfoBaseRPC = jsonrpc.InfoBaseRPC;
-        var GKNodeRPC = jsonrpc.GKNodeRPC;
         var model_map = jsonrpc.ModelRPC.getModelMap();
         model_map = Map.toJSMap(model_map);
         var current_page_num = 1;
@@ -47,6 +45,7 @@
         var beanList = null;
         var table = new Table();
         table.table_name = "table";
+        var opt_ids = ","+getOptIDSByUser(app,site_id)+",";//登录人所拥有管理权限ID
 
         //搜索条件
         var tj = "";
@@ -62,7 +61,6 @@
         con_map.put("sort_type", "desc");
 
         $(document).ready(function () {
-            setUserOperate();
             showModels();
             initButtomStyle();
             reloadInfoDataList();
@@ -212,139 +210,15 @@
             });
 
             current_page_num = tp.curr_page;
-            if (gk_article == false && app != "ggfw")//特殊的公开栏目不使用权限判断
-                setUserOperateLI(table.table_name);
 
             Init_InfoTable(table.table_name);
-        }
-
-        function setUserOperateLI(table_name) {
-            $("#" + table_name + " li[id]").hide();
-            $("#" + table_name + " li[id]").each(function () {
-                var o_id = "," + $(this).attr("id") + ",";
-                if (opt_ids.indexOf(o_id) > -1)
-                    $(this).show();
-            });
         }
 
         function showTurnPage() {
             tp.show("turn", "");
             tp.onPageChange = showList;
         }
-
-        function setUserOperate() {
-            $("#btn299").hide();
-            $(":button[id!='btn']").hide();
-
-            if (opt_ids.indexOf(",299,") > -1)
-                $("#btn299").show();
-
-            $(":button[id!='btn']").each(function () {
-                var o_id = "," + $(this).attr("id").replace("btn", "") + ",";
-                if (opt_ids.indexOf(o_id) > -1)
-                    $(this).show();
-            });
-            $("#btnSearch").show();
-
-        }
-
-
-        //通过
-        function onPass() {
-            var selectList = table.getSelecteBeans();
-            if (InfoBaseRPC.passInfoStatus(selectList, LoginUserBean.user_id)) {
-                msgAlert("审核操作成功");
-            } else {
-                msgWargin("审核操作失败");
-            }
-            reloadInfoDataList();
-        }
-
-        //不通过
-        function noPass(desc) {
-            var selectIDS = "";
-            if (temp_info_id != "" && temp_info_id != null)
-                selectIDS = temp_info_id;
-            else
-                selectIDS = table.getSelecteCheckboxValue("info_id");
-
-            if (InfoBaseRPC.noPassInfoStatus(selectIDS,temp_step_id, desc)) {
-                msgAlert("退回操作成功");
-            } else {
-                msgWargin("退回操作失败");
-            }
-            temp_info_id = null;
-            temp_step_id = null;
-            reloadInfoDataList();
-        }
-
-        var temp_info_id;
-        var temp_step_id;
-
-        function noPassDesc(id, step_id) {
-            if (id != null && id != "") {
-                temp_info_id = id;
-                temp_step_id = step_id;
-                OpenModalWindow("退稿意见", "/sys/cms/info/article/noPassDesc.jsp", 520, 235);
-            }
-        }
-
-        function auditList(info_id){
-            if (info_id != null && info_id != "") {
-                OpenModalWindow("审核过程信息", "/sys/cms/info/article/auditList.jsp?info_id=" + info_id, 520, 235);
-            }
-        }
-
-        //单条信息通过
-        function doPass(cid, site_id, app, num) {
-            //打开选择审核步骤页面
-            parent.OpenModalWindow("选择审核步骤", "/sys/cms/info/article/chooseAudit.jsp?cat_id=" + cid + "&site_id=" + site_id + "&app_id=" + app + "&num=" + num, 520, 280);
-
-            /*var list = new List();
-            list.add(beanList.get(num));
-            if (InfoBaseRPC.passInfoStatus(list, LoginUserBean.user_id)) {
-                msgAlert("审核操作成功");
-            } else {
-                msgWargin("审核操作失败");
-            }*/
-            // reloadInfoDataList();
-        }
-
-        //单条信息不通过
-        function doNoPass(id) {
-
-            if (InfoBaseRPC.noPassInfoStatus(id)) {
-                msgAlert("退回操作成功");
-            } else {
-                msgWargin("退回操作失败");
-            }
-            reloadInfoDataList();
-        }
-
-        //还原
-        function rebackInfo() {
-            var selectList = table.getSelecteBeans();
-            if (InfoBaseRPC.goBackInfo(selectList)) {
-                msgAlert("还原操作成功");
-                reloadInfoDataList();
-            } else {
-                msgWargin("还原操作失败");
-            }
-        }
-
-        //信息删除，逻辑删
-        function deleteInfoData() {
-            var selectList = table.getSelecteBeans();
-
-            if (InfoBaseRPC.deleteInfo(selectList)) {
-                msgAlert("信息" + WCMLang.Delete_success);
-                reloadInfoDataList();
-            } else {
-                msgWargin("信息" + WCMLang.Delete_fail);
-            }
-        }
-
-        //打开修改窗口
+        /**************************** 信息修改开始 ***************************************/
         function openUpdatePage(cid, Infoid, model_id, is_host) {
             if (is_host == 1) {
                 //引用信息只修改信息主表内容
@@ -357,6 +231,95 @@
                 parent.addTab(true, "/sys/cms/info/article/" + getAddPagebyModel(model_id) + "?cid=" + cid + "&info_id=" + Infoid + "&site_id=" + site_id + "&app_id=" + app + "&model=" + model_id + "&topnum=" + parent.curTabIndex, "修改信息");
             }
         }
+        /**************************** 信息修改结束 ***************************************/
+
+        /**************************** 信息审核通过开始 ************************************/
+        //单条信息
+        function doPass(cid, site_id, app, num) {
+            parent.OpenModalWindow("选择审核步骤", "/sys/cms/info/article/chooseAudit.jsp?cat_id=" + cid + "&site_id=" + site_id + "&app_id=" + app + "&num=" + num, 520, 280);
+        }
+        //批量信息
+        function onPass() {
+            var info_list = table.getSelecteBeans();
+            info_list = List.toJSList(info_list);
+            cid = info_list.get(0).cat_id;
+            parent.OpenModalWindow("选择审核步骤", "/sys/cms/info/article/chooseAudit.jsp?cat_id=" + cid + "&site_id=" + site_id + "&app_id=" + app, 520, 280);
+        }
+        /**************************** 信息审核通过结束 ************************************/
+
+
+        /**************************** 单条信息退稿 开始 ************************************/
+        var temp_info_id = "";
+        var temp_step_id = "";
+        function noPass(desc) {
+            var selectIDS = "";
+            if (temp_info_id != "" && temp_info_id != null){
+                selectIDS = temp_info_id;
+            } else {
+                selectIDS = table.getSelecteCheckboxValue("info_id");
+                var info_list = table.getSelecteBeans();
+                info_list = List.toJSList(info_list);
+                temp_step_id = info_list.get(0).step_id;
+            }
+            if (InfoBaseRPC.noPassInfoStatus(selectIDS,temp_step_id, desc)) {
+                msgAlert("退回操作成功");
+            } else {
+                msgWargin("退回操作失败");
+            }
+            temp_info_id = "";
+            temp_step_id = "";
+            reloadInfoDataList();
+        }
+        //单条
+        function noPassDesc(id,step_id) {
+            if (id != null && id != "") {
+                temp_info_id = id;
+                temp_step_id = step_id;
+                OpenModalWindow("退稿意见", "/sys/cms/info/article/noPassDesc.jsp", 520, 235);
+            }
+        }
+        //批量
+        function noListPassDesc() {
+            OpenModalWindow("退稿意见", "/sys/cms/info/article/noPassDesc.jsp", 520, 235);
+        }
+        /**************************** 单条信息退稿 结束 ************************************/
+
+
+        /**************************** 审核流程信息查看开始 ************************************/
+        function auditList(info_id){
+            if (info_id != null && info_id != "") {
+                OpenModalWindow("审核过程信息", "/sys/cms/info/article/auditList.jsp?info_id=" + info_id, 520, 235);
+            }
+        }
+        /**************************** 审核流程信息查看结束 ************************************/
+
+
+
+        //信息删除，逻辑删
+        function deleteInfoData() {
+            var selectList = table.getSelecteBeans();
+            if (InfoBaseRPC.deleteInfo(selectList)) {
+                msgAlert("信息" + WCMLang.Delete_success);
+                reloadInfoDataList();
+            } else {
+                msgWargin("信息" + WCMLang.Delete_fail);
+            }
+        }
+        //单条信息逻辑删除
+        function doDelete(num) {
+            parent.msgConfirm(WCMLang.Delete_confirm, "doDeleteHandl(" + num + ")");
+        }
+        function doDeleteHandl(num) {
+            var list = new List();
+            list.add(beanList.get(num));
+            if (InfoBaseRPC.deleteInfo(list)) {
+                parent.msgAlert("信息" + WCMLang.Delete_success);
+                reloadInfoDataList();
+            } else {
+                parent.msgWargin("信息" + WCMLang.Delete_fail);
+            }
+        }
+
 
         function showModels() {
             $("#pageGoNum").append("<option value=\"-1\" selected=\"selected\"  >全部</option> ");
@@ -507,9 +470,9 @@
         <table class="table_option" border="0" cellpadding="0" cellspacing="0">
             <tr>
                 <td align="left" valign="middle">
-                    <%--<input id="btn303" name="btn1" type="button" onclick="publicSelectCheckbox(table,'info_id','onPass()');" value="通过" />
-                    <input id="btn303" name="btn2" type="button" onclick="publicSelectCheckbox(table,'info_id','noPassDesc()');" value="退稿" />
-                    <input id="btn301" name="btn3" type="button" onclick="deleteRecord(table,'info_id','deleteInfoData()');" value="删除" />--%>
+                    <input id="btn303" name="btn1" type="button" onclick="publicSelectCheckbox(table,'info_id','onPass()');" value="通过" />
+                    <input id="btn303" name="btn2" type="button" onclick="publicSelectCheckbox(table,'info_id','noListPassDesc()');" value="退稿" />
+                    <input id="btn301" name="btn3" type="button" onclick="deleteRecord(table,'info_id','deleteInfoData()');" value="删除" />
                 </td>
             </tr>
         </table>
