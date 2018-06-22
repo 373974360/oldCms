@@ -1,6 +1,7 @@
 package com.yinhai.webservice.client;
 
 import com.yinhai.model.WangDianVo;
+import org.apache.commons.lang3.StringUtils;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
@@ -71,70 +72,72 @@ public class WangDianServiceClient {
 
     public static List<WangDianVo> getWangdianResultList(String s) {
         List<WangDianVo> wangDianVoArrayList = new ArrayList<>();
-        try {
-            s = s.substring(s.indexOf("<data>"), s.indexOf("</return>"));
-            Document xmlDoc = DocumentHelper.parseText(s);
-            Element rootElement = xmlDoc.getRootElement();
-            Iterator personInfos = rootElement.elementIterator("list");
-            if (personInfos != null) {
-                while (personInfos.hasNext()) {
-                    Element questionnaire = (Element) personInfos.next();
-                    WangDianVo wangDianVo = new WangDianVo();
-                    if (questionnaire.element("id") != null) {
-                        wangDianVo.setId(questionnaire.element("id").getTextTrim());
-                    } else {
-                        wangDianVo.setId("");
+        if(StringUtils.isNotEmpty(s)){
+            try {
+                s = s.substring(s.indexOf("<data>"), s.indexOf("</return>"));
+                Document xmlDoc = DocumentHelper.parseText(s);
+                Element rootElement = xmlDoc.getRootElement();
+                Iterator personInfos = rootElement.elementIterator("list");
+                if (personInfos != null) {
+                    while (personInfos.hasNext()) {
+                        Element questionnaire = (Element) personInfos.next();
+                        WangDianVo wangDianVo = new WangDianVo();
+                        if (questionnaire.element("id") != null) {
+                            wangDianVo.setId(questionnaire.element("id").getTextTrim());
+                        } else {
+                            wangDianVo.setId("");
+                        }
+                        if (questionnaire.element("pid") != null) {
+                            wangDianVo.setPid(questionnaire.element("pid").getTextTrim());
+                        } else {
+                            wangDianVo.setPid("");
+                        }
+                        if (questionnaire.element("depcode") != null) {
+                            wangDianVo.setDepcode(questionnaire.element("depcode").getTextTrim());
+                        } else {
+                            wangDianVo.setDepcode("");
+                        }
+                        if (questionnaire.element("name") != null) {
+                            wangDianVo.setName(questionnaire.element("name").getTextTrim());
+                        } else {
+                            wangDianVo.setName("");
+                        }
+                        if (questionnaire.element("depaddr") != null) {
+                            wangDianVo.setDepaddr(questionnaire.element("depaddr").getTextTrim());
+                        } else {
+                            wangDianVo.setDepaddr("");
+                        }
+                        if (questionnaire.element("depphone") != null) {
+                            wangDianVo.setDepphone(questionnaire.element("depphone").getTextTrim());
+                        } else {
+                            wangDianVo.setDepphone("");
+                        }
+                        if (questionnaire.element("longitude") != null) {
+                            wangDianVo.setLongitude(questionnaire.element("longitude").getTextTrim());
+                        } else {
+                            wangDianVo.setLongitude("");
+                        }
+                        if (questionnaire.element("latitude") != null) {
+                            wangDianVo.setLatitude(questionnaire.element("latitude").getTextTrim());
+                        } else {
+                            wangDianVo.setLatitude("");
+                        }
+                        if (questionnaire.element("sertime") != null) {
+                            wangDianVo.setSertime(questionnaire.element("sertime").getTextTrim());
+                        } else {
+                            wangDianVo.setSertime("");
+                        }
+                        if (questionnaire.element("serarea") != null) {
+                            wangDianVo.setSerarea(questionnaire.element("serarea").getTextTrim());
+                        } else {
+                            wangDianVo.setSerarea("");
+                        }
+                        wangDianVoArrayList.add(wangDianVo);
                     }
-                    if (questionnaire.element("pid") != null) {
-                        wangDianVo.setPid(questionnaire.element("pid").getTextTrim());
-                    } else {
-                        wangDianVo.setPid("");
-                    }
-                    if (questionnaire.element("depcode") != null) {
-                        wangDianVo.setDepcode(questionnaire.element("depcode").getTextTrim());
-                    } else {
-                        wangDianVo.setDepcode("");
-                    }
-                    if (questionnaire.element("name") != null) {
-                        wangDianVo.setName(questionnaire.element("name").getTextTrim());
-                    } else {
-                        wangDianVo.setName("");
-                    }
-                    if (questionnaire.element("depaddr") != null) {
-                        wangDianVo.setDepaddr(questionnaire.element("depaddr").getTextTrim());
-                    } else {
-                        wangDianVo.setDepaddr("");
-                    }
-                    if (questionnaire.element("depphone") != null) {
-                        wangDianVo.setDepphone(questionnaire.element("depphone").getTextTrim());
-                    } else {
-                        wangDianVo.setDepphone("");
-                    }
-                    if (questionnaire.element("longitude") != null) {
-                        wangDianVo.setLongitude(questionnaire.element("longitude").getTextTrim());
-                    } else {
-                        wangDianVo.setLongitude("");
-                    }
-                    if (questionnaire.element("latitude") != null) {
-                        wangDianVo.setLatitude(questionnaire.element("latitude").getTextTrim());
-                    } else {
-                        wangDianVo.setLatitude("");
-                    }
-                    if (questionnaire.element("sertime") != null) {
-                        wangDianVo.setSertime(questionnaire.element("sertime").getTextTrim());
-                    } else {
-                        wangDianVo.setSertime("");
-                    }
-                    if (questionnaire.element("serarea") != null) {
-                        wangDianVo.setSerarea(questionnaire.element("serarea").getTextTrim());
-                    } else {
-                        wangDianVo.setSerarea("");
-                    }
-                    wangDianVoArrayList.add(wangDianVo);
                 }
+            } catch (DocumentException e) {
+                e.printStackTrace();
             }
-        } catch (DocumentException e) {
-            e.printStackTrace();
         }
         return wangDianVoArrayList;
     }

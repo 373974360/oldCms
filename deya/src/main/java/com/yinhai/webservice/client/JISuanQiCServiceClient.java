@@ -1,6 +1,7 @@
 package com.yinhai.webservice.client;
 
 import com.yinhai.model.JiSuanQiVo;
+import org.apache.commons.lang3.StringUtils;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
@@ -63,27 +64,29 @@ public class JISuanQiCServiceClient {
 
     public static JiSuanQiVo getResult(String s) {
         JiSuanQiVo jisuanqiVo = new JiSuanQiVo();
-        try {
-            s = s.substring(s.indexOf("<data>"), s.indexOf("</return>"));
-            Document xmlDoc = DocumentHelper.parseText(s);
-            Element rootElement = xmlDoc.getRootElement();
-            if (rootElement.element("maxYear") != null) {
-                jisuanqiVo.setMaxYear(rootElement.element("maxYear") .getTextTrim());
-            } else {
-                jisuanqiVo.setMaxYear("");
+        if(StringUtils.isNotEmpty(s)){
+            try {
+                s = s.substring(s.indexOf("<data>"), s.indexOf("</return>"));
+                Document xmlDoc = DocumentHelper.parseText(s);
+                Element rootElement = xmlDoc.getRootElement();
+                if (rootElement.element("maxYear") != null) {
+                    jisuanqiVo.setMaxYear(rootElement.element("maxYear") .getTextTrim());
+                } else {
+                    jisuanqiVo.setMaxYear("");
+                }
+                if (rootElement.element("gjjLoan") != null) {
+                    jisuanqiVo.setGjjLoan(rootElement.element("gjjLoan") .getTextTrim());
+                } else {
+                    jisuanqiVo.setGjjLoan("");
+                }
+                if (rootElement.element("syLoan") != null) {
+                    jisuanqiVo.setSyLoan(rootElement.element("syLoan") .getTextTrim());
+                } else {
+                    jisuanqiVo.setSyLoan("");
+                }
+            } catch (DocumentException e) {
+                e.printStackTrace();
             }
-            if (rootElement.element("gjjLoan") != null) {
-                jisuanqiVo.setGjjLoan(rootElement.element("gjjLoan") .getTextTrim());
-            } else {
-                jisuanqiVo.setGjjLoan("");
-            }
-            if (rootElement.element("syLoan") != null) {
-                jisuanqiVo.setSyLoan(rootElement.element("syLoan") .getTextTrim());
-            } else {
-                jisuanqiVo.setSyLoan("");
-            }
-        } catch (DocumentException e) {
-            e.printStackTrace();
         }
         return jisuanqiVo;
     }
