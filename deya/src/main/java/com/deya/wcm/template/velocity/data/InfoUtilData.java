@@ -42,6 +42,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import com.yinhai.model.JiSuanQiVo;
+import com.yinhai.webservice.client.JISuanQiAServiceClient;
+import com.yinhai.webservice.client.JISuanQiBServiceClient;
+import com.yinhai.webservice.client.JISuanQiCServiceClient;
 
 public class InfoUtilData {
 
@@ -1981,6 +1985,35 @@ public class InfoUtilData {
         map.put("centercode","");//中心编号
         map.put("keyword",keyword);//搜索关键字 机构地址  机构名称  服务范围
         return WangDianServiceClient.getWangdianResultList(map);
+    }
+
+    //计算器1
+    public static JiSuanQiVo getJisuanqiAResult(String limit, String loanYear, String loanType){
+        Map<String,String> map = new HashMap<>();
+        map.put("limit",limit);//贷款额度(元)
+        map.put("loanYear",loanYear);//贷款年限(年)
+        map.put("loanType",loanType);//还款方式：1：等额本息2:等额本金
+        return JISuanQiAServiceClient.getResult(map);
+    }
+    //计算器2
+    public static JiSuanQiVo getJisuanqiBResult(String gjjLoan, String syLoan, String maxYear, String loanType){
+        Map<String,String> map = new HashMap<>();
+        map.put("gjjLoan",gjjLoan);//公积金贷款
+        map.put("syLoan",syLoan);//商业性贷款
+        map.put("maxYear",maxYear);//最高贷款年限
+        map.put("loanType",loanType);//还款方式：1：等额本息2:等额本金
+        return JISuanQiBServiceClient.getResult(map);
+    }
+    //计算器3
+    public static JiSuanQiVo getJisuanqiCResult(String age, String income, String price, String sex, String houseType, String loanType){
+        Map<String,String> map = new HashMap<>();
+        map.put("age",age);//借款人年龄
+        map.put("income",income);//家庭月收入(元)
+        map.put("price",price);// 购房价款(元)
+        map.put("sex",sex);//借款人性别 1:男 2女
+        map.put("houseType",houseType);//房屋类型 1:商品房  2:二手房
+        map.put("loanType",loanType);//贷款类型:1:公积金贷款  2:组合贷款
+        return JISuanQiCServiceClient.getResult(map);
     }
     public static void main(String[] args)
     {
