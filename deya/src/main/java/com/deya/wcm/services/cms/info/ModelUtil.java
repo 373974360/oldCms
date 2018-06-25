@@ -14,6 +14,7 @@ import com.deya.wcm.dao.cms.info.ModelUtilDAO;
 import com.deya.wcm.services.model.services.BeanToMapUtil;
 import com.deya.wcm.services.model.services.InfoCustomService;
 import com.deya.wcm.services.model.services.MapManager;
+import com.yinhai.webservice.client.DaiBanServiceClient;
 
 /**
  * 内容模型通用处理类，包括文章模型，通用图组新闻，通用视频新闻，用户自定义字段等
@@ -55,6 +56,8 @@ public class ModelUtil {
 				if(info.getInfo_status() == 8){//发布后要处理的事情			
 						InfoPublishManager.publishAfterEvent(info);	
 				}
+				//推送代办信息
+				DaiBanServiceClient.doService();
 				return true;
 			}else
 				return false;

@@ -465,6 +465,10 @@ public class InfoDAO {
         return DBManager.update("update_auto_publish_val", m);
     }
 
+    public static boolean updateAutoPublish(Map<String, String> m) {
+        return DBManager.update("update_auto_publish", m);
+    }
+
     /**
      * 根据信息ID得到图组内容模型的详细内容
      *

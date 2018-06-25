@@ -39,8 +39,9 @@ function reloadPublicGKInfo()
 		$("#generate_dtime").val(getCurrentDate());//生成年份
 
         var deptBean = DeptRPC.getDeptBeanByID(LoginUserBean.dept_id);
-		$("#gk_duty_dept").val(deptBean.dept_name);
+		//$("#gk_duty_dept").val(deptBean.dept_name);
 		$("#gk_input_dept").val(deptBean.dept_name);
+        $("#editor").val(deptBean.dept_name);
 		publicUploadFileButtomLoad("uploadify_file",true,true,"",0,5,rela_site_id,"saveFileUrl");
 		iniOpt();
 

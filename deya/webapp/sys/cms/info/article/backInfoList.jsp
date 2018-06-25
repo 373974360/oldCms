@@ -253,7 +253,7 @@
             }
             var input_dept = $("#input_dept").val();
             if (input_dept != "" && input_dept != null) {
-                search_con += " and ci.source = " + input_dept;
+                search_con += " and ci.editor = '" + input_dept+"'";
             }
             var start_time = $("#start_time").val();
             var end_time = $("#end_time").val();
@@ -327,6 +327,9 @@
                 parent.msgWargin("信息" + WCMLang.ArchiveStatus_fail);
             }
         }
+        function doSelect(dep_id,dept_name){
+            $("#input_dept").val(dept_name);
+        }
     </script>
 </head>
 
@@ -358,7 +361,7 @@
                     <option value="">全部</option>
                 </select>
                 <span>发起部门：</span>
-                <input id="input_dept" type="text" class="input_text" style="width:150px;" value=""/>
+                <input id="input_dept" type="text" class="input_text" style="width:150px;" value="" onclick="openSelectSingleDept('选择组织机构节点','doSelect','all')"/>
                 <span>发起时间：</span>
                 <input class="input_text" id="start_time" name="start_time" type="text"
                        onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:true,readOnly:true})" readonly="readonly"

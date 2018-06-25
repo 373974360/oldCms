@@ -40,6 +40,8 @@ public class DaiBanServiceClient {
     private static String sysnumber = "mh";//系统编号
 
     public static int doService() {
+
+        //待审批信息
         List<UserBean> userList = UserManager.getUserList();
         Map<String,String> con_map = new HashMap<>();
         con_map.put("app_id","cms");
@@ -85,6 +87,45 @@ public class DaiBanServiceClient {
                 }
             }
         }
+
+        //退稿信息
+        con_map.put("final_status","99");
+        con_map.put("info_status","1");
+        if(userList!=null && !userList.isEmpty()){
+            for(UserBean user:userList){
+                con_map.put("user_id",user.getUser_id()+"");
+                con_map.put("step_id",WorkFlowManager.getMaxStepIDByUserID(1,user.getUser_id()+"","cms","CMScqgjj")+"");
+                Map<String,Object> resultMap = InfoDesktop.getWaitVerifyInfoList(con_map);
+                List<InfoBean> infoList = (List<InfoBean>) resultMap.get("info_List");
+                if(infoList!=null && !infoList.isEmpty()){
+                    for(InfoBean info:infoList){
+                        _xmlstr.append("<list>");
+                        _xmlstr.append("<buscode>").append(info.getInfo_id()).append("</buscode>");
+                        _xmlstr.append("<loginid>").append(user.getUser_id()).append("</loginid>");
+                        _xmlstr.append("<busname>").append(info.getTitle()).append("</busname>");
+                        if(info.getWf_id()==0){
+                            info.setWf_id(1);
+                        }
+                        WorkFlowBean flowBean = WorkFlowManager.getWorkFlowBean(info.getWf_id());
+                        List<WorkFlowStepBean> stepList = flowBean.getWorkFlowStep_list();
+                        for(WorkFlowStepBean stepBean:stepList){
+                            if(info.getStep_id()==stepBean.getStep_id()-1){
+                                _xmlstr.append("<stepcode>").append(stepBean.getStep_id()).append("</stepcode>");
+                                _xmlstr.append("<stepname>").append(stepBean.getStep_name()).append("</stepname>");
+                            }
+                        }
+                        _xmlstr.append("<resultname>").append("退稿").append("</resultname>");
+                        _xmlstr.append("<apvaladdress>").append("/sys/index.jsp?menuUrl=/sys/cms/info/article/noPassInfoList.jsp").append("</apvaladdress>");
+                        _xmlstr.append("<remark>").append("退稿信息").append("</remark>");
+                        _xmlstr.append("<curcode>").append(info.getModify_user()).append("</curcode>");
+                        _xmlstr.append("<curname>").append(UserManager.getUserRealName(info.getModify_user()+"")).append("</curname>");
+                        _xmlstr.append("<curtime>").append(info.getOpt_dtime()).append("</curtime>");
+                        _xmlstr.append("<sysnumber>").append("mh").append("</sysnumber>");
+                        _xmlstr.append("</list>");
+                    }
+                }
+            }
+        }
        String s = WebServiceClientUtil.doHttpPost("trader", "NLC108", _xmlstr.toString());
         int result = getResult(s);
         return result;
@@ -93,12 +134,14 @@ public class DaiBanServiceClient {
     public static int getResult(String s) {
         String textTrim = "0";
         try {
-            s = s.substring(s.indexOf("<data>"), s.indexOf("</return>"));
-            Document xmlDoc = DocumentHelper.parseText(s);
-            System.out.println(s + "----------------------------------");
-            Element rootElement = xmlDoc.getRootElement();
-            Element rescode = rootElement.element("rescode");
-            textTrim = rescode.getTextTrim();
+            if(s!=null){
+                s = s.substring(s.indexOf("<data>"), s.indexOf("</return>"));
+                Document xmlDoc = DocumentHelper.parseText(s);
+                System.out.println(s + "----------------------------------");
+                Element rootElement = xmlDoc.getRootElement();
+                Element rescode = rootElement.element("rescode");
+                textTrim = rescode.getTextTrim();
+            }
         } catch (DocumentException e) {
             e.printStackTrace();
         }

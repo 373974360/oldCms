@@ -18,13 +18,19 @@ public class InfoTimerImpl implements Job {
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
         System.out.println("定时自动发布信息开始执行*****" + DateUtil.getCurrentDateTime());
         String cancel_ids = "";
-        List<InfoBean> info_list = InfoDAO.getAtuoPublishInfoList();
+        List<InfoBean> info_list = InfoDAO.getAtuoPublishInfoList();//这里也查出了正在走流程的信息，因为客户要求定时已到还未走完流程的需要特殊处理
         if (info_list != null && info_list.size() > 0) {
             for (InfoBean info : info_list) {
                 if (info.getInfo_status() == 8) {//需要撤消的
                     cancel_ids += "," + info.getInfo_id();
                     InfoPublishManager.cancelAfterEvent(info);
-                } else {
+                } else if(info.getInfo_status() == 2){//定时已到，流程还没有走完的信息，清除定时设置，但是还得保留定时时间
+                    Map<String, String> m = new HashMap<String, String>();
+                    m.put("info_id", info.getInfo_id() + "");
+                    m.put("info_status", "2");
+                    m.put("auto_type", "is_auto_up");
+                    InfoDAO.updateAutoPublish(m);
+                }else{
                     info.setInfo_status(8);
                     Map<String, String> m = new HashMap<String, String>();
                     m.put("info_id", info.getInfo_id() + "");

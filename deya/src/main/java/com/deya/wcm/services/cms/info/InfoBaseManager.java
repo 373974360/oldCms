@@ -770,7 +770,7 @@ public class InfoBaseManager {
         AccessCountManager.deleteAccessCountInfos(m);
 
         //InfoPublishManager.createRelaContentHTML(l);
-
+        DaiBanServiceClient.doService();
         return true;
     }
 

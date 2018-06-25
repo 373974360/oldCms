@@ -348,7 +348,7 @@
     <!-- 得到需要自动发布或撤消的信息 -->
     <select id="getAtuoPublishInfoList" parameterType="Map" resultType="com.deya.wcm.bean.cms.info.InfoBean" >
         <![CDATA[
-		select * from cs_info where (((info_status = 4 or info_status = 3) and is_auto_up = 1 and up_dtime < #{current_time}) 
+		select * from cs_info where (((info_status = 4 or info_status = 3 or info_status = 2) and is_auto_up = 1 and up_dtime < #{current_time})
 		or (info_status = 8 and is_auto_down = 1 and down_dtime < #{current_time}))
 		]]>
         <if test="server_ip != null">
@@ -360,6 +360,12 @@
     <!-- 自动发布撤消完成后将自动发布的值置空  -->
     <update id="update_auto_publish_val" parameterType="Map">
         update cs_info set ${auto_type} = 0,${auto_time} = '',released_dtime=#{released_dtime},info_status=#{info_status}
+        where
+        <if test="info_id != null">info_id = ${info_id}</if>
+        <if test="info_ids != null">info_id in (${info_ids})</if>
+    </update>
+    <update id="update_auto_publish" parameterType="Map">
+        update cs_info set ${auto_type} = 0,info_status=#{info_status}
         where
         <if test="info_id != null">info_id = ${info_id}</if>
         <if test="info_ids != null">info_id in (${info_ids})</if>

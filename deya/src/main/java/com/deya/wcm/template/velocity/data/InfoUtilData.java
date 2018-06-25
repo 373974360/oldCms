@@ -1975,10 +1975,10 @@ public class InfoUtilData {
     }
 
 
-    public static List<WangDianVo> getWangdianResultList(String deptype1,String bustype,String keyword){
+    public static List<WangDianVo> getWangdianResultList(String deptype,String bustype,String keyword){
         Map<String,String> map = new HashMap<>();
         map.put("depcode","");//机构代码
-        map.put("deptype1",deptype1);//机构类型0 所有 1 机构 2 网点
+        map.put("deptype1",deptype);//机构类型0 所有 1 机构 2 网点
         map.put("bktype","");//银行航别
         map.put("noparentnode","1");//1表示不显示根节点，其他表示显示
         map.put("bustype",bustype);//业务类型默认层级：0， 归集：1， 贷款：2

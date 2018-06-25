@@ -227,8 +227,9 @@ if(model == null || !model.matches("[0-9]*")){
     -->
 	<tr>
 		<th>发起部门：</th>
-		<td>
-			<input id="gk_input_dept" name="gk_input_dept" type="text" style="width:350px;" value="" onblur="checkInputValue('gk_input_dept',true,240,'发布机构','')" readonly="readonly"/>
+		<td><!--这里用来源代替发起部门 检索用-->
+			<input id="gk_input_dept" name="gk_input_dept" type="hidden"/>
+			<input id="editor" name="editor" type="text" style="width:350px;" value="" onblur="checkInputValue('editor',true,240,'发布机构','')" readonly="readonly"/>
 		</td>
 	</tr>
 	<%--<tr>

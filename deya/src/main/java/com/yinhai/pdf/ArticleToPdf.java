@@ -143,6 +143,9 @@ public class ArticleToPdf {
                         }
                         File file = new File(pdfPath);
                         file.delete();
+
+                        File fileStep = new File(stepPdfPath);
+                        fileStep.delete();
                     } catch (Exception e) {
                         e.printStackTrace();
                         status = false;
