@@ -322,6 +322,14 @@ public class AppealData{
 					con += " and pur_id in ("+pur_id+") ";
 				}
 			}
+			if(tempA[i].toLowerCase().startsWith("me_id="))
+			{
+				String me_id = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=")+1));
+				if(!"".equals(me_id) && !me_id.startsWith("$me_id") && FormatUtil.isValiditySQL(me_id))
+				{
+					con += " and me_id = "+me_id+"";
+				}
+			}
 			if(tempA[i].toLowerCase().startsWith("cur_page="))
 			{
 				String cp = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=")+1));
