@@ -2078,6 +2078,13 @@ sDesigner = function(){
 				 str += '<div id=""><input type="text" class="input_border" id="wjbh" name="wjbh" value="" style="width:98%" onkeyUP="ObjectPool['+this.name+'].setValue(this)"></div>';
 				 str += '<div class="text_div">发布渠道</div>';
 				 str += '<div id=""><input type="text" class="input_border" id="fbqd" name="fbqd" value="" style="width:98%" onkeyUP="ObjectPool['+this.name+'].setValue(this)"></div>';
+				 str += '<div class="text_div">发起人</div>';
+				 str += '<div id=""><input type="text" class="input_border" id="creator" name="creator" value="" style="width:98%" onkeyUP="ObjectPool['+this.name+'].setValue(this)"></div>';
+				 str += '<div class="text_div">发起部门</div>';
+				 str += '<div id=""><input type="text" class="input_border" id="depname" name="depname" value="" style="width:98%" onkeyUP="ObjectPool['+this.name+'].setValue(this)"></div>';
+				 str += '<div class="text_div">发起时间</div>';
+				 str += '<div id=""><input type="text" class="input_border" id="create_date" name="create_date" value="" style="width:98%" onkeyUP="ObjectPool['+this.name+'].setValue(this)">';
+				 str += '<input type="hidden" id="curinfo" name="curinfo" value="" onkeyUP="ObjectPool['+this.name+'].setValue(this)"></div>';
 				 str += '</div>';
 				str += '</div>';
 			  str += '</div>';

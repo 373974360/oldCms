@@ -100,14 +100,23 @@ function showList() {
 /**********************添加操作　开始*************************************/
 function fnAddSurvey()
 {
-    var ywlsh = table.getSelecteCheckboxValue("ywlsh");
-    var file_path = table.getSelecteCheckboxValue("question_file_name");
-    var wjbh = table.getSelecteCheckboxValue("question_code");
-    var fbqd = table.getSelecteCheckboxValue("source");
-    //var ywlsh = "45";
-    //var file_path = "/uploadfile/123.xls";
-    //var wjbh = "BH89757321";
-    //var fbqd = "pc,xxfb,wx";
+    var ywlsh = table.getSelecteCheckboxValue("ywlsh");//业务流水号
+    var file_path = table.getSelecteCheckboxValue("question_file_name");//附件
+    var wjbh = table.getSelecteCheckboxValue("question_code");//问卷编号
+    var fbqd = table.getSelecteCheckboxValue("source");//发布渠道
+    var curinfo = table.getSelecteCheckboxValue("curinfo");//审核流程
+    var depname = table.getSelecteCheckboxValue("depname");//发起部门
+    var creator = table.getSelecteCheckboxValue("creator");//发起人
+    var create_date = table.getSelecteCheckboxValue("create_date");//发起时间
+
+    //var ywlsh = "451";//业务流水号
+    //var file_path = "filepath/123.xls";//附件
+    //var wjbh = "BH89757";//问卷编号
+    //var fbqd = "线下发布、门户、网厅、APP";//发布渠道
+    //var curinfo = "[{result=同意, curname=超级用户, curdepname=办公室, stepname=办公室负责人审核, nextstepname=分管领导审核, remark=非官方顶呱呱反对发个, curdate=2018-06-25 21:06:37, curloginid=118001}, {result=null, curname=超级用户, curdepname=办公室, stepname=创建问卷, nextstepname=办公室负责人审核, remark=null, curdate=2018-06-25 21:05:57, curloginid=118001}, {result=hhhhhhhhhhhhhhhhhhhhhh, curname=超级用户, curdepname=办公室, stepname=分管领导审核, nextstepname=结束, remark=非官方顶呱呱反对发个|, curdate=2018-06-25 21:07:02, curloginid=118001}]";//审核流程
+    //var depname = "办公室";//发起部门
+    //var creator = "超级用户";//发起人
+    //var create_date = "2018-06-25 21:05:49.0";//发起时间
     if(ywlsh == "" || ywlsh == "")
     {
         parent.msgWargin("请选择要配置的问卷");
@@ -118,7 +127,7 @@ function fnAddSurvey()
         parent.msgWargin("只能选择一条记录进行推送操作");
         return;
     }
-    window.location.href = "add_survey.jsp?site_id="+site_id+"&ywlsh="+ywlsh+"&file_path="+file_path+"&wjbh="+wjbh+"&fbqd="+fbqd;
+    window.location.href = "add_survey.jsp?site_id="+site_id+"&ywlsh="+ywlsh+"&file_path="+file_path+"&wjbh="+wjbh+"&fbqd="+fbqd+"&curinfo="+curinfo+"&depname="+depname+"&creator="+creator+"&create_date="+create_date;
 }
 /**********************添加操作　结束*************************************/
 

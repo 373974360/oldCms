@@ -1,5 +1,7 @@
 package com.yinhai.pdf;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.deya.util.DateUtil;
 import com.deya.util.jconfig.JconfigUtilContainer;
 import com.deya.wcm.bean.org.user.LoginUserBean;
@@ -32,6 +34,7 @@ import java.util.regex.Pattern;
 public class SurveyToPdf {
 
     private static final String HTML = "question_template.html";
+    private static final String STEP_HTML = "question_step_template.html";
     private static String localPath;
     private static String remotePath;
     static {
@@ -54,6 +57,9 @@ public class SurveyToPdf {
                     data.put("publish_time", surveyBean.getPublish_time());
                     data.put("start_time", surveyBean.getStart_time());
                     data.put("end_time", surveyBean.getEnd_time());
+                    data.put("depname", surveyBean.getDepname());//发起部门
+                    data.put("creator", surveyBean.getCreator());//发起人
+                    data.put("create_date", surveyBean.getCreate_date());//发起时间
                     GuiDangVo guiDangVo = new GuiDangVo();
                     LoginUserBean loginUserBean = (LoginUserBean) SessionManager.get(request, "cicro_wcm_user");
                     guiDangVo.setBuscode(String.valueOf(loginUserBean.getDept_id()));
@@ -65,12 +71,43 @@ public class SurveyToPdf {
                     guiDangVo.setXxly("3");
                     guiDangVo.setCurdate(DateUtil.getString(new Date(), "yyyyMMdd"));
                     try {
+
+                        //问卷信息生成PDF
                         data.put("content", completeHtmlTag(surveyBean.getSurvey_content(), domain));
                         String content = PdfUtil.freeMarkerRender(data, HTML);
                         String pdfName = surveyBean.getS_id() + ".pdf";
                         String pdfPath = localPath + pdfName;
                         PdfUtil.createPdf(content, pdfPath);
-                        String attrFiles = pdfName;
+
+
+                        //问卷流程生成PDF
+                        String curInfo = surveyBean.getCurinfo();
+                        curInfo = curInfo.replaceAll(" ","");
+                        curInfo = curInfo.replaceAll("=",":\"");
+                        curInfo = curInfo.replaceAll("result","\"result\"");
+                        curInfo = curInfo.replaceAll(",curname","\",\"curname\"");
+                        curInfo = curInfo.replaceAll(",curdepname","\",\"curdepname\"");
+                        curInfo = curInfo.replaceAll(",nextstepname","\",\"nextbumc\"");
+                        curInfo = curInfo.replaceAll(",stepname","\",\"stepname\"");
+                        curInfo = curInfo.replaceAll(",remark","\",\"remark\"");
+                        curInfo = curInfo.replaceAll(",curdate","\",\"curdate\"");
+                        curInfo = curInfo.replaceAll(",curloginid","\",\"curloginid\"");
+                        curInfo = curInfo.replaceAll("}","\"}");
+
+                        String stepHtml = "";
+                        JSONArray array = JSONArray.parseArray(curInfo);
+                        for (int i = 0; i < array.size(); i++) {
+                            JSONObject jo = array.getJSONObject(i);
+                            stepHtml+="<tr><td>"+jo.getString("stepname")+"</td><td>"+jo.getString("result")+"</td><td colspan='3'>"+jo.getString("remark")+"</td><td>"+jo.getString("curname")+" "+jo.getString("curdate")+"</td></tr>";
+                        }
+                        data.put("stepHtml",stepHtml);
+                        String stepContent = PdfUtil.freeMarkerRender(data, STEP_HTML);
+                        String stepPdfName = surveyBean.getS_id() + "_step.pdf";
+                        String stepPdfPath = localPath + stepPdfName;
+                        PdfUtil.createPdf(stepContent, stepPdfPath);
+
+
+                        String attrFiles = pdfName+"|"+stepPdfName;
                         if(StringUtils.isNotEmpty(surveyBean.getFile_path())){
                             attrFiles += "|"+surveyBean.getFile_path();
                         }
@@ -78,6 +115,10 @@ public class SurveyToPdf {
                         //上传文章生成的pdf到sftp服务器
                         SFTPUtils sftpUtils = new SFTPUtils();
                         sftpUtils.uploadFile(pdfName,pdfName);
+
+                        //上传审批流程
+                        sftpUtils.uploadFile(stepPdfName,stepPdfName);
+
                         guiDangVo.setFilepath(remotePath);
                         int i = GuiDangServiceClient.doService(guiDangVo);
                         if (i == 0) {
@@ -86,6 +127,9 @@ public class SurveyToPdf {
                         }
                         File file = new File(pdfPath);
                         file.delete();
+
+                        File stepFile = new File(stepPdfPath);
+                        stepFile.delete();
                     } catch (Exception e) {
                         e.printStackTrace();
                         status = false;

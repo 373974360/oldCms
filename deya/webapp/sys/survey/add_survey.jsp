@@ -5,6 +5,10 @@ String ywlsh = request.getParameter("ywlsh");
 String file_path = request.getParameter("file_path");
 String wjbh = request.getParameter("wjbh");
 String fbqd = request.getParameter("fbqd");
+String curinfo = request.getParameter("curinfo");
+String depname = request.getParameter("depname");
+String creator = request.getParameter("creator");
+String create_date = request.getParameter("create_date");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -155,6 +159,10 @@ String fbqd = request.getParameter("fbqd");
     	var file_path = "<%=file_path%>";
     	var wjbh = "<%=wjbh%>";
     	var fbqd = "<%=fbqd%>";
+    	var curinfo = "<%=curinfo%>";
+		var depname = "<%=depname%>";
+		var creator = "<%=creator%>";
+		var create_date = "<%=create_date%>";
 		$(document).ready(function () {
 			initButtomStyle();
 			init_FromTabsStyle();
@@ -197,6 +205,10 @@ String fbqd = request.getParameter("fbqd");
                 $("#file_path").val(file_path);
                 $("#wjbh").val(wjbh);
                 $("#fbqd").val(fbqd);
+                $("#curinfo").val(curinfo);
+                $("#depname").val(depname);
+                $("#creator").val(creator);
+                $("#create_date").val(create_date);
 			}
 		
 			setContentAreaHeight();

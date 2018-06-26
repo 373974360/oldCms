@@ -137,13 +137,13 @@
 	
 	<!-- 修改问卷调查 -->
 	<update id="updateSurvey" parameterType="com.deya.wcm.bean.survey.SurveyBean">
-		update cp_survey set category_id = #{category_id},s_name = #{s_name},description = #{description},is_register = #{is_register},ip_fre = #{ip_fre},start_time = #{start_time},end_time = #{end_time},is_show_subsort = #{is_show_subsort},survey_content = #{survey_content},model_path = #{model_path},ip_restrict = #{ip_restrict},update_time = #{update_time},update_user = #{update_user},is_show_result = #{is_show_result},is_show_title = #{is_show_title},spacing_interval = #{spacing_interval},publish_status = #{publish_status},ywlsh = #{ywlsh},file_path = #{file_path},wjbh=#{wjbh},fbqd=#{fbqd} where s_id = #{s_id}
+		update cp_survey set category_id = #{category_id},s_name = #{s_name},description = #{description},is_register = #{is_register},ip_fre = #{ip_fre},start_time = #{start_time},end_time = #{end_time},is_show_subsort = #{is_show_subsort},survey_content = #{survey_content},model_path = #{model_path},ip_restrict = #{ip_restrict},update_time = #{update_time},update_user = #{update_user},is_show_result = #{is_show_result},is_show_title = #{is_show_title},spacing_interval = #{spacing_interval},publish_status = #{publish_status},ywlsh = #{ywlsh},file_path = #{file_path},wjbh=#{wjbh},fbqd=#{fbqd},curinfo=#{curinfo},depname=#{depname},creator=#{creator},create_date=#{create_date} where s_id = #{s_id}
 	</update>
 		
 	<!-- 插入问卷调查 -->
 	<insert id="insertSurvey" parameterType="com.deya.wcm.bean.survey.SurveyBean">
-		insert into cp_survey(id,s_id,category_id,s_name,description,is_register,ip_fre,start_time,end_time,is_show_subsort,is_show_result,is_show_title,survey_content,model_path,ip_restrict,add_time,add_user,spacing_interval,site_id,ywlsh,file_path,wjbh,fbqd)
-		values(#{id},#{s_id},#{category_id},#{s_name},#{description},#{is_register},#{ip_fre},#{start_time},#{end_time},#{is_show_subsort},#{is_show_result},#{is_show_title},#{survey_content},#{model_path},#{ip_restrict},#{add_time},#{add_user},#{spacing_interval},#{site_id},#{ywlsh},#{file_path},#{wjbh},#{fbqd})
+		insert into cp_survey(id,s_id,category_id,s_name,description,is_register,ip_fre,start_time,end_time,is_show_subsort,is_show_result,is_show_title,survey_content,model_path,ip_restrict,add_time,add_user,spacing_interval,site_id,ywlsh,file_path,wjbh,fbqd,curinfo,depname,creator,create_date)
+		values(#{id},#{s_id},#{category_id},#{s_name},#{description},#{is_register},#{ip_fre},#{start_time},#{end_time},#{is_show_subsort},#{is_show_result},#{is_show_title},#{survey_content},#{model_path},#{ip_restrict},#{add_time},#{add_user},#{spacing_interval},#{site_id},#{ywlsh},#{file_path},#{wjbh},#{fbqd},#{curinfo},#{depname},#{creator},#{create_date})
 	</insert>
 	
 	<!-- 设置问卷调查属性 -->

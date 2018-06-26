@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <style>
+        body{font-family:"Microsoft YaHei";}
+        .top_title{text-align: center;font-size: 28px;line-height: 40px;}
+        .title{text-align: center;font-size: 20px;line-height: 30px;}
+        table,table tr th, table tr td { border:1px solid #000; }
+        table { width: 100%; min-height: 25px; line-height: 40px; text-align: center; border-collapse: collapse;margin-top:20px;}
+    </style>
+</head>
+<body>
+<div class="top_title">
+    重庆市住房公积金管理中心
+</div>
+<div class="title">
+    问卷审批流程-发布归档
+</div>
+<div class="title">
+    问卷开始时间：${start_time}  问卷结束时间：${end_time}
+</div>
+<table>
+    <tr>
+        <td>问卷标题：</td>
+        <td colspan="5">${s_name}</td>
+    </tr>
+    <tr>
+        <td>发起时间：</td>
+        <td>${create_date}</td>
+        <td>发起人：</td>
+        <td>${creator}</td>
+        <td>发起部门：</td>
+        <td>${depname}</td>
+    </tr>
+    ${stepHtml}
+</table>
+</body>
+</html>

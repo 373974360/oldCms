@@ -58,6 +58,11 @@ public class SurveyBean implements IBean,java.io.Serializable{
 	private String wjbh="";//问卷编号
 	private String fbqd="";//发布渠道
 
+	private String creator="";//发起人
+	private String depname="";//发起部门
+	private String create_date="";//发起时间
+	private String curinfo="";//审核流程
+
 	private int back_status = 0;
 
 	public int getIs_checkcode() {
@@ -362,5 +367,37 @@ public class SurveyBean implements IBean,java.io.Serializable{
 
 	public void setFbqd(String fbqd) {
 		this.fbqd = fbqd;
+	}
+
+	public String getCreator() {
+		return creator;
+	}
+
+	public void setCreator(String creator) {
+		this.creator = creator;
+	}
+
+	public String getDepname() {
+		return depname;
+	}
+
+	public void setDepname(String depname) {
+		this.depname = depname;
+	}
+
+	public String getCreate_date() {
+		return create_date;
+	}
+
+	public void setCreate_date(String create_date) {
+		this.create_date = create_date;
+	}
+
+	public String getCurinfo() {
+		return curinfo;
+	}
+
+	public void setCurinfo(String curinfo) {
+		this.curinfo = curinfo;
 	}
 }
