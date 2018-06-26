@@ -119,6 +119,17 @@
         <property name="certcode" value="yhadmin"/>
     </category>
 
+
+    <category name="trader">
+        <property name="wsdlUrl" value="http://35.10.43.244:8003/trader/services/TraderService?wsdl"/>
+        <property name="targetNamespace" value="http://service.core.trader.yinhai.com/"/>
+        <property name="methodName" value="doTrader"/>
+        <property name="paramName" value="paramXml"/>
+        <property name="forgcode" value="19ceb94366931d8e2017"/>
+        <property name="certcode" value="3b0184454f8cb24147d7"/>
+        <property name="torgcode" value="5510gjj"/>
+    </category>
+
     <category name="sftp">
         <property name="pdfdir" value="/deya/pdf/"/>
         <property name="ip" value="35.10.28.126"/>
