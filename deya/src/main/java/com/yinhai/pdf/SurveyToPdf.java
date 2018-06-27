@@ -81,33 +81,43 @@ public class SurveyToPdf {
 
 
                         //问卷流程生成PDF
+                        String stepPdfName="";
+                        String stepPdfPath="";
                         String curInfo = surveyBean.getCurinfo();
-                        curInfo = curInfo.replaceAll(" ","");
-                        curInfo = curInfo.replaceAll("=",":\"");
-                        curInfo = curInfo.replaceAll("result","\"result\"");
-                        curInfo = curInfo.replaceAll(",curname","\",\"curname\"");
-                        curInfo = curInfo.replaceAll(",curdepname","\",\"curdepname\"");
-                        curInfo = curInfo.replaceAll(",nextstepname","\",\"nextbumc\"");
-                        curInfo = curInfo.replaceAll(",stepname","\",\"stepname\"");
-                        curInfo = curInfo.replaceAll(",remark","\",\"remark\"");
-                        curInfo = curInfo.replaceAll(",curdate","\",\"curdate\"");
-                        curInfo = curInfo.replaceAll(",curloginid","\",\"curloginid\"");
-                        curInfo = curInfo.replaceAll("}","\"}");
+                        if(StringUtils.isNotEmpty(curInfo)){
+                            curInfo = curInfo.replaceAll(" ","");
+                            curInfo = curInfo.replaceAll("=",":\"");
+                            curInfo = curInfo.replaceAll("result","\"result\"");
+                            curInfo = curInfo.replaceAll(",curname","\",\"curname\"");
+                            curInfo = curInfo.replaceAll(",curdepname","\",\"curdepname\"");
+                            curInfo = curInfo.replaceAll(",nextstepname","\",\"nextbumc\"");
+                            curInfo = curInfo.replaceAll(",stepname","\",\"stepname\"");
+                            curInfo = curInfo.replaceAll(",remark","\",\"remark\"");
+                            curInfo = curInfo.replaceAll(",curdate","\",\"curdate\"");
+                            curInfo = curInfo.replaceAll(",curloginid","\",\"curloginid\"");
+                            curInfo = curInfo.replaceAll("}","\"}");
 
-                        String stepHtml = "";
-                        JSONArray array = JSONArray.parseArray(curInfo);
-                        for (int i = 0; i < array.size(); i++) {
-                            JSONObject jo = array.getJSONObject(i);
-                            stepHtml+="<tr><td>"+jo.getString("stepname")+"</td><td>"+jo.getString("result")+"</td><td colspan='3'>"+jo.getString("remark")+"</td><td>"+jo.getString("curname")+" "+jo.getString("curdate")+"</td></tr>";
+                            String stepHtml = "";
+                            JSONArray array = JSONArray.parseArray(curInfo);
+                            if(array!=null&&array.size()>0){
+                                for (int i = 0; i < array.size(); i++) {
+                                    JSONObject jo = array.getJSONObject(i);
+                                    stepHtml+="<tr><td>"+jo.getString("stepname")+"</td><td>"+jo.getString("result")+"</td><td colspan='3'>"+jo.getString("remark")+"</td><td>"+jo.getString("curname")+" "+jo.getString("curdate")+"</td></tr>";
+                                }
+                                data.put("stepHtml",stepHtml);
+                                String stepContent = PdfUtil.freeMarkerRender(data, STEP_HTML);
+                                stepPdfName = surveyBean.getS_id() + "_step.pdf";
+                                stepPdfPath = localPath + stepPdfName;
+                                PdfUtil.createPdf(stepContent, stepPdfPath);
+                            }
                         }
-                        data.put("stepHtml",stepHtml);
-                        String stepContent = PdfUtil.freeMarkerRender(data, STEP_HTML);
-                        String stepPdfName = surveyBean.getS_id() + "_step.pdf";
-                        String stepPdfPath = localPath + stepPdfName;
-                        PdfUtil.createPdf(stepContent, stepPdfPath);
 
 
-                        String attrFiles = pdfName+"|"+stepPdfName;
+
+                        String attrFiles = pdfName;
+                        if(StringUtils.isNotEmpty(stepPdfName)){
+                            attrFiles+="|"+stepPdfName;
+                        }
                         if(StringUtils.isNotEmpty(surveyBean.getFile_path())){
                             attrFiles += "|"+surveyBean.getFile_path();
                         }
@@ -117,7 +127,9 @@ public class SurveyToPdf {
                         sftpUtils.uploadFile(pdfName,pdfName);
 
                         //上传审批流程
-                        sftpUtils.uploadFile(stepPdfName,stepPdfName);
+                        if(StringUtils.isNotEmpty(stepPdfName)){
+                            sftpUtils.uploadFile(stepPdfName,stepPdfName);
+                        }
 
                         guiDangVo.setFilepath(remotePath);
                         int i = GuiDangServiceClient.doService(guiDangVo);
@@ -128,8 +140,10 @@ public class SurveyToPdf {
                         File file = new File(pdfPath);
                         file.delete();
 
-                        File stepFile = new File(stepPdfPath);
-                        stepFile.delete();
+                        if(StringUtils.isNotEmpty(stepPdfPath)){
+                            File stepFile = new File(stepPdfPath);
+                            stepFile.delete();
+                        }
                     } catch (Exception e) {
                         e.printStackTrace();
                         status = false;

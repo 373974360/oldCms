@@ -51,6 +51,8 @@ public class WangDianServiceClient {
         }
         if (deptype1 != null && !"".equals(deptype1)) {
             _xmlstr.append("<deptype1>").append(deptype1).append("</deptype1>");
+        }else{
+            _xmlstr.append("<deptype1>").append(0).append("</deptype1>");
         }
         if (bktype != null && !"".equals(bktype)) {
             _xmlstr.append("<bktype>").append(bktype).append("</bktype>");
@@ -60,6 +62,8 @@ public class WangDianServiceClient {
         }
         if (bustype != null && !"".equals(bustype)) {
             _xmlstr.append("<bustype>").append(bustype).append("</bustype>");
+        }else{
+            _xmlstr.append("<bustype>").append(0).append("</bustype>");
         }
         if (centercode != null && !"".equals(centercode)) {
             _xmlstr.append("<centercode>").append(centercode).append("</centercode>");
