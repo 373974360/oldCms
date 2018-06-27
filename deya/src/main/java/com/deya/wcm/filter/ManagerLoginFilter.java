@@ -1,19 +1,15 @@
 package com.deya.wcm.filter;
 
-import java.io.IOException;
-import java.util.Enumeration;
-
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import com.deya.util.Javascript;
 import com.deya.util.jspFilterHandl;
+import com.deya.wcm.services.org.user.SessionManager;
 import com.deya.wcm.services.org.user.UserLogin;
+import org.apache.poi.util.SystemOutLogger;
+
+import javax.servlet.*;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 public class ManagerLoginFilter implements javax.servlet.Filter {
     private FilterConfig config;
@@ -41,59 +37,49 @@ public class ManagerLoginFilter implements javax.servlet.Filter {
                          FilterChain chain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) _request;
         HttpServletResponse response = (HttpServletResponse) _response;
-        //System.out.println("doFilter------------"+request.getSession().getId());
         String requestUri = request.getRequestURI();
-        //System.out.println("requestUri--------------" + requestUri);
         String loginPage = config.getInitParameter("loginPage");
         String notFilterPage = config.getInitParameter("notFilterPage");
         String[] notArr = notFilterPage.split(";");
-
         request.setCharacterEncoding("utf-8");
-
+        request.getParameterNames();
+        ServletRequest requestWrapper = null;
+        if(request instanceof HttpServletRequest && requestUri.contains("JSON-RPC")) {
+            requestWrapper = new MyHttpServletRequestWrapper(request);
+        }
+        if(null == requestWrapper) {
+            requestWrapper = request;
+        }
         if (isContains(request.getRequestURI(), notArr)) {
-            chain.doFilter(request, response);
+            chain.doFilter(requestWrapper, response);
             return;
         }
-
         //对前台的jsp进行xss漏洞过滤
-        //if(!requestUri.startsWith("/sys"))
-        if (requestUri.indexOf("/sys/") < 0) {
-            if (!jspFilterHandl.isRightParam(request, requestUri)) {
+        if (!jspFilterHandl.isRightParam(requestWrapper, requestUri)) {
+            if (requestUri.startsWith("/sys") || requestUri.startsWith("/manager") || requestUri.startsWith("/admin")) {
+                System.out.println("*******************验证参数错误，跳转到后台登录页！**********************");
+                SessionManager.remove(request, "cicro_wcm_user");
+                response.sendRedirect(loginPage);
+            }else{
+                System.out.println("*******************验证参数错误，跳转到首页！**********************");
                 response.setContentType("text/html; charset=utf-8");
                 response.sendRedirect("/");
-                return;
-            } else {
-                chain.doFilter(request, response);
             }
         } else {
-            String method = request.getParameter("method");
-            if (method != null && !"".equals(method) && !"null".equals(method)) {
-                request.getSession().setAttribute("method", method);
-            }
-            method = (String)request.getSession().getAttribute("method");
-            String menuUrl = request.getParameter("menuUrl");
-            loginPage = loginPage + "?menuUrl=" + menuUrl + "&method=" + method;
-            if (!jspFilterHandl.isRightParam(request, requestUri)) {
-                response.setContentType("text/html; charset=utf-8");
-                if (requestUri.indexOf("/sys/JSON-RPC") >= 0) {
-                    response.getWriter().write("top.location.href='" + loginPage + "'");
-                } else {
-                    response.getWriter().write(Javascript.location(loginPage, "top"));
-                }
-            } else {
+            if (requestUri.startsWith("/sys") || requestUri.startsWith("/manager") || requestUri.startsWith("/admin")) {
                 if (UserLogin.checkLoginBySession(request)) {
-                    chain.doFilter(request, response);
+                    chain.doFilter(requestWrapper, response);
                 } else {
-                    //response.sendRedirect(loginPage);
                     response.setContentType("text/html; charset=utf-8");
-                    if (requestUri.indexOf("/sys/JSON-RPC") >= 0) {
+                    if (requestUri.contains("/sys/JSON-RPC")) {
                         response.getWriter().write("top.location.href='" + loginPage + "'");
                     } else {
-                        response.getWriter().write(Javascript.location(loginPage, "window"));
+                        response.getWriter().write(Javascript.location(loginPage, "top"));
                     }
                 }
+            } else {
+                chain.doFilter(requestWrapper, response);
             }
-
         }
     }
 
