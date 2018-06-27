@@ -37,6 +37,7 @@ var contetnid = "info_content";
 var linksInfo = "";
 var focusInfo = "";
 var mFlag = false;
+var step_id="0"
 
 $(document).ready(function(){
 	$("#is_pic").hide();
@@ -90,8 +91,22 @@ $(document).ready(function(){
 			
 			$("#title").attr("style",style);
 			*/
+            defaultBean.step_id=step_id;
 			$("#info_article_table").autoFill(defaultBean);				
-			publicReloadUpdateGKInfos();			
+			publicReloadUpdateGKInfos();
+            if(defaultBean.info_status=='3'||defaultBean.info_status=='4'||defaultBean.info_status=='8'){//这些状态下修改信息的时候可以选择走保密审查
+                if(defaultBean.info_status=='4'){
+                    $("#audit_tr").addClass("hidden");
+                    $("#li_ds").addClass("hidden");
+                    $("#opt_bmsc input").attr("checked",'true');
+                }
+                $("#opt_bmsc").removeClass("hidden");
+            }else if(defaultBean.info_status=='2'){//待审信息修改的时候屏蔽选择审批步骤和发布状态的按钮
+                $("#info_staus_tr").addClass("hidden");
+                $("#audit_tr").addClass("hidden");
+            }else{
+                $("#opt_bmsc").addClass("hidden");
+            }
 		}
 		$("#addButton").click(updateInfoData);		
 		mFlag = true;		

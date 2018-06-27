@@ -108,6 +108,8 @@ function fnAddSurvey()
     var depname = table.getSelecteCheckboxValue("depname");//发起部门
     var creator = table.getSelecteCheckboxValue("creator");//发起人
     var create_date = table.getSelecteCheckboxValue("create_date");//发起时间
+    var start_date = table.getSelecteCheckboxValue("start_date");//起始时间
+    var end_date = table.getSelecteCheckboxValue("end_date");//结束时间
 
     //var ywlsh = "451";//业务流水号
     //var file_path = "filepath/123.xls";//附件
@@ -127,7 +129,7 @@ function fnAddSurvey()
         parent.msgWargin("只能选择一条记录进行推送操作");
         return;
     }
-    window.location.href = "add_survey.jsp?site_id="+site_id+"&ywlsh="+ywlsh+"&file_path="+file_path+"&wjbh="+wjbh+"&fbqd="+fbqd+"&curinfo="+curinfo+"&depname="+depname+"&creator="+creator+"&create_date="+create_date;
+    window.location.href = "add_survey.jsp?site_id="+site_id+"&ywlsh="+ywlsh+"&file_path="+file_path+"&wjbh="+wjbh+"&fbqd="+fbqd+"&curinfo="+curinfo+"&depname="+depname+"&creator="+creator+"&create_date="+create_date+"&start_date="+start_date+"&end_date="+end_date;
 }
 /**********************添加操作　结束*************************************/
 

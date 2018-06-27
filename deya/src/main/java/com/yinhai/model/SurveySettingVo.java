@@ -56,6 +56,10 @@ public class SurveySettingVo implements Serializable {
      * 发布部门
      */
     private String depname;
+    /**
+     * 审批流程
+     * */
+    private String curinfo;
 
 
     public String getYwlsh() {
@@ -153,4 +157,14 @@ public class SurveySettingVo implements Serializable {
     public void setDepname(String depname) {
         this.depname = depname;
     }
+
+    public String getCurinfo() {
+        return curinfo;
+    }
+
+    public void setCurinfo(String curinfo) {
+        this.curinfo = curinfo;
+    }
+
+
 }

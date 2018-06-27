@@ -91,7 +91,9 @@ public class ModelUtil {
 				InfoBaseManager.changeInfoStatus(info);
 				if(info.getInfo_status() == 8){//发布后要处理的事情				
 					InfoPublishManager.publishAfterEvent(info);	
-				} 
+				}
+				//推送代办信息
+				DaiBanServiceClient.doService();
 				return true;
 			}else
 				return false;

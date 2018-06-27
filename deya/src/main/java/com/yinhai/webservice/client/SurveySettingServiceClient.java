@@ -162,6 +162,11 @@ public class SurveySettingServiceClient {
                     } else {
                         surveySettingVo.setDepname("");
                     }
+                    if (questionnaire.element("curinfo") != null) {
+                        surveySettingVo.setCurinfo(questionnaire.element("curinfo").getTextTrim());
+                    } else {
+                        surveySettingVo.setCurinfo("");
+                    }
                     surveySettingVoList.add(surveySettingVo);
                 }
             }

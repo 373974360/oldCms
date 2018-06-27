@@ -9,6 +9,8 @@ String curinfo = request.getParameter("curinfo");
 String depname = request.getParameter("depname");
 String creator = request.getParameter("creator");
 String create_date = request.getParameter("create_date");
+String start_date = request.getParameter("start_date");
+String end_date = request.getParameter("end_date");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -163,6 +165,8 @@ String create_date = request.getParameter("create_date");
 		var depname = "<%=depname%>";
 		var creator = "<%=creator%>";
 		var create_date = "<%=create_date%>";
+		var start_date = "<%=start_date%>";
+		var end_date = "<%=end_date%>";
 		$(document).ready(function () {
 			initButtomStyle();
 			init_FromTabsStyle();
@@ -209,6 +213,8 @@ String create_date = request.getParameter("create_date");
                 $("#depname").val(depname);
                 $("#creator").val(creator);
                 $("#create_date").val(create_date);
+                $("#start_time").val(start_date);
+                $("#end_time").val(end_date);
 			}
 		
 			setContentAreaHeight();
