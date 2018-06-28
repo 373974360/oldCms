@@ -59,7 +59,8 @@ public class ManagerLoginFilter implements javax.servlet.Filter {
             if (requestUri.startsWith("/sys") || requestUri.startsWith("/manager") || requestUri.startsWith("/admin")) {
                 System.out.println("*******************验证参数错误，跳转到后台登录页！**********************");
                 SessionManager.remove(request, "cicro_wcm_user");
-                response.sendRedirect(loginPage);
+                response.setContentType("text/html; charset=utf-8");
+                response.getWriter().write("alert('您提交的参数存在非法字符');");
             }else{
                 System.out.println("*******************验证参数错误，跳转到首页！**********************");
                 response.setContentType("text/html; charset=utf-8");

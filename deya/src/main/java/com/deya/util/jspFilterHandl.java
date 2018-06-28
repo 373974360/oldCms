@@ -143,6 +143,16 @@ public class jspFilterHandl {
             if (queryString.indexOf("collURL") == -1) {
                 if ((path.equals("/sys") && servletPath.indexOf("/JSON-RPC") >= 0) || (path.equals("/manager") && servletPath.indexOf("/JSON-RPC") >= 0)) {
                     String params = getRequestPayload(request);
+                    int nowLength = params.length();//原始长度
+                    params = params.replaceAll("eval\\((.*)\\)", "");
+                    params = params.replaceAll("[\\\"\\\'][\\s]*javascript:(.*)[\\\"\\\']", "");
+                    params = params.replaceAll("(?i)<script.*?>.*?<script.*?>", "");
+                    params = params.replaceAll("(?i)<script.*?>.*?</script.*?>", "");
+                    params = params.replaceAll("(?i)<.*?javascript:.*?>.*?</.*?>", "");
+                    params = params.replaceAll("(?i)<.*?\\s+on.*?>.*?</.*?>", "");
+                    if(params.length()!=nowLength){
+                        return true;  //包含要过滤的关键字
+                    }
                     System.out.println("params：" + params);
                     if (isTureKey(params, sqlFilterStr)) {
                         return true;  //包含要过滤的关键字
