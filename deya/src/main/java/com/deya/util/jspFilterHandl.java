@@ -18,12 +18,13 @@ public class jspFilterHandl {
             "injected", "ACUstart", "ACUend", "():;", "acu:Expre", "window.location.href", "document", "parameter: ", "<OBJECT", "javascript", "confirm", "<script>", "</script>", "..", "cat ", "click", "function", "prompt(", "<", ">", "'", "‘", "’", "�", "ndhlmt:expre", "ssion", "ndhlmt"};
     private static String no_filter_jsp;
 
-    private static String[] sqlFilterStr = {"exec ", "insert ", "delete ", "trancate ", "update ", "drop table","<script>","<javascript>","alert","%df", "%5c", "%27", "%20", "%22", "%27", "%28", "%29", "%3E", "%3e", "%3C", "%3c","application","iframe","location","set-cookie","asc\\(", "mid\\(", "char\\(","exists","header",
-            "ndhlmt:expre", "ndhlmt","document","function"};
+    private static String[] sqlFilterStr = {"exec ", "insert ", "delete ", "trancate ", "update ", "drop table"};
 
     private static String[] integerParamStr = {"cat_id", "model_id", "sq_id", "tm_id", "info_id", "info_status", "dept_id", "final_status", "f_id"};
 
     private static String[] editorParams = {"ware_content","t_content","sq_content","correct_content","c_spyj","c_sqtj","c_jzxyq","c_sqclml","c_sfyj","c_fulu"};
+
+    private static String[] no_filter_rpc={"SurveyRPC","InfoBaseRPC","TemplateRPC","WareRPC","ModelUtilRPC"};
 
     static {
         String[] jspArr = JconfigUtilContainer.bashConfig().getPropertyNamesByCategory("filter_jsp_page");
@@ -143,23 +144,34 @@ public class jspFilterHandl {
             if (queryString.indexOf("collURL") == -1) {
                 if ((path.equals("/sys") && servletPath.indexOf("/JSON-RPC") >= 0) || (path.equals("/manager") && servletPath.indexOf("/JSON-RPC") >= 0)) {
                     String params = getRequestPayload(request);
-                    int nowLength = params.length();//原始长度
-                    params = params.replaceAll("eval\\((.*)\\)", "");
-                    params = params.replaceAll("[\\\"\\\'][\\s]*javascript:(.*)[\\\"\\\']", "");
-                    params = params.replaceAll("(?i)<script.*?>.*?<script.*?>", "");
-                    params = params.replaceAll("(?i)<script.*?>.*?</script.*?>", "");
-                    params = params.replaceAll("(?i)<.*?javascript:.*?>.*?</.*?>", "");
-                    params = params.replaceAll("(?i)<.*?\\s+on.*?>.*?</.*?>", "");
-                    if(params.length()!=nowLength){
-                        return true;  //包含要过滤的关键字
+                    boolean b = false;
+                    for(String rpc:no_filter_rpc){
+                        if(params.contains(rpc)){
+                            b = true;
+                            break;
+                        }
                     }
-                    System.out.println("params：" + params);
-                    if (isTureKey(params, sqlFilterStr)) {
-                        return true;  //包含要过滤的关键字
-                    }
-                    if(params.indexOf("map") >= 0){//jsonRPC携带的参数集合
-                        if(isRPCParames(params)){
-                            return true;
+                    if(!b){
+                        System.out.println("params：" + params);
+                        int nowLength = params.length();//原始长度
+                        params = params.replaceAll("eval\\((.*)\\)", "");
+                        params = params.replaceAll("[\\\"\\\'][\\s]*javascript:(.*)[\\\"\\\']", "");
+                        params = params.replaceAll("(?i)<script.*?>.*?<script.*?>", "");
+                        params = params.replaceAll("(?i)<script.*?>.*?</script.*?>", "");
+                        params = params.replaceAll("(?i)<.*?javascript:.*?>.*?</.*?>", "");
+                        params = params.replaceAll("(?i)<.*?\\s+on.*?>.*?</.*?>", "");
+                        params = params.replaceAll("<", "");
+                        params = params.replaceAll(">", "");
+                        if(params.length()!=nowLength){
+                            return true;  //包含要过滤的关键字
+                        }
+                        if (isTureKey(params, sqlFilterStr)) {
+                            return true;  //包含要过滤的关键字
+                        }
+                        if(params.indexOf("map") >= 0){//jsonRPC携带的参数集合
+                            if(isRPCParames(params)){
+                                return true;
+                            }
                         }
                     }
                 }
