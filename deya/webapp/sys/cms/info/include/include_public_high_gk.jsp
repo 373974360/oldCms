@@ -91,7 +91,7 @@
 			</td>
 		</tr>
         <tr id="audit_tr" class="hidden">
-            <th>选择审核步骤：</th>
+            <th>选择下一环节：</th>
             <td id="audit_list">
 
             </td>

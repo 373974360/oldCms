@@ -10,7 +10,7 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=8"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>选择审核步骤</title>
+    <title>选择下一环节</title>
     <jsp:include page="../include/include_info_tools.jsp"/>
 
     <script type="text/javascript">
@@ -140,7 +140,7 @@
     <table id="table" class="table_form" border="0" cellpadding="0" cellspacing="0">
         <tbody>
         <tr id="audit_tr" class="hidden">
-            <th>选择审核步骤：</th>
+            <th>选择下一环节：</th>
             <td id="audit_list">
 
             </td>

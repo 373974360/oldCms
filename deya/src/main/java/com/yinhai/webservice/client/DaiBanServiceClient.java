@@ -78,8 +78,13 @@ public class DaiBanServiceClient {
                         _xmlstr.append("<resultname>").append("待审批").append("</resultname>");
                         _xmlstr.append("<apvaladdress>").append("/sys/index.jsp?menuUrl=/sys/cms/info/article/verifyInfoList.jsp").append("</apvaladdress>");
                         _xmlstr.append("<remark>").append("待审批信息").append("</remark>");
-                        _xmlstr.append("<curcode>").append(info.getModify_user()).append("</curcode>");
-                        _xmlstr.append("<curname>").append(UserManager.getUserRealName(info.getModify_user()+"")).append("</curname>");
+                        if(info.getModify_user()==0){
+                            _xmlstr.append("<curcode>").append(info.getInput_user()).append("</curcode>");
+                            _xmlstr.append("<curname>").append(UserManager.getUserRealName(info.getInput_user()+"")).append("</curname>");
+                        }else{
+                            _xmlstr.append("<curcode>").append(info.getModify_user()).append("</curcode>");
+                            _xmlstr.append("<curname>").append(UserManager.getUserRealName(info.getModify_user()+"")).append("</curname>");
+                        }
                         _xmlstr.append("<curtime>").append(info.getOpt_dtime()).append("</curtime>");
                         _xmlstr.append("<sysnumber>").append("mh").append("</sysnumber>");
                         _xmlstr.append("</list>");
@@ -117,8 +122,13 @@ public class DaiBanServiceClient {
                         _xmlstr.append("<resultname>").append("退稿").append("</resultname>");
                         _xmlstr.append("<apvaladdress>").append("/sys/index.jsp?menuUrl=/sys/cms/info/article/noPassInfoList.jsp").append("</apvaladdress>");
                         _xmlstr.append("<remark>").append("退稿信息").append("</remark>");
-                        _xmlstr.append("<curcode>").append(info.getModify_user()).append("</curcode>");
-                        _xmlstr.append("<curname>").append(UserManager.getUserRealName(info.getModify_user()+"")).append("</curname>");
+                        if(info.getModify_user()==0){
+                            _xmlstr.append("<curcode>").append(info.getInput_user()).append("</curcode>");
+                            _xmlstr.append("<curname>").append(UserManager.getUserRealName(info.getInput_user()+"")).append("</curname>");
+                        }else{
+                            _xmlstr.append("<curcode>").append(info.getModify_user()).append("</curcode>");
+                            _xmlstr.append("<curname>").append(UserManager.getUserRealName(info.getModify_user()+"")).append("</curname>");
+                        }
                         _xmlstr.append("<curtime>").append(info.getOpt_dtime()).append("</curtime>");
                         _xmlstr.append("<sysnumber>").append("mh").append("</sysnumber>");
                         _xmlstr.append("</list>");

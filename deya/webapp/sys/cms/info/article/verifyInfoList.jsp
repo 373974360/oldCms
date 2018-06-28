@@ -85,9 +85,9 @@
             colsList.add(setTitleClos("title", "标题", "", "", "", ""));//英文名，显示名，宽，高，样式名，点击事件　
             colsList.add(setTitleClos("cat_cname", "所属栏目", "100px", "", "", ""));
             colsList.add(setTitleClos("actions", "管理操作", "120px", "", "", ""));
-            colsList.add(setTitleClos("weight", "权重", "30px", "", "", ""));
             colsList.add(setTitleClos("input_user", "发起人", "60px", "", "", ""));
             colsList.add(setTitleClos("input_dtime", "发起时间", "100px", "", "", ""));
+            colsList.add(setTitleClos("step_name", "当前审核环节", "100px", "", "", ""));
             colsList.add(setTitleClos("modify_user", "审核人", "100px", "", "", ""));
             colsList.add(setTitleClos("opt_dtime", "送审时间", "100px", "", "", ""));
 
@@ -188,6 +188,20 @@
                 }
             });
 
+
+            table.getCol("step_name").each(function (i) {
+                if (i > 0) {
+                    var wf_id = jsonrpc.CategoryRPC.getWFIDByCatID(beanList.get(i - 1).cat_id, beanList.get(i - 1).site_id);
+                    var workFlowBean = jsonrpc.WorkFlowRPC.getWorkFlowBean(wf_id);
+                    var workStepList = workFlowBean.workFlowStep_list;
+                    workStepList = List.toJSList(workStepList);
+                    for (var j = 0; j < workStepList.size(); j++) {
+                        if (beanList.get(i - 1).step_id == workStepList.get(j).step_id - 1) {
+                            $(this).html(workStepList.get(j).step_name);
+                        }
+                    }
+                }
+            });
             table.getCol("actions").each(function (i) {
                 if (i > 0) {
                     $(this).css({"text-align": "center"});
@@ -236,14 +250,14 @@
         /**************************** 信息审核通过开始 ************************************/
         //单条信息
         function doPass(cid, site_id, app, num) {
-            parent.OpenModalWindow("选择审核步骤", "/sys/cms/info/article/chooseAudit.jsp?cat_id=" + cid + "&site_id=" + site_id + "&app_id=" + app + "&num=" + num, 520, 280);
+            parent.OpenModalWindow("选择下一环节", "/sys/cms/info/article/chooseAudit.jsp?cat_id=" + cid + "&site_id=" + site_id + "&app_id=" + app + "&num=" + num, 520, 280);
         }
         //批量信息
         function onPass() {
             var info_list = table.getSelecteBeans();
             info_list = List.toJSList(info_list);
             cid = info_list.get(0).cat_id;
-            parent.OpenModalWindow("选择审核步骤", "/sys/cms/info/article/chooseAudit.jsp?cat_id=" + cid + "&site_id=" + site_id + "&app_id=" + app, 520, 280);
+            parent.OpenModalWindow("选择下一环节", "/sys/cms/info/article/chooseAudit.jsp?cat_id=" + cid + "&site_id=" + site_id + "&app_id=" + app, 520, 280);
         }
         /**************************** 信息审核通过结束 ************************************/
 
