@@ -25,18 +25,18 @@ import com.deya.wcm.services.org.user.UserLogin;
 @SuppressWarnings("serial")
 public class TemplateResourcesUpload extends HttpServlet{
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
-		throws ServletException, IOException {
+			throws ServletException, IOException {
 		//System.out.println(request.getSession().getId());
-		response.getWriter().println("OK"+UserLogin.checkLoginBySession(request));		
+		response.getWriter().println("OK"+UserLogin.checkLoginBySession(request));
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {	
-		
+			throws ServletException, IOException {
+
 		String sid = request.getParameter("sid");
 		if(sid == null || "".equals(sid) || !UploadManager.checkUploadSecretKey(sid))
-		{	
+		{
 			System.out.println("Upload validation errors "+sid);
 			return;
 		}
@@ -51,7 +51,7 @@ public class TemplateResourcesUpload extends HttpServlet{
 		} catch (FileUploadException ex) {
 			return;
 		}
-		
+
 		String site_id = request.getParameter("site_id");
 		String browser_path = "";
 		String savePath = "";
@@ -59,14 +59,14 @@ public class TemplateResourcesUpload extends HttpServlet{
 			savePath = JconfigUtilContainer.bashConfig().getProperty("path", "", "root_path")+"/cms.files";//这个是共享资源的东东，放在cws.files目录下
 		else
 			savePath = SiteManager.getSiteBeanBySiteID(site_id).getSite_path();
-			
+
 		Iterator<FileItem> it = fileList.iterator();
 		String name = "";
 		String extName = "";
 		while (it.hasNext()) {
 			FileItem item = it.next();
 			if (!item.isFormField()) {
-				name = item.getName();						
+				name = item.getName();
 				if (name == null || name.trim().equals("")) {
 					continue;
 				}
@@ -74,10 +74,12 @@ public class TemplateResourcesUpload extends HttpServlet{
 				if (name.lastIndexOf(".") >= 0) {
 					extName = name.substring(name.lastIndexOf("."))
 							.toLowerCase();
-					if(UploadFileIfy.NOTUPLOAT_FILE_EXT.contains(","+extName.substring(1)+","))
+					if(!UploadFileIfy.UPLOAT_FILE_EXT.contains(","+extName.substring(1)+",")){
+						System.out.println("非法文件上传，后缀名："+extName+"；不允许上传！");
 						return;
-				}				
-				try {					
+					}
+				}
+				try {
 					if (extName.equals(".gif") || extName.equals(".jpg")
 							|| extName.equals(".jpeg")
 							|| extName.equals(".png") || extName.equals(".swf")) {
@@ -99,9 +101,9 @@ public class TemplateResourcesUpload extends HttpServlet{
 					}
 					//上传的zip文件
 					if (extName.equals(".zip")) {
-						savePath = SiteManager.getSiteBeanBySiteID(site_id).getSite_path();						
+						savePath = SiteManager.getSiteBeanBySiteID(site_id).getSite_path();
 					}
-					
+
 					File f = new File(savePath);
 					if(!f.exists())
 					{
@@ -110,7 +112,7 @@ public class TemplateResourcesUpload extends HttpServlet{
 					//System.out.println(savePath);
 					File saveFile = new File(savePath +File.separator+ name);
 					item.write(saveFile);
-					
+
 					//对zip文件进行解压
 					if (extName.equals(".zip")) {
 						if(ZipManager.decompress(savePath +File.separator+ name,savePath))

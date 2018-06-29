@@ -22,17 +22,17 @@ import com.deya.util.jconfig.JconfigUtilContainer;
 @SuppressWarnings("serial")
 public class DesignFileUpload extends HttpServlet{
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
-		throws ServletException, IOException {
+			throws ServletException, IOException {
 		//System.out.println(request.getSession().getId());
-		response.getWriter().println("OK");		
+		response.getWriter().println("OK");
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {	
-		String sid = request.getParameter("sid");		
+			throws ServletException, IOException {
+		String sid = request.getParameter("sid");
 		if(sid == null || "".equals(sid) || !UploadManager.checkUploadSecretKey(sid))
-		{	
+		{
 			System.out.println("Upload validation errors");
 			return;
 		}
@@ -47,16 +47,16 @@ public class DesignFileUpload extends HttpServlet{
 		} catch (FileUploadException ex) {
 			return;
 		}
-		
+
 		String browser_path = "";
 		String savePath = "";
 		if("thumb".equals(up_type))
 		{
 			browser_path = "/cms.files/design/thumb/";
 			savePath = FormatUtil.formatPath(JconfigUtilContainer.bashConfig().getProperty("path", "", "cms_files") + "/design/thumb/");//这个是共享资源的东东，放在cws.files目录下
-			
+
 		}else
-		{			
+		{
 			savePath = FormatUtil.formatPath(JconfigUtilContainer.bashConfig().getProperty("path", "", "cms_files") + "/design/theme/"+css_ename+"/");//这个是共享资源的东东，放在cws.files目录下
 		}
 		//System.out.println("DesignFileUpload--------------"+savePath);
@@ -66,7 +66,7 @@ public class DesignFileUpload extends HttpServlet{
 		while (it.hasNext()) {
 			FileItem item = it.next();
 			if (!item.isFormField()) {
-				name = item.getName();						
+				name = item.getName();
 				if (name == null || name.trim().equals("")) {
 					continue;
 				}
@@ -74,15 +74,17 @@ public class DesignFileUpload extends HttpServlet{
 				if (name.lastIndexOf(".") >= 0) {
 					extName = name.substring(name.lastIndexOf("."))
 							.toLowerCase();
-					if(UploadFileIfy.NOTUPLOAT_FILE_EXT.contains(","+extName.substring(1)+","))
+					if(!UploadFileIfy.UPLOAT_FILE_EXT.contains(","+extName.substring(1)+",")){
+						System.out.println("非法文件上传，后缀名："+extName+"；不允许上传！");
 						return;
-				}				
-				try {					
+					}
+				}
+				try {
 					if("thumb".equals(up_type))
 					{
 						name = DateUtil.getCurrentDateTime("yyyyMMddhhmmsss")+extName;
 					}
-					
+
 					File f = new File(savePath);
 					if(!f.exists())
 					{
@@ -91,7 +93,7 @@ public class DesignFileUpload extends HttpServlet{
 					//System.out.println(savePath);
 					File saveFile = new File(savePath +"/"+ name);
 					item.write(saveFile);
-					
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

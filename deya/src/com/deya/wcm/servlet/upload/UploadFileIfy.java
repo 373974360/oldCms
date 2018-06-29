@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.baidu.ueditor.define.AppInfo;
-import com.deya.util.jspFilterHandl;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -46,7 +45,7 @@ public class UploadFileIfy extends HttpServlet {
     public static String hd_url = "";
     public static String thum_url = "";
     public static String pic_name = "";
-    public static String NOTUPLOAT_FILE_EXT = ",php,php3,php5,phtml,asp,aspx,ascx,jsp,cfm,cfc,pl,bat,exe,dll,reg,cgi,com,vbs,js,sh,";
+    public static String UPLOAT_FILE_EXT = ",jpg,png,jpeg,gif,mp4,wmv,flv,zip,tar.gz,rar,txt,swf,tar,doc,docx,xls,xlsx,pdf,ppt,pptx,";
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String delete_file = request.getParameter("delete_file");
@@ -102,17 +101,13 @@ public class UploadFileIfy extends HttpServlet {
             FileItem item = (FileItem) it.next();
             if (!item.isFormField()) {
                 name = item.getName();
-                if(jspFilterHandl.isTureKey(name)){
-                    System.out.println("非法文件");
-                    String outStr = "{\"error\":\"非法文件\"}";
-                    response.getWriter().print(outStr);
-                }
                 if ((name != null) && (!name.trim().equals(""))) {
                     if (name.lastIndexOf(".") >= 0) {
                         extName = name.substring(name.lastIndexOf(".")).toLowerCase();
-                        if (NOTUPLOAT_FILE_EXT.indexOf("," + extName.substring(1) + ",")>-1)
-                            System.out.println("+==========上传出错========+");
+                        if (!UPLOAT_FILE_EXT.contains("," + extName.substring(1) + ",")){
+                            System.out.println("非法文件上传，后缀名："+extName+"；不允许上传！");
                             return;
+                        }
                     }
                     File file = null;
                     do {
@@ -310,7 +305,7 @@ public class UploadFileIfy extends HttpServlet {
             if ((name != null) && (!name.trim().equals(""))) {
                 if (name.lastIndexOf(".") >= 0) {
                     extName = name.substring(name.lastIndexOf(".")).toLowerCase();
-                    if (NOTUPLOAT_FILE_EXT.contains("," + extName.substring(1) + ","))
+                    if (!UPLOAT_FILE_EXT.contains("," + extName.substring(1) + ","))
                         return null;
                 }
                 File file = null;
