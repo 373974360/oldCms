@@ -35,7 +35,7 @@ import com.deya.util.jconfig.JconfigUtilContainer;
  * <p>
  * Company: Cicro
  * </p>
- * 
+ *
  * @author yuduochao
  * @version 1.0 *
  */
@@ -49,73 +49,75 @@ public class PeculiarUploadFile extends HttpServlet {
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {			
-	try{
-        String site_id = request.getParameter("site_id");
-        String sid = FormatUtil.formatNullString(request.getParameter("sid"));
-        String domain = SiteDomainManager.getDefaultSiteDomainBySiteID(site_id);
+			throws ServletException, IOException {
+		try{
+			String site_id = request.getParameter("site_id");
+			String sid = FormatUtil.formatNullString(request.getParameter("sid"));
+			String domain = SiteDomainManager.getDefaultSiteDomainBySiteID(site_id);
 
-        if ((sid == null) || ("".equals(sid)) || (!UploadManager.checkUploadSecretKey(sid))) {
-            System.out.println("Upload validation errors");
-            return;
-        }
-		String savePath = JconfigUtilContainer.bashConfig().getProperty("path", "", "hostRoot_path");
-		DiskFileItemFactory fac = new DiskFileItemFactory();
-		ServletFileUpload upload = new ServletFileUpload(fac);
-		upload.setHeaderEncoding("utf-8");
-		List fileList = null;
-		try {
-			fileList = upload.parseRequest(request);
-		} catch (FileUploadException ex) {
-			return;
-		}
-		savePath = FormatUtil.formatPath(savePath+"/"+domain+"/ROOT/upload/"+DateUtil.getCurrentDateTime("yyyyMM"));
-		File ps = new File(savePath);
-		if(!ps.exists())
-			ps.mkdirs();
-		
-		Iterator<FileItem> it = fileList.iterator();
-        String fileName = "";
-		String name = "";
-		String extName = "";
-		while (it.hasNext()) {
-			FileItem item = it.next();
-			if (!item.isFormField()) {
-				name = item.getName();
-				if (name == null || name.trim().equals("")) {
-					continue;
-				}
-				// 扩展名格式：
-				if (name.lastIndexOf(".") >= 0) {
-					extName = name.substring(name.lastIndexOf("."))
-							.toLowerCase();
-					if(UploadFileIfy.NOTUPLOAT_FILE_EXT.contains(","+extName.substring(1)+","))
-						return;
-				}
-				File file = null;
-				do {
-					// 生成文件名：
-					name = DateUtil.getCurrentDateTime("yyyyMMddhhmmsss");
-                    fileName = name + extName;
-					name = savePath +"/"+ name + extName;
-					file = new File(name);
-				} while (file.exists());
-				try {
-                    if (extName.equals(".gif") || extName.equals(".jpg")
-                            || extName.equals(".jpeg")
-                            || extName.equals(".png")) {
-                        File saveFile = new File(name);
-                        item.write(saveFile);
-                    }
-				} catch (Exception e) {
-					e.printStackTrace();
+			if ((sid == null) || ("".equals(sid)) || (!UploadManager.checkUploadSecretKey(sid))) {
+				System.out.println("Upload validation errors");
+				return;
+			}
+			String savePath = JconfigUtilContainer.bashConfig().getProperty("path", "", "hostRoot_path");
+			DiskFileItemFactory fac = new DiskFileItemFactory();
+			ServletFileUpload upload = new ServletFileUpload(fac);
+			upload.setHeaderEncoding("utf-8");
+			List fileList = null;
+			try {
+				fileList = upload.parseRequest(request);
+			} catch (FileUploadException ex) {
+				return;
+			}
+			savePath = FormatUtil.formatPath(savePath+"/"+domain+"/ROOT/upload/"+DateUtil.getCurrentDateTime("yyyyMM"));
+			File ps = new File(savePath);
+			if(!ps.exists())
+				ps.mkdirs();
+
+			Iterator<FileItem> it = fileList.iterator();
+			String fileName = "";
+			String name = "";
+			String extName = "";
+			while (it.hasNext()) {
+				FileItem item = it.next();
+				if (!item.isFormField()) {
+					name = item.getName();
+					if (name == null || name.trim().equals("")) {
+						continue;
+					}
+					// 扩展名格式：
+					if (name.lastIndexOf(".") >= 0) {
+						extName = name.substring(name.lastIndexOf("."))
+								.toLowerCase();
+						if(!UploadFileIfy.UPLOAT_FILE_EXT.contains(","+extName.substring(1)+",")){
+							System.out.println("非法文件上传，后缀名："+extName+"；不允许上传！");
+							return;
+						}
+					}
+					File file = null;
+					do {
+						// 生成文件名：
+						name = DateUtil.getCurrentDateTime("yyyyMMddhhmmsss");
+						fileName = name + extName;
+						name = savePath +"/"+ name + extName;
+						file = new File(name);
+					} while (file.exists());
+					try {
+						if (extName.equals(".gif") || extName.equals(".jpg")
+								|| extName.equals(".jpeg")
+								|| extName.equals(".png")) {
+							File saveFile = new File(name);
+							item.write(saveFile);
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
 			}
+			response.getWriter().print("/upload/"+DateUtil.getCurrentDateTime("yyyyMM") + "/" + fileName);
+		}	catch (Exception e) {
+			// TODO: handle exception
 		}
-		response.getWriter().print("/upload/"+DateUtil.getCurrentDateTime("yyyyMM") + "/" + fileName);
-	}	catch (Exception e) {
-		// TODO: handle exception
-	}
-		
+
 	}
 }
