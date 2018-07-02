@@ -86,7 +86,20 @@ public class SurveyService implements ISyncCatch{
 		m.put("con", con);
 		return SurveyDAO.getSurveyRecommendListCount(m);
 	}
-	
+
+
+	/**
+	 * 得到推荐列表总数(前台使用)
+	 * @param
+	 * @return List
+	 * */
+	public static boolean updateFilePath(String sid,String filePath)
+	{
+		Map<String,String> m = new HashMap<String,String>();
+		m.put("sid", sid);
+		m.put("filePath", filePath);
+		return SurveyDAO.updateFilePath(m);
+	}
 	/**
      * 得到问卷调查列表总数(前台调用)
      * @param String con　组织好的查询，翻页条数等参数

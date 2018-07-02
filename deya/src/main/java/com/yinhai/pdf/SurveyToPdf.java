@@ -121,16 +121,26 @@ public class SurveyToPdf {
                         if(StringUtils.isNotEmpty(surveyBean.getFile_path())){
                             attrFiles += "|"+surveyBean.getFile_path();
                         }
-                        guiDangVo.setFiles(attrFiles);
-                        //上传文章生成的pdf到sftp服务器
+
                         SFTPUtils sftpUtils = new SFTPUtils();
+
+                        //上传线下分析报告
+                        if(StringUtils.isNotEmpty(surveyBean.getFile_path_fxbg())){
+                            String filepath = surveyBean.getFile_path_fxbg();
+                            String fileext = filepath.substring(filepath.lastIndexOf("."),filepath.length());
+                            String remoteName = surveyBean.getS_id() + "_xxfxbg"+fileext;
+                            sftpUtils.uploadFile2(remoteName,filepath);
+                            attrFiles+="|"+remoteName;
+                        }
+
+                        //上传文章生成的pdf到sftp服务器
                         sftpUtils.uploadFile(pdfName,pdfName);
 
                         //上传审批流程
                         if(StringUtils.isNotEmpty(stepPdfName)){
                             sftpUtils.uploadFile(stepPdfName,stepPdfName);
                         }
-
+                        guiDangVo.setFiles(attrFiles);
                         guiDangVo.setFilepath(remotePath);
                         int i = GuiDangServiceClient.doService(guiDangVo);
                         if (i == 0) {

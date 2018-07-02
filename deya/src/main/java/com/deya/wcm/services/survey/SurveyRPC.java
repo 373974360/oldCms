@@ -107,7 +107,16 @@ public class SurveyRPC {
 		}else
 			return false;
 	}
-	
+
+	/**
+	 * 修改问卷调查
+	 * @param SurveyBean sb　问卷对象
+	 * @return boolean　true or false
+	 * */
+	public static boolean updateFilePath(String sid,String filePath)
+	{
+		return SurveyService.updateFilePath(sid,filePath);
+	}
 	/**
      * 问卷调查属性设置
      * @param SurveyBean sb　问卷对象

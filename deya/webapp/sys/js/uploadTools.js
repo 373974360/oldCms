@@ -507,6 +507,66 @@ function publicUploadDOC(input_name,is_auto,is_multi,selectAfterHandl,is_press,p
    });
 
 }
+
+
+//问卷附件上传
+function surveyUploadDOC(input_name,is_auto,is_multi,selectAfterHandl,is_press,press_osition,site_id,uploadAfterHandl)
+{
+    var imgDomain = MateInfoRPC.getImgDomain(site_id);
+    $("#"+input_name).uploadify({//初始化函数
+        'uploader' :'/sys/js/uploadFile/uploadify.swf',//flash文件位置，注意路径
+        'script' :''+imgDomain+'/servlet/UploadFileIfy',//后台处理的请求
+        'cancelImg' :'/sys/js/uploadFile/cancel.png',//取消按钮图片
+        'buttonImg': '/sys/js/uploadFile/upst.gif',
+        'folder' :'folder',//您想将文件保存到的路径
+        'queueID' :'fileQueue',//与下面的上传文件列表id对应
+        'queueSizeLimit' :50,//上传文件的数量
+        //'scriptData' :{'is_press':0,'press_osition':5,'site_id':site_id},//向后台传的数据
+        'fileDesc' :'txt,doc,docx,xlsx,xls',//上传文件类型说明
+        'fileExt' :'*.txt;*.doc;*.docx;*.xlsx;*.xls', //控制可上传文件的扩展名，启用本项时需同时声明fileDesc
+        'method':'get',//如果向后台传输数据，必须是get
+        'sizeLimit':31457280,//文件上传的大小限制，单位是字节
+        'auto' :is_auto,//是否自动上传
+        'multi' :is_multi,
+        'simUploadLimit' :1,//同时上传文件的数量
+        'buttonText' :'BROWSE',//浏览按钮图片
+        'onSelect':function(event,queueID,fileObj){//选择完后触发的事件
+            if(fileObj.size > 31457280){
+                alert("附件过大，不允许上传！");
+                return;
+            }
+            else
+            {
+                if(is_auto)
+                {
+                    $("#"+input_name).uploadifySettings('scriptData',{'is_press':is_press,'press_osition':press_osition,'site_id':site_id,'sid':MateInfoRPC.getUploadSecretKey()});
+                }else
+                {
+                    if(selectAfterHandl != "" && selectAfterHandl != null)
+                        eval(selectAfterHandl+"()");
+                }
+            }
+        },
+        'onError':function(event,queueID,fileObj,errorObj){
+            alert("文件:" +fileObj.name + "上传失败！");
+        },
+        'onComplete': function(event,queueID,fileObj,response,data){//当上传完成后的回调函数，ajax方式哦~~
+            var att_path = "";
+            var att_ename = "";
+            var objPath =  jQuery.parseJSON(response);
+            att_path = objPath.att_path;
+            att_ename = objPath.att_ename;
+            pic_url = imgDomain + att_path + att_ename;
+            if(uploadAfterHandl != "" && uploadAfterHandl != null)
+            {
+                eval(""+uploadAfterHandl+"('"+pic_url+"')");
+            }
+        },
+        'onAllComplete': function(event,data){
+        }
+    });
+
+}
 var current_folder = "";//保存目录，如果不为空，保存在此目录下,且于模板管理处上传资源
 function initTemplateUpLoad()
 {

@@ -171,6 +171,11 @@
 	<update id="publishSurvey" parameterType="Map">	
 		update cp_survey set publish_status=#{publish_status},publish_time=#{current_time} where id in (${ids})
 	</update>
+
+
+	<update id="updateSurveyFilePath" parameterType="Map">
+		update cp_survey set file_path_fxbg=#{filePath} where s_id = #{sid}
+	</update>
 	
 	<!-- 删除问卷 -->
 	<update id="deleteSurvey" parameterType="Map">		

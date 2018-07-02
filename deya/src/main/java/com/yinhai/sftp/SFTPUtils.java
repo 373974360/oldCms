@@ -254,6 +254,41 @@ public class SFTPUtils {
     }
 
     /**
+     * 上传单个文件
+     *
+     * @param remotePath：远程保存目录
+     * @param remoteFileName：保存文件名
+     * @param localPath：本地上传目录(以路径符号结束)
+     * @param localFileName：上传的文件名
+     * @return
+     */
+    public boolean uploadFile2(String remoteFileName, String localFileName) {
+        FileInputStream in = null;
+        try {
+            this.connect();
+            createDir(remotePath);
+            File file = new File(localFileName);
+            in = new FileInputStream(file);
+            sftp.put(in, remoteFileName);
+            return true;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (SftpException e) {
+            e.printStackTrace();
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            this.disconnect();
+        }
+        return false;
+    }
+
+    /**
      * 批量上传文件
      *
      * @param remotePath：远程保存目录

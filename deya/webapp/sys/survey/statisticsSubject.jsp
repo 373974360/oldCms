@@ -73,15 +73,29 @@
         var answer_count = 0;//答卷总数
         var is_answer_editor = false;
         $(document).ready(function () {
-
+            surveyUploadDOC("uploadify",true,false,"",0,5,"CMScqgjj","saveSurveyFilePathUrl");
             var surveyBean = SurveyRPC.getSurveyBean(s_id);
             if(surveyBean.fbqd!=null&&surveyBean.fbqd!=''&&surveyBean.fbqd.indexOf("线下发布")!=-1){
                 is_answer_editor = true;
+                $("#file_path_fxbg").val(surveyBean.file_path_fxbg);
             }
             initButtomStyle();
             reload();
         });
 
+        function saveSurveyFilePathUrl(url)
+        {
+            $("#file_path_fxbg").val(url);
+        }
+        function saveSurveyPathUrl()
+        {
+            if(SurveyRPC.updateFilePath(s_id,$("#file_path_fxbg").val())){
+                parent.msgAlert("保存成功");
+            }else{
+                parent.msgAlert("保存失败");
+            }
+
+        }
 
         function reload() {
             setSubjectList();
@@ -438,8 +452,16 @@
                 <input id="btn2" name="btn2" type="button" onclick="goOtherPage()" value="所有答卷"/>
                 <span class="blank3"></span>
             </td>
+            <td align="right" valign="middle" id="dept_search" class="search_td fromTabs">
+
+            </td>
+        </tr>
+        <tr>
             <td class="fromTabs">
                 问卷分析报告：
+                <input id="file_path_fxbg" name="file_path_fxbg" type="text" style="width:250px;" value="" />
+                <input type="file" name="uploadify" id="uploadify"/>
+                <input type="button" value="保存" onclick="saveSurveyPathUrl()"/>
                 <span class="blank3"></span>
             </td>
             <td align="right" valign="middle" id="dept_search" class="search_td fromTabs">

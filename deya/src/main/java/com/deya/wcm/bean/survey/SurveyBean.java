@@ -62,6 +62,7 @@ public class SurveyBean implements IBean,java.io.Serializable{
 	private String depname="";//发起部门
 	private String create_date="";//发起时间
 	private String curinfo="";//审核流程
+	private String file_path_fxbg="";//线下分析报告
 
 	private int back_status = 0;
 
@@ -399,5 +400,13 @@ public class SurveyBean implements IBean,java.io.Serializable{
 
 	public void setCurinfo(String curinfo) {
 		this.curinfo = curinfo;
+	}
+
+	public String getFile_path_fxbg() {
+		return file_path_fxbg;
+	}
+
+	public void setFile_path_fxbg(String file_path_fxbg) {
+		this.file_path_fxbg = file_path_fxbg;
 	}
 }
