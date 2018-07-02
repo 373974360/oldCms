@@ -2,16 +2,16 @@ package com.deya.wcm.bean.appeal.sq;
 
 public class SQBean implements java.io.Serializable{
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 7089029015588100211L;
 	private int sq_id = 0;//
 	private String sq_code = "";//
 	private int model_id = 0;//业务ID 省（市、县、厅）长信箱	部门信箱
 	private String model_cname = "";
-	private int me_id = 0;//会员ID 
+	private Long me_id = 0L;//会员ID
 	private String sq_realname = "";//真名
-	private int sq_sex = 0;//0：女	1：男	
+	private int sq_sex = 0;//0：女	1：男
 	private String sq_vocation = "";//职业
 	private int sq_age = 0;//
 	private String sq_address = "";//
@@ -31,15 +31,15 @@ public class SQBean implements java.io.Serializable{
 	private String query_code = "";//
 	private int cat_id = 0;//投诉所属领域（内容分类）
 	private int area_id = 0;//投诉所属地区(问题属地)
-	private String area_name = "";	
+	private String area_name = "";
 	private int pur_id = 0;//投诉  建议 咨询
-	private String pur_name = "";	
+	private String pur_name = "";
 	private String accept_dtime = "";//受理时间
 	private String over_dtime  = "";//办结时间
 	private int sq_flag = 0;//信件标识  0：正常信件（默认值）	-1：无效信件	 1：重复信件	2：不予受理信件
 	private int initial_sq_id = 0;//最初的信件ID 如果信件重复,在此记录最初的信件ID
 	private int sq_status = 0;//流程处理状态 0：待处理	1：处理中	2：待审核	3：已办结
-	private String sq_status_name = "";	
+	private String sq_status_name = "";
 	private int step_id = 0;//流程状态码 1-99：审核过程中	100：终审通过
 	private int publish_status = 0;//发布(公开)标识（政府意愿） 0：未发布（不公开）	1：已发布（公开）
 	private int supervise_flag = 0;//督办标识 0：未督办 	1：已督办
@@ -51,12 +51,12 @@ public class SQBean implements java.io.Serializable{
 	private int prove_type = 1;//信件原始办理类型 1：自办	2：转办	3：交办	4：呈办
 	private int people_num = 1;//来信人数 1：1-4人	2：5-99人 	3：100-999人	4：1000人以上
 	private int do_dept = 0;//处理部门  如业务设置为不分拣，则提交部门=处理部门
-	private String do_dept_name = "";	
+	private String do_dept_name = "";
 	private String submit_name = "";//提交部门(领导人)名称
 	private int publish_user = 0;//发布人
 	private String publish_dtime = "";//发布时间
-	private int sat_score = 0;//满意度分值	
-	private int hits = 0;//总点击数	
+	private int sat_score = 0;//满意度分值
+	private int hits = 0;//总点击数
 	private int day_hits = 0;//日点击数
 	private int week_hits = 0;//周点击数
 	private int month_hits = 0;//月点击数
@@ -148,7 +148,7 @@ public class SQBean implements java.io.Serializable{
 	}
 	public void setModel_cname(String modelCname) {
 		model_cname = modelCname;
-	}	
+	}
 	public int getSq_id() {
 		return sq_id;
 	}
@@ -167,12 +167,15 @@ public class SQBean implements java.io.Serializable{
 	public void setModel_id(int modelId) {
 		model_id = modelId;
 	}
-	public int getMe_id() {
+
+	public Long getMe_id() {
 		return me_id;
 	}
-	public void setMe_id(int meId) {
-		me_id = meId;
+
+	public void setMe_id(Long me_id) {
+		this.me_id = me_id;
 	}
+
 	public String getSq_realname() {
 		return sq_realname;
 	}
@@ -425,5 +428,5 @@ public class SQBean implements java.io.Serializable{
 	public void setSat_score(int satScore) {
 		sat_score = satScore;
 	}
-	
+
 }

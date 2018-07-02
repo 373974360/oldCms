@@ -3,14 +3,13 @@
 <%@page import="com.deya.wcm.bean.appeal.model.*,com.deya.wcm.services.appeal.model.*"%>
 <%@page import="com.deya.wcm.bean.appeal.sq.*,com.deya.wcm.services.appeal.sq.*"%>
 <%@page import="com.deya.wcm.template.velocity.*,com.deya.wcm.template.velocity.impl.*,com.deya.util.FormatUtil"%>
-<%@ page import="com.deya.wcm.services.appeal.myddc.SqMyddcBean" %>
-<%@ page import="com.deya.wcm.services.appeal.myddc.SqMyddcManager" %>
 <%
-	String action_type = request.getParameter("action_type"); 
+	String action_type = request.getParameter("action_type");
 	if("insertSQ".equals(action_type))
-	{		
+	{
 		String codeSession = (String)request.getSession().getAttribute("valiCode");
 		String auth_code = request.getParameter("auth_code");
+		System.out.println(codeSession + "*********************************" + auth_code);
 		if(!auth_code.equals(codeSession))
 		{
 			out.println("<script>");
@@ -39,7 +38,7 @@
 		String area_id = FormatUtil.formatNullString(request.getParameter("area_id"));
 		String cat_id = FormatUtil.formatNullString(request.getParameter("cat_id"));
 		int mod_id = Integer.parseInt(model_id);
-		
+
 		if(sq_title.equals("")){
 			out.println("<script>");
 			out.println("top.alert('验证码不正确')");
@@ -90,9 +89,7 @@
 			sb.setIs_open(0);
 		}
 		if(me_id !=""){
-			sb.setMe_id(Integer.parseInt(me_id));
-		}else{
-			sb.setMe_id(0);
+			sb.setMe_id(Long.parseLong(me_id));
 		}
 		sb.setSq_ip(request.getRemoteAddr());
 		if(do_dept !="")
@@ -122,119 +119,48 @@
 					if(sc_list != null && sc_list.size() > 0)
 						SQManager.insertSQCursom(sc_list);//插入扩展字段
 				}
-                /*
-					try{
-						HttpClient httpclient = new HttpClient();
-						PostMethod post = new PostMethod("http://sx.ums86.com:8899/sms/Api/Send.do");//
-						post.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET,"gbk");
-						post.addParameter("SpCode", "218968");
-						post.addParameter("LoginName", "wn_xxh");
-						post.addParameter("Password", "wn1234");
-						post.addParameter("MessageContent", "您的信件已提交成功，信件编号："+ newSB.getSq_code() + "，查询码：" + newSB.getQuery_code() + "，请等待回复处理，感谢您对我们工作的支持！");
-						post.addParameter("UserNumber", sq_phone);
-						post.addParameter("SerialNumber", "");
-						post.addParameter("ScheduleTime", "");
-						post.addParameter("whitevalid", "1");
-						post.addParameter("f", "1");
-						httpclient.executeMethod(post);
-					}catch (Exception e) {
-						e.printStackTrace();
-					}
-					*/
+//				out.println("<script>");
+//				out.println("top.$('#appealForm').remove()");
+//				out.println("top.$('#result_div #result_sq_code').append('"+newSB.getSq_code()+"')");
+//				out.println("top.$('#result_div #result_query_code').append('"+newSB.getQuery_code()+"')");
+//				out.println("top.$('#result_div').show()");
+//				out.println("</script>");
 				out.println("<script>");
-				out.println("top.$('#appealForm').remove()");		
-				out.println("top.$('#result_div #result_sq_code').append('"+newSB.getSq_code()+"')");
-				out.println("top.$('#result_div #result_query_code').append('"+newSB.getQuery_code()+"')");		
-				out.println("top.$('#result_div').show()");
+				out.println("top.alert('提交成功')");
+				out.println("top.window.location.reload()");
 				out.println("</script>");
 			}
 		}
 	}
-	/*if("saveScore".equals(action_type))
-	{
-        String sq_code = FormatUtil.formatNullString(request.getParameter("sq_code"));
-        String query_code = FormatUtil.formatNullString(request.getParameter("query_code"));
-        String sq_id = FormatUtil.formatNullString(request.getParameter("sq_id"));
-        String sat_score_str = "";
-        String raty_score_str = "";
-        String totle = FormatUtil.formatNullString(request.getParameter("totle"));
-        if(totle != null && !"".equals(totle))
-        {
-            int size = Integer.parseInt(totle);
-            for(int i = 1; i <= size; i++)
-            {
-                String sat_score = FormatUtil.formatNullString(request.getParameter("sat_score" + i));
-                String raty_score = FormatUtil.formatNullString(request.getParameter("raty_score" + i));
-                sat_score_str = sat_score_str + sat_score + ",";
-                raty_score_str = raty_score_str + raty_score + ",";
-            }
-            sat_score_str = sat_score_str.substring(0, sat_score_str.length() - 1);
-            raty_score_str = raty_score_str.substring(0, raty_score_str.length() - 1);
-        }
-        else
-        {
-            out.println("<script>");
-            out.println("top.alert('投票失败')");
-            out.println("</script>");
-            return;
-        }
-
-        SQBean sb = SQManager.searchBrowserSQBean(sq_code,query_code);
-
-        if(sb == null || !sq_id.equals(sb.getSq_id()+""))
-        {
-            out.println("<script>");
-            out.println("top.alert('查询码及信件编码不正确')");
-            out.println("</script>");
-            return;
-        }
-
-        if(SQManager.saveScore(sq_id,sat_score_str,raty_score_str))
-        {
-            out.println("<script>");
-            out.println("top.alert('投票成功')");
-            out.println("top.$('BeginSatis_div').remove()");
-            out.println("</script>");
-            return;
-        }else
-        {
-            out.println("<script>");
-            out.println("top.alert('投票失败')");
-            out.println("</script>");
-            return;
-        }
-	}*/
-
 	if("saveScore".equals(action_type))
 	{
-		String codeSession = (String)request.getSession().getAttribute("valiCode");
-		String auth_code = request.getParameter("auth_code");
-		if(!auth_code.equals(codeSession))
+		String sq_code = FormatUtil.formatNullString(request.getParameter("sq_code"));
+		String query_code = FormatUtil.formatNullString(request.getParameter("query_code"));
+		String sq_id = FormatUtil.formatNullString(request.getParameter("sq_id"));
+		String sat_score_str = FormatUtil.formatNullString(request.getParameter("sat_score_str"));
+		String raty_score_str = FormatUtil.formatNullString(request.getParameter("raty_score_str"));
+
+		SQBean sb = SQManager.searchBrowserSQBean(sq_code,query_code);
+
+		if(sb == null || !sq_id.equals(sb.getSq_id()+""))
 		{
 			out.println("<script>");
-			out.println("top.alert('验证码不正确')");
-			out.println("top.changeCreateImage()");
+			out.println("top.alert('查询码及信件编码不正确')");
 			out.println("</script>");
 			return;
 		}
-		String sq_id = FormatUtil.formatNullString(request.getParameter("sq_id"));
-		String myd = FormatUtil.formatNullString(request.getParameter("myd"));
-		SqMyddcBean sqMyddcBean = new SqMyddcBean();
-		sqMyddcBean.setSq_id(Integer.parseInt(sq_id));
-		sqMyddcBean.setMyd(myd);
-		boolean insertSqMyddc = SqMyddcManager.insertSqMyddc(sqMyddcBean, null);
-		if(insertSqMyddc)
+
+		if(SQManager.saveScore(sq_id,sat_score_str,raty_score_str))
 		{
 			out.println("<script>");
 			out.println("top.alert('投票成功')");
-			out.println("top.changeCreateImage()");
+			out.println("top.$('BeginSatis_div').remove()");
 			out.println("</script>");
 			return;
 		}else
 		{
 			out.println("<script>");
 			out.println("top.alert('投票失败')");
-			out.println("top.changeCreateImage()");
 			out.println("</script>");
 			return;
 		}

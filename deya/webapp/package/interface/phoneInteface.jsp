@@ -62,6 +62,10 @@ if("sq_content".equals(action_type))
 {
 	result = getSQContent(request);
 }
+if("mysq_list".equals(action_type))
+{
+	result = getMySQInfoList(request);
+}
 if("ft_list".equals(action_type))
 {
 	result = getFTInfoList(request);
@@ -388,6 +392,32 @@ public String getFWInfoList(HttpServletRequest request)
 	return "["+json+"]";
 }
 
+public String getMySQInfoList(HttpServletRequest request)
+{
+	String json = "";
+	String me_id = FormatUtil.formatNullString(request.getParameter("me_id"));
+	String model_id = FormatUtil.formatNullString(request.getParameter("model_id"));
+	List<SQBean> info_list = SQManager.getBroSQListByMemberID(me_id);
+	if(info_list != null && info_list.size() > 0)
+	{
+		for(SQBean info : info_list)
+		{
+            if(model_id != null && !"".equals(model_id)){
+                if(Integer.parseInt(model_id) == info.getModel_id()){
+                    json += ",{\"sq_id\":\""+info.getSq_id()+"\",\"sq_title\":\""+replaceFont(info.getSq_title2())+"\",\"add_dtime\":\""+info.getSq_dtime()+"\",\"over_time\":\""+info.getOver_dtime()+"\"}";
+                }
+            }else{
+                json += ",{\"sq_id\":\""+info.getSq_id()+"\",\"sq_title\":\""+replaceFont(info.getSq_title2())+"\",\"add_dtime\":\""+info.getSq_dtime()+"\",\"do_dept_name\":\""+info.getDo_dept_name()+"\",\"over_time\":\""+info.getOver_dtime()+"\"}";
+            }
+
+		}
+		if(json.length() > 0){
+		    json = json.substring(1);
+		}
+	}
+	return "["+json+"]";
+}
+
 public String getSQInfoList(HttpServletRequest request)
 {
 	String json = "";
@@ -397,7 +427,7 @@ public String getSQInfoList(HttpServletRequest request)
 	String sq_title = FormatUtil.formatNullString(request.getParameter("sq_title"));
 	String page = FormatUtil.formatNullString(request.getParameter("page"));
 	String size = FormatUtil.formatNullString(request.getParameter("size"));
-	String params = "model_id=" + model_id + ";is_open=1;publish_status=1;sq_status=3;cat_id="+cat_id+";dept_id="+dept_id+";sq_title="+sq_title+";size="+size+";cur_page="+page+";orderby=over_dtime desc;";
+	String params = "model_id=" + model_id + ";cat_id="+cat_id+";dept_id="+dept_id+";sq_title="+sq_title+";size="+size+";cur_page="+page+";orderby=over_dtime desc;";
 	List<SQBean> info_list = AppealData.getAppealList(params);
 	if(info_list != null && info_list.size() > 0)
 	{
@@ -418,7 +448,7 @@ public String getSQContent(HttpServletRequest request)
 	if(id != null && !"".equals(id))
 	{
 		bean = SQManager.getSqBean(Integer.parseInt(id));
-		json += "{\"sq_id\":\""+bean.getSq_id()+"\",\"sq_name\":\""+bean.getSq_realname()+"\",\"sq_title\":\""+bean.getSq_title2()+"\",\"add_dtime\":\""+bean.getSq_dtime()+"\",\"dept_name\":\""+bean.getDo_dept_name()+"\",\"over_time\":\""+bean.getOver_dtime()+"\",\"sq_content\":\""+replaceStr(bean.getSq_content2())+"\",\"sq_reply\":\""+replaceStr(bean.getSq_reply())+"\"}";
+		json += "{\"sq_id\":\""+bean.getSq_id()+"\",\"sq_name\":\""+bean.getSq_realname()+"\",\"sq_title\":\""+bean.getSq_title2()+"\",\"sq_phone\":\""+bean.getSq_phone()+"\",\"add_dtime\":\""+bean.getSq_dtime()+"\",\"dept_name\":\""+bean.getDo_dept_name()+"\",\"over_time\":\""+bean.getOver_dtime()+"\",\"sq_content\":\""+replaceStr(bean.getSq_content2())+"\",\"sq_reply\":\""+replaceStr(bean.getSq_reply())+"\"}";
 	}
 	return "["+json+"]";
 }
