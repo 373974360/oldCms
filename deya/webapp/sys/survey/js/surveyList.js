@@ -439,8 +439,11 @@ function publishSurvey(publish_status)
 function batchPublishSurvey(publish_status)
 {
 	var message = "发布";
-	if(publish_status == -1)
-		message = "撤销";
+	if(publish_status == -1){
+        message = "撤销";
+	}else if(publish_status == 2){
+        message = "退回";
+	}
 
 	var selectIDS = table.getSelecteCheckboxValue("id");
 	if(selectIDS == "")
@@ -453,12 +456,12 @@ function batchPublishSurvey(publish_status)
 	
 	if(SurveyRPC.publishSurvey(selectIDS,publish_status,parent.LoginUserBean.user_id))
 	{
-        parent.msgAlert(WCMLang.Publish_success);
+        parent.msgAlert("问卷"+message+"成功！");
 		
 		showList();	
 	}
 	else
-        parent.msgWargin(WCMLang.Publish_success);
+        parent.msgWargin("问卷"+message+"失败！");
 }
 /**********************发布操作　结束*************************************/
 

@@ -438,6 +438,10 @@
                 <input id="btn2" name="btn2" type="button" onclick="goOtherPage()" value="所有答卷"/>
                 <span class="blank3"></span>
             </td>
+            <td class="fromTabs">
+                问卷分析报告：
+                <span class="blank3"></span>
+            </td>
             <td align="right" valign="middle" id="dept_search" class="search_td fromTabs">
 
             </td>

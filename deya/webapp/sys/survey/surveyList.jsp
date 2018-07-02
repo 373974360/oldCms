@@ -38,6 +38,7 @@
 				<!--<input id="btn1" name="btn1" type="button" onclick="fnAddSurvey('')" value="添加" />-->
 				<input id="btn1" name="btn1" type="button" onclick="publicSelectSinglCheckbox(table,'id','showSurveyAttr(\'bath\')')" value="属性设置" />
 				<input id="btn1" name="btn1" type="button" onclick="updateRecord(table,'id','fnUpdateSurvey()');" value="修改" />
+				<input id="btn3" name="btn3" type="button" onclick="publicSelectCheckbox(table,'id','batchPublishSurvey(-1)')" value="撤销" />
 				<input id="btn3" name="btn3" type="button" onclick="deleteRecord(table,'id','batchDelSurveyHandl()')" value="删除" />
 				<!-- <input id="btn1" name="btn1" type="button" onclick="fnSearch()" value="查询" /> -->
 				<span class="blank3"></span>
