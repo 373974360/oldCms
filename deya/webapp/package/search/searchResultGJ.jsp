@@ -12,15 +12,14 @@
 		return;
 	}
 	String title = com.deya.util.Encode.iso_8859_1ToUtf8(request.getParameter("q"));
-	String site_id = FormatUtil.formatNullString(request.getParameter("site_id"));
+	String site_id = SiteDomainManager.getSiteIDByUrl(request.getRequestURL().toString());
 	if(title !=""){
 		SearchCustomKeyService.addKeys(title,site_id);
 	}
-	request.setAttribute();
 	com.deya.wcm.bean.search.SearchResult result = SearchManager.searchGJ(request);
 	VelocityAppealContextImp vc = new VelocityAppealContextImp(request);
 	vc.vcontextPut("result",result);
 	//vc.setModelID("",t_id);
-	vc.setTemplate_id(t_id); 
-	out.println(vc.parseTemplate()); 
+	vc.setTemplate_id(t_id);
+	out.println(vc.parseTemplate());
 %>
