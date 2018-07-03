@@ -28,7 +28,7 @@
 		colsList.add(setTitleClos("start_time","起始时间","80px","","",""));
 		colsList.add(setTitleClos("end_time","结束时间","80px","","",""));
 		colsList.add(setTitleClos("publish_status","状态","60px","","",""));
-		//colsList.add(setTitleClos("add_time","创建时间","80px","","",""));		
+		colsList.add(setTitleClos("file_path_fxbg","线下报告","80px","","",""));
 		colsList.add(setTitleClos("back_status","归档状态","60px","","",""));
 		
 		table.setColsList(colsList);
@@ -106,6 +106,16 @@
 					$(this).html("设计中");
 			}
 		});
+        table.getCol("file_path_fxbg").each(function(i){
+            if(i>0)
+            {
+                if(beanList.get(i-1).file_path_fxbg != '') {
+                    $(this).html("<a target='_blank' href='"+beanList.get(i-1).file_path_fxbg+"'>下载</a>");
+                } else {
+                    $(this).html("暂无");
+				}
+            }
+        });
 
 		table.getCol("publish_status").each(function(i){//为某一列的每个单元格增加点击事件(常用于给按钮增加事件)
 			if(i>0)

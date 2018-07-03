@@ -353,7 +353,7 @@
 	<![CDATA[
 		select * from (
 	       select row_.*, rownum rownum_ from (       
-	            select cs.id,cs.s_id,cs.s_name,cs.start_time,cs.end_time,cs.publish_status,cs.add_time,cc.c_name,cs.show_result_status,cs.recommend_flag,cs.back_status,cs.ywlsh,cs.file_path,cs.wjbh,cs.fbqd
+	            select cs.id,cs.s_id,cs.s_name,cs.start_time,cs.end_time,cs.publish_status,cs.add_time,cc.c_name,cs.show_result_status,cs.recommend_flag,cs.back_status,cs.ywlsh,cs.file_path,cs.wjbh,cs.fbqd,cs.file_path_fxbg
 	            from cp_survey cs,cp_survey_category cc  
 	            where cs.is_delete = 0 and cs.category_id = cc.category_id 
 	     ]]>
@@ -365,7 +365,7 @@
 	]]></select>
 	<select id="getSurveyList_mysql" parameterType="Map" resultType="com.deya.wcm.bean.survey.SurveyBean">
 		<![CDATA[      
-			select cs.id,cs.s_id,cs.s_name,cs.start_time,cs.end_time,cs.publish_status,cs.add_time,cc.c_name,cs.show_result_status,cs.recommend_flag,cs.back_status,cs.ywlsh,cs.file_path,cs.wjbh,cs.fbqd
+			select cs.id,cs.s_id,cs.s_name,cs.start_time,cs.end_time,cs.publish_status,cs.add_time,cc.c_name,cs.show_result_status,cs.recommend_flag,cs.back_status,cs.ywlsh,cs.file_path,cs.wjbh,cs.fbqd,cs.file_path_fxbg
 			from cp_survey cs,cp_survey_category cc  
 			where cs.is_delete = 0 and cs.category_id = cc.category_id 
 		]]>
@@ -377,7 +377,7 @@
 	<select id="getSurveyList_mssql" parameterType="Map" resultType="com.deya.wcm.bean.survey.SurveyBean">
 		<![CDATA[      
 			select top ${page_size} 
-			cs.id,cs.s_id,cs.s_name,cs.start_time,cs.end_time,cs.publish_status,cs.add_time,cc.c_name,cs.show_result_status,cs.recommend_flag,cs.back_status,cs.ywlsh,cs.file_path,cs.wjbh,cs.fbqd
+			cs.id,cs.s_id,cs.s_name,cs.start_time,cs.end_time,cs.publish_status,cs.add_time,cc.c_name,cs.show_result_status,cs.recommend_flag,cs.back_status,cs.ywlsh,cs.file_path,cs.wjbh,cs.fbqd,cs.file_path_fxbg
 			  from cp_survey cs,cp_survey_category cc  
 			  where cs.is_delete = 0 
 				and cs.category_id = cc.category_id 

@@ -458,10 +458,10 @@
         </tr>
         <tr>
             <td class="fromTabs">
-                问卷分析报告：
-                <input id="file_path_fxbg" name="file_path_fxbg" type="text" style="width:250px;" value="" />
-                <input type="file" name="uploadify" id="uploadify"/>
-                <input type="button" value="保存" onclick="saveSurveyPathUrl()"/>
+                <div style="float:left;line-height:20px;">问卷分析报告：</div>
+                <div style="float:left;line-height:20px;margin-left:10px;"><input id="file_path_fxbg" name="file_path_fxbg" type="text" style="width:250px;" value="" /></div>
+                <div style="float:left;line-height:20px;margin-left:10px;"><input type="file" name="uploadify" id="uploadify"/></div>
+                <div style="float:left;line-height:20px;margin-left:10px;"><input type="button" style="height:23px;line-height:23px;" value="保存" onclick="saveSurveyPathUrl()"/></div>
                 <span class="blank3"></span>
             </td>
             <td align="right" valign="middle" id="dept_search" class="search_td fromTabs">

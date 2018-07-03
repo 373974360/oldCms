@@ -517,7 +517,7 @@ function surveyUploadDOC(input_name,is_auto,is_multi,selectAfterHandl,is_press,p
         'uploader' :'/sys/js/uploadFile/uploadify.swf',//flash文件位置，注意路径
         'script' :''+imgDomain+'/servlet/UploadFileIfy',//后台处理的请求
         'cancelImg' :'/sys/js/uploadFile/cancel.png',//取消按钮图片
-        'buttonImg': '/sys/js/uploadFile/upst.gif',
+        'buttonImg': '/sys/js/uploadFile/upst1.png',
         'folder' :'folder',//您想将文件保存到的路径
         'queueID' :'fileQueue',//与下面的上传文件列表id对应
         'queueSizeLimit' :50,//上传文件的数量
