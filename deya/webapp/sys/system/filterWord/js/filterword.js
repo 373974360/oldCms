@@ -8,12 +8,15 @@ var serarch_con = "";//查询条件
 var tp = new TurnPage();
 var beanList = null;
 var table = new Table();	
-table.table_name = "filterWord_table";;
+table.table_name = "filterWord_table";
+var current_page_num = 1;
 
-function show()
+function reloadRoleList()
 {
-	showList();	
-	showTurnPage();	
+	initTable()
+	tp.curr_page = current_page_num;
+    showTurnPage();
+    showList();
 }
 /* 刷新页面 */
 function locationFilterWord()
@@ -64,8 +67,7 @@ function showList(){
 	}
 
 	beanList = FilterWordRPC.getAllFilterWord(m);//第一个参数为站点ID，暂时默认为空	
-	beanList = List.toJSList(beanList);//把list转成JS的List对象	
-	tp.total = beanList.size();
+	beanList = List.toJSList(beanList);//把list转成JS的List对象
 
 	curr_bean = null;		
 	table.setBeanList(beanList,"td_list");//设置列表内容的样式
@@ -81,12 +83,14 @@ function showList(){
 	table.getCol("replacement").each(function(i){
 			$(this).css({"text-align":"left"});	
 	});
+    current_page_num = tp.curr_page;
 	Init_InfoTable(table.table_name);
 }
 
-function showTurnPage(){	
-				
-	tp.show("turn","simple");	
+function showTurnPage(){
+    var m = new Map();
+    tp.total = FilterWordRPC.getFilterWordCount(m);
+    tp.show("turn","");
 	tp.onPageChange = showList;
 }
 
@@ -147,7 +151,7 @@ function updateFilterWord()
 	{
 		top.msgAlert("过滤词信息"+WCMLang.Add_success);			
 		top.CloseModalWindow();
-		top.getCurrentFrameObj().show()
+		top.getCurrentFrameObj().reloadRoleList()
 	}
 	else
 	{
@@ -162,7 +166,7 @@ function deleteFilterWord()
 	if(FilterWordRPC.deleteFilterWord(selectIDS))
 	{
 		top.msgAlert("过滤词信息"+WCMLang.Delete_success);
-		top.getCurrentFrameObj().show()
+		top.getCurrentFrameObj().reloadRoleList()
 	}else
 	{
 		top.msgWargin("过滤词信息"+WCMLang.Delete_fail);
