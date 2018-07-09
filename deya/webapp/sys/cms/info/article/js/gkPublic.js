@@ -73,7 +73,7 @@ function setPublishSource(){
     {
         if(defaultBean.publish_source.indexOf('mh') < 0 ){
             $("input[name='publish_source']").each(function(){
-                if($(this).val() == "pc"){
+                if($(this).val() == "mh"){
                     $(this).removeAttr("checked");
                 }
             });
