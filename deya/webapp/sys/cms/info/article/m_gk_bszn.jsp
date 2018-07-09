@@ -109,6 +109,10 @@ if(cb.getMlsx()==1){
 %>
     <jsp:include page="../include/include_public_gk.jsp"/>
         <%
+}else{
+    %>
+    <jsp:include page="../include/include_public_gk.jsp"/>
+        <%
 }
 %>
 
@@ -326,6 +330,10 @@ if(cb.getMlsx()==1){
                 <jsp:include page="../include/include_public_high.jsp"/>
                 <%
             }else if(cb.getMlsx()==2){
+                %>
+                <jsp:include page="../include/include_public_high_gk.jsp"/>
+                <%
+            }else{
                 %>
                 <jsp:include page="../include/include_public_high_gk.jsp"/>
                 <%
