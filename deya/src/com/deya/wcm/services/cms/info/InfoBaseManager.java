@@ -17,6 +17,7 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.deya.wcm.bean.cms.workflow.WorkFlowBean;
 import com.deya.wcm.services.cms.category.*;
 import com.deya.wcm.services.model.services.BeanToMapUtil;
 import com.deya.wcm.services.org.role.RoleUserManager;
@@ -543,7 +544,14 @@ public class InfoBaseManager {
                 int wf_id = CategoryManager.getCategoryBean(info.getCat_id()).getWf_id();
                 int stepId = WorkFlowManager.getMaxStepIDByUserID(wf_id,user_id,info.getApp_id(),info.getSite_id());
                 String info_status = "2";
-
+                WorkFlowBean wfb = WorkFlowManager.getWorkFlowBean(wf_id);
+                if(wfb != null)
+                {//判断步骤ID是否为最后一步，如果是返回终审状态值
+                    if(stepId == wfb.getWf_steps())
+                    {
+                        stepId = 100;
+                    }
+                }
                 if(wf_id == 0 || stepId == 100)
                 {//步骤ID为100，直接审核通过，改为待发状态
                     info_status = "4";

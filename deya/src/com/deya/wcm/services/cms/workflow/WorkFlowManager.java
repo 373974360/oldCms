@@ -163,7 +163,7 @@ public class WorkFlowManager implements ISyncCatch{
 			{//判断步骤ID是否为最后一步，如果是返回终审状态值	
 				if(step_id == wfb.getWf_steps())
 				{
-					return last_verify;
+					return step_id;
 				}
 			}				
 		}
