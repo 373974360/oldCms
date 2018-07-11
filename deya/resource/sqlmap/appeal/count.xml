@@ -6,14 +6,14 @@
 	<!-- 通过 诉求目的 ， 时间，业务ID 得到诉求信件总数 -->
 	<select id="getCountByModelIdAndPur" parameterType="Map" resultType="java.lang.Integer">
 	<![CDATA[
-		select count(sq_id) from cp_sq where model_id in (${model_id}) and pur_id=${pur_id} and sq_dtime>#{s} and sq_dtime<#{e}
+		select count(sq_id) from cp_sq where model_id in (${model_id}) and pur_id=${pur_id} and sq_dtime>#{s} and sq_dtime<#{e} and sq_flag!=-1
 	]]>
 	</select> 
 	
 	<!-- 通过 诉求目的 ， 时间，业务ID，处理状态  得到诉求信件数 -->
 	<select id="getCountByModelIdAndPurStatus" parameterType="Map" resultType="java.lang.Integer">
 	<![CDATA[
-		select count(sq_id) from cp_sq where model_id in (${model_id}) and pur_id=${pur_id} and sq_status=${sq_status} and sq_dtime>#{s} and sq_dtime<#{e}
+		select count(sq_id) from cp_sq where model_id in (${model_id}) and pur_id=${pur_id} and sq_status=${sq_status} and sq_dtime>#{s} and sq_dtime<#{e} and sq_flag!=-1
 	]]>
 	</select>
 	 
@@ -30,7 +30,7 @@
 	<!-- 通过  诉求目的 ， 时间，业务ID ，警示状态    得到诉求信件数 -->
 	<select id="getCountByModelIdAndAlarm" parameterType="Map" resultType="java.lang.Integer">
 		<![CDATA[
-		select count(sq_id) from cp_sq where model_id in (${model_id}) and pur_id=${pur_id} and sq_dtime>#{s} and sq_dtime<#{e}
+		select count(sq_id) from cp_sq where model_id in (${model_id}) and pur_id=${pur_id} and sq_dtime>#{s} and sq_dtime<#{e} and sq_flag!=-1
 		]]>
 		<if test="alarm_flag != null"> 
                and alarm_flag=${alarm_flag}
