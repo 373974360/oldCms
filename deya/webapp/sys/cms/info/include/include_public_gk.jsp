@@ -172,20 +172,14 @@ if(model == null || !model.matches("[0-9]*")){
 			</td>
 			-->
             <th style="width:66px;">发布时间：</th>
-            <td>
+            <td width="178">
                 <input id="released_dtime" name="released_dtime" type="text"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:true,readOnly:true})" readonly="readonly" />
             </td>
-            <!--
-			<th style="width:85px;"></th>
-			<td width="110px">
-				<input id="generate_dtime" name="generate_dtime" type="hidden" class="width100" maxlength="80" value="" readonly="readonly"/>
-			</td>
-
-			<th style="width:85px;">生成日期：</th>
-			<td width="110px">
+			<th style="width:85px;">成文日期：</th>
+			<td>
 				<input id="generate_dtime" name="generate_dtime" type="text" class="width100" maxlength="80" value="" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:true,readOnly:true})" readonly="readonly"/>
 			</td>
-			-->
+        	<td></td>
 		</tr>
 	</tbody>
 </table>

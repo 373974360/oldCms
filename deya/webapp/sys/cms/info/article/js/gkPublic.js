@@ -36,7 +36,7 @@ function reloadPublicGKInfo()
 		setInfoStatusButton();
 		
 		$("#gk_year").val(getCurrentDate().substring(0,7));//生成年份
-		$("#generate_dtime").val(getCurrentDate());//生成年份
+		//$("#generate_dtime").val(getCurrentDate());//生成年份
 
         var deptBean = DeptRPC.getDeptBeanByID(LoginUserBean.dept_id);
 		$("#gk_duty_dept").val(deptBean.dept_name);

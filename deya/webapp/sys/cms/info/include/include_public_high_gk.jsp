@@ -131,7 +131,7 @@
 				</select>               
 			</td>
 		</tr>
-        <tr>
+        <!--<tr>
 			<th>体裁分类：</th>
 			<td id="theme_id_td">
 				<input type="hidden" id="theme_id" name="theme_id" value="0"><input type="text" id="theme_name" name="theme_name" value="" style="width:80px" readOnly="readOnly">
@@ -149,7 +149,7 @@
 				</select>
                
 			</td>
-		</tr>
+		</tr>-->
 		<tr>
 			<th><span class="f_red">*</span>公开标准化分类：</th>
 			<td id="gkbzh_id_td">
@@ -240,7 +240,7 @@
 		</tr>
 	</tbody>
 </table>
-<table id="" class="table_form" border="0" cellpadding="0" cellspacing="0">
+<table id="" class="table_form hidden" border="0" cellpadding="0" cellspacing="0">
 	<tbody>
     	 <tr>
 			<th valign="top">推荐：</th>

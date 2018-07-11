@@ -119,27 +119,12 @@ function savePicUrl(url)
 <span class="blank12"></span>
 <form action="#" name="form1">
 <div id="info_article_table">
-	<%
-		if(cb.getMlsx()==1){
-	%>
 	<jsp:include page="../include/include_public.jsp"/>
-	<%
-	}else if(cb.getMlsx()==2){
-	%>
-	<jsp:include page="../include/include_public_gk.jsp"/>
-	<%
-		}else{
-	%>
-	<jsp:include page="../include/include_public_gk.jsp"/>
-	<%
-		}
-	%>
-
 <!-- 内容主体不同部分　开始 -->
 <table id="" class="table_form" border="0" cellpadding="0" cellspacing="0">
 	<tbody>
 		<tr>
-			<th ><span class="f_red">*</span>链接：</th>
+			<th ><span class="f_red">*</span>转载链接：</th>
 			<td style="">
 				<input id="content_url" name="content_url" type="text" class="width350" maxlength="900" value="" onblur="checkInputValue('content_url',false,900,'链接','')"/>
 			</td>
@@ -155,22 +140,7 @@ function savePicUrl(url)
 	  </tbody>
 	</table>
 <!-- 内容主体不同部分　结束 -->
-	<%
-		if(cb.getMlsx()==1){
-	%>
 	<jsp:include page="../include/include_public_high.jsp"/>
-	<%
-	}else if(cb.getMlsx()==2){
-	%>
-	<jsp:include page="../include/include_public_high_gk.jsp"/>
-	<%
-		}else{
-	%>
-	<jsp:include page="../include/include_public_high_gk.jsp"/>
-	<%
-		}
-	%>
-
 </div>
 
 <!--隔线开始-->
