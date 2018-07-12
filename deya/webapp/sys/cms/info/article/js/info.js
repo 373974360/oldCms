@@ -254,7 +254,7 @@ function showList() {
             if (beanList.get(i - 1).content_url.indexOf("http") >= 0 || beanList.get(i - 1).content_url.indexOf("https") >= 0) {
                 $(this).html('<a target="blank" href="' + beanList.get(i - 1).content_url + '">' + title_flag + beanList.get(i - 1).title + '</a>' + title_end_str);
             } else {
-                $(this).html('<a target="blank" href="http://' + window.location.host + '/sys/cms/info/article/contentView.jsp?info_id=' + beanList.get(i - 1).info_id + '&site_id=' + beanList.get(i - 1).site_id + '">' + title_flag + beanList.get(i - 1).title + '</a>' + title_end_str);
+                $(this).html('<a target="blank" href="https://' + window.location.host + '/sys/cms/info/article/contentView.jsp?info_id=' + beanList.get(i - 1).info_id + '&site_id=' + beanList.get(i - 1).site_id + '">' + title_flag + beanList.get(i - 1).title + '</a>' + title_end_str);
             }
         }
     });
