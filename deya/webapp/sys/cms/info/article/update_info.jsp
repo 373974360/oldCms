@@ -1,3 +1,5 @@
+<%@ page import="com.deya.wcm.bean.cms.category.CategoryBean" %>
+<%@ page import="com.deya.wcm.services.cms.category.CategoryManager" %>
 <%@ page contentType="text/html; charset=utf-8"%>
 <%
 String cid = request.getParameter("cid");
@@ -18,6 +20,7 @@ String topnum = request.getParameter("topnum");
 if(topnum == null || topnum.trim().equals("") || topnum.trim().equals("null") ){
 	topnum = "0";
 }
+	CategoryBean cb = CategoryManager.getCategoryBeanCatID(Integer.parseInt(cid));
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -39,14 +42,14 @@ var mFlag = false;
 $(document).ready(function(){
 	initButtomStyle();
 	init_input();
-	reloadPublicInfo();
+    reloadPublicGKInfo();
 	publicUploadButtomLoad("uploadify",true,false,"",0,5,site_id,"savePicUrl");
 
 	if(infoid != "" && infoid != "null" && infoid != null){		
 		defaultBean = InfoBaseRPC.getInfoById(infoid,site_id);
 		if(defaultBean){
-			$("#info_article_table").autoFill(defaultBean);			
-			publicReloadUpdateInfos();			
+			$("#info_article_table").autoFill(defaultBean);
+            publicReloadUpdateGKInfos();
 		}
 		$("#addButton").click(updateInfoData);		
 		mFlag = true;
@@ -112,7 +115,21 @@ function getAddPagebyModel(model_id)
 <div id="info_article_table">
 <input id="model_id" type="hidden" class="width200" value="<%=model%>" />
 <input id="app_id" type="hidden" class="width200" value="<%=app_id%>" />
-<jsp:include page="../include/include_public.jsp"/>
+	<%
+		if(cb.getMlsx()==1){
+	%>
+	<jsp:include page="../include/include_public.jsp"/>
+	<%
+	}else if(cb.getMlsx()==2){
+	%>
+	<jsp:include page="../include/include_public_gk.jsp"/>
+	<%
+	}else{
+	%>
+	<jsp:include page="../include/include_public_gk.jsp"/>
+	<%
+		}
+	%>
 
 <!-- 内容主体不同部分　开始 -->
 <table id="" class="table_form" border="0" cellpadding="0" cellspacing="0">
@@ -128,8 +145,21 @@ function getAddPagebyModel(model_id)
 	  </tbody>
 	</table>
 <!-- 内容主体不同部分　结束 -->
-
-<jsp:include page="../include/include_public_high_gk.jsp"/>
+	<%
+		if(cb.getMlsx()==1){
+	%>
+	<jsp:include page="../include/include_public_high.jsp"/>
+	<%
+	}else if(cb.getMlsx()==2){
+	%>
+	<jsp:include page="../include/include_public_high_gk.jsp"/>
+	<%
+	}else{
+	%>
+	<jsp:include page="../include/include_public_high_gk.jsp"/>
+	<%
+		}
+	%>
 
 </div>
 
