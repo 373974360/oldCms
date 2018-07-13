@@ -95,7 +95,7 @@ public class InfoDesktop {
 							System.out.println("step_id=======>"+step_id);
 							if(step_id==100){
 								conn += "or (ci.cat_id = "+tempA[i]+" and ci.step_id < "+step_id+") ";
-							}else if(step_id>0){
+							}else{
 								conn += "or (ci.cat_id = "+tempA[i]+" and ci.step_id = "+(step_id-1)+") ";
 							}
 

@@ -26,7 +26,7 @@ function reloadPublicGKInfo()
 	showSelectDiv2("cat_tree","cat_tree_div1",300);
 	
 	iniSQbox();
-	getFirstChileCateID();
+	//getFirstChileCateID();
 	if(mFlag == false)
 	{//添加时要加载的方法
 		$("#cat_id").val(cid);

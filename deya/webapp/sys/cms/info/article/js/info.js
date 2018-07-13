@@ -342,13 +342,13 @@ function showList(){
 			switch(nm){
 			case 0:
 				str += "<li class='ico_submit'><a title='送审' href='javascript:doSubmitPage("+(i-1)+")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
-                str += "<li id='315' class='ico_edit'><a title='修改' href='javascript:openUpdatePage("+beanList.get(i-1).info_id+","+beanList.get(i-1).model_id+","+beanList.get(i-1).is_host+")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
+                str += "<li id='315' class='ico_edit'><a title='修改' href='javascript:openUpdatePage("+beanList.get(i-1).info_id+","+beanList.get(i-1).cat_id+","+beanList.get(i-1).model_id+","+beanList.get(i-1).is_host+")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
                 str += "<li id='332' class='ico_delete' ><a title='删除' href='javascript:doDelete("+(i-1)+")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
 
                 break;
 			case 1:
 				str += "<li class='ico_submit'><a title='送审'  href='javascript:doSubmitPage("+(i-1)+")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
-                str += "<li id='315' class='ico_edit'><a title='修改' href='javascript:openUpdatePage("+beanList.get(i-1).info_id+","+beanList.get(i-1).model_id+","+beanList.get(i-1).is_host+")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
+                str += "<li id='315' class='ico_edit'><a title='修改' href='javascript:openUpdatePage("+beanList.get(i-1).info_id+","+beanList.get(i-1).cat_id+","+beanList.get(i-1).model_id+","+beanList.get(i-1).is_host+")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
                 str += "<li id='332' class='ico_delete' ><a title='删除' href='javascript:doDelete("+(i-1)+")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
                 break;
 			case 2:
@@ -356,14 +356,14 @@ function showList(){
                 {
                     str += "<li id='303' class='ico_pass'><a title='通过' href='javascript:doPass("+(i-1)+")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li><li id='303' class='ico_nopass'><a  title='退稿' href='javascript:noPassDesc("+beanList.get(i-1).info_id+")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
                 }
-                str += "<li id='315' class='ico_edit'><a title='修改' href='javascript:openUpdatePage("+beanList.get(i-1).info_id+","+beanList.get(i-1).model_id+","+beanList.get(i-1).is_host+")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
+                str += "<li id='315' class='ico_edit'><a title='修改' href='javascript:openUpdatePage("+beanList.get(i-1).info_id+","+beanList.get(i-1).cat_id+","+beanList.get(i-1).model_id+","+beanList.get(i-1).is_host+")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
                 str += "<li id='332' class='ico_delete' ><a title='删除' href='javascript:doDelete("+(i-1)+")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
                 break;
 			case 3:
 				str += "<li id='302' class='ico_publish'><a  title='发布' href='javascript:doPublish("+(i-1)+")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
                 if(isChangeDelete)
                 {
-                    str += "<li id='315' class='ico_edit'><a title='修改' href='javascript:openUpdatePage("+beanList.get(i-1).info_id+","+beanList.get(i-1).model_id+","+beanList.get(i-1).is_host+")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
+                    str += "<li id='315' class='ico_edit'><a title='修改' href='javascript:openUpdatePage("+beanList.get(i-1).info_id+","+beanList.get(i-1).cat_id+","+beanList.get(i-1).model_id+","+beanList.get(i-1).is_host+")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
                     str += "<li id='332' class='ico_delete' ><a title='删除' href='javascript:doDelete("+(i-1)+")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";break;
                 }
                 break;
@@ -371,13 +371,13 @@ function showList(){
 				str += "<li id='302' class='ico_publish'><a title='发布' href='javascript:doPublish("+(i-1)+")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
                 if(isChangeDelete)
                 {
-                    str += "<li id='315' class='ico_edit'><a title='修改' href='javascript:openUpdatePage("+beanList.get(i-1).info_id+","+beanList.get(i-1).model_id+","+beanList.get(i-1).is_host+")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
+                    str += "<li id='315' class='ico_edit'><a title='修改' href='javascript:openUpdatePage("+beanList.get(i-1).info_id+","+beanList.get(i-1).cat_id+","+beanList.get(i-1).model_id+","+beanList.get(i-1).is_host+")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
                     str += "<li id='332' class='ico_delete' ><a title='删除' href='javascript:doDelete("+(i-1)+")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";break;
                 }
                 break;
 			case 8:
 				str += "<li class='ico_view'><a title='预览' href='javascript:doView("+(i-1)+")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
-				str += "<li id='315' class='ico_edit'><a title='修改' href='javascript:openUpdatePage("+beanList.get(i-1).info_id+","+beanList.get(i-1).model_id+","+beanList.get(i-1).is_host+")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
+				str += "<li id='315' class='ico_edit'><a title='修改' href='javascript:openUpdatePage("+beanList.get(i-1).info_id+","+beanList.get(i-1).cat_id+","+beanList.get(i-1).model_id+","+beanList.get(i-1).is_host+")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
 				str += "<li id='332' class='ico_delete' ><a title='删除' href='javascript:doDelete("+(i-1)+")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
                 if(isChangeDelete)
                 {
@@ -387,11 +387,11 @@ function showList(){
                 break;
 			case 9:
 				str += "<li id='308' class='ico_reduce'><a title='还原' href='javascript:doReduce("+(i-1)+")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
-				str += "<li id='315' class='ico_edit' ><a  title='修改' href='javascript:openUpdatePage("+beanList.get(i-1).info_id+","+beanList.get(i-1).model_id+","+beanList.get(i-1).is_host+")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
+				str += "<li id='315' class='ico_edit' ><a  title='修改' href='javascript:openUpdatePage("+beanList.get(i-1).info_id+","+beanList.get(i-1).cat_id+","+beanList.get(i-1).model_id+","+beanList.get(i-1).is_host+")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
 				str += "<li id='309' class='ico_Clear' ><a  title='彻底删除' href='javascript:doClearOneInfo("+(i-1)+")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";break;
 			default:
 				str += "<li id='308' class='ico_reduce'><a title='还原' href='javascript:doReduce("+(i-1)+")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
-				str += "<li id='315' class='ico_edit' ><a title='修改' href='javascript:openUpdatePage("+beanList.get(i-1).info_id+","+beanList.get(i-1).model_id+","+beanList.get(i-1).is_host+")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
+				str += "<li id='315' class='ico_edit' ><a title='修改' href='javascript:openUpdatePage("+beanList.get(i-1).info_id+","+beanList.get(i-1).cat_id+","+beanList.get(i-1).model_id+","+beanList.get(i-1).is_host+")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
 				str += "<li id='309' class='ico_Clear' ><a title='彻底删除' href='javascript:doClearOneInfo("+(i-1)+")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";break;
 			}
 			$(this).html(str+"</ul>");
@@ -671,20 +671,20 @@ function openAddInfoPage(model_id)
 }
 
 //打开修改窗口
-function openUpdatePage(Infoid,model_id,is_host)
+function openUpdatePage(Infoid,cat_id,model_id,is_host)
 {
 	if(is_host == 1)
 	{
 		//引用信息只修改信息主表内容
-		top.addTab(true,"/sys/cms/info/article/update_info.jsp?cid="+cid+"&info_id="+Infoid+"&site_id="+site_id+"&app_id="+app+"&model="+model_id+"&topnum="+top.curTabIndex,"维护信息");
+		top.addTab(true,"/sys/cms/info/article/update_info.jsp?cid="+cat_id+"&info_id="+Infoid+"&site_id="+site_id+"&app_id="+app+"&model="+model_id+"&topnum="+top.curTabIndex,"维护信息");
 	}
 	else
 	{
 		if(gk_article == true)
 		{
-			top.addTab(true,"/sys/cms/info/article/m_gk_gkzn.jsp?cid="+cid+"&info_id="+Infoid+"&site_id="+site_id+"&app_id="+app+"&model="+model_id+"&topnum="+top.curTabIndex,"维护信息");
+			top.addTab(true,"/sys/cms/info/article/m_gk_gkzn.jsp?cid="+cat_id+"&info_id="+Infoid+"&site_id="+site_id+"&app_id="+app+"&model="+model_id+"&topnum="+top.curTabIndex,"维护信息");
 		}else
-			top.addTab(true,"/sys/cms/info/article/"+getAddPagebyModel(model_id)+"?cid="+cid+"&info_id="+Infoid+"&site_id="+site_id+"&app_id="+app+"&model="+model_id+"&topnum="+top.curTabIndex,"维护信息");
+			top.addTab(true,"/sys/cms/info/article/"+getAddPagebyModel(model_id)+"?cid="+cat_id+"&info_id="+Infoid+"&site_id="+site_id+"&app_id="+app+"&model="+model_id+"&topnum="+top.curTabIndex,"维护信息");
 	}
 }
 

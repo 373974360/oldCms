@@ -175,7 +175,7 @@ function updateInfoData()
 	if(bean.info_status == "8" || bean.info_status == 8){
 		bean.step_id = 100;
 	}else{
-		bean.step_id = 0;
+		bean.step_id = 1;
 	}
 	bean.page_count = getContentPage(bean.info_content);
 	bean.word_count = getWordCount(bean.info_content);
