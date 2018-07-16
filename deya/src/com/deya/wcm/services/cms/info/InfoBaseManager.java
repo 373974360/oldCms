@@ -1039,8 +1039,8 @@ public class InfoBaseManager {
     }
 
 
-    public static boolean infoGKBZHGet(List<InfoBean> l,int cat_id){
-        return InfoDAO.infoGKBZHGet(l,cat_id);
+    public static boolean infoGKBZHGet(List<InfoBean> l,String gkhj_id,String gkhj_name,int cat_id){
+        return InfoDAO.infoGKBZHGet(l,gkhj_id,gkhj_name,cat_id);
     }
     public static boolean deleteGKBZHInfo(List<InfoBean> l){
         return InfoDAO.deleteGKBZHInfo(l);

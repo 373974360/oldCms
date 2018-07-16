@@ -75,9 +75,9 @@ public class InfoBaseRPC {
 	}
 
 
-	public static boolean infoGKBZHGet(List<InfoBean> l,int cat_id)
+	public static boolean infoGKBZHGet(List<InfoBean> l,String gkhj_id,String gkhj_name,int cat_id)
 	{
-			return InfoBaseManager.infoGKBZHGet(l, cat_id);
+			return InfoBaseManager.infoGKBZHGet(l,gkhj_id,gkhj_name, cat_id);
 	}
 	/**
 	 * 根据信息ID得到点击次数

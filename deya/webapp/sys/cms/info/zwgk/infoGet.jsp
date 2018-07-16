@@ -20,6 +20,7 @@ var site_id = "<%=siteid%>";
 var app_id = "<%=app_id%>";
 var s_site_id = site_id;
 var CategoryRPC = jsonrpc.CategoryRPC;
+var cat_map = new Map();//主题分类列表数据
 var input_type = "checkbox";
 
 $(document).ready(function() {
@@ -44,9 +45,56 @@ $(document).ready(function() {
 		$("#tsArea option").eq(0).remove();
 	
 	setScrollHandl();
-	
-});
 
+
+    getCateClassList("gkhj_id_td","gkhjfl");
+});
+//根据应用目英文名称取得栏目列表加载到列表中
+function getCateClassList(td_name,catecass_ename)
+{
+    var smcat_bean = CategoryRPC.getSMCategoryList(catecass_ename);
+    if(smcat_bean != null)
+    {
+        var cat_list = smcat_bean.sm_list;//取根节点的子节点
+        setCategoryListToSelect($("#"+td_name+" select"),cat_list);
+    }
+    $("#"+td_name+" select option").first().change();
+}
+
+//联动select切换事件　 将得到的子栏目列表写入到select框中
+function setChileListToSelect(index_num,select_cat_id,td_name)
+{
+    try{
+        $("#"+td_name+" select").slice(index_num+1).remove();
+        var child_list = cat_map.get(select_cat_id).sm_list;
+        child_list = List.toJSList(child_list);
+
+        if(child_list != null && child_list.size() > 0)
+        {
+            $("#"+td_name).append('<select id="first_top" class="input_select" style="width:150px;" onchange="setChileListToSelect('+index_num+1+',this.value,\''+td_name+'\')"><option value="0"></option></select>');
+            setCategoryListToSelect($("#"+td_name+" select").eq(index_num+1),child_list);
+            $("#"+td_name+" select").eq(index_num+1).find("option").first().change();
+        }else
+        {
+            $("#"+td_name+" input[type='hidden']").val(select_cat_id);
+            $("#"+td_name+" input[type='text']").val(CategoryRPC.getCategoryCName(select_cat_id,""));
+        }
+    }catch(e){
+
+    }
+
+}
+
+//将得到的栏目列表写入到select框中
+function setCategoryListToSelect(obj,cat_list)
+{
+    cat_list = List.toJSList(cat_list);
+    for(var i=0;i<cat_list.size();i++)
+    {
+        $(obj).addOptionsSingl(cat_list.get(i).cat_id,cat_list.get(i).cat_cname);
+        cat_map.put(cat_list.get(i).cat_id,cat_list.get(i));
+    }
+}
 function setUserPublishOperate()	
 {
 	var opt_ids = ","+top.getOptIDSByUser(app_id,site_id)+",";
@@ -158,7 +206,18 @@ h3{height:20px;}
 					</div>
 				</td>
 			</tr>
-		</table>		
+		</table>
+		<table class="table_form" border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<th><span class="f_red">*</span>公开环节分类：</th>
+				<td id="gkhj_id_td">
+					<input type="hidden" onblur="checkInputValue('gkhj_id',false,240,'公开环节分类','')" id="gkhj_id" name="gkhj_id" value="0"><input type="text" onblur="checkInputValue('gkhj_name',false,240,'公开环节分类','')" id="gkhj_name" name="gkhj_name" value="" style="width:80px" readOnly="readOnly">
+					<select class="input_select" style="width:150px;" onchange="setChileListToSelect(0,this.value,'gkhj_id_td')">
+						<option value="0"></option>
+					</select>
+				</td>
+			</tr>
+		</table>
 		<span class="blank12"></span>
 		<div class="line2h"></div>
 		<span class="blank3"></span>

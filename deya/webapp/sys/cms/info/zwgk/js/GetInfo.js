@@ -353,8 +353,10 @@ function doGet()
 	$("#data :checked").each(function(){		
 		i_list.add(info_map.get($(this).val()));
 	});
-
-	if(jsonrpc.InfoBaseRPC.infoGKBZHGet(i_list,cat_id_for_get))
+	var gkhj_id = $("#gkhj_id").val();
+    var gkhj_name = $("#gkhj_name").val();
+    /** @namespace jsonrpc.InfoBaseRPC */
+    if(jsonrpc.InfoBaseRPC.infoGKBZHGet(i_list,gkhj_id,gkhj_name,cat_id_for_get))
 	{
 		top.msgAlert("获取成功");
 		top.getCurrentFrameObj().reloadInfoDataList();

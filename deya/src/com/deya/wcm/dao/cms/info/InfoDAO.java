@@ -609,7 +609,7 @@ public class InfoDAO {
 		return DBManager.getString("getQuoteInfoCount", m);
 	}
 
-	public static boolean infoGKBZHGet(List<InfoBean> l,int cat_id)
+	public static boolean infoGKBZHGet(List<InfoBean> l,String gkhj_id,String gkhj_name,int cat_id)
 	{
 		if(!l.isEmpty()){
 			String info_ids = "";
@@ -620,6 +620,8 @@ public class InfoDAO {
 			Map<String,String> m = new HashMap<String,String>();
 			m.put("info_ids",info_ids);
 			m.put("cat_id",cat_id+"");
+			m.put("gkhj_id",gkhj_id);
+			m.put("gkhj_name",gkhj_name);
 			return DBManager.update("infoGKBZHGet",m);
 		}
 		return false;
