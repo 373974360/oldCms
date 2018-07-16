@@ -1066,6 +1066,9 @@ function setInfoStatusButton() {
         $("#wf_id").val(wf_id);
         step_id = getMaxStepIDByUserID(wf_id, app_id, site_id);
         var workFlowBean = jsonrpc.WorkFlowRPC.getWorkFlowBean(wf_id);
+        if(workFlowBean.wf_steps==step_id){
+            step_id=100;
+        }
         var workStepList = workFlowBean.workFlowStep_list;
         workStepList = List.toJSList(workStepList);
         for (var i = 0; i < workStepList.size(); i++) {
