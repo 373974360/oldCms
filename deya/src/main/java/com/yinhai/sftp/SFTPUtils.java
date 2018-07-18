@@ -227,12 +227,18 @@ public class SFTPUtils {
      * @param localFileName：上传的文件名
      * @return
      */
-    public boolean uploadFile(String remoteFileName, String localFileName) {
+    public boolean uploadFile(String remoteFileName, String localFileName,boolean isLocalPath) {
         FileInputStream in = null;
         try {
             this.connect();
             createDir(remotePath);
-            File file = new File(localPath + localFileName);
+            String path = "";
+            if(isLocalPath){
+                path = localPath + localFileName;
+            }else{
+                path = localFileName;
+            }
+            File file = new File(path);
             in = new FileInputStream(file);
             sftp.put(in, remoteFileName);
             return true;
@@ -306,7 +312,7 @@ public class SFTPUtils {
                 if (files[i].isFile()
                         && files[i].getName().indexOf("bak") == -1) {
                     if (this.uploadFile(files[i].getName(),
-                            files[i].getName())
+                            files[i].getName(),true)
                             && del) {
                         deleteFile(localPath + files[i].getName());
                     }

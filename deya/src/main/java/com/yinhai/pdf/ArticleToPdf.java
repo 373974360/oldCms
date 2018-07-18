@@ -119,19 +119,20 @@ public class ArticleToPdf {
 
                         //上传文章生成的pdf到sftp服务器
                         SFTPUtils sftpUtils = new SFTPUtils();
-                        sftpUtils.uploadFile(pdfName, pdfName);
+                        sftpUtils.uploadFile(pdfName, pdfName,true);
                         List<String> fileUrl = findFileUrl(content, ib.getSite_id());
                         String attrFiles = pdfName;
                         if (fileUrl.size() > 0) {
                             for (String s1 : fileUrl) {
                                 String fileName = s1.substring(s1.lastIndexOf("/") + 1, s1.length());
-                                sftpUtils.uploadFile(fileName, fileName);
+                                System.out.println("迁入数据附件获取到的地址："+fileName);
+                                sftpUtils.uploadFile(s1, s1,false);
                                 attrFiles += "|" + fileName;
                             }
                         }
 
                         //上传审核流程pdf
-                        sftpUtils.uploadFile(stepPdfName, stepPdfName);
+                        sftpUtils.uploadFile(stepPdfName, stepPdfName,true);
                         attrFiles += "|"+stepPdfName;
 
                         guiDangVo.setFiles(attrFiles);

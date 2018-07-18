@@ -134,11 +134,11 @@ public class SurveyToPdf {
                         }
 
                         //上传文章生成的pdf到sftp服务器
-                        sftpUtils.uploadFile(pdfName,pdfName);
+                        sftpUtils.uploadFile(pdfName,pdfName,true);
 
                         //上传审批流程
                         if(StringUtils.isNotEmpty(stepPdfName)){
-                            sftpUtils.uploadFile(stepPdfName,stepPdfName);
+                            sftpUtils.uploadFile(stepPdfName,stepPdfName,true);
                         }
                         guiDangVo.setFiles(attrFiles);
                         guiDangVo.setFilepath(remotePath);
