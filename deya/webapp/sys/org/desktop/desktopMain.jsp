@@ -112,7 +112,7 @@
                 desk_list.add(bean);
             });
 
-            $("#ysqgk_table :checked").each(function () {
+            $("#zwgk_table :checked").each(function () {
                 var bean = BeanUtil.getCopy(DeskTopBean);
                 bean.user_id = user_id;
                 bean.app_type = "ysqgk";

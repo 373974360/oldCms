@@ -306,6 +306,24 @@
 	   ]]>
 	   </sql>
 
+
+
+        <sql>
+        <![CDATA[
+	   create table cs_gk_ysq_process
+		(
+			pro_id  bigint(20) primary key,
+			ysq_id bigint(20) default NULL,
+            do_dept bigint(20) default NULL,
+            do_dept_name varchar(250) default NULL,
+            old_dept bigint(20) default NULL,
+            old_dept_name varchar(250) default NULL,
+            pro_content text,
+            pro_dtime varchar(250) default NULL,
+		)
+	   ]]>
+        </sql>
+
 	    <sql>
           <![CDATA[
 				create table cs_gk_ysq(

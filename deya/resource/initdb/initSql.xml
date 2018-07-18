@@ -1639,8 +1639,13 @@
     <sql><![CDATA[insert into cs_org_opt (opt_id, parent_id, tree_position, opt_name, app_id, controller, action, opt_flag, opt_memo) values ('509', '507', '$1$507$509$', '已发信息修改权限', 'cms', '', '', '', '')]]></sql>
     <!--<sql><![CDATA[insert into cs_org_opt (opt_id, parent_id, tree_position, opt_name, app_id, controller, action, opt_flag, opt_memo) values ('510', '507', '$1$507$510$', '信息更新统计', 'cms', '', '', '', '')]]></sql>
     <sql><![CDATA[insert into cs_org_opt (opt_id, parent_id, tree_position, opt_name, app_id, controller, action, opt_flag, opt_memo) values ('511', '507', '$1$507$511$', '信息更新统计', 'cms', '', '', '', '')]]></sql>-->
-		<sql><![CDATA[insert into cs_org_opt (opt_id, parent_id, tree_position, opt_name, app_id, controller, action, opt_flag, opt_memo) values ('531','1', '$1$531$', '政务公开', 'cms', '', '', '', '')]]></sql>
+		<sql><![CDATA[insert into cs_org_opt (opt_id, parent_id, tree_position, opt_name, app_id, controller, action, opt_flag, opt_memo) values ('531','1', '$1$531$', '试点领域专栏', 'cms', '', '', '', '')]]></sql>
 		<sql><![CDATA[insert into cs_org_opt (opt_id, parent_id, tree_position, opt_name, app_id, controller, action, opt_flag, opt_memo) values (532, 531, '$1$531$532$', '内容管理', 'cms', '', '', '', '')]]></sql>
+		<sql><![CDATA[insert into cs_org_opt (opt_id, parent_id, tree_position, opt_name, app_id, controller, action, opt_flag, opt_memo) values ('533','1', '$1$533$', '集约化管理', 'cms', '', '', '', '')]]></sql>
+		<sql><![CDATA[insert into cs_org_opt (opt_id, parent_id, tree_position, opt_name, app_id, controller, action, opt_flag, opt_memo) values ('534','533', '$1$533$534$', '栏目更新规则配置', 'cms', '', '', '', '')]]></sql>
+		<sql><![CDATA[insert into cs_org_opt (opt_id, parent_id, tree_position, opt_name, app_id, controller, action, opt_flag, opt_memo) values ('535','533', '$1$533$535$', '网站断链检测', 'cms', '', '', '', '')]]></sql>
+		<sql><![CDATA[insert into cs_org_opt (opt_id, parent_id, tree_position, opt_name, app_id, controller, action, opt_flag, opt_memo) values ('536','533', '$1$533$536$', '网站空白栏目检索', 'cms', '', '', '', '')]]></sql>
+		<sql><![CDATA[insert into cs_org_opt (opt_id, parent_id, tree_position, opt_name, app_id, controller, action, opt_flag, opt_memo) values ('537','533', '$1$533$537$', '栏目更新结果', 'cms', '', '', '', '')]]></sql>
 	<sql>
 	<![CDATA[
 		insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (1, 0, '系统菜单', '', '0', '0', '$1$', 1, '', '')
@@ -2832,8 +2837,13 @@
 	<sql><![CDATA[insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, handls, opt_id, menu_level, menu_position, menu_sort, menu_memo) values ('552', '398', '数据采集', '/sys/dataCollection/ruleCategoryList.jsp', '', '502', '0', '$1$396$6$398$552$', '999', '')]]></sql>
     <sql><![CDATA[insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, handls, opt_id, menu_level, menu_position, menu_sort, menu_memo) values ('556', '552', '分类管理', '/sys/dataCollection/ruleCategoryList.jsp', '', '506', '0', '$1$396$6$398$552$556$', '0', '')]]></sql>
     	<sql><![CDATA[insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, handls, opt_id, menu_level, menu_position, menu_sort, menu_memo) values ('551', '444', '信息更新统计', '/sys/cms/cmsCount/cmsUpdateList.jsp', '', '501', '0', '$1$396$6$444$551$', '999', '')]]></sql>
-		<sql><![CDATA[insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, handls, opt_id, menu_level, menu_position, menu_sort, menu_memo) values ('571', '396', '政务公开', '', '', 531, 0, '$1$396$571$', 999, '')]]></sql>
+		<sql><![CDATA[insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, handls, opt_id, menu_level, menu_position, menu_sort, menu_memo) values ('571', '396', '试点领域专栏', '', '', 531, 0, '$1$396$571$', 999, '')]]></sql>
 		<sql><![CDATA[insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, handls, opt_id, menu_level, menu_position, menu_sort, menu_memo) values ('572', '571', '内容管理', '', 'getZWGKBZHCategoryTreeByUserID()', 532, 0, '$1$396$571$572$', 999, '')]]></sql>
+		<sql><![CDATA[insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, handls, opt_id, menu_level, menu_position, menu_sort, menu_memo) values ('573', '396', '集约化管理', '', '', 533, 0, '$1$396$573$', 999, '')]]></sql>
+		<sql><![CDATA[insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, handls, opt_id, menu_level, menu_position, menu_sort, menu_memo) values ('574', '573', '栏目更新规则配置', '', '', 534, 0, '$1$396$573$574$', 999, '')]]></sql>
+		<sql><![CDATA[insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, handls, opt_id, menu_level, menu_position, menu_sort, menu_memo) values ('575', '573', '网站断链检测', '', '', 535, 0, '$1$396$573$575$', 999, '')]]></sql>
+		<sql><![CDATA[insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, handls, opt_id, menu_level, menu_position, menu_sort, menu_memo) values ('576', '573', '网站空白栏目检索', '', '', 536, 0, '$1$396$573$576$', 999, '')]]></sql>
+		<sql><![CDATA[insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, handls, opt_id, menu_level, menu_position, menu_sort, menu_memo) values ('577', '573', '栏目更新结果', '', '', 537, 0, '$1$396$573$577$', 999, '')]]></sql>
 	<sql>
 	<![CDATA[
 		insert into cs_info_category (id, cat_id, class_id, parent_id, wf_id, is_wf_publish, cat_code, cat_ename, cat_cname, cat_position, cat_level, is_mutilpage, template_index, template_list, is_generate_index, urlrule_index, urlrule_list, urlrule_content, is_allow_submit, is_allow_comment, is_comment_checked, is_show, cat_keywords, cat_description, cat_sort, is_sync, cat_source_id, cat_class_id, is_disabled, cat_type, zt_cat_id, is_archive, cat_memo, app_id, site_id, jump_url, hj_sql, is_show_tree)values (244, 244, 70, 0, 0, 0, '', 'zt', '主题分类', '$0$244$', 1, 0, 0, 0, 0, '', '', '', 0, 0, 0, 1, '', '', 9999, 0, 244, 0, 1, 0, 0, 0, '', 'system', '', '', '', 1)
@@ -5811,6 +5821,13 @@
 	<sql><![CDATA[insert into cs_org_role_opt (role_opt_id, role_id, opt_id) values ('10158', '5', '501')]]></sql>
 		<sql><![CDATA[insert into cs_org_role_opt (role_opt_id, role_id, opt_id) values ('11223', '1', '531')]]></sql>
 		<sql><![CDATA[insert into cs_org_role_opt (role_opt_id, role_id, opt_id) values ('11224', '1', '532')]]></sql>
+
+
+		<sql><![CDATA[insert into cs_org_role_opt (role_opt_id, role_id, opt_id) values ('11587', '1', '533')]]></sql>
+		<sql><![CDATA[insert into cs_org_role_opt (role_opt_id, role_id, opt_id) values ('11588', '1', '534')]]></sql>
+		<sql><![CDATA[insert into cs_org_role_opt (role_opt_id, role_id, opt_id) values ('11589', '1', '535')]]></sql>
+		<sql><![CDATA[insert into cs_org_role_opt (role_opt_id, role_id, opt_id) values ('11590', '1', '536')]]></sql>
+		<sql><![CDATA[insert into cs_org_role_opt (role_opt_id, role_id, opt_id) values ('11591', '1', '537')]]></sql>
 	
 	
 	<sql>
