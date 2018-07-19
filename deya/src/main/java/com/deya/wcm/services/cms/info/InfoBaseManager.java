@@ -532,14 +532,15 @@ public class InfoBaseManager {
                     infoWorkStep.setWork_time(DateUtil.getCurrentDateTime());
                     InfoDAO.insertInfoWorkStep(infoWorkStep);
 
-                    int infoStatus = InfoBaseManager.getInfoById(ids).getInfo_status();
+                    InfoBean infoBean = InfoBaseManager.getInfoById(ids);
+                    int infoStatus = infoBean.getInfo_status();
                     if(infoStatus==2){//正在走流程的信息，退稿的时候从哪里提交的退到那里去
                         //查询最后一步审核通过的步骤
                         List<InfoWorkStep> stepList = InfoDAO.getInfoWorkStepByInfoId(ids,"1","desc");
                         if(!stepList.isEmpty()){
                             step_id = stepList.get(0).getStep_id()+"";
                         }else{
-                            step_id = "0";
+                            step_id = WorkFlowRPC.getMaxStepIDByUserID(infoBean.getWf_id(),infoBean.getInput_user()+"","cms","CMScqgjj")+"";
                         }
                     }
                     InfoDAO.noPassInfoStatus(ids,auto_desc, step_id, stl);
@@ -566,13 +567,10 @@ public class InfoBaseManager {
         String info_status = "2";
         String step_id = "0";
         if (status != null && status.length() > 0) {
-            if (Integer.parseInt(status) == 0) {
+            if (Integer.parseInt(status) == -1) {
                 info_status = "0";
             } else {
-                InfoBean infoById = getInfoById(info_id);
-                if (infoById.getStep_id() >= 1) {
-                    step_id = (infoById.getStep_id() - 1) + "";
-                }
+                step_id = status;
             }
         }
         return InfoDAO.backPassInfoStatus(info_id, info_status, step_id, stl);

@@ -20,6 +20,10 @@
             init_FromTabsStyle();
             if ($.browser.msie && $.browser.version == "6.0" && $("html")[0].scrollHeight > $("html").height())
                 $("html").css("overflowY", "scroll");
+
+
+            var step_id = jsonrpc.WorkFlowRPC.getMaxStepIDByUserID(getCurrentFrameObj().beanList.get(num).wf_id,getCurrentFrameObj().beanList.get(num).input_user,"cms","CMScqgjj");
+            $("#step_id").val(step_id);
         });
 
         function related_ok() {
@@ -49,8 +53,8 @@
         <tr id="back_tr">
             <th>选择撤回步骤：</th>
             <td id="back_list">
-                <input name="backStep" type="radio" checked="checked" value="-1"/><label for="e">上一步</label>&nbsp;&nbsp;
-                <input name="backStep" type="radio" value="0"/><label for="e">草稿</label>&nbsp;&nbsp;
+                <input id="step_id" name="backStep" type="radio" checked="checked"/><label for="e">发起人</label>&nbsp;&nbsp;
+                <input name="backStep" type="radio" value="-1"/><label for="e">草稿</label>&nbsp;&nbsp;
             </td>
         </tr>
         </tbody>

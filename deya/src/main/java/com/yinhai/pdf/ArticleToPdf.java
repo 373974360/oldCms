@@ -125,7 +125,7 @@ public class ArticleToPdf {
                         if (fileUrl.size() > 0) {
                             for (String s1 : fileUrl) {
                                 String fileName = s1.substring(s1.lastIndexOf("/") + 1, s1.length());
-                                System.out.println("迁入数据附件获取到的地址："+fileName);
+                                System.out.println("**********迁入数据附件获取到的地址**********："+s1);
                                 sftpUtils.uploadFile(s1, s1,false);
                                 attrFiles += "|" + fileName;
                             }

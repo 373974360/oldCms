@@ -238,6 +238,7 @@ public class SFTPUtils {
             }else{
                 path = localFileName;
             }
+            System.out.println("**********归档PDF临时文件路径**********："+path);
             File file = new File(path);
             in = new FileInputStream(file);
             sftp.put(in, remoteFileName);

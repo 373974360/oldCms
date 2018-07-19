@@ -97,6 +97,9 @@
             con_map.put("start_num", tp.getStart());
             con_map.put("page_size", tp.pageSize);
             con_map.put("highSearchString", highSearchString);
+            if(!isSiteManager("cms","CMScqgjj")){
+                con_map.put("input_user", LoginUserBean.user_id);
+            }
 
             if (tj != "") {
                 con_map.put("modelString", tj);
@@ -156,9 +159,9 @@
                 if (i > 0) {
                     $(this).css({"text-align": "center"});
                     var str = "<ul class=\"optUL\">";
-                    str += "<li name='btn302' class='ico_publish'><a title='发布' href='javascript:doPublish("+(i-1)+")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
-                    str += "<li name='btn300' class='ico_edit' ><a  title='修改' href='javascript:openUpdatePage("+beanList.get(i - 1).cat_id+"," + beanList.get(i - 1).info_id + "," + beanList.get(i - 1).model_id + "," + beanList.get(i - 1).is_host + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
-                    str += "<li name='btn303' class='ico_nopass'><a  title='退稿' href='javascript:noPassDesc(" + beanList.get(i - 1).info_id + "," + beanList.get(i - 1).step_id + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
+                    str += "<li class='ico_publish'><a title='发布' href='javascript:doPublish("+(i-1)+")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
+                    str += "<li class='ico_edit' ><a  title='修改' href='javascript:openUpdatePage("+beanList.get(i - 1).cat_id+"," + beanList.get(i - 1).info_id + "," + beanList.get(i - 1).model_id + "," + beanList.get(i - 1).is_host + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
+                    str += "<li class='ico_nopass'><a  title='退稿' href='javascript:noPassDesc(" + beanList.get(i - 1).info_id + "," + beanList.get(i - 1).step_id + ")' style='width:16px;height:16px;'>&nbsp;&nbsp;&nbsp;&nbsp;</a></li>";
                     $(this).html(str + "</ul>");
                 }
             });
