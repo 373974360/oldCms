@@ -12,67 +12,73 @@
 	<script type="text/javascript" src="../../../js/jquery.js"></script>
 	<script type="text/javascript">
         var theme_list_open = false;
+        var infoid = "<%=info_id%>";
         $(document).ready(function () {
-            var url = "/info/contentView.jsp?info_id=<%=info_id%>";
-            $("#iframe").attr("src",url);
-            function fixHeight() {
-                var headerHeight = $("#switcher").height();
-                $("#iframe").attr("height", $(window).height()-84 + "px");
-            }
-            $(window).resize(function () {
-                fixHeight();
-            }).resize();
-            //响应式预览
-            $('.icon-monitor').addClass('active');
-            $(".icon-mobile-3").click(function () {
-                url = "/info/iList.jsp?info_id=<%=info_id%>&tm_id=523";
-                $("#by").css("overflow-y", "auto");
-                $('#iframe-wrap').removeClass().addClass('mobile-width-3');
-                $('.icon-tablet,.icon-mobile-1,.icon-monitor,.icon-mobile-2,.icon-mobile-3').removeClass('active');
-                $(this).addClass('active');
+            var defaultBean = ModelUtilRPC.select(infoid,"CMScqgjj","link");
+            if(defauleBean.cat_id==10058||defauleBean.cat_id==10062||defauleBean.cat_id==10063){
+				$("#iframe-wrap").html("<img src='"+defaultBean.thumb_url+"' style='margin:0 auto;'/>");
+			}else{
+                var url = "/info/contentView.jsp?info_id=<%=info_id%>";
                 $("#iframe").attr("src",url);
-                return false;
-            });
+                function fixHeight() {
+                    var headerHeight = $("#switcher").height();
+                    $("#iframe").attr("height", $(window).height()-84 + "px");
+                }
+                $(window).resize(function () {
+                    fixHeight();
+                }).resize();
+                //响应式预览
+                $('.icon-monitor').addClass('active');
+                $(".icon-mobile-3").click(function () {
+                    url = "/info/iList.jsp?info_id=<%=info_id%>&tm_id=523";
+                    $("#by").css("overflow-y", "auto");
+                    $('#iframe-wrap').removeClass().addClass('mobile-width-3');
+                    $('.icon-tablet,.icon-mobile-1,.icon-monitor,.icon-mobile-2,.icon-mobile-3').removeClass('active');
+                    $(this).addClass('active');
+                    $("#iframe").attr("src",url);
+                    return false;
+                });
 
-            $(".icon-mobile-2").click(function () {
-                url = "/info/iList.jsp?info_id=<%=info_id%>&tm_id=523";
-                $("#by").css("overflow-y", "auto");
-                $('#iframe-wrap').removeClass().addClass('mobile-width-2');
-                $('.icon-tablet,.icon-mobile-1,.icon-monitor,.icon-mobile-2,.icon-mobile-3').removeClass('active');
-                $(this).addClass('active');
-                $("#iframe").attr("src",url);
-                return false;
-            });
+                $(".icon-mobile-2").click(function () {
+                    url = "/info/iList.jsp?info_id=<%=info_id%>&tm_id=523";
+                    $("#by").css("overflow-y", "auto");
+                    $('#iframe-wrap').removeClass().addClass('mobile-width-2');
+                    $('.icon-tablet,.icon-mobile-1,.icon-monitor,.icon-mobile-2,.icon-mobile-3').removeClass('active');
+                    $(this).addClass('active');
+                    $("#iframe").attr("src",url);
+                    return false;
+                });
 
-            $(".icon-mobile-1").click(function () {
-                url = "/info/iList.jsp?info_id=<%=info_id%>&tm_id=26";
-                $("#by").css("overflow-y", "auto");
-                $('#iframe-wrap').removeClass().addClass('mobile-width');
-                $('.icon-tablet,.icon-mobile,.icon-monitor,.icon-mobile-2,.icon-mobile-3').removeClass('active');
-                $(this).addClass('active');
-                $("#iframe").attr("src",url);
-                return false;
-            });
+                $(".icon-mobile-1").click(function () {
+                    url = "/info/iList.jsp?info_id=<%=info_id%>&tm_id=26";
+                    $("#by").css("overflow-y", "auto");
+                    $('#iframe-wrap').removeClass().addClass('mobile-width');
+                    $('.icon-tablet,.icon-mobile,.icon-monitor,.icon-mobile-2,.icon-mobile-3').removeClass('active');
+                    $(this).addClass('active');
+                    $("#iframe").attr("src",url);
+                    return false;
+                });
 
-            $(".icon-tablet").click(function () {
-                url = "/info/iList.jsp?info_id=<%=info_id%>&tm_id=26";
-                $("#by").css("overflow-y", "auto");
-                $('#iframe-wrap').removeClass().addClass('tablet-width');
-                $('.icon-tablet,.icon-mobile-1,.icon-monitor,.icon-mobile-2,.icon-mobile-3').removeClass('active');
-                $(this).addClass('active');
-                $("#iframe").attr("src",url);
-                return false;
-            });
+                $(".icon-tablet").click(function () {
+                    url = "/info/iList.jsp?info_id=<%=info_id%>&tm_id=26";
+                    $("#by").css("overflow-y", "auto");
+                    $('#iframe-wrap').removeClass().addClass('tablet-width');
+                    $('.icon-tablet,.icon-mobile-1,.icon-monitor,.icon-mobile-2,.icon-mobile-3').removeClass('active');
+                    $(this).addClass('active');
+                    $("#iframe").attr("src",url);
+                    return false;
+                });
 
-            $(".icon-monitor").click(function () {
-                url = "/info/contentView.jsp?info_id=<%=info_id%>";
-                $("#by").css("overflow-y", "hidden");
-                $('#iframe-wrap').removeClass().addClass('full-width');
-                $('.icon-tablet,.icon-mobile-1,.icon-monitor,.icon-mobile-2,.icon-mobile-3').removeClass('active');
-                $(this).addClass('active');
-                $("#iframe").attr("src",url);
-                return false;
-            });
+                $(".icon-monitor").click(function () {
+                    url = "/info/contentView.jsp?info_id=<%=info_id%>";
+                    $("#by").css("overflow-y", "hidden");
+                    $('#iframe-wrap').removeClass().addClass('full-width');
+                    $('.icon-tablet,.icon-mobile-1,.icon-monitor,.icon-mobile-2,.icon-mobile-3').removeClass('active');
+                    $(this).addClass('active');
+                    $("#iframe").attr("src",url);
+                    return false;
+                });
+			}
         });
 	</script>
 
