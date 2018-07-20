@@ -10,12 +10,14 @@
 	<title>在线预览</title>
 	<link type="text/css" rel="stylesheet" href="../../../js/view/demo.css"/>
 	<script type="text/javascript" src="../../../js/jquery.js"></script>
+	<script type="text/javascript" src="../../../js/jsonrpc.js"></script>
 	<script type="text/javascript">
+        var ModelUtilRPC = jsonrpc.ModelUtilRPC;
         var theme_list_open = false;
         var infoid = "<%=info_id%>";
         $(document).ready(function () {
-            var defaultBean = ModelUtilRPC.select(infoid,"CMScqgjj","link");
-            if(defauleBean.cat_id==10058||defauleBean.cat_id==10062||defauleBean.cat_id==10063){
+            var linkBean = ModelUtilRPC.select(infoid,"CMScqgjj","link");
+            if(linkBean.cat_id==10058||linkBean.cat_id==10062||linkBean.cat_id==10063){
 				$("#iframe-wrap").html("<img src='"+defaultBean.thumb_url+"' style='margin:0 auto;'/>");
 			}else{
                 var url = "/info/contentView.jsp?info_id=<%=info_id%>";
