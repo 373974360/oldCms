@@ -18,7 +18,11 @@
         $(document).ready(function () {
             var linkBean = ModelUtilRPC.select(infoid,"CMScqgjj","link");
             if(linkBean.cat_id==10058||linkBean.cat_id==10062||linkBean.cat_id==10063){
-				$("#iframe-wrap").html("<img src='"+defaultBean.thumb_url+"' style='margin:0 auto;'/>");
+                if(linkBean.cat_id==10058){
+                    $("#iframe-wrap").html("<p style='color:red;margin-top:50px;'>备注：首页横幅图必须为 宽776 高78</p><img src='"+linkBean.thumb_url+"' width='776' height='78'/>");
+				}else{
+                    $("#iframe-wrap").html("<img src='"+linkBean.thumb_url+"' style='margin-top:50px;'/>");
+				}
 			}else{
                 var url = "/info/contentView.jsp?info_id=<%=info_id%>";
                 $("#iframe").attr("src",url);
