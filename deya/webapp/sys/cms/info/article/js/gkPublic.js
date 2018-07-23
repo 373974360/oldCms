@@ -160,20 +160,25 @@ function getCateClassList(td_name,catecass_ename)
 function setChileListToSelect(index_num,select_cat_id,td_name)
 {	
 	try{
-		$("#"+td_name+" select").slice(index_num+1).remove();
-		var child_list = cat_map.get(select_cat_id).sm_list;
-		child_list = List.toJSList(child_list);
-		
-		if(child_list != null && child_list.size() > 0)
-		{
-			$("#"+td_name).append('<select id="first_top" class="input_select" style="width:150px;" onchange="setChileListToSelect('+index_num+1+',this.value,\''+td_name+'\')"><option value="0"></option></select>');		
-			setCategoryListToSelect($("#"+td_name+" select").eq(index_num+1),child_list);
-			$("#"+td_name+" select").eq(index_num+1).find("option").first().change();
-		}else
-		{		
-			$("#"+td_name+" input[type='hidden']").val(select_cat_id);
-			$("#"+td_name+" input[type='text']").val(CategoryRPC.getCategoryCName(select_cat_id,""));
-		}	
+		if(select_cat_id>0){
+            $("#"+td_name+" select").slice(index_num+1).remove();
+            var child_list = cat_map.get(select_cat_id).sm_list;
+            child_list = List.toJSList(child_list);
+
+            if(child_list != null && child_list.size() > 0)
+            {
+                $("#"+td_name).append('<select id="first_top" class="input_select" style="width:150px;" onchange="setChileListToSelect('+index_num+1+',this.value,\''+td_name+'\')"><option value="0"></option></select>');
+                setCategoryListToSelect($("#"+td_name+" select").eq(index_num+1),child_list);
+                $("#"+td_name+" select").eq(index_num+1).find("option").first().change();
+            }else
+            {
+                $("#"+td_name+" input[type='hidden']").val(select_cat_id);
+                $("#"+td_name+" input[type='text']").val(CategoryRPC.getCategoryCName(select_cat_id,""));
+            }
+        }else{
+            $("#"+td_name+" input[type='hidden']").val(0);
+            $("#"+td_name+" input[type='text']").val("");
+		}
 	}catch(e){
 		
 	}
