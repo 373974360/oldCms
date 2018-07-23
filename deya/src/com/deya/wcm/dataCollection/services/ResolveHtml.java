@@ -12,6 +12,7 @@ import com.deya.wcm.dataCollection.util.URLUtil;
 import com.deya.wcm.services.cms.category.CategoryRPC;
 import com.deya.wcm.services.cms.info.InfoBaseRPC;
 import com.deya.wcm.services.cms.info.ModelUtil;
+import com.deya.wcm.services.zwgk.index.IndexManager;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -25,10 +26,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedHashSet;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -371,6 +369,11 @@ public class ResolveHtml {
                     bean.setIs_am_tupage(0);
                     bean.setWeight(60);
                     bean.setContent_url(articleBean.getUrl());
+                    Map<String,String> imap = IndexManager.getIndex(site_id,articleBean.getCat_id(),"","");
+                    if(!imap.isEmpty()&&imap.containsKey("gk_index"))
+                    {
+                        bean.setGk_index(imap.get("gk_index"));
+                    }
                     ModelUtil.insert(bean,"article",null);
                 }
             }else{
