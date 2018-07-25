@@ -31,7 +31,8 @@ var subNode = false;
 var current_page_num = 1;
 var is_save_first_page = false;//操作成功后是否保存在第一页
 var highSearchString = "";//高级搜索的字符串
-var is_my_info = false;//只显示自己所添加的审核中的信息
+var is_my_info = false;//只显示自己所添加的信息
+var is_my_info_step = false;//只显示自己所添加的审核中的信息
 
 function setInfoGoble(n){
 	infoIdGoble = n;
@@ -142,6 +143,10 @@ function showList(){
 	{
 		m.put("input_user",LoginUserBean.user_id+"");
 	}
+    if(is_my_info_step)
+    {
+        m.put("is_my_info_step",0);
+    }
 	
 	if(stepID != "" && stepID != "100"){
 		m.put("step_id",stepID);
@@ -432,6 +437,10 @@ function showTurnPage(){
 	{
 		m.put("input_user",LoginUserBean.user_id+"");
 	}
+    if(is_my_info_step)
+    {
+        m.put("is_my_info_step",0);
+    }
 	if(stepID != "" && stepID != "100"){
 		m.put("step_id",stepID);
 	}
@@ -553,7 +562,9 @@ function clickLabelHandl(num)
 		break;
 	case 2:
 		infoStatus = "2";
-		stepID = "0";
+        var temp_wf_id = CategoryRPC.getWFIDByCatID(cid,site_id);
+        stepID = getMaxStepIDByUserID(temp_wf_id,app,site_id)+"";
+        is_my_info_step = false;
 		//getTheLeafNodes();
 		finalStatus = "0";
 		break;
@@ -563,6 +574,7 @@ function clickLabelHandl(num)
 		//getTheLeafNodes();
 		finalStatus = "0";
         	is_my_info = true;
+        is_my_info_step = true;
 		break;
 	case 4:
 		infoStatus = "1";

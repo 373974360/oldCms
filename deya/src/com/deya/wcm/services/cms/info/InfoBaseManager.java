@@ -323,7 +323,7 @@ public class InfoBaseManager {
             String sql = "";
             if(category_ids == null || category_ids.trim().equals("")){
                 if(map.get("step_id") != null && !map.get("step_id").trim().equals("")){
-                    //sql = " and ci.step_id="+map.get("step_id");
+                    sql = " and ci.step_id="+(Integer.parseInt(map.get("step_id"))-1);
                 }
             }else{
                 if(category_ids.trim().startsWith(",")){
@@ -335,6 +335,14 @@ public class InfoBaseManager {
                 sql = CategoryManager.getSearchSQLByCategoryIDS(user_id,category_ids,app_id,site_id);
                 map.remove("cat_id");
             }
+            System.out.println("searchString1:"+sql);
+            map.put("searchString2", sql);
+        }else if(map.get("info_status").equals("2")){
+            String sql = "";
+            if(!map.containsKey("is_my_info_step")){
+                sql = " and ci.step_id="+(Integer.parseInt(map.get("step_id"))-1);
+            }
+            System.out.println("searchString2:"+sql);
             map.put("searchString2", sql);
         }
     }
