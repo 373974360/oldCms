@@ -167,7 +167,7 @@ function setChileListToSelect(index_num,select_cat_id,td_name)
 
             if(child_list != null && child_list.size() > 0)
             {
-                $("#"+td_name).append('<select id="first_top" class="input_select" style="width:150px;" onchange="setChileListToSelect('+index_num+1+',this.value,\''+td_name+'\')"><option value="0"></option></select>');
+                $("#"+td_name).append('<select id="first_top_'+(index_num+1)+'" class="input_select" style="width:150px;" onchange="setChileListToSelect('+(index_num+1)+',this.value,\''+td_name+'\')"><option value="0"></option></select>');
                 setCategoryListToSelect($("#"+td_name+" select").eq(index_num+1),child_list);
                 $("#"+td_name+" select").eq(index_num+1).find("option").first().change();
             }else
