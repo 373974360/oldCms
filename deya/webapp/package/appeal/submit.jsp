@@ -205,7 +205,7 @@
         }
 	}*/
 
-	if("saveScore".equals(action_type))
+	/*if("saveScore".equals(action_type))
 	{
 		String codeSession = (String)request.getSession().getAttribute("valiCode");
 		String auth_code = request.getParameter("auth_code");
@@ -235,6 +235,61 @@
 			out.println("<script>");
 			out.println("top.alert('投票失败')");
 			out.println("top.changeCreateImage()");
+			out.println("</script>");
+			return;
+		}
+	}*/
+
+	if("saveScore".equals(action_type))
+	{
+		String sq_code = FormatUtil.formatNullString(request.getParameter("sq_code"));
+		String query_code = FormatUtil.formatNullString(request.getParameter("query_code"));
+		String sq_id = FormatUtil.formatNullString(request.getParameter("sq_id"));
+		String sat_score_str = "";
+		String raty_score_str = "";
+		String totle = FormatUtil.formatNullString(request.getParameter("totle"));
+		if(totle != null && !"".equals(totle))
+		{
+			int size = Integer.parseInt(totle);
+			for(int i = 1; i <= size; i++)
+			{
+				String sat_score = FormatUtil.formatNullString(request.getParameter("sat_score" + i));
+				String raty_score = FormatUtil.formatNullString(request.getParameter("raty_score" + i));
+				sat_score_str = sat_score_str + sat_score + ",";
+				raty_score_str = raty_score_str + raty_score + ",";
+			}
+			sat_score_str = sat_score_str.substring(0, sat_score_str.length() - 1);
+			raty_score_str = raty_score_str.substring(0, raty_score_str.length() - 1);
+		}
+		else
+		{
+			out.println("<script>");
+			out.println("top.alert('投票失败')");
+			out.println("</script>");
+			return;
+		}
+
+		SQBean sb = SQManager.searchBrowserSQBean(sq_code,query_code);
+
+		if(sb == null || !sq_id.equals(sb.getSq_id()+""))
+		{
+			out.println("<script>");
+			out.println("top.alert('查询码及信件编码不正确')");
+			out.println("</script>");
+			return;
+		}
+
+		if(SQManager.saveScore(sq_id,sat_score_str,raty_score_str))
+		{
+			out.println("<script>");
+			out.println("top.alert('投票成功')");
+			out.println("top.$('BeginSatis_div').remove()");
+			out.println("</script>");
+			return;
+		}else
+		{
+			out.println("<script>");
+			out.println("top.alert('投票失败')");
 			out.println("</script>");
 			return;
 		}
