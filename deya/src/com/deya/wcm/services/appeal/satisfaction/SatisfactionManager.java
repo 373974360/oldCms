@@ -163,7 +163,7 @@ public class SatisfactionManager implements ISyncCatch{
 						SatRecordBean srb = new SatRecordBean();
 						srb.setSq_id(Integer.parseInt(sq_id));
 						srb.setSat_id(sf_list.get(i).getSat_id());
-						srb.setSat_score(Integer.parseInt(temp_raty[i]));
+						srb.setSat_score(temp_raty[i]);
 						srb.setAdd_dtime(add_time);
 						SatisfactionDAO.insertSatRecord(srb);
 					}catch(Exception e)

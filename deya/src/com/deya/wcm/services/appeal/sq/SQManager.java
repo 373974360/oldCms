@@ -593,7 +593,7 @@ public class SQManager {
         String[] temp_raty = raty_score_str.split(",");
         int sat_score = 0;
         for (int i = 0; i < temp_sat.length; i++) {
-            sat_score += Integer.parseInt(temp_sat[i]) * Integer.parseInt(temp_raty[i]) / 10;
+            sat_score += Double.parseDouble(temp_sat[i]) * Double.parseDouble(temp_raty[i]) / 10;
         }
         Map<String, String> m = new HashMap<String, String>();
         m.put("sq_id", sq_id);

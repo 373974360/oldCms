@@ -260,6 +260,9 @@
 			}
 			sat_score_str = sat_score_str.substring(0, sat_score_str.length() - 1);
 			raty_score_str = raty_score_str.substring(0, raty_score_str.length() - 1);
+
+			System.out.println("sat_score_str:"+sat_score_str);
+			System.out.println("raty_score_str:"+raty_score_str);
 		}
 		else
 		{
