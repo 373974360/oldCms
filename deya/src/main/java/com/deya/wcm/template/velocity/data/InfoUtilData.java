@@ -1992,7 +1992,21 @@ public class InfoUtilData {
         map.put("bustype",bustype);//业务类型默认层级：0， 归集：1， 贷款：2
         map.put("centercode","");//中心编号
         map.put("keyword",keyword);//搜索关键字 机构地址  机构名称  服务范围
-        return WangDianServiceClient.getWangdianResultList(map);
+
+        List<WangDianVo> list = WangDianServiceClient.getWangdianResultList(map);
+        List<WangDianVo> resultList = new ArrayList<>();
+        if(deptype.equals("2")&&bustype.equals("1")){//机构类型选择银行网点，且业务类型为缴存银行网点的时候
+            if(!list.isEmpty()){
+                for(WangDianVo wangdian:list){
+                    if(wangdian.getPid().equals("14")||wangdian.getPid().equals("15")||wangdian.getPid().equals("16")||wangdian.getPid().equals("17")){
+                        resultList.add(wangdian);
+                    }
+                }
+            }
+        }else{
+            resultList = list;
+        }
+        return resultList;
     }
 
     //计算器1
