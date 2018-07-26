@@ -1976,13 +1976,14 @@ public class InfoUtilData {
     }
 
 
-    public static List<WangDianVo> getWangdianResultList(String deptype,String bustype,String bktype,String keyword){
+    public static List<WangDianVo> getWangdianResultList(String deptype,String bknktype,String bustype,String bktype,String keyword){
         Map<String,String> map = new HashMap<>();
         map.put("depcode","");//机构代码
         if(StringUtils.isEmpty(deptype)){
             deptype="0";
         }
         map.put("deptype1",deptype);//机构类型0 所有 1 机构 2 网点
+        map.put("bknktype",bknktype);//网点类型
         map.put("bktype",bktype);//银行航别
         map.put("noparentnode","1");//1表示不显示根节点，其他表示显示
         if(StringUtils.isEmpty(bustype)){

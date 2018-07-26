@@ -32,6 +32,7 @@ public class WangDianServiceClient {
     private static String bustype = "";//业务类型
     private static String centercode = "";//中心编号
     private static String keyword = "";//搜索关键字 机构地址  机构名称  服务范围
+    private static String bknktype = "";//网点类型
 
     public static List<WangDianVo> getWangdianResultList(Map<String, String> map) {
         depcode = map.get("depcode");
@@ -41,6 +42,7 @@ public class WangDianServiceClient {
         bustype = map.get("bustype");
         centercode = map.get("centercode");
         keyword = map.get("keyword");
+        bknktype = map.get("bknktype");
         String s = WebServiceClientUtil.doHttpPost("trader", "NLC009", getparamValue());
         return getWangdianResultList(s);
     }
@@ -53,6 +55,9 @@ public class WangDianServiceClient {
             _xmlstr.append("<deptype1>").append(deptype1).append("</deptype1>");
         }else{
             _xmlstr.append("<deptype1>").append(0).append("</deptype1>");
+        }
+        if (bknktype != null && !"".equals(bknktype)) {
+            _xmlstr.append("<bknktype>").append(bknktype).append("</bknktype>");
         }
         if (bktype != null && !"".equals(bktype)) {
             _xmlstr.append("<bktype>").append(bktype).append("</bktype>");
