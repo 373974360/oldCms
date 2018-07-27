@@ -1980,7 +1980,7 @@ public class InfoUtilData {
         Map<String,String> map = new HashMap<>();
         map.put("depcode","");//机构代码
         if(StringUtils.isEmpty(deptype)){
-            deptype="0";
+            deptype="1";
         }
         map.put("deptype1",deptype);//机构类型0 所有 1 机构 2 网点
         map.put("bknktype",bknktype);//网点类型
