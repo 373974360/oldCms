@@ -112,7 +112,7 @@
                 desk_list.add(bean);
             });
 
-            $("#zwgk_table :checked").each(function () {
+            $("#ysqgk_table :checked").each(function () {
                 var bean = BeanUtil.getCopy(DeskTopBean);
                 bean.user_id = user_id;
                 bean.app_type = "ysqgk";
@@ -198,13 +198,12 @@
             <div class="sq_title_right">点击闭合</div>
         </div>
         <div class="sq_box_content">
-            <table id="zwgk_table" class="table_view" border="0" cellpadding="0" cellspacing="0">
+            <table id="ysqgk_table" class="table_view" border="0" cellpadding="0" cellspacing="0">
                 <tbody id="xg_sq_list">
                 <tr>
                     <td>
                         <ul>
-                            <li><input type="checkbox" value="0" class="input_checkbox"
-                                       checked="checked"><label>依申请公开</label></li>
+                            <li><input type="checkbox" value="0" class="input_checkbox"><label>依申请公开</label></li>
                         </ul>
                     </td>
                 </tr>

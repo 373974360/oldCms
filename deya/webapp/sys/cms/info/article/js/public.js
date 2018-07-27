@@ -985,9 +985,12 @@ function publicSaveInfoEvent(bean, model_ename, save_type) {
         if (bean.info_status == "8") {
             //得到该栏目所使用的流程ID
             var temp_wf_id = CategoryRPC.getWFIDByCatID(bean.cat_id, site_id);
-
             if (temp_wf_id != 0) {
+                var workFlowBean = jsonrpc.WorkFlowRPC.getWorkFlowBean(temp_wf_id);
                 var temp_step_id = getMaxStepIDByUserID(temp_wf_id, bean.app_id, site_id);
+                if(workFlowBean.wf_steps==temp_step_id){
+                    temp_step_id=100;
+                }
                 if (temp_step_id != 100) {//如果登录人是终审人，不要待审按钮 不然，后台不好更改状态逻辑，（如步骤ID为100，却又是待审状态）
                     bean.info_status = "2";
                     bean.step_id = temp_step_id;
@@ -1068,6 +1071,7 @@ function setInfoStatusButton() {
         var workFlowBean = jsonrpc.WorkFlowRPC.getWorkFlowBean(wf_id);
         if(workFlowBean.wf_steps==step_id){
             step_id=100;
+            $("#li_ds").addClass("hidden");
         }
         var workStepList = workFlowBean.workFlowStep_list;
         workStepList = List.toJSList(workStepList);
