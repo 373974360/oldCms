@@ -651,7 +651,7 @@ function creatWord()
 			<tr>
 				<th style="vertical-align:top;">内容：</th>
 				<td >
-                    <div id="sq_content2"  style="width: 100%;height:150px;line-height: 25px;"></div>
+                    <div id="sq_content2"  style="width: 100%;height:150px;line-height: 25px;overflow: auto;"></div>
                 </td>
 			</tr>
             <!--
