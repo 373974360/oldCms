@@ -10,6 +10,14 @@
     {
         result = getNewsList(request);
     }
+    if("news_hits_list".equals(action_type))
+    {
+        result = getHitsNewsList(request);
+    }
+    if("cat_count_list".equals(action_type))
+    {
+        result = getChildCategoryCountList(request);
+    }
     if("news_count".equals(action_type))
     {
         result = getNewsListCount(request);
@@ -102,6 +110,53 @@ public String getNewsList(HttpServletRequest request)
 		for(InfoBean info : info_list)
 		{
 			json += ",{\"info_id\":\""+info.getInfo_id()+"\",\"title\":\""+replaceFont(info.getTitle())+"\",\"model_id\":\""+info.getModel_id()+"\",\"content_url\":\""+info.getContent_url()+"\",\"description\":\""+replaceStr(info.getDescription())+"\",\"source\":\""+info.getSource()+"\",\"released_dtime\":\""+info.getReleased_dtime()+"\"}";
+		}
+		json = json.substring(1);
+	}
+	return "["+json+"]";
+}
+
+public String getHitsNewsList(HttpServletRequest request)
+{
+	String json = "";
+	String params = "site_id=CMScqgjj;size=10;cur_page=1;orderby=ci.hits desc;";
+	List<InfoBean> info_list = InfoUtilData.getInfoList(params);
+	if(info_list != null && info_list.size() > 0)
+	{
+		for(InfoBean info : info_list)
+		{
+			json += ",{\"title\":\""+replaceFont(info.getTitle())+"\",\"hits\":\""+info.getHits()+"\"}";
+		}
+		json = json.substring(1);
+	}
+	return "["+json+"]";
+}
+public String getChildCategoryCountList(HttpServletRequest request){
+	String json = "";
+	String site_id = "CMScqgjj";
+	String cat_id = "0";
+	List<CategoryBean> info_list = CategoryManager.getChildCategoryList(Integer.parseInt(cat_id),site_id);
+	if(info_list != null && info_list.size() > 0)
+	{
+		for(int i = 0; i < info_list.size(); i++){
+			CategoryBean bean = info_list.get(i);
+            String params = "site_id=" + site_id + ";cat_id="+bean.getCat_id()+";size=10;cur_page=1;orderby=ci.released_dtime desc;";
+            TurnPageBean tpb = InfoUtilData.getInfoCount(params);
+            json += ",{\"cat_cname\":\""+bean.getCat_cname()+"\",\"count\":\""+tpb.getCount()+"\"";
+            List<CategoryBean> children_list = CategoryManager.getChildCategoryList(bean.getCat_id(),site_id);
+            if(!children_list.isEmpty()){
+                json += ",\"children\":[";
+                String cjson = "";
+                for(CategoryBean cbean:children_list){
+                    String cparams = "site_id=" + site_id + ";cat_id="+cbean.getCat_id()+";size=10;cur_page=1;orderby=ci.released_dtime desc;";
+                    TurnPageBean ctpb = InfoUtilData.getInfoCount(cparams);
+                    cjson += ",{\"cat_cname\":\""+cbean.getCat_cname()+"\",\"count\":\""+ctpb.getCount()+"\"}";
+                }
+                cjson = cjson.substring(1);
+                json += cjson;
+                json +=	""+"]";
+            }
+            json += "}";
 		}
 		json = json.substring(1);
 	}
