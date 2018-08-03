@@ -125,7 +125,7 @@ public String getHitsNewsList(HttpServletRequest request)
 	{
 		for(InfoBean info : info_list)
 		{
-			json += ",{\"title\":\""+replaceFont(info.getTitle())+"\",\"hits\":\""+info.getHits()+"\"}";
+			json += ",{\"newstital\":\""+replaceFont(info.getTitle())+"\",\"newsCount\":\""+info.getHits()+"\"}";
 		}
 		json = json.substring(1);
 	}
@@ -142,7 +142,7 @@ public String getChildCategoryCountList(HttpServletRequest request){
 			CategoryBean bean = info_list.get(i);
             String params = "site_id=" + site_id + ";cat_id="+bean.getCat_id()+";size=10;cur_page=1;orderby=ci.released_dtime desc;";
             TurnPageBean tpb = InfoUtilData.getInfoCount(params);
-            json += ",{\"cat_cname\":\""+bean.getCat_cname()+"\",\"count\":\""+tpb.getCount()+"\"";
+            json += ",{\"columntital\":\""+bean.getCat_cname()+"\",\"columnCount\":\""+tpb.getCount()+"\"";
             List<CategoryBean> children_list = CategoryManager.getChildCategoryList(bean.getCat_id(),site_id);
             if(!children_list.isEmpty()){
                 json += ",\"children\":[";
@@ -150,7 +150,7 @@ public String getChildCategoryCountList(HttpServletRequest request){
                 for(CategoryBean cbean:children_list){
                     String cparams = "site_id=" + site_id + ";cat_id="+cbean.getCat_id()+";size=10;cur_page=1;orderby=ci.released_dtime desc;";
                     TurnPageBean ctpb = InfoUtilData.getInfoCount(cparams);
-                    cjson += ",{\"cat_cname\":\""+cbean.getCat_cname()+"\",\"count\":\""+ctpb.getCount()+"\"}";
+                    cjson += ",{\"columntital\":\""+cbean.getCat_cname()+"\",\"columnCount\":\""+ctpb.getCount()+"\"}";
                 }
                 cjson = cjson.substring(1);
                 json += cjson;
