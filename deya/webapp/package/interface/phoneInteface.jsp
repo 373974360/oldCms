@@ -147,32 +147,15 @@ public String getCountList(HttpServletRequest request){
 public String getChildCategoryCountList(HttpServletRequest request){
 	String json = "";
 	String site_id = "CMScqgjj";
-	String cat_id = "0";
-	List<CategoryBean> info_list = CategoryManager.getChildCategoryList(Integer.parseInt(cat_id),site_id);
-	if(info_list != null && info_list.size() > 0)
-	{
-		for(int i = 0; i < info_list.size(); i++){
-			CategoryBean bean = info_list.get(i);
-            String params = "site_id=" + site_id + ";cat_id="+bean.getCat_id()+";size=10;cur_page=1;orderby=ci.released_dtime desc;";
-            TurnPageBean tpb = InfoUtilData.getInfoCount(params);
-            json += ",{\"columntital\":\""+bean.getCat_cname()+"\",\"columnCount\":\""+tpb.getCount()+"\"";
-            List<CategoryBean> children_list = CategoryManager.getChildCategoryList(bean.getCat_id(),site_id);
-            if(!children_list.isEmpty()){
-                json += ",\"children\":[";
-                String cjson = "";
-                for(CategoryBean cbean:children_list){
-                    String cparams = "site_id=" + site_id + ";cat_id="+cbean.getCat_id()+";size=10;cur_page=1;orderby=ci.released_dtime desc;";
-                    TurnPageBean ctpb = InfoUtilData.getInfoCount(cparams);
-                    cjson += ",{\"columntital\":\""+cbean.getCat_cname()+"\",\"columnCount\":\""+ctpb.getCount()+"\"}";
-                }
-                cjson = cjson.substring(1);
-                json += cjson;
-                json +=	""+"]";
-            }
-            json += "}";
-		}
-		json = json.substring(1);
-	}
+	String cat_id = FormatUtil.formatNullString(request.getParameter("cat_id"));
+	String[] catArray = cat_id.split(",");
+    for(String str:catArray){
+        CategoryBean bean = CategoryManager.getCategoryBeanCatID(Integer.parseInt(str),site_id);
+        String params = "site_id=" + site_id + ";cat_id="+bean.getCat_id()+";size=10;cur_page=1;orderby=ci.released_dtime desc;";
+        TurnPageBean tpb = InfoUtilData.getInfoCount(params);
+        json += ",{\"columntital\":\""+bean.getCat_cname()+"\",\"columnCount\":\""+tpb.getCount()+"\"}";
+    }
+    json = json.substring(1);
 	return "["+json+"]";
 }
 
