@@ -21,7 +21,7 @@
     }
     if("count_list".equals(action_type))
     {
-        result = getChildCategoryCountList(request);
+        result = getCountList(request);
     }
     if("news_count".equals(action_type))
     {
@@ -139,7 +139,9 @@ public String getHitsNewsList(HttpServletRequest request)
 public String getCountList(HttpServletRequest request){
 	String json = "";
 	String i_date = FormatUtil.formatNullString(request.getParameter("i_date"));
+	i_date = i_date.substring(0,4)+"-"+i_date.substring(4,6)+"-"+i_date.substring(6,8);
 	json = CmsCountDAO.getCountBySource(i_date);
+	json = json.replaceAll("-","");
 	return "["+json+"]";
 }
 public String getChildCategoryCountList(HttpServletRequest request){

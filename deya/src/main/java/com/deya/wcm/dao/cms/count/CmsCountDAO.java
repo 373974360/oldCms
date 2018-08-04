@@ -385,6 +385,7 @@ public class CmsCountDAO {
             }
             Map<String, String> map = new HashMap<>();
             map.put("source", str);
+            map.put("date", date);
             String newsCount = DBManager.getString("getCountBySource_count", map);
             String newsHits = DBManager.getString("getCountBySource_hits", map);
             String newsDownloadHits = DBManager.getString("getCountBySource_download", map);
