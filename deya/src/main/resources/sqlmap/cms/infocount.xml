@@ -490,4 +490,18 @@
         group by author having author != '' and author is not null order by count
     </select>
 
+    <select id="getCountBySource_count" parameterType="Map" resultType="java.lang.String">
+        select count(info_id) from cs_info where publish_source like '%${source}%'
+    </select>
+    <select id="getCountBySource_hits" parameterType="Map" resultType="java.lang.String">
+        select sum(hits) from cs_info where publish_source like '%${source}%'
+    </select>
+    <select id="getCountBySource_download" parameterType="Map" resultType="java.lang.String">
+        select sum(hits) from cs_info where cat_id=10038 and publish_source like '%${source}%'
+    </select>
+    <select id="getCountBySource_survey" parameterType="Map" resultType="java.lang.String">
+        select sum(t.count) from (select count(s_id) as count from cp_survey_answer where s_id in (select s_id from cp_survey where is_delete = 0) and source = '${surveySource}' group by ip) t
+    </select>
+
+
 </mapper>

@@ -3,6 +3,7 @@
 <%@page import="com.deya.wcm.bean.interview.SubjectBean,com.deya.wcm.bean.search.ResultBean,com.deya.wcm.bean.system.formodel.ModelBean,com.deya.wcm.bean.template.TurnPageBean"%>
 <%@page import="com.deya.wcm.services.appeal.sq.SQManager,com.deya.wcm.services.cms.category.CategoryManager,com.deya.wcm.services.cms.info.InfoBaseManager,com.deya.wcm.services.cms.info.ModelUtil"%>
 <%@page import="com.deya.wcm.services.model.services.InfoCustomService,com.deya.wcm.services.search.search.SearchManager,com.deya.wcm.services.system.formodel.ModelManager,com.deya.wcm.services.zwgk.info.GKInfoManager,com.deya.wcm.template.velocity.data.AppealData,com.deya.wcm.template.velocity.data.InfoUtilData"%><%@ page import="com.deya.wcm.template.velocity.data.InterViewData"%><%@ page import="org.json.JSONException"%><%@ page import="org.json.JSONObject"%><%@ page import="java.util.*"%>
+<%@page import="com.deya.wcm.dao.cms.count.CmsCountDAO"%>
 <%
     String action_type = request.getParameter("action_type");
     String result = "";
@@ -15,6 +16,10 @@
         result = getHitsNewsList(request);
     }
     if("cat_count_list".equals(action_type))
+    {
+        result = getChildCategoryCountList(request);
+    }
+    if("count_list".equals(action_type))
     {
         result = getChildCategoryCountList(request);
     }
@@ -129,6 +134,12 @@ public String getHitsNewsList(HttpServletRequest request)
 		}
 		json = json.substring(1);
 	}
+	return "["+json+"]";
+}
+public String getCountList(HttpServletRequest request){
+	String json = "";
+	String i_date = FormatUtil.formatNullString(request.getParameter("i_date"));
+	json = CmsCountDAO.getCountBySource(i_date);
 	return "["+json+"]";
 }
 public String getChildCategoryCountList(HttpServletRequest request){
