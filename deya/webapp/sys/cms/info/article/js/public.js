@@ -985,12 +985,9 @@ function publicSaveInfoEvent(bean, model_ename, save_type) {
         if (bean.info_status == "8") {
             //得到该栏目所使用的流程ID
             var temp_wf_id = CategoryRPC.getWFIDByCatID(bean.cat_id, site_id);
+
             if (temp_wf_id != 0) {
-                var workFlowBean = jsonrpc.WorkFlowRPC.getWorkFlowBean(temp_wf_id);
                 var temp_step_id = getMaxStepIDByUserID(temp_wf_id, bean.app_id, site_id);
-                if(workFlowBean.wf_steps==temp_step_id){
-                    temp_step_id=100;
-                }
                 if (temp_step_id != 100) {//如果登录人是终审人，不要待审按钮 不然，后台不好更改状态逻辑，（如步骤ID为100，却又是待审状态）
                     bean.info_status = "2";
                     bean.step_id = temp_step_id;
@@ -1041,7 +1038,7 @@ function updateQuoteInfo(bean, model_ename) {
             bean.step_id = new_info_bean.step_id;
             bean.info_status = new_info_bean.info_status;
             bean.final_status = new_info_bean.final_status;
-            bean.released_dtime = new_info_bean.released_dtime;
+            // bean.released_dtime = new_info_bean.released_dtime;
             bean.is_auto_up = new_info_bean.is_auto_up;
             bean.up_dtime = new_info_bean.up_dtime;
             bean.is_auto_down = new_info_bean.is_auto_down;
@@ -1069,10 +1066,6 @@ function setInfoStatusButton() {
         $("#wf_id").val(wf_id);
         step_id = getMaxStepIDByUserID(wf_id, app_id, site_id);
         var workFlowBean = jsonrpc.WorkFlowRPC.getWorkFlowBean(wf_id);
-        if(workFlowBean.wf_steps==step_id){
-            step_id=100;
-            $("#li_ds").addClass("hidden");
-        }
         var workStepList = workFlowBean.workFlowStep_list;
         workStepList = List.toJSList(workStepList);
         for (var i = 0; i < workStepList.size(); i++) {
