@@ -19,6 +19,7 @@ import com.deya.wcm.bean.cms.count.SiteCountBean;
 import com.deya.wcm.bean.cms.info.InfoBean;
 import com.deya.wcm.db.DBManager;
 import com.deya.wcm.services.cms.category.CategoryManager;
+import org.apache.commons.lang3.StringUtils;
 
 public class CmsCountDAO {
 
@@ -391,7 +392,19 @@ public class CmsCountDAO {
             String newsDownloadHits = DBManager.getString("getCountBySource_download", map);
             map.put("surveySource", surveySource);
             String surveyCount = DBManager.getString("getCountBySource_survey", map);
-            json += ",{\"chlcode\":\"" + chlcode + "\",\"chlname\":\"" + chlname + "\",\"i_date\":\"" + date + "\",\"openinfoquery\":\"" + newsHits + "\",\"openinfopush\":\"" + newsCount + "\",\"newsDownloadHits\":\"" + newsDownloadHits + "\",\"otherinfopush\":\"0\",\"onlinesurvey\",\"" + surveyCount + "\"}";
+            if(StringUtils.isEmpty(newsCount)){
+                newsCount="0";
+            }
+            if(StringUtils.isEmpty(newsHits)){
+                newsHits="0";
+            }
+            if(StringUtils.isEmpty(newsDownloadHits)){
+                newsDownloadHits="0";
+            }
+            if(StringUtils.isEmpty(surveyCount)){
+                surveyCount="0";
+            }
+            json += ",{\"chlcode\":\"" + chlcode + "\",\"chlname\":\"" + chlname + "\",\"i_date\":\"" + date + "\",\"openinfoquery\":\"" + newsHits + "\",\"openinfopush\":\"" + newsCount + "\",\"newsDownloadHits\":\"" + newsDownloadHits + "\",\"otherinfopush\":\"0\",\"onlinesurvey\":\"" + surveyCount + "\"}";
         }
         json = json.substring(1);
         return json;
