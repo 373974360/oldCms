@@ -61,12 +61,12 @@ $(document).ready(function(){
   var nameDb='';
 
   function doCreateConfirm(dbname){
-	  msgConfirm("该操作会导致前台搜索功能暂不可用，<br/>确定要继续吗？","doCreate('"+dbname+"')");
+	  parent.msgConfirm("该操作会导致前台搜索功能暂不可用，<br/>确定要继续吗？","doCreate('"+dbname+"')");
   }
   
   function doCreate(dbname){
 	     if(nameDb!=""){
-	    	msgAlert("由于效率问题，一次只能对一个索引库进行操作");
+	    	parent.msgAlert("由于效率问题，一次只能对一个索引库进行操作");
 	        var imag = '<img width="12px" height="12px" src="../../images/loading.gif"/>';
 	        $("#"+nameDb).html(imag + "正在建索引");
 	        return;
@@ -80,14 +80,14 @@ $(document).ready(function(){
   }
   function callBack(data){ 
 	    if($.trim(data)=='1'){
-	      msgAlert("创建索引成功！");
+	      parent.msgAlert("创建索引成功！");
 	      if(nameDb!='ALL'){
 	    	  $("#"+nameDb).html("已建索引");
 		  }else{
 			  $("#"+nameDb).html("");
 		  }
 	    }else{
-	      msgAlert("创建索引失败");
+	      parent.msgAlert("创建索引失败");
 	      if(nameDb!='ALL'){
 	    	  $("#"+nameDb).html("<font color='red'>未建索引</font>");
 		  }else{
@@ -101,12 +101,12 @@ $(document).ready(function(){
 
 
   function doDeleteConfirm(dbname){
-	  msgConfirm("该操作会导致前台搜索功能不可用，<br/>确定删除吗？","doDelete('"+dbname+"')");
+	  parent.msgConfirm("该操作会导致前台搜索功能不可用，<br/>确定删除吗？","doDelete('"+dbname+"')");
   }
   
   function doDelete(dbname){
 	     if(nameDb!=""){
-	    	msgAlert("由于效率问题，一次只能对一个索引库进行操作");
+	    	parent.msgAlert("由于效率问题，一次只能对一个索引库进行操作");
 	        return;
 	     }
 	     //alert(dbname);
@@ -118,14 +118,14 @@ $(document).ready(function(){
   }
   function doDeleteCallBack(data){ 
 	    if($.trim(data)=='1'){
-	      msgAlert("删除索引成功！");
+	      parent.msgAlert("删除索引成功！");
 	      if(nameDb!='ALL'){
 	    	  $("#"+nameDb).html("<font color='red'>未建索引</font>");
 		  }else{
 			  $("#"+nameDb).html("");
 		  }
 	    }else{
-	      msgAlert("删除索引失败");
+	      parent.msgAlert("删除索引失败");
 	      if(nameDb!='ALL'){
 	    	  $("#"+nameDb).html("已建索引");
 		  }else{
