@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="dz_jyhgl">
+
+    <!-- ****************取得站点内某个人员的统计信息************************* -->
+    <select id="getNullCategoryByCount" parameterType="Map" resultType="Map">
+        SELECT
+            g.cat_id,
+            g.cat_cname,
+            g.cat_position
+        FROM
+            ( SELECT count( * ) count, cat_id FROM cs_info WHERE final_status = 0 AND info_status = 8 AND site_id = #{site_id} GROUP BY cat_id ) i
+            RIGHT JOIN cs_info_category g ON i.cat_id = g.cat_id
+        WHERE
+            site_id = #{site_id}
+            AND i.count IS NULL order by g.cat_position asc,cat_sort desc
+    </select>
+
+</mapper>

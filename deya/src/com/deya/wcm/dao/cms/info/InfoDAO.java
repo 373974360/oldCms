@@ -152,7 +152,9 @@ public class InfoDAO {
 	 * @param stl
 	 * @return boolean
 	 */
-	public static boolean addInfo(InfoBean info, SettingLogsBean stl){				
+	public static boolean addInfo(InfoBean info, SettingLogsBean stl){
+		//根据信息的发布时间获取距离本栏目上一条信息的间隔天数
+
 		if(DBManager.insert("addInfo", info))
 		{			
 			PublicTableDAO.insertSettingLogs("添加","主信息",info.getInfo_id()+"",stl);						
