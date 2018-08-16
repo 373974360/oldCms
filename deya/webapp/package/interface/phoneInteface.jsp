@@ -128,6 +128,19 @@ public String getHitsNewsList(HttpServletRequest request)
 	List<InfoBean> info_list = InfoUtilData.getInfoList(params);
 	if(info_list != null && info_list.size() > 0)
 	{
+	    Collections.sort(info_list, new Comparator<InfoBean>() {
+            @Override
+            public int compare(InfoBean info1, InfoBean info2) {
+                //按照点击数排序
+                if(info1.getHits() < info2.getHits()){
+                    return 0;
+                }
+                if(info1.getHits() == info2.getHits()){
+                    return 1;
+                }
+                return -1;
+            }
+	    });
 		for(InfoBean info : info_list)
 		{
 			json += ",{\"newstital\":\""+replaceFont(info.getTitle())+"\",\"newsCount\":\""+info.getHits()+"\"}";
