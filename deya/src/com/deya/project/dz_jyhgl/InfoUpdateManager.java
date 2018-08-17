@@ -28,4 +28,19 @@ public class InfoUpdateManager {
     public static String getInfoUpdateCategoryByGzId(int gz_id){
         return InfoUpdateDAO.getInfoUpdateCategoryByGzId(gz_id);
     }
+
+    public static List<InfoUpdateBean> getStartInfoUpdateList(String currTime){
+        return InfoUpdateDAO.getStartInfoUpdateList(currTime);
+    }
+    public static List<InfoUpdateCategoryBean> getStartInfoUpdateCategoryList(int gz_id){
+        return InfoUpdateDAO.getStartInfoUpdateCategoryList(gz_id);
+    }
+    public static int getInfoUpdateCountByTimeAndCatId(String time,int cat_id){
+        return InfoUpdateDAO.getInfoUpdateCountByTimeAndCatId(time,cat_id);
+    }
+
+    public static String getInfoMaxReleasedDtime(int cat_id){
+        return InfoUpdateDAO.getInfoMaxReleasedDtime(cat_id);
+    }
+
 }

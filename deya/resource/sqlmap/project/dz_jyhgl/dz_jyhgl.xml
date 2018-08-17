@@ -25,7 +25,7 @@
                 and site_id=#{site_id}
             </if>
         </where>
-         order by gz_id desc limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
+         order by gz_id asc limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
     </select>
     <select id="getInfoUpdateCount" parameterType="Map" resultType="java.lang.String" >
         select count(*) from cs_info_update
@@ -34,25 +34,25 @@
                 and site_id=#{site_id}
             </if>
         </where>
-        order by gz_id desc
+        order by gz_id asc
     </select>
     <select id="getInfoUpdateById"  parameterType="Map" resultType="com.deya.project.dz_jyhgl.InfoUpdateBean">
         select * from cs_info_update where gz_id=#{gz_id}
     </select>
     <insert id="insertInfoUpdate" parameterType="com.deya.project.dz_jyhgl.InfoUpdateBean">
-        insert into cs_info_update(gz_id,gz_name,gz_day,gz_count,gz_time,site_id,gz_nexttime)
-		values(#{gz_id},#{gz_name},#{gz_day},#{gz_count},#{gz_time},#{site_id},#{gz_nexttime})
+        insert into cs_info_update(gz_id,gz_name,gz_day,gz_count,site_id,gz_nexttime)
+		values(#{gz_id},#{gz_name},#{gz_day},#{gz_count},#{site_id},#{gz_nexttime})
     </insert>
     <update id="updateInfoUpdate" parameterType="com.deya.project.dz_jyhgl.InfoUpdateBean">
-        update cs_info_update set gz_name=#{gz_name},gz_day=#{gz_day},gz_count=#{gz_count},gz_time=#{gz_time},gz_nexttime=#{gz_nexttime} where gz_id=#{gz_id}
+        update cs_info_update set gz_name=#{gz_name},gz_day=#{gz_day},gz_count=#{gz_count},gz_nexttime=#{gz_nexttime} where gz_id=#{gz_id}
     </update>
     <delete id="deleteInfoUpdate" parameterType="Map">
         delete from cs_info_update where gz_id=#{gz_id}
     </delete>
 
 
-    <delete id="clearInfoUpdateCategoryByGzId" parameterType="Map">
-        delete from cs_info_update_category where cat_id in (${cat_ids})
+    <delete id="clearInfoUpdateCategory" parameterType="Map">
+        delete from cs_info_update_category where cat_id in (${cat_ids}) or gz_id = #{gz_id}
     </delete>
 
     <insert id="insertInfoUpdateCategory" parameterType="com.deya.project.dz_jyhgl.InfoUpdateCategoryBean">
@@ -62,5 +62,22 @@
 
     <select id="getInfoUpdateCategoryByGzId" parameterType="Map" resultType="java.lang.String">
         select group_concat(cat_id) as cat_ids from cs_info_update_category where gz_id=#{gz_id}
+    </select>
+
+
+    <select id="getStartInfoUpdateList"  parameterType="Map" resultType="com.deya.project.dz_jyhgl.InfoUpdateBean">
+        <![CDATA[select * from cs_info_update where gz_nexttime <= #{curr_time} order by gz_id asc]]>
+    </select>
+    <select id="getStartInfoUpdateCategoryList"  parameterType="Map" resultType="com.deya.project.dz_jyhgl.InfoUpdateCategoryBean">
+        select * from cs_info_update_category where gz_id=#{gz_id} order by cat_id asc
+    </select>
+
+
+    <select id="getInfoUpdateCountByTimeAndCatId" parameterType="Map" resultType="java.lang.String">
+        select count(*) as totle from cs_info where released_dtime > #{check_time} and cat_id=#{cat_id}
+    </select>
+
+    <select id="getInfoMaxReleasedDtime" parameterType="Map" resultType="java.lang.String">
+       select max(released_dtime) from cs_info where cat_id = #{cat_id} and info_status=8 and final_status=0
     </select>
 </mapper>

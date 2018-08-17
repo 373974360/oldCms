@@ -16,9 +16,9 @@ function initTable(){
 	colsList.add(setTitleClos("gz_name","规则名称","","","",""));//英文名，显示名，宽，高，样式名，点击事件　
 	colsList.add(setTitleClos("gz_day","间隔天数","100px","","",""));
     colsList.add(setTitleClos("gz_count","更新条数","100px","","",""));
-	colsList.add(setTitleClos("gz_time","上次检查时间","150px","","",""));
+	colsList.add(setTitleClos("gz_time","检查起点时间","150px","","",""));
     colsList.add(setTitleClos("gz_nexttime","下次检查时间","150px","","",""));
-    colsList.add(setTitleClos("action_col","管理操作","200px","","",""));
+    colsList.add(setTitleClos("action_col","管理操作","100px","","",""));
 	
 	table.setColsList(colsList);
 	table.setAllColsList(colsList);				
@@ -44,7 +44,7 @@ function showList(){
 	table.getCol("action_col").each(function(i){
 		if(i>0)
 		{
-			$(this).html('<a href="javascript:openCategoryPage(\''+beanList.get(i-1).gz_id+'\',\''+beanList.get(i-1).site_id+'\')">配置栏目</a>&nbsp;<a href="#">手动检查</a>&nbsp;<a href="#">报表下载</a>');
+			$(this).html('<a href="javascript:openCategoryPage(\''+beanList.get(i-1).gz_id+'\',\''+beanList.get(i-1).site_id+'\')">配置栏目</a>');
 		}
 	})
 	Init_InfoTable(table.table_name);

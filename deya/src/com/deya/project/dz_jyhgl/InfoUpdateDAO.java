@@ -17,16 +17,14 @@ public class InfoUpdateDAO {
         return Integer.parseInt(DBManager.getString("getInfoUpdateCount",map));
     }
     public static InfoUpdateBean getInfoUpdateById(int gz_id){
-        Map<String,Integer> map = new HashMap<String,Integer>();
+        Map<String,Integer> map = new HashMap<>();
         map.put("gz_id",gz_id);
         return (InfoUpdateBean)DBManager.queryFObj("getInfoUpdateById",map);
     }
     public static boolean insertInfoUpdate(InfoUpdateBean bean){
         try {
             bean.setGz_id(PublicTableDAO.getIDByTableName("cs_info_update"));
-            String currTime = DateUtil.getCurrentDateTime();
-            bean.setGz_time(currTime);
-            bean.setGz_nexttime(DateUtil.getDateTimeString(DateUtil.getDateTimesAfter(currTime,bean.getGz_day())));
+            bean.setGz_nexttime(DateUtil.getCurrentDate()+" 00:00:00");
             DBManager.insert("insertInfoUpdate",bean);
             return true;
         }catch (Exception e){
@@ -36,7 +34,6 @@ public class InfoUpdateDAO {
     }
     public static boolean updateInfoUpdate(InfoUpdateBean bean){
         try {
-            bean.setGz_nexttime(DateUtil.getDateTimeString(DateUtil.getDateTimesAfter(bean.getGz_time(),bean.getGz_day())));
             DBManager.update("updateInfoUpdate",bean);
             return true;
         }catch (Exception e){
@@ -48,7 +45,7 @@ public class InfoUpdateDAO {
 
     public static boolean deleteInfoUpdate(int gz_id){
         try {
-            Map<String,Integer> map = new HashMap<String,Integer>();
+            Map<String,Integer> map = new HashMap<>();
             map.put("gz_id",gz_id);
             DBManager.delete("deleteInfoUpdate",map);
             return true;
@@ -60,9 +57,10 @@ public class InfoUpdateDAO {
 
     public static boolean insertInfoUpdateCategory(String cat_ids,int gz_id){
         try {
-            Map<String,String> map = new HashMap<String,String>();
+            Map<String,String> map = new HashMap<>();
             map.put("cat_ids",cat_ids);
-            DBManager.delete("clearInfoUpdateCategoryByGzId",map);
+            map.put("gz_id",gz_id+"");
+            DBManager.delete("clearInfoUpdateCategory",map);
 
             String catArray[] = cat_ids.split(",");
             if(ArrayUtils.isNotEmpty(catArray)){
@@ -81,8 +79,34 @@ public class InfoUpdateDAO {
         }
     }
     public static String getInfoUpdateCategoryByGzId(int gz_id){
-        Map<String,Integer> map = new HashMap<String,Integer>();
+        Map<String,Integer> map = new HashMap<>();
         map.put("gz_id",gz_id);
         return DBManager.getString("getInfoUpdateCategoryByGzId",map);
     }
+
+    public static List<InfoUpdateBean> getStartInfoUpdateList(String currTime){
+        Map<String,String> map = new HashMap<>();
+        map.put("curr_time",currTime);
+        return DBManager.queryFList("getStartInfoUpdateList",map);
+    }
+
+    public static List<InfoUpdateCategoryBean> getStartInfoUpdateCategoryList(int gz_id){
+        Map<String,Integer> map = new HashMap<>();
+        map.put("gz_id",gz_id);
+        return DBManager.queryFList("getStartInfoUpdateCategoryList",map);
+    }
+
+    public static int getInfoUpdateCountByTimeAndCatId(String time,int cat_id){
+        Map<String,String> map = new HashMap<>();
+        map.put("check_time",time);
+        map.put("cat_id",cat_id+"");
+        return Integer.parseInt(DBManager.getString("getInfoUpdateCountByTimeAndCatId",map));
+    }
+
+    public static String getInfoMaxReleasedDtime(int cat_id){
+        Map<String,Integer> map = new HashMap<>();
+        map.put("cat_id",cat_id);
+        return DBManager.getString("getInfoMaxReleasedDtime",map);
+    }
+
 }
