@@ -70,7 +70,6 @@ public class InfoBean  implements java.io.Serializable,Cloneable{
 	private String modify_user_name = "";
     protected String info_level = "";//稿件评级
     protected String isIpLimit = "";//是否IP限制
-	private int upday = 0;//该信息在本栏目中距离上一条信息的间隔天数
 	
 	public int getIs_am_tupage() {
 		return is_am_tupage;

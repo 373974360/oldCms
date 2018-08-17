@@ -3,7 +3,7 @@
         "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 <mapper namespace="dz_jyhgl">
 
-    <!-- ****************取得站点内某个人员的统计信息************************* -->
+    <!-- ****************取得站点内无信息的栏目数据************************* -->
     <select id="getNullCategoryByCount" parameterType="Map" resultType="Map">
         SELECT
             g.cat_id,
@@ -17,4 +17,50 @@
             AND i.count IS NULL order by g.cat_position asc,cat_sort desc
     </select>
 
+    <!-- ****************更新规则列表************************* -->
+    <select id="getInfoUpdateList"  parameterType="Map" resultType="com.deya.project.dz_jyhgl.InfoUpdateBean">
+        select * from cs_info_update
+        <where>
+            <if test="site_id != ''">
+                and site_id=#{site_id}
+            </if>
+        </where>
+         order by gz_id desc limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
+    </select>
+    <select id="getInfoUpdateCount" parameterType="Map" resultType="java.lang.String" >
+        select count(*) from cs_info_update
+        <where>
+            <if test="site_id != ''">
+                and site_id=#{site_id}
+            </if>
+        </where>
+        order by gz_id desc
+    </select>
+    <select id="getInfoUpdateById"  parameterType="Map" resultType="com.deya.project.dz_jyhgl.InfoUpdateBean">
+        select * from cs_info_update where gz_id=#{gz_id}
+    </select>
+    <insert id="insertInfoUpdate" parameterType="com.deya.project.dz_jyhgl.InfoUpdateBean">
+        insert into cs_info_update(gz_id,gz_name,gz_day,gz_count,gz_time,site_id,gz_nexttime)
+		values(#{gz_id},#{gz_name},#{gz_day},#{gz_count},#{gz_time},#{site_id},#{gz_nexttime})
+    </insert>
+    <update id="updateInfoUpdate" parameterType="com.deya.project.dz_jyhgl.InfoUpdateBean">
+        update cs_info_update set gz_name=#{gz_name},gz_day=#{gz_day},gz_count=#{gz_count},gz_time=#{gz_time},gz_nexttime=#{gz_nexttime} where gz_id=#{gz_id}
+    </update>
+    <delete id="deleteInfoUpdate" parameterType="Map">
+        delete from cs_info_update where gz_id=#{gz_id}
+    </delete>
+
+
+    <delete id="clearInfoUpdateCategoryByGzId" parameterType="Map">
+        delete from cs_info_update_category where cat_id in (${cat_ids})
+    </delete>
+
+    <insert id="insertInfoUpdateCategory" parameterType="com.deya.project.dz_jyhgl.InfoUpdateCategoryBean">
+        insert into cs_info_update_category(id,cat_id,gz_id)
+        values(#{id},#{cat_id},#{gz_id})
+    </insert>
+
+    <select id="getInfoUpdateCategoryByGzId" parameterType="Map" resultType="java.lang.String">
+        select group_concat(cat_id) as cat_ids from cs_info_update_category where gz_id=#{gz_id}
+    </select>
 </mapper>
