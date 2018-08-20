@@ -1,5 +1,11 @@
 package com.deya.project.dz_jyhgl;
 
+import com.deya.util.FormatUtil;
+import com.deya.util.jconfig.JconfigUtilContainer;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -50,5 +56,24 @@ public class InfoUpdateManager {
     public static String getInfoMaxReleasedDtime(String cat_id){
         return InfoUpdateDAO.getInfoMaxReleasedDtime(cat_id);
     }
+
+
+    public static List<InfoUpdateDownLoadBean> getDownloadFile(int gz_id,String site_id){
+        List<InfoUpdateDownLoadBean> files = new ArrayList<>();
+        String root_path = JconfigUtilContainer.bashConfig().getProperty("path", "", "manager_path");
+        String path = FormatUtil.formatPath(root_path + "/project/dz_jyhgl/"+site_id+"/"+gz_id+"/");
+        File file = new File(path);
+        File[] tempList = file.listFiles();
+        for (int i = 0; i < tempList.length; i++) {
+            InfoUpdateDownLoadBean downLoadBean = new InfoUpdateDownLoadBean();
+            if (tempList[i].isFile()) {
+                downLoadBean.setFile_name(tempList[i].getName());
+                downLoadBean.setFile_path("/sys/project/dz_jyhgl/"+site_id+"/"+gz_id+"/"+tempList[i].getName());
+                files.add(downLoadBean);
+            }
+        }
+        return files;
+    }
+
 
 }

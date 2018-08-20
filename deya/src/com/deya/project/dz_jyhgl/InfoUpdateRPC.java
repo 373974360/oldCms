@@ -29,4 +29,7 @@ public class InfoUpdateRPC {
     public static String getInfoUpdateCategoryByGzId(int gz_id){
         return InfoUpdateManager.getInfoUpdateCategoryByGzId(gz_id);
     }
+    public static List<InfoUpdateDownLoadBean> getDownloadFile(int gz_id,String site_id){
+        return InfoUpdateManager.getDownloadFile(gz_id,site_id);
+    }
 }

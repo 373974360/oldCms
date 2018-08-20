@@ -71,7 +71,7 @@ public class InfoUpdateTimerImpl implements Job {
                             }
                         }
                     }
-                    createExcel(checkResultList,infoUpdateBean.getGz_id());
+                    createExcel(checkResultList,infoUpdateBean.getGz_id(),infoUpdateBean.getSite_id());
                 }else{
                     System.out.println("定时检查栏目更新情况开始*****" + infoUpdateBean.getGz_name()+":暂未配置栏目!");
                 }
@@ -85,10 +85,10 @@ public class InfoUpdateTimerImpl implements Job {
         }
     }
 
-    private static void createExcel(List<Map<String,String>> checkResultList,int gz_id){
+    private static void createExcel(List<Map<String,String>> checkResultList,int gz_id,String site_id){
         //删除今天以前的文件夹
         String root_path = JconfigUtilContainer.bashConfig().getProperty("path", "", "manager_path");
-        String path = FormatUtil.formatPath(root_path + "/project/dz_jyhgl/result/"+gz_id+"/");
+        String path = FormatUtil.formatPath(root_path + "/project/dz_jyhgl/"+site_id+"/"+gz_id+"/");
         CountUtil.deleteFile(path);
         //创建今天的文件夹和xls文件
         String nowDate = CountUtil.getNowDayDate();
@@ -97,8 +97,7 @@ public class InfoUpdateTimerImpl implements Job {
         if(!file.exists()){
             file.mkdirs();
         }
-        String nowTime = CountUtil.getNowDayDateTime();
-        String xls = nowTime + CountUtil.getEnglish(1)+".xls";
+        String xls = CountUtil.getEnglish(1)+".xls";
         String xlsFile = fileTemp2+File.separator+xls;
 
         String[] head = {"栏目","最后更新时间","截止时间","规定更新数量","实际更新数量","建议"};
