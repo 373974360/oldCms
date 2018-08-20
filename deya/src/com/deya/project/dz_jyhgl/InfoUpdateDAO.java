@@ -57,8 +57,11 @@ public class InfoUpdateDAO {
 
     public static boolean insertInfoUpdateCategory(String cat_ids,int gz_id){
         try {
+            InfoUpdateBean infoUpdateBean = getInfoUpdateById(gz_id);
             Map<String,String> map = new HashMap<>();
-            map.put("cat_ids",cat_ids);
+            if(infoUpdateBean.getGz_type()==2){//只有列表页的监测配置  一个栏目只能配一个规则
+                map.put("cat_ids",cat_ids);
+            }
             map.put("gz_id",gz_id+"");
             DBManager.delete("clearInfoUpdateCategory",map);
 
@@ -103,10 +106,22 @@ public class InfoUpdateDAO {
         return Integer.parseInt(DBManager.getString("getInfoUpdateCountByTimeAndCatId",map));
     }
 
+    public static int getInfoUpdateCountByTimeAndCatId(String time,String cat_id){
+        Map<String,String> map = new HashMap<>();
+        map.put("check_time",time);
+        map.put("cat_id",cat_id);
+        return Integer.parseInt(DBManager.getString("getInfoUpdateCountByTimeAndCatId_index",map));
+    }
+
     public static String getInfoMaxReleasedDtime(int cat_id){
         Map<String,Integer> map = new HashMap<>();
         map.put("cat_id",cat_id);
         return DBManager.getString("getInfoMaxReleasedDtime",map);
     }
 
+    public static String getInfoMaxReleasedDtime(String cat_id){
+        Map<String,String> map = new HashMap<>();
+        map.put("cat_id",cat_id);
+        return DBManager.getString("getInfoMaxReleasedDtime_index",map);
+    }
 }

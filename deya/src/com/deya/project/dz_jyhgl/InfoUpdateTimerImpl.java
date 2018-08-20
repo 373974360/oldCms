@@ -33,16 +33,17 @@ public class InfoUpdateTimerImpl implements Job {
                 List<CategoryBean> categoryBeanList = getCatIds(infoUpdateBean);//获取该规则下配置的所有末级栏目
                 if(!categoryBeanList.isEmpty()){
                     List<Map<String,String>> checkResultList = new ArrayList<>();
-                    for(CategoryBean categoryBean:categoryBeanList){
-                        //检查起点时间 为该栏目发布的最后一条信息的时间
-                        String checkStartTime = InfoUpdateManager.getInfoMaxReleasedDtime(categoryBean.getCat_id());
+                    if(infoUpdateBean.getGz_type()==1){//首页
+                        String cat_ids = InfoUpdateManager.getInfoUpdateCategoryByGzId(infoUpdateBean.getGz_id());
+                        //检查起点时间 为首页所有栏目最后一条信息的时间
+                        String checkStartTime = InfoUpdateManager.getInfoMaxReleasedDtime(cat_ids);
                         if(StringUtils.isEmpty(checkStartTime)){
                             checkStartTime = currTime;
                         }
                         Map<String,String> map = new HashMap<>();
-                        int count = InfoUpdateManager.getInfoUpdateCountByTimeAndCatId(checkStartTime,categoryBean.getCat_id());
+                        int count = InfoUpdateManager.getInfoUpdateCountByTimeAndCatId(checkStartTime,cat_ids);
                         if(count<infoUpdateBean.getGz_count()){
-                            map.put("cat_name", getCategoryPosition(categoryBean.getCat_id(),infoUpdateBean.getSite_id()));
+                            map.put("cat_name", "网站首页");
                             map.put("start_time",checkStartTime);
                             map.put("end_time",currTime);
                             map.put("gz_count",infoUpdateBean.getGz_count()+"");
@@ -50,15 +51,34 @@ public class InfoUpdateTimerImpl implements Job {
                             map.put("desc","补录信息");
                             checkResultList.add(map);
                         }
+                    }else if(infoUpdateBean.getGz_type()==2){//列表页
+                        for(CategoryBean categoryBean:categoryBeanList){
+                            //检查起点时间 为该栏目发布的最后一条信息的时间
+                            String checkStartTime = InfoUpdateManager.getInfoMaxReleasedDtime(categoryBean.getCat_id());
+                            if(StringUtils.isEmpty(checkStartTime)){
+                                checkStartTime = currTime;
+                            }
+                            Map<String,String> map = new HashMap<>();
+                            int count = InfoUpdateManager.getInfoUpdateCountByTimeAndCatId(checkStartTime,categoryBean.getCat_id());
+                            if(count<infoUpdateBean.getGz_count()){
+                                map.put("cat_name", getCategoryPosition(categoryBean.getCat_id(),infoUpdateBean.getSite_id()));
+                                map.put("start_time",checkStartTime);
+                                map.put("end_time",currTime);
+                                map.put("gz_count",infoUpdateBean.getGz_count()+"");
+                                map.put("info_count",count+"");
+                                map.put("desc","补录信息");
+                                checkResultList.add(map);
+                            }
+                        }
                     }
                     createExcel(checkResultList,infoUpdateBean.getGz_id());
-                    //更新检下次检查时间
-                    String nextTime = DateUtil.getDateTimeString(DateUtil.getDateAfter(currTime,infoUpdateBean.getGz_day()-2));
-                    infoUpdateBean.setGz_nexttime(nextTime);
-                    InfoUpdateManager.updateInfoUpdate(infoUpdateBean);
                 }else{
                     System.out.println("定时检查栏目更新情况开始*****" + infoUpdateBean.getGz_name()+":暂未配置栏目!");
                 }
+                //更新检下次检查时间
+                String nextTime = DateUtil.getDateTimeString(DateUtil.getDateAfter(currTime,infoUpdateBean.getGz_day()-2));
+                infoUpdateBean.setGz_nexttime(nextTime);
+                InfoUpdateManager.updateInfoUpdate(infoUpdateBean);
             }
         }else{
             System.out.println("定时检查栏目更新情况开始*****暂无任务" + currTime);
@@ -92,7 +112,7 @@ public class InfoUpdateTimerImpl implements Job {
             data[i][4] = map.get("info_count");//实际更新数量
             data[i][5] = map.get("desc");//建议
         }
-        OutExcel oe=new OutExcel("栏目更新检查结果");
+        OutExcel oe=new OutExcel("信息更新检查结果");
         oe.doOut(xlsFile,head,data);
     }
 

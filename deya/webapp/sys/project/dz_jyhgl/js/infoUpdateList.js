@@ -16,7 +16,7 @@ function initTable(){
 	colsList.add(setTitleClos("gz_name","规则名称","","","",""));//英文名，显示名，宽，高，样式名，点击事件　
 	colsList.add(setTitleClos("gz_day","间隔天数","100px","","",""));
     colsList.add(setTitleClos("gz_count","更新条数","100px","","",""));
-	colsList.add(setTitleClos("gz_time","检查起点时间","150px","","",""));
+	colsList.add(setTitleClos("gz_type","监测类型","150px","","",""));
     colsList.add(setTitleClos("gz_nexttime","下次检查时间","150px","","",""));
     colsList.add(setTitleClos("action_col","管理操作","100px","","",""));
 	
@@ -47,6 +47,17 @@ function showList(){
 			$(this).html('<a href="javascript:openCategoryPage(\''+beanList.get(i-1).gz_id+'\',\''+beanList.get(i-1).site_id+'\')">配置栏目</a>');
 		}
 	})
+    table.getCol("gz_type").each(function(i){
+        if(i>0)
+        {
+            if(beanList.get(i-1).gz_type==1){
+                $(this).html('首页');
+            }
+            if(beanList.get(i-1).gz_type==2){
+                $(this).html('列表页');
+            }
+        }
+    })
 	Init_InfoTable(table.table_name);
 }
 function showTurnPage(){
@@ -72,7 +83,7 @@ function openAddPage(){
         top.msgWargin("请选择站点");
         return;
 	}else{
-        top.OpenModalWindow("新建更新规则","/sys/project/dz_jyhgl/infoUpdate_add.jsp?site_id="+site_id,500,195);
+        top.OpenModalWindow("新建更新规则","/sys/project/dz_jyhgl/infoUpdate_add.jsp?site_id="+site_id,500,215);
 	}
 }
 
@@ -98,7 +109,7 @@ function funAdd(){
 //打开修改页面
 function openUpdatePage(){
     var selectIDS = table.getSelecteCheckboxValue("gz_id");
-    top.OpenModalWindow("修改更新规则","/sys/project/dz_jyhgl/infoUpdate_add.jsp?gz_id="+selectIDS,500,195);
+    top.OpenModalWindow("修改更新规则","/sys/project/dz_jyhgl/infoUpdate_add.jsp?gz_id="+selectIDS,500,215);
 }
 
 //修改

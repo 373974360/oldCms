@@ -11,6 +11,7 @@ public class InfoUpdateBean implements Serializable {
     private int gz_count=0;//信息条数  间隔天数内需要更新的信息条数
     private String site_id="";//站点ID
     private String gz_nexttime="";//下次检查时间
+    private int gz_type=0;//1:首页；2:列表页
 
     public int getGz_id() {
         return gz_id;
@@ -58,5 +59,13 @@ public class InfoUpdateBean implements Serializable {
 
     public void setGz_nexttime(String gz_nexttime) {
         this.gz_nexttime = gz_nexttime;
+    }
+
+    public int getGz_type() {
+        return gz_type;
+    }
+
+    public void setGz_type(int gz_type) {
+        this.gz_type = gz_type;
     }
 }

@@ -45,6 +45,13 @@ $(document).ready(function(){
 				</td>
 			</tr>
 			<tr>
+				<th><span class="f_red">*</span>监测类型：</th>
+				<td class="width250">
+					<input id="gz_type" name="gz_type" type="radio" value="1" checked="true"/>首页
+					<input id="gz_type" name="gz_type" type="radio" value="2"/>列表页
+				</td>
+			</tr>
+			<tr>
 				<th><span class="f_red">*</span>间隔天数：</th>
 				<td class="width250">
 					<input id="gz_day" name="gz_day" type="text" class="width300" value="" onblur="checkInputValue('gz_day',false,80,'间隔天数','checkInt')"/>

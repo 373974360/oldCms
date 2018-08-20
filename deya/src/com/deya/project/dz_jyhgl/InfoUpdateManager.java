@@ -38,8 +38,16 @@ public class InfoUpdateManager {
     public static int getInfoUpdateCountByTimeAndCatId(String time,int cat_id){
         return InfoUpdateDAO.getInfoUpdateCountByTimeAndCatId(time,cat_id);
     }
+    public static int getInfoUpdateCountByTimeAndCatId(String time,String cat_id){
+        return InfoUpdateDAO.getInfoUpdateCountByTimeAndCatId(time,cat_id);
+    }
 
     public static String getInfoMaxReleasedDtime(int cat_id){
+        return InfoUpdateDAO.getInfoMaxReleasedDtime(cat_id);
+    }
+
+    //首页栏目聚合  最后一条信息的更新时间
+    public static String getInfoMaxReleasedDtime(String cat_id){
         return InfoUpdateDAO.getInfoMaxReleasedDtime(cat_id);
     }
 
