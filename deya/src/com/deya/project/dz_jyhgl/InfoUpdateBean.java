@@ -10,7 +10,7 @@ public class InfoUpdateBean implements Serializable {
     private int gz_day=0;//检查频率  检查间隔天数
     private int gz_count=0;//信息条数  间隔天数内需要更新的信息条数
     private String site_id="";//站点ID
-    private String gz_nexttime="";//下次检查时间
+    private String gz_time="";//下次检查时间
     private int gz_type=0;//1:首页；2:列表页
 
     public int getGz_id() {
@@ -49,17 +49,18 @@ public class InfoUpdateBean implements Serializable {
         return site_id;
     }
 
+    public String getGz_time() {
+        return gz_time;
+    }
+
+    public void setGz_time(String gz_time) {
+        this.gz_time = gz_time;
+    }
+
     public void setSite_id(String site_id) {
         this.site_id = site_id;
     }
 
-    public String getGz_nexttime() {
-        return gz_nexttime;
-    }
-
-    public void setGz_nexttime(String gz_nexttime) {
-        this.gz_nexttime = gz_nexttime;
-    }
 
     public int getGz_type() {
         return gz_type;

@@ -24,7 +24,6 @@ public class InfoUpdateDAO {
     public static boolean insertInfoUpdate(InfoUpdateBean bean){
         try {
             bean.setGz_id(PublicTableDAO.getIDByTableName("cs_info_update"));
-            bean.setGz_nexttime(DateUtil.getCurrentDate()+" 00:00:00");
             DBManager.insert("insertInfoUpdate",bean);
             return true;
         }catch (Exception e){
@@ -99,29 +98,17 @@ public class InfoUpdateDAO {
         return DBManager.queryFList("getStartInfoUpdateCategoryList",map);
     }
 
-    public static int getInfoUpdateCountByTimeAndCatId(String time,int cat_id){
+    public static int getInfoUpdateCountByTimeAndCatId(String starttime,String endtime,String cat_id){
         Map<String,String> map = new HashMap<>();
-        map.put("check_time",time);
-        map.put("cat_id",cat_id+"");
+        map.put("starttime",starttime);
+        map.put("endtime",endtime);
+        map.put("cat_id",cat_id);
         return Integer.parseInt(DBManager.getString("getInfoUpdateCountByTimeAndCatId",map));
-    }
-
-    public static int getInfoUpdateCountByTimeAndCatId(String time,String cat_id){
-        Map<String,String> map = new HashMap<>();
-        map.put("check_time",time);
-        map.put("cat_id",cat_id);
-        return Integer.parseInt(DBManager.getString("getInfoUpdateCountByTimeAndCatId_index",map));
-    }
-
-    public static String getInfoMaxReleasedDtime(int cat_id){
-        Map<String,Integer> map = new HashMap<>();
-        map.put("cat_id",cat_id);
-        return DBManager.getString("getInfoMaxReleasedDtime",map);
     }
 
     public static String getInfoMaxReleasedDtime(String cat_id){
         Map<String,String> map = new HashMap<>();
         map.put("cat_id",cat_id);
-        return DBManager.getString("getInfoMaxReleasedDtime_index",map);
+        return DBManager.getString("getInfoMaxReleasedDtime",map);
     }
 }

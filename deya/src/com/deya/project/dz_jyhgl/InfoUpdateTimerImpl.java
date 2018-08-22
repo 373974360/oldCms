@@ -41,11 +41,13 @@ public class InfoUpdateTimerImpl implements Job {
                             checkStartTime = currTime;
                         }
                         Map<String,String> map = new HashMap<>();
-                        int count = InfoUpdateManager.getInfoUpdateCountByTimeAndCatId(checkStartTime,cat_ids);
+                        String endtime = DateUtil.getDateTimeString(DateUtil.getDateAfter(checkStartTime,infoUpdateBean.getGz_day()-2));
+                        int count = InfoUpdateManager.getInfoUpdateCountByTimeAndCatId(checkStartTime,endtime,cat_ids);
                         if(count<infoUpdateBean.getGz_count()){
                             map.put("cat_name", "网站首页");
                             map.put("start_time",checkStartTime);
-                            map.put("end_time",currTime);
+                            map.put("end_time",endtime);
+                            map.put("gz_day",infoUpdateBean.getGz_day()+"");
                             map.put("gz_count",infoUpdateBean.getGz_count()+"");
                             map.put("info_count",count+"");
                             map.put("desc","补录信息");
@@ -54,16 +56,18 @@ public class InfoUpdateTimerImpl implements Job {
                     }else if(infoUpdateBean.getGz_type()==2){//列表页
                         for(CategoryBean categoryBean:categoryBeanList){
                             //检查起点时间 为该栏目发布的最后一条信息的时间
-                            String checkStartTime = InfoUpdateManager.getInfoMaxReleasedDtime(categoryBean.getCat_id());
+                            String checkStartTime = InfoUpdateManager.getInfoMaxReleasedDtime(categoryBean.getCat_id()+"");
                             if(StringUtils.isEmpty(checkStartTime)){
                                 checkStartTime = currTime;
                             }
+                            String endtime = DateUtil.getDateTimeString(DateUtil.getDateAfter(checkStartTime,infoUpdateBean.getGz_day()-2));
                             Map<String,String> map = new HashMap<>();
-                            int count = InfoUpdateManager.getInfoUpdateCountByTimeAndCatId(checkStartTime,categoryBean.getCat_id());
+                            int count = InfoUpdateManager.getInfoUpdateCountByTimeAndCatId(checkStartTime,endtime,categoryBean.getCat_id()+"");
                             if(count<infoUpdateBean.getGz_count()){
                                 map.put("cat_name", getCategoryPosition(categoryBean.getCat_id(),infoUpdateBean.getSite_id()));
                                 map.put("start_time",checkStartTime);
-                                map.put("end_time",currTime);
+                                map.put("end_time",endtime);
+                                map.put("gz_day",infoUpdateBean.getGz_day()+"");
                                 map.put("gz_count",infoUpdateBean.getGz_count()+"");
                                 map.put("info_count",count+"");
                                 map.put("desc","补录信息");
@@ -77,7 +81,7 @@ public class InfoUpdateTimerImpl implements Job {
                 }
                 //更新检下次检查时间
                 String nextTime = DateUtil.getDateTimeString(DateUtil.getDateAfter(currTime,infoUpdateBean.getGz_day()-2));
-                infoUpdateBean.setGz_nexttime(nextTime);
+                infoUpdateBean.setGz_time(nextTime);
                 InfoUpdateManager.updateInfoUpdate(infoUpdateBean);
             }
         }else{
@@ -92,24 +96,26 @@ public class InfoUpdateTimerImpl implements Job {
         CountUtil.deleteFile(path);
         //创建今天的文件夹和xls文件
         String nowDate = CountUtil.getNowDayDate();
-        String fileTemp2 = FormatUtil.formatPath(path+ File.separator+nowDate);
+        String fileTemp2 = FormatUtil.formatPath(path+ File.separator);
         File file = new File(fileTemp2);
         if(!file.exists()){
             file.mkdirs();
         }
-        String xls = CountUtil.getEnglish(1)+".xls";
+        String nowTime = CountUtil.getNowDayDateTime();
+        String xls = nowTime + CountUtil.getEnglish(1)+".xls";
         String xlsFile = fileTemp2+File.separator+xls;
 
-        String[] head = {"栏目","最后更新时间","截止时间","规定更新数量","实际更新数量","建议"};
-        String[][] data = new String[checkResultList.size()][6];
+        String[] head = {"栏目","最后更新时间","截止时间","间隔天数","规定更新数量","实际更新数量","建议"};
+        String[][] data = new String[checkResultList.size()][7];
         for(int i=0;i<checkResultList.size();i++){
             Map<String,String>  map = checkResultList.get(i);
             data[i][0] = map.get("cat_name");//栏目
             data[i][1] = map.get("start_time");//开始时间
             data[i][2] = map.get("end_time");//结束时间
-            data[i][3] = map.get("gz_count");//规定更新数量
-            data[i][4] = map.get("info_count");//实际更新数量
-            data[i][5] = map.get("desc");//建议
+            data[i][3] = map.get("gz_day");//间隔天数
+            data[i][4] = map.get("gz_count");//规定更新数量
+            data[i][5] = map.get("info_count");//实际更新数量
+            data[i][6] = map.get("desc");//建议
         }
         OutExcel oe=new OutExcel("信息更新检查结果");
         oe.doOut(xlsFile,head,data);

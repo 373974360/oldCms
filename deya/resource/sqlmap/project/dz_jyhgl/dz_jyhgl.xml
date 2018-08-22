@@ -40,11 +40,11 @@
         select * from cs_info_update where gz_id=#{gz_id}
     </select>
     <insert id="insertInfoUpdate" parameterType="com.deya.project.dz_jyhgl.InfoUpdateBean">
-        insert into cs_info_update(gz_id,gz_name,gz_day,gz_count,site_id,gz_nexttime,gz_type)
-		values(#{gz_id},#{gz_name},#{gz_day},#{gz_count},#{site_id},#{gz_nexttime},#{gz_type})
+        insert into cs_info_update(gz_id,gz_name,gz_day,gz_count,site_id,gz_time,gz_type)
+		values(#{gz_id},#{gz_name},#{gz_day},#{gz_count},#{site_id},#{gz_time},#{gz_type})
     </insert>
     <update id="updateInfoUpdate" parameterType="com.deya.project.dz_jyhgl.InfoUpdateBean">
-        update cs_info_update set gz_name=#{gz_name},gz_day=#{gz_day},gz_count=#{gz_count},gz_nexttime=#{gz_nexttime},gz_type=#{gz_type} where gz_id=#{gz_id}
+        update cs_info_update set gz_name=#{gz_name},gz_day=#{gz_day},gz_count=#{gz_count},gz_time=#{gz_time},gz_type=#{gz_type} where gz_id=#{gz_id}
     </update>
     <delete id="deleteInfoUpdate" parameterType="Map">
         delete from cs_info_update where gz_id=#{gz_id}
@@ -69,7 +69,7 @@
 
 
     <select id="getStartInfoUpdateList"  parameterType="Map" resultType="com.deya.project.dz_jyhgl.InfoUpdateBean">
-        <![CDATA[select * from cs_info_update where gz_nexttime <= #{curr_time} order by gz_id asc]]>
+        <![CDATA[select * from cs_info_update order by gz_id asc]]>
     </select>
     <select id="getStartInfoUpdateCategoryList"  parameterType="Map" resultType="com.deya.project.dz_jyhgl.InfoUpdateCategoryBean">
         select * from cs_info_update_category where gz_id=#{gz_id} order by cat_id asc
@@ -77,17 +77,10 @@
 
 
     <select id="getInfoUpdateCountByTimeAndCatId" parameterType="Map" resultType="java.lang.String">
-        select count(*) as totle from cs_info where released_dtime > #{check_time} and cat_id=#{cat_id}
-    </select>
-
-    <select id="getInfoUpdateCountByTimeAndCatId_index" parameterType="Map" resultType="java.lang.String">
-        select count(*) as totle from cs_info where released_dtime > #{check_time} and cat_id in (${cat_id})
+        <![CDATA[select count(*) as totle from cs_info where released_dtime > #{starttime} and released_dtime <= #{endtime} and cat_id in (${cat_id})]]>
     </select>
 
     <select id="getInfoMaxReleasedDtime" parameterType="Map" resultType="java.lang.String">
-       select max(released_dtime) from cs_info where cat_id = #{cat_id} and info_status=8 and final_status=0
-    </select>
-    <select id="getInfoMaxReleasedDtime_index" parameterType="Map" resultType="java.lang.String">
         select max(released_dtime) from cs_info where cat_id in (${cat_id}) and info_status=8 and final_status=0
     </select>
 </mapper>
