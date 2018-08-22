@@ -79,9 +79,7 @@ public class InfoUpdateTimerImpl implements Job {
                 }else{
                     System.out.println("定时检查栏目更新情况开始*****" + infoUpdateBean.getGz_name()+":暂未配置栏目!");
                 }
-                //更新检下次检查时间
-                String nextTime = DateUtil.getDateTimeString(DateUtil.getDateAfter(currTime,infoUpdateBean.getGz_day()-2));
-                infoUpdateBean.setGz_time(nextTime);
+                infoUpdateBean.setGz_time(DateUtil.getCurrentDateTime());
                 InfoUpdateManager.updateInfoUpdate(infoUpdateBean);
             }
         }else{

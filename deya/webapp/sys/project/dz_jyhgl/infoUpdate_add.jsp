@@ -49,6 +49,9 @@ $(document).ready(function(){
 				<td class="width250">
 					<input id="gz_type" name="gz_type" type="radio" value="1" checked="true"/>首页
 					<input id="gz_type" name="gz_type" type="radio" value="2"/>列表页
+					<input id="gz_type" name="gz_type" type="radio" value="3"/>诉求
+					<input id="gz_type" name="gz_type" type="radio" value="4"/>调查
+					<input id="gz_type" name="gz_type" type="radio" value="5"/>访谈
 				</td>
 			</tr>
 			<tr>
