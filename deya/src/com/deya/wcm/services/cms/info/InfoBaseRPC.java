@@ -515,6 +515,9 @@ public class InfoBaseRPC {
 		return InfoExpandManager.setInfoTop(istop, info_id);
 	}
 
+	public static String getInfoByUrl(String url){
+		return InfoBaseManager.getInfoByUrl(url);
+	}
 	public static void main(String[] args) {
         /*
 		Map<String, String> m = new java.util.HashMap<String, String>();

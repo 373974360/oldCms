@@ -873,7 +873,7 @@
 
     <!--获取url获取信息总数 -->
     <select id="getInfoByUrl" parameterType="Map" resultType="java.lang.String">
-        select count(*) from cs_info where content_url like '%${content_url}%'
+        select count(*) from cs_info where info_status=8 and final_status=0 and content_url like '%${content_url}%'
     </select>
 
 </mapper>
