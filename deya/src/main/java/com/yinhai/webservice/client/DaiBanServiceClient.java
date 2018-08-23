@@ -90,7 +90,7 @@ public class DaiBanServiceClient {
                             }
                         }
                         _xmlstr.append("<resultname>").append("待审批").append("</resultname>");
-                        _xmlstr.append("<apvaladdress>").append("/sys/index.jsp?menuUrl=/sys/cms/info/article/verifyInfoList.jsp").append("</apvaladdress>");
+                        _xmlstr.append("<apvaladdress>").append("index.jsp?menuUrl=/sys/cms/info/article/verifyInfoList.jsp").append("</apvaladdress>");
                         _xmlstr.append("<remark>").append("待审批信息").append("</remark>");
                         if(info.getModify_user()==0){
                             _xmlstr.append("<curcode>").append(info.getInput_user()).append("</curcode>");
@@ -134,7 +134,7 @@ public class DaiBanServiceClient {
                             }
                         }
                         _xmlstr.append("<resultname>").append("退稿").append("</resultname>");
-                        _xmlstr.append("<apvaladdress>").append("/sys/index.jsp?menuUrl=/sys/cms/info/article/noPassInfoList.jsp").append("</apvaladdress>");
+                        _xmlstr.append("<apvaladdress>").append("index.jsp?menuUrl=/sys/cms/info/article/noPassInfoList.jsp").append("</apvaladdress>");
                         _xmlstr.append("<remark>").append("退稿信息").append("</remark>");
                         if(info.getModify_user()==0){
                             _xmlstr.append("<curcode>").append(info.getInput_user()).append("</curcode>");
