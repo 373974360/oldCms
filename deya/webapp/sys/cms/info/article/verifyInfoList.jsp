@@ -31,7 +31,6 @@
     <script type="text/javascript" src="js/public.js"></script>
 
     <script type="text/javascript">
-
         var site_id = "<%=siteid%>";
         var app = "<%=app_id%>";
         var gk_article = false;//特殊栏目标识，在政务公开中使用的是内容管理中的文章模型
@@ -59,6 +58,18 @@
         con_map.put("app_id", app);
         con_map.put("sort_name", "ci.opt_dtime");
         con_map.put("sort_type", "desc");
+
+        if(LoginUserBean.user_id==139606){//陈小平
+            con_map.put("dept_id", "3,10");//办公室、贷款管理处
+        }else if(LoginUserBean.user_id==128006){//赵燕
+            con_map.put("dept_id", "9,4");//法规处，人事处
+        }else if(LoginUserBean.user_id==127987){//孙开颜
+            con_map.put("dept_id", "6,12,5");//财务处，信息处，计划处
+        }else if(LoginUserBean.user_id==128008){//付晓朦
+            con_map.put("dept_id", "7,8");//审计，监察室
+        }else if(opt_ids.indexOf(",531,")>-1){
+            con_map.put("dept_id", LoginUserBean.dept_id+"");
+        }
 
         $(document).ready(function () {
             showModels();

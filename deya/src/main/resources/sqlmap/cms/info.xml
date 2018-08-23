@@ -484,6 +484,9 @@
         <if test="input_user != null">
             and ci.input_user = #{input_user}
         </if>
+        <if test="dept_user != null">
+            and ci.input_user in ()#{input_user}
+        </if>
         <if test="site_id != null">
             and ci.site_id = #{site_id} and ci.site_id = ca.site_id
         </if>

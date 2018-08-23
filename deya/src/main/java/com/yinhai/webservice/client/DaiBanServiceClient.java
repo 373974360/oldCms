@@ -1,5 +1,6 @@
 package com.yinhai.webservice.client;
 
+import org.apache.commons.lang3.StringUtils;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
@@ -15,6 +16,7 @@ import com.deya.wcm.bean.cms.info.InfoBean;
 import com.deya.wcm.bean.cms.workflow.WorkFlowBean;
 import com.deya.wcm.services.cms.workflow.WorkFlowManager;
 import com.deya.wcm.bean.cms.workflow.WorkFlowStepBean;
+import com.deya.wcm.services.org.user.UserLogin;
 
 /**
  * Created with IntelliJ IDEA.
@@ -56,6 +58,18 @@ public class DaiBanServiceClient {
         if(userList!=null && !userList.isEmpty()){
             for(UserBean user:userList){
                 con_map.put("user_id",user.getUser_id()+"");
+                String opt_ids = UserLogin.getOptIDSByUserAPPSite(user.getUser_id()+"", "cms", "CMScqgjj");
+                if(user.getUser_id()==139606){//陈小平
+                    con_map.put("dept_user",deptUser("3,10"));//办公室、贷款管理处
+                }else if(user.getUser_id()==128006){//赵燕
+                    con_map.put("dept_user",deptUser("9,4"));//办公室、贷款管理处
+                }else if(user.getUser_id()==127987){//孙开颜
+                    con_map.put("dept_user",deptUser("6,12,5"));//财务处，信息处，计划处
+                }else if(user.getUser_id()==128008){//付晓朦
+                    con_map.put("dept_user",deptUser("7,8"));//审计，监察室
+                }else if(opt_ids.indexOf(",531,")>-1){
+                    con_map.put("dept_user",deptUser(user.getDept_id()+""));
+                }
                 Map<String,Object> resultMap = InfoDesktop.getWaitVerifyInfoList(con_map);
                 List<InfoBean> infoList = (List<InfoBean>) resultMap.get("info_List");
                 if(infoList!=null && !infoList.isEmpty()){
@@ -156,5 +170,24 @@ public class DaiBanServiceClient {
             e.printStackTrace();
         }
         return Integer.parseInt(textTrim);
+    }
+
+    public static String deptUser(String dept_id){
+        String dept_user="";
+        String[] deptArray = dept_id.split(",");
+        for(String deptId:deptArray){
+            List<UserBean> list = UserManager.getUserListByDeptID(deptId);
+            if(!list.isEmpty()){
+                for(UserBean userBean:list){
+                    dept_user+=userBean.getUser_id()+",";
+                }
+            }
+        }
+        if(StringUtils.isNotEmpty(dept_user)){
+            dept_user = dept_user.substring(0,dept_user.length()-1);
+        }else{
+            dept_user="0";
+        }
+        return dept_user;
     }
 }

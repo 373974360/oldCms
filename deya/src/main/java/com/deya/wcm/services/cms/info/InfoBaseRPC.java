@@ -16,6 +16,9 @@ import com.deya.wcm.services.Log.LogManager;
 import com.deya.analyzer.AnalyzerManager;
 import com.yinhai.model.InfoWorkStep;
 import com.yinhai.pdf.ArticleToPdf;
+import com.deya.wcm.bean.org.user.UserBean;
+import com.deya.wcm.services.org.user.UserManager;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * @author 符江波
@@ -534,6 +537,26 @@ public class InfoBaseRPC {
      * @return Map 这里返回Map 把总数和列表放在一起，以名分开取的时候浪费性能,取条件时耗性能
      */
     public static Map<String, Object> getWaitVerifyInfoList(Map<String, String> m) {
+
+        if(m.containsKey("dept_id")){
+            String dept_user="";
+            String[] deptArray = m.get("dept_id").split(",");
+            for(String dept_id:deptArray){
+                List<UserBean> list = UserManager.getUserListByDeptID(dept_id);
+                if(!list.isEmpty()){
+                    for(UserBean userBean:list){
+                        dept_user+=userBean.getUser_id()+",";
+                    }
+                }
+            }
+            if(StringUtils.isNotEmpty(dept_user)){
+                dept_user = dept_user.substring(0,dept_user.length()-1);
+            }else{
+                dept_user = "0";
+            }
+            m.put("dept_user",dept_user);
+            System.out.println("DEPT_USER===============>>>>>"+dept_user);
+        }
         return InfoDesktop.getWaitVerifyInfoList(m);
     }
 
