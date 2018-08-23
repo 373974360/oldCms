@@ -80,7 +80,18 @@
         <![CDATA[select count(*) as totle from cs_info where released_dtime > #{starttime} and released_dtime <= #{endtime} and cat_id in (${cat_id})]]>
     </select>
 
-    <select id="getInfoMaxReleasedDtime" parameterType="Map" resultType="java.lang.String">
-        select max(released_dtime) from cs_info where cat_id in (${cat_id}) and info_status=8 and final_status=0
+
+    <select id="getSqPublishCount" parameterType="Map" resultType="java.lang.String">
+        <![CDATA[select count(*) from cp_sq where publish_dtime > #{starttime} and publish_dtime <=#{endtime} and publish_status=1 and sq_flag=0 order by publish_dtime desc]]>
+    </select>
+
+
+    <select id="getSurveyPublishCount" parameterType="Map" resultType="java.lang.String">
+        <![CDATA[select count(*) from cp_survey where publish_time > #{starttime} and publish_time <= #{endtime} and publish_status=1 and site_id=#{site_id} order by publish_time desc]]>
+    </select>
+
+
+    <select id="getSubjectApplyCount" parameterType="Map" resultType="java.lang.String">
+        <![CDATA[select count(*) from cp_subject where apply_time > #{starttime} and apply_time <= #{endtime} and publish_status=1 and audit_status=1 and site_id=#{site_id} order by apply_time desc]]>
     </select>
 </mapper>

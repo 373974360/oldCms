@@ -24,6 +24,7 @@ public class InfoUpdateDAO {
     public static boolean insertInfoUpdate(InfoUpdateBean bean){
         try {
             bean.setGz_id(PublicTableDAO.getIDByTableName("cs_info_update"));
+            bean.setGz_time(DateUtil.getCurrentDate()+" 00:00:00");
             DBManager.insert("insertInfoUpdate",bean);
             return true;
         }catch (Exception e){
@@ -106,9 +107,28 @@ public class InfoUpdateDAO {
         return Integer.parseInt(DBManager.getString("getInfoUpdateCountByTimeAndCatId",map));
     }
 
-    public static String getInfoMaxReleasedDtime(String cat_id){
+
+    public static int getSqPublishCount(String starttime,String endtime){
         Map<String,String> map = new HashMap<>();
-        map.put("cat_id",cat_id);
-        return DBManager.getString("getInfoMaxReleasedDtime",map);
+        map.put("starttime",starttime);
+        map.put("endtime",endtime);
+        return Integer.parseInt(DBManager.getString("getSqPublishCount",map));
+    }
+
+
+    public static int getSurveyPublishCount(String starttime,String endtime,String site_id){
+        Map<String,String> map = new HashMap<>();
+        map.put("starttime",starttime);
+        map.put("endtime",endtime);
+        map.put("site_id",site_id);
+        return Integer.parseInt(DBManager.getString("getSurveyPublishCount",map));
+    }
+
+    public static int getSubjectApplyCount(String starttime,String endtime,String site_id){
+        Map<String,String> map = new HashMap<>();
+        map.put("starttime",starttime);
+        map.put("endtime",endtime);
+        map.put("site_id",site_id);
+        return Integer.parseInt(DBManager.getString("getSubjectApplyCount",map));
     }
 }

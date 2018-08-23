@@ -45,9 +45,6 @@ public class InfoUpdateManager {
         return InfoUpdateDAO.getInfoUpdateCountByTimeAndCatId(starttime,endtime,cat_id);
     }
 
-    public static String getInfoMaxReleasedDtime(String cat_id){
-        return InfoUpdateDAO.getInfoMaxReleasedDtime(cat_id);
-    }
 
     public static List<InfoUpdateDownLoadBean> getDownloadFile(int gz_id,String site_id){
         List<InfoUpdateDownLoadBean> files = new ArrayList<>();
@@ -67,4 +64,19 @@ public class InfoUpdateManager {
     }
 
 
+    public static int getSqPublishCount(String starttime,String endtime){
+        return InfoUpdateDAO.getSqPublishCount(starttime,endtime);
+    }
+
+
+
+    public static int getSurveyPublishCount(String starttime,String endtime,String site_id){
+        return InfoUpdateDAO.getSurveyPublishCount(starttime,endtime,site_id);
+    }
+
+
+
+    public static int getSubjectApplyCount(String starttime,String endtime,String site_id){
+        return InfoUpdateDAO.getSubjectApplyCount(starttime,endtime,site_id);
+    }
 }

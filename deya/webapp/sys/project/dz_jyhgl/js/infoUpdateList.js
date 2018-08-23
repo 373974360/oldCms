@@ -44,7 +44,9 @@ function showList(){
 	table.getCol("action_col").each(function(i){
 		if(i>0)
 		{
-			$(this).html('<a href="javascript:openCategoryPage(\''+beanList.get(i-1).gz_id+'\',\''+beanList.get(i-1).site_id+'\')">配置栏目</a>');
+		    if(beanList.get(i-1).gz_type<=2){
+                $(this).html('<a href="javascript:openCategoryPage(\''+beanList.get(i-1).gz_id+'\',\''+beanList.get(i-1).site_id+'\')">配置栏目</a>');
+            }
 		}
 	})
     table.getCol("gz_type").each(function(i){
@@ -55,6 +57,15 @@ function showList(){
             }
             if(beanList.get(i-1).gz_type==2){
                 $(this).html('列表页');
+            }
+            if(beanList.get(i-1).gz_type==3){
+                $(this).html('诉求');
+            }
+            if(beanList.get(i-1).gz_type==4){
+                $(this).html('调查');
+            }
+            if(beanList.get(i-1).gz_type==5){
+                $(this).html('访谈');
             }
         }
     })

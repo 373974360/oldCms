@@ -17,7 +17,7 @@ function initTable(){
 	colsList.add(setTitleClos("gz_day","间隔天数","100px","","",""));
     colsList.add(setTitleClos("gz_count","更新条数","100px","","",""));
 	colsList.add(setTitleClos("gz_type","监测类型","150px","","",""));
-    colsList.add(setTitleClos("gz_time","下次检查时间","150px","","",""));
+    colsList.add(setTitleClos("gz_time","检查时间","150px","","",""));
     colsList.add(setTitleClos("action_col","管理操作","100px","","",""));
 	
 	table.setColsList(colsList);
@@ -55,6 +55,15 @@ function showList(){
             }
             if(beanList.get(i-1).gz_type==2){
                 $(this).html('列表页');
+            }
+            if(beanList.get(i-1).gz_type==3){
+                $(this).html('诉求');
+            }
+            if(beanList.get(i-1).gz_type==4){
+                $(this).html('调查');
+            }
+            if(beanList.get(i-1).gz_type==5){
+                $(this).html('访谈');
             }
         }
     })
