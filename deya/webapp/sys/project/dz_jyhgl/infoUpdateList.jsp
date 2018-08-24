@@ -26,6 +26,7 @@ $(document).ready(function(){
 					<option value="">全部站点</option>
 				</select>
 			</td>
+			<td width="10"></td>
 			<td align="left" valign="middle">
 				<input id="btn1" name="btn1" type="button" onclick="openAddPage()" value="新建规则" />
 				<input id="btn2" name="btn2" type="button" onclick="updateRecord(table,'gz_id','openUpdatePage()');" value="修改" />

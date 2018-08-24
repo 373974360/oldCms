@@ -48,6 +48,10 @@ public class InfoUpdateDAO {
             Map<String,Integer> map = new HashMap<>();
             map.put("gz_id",gz_id);
             DBManager.delete("deleteInfoUpdate",map);
+
+            Map<String,String> map_1 = new HashMap<>();
+            map_1.put("gz_id",gz_id+"");
+            DBManager.delete("clearInfoUpdateCategory",map_1);
             return true;
         }catch (Exception e){
             e.printStackTrace();
