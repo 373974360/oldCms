@@ -120,6 +120,14 @@
                 desk_list.add(bean);
             });
 
+            $("#info_update_box :checked").each(function () {
+                var bean = BeanUtil.getCopy(DeskTopBean);
+                bean.user_id = user_id;
+                bean.app_type = "info_update";
+                bean.k_v = $(this).val();
+                desk_list.add(bean);
+            });
+
             if (UserManRPC.insertUserDesktop(user_id, desk_list)) {
                 top.msgAlert(WCMLang.Set_success);
             }
@@ -207,6 +215,28 @@
                         </ul>
                     </td>
                 </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <span class="blank6"></span>
+    <!--栏目脱更提醒-->
+    <div class="sq_box" id="info_update_box">
+        <div class="sq_title_box">
+            <div class="sq_title sq_title_minus">栏目脱更提醒</div>
+            <div class="sq_title_right">点击闭合</div>
+        </div>
+        <div class="sq_box_content">
+            <table id="info_update_table" class="table_view" border="0" cellpadding="0" cellspacing="0">
+                <tbody id="xg_sq_list">
+                    <tr>
+                        <td>
+                            <ul>
+                                <li><input type="checkbox" value="0" class="input_checkbox"><label>栏目脱更提醒</label></li>
+                            </ul>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>

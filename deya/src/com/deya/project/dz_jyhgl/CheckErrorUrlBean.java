@@ -2,7 +2,7 @@ package com.deya.project.dz_jyhgl;
 
 import java.io.Serializable;
 
-public class ErrorUrlBean implements Serializable {
+public class CheckErrorUrlBean implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String url="";

@@ -16,7 +16,7 @@ public class CheckErrorUrlRPC {
 
     private static String noCheckExt = "jpg,png,gif,bmp,jpeg,asf,avi,mpg,mpeg,mpe,mov,rmvb,wmv,wav,mid,midi,mp3,mpa,mp2,mp4,flv,ra,ram,rm,wma,mkv,txt,doc,docx,xlsx,xsl,ppt,pdf,rtf,rar,zip,tar,gz";
 
-    public static List<ErrorUrlBean> startCheckSite(String site_domain, String encode) {
+    public static List<CheckErrorUrlBean> startCheckSite(String site_domain, String encode) {
         List<Map<String,Integer>> result = new ArrayList<>();//错链收集集合
         Map<String,Integer> urlMap = new HashMap<>();//已检测URL集合
         result = checkUrl(site_domain,site_domain,encode,result,urlMap);
@@ -154,12 +154,12 @@ public class CheckErrorUrlRPC {
         return httpCode;
     }
 
-    public static List<ErrorUrlBean> toBeanList(List<Map<String,Integer>> list){
-        List<ErrorUrlBean> resultList = new ArrayList<>();
+    public static List<CheckErrorUrlBean> toBeanList(List<Map<String,Integer>> list){
+        List<CheckErrorUrlBean> resultList = new ArrayList<>();
         if(!list.isEmpty()){
             for(Map<String,Integer> map:list){
                 for(String key:map.keySet()){
-                    ErrorUrlBean bean = new ErrorUrlBean();
+                    CheckErrorUrlBean bean = new CheckErrorUrlBean();
                     bean.setUrl(key);
                     bean.setCode(map.get(key));
                     resultList.add(bean);

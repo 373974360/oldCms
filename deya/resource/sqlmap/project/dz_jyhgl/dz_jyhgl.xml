@@ -94,4 +94,14 @@
     <select id="getSubjectApplyCount" parameterType="Map" resultType="java.lang.String">
         <![CDATA[select count(*) from cp_subject where apply_time > #{starttime} and apply_time <= #{endtime} and publish_status=1 and audit_status=1 and site_id=#{site_id} order by apply_time desc]]>
     </select>
+
+
+    <insert id="cs_info_update_result" parameterType="com.deya.project.dz_jyhgl.InfoUpdateResultBean">
+        insert into cs_info_update_result(id,gz_id,cat_id,cat_name,end_update_time,check_time,gz_day,gz_count,update_count,update_desc)
+        values(#{id},#{gz_id},#{cat_id},#{cat_name},#{end_update_time},#{check_time},#{gz_day},#{gz_count},#{update_count},#{update_desc})
+    </insert>
+
+    <delete id="clearInfoUpdateResult" parameterType="Map">
+        delete from cs_info_update_result where 1=1
+    </delete>
 </mapper>

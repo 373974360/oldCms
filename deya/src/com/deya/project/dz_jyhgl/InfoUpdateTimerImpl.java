@@ -30,7 +30,7 @@ public class InfoUpdateTimerImpl implements Job {
         List<InfoUpdateBean> infoUpdateList = InfoUpdateManager.getStartInfoUpdateList(currTime);
         if(!infoUpdateList.isEmpty()){
             for(InfoUpdateBean infoUpdateBean:infoUpdateList){
-                List<Map<String,String>> checkResultList = new ArrayList<>();
+                List<InfoUpdateResultBean> checkResultList = new ArrayList<>();
                 //设置检测起始时间
                 String checkStartTime = DateUtil.getDateBefore(currTime,infoUpdateBean.getGz_day())+" 00:00:00";
                 if(infoUpdateBean.getGz_type()<=2){
@@ -39,36 +39,40 @@ public class InfoUpdateTimerImpl implements Job {
                         if(infoUpdateBean.getGz_type()==1){//首页
                             String cat_ids = InfoUpdateManager.getInfoUpdateCategoryByGzId(infoUpdateBean.getGz_id());
                             //检查起点时间 为首页所有栏目最后一条信息的时间
-                            Map<String,String> map = new HashMap<>();
+                            InfoUpdateResultBean resultBean = new InfoUpdateResultBean();
                             int count = InfoUpdateManager.getInfoUpdateCountByTimeAndCatId(checkStartTime,currTime,cat_ids);
-                            map.put("cat_name", "网站首页");
-                            map.put("start_time",checkStartTime);
-                            map.put("end_time",currTime);
-                            map.put("gz_day",infoUpdateBean.getGz_day()+"");
-                            map.put("gz_count",infoUpdateBean.getGz_count()+"");
-                            map.put("info_count",count+"");
+                            resultBean.setGz_id(infoUpdateBean.getGz_id());
+                            resultBean.setCat_id(0);
+                            resultBean.setCat_name("网站首页");
+                            resultBean.setEnd_update_time(checkStartTime);
+                            resultBean.setCheck_time(currTime);
+                            resultBean.setGz_day(infoUpdateBean.getGz_day());
+                            resultBean.setGz_count(infoUpdateBean.getGz_count());
+                            resultBean.setUpdate_count(count);
                             if(count<infoUpdateBean.getGz_count()){
-                                map.put("desc","不合格");
+                                resultBean.setUpdate_desc("不合格");
                             }else{
-                                map.put("desc","合格");
+                                resultBean.setUpdate_desc("合格");
                             }
-                            checkResultList.add(map);
+                            checkResultList.add(resultBean);
                         }else if(infoUpdateBean.getGz_type()==2){//列表页
                             for(CategoryBean categoryBean:categoryBeanList){
-                                Map<String,String> map = new HashMap<>();
+                                InfoUpdateResultBean resultBean = new InfoUpdateResultBean();
                                 int count = InfoUpdateManager.getInfoUpdateCountByTimeAndCatId(checkStartTime,currTime,categoryBean.getCat_id()+"");
-                                map.put("cat_name", getCategoryPosition(categoryBean.getCat_id(),infoUpdateBean.getSite_id()));
-                                map.put("start_time",checkStartTime);
-                                map.put("end_time",currTime);
-                                map.put("gz_day",infoUpdateBean.getGz_day()+"");
-                                map.put("gz_count",infoUpdateBean.getGz_count()+"");
-                                map.put("info_count",count+"");
+                                resultBean.setGz_id(infoUpdateBean.getGz_id());
+                                resultBean.setCat_id(categoryBean.getCat_id());
+                                resultBean.setCat_name(getCategoryPosition(categoryBean.getCat_id(),infoUpdateBean.getSite_id()));
+                                resultBean.setEnd_update_time(checkStartTime);
+                                resultBean.setCheck_time(currTime);
+                                resultBean.setGz_day(infoUpdateBean.getGz_day());
+                                resultBean.setGz_count(infoUpdateBean.getGz_count());
+                                resultBean.setUpdate_count(count);
                                 if(count<infoUpdateBean.getGz_count()){
-                                    map.put("desc","不合格");
+                                    resultBean.setUpdate_desc("不合格");
                                 }else{
-                                    map.put("desc","合格");
+                                    resultBean.setUpdate_desc("合格");
                                 }
-                                checkResultList.add(map);
+                                checkResultList.add(resultBean);
                             }
                         }
                     }else{
@@ -77,52 +81,58 @@ public class InfoUpdateTimerImpl implements Job {
                 }else{
                     if(infoUpdateBean.getGz_type()==3){//诉求
                         int count = InfoUpdateManager.getSqPublishCount(checkStartTime,currTime);
-                        Map<String,String> map = new HashMap<>();
-                        map.put("cat_name", "诉求系统");
-                        map.put("start_time",checkStartTime);
-                        map.put("end_time",currTime);
-                        map.put("gz_day",infoUpdateBean.getGz_day()+"");
-                        map.put("gz_count",infoUpdateBean.getGz_count()+"");
-                        map.put("info_count",count+"");
+                        InfoUpdateResultBean resultBean = new InfoUpdateResultBean();
+                        resultBean.setGz_id(infoUpdateBean.getGz_id());
+                        resultBean.setCat_id(0);
+                        resultBean.setCat_name("诉求系统");
+                        resultBean.setEnd_update_time(checkStartTime);
+                        resultBean.setCheck_time(currTime);
+                        resultBean.setGz_day(infoUpdateBean.getGz_day());
+                        resultBean.setGz_count(infoUpdateBean.getGz_count());
+                        resultBean.setUpdate_count(count);
                         if(count<infoUpdateBean.getGz_count()){
-                            map.put("desc","不合格");
+                            resultBean.setUpdate_desc("不合格");
                         }else{
-                            map.put("desc","合格");
+                            resultBean.setUpdate_desc("合格");
                         }
-                        checkResultList.add(map);
+                        checkResultList.add(resultBean);
                     }else if(infoUpdateBean.getGz_type()==4){//调查
                         int count = InfoUpdateManager.getSurveyPublishCount(checkStartTime,currTime,infoUpdateBean.getSite_id());
-                        Map<String,String> map = new HashMap<>();
-                        map.put("cat_name", "调查系统");
-                        map.put("start_time",checkStartTime);
-                        map.put("end_time",currTime);
-                        map.put("gz_day",infoUpdateBean.getGz_day()+"");
-                        map.put("gz_count",infoUpdateBean.getGz_count()+"");
-                        map.put("info_count",count+"");
+                        InfoUpdateResultBean resultBean = new InfoUpdateResultBean();
+                        resultBean.setGz_id(infoUpdateBean.getGz_id());
+                        resultBean.setCat_id(0);
+                        resultBean.setCat_name("调查系统");
+                        resultBean.setEnd_update_time(checkStartTime);
+                        resultBean.setCheck_time(currTime);
+                        resultBean.setGz_day(infoUpdateBean.getGz_day());
+                        resultBean.setGz_count(infoUpdateBean.getGz_count());
+                        resultBean.setUpdate_count(count);
                         if(count<infoUpdateBean.getGz_count()){
-                            map.put("desc","不合格");
+                            resultBean.setUpdate_desc("不合格");
                         }else{
-                            map.put("desc","合格");
+                            resultBean.setUpdate_desc("合格");
                         }
-                        checkResultList.add(map);
+                        checkResultList.add(resultBean);
                     }else if(infoUpdateBean.getGz_type()==5){//访谈
                         int count = InfoUpdateManager.getSubjectApplyCount(checkStartTime,currTime,infoUpdateBean.getSite_id());
-                        Map<String,String> map = new HashMap<>();
-                        map.put("cat_name", "访谈系统");
-                        map.put("start_time",checkStartTime);
-                        map.put("end_time",currTime);
-                        map.put("gz_day",infoUpdateBean.getGz_day()+"");
-                        map.put("gz_count",infoUpdateBean.getGz_count()+"");
-                        map.put("info_count",count+"");
+                        InfoUpdateResultBean resultBean = new InfoUpdateResultBean();
+                        resultBean.setGz_id(infoUpdateBean.getGz_id());
+                        resultBean.setCat_id(0);
+                        resultBean.setCat_name("访谈系统");
+                        resultBean.setEnd_update_time(checkStartTime);
+                        resultBean.setCheck_time(currTime);
+                        resultBean.setGz_day(infoUpdateBean.getGz_day());
+                        resultBean.setGz_count(infoUpdateBean.getGz_count());
+                        resultBean.setUpdate_count(count);
                         if(count<infoUpdateBean.getGz_count()){
-                            map.put("desc","不合格");
+                            resultBean.setUpdate_desc("不合格");
                         }else{
-                            map.put("desc","合格");
+                            resultBean.setUpdate_desc("合格");
                         }
-                        checkResultList.add(map);
+                        checkResultList.add(resultBean);
                     }
                 }
-                createExcel(checkResultList,infoUpdateBean.getGz_id(),infoUpdateBean.getSite_id());
+                toInsert(checkResultList);
                 infoUpdateBean.setGz_time(currTime);
                 InfoUpdateManager.updateInfoUpdate(infoUpdateBean);
             }
@@ -131,36 +141,13 @@ public class InfoUpdateTimerImpl implements Job {
         }
     }
 
-    private static void createExcel(List<Map<String,String>> checkResultList,int gz_id,String site_id){
-        //删除今天以前的文件夹
-        String root_path = JconfigUtilContainer.bashConfig().getProperty("path", "", "manager_path");
-        String path = FormatUtil.formatPath(root_path + "/project/dz_jyhgl/"+site_id+"/"+gz_id+"/");
-        CountUtil.deleteFile(path);
-        //创建今天的文件夹和xls文件
-        String nowDate = CountUtil.getNowDayDate();
-        String fileTemp2 = FormatUtil.formatPath(path+ File.separator);
-        File file = new File(fileTemp2);
-        if(!file.exists()){
-            file.mkdirs();
+    private static void toInsert(List<InfoUpdateResultBean> checkResultList){
+        InfoUpdateResultManager.clearInfoUpdateResult();
+        if(!checkResultList.isEmpty()){
+            for(InfoUpdateResultBean bean:checkResultList){
+                InfoUpdateResultManager.insertInfoUpdateResult(bean);
+            }
         }
-        String nowTime = CountUtil.getNowDayDateTime();
-        String xls = nowTime + CountUtil.getEnglish(1)+".xls";
-        String xlsFile = fileTemp2+File.separator+xls;
-
-        String[] head = {"栏目","监测开始时间","监测时间节点","间隔天数","规定更新数量","实际更新数量","是否合格"};
-        String[][] data = new String[checkResultList.size()][7];
-        for(int i=0;i<checkResultList.size();i++){
-            Map<String,String>  map = checkResultList.get(i);
-            data[i][0] = map.get("cat_name");//栏目
-            data[i][1] = map.get("start_time");//开始时间
-            data[i][2] = map.get("end_time");//结束时间
-            data[i][3] = map.get("gz_day");//间隔天数
-            data[i][4] = map.get("gz_count");//规定更新数量
-            data[i][5] = map.get("info_count");//实际更新数量
-            data[i][6] = map.get("desc");//实际更新数量
-        }
-        OutExcel oe=new OutExcel("信息更新检查结果");
-        oe.doOut(xlsFile,head,data);
     }
 
     private static List<CategoryBean> getCatIds(InfoUpdateBean infoUpdateBean){
