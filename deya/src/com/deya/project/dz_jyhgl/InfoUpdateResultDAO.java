@@ -3,10 +3,14 @@ package com.deya.project.dz_jyhgl;
 import com.deya.wcm.dao.PublicTableDAO;
 import com.deya.wcm.db.DBManager;
 
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class InfoUpdateResultDAO {
+
+    public static List<InfoUpdateResultBean> getInfoUpdateResultList(Map<String, String> map){
+        return DBManager.queryFList("getInfoUpdateResultList",map);
+    }
 
     public static boolean insertInfoUpdateResult(InfoUpdateResultBean bean){
         try {

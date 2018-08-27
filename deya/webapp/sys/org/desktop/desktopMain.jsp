@@ -28,6 +28,8 @@
             }
             initSiteListHandel("cms", "cms_table");
 
+            initSiteListHandel("cms", "info_update_table");
+
             init_input();
 
             selectChecked();
@@ -79,7 +81,7 @@
                 if (str.substring(str.length - 5) == "</li>")
                     str += '</ul></td></tr>';
                 str += '<tr><td><span class="pointer" onclick="selectAll(\'' + table_name + '\')">全选</span>&nbsp;|&nbsp;<span class="pointer" onclick="concelAll(\'' + table_name + '\')">反选</span></td></tr>';
-                $("#" + app_name + "_table tbody").append(str);
+                $("#" + table_name + " tbody").append(str);
             }
         }
 
@@ -120,7 +122,7 @@
                 desk_list.add(bean);
             });
 
-            $("#info_update_box :checked").each(function () {
+            $("#info_update_table :checked").each(function () {
                 var bean = BeanUtil.getCopy(DeskTopBean);
                 bean.user_id = user_id;
                 bean.app_type = "info_update";
@@ -222,21 +224,15 @@
 
     <span class="blank6"></span>
     <!--栏目脱更提醒-->
-    <div class="sq_box" id="info_update_box">
+    <div class="sq_box">
         <div class="sq_title_box">
             <div class="sq_title sq_title_minus">栏目脱更提醒</div>
             <div class="sq_title_right">点击闭合</div>
         </div>
         <div class="sq_box_content">
             <table id="info_update_table" class="table_view" border="0" cellpadding="0" cellspacing="0">
-                <tbody id="xg_sq_list">
-                    <tr>
-                        <td>
-                            <ul>
-                                <li><input type="checkbox" value="0" class="input_checkbox"><label>栏目脱更提醒</label></li>
-                            </ul>
-                        </td>
-                    </tr>
+                <tbody>
+
                 </tbody>
             </table>
         </div>

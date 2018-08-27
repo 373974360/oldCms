@@ -6,6 +6,7 @@ public class InfoUpdateResultBean implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private int id = 0;//主键ID
+    private String site_id="";//站点ID
     private int gz_id=0;//规则ID
     private int cat_id=0;//栏目Id
     private String cat_name="";//栏目名称
@@ -22,6 +23,14 @@ public class InfoUpdateResultBean implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getSite_id() {
+        return site_id;
+    }
+
+    public void setSite_id(String site_id) {
+        this.site_id = site_id;
     }
 
     public int getGz_id() {

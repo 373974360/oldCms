@@ -8,6 +8,8 @@
 <%@ page import="com.deya.wcm.services.zwgk.ysqgk.YsqgkInfoManager" %>
 <%@ page import="com.deya.wcm.bean.zwgk.ysqgk.YsqgkListBean" %>
 <%@ page import="static com.deya.wcm.services.search.util.tongyinci.InitCiku.list" %>
+<%@ page import="com.deya.project.dz_jyhgl.InfoUpdateResultBean" %>
+<%@ page import="com.deya.project.dz_jyhgl.InfoUpdateResultManager" %>
 <%
     int user_id = UserLogin.getUserBySession(request).getUser_id();
     List<DeskTopBean> desk_list = UserManRPC.getUserDesktop(user_id);
@@ -136,6 +138,35 @@
                         String d_time = ysqBean.getPut_dtime();
                         str += "<tr><td width=\"260px\">" + splitString(ysqBean.getName(), 20) + "</a></td>";
                         str += "<td>" + d_time.substring(5, d_time.length() - 3) + "</td></tr>";
+                    }
+                }
+                str += "</tbody></table></div></div>";
+            }
+            if ("info_update".equals(det.getApp_type())) {
+                sq_con_map.put("site_id", det.getK_v());
+                sq_con_map.put("update_desc", "不合格");
+                List<InfoUpdateResultBean> result = InfoUpdateResultManager.getInfoUpdateResultList(sq_con_map);
+                str += "<div class=\"sq_box new_sq_box\" ><div class=\"sq_title_box\" ><div class=\"sq_title2\">栏目脱更提醒</div>";
+                str += "<div class=\"sq_title_right2\"></div>";
+                str += "</div>";
+                str += "<div class=\"sq_box_content\">";
+                str += "<table id=\"sq_table\" class=\"table_view_desk\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" ><tbody>";
+                if (result != null) {
+                    str += "<tr><td width=\"260px\">栏目名称</td>";
+                    str += "<td>监测周期</td>";
+                    str += "<td>开始时间</td>";
+                    str += "<td>截止时间</td>";
+                    str += "<td>应更新数量</td>";
+                    str += "<td>实际更新数量</td>";
+                    str += "<td>是否合格</td></tr>";
+                    for (InfoUpdateResultBean bean : result) {
+                        str += "<tr><td width=\"260px\">" + bean.getCat_name() + "</td>";
+                        str += "<td>" + bean.getGz_day() + "</td>";
+                        str += "<td>" + bean.getEnd_update_time() + "</td>";
+                        str += "<td>" + bean.getCheck_time() + "</td>";
+                        str += "<td>" + bean.getGz_count() + "</td>";
+                        str += "<td>" + bean.getUpdate_count() + "</td>";
+                        str += "<td>" + bean.getUpdate_desc() + "</td></tr>";
                     }
                 }
                 str += "</tbody></table></div></div>";

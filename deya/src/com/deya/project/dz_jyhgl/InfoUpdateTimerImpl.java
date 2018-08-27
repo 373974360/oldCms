@@ -25,12 +25,13 @@ public class InfoUpdateTimerImpl implements Job {
 
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
+        InfoUpdateResultManager.clearInfoUpdateResult();
         String currTime = DateUtil.getCurrentDate()+" 00:00:00";
         System.out.println("定时检查栏目更新情况开始*****" + currTime);
         List<InfoUpdateBean> infoUpdateList = InfoUpdateManager.getStartInfoUpdateList(currTime);
         if(!infoUpdateList.isEmpty()){
+            List<InfoUpdateResultBean> checkResultList = new ArrayList<>();
             for(InfoUpdateBean infoUpdateBean:infoUpdateList){
-                List<InfoUpdateResultBean> checkResultList = new ArrayList<>();
                 //设置检测起始时间
                 String checkStartTime = DateUtil.getDateBefore(currTime,infoUpdateBean.getGz_day())+" 00:00:00";
                 if(infoUpdateBean.getGz_type()<=2){
@@ -48,6 +49,7 @@ public class InfoUpdateTimerImpl implements Job {
                             resultBean.setCheck_time(currTime);
                             resultBean.setGz_day(infoUpdateBean.getGz_day());
                             resultBean.setGz_count(infoUpdateBean.getGz_count());
+                            resultBean.setSite_id(infoUpdateBean.getSite_id());
                             resultBean.setUpdate_count(count);
                             if(count<infoUpdateBean.getGz_count()){
                                 resultBean.setUpdate_desc("不合格");
@@ -66,6 +68,7 @@ public class InfoUpdateTimerImpl implements Job {
                                 resultBean.setCheck_time(currTime);
                                 resultBean.setGz_day(infoUpdateBean.getGz_day());
                                 resultBean.setGz_count(infoUpdateBean.getGz_count());
+                                resultBean.setSite_id(infoUpdateBean.getSite_id());
                                 resultBean.setUpdate_count(count);
                                 if(count<infoUpdateBean.getGz_count()){
                                     resultBean.setUpdate_desc("不合格");
@@ -79,70 +82,54 @@ public class InfoUpdateTimerImpl implements Job {
                         System.out.println("定时检查栏目更新情况开始*****" + infoUpdateBean.getGz_name()+":暂未配置栏目!");
                     }
                 }else{
+                    InfoUpdateResultBean resultBean = new InfoUpdateResultBean();
+                    resultBean.setSite_id(infoUpdateBean.getSite_id());
+                    resultBean.setGz_id(infoUpdateBean.getGz_id());
+                    resultBean.setCat_id(0);
+                    resultBean.setEnd_update_time(checkStartTime);
+                    resultBean.setCheck_time(currTime);
+                    resultBean.setGz_day(infoUpdateBean.getGz_day());
+                    resultBean.setGz_count(infoUpdateBean.getGz_count());
                     if(infoUpdateBean.getGz_type()==3){//诉求
                         int count = InfoUpdateManager.getSqPublishCount(checkStartTime,currTime);
-                        InfoUpdateResultBean resultBean = new InfoUpdateResultBean();
-                        resultBean.setGz_id(infoUpdateBean.getGz_id());
-                        resultBean.setCat_id(0);
                         resultBean.setCat_name("诉求系统");
-                        resultBean.setEnd_update_time(checkStartTime);
-                        resultBean.setCheck_time(currTime);
-                        resultBean.setGz_day(infoUpdateBean.getGz_day());
-                        resultBean.setGz_count(infoUpdateBean.getGz_count());
                         resultBean.setUpdate_count(count);
                         if(count<infoUpdateBean.getGz_count()){
                             resultBean.setUpdate_desc("不合格");
                         }else{
                             resultBean.setUpdate_desc("合格");
                         }
-                        checkResultList.add(resultBean);
                     }else if(infoUpdateBean.getGz_type()==4){//调查
                         int count = InfoUpdateManager.getSurveyPublishCount(checkStartTime,currTime,infoUpdateBean.getSite_id());
-                        InfoUpdateResultBean resultBean = new InfoUpdateResultBean();
-                        resultBean.setGz_id(infoUpdateBean.getGz_id());
-                        resultBean.setCat_id(0);
                         resultBean.setCat_name("调查系统");
-                        resultBean.setEnd_update_time(checkStartTime);
-                        resultBean.setCheck_time(currTime);
-                        resultBean.setGz_day(infoUpdateBean.getGz_day());
-                        resultBean.setGz_count(infoUpdateBean.getGz_count());
                         resultBean.setUpdate_count(count);
                         if(count<infoUpdateBean.getGz_count()){
                             resultBean.setUpdate_desc("不合格");
                         }else{
                             resultBean.setUpdate_desc("合格");
                         }
-                        checkResultList.add(resultBean);
                     }else if(infoUpdateBean.getGz_type()==5){//访谈
                         int count = InfoUpdateManager.getSubjectApplyCount(checkStartTime,currTime,infoUpdateBean.getSite_id());
-                        InfoUpdateResultBean resultBean = new InfoUpdateResultBean();
-                        resultBean.setGz_id(infoUpdateBean.getGz_id());
-                        resultBean.setCat_id(0);
                         resultBean.setCat_name("访谈系统");
-                        resultBean.setEnd_update_time(checkStartTime);
-                        resultBean.setCheck_time(currTime);
-                        resultBean.setGz_day(infoUpdateBean.getGz_day());
-                        resultBean.setGz_count(infoUpdateBean.getGz_count());
                         resultBean.setUpdate_count(count);
                         if(count<infoUpdateBean.getGz_count()){
                             resultBean.setUpdate_desc("不合格");
                         }else{
                             resultBean.setUpdate_desc("合格");
                         }
-                        checkResultList.add(resultBean);
                     }
+                    checkResultList.add(resultBean);
                 }
-                toInsert(checkResultList);
                 infoUpdateBean.setGz_time(currTime);
                 InfoUpdateManager.updateInfoUpdate(infoUpdateBean);
             }
+            toInsert(checkResultList);
         }else{
             System.out.println("定时检查栏目更新情况开始*****暂无任务" + currTime);
         }
     }
 
     private static void toInsert(List<InfoUpdateResultBean> checkResultList){
-        InfoUpdateResultManager.clearInfoUpdateResult();
         if(!checkResultList.isEmpty()){
             for(InfoUpdateResultBean bean:checkResultList){
                 InfoUpdateResultManager.insertInfoUpdateResult(bean);
