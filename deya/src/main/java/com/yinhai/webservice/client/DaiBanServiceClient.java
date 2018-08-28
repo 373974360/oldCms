@@ -59,7 +59,7 @@ public class DaiBanServiceClient {
         if(userList!=null && !userList.isEmpty()){
             for(UserBean user:userList){
                 con_map.put("user_id",user.getUser_id()+"");
-                String opt_ids = UserLogin.getOptIDSByUserAPPSite(user.getUser_id()+"", "cms", "CMScqgjj");
+                String opt_ids = ","+UserLogin.getOptIDSByUserAPPSite(user.getUser_id()+"", "cms", "CMScqgjj")+",";
                 if(user.getUser_id()==139606){//陈小平
                     con_map.put("dept_user",deptUser("3,10"));//办公室、贷款管理处
                 }else if(user.getUser_id()==128006){//赵燕
