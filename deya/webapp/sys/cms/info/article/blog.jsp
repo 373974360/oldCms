@@ -6,7 +6,11 @@
     String infoId=request.getParameter("id");
     String token="2.00LxGKPE1Lk4tDc80789af550ft_wy";
     InfoBean bean= InfoBaseRPC.getInfoById(infoId);
-    Blog.updateStatus(bean.getTitle()+" http://www.itl.gov.cn"+bean.getContent_url(),token);
+    String content_url = bean.getContent_url();
+    if(!content_url.substring(0,4).equals("http")){
+        content_url="http://www.itl.gov.cn"+content_url;
+    }
+    Blog.updateStatus(bean.getTitle()+" "+content_url,token);
     PrintWriter outs=response.getWriter();
     outs.println("{\"data\":\"ok\"}");
 %>

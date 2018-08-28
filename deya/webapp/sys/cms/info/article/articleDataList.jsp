@@ -154,11 +154,15 @@ function getSelectInfoBeans()
 }
 function blogTS(){
     var selectIDS = table.getSelecteCheckboxValue("info_id");
-    $.post("/sys/cms/info/article/blog.jsp",{id:selectIDS},function(data,status){
-        var mess=JSON.parse(data);
-        if(mess.data=='ok')
-            alert('推送成功！！');
-    });
+    if(selectIDS.split(",").length>1){
+        alert('只能选择一条信息！！');
+	}else{
+        $.post("/sys/cms/info/article/blog.jsp",{id:selectIDS},function(data,status){
+            var mess=JSON.parse(data);
+            if(mess.data=='ok')
+                alert('推送成功！！');
+        });
+	}
 }
 </script>
 </head>
