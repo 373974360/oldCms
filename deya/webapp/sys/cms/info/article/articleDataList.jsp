@@ -152,6 +152,14 @@ function getSelectInfoBeans()
 {
 	return table.getSelecteBeans();
 }
+function blogTS(){
+    var selectIDS = table.getSelecteCheckboxValue("info_id");
+    $.post("/sys/cms/info/article/blog.jsp",{id:selectIDS},function(data,status){
+        var mess=JSON.parse(data);
+        if(mess.data=='ok')
+            alert('推送成功！！');
+    });
+}
 </script>
 </head>
 
@@ -259,6 +267,8 @@ function getSelectInfoBeans()
 			<input id="btn307" name="btn307" type="button" onclick="cancleInfo()" value="撤销" />
 			<input id="btn332" name="btn332" type="button" onclick="deleteRecord(table,'info_id','deleteInfoData()');" value="删除" />
 			<input id="btn" name="btn" type="button" onclick="publicSelectCheckbox(table,'info_id','createStaticContentHtml()');" value="生成静态页" />
+			<input id="btn539" name="btn539" type="button" onclick="blogTS()" value="推送微博" />
+			<input id="btn540" name="btn540" type="button" onclick="" value="推送微信" />
             <input id="btnzpxx" name="btnzpxx" type="button" onclick="viewJl()" value="查看简历" />
         </td>
 	</tr>
