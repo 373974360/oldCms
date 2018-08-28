@@ -9,6 +9,7 @@ import org.dom4j.Element;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import com.deya.wcm.services.org.user.UserRegisterManager;
 import com.deya.wcm.bean.org.user.UserBean;
 import com.deya.wcm.services.org.user.UserManager;
 import com.deya.wcm.services.cms.info.InfoDesktop;
@@ -76,7 +77,7 @@ public class DaiBanServiceClient {
                     for(InfoBean info:infoList){
                         _xmlstr.append("<list>");
                         _xmlstr.append("<buscode>").append(info.getInfo_id()).append("</buscode>");
-                        _xmlstr.append("<loginid>").append(user.getUser_id()).append("</loginid>");
+                        _xmlstr.append("<loginid>").append(UserRegisterManager.getUserRegisterListByUserID(user.getUser_id()).get(0).getUsername()).append("</loginid>");
                         _xmlstr.append("<busname>").append(info.getTitle()).append("</busname>");
                         if(info.getWf_id()==0){
                             info.setWf_id(1);
@@ -120,7 +121,7 @@ public class DaiBanServiceClient {
                     for(InfoBean info:infoList){
                         _xmlstr.append("<list>");
                         _xmlstr.append("<buscode>").append(info.getInfo_id()).append("</buscode>");
-                        _xmlstr.append("<loginid>").append(user.getUser_id()).append("</loginid>");
+                        _xmlstr.append("<loginid>").append(UserRegisterManager.getUserRegisterListByUserID(user.getUser_id()).get(0).getUsername()).append("</loginid>");
                         _xmlstr.append("<busname>").append(info.getTitle()).append("</busname>");
                         if(info.getWf_id()==0){
                             info.setWf_id(1);
