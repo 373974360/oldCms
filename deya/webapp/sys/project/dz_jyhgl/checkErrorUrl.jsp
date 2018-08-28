@@ -19,7 +19,7 @@ $(document).ready(function(){
 });
 function startCheckSite(){
     $("#info_table tbody").empty();
-    $("#info_table tbody").append("<tr style=\"height:32px;line-height:32px;\"><td colspan=\"2\">扫描中，请稍候...</td></tr>");
+    $("#info_table tbody").append("<tr style=\"height:32px;line-height:32px;\"><td colspan=\"2\">扫描中...，请勿离开此页面...</td></tr>");
     var site_domain = $("#site_domain").val();
     var encode = $("#encode").val();
     beanList =  CheckErrorUrlRPC.startCheckSite(site_domain,encode);

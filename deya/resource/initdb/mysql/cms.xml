@@ -516,7 +516,46 @@
 					)
 		   ]]> 
        </sql>
-    </table>	
+        <sql>
+            <![CDATA[
+				create table cs_info_update(
+					gz_id int(11) not null PRIMARY KEY,
+					gz_name varchar(250) default '',
+					gz_day int(11),
+					gz_count int(11),
+					site_id varchar(250) default '',
+					gz_time varchar(20) default '',
+					gz_type int(11)
+				)
+		   ]]>
+        </sql>
+        <sql>
+            <![CDATA[
+				create table cs_info_update_category(
+					id int(11) not null PRIMARY KEY,
+					cat_id int(11),
+					gz_id int(11)
+				)
+		   ]]>
+        </sql>
+        <sql>
+            <![CDATA[
+				create table cs_info_update_result(
+					id int(11) not null PRIMARY KEY,
+					site_id varchar(250) default '',
+					gz_id int(11),
+					cat_id int(11),
+					cat_name varchar(250) default '',
+					end_update_time varchar(20) default '',
+					check_time varchar(20) default '',
+					gz_day int(11),
+					gz_count int(11),
+					update_count int(11),
+					update_desc varchar(250) default ''
+				)
+		   ]]>
+        </sql>
+    </table>
 
     
 
