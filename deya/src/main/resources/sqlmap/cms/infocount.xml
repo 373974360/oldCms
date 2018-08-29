@@ -492,12 +492,44 @@
 
     <select id="getCountBySource_count" parameterType="Map" resultType="java.lang.String">
         select count(info_id) from cs_info where released_dtime like '%${date}%' and publish_source like '%${source}%'
+        <if test="cat_ids!=null and cat_ids!=''">
+            and cat_id in (${cat_ids})
+        </if>
     </select>
     <select id="getCountBySource_hits" parameterType="Map" resultType="java.lang.String">
-        select sum(day_hits) from cs_info where lasthit_dtime like '%${date}%' and publish_source like '%${source}%'
+        select
+        <if test="source=='app'">
+            sum(appday_hits)
+        </if>
+        <if test="source=='zzzd'">
+            sum(zdday_hits)
+        </if>
+        <if test="source=='wx'">
+            sum(wxday_hits)
+        </if>
+        <if test="source=='wt' or source=='mh'">
+            sum(day_hits)
+        </if>
+         from cs_info where lasthit_dtime like '%${date}%' and publish_source like '%${source}%'
+        <if test="cat_ids!=null and cat_ids!=''">
+            and cat_id in (${cat_ids})
+        </if>
     </select>
     <select id="getCountBySource_download" parameterType="Map" resultType="java.lang.String">
-        select sum(day_hits) from cs_info where cat_id=10038 and lasthit_dtime like '%${date}%' and publish_source like '%${source}%'
+        select
+        <if test="source=='app'">
+            sum(appday_hits)
+        </if>
+        <if test="source=='zzzd'">
+            sum(zdday_hits)
+        </if>
+        <if test="source=='wx'">
+            sum(wxday_hits)
+        </if>
+        <if test="source=='wt' or source=='mh'">
+            sum(day_hits)
+        </if>
+         from cs_info where cat_id in (10066,10067,10068,10069,10070) and lasthit_dtime like '%${date}%' and publish_source like '%${source}%'
     </select>
     <select id="getCountBySource_survey" parameterType="Map" resultType="java.lang.String">
         select sum(t.count) from (select count(s_id) as count from cp_survey_answer where s_id in (select s_id from cp_survey where is_delete = 0) and source = '${surveySource}' and answer_time like '%${date}%' group by ip) t

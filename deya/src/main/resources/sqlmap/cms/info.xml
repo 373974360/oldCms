@@ -404,6 +404,19 @@
         where info_id = ${info_id}
     </update>
 
+
+
+    <!-- 添加点击次数 -->
+    <update id="add_zdinfo_hits" parameterType="Map">
+        update cs_info set
+        zdhits = apphits + ${num},
+        zdday_hits = ${d_num},
+        zdweek_hits = ${w_num},
+        zdmonth_hits = ${m_num},
+        lasthit_dtime = #{lasthit_dtime}
+        where info_id = ${info_id}
+    </update>
+
     <!-- 清空点击次数 -->
     <update id="clear_info_hits" parameterType="Map">
         update cs_info set ${item_name} = 0
@@ -485,7 +498,7 @@
             and ci.input_user = #{input_user}
         </if>
         <if test="dept_user != null">
-            and ci.input_user in (#{dept_user})
+            and ci.input_user in (${dept_user})
         </if>
         <if test="site_id != null">
             and ci.site_id = #{site_id} and ci.site_id = ca.site_id

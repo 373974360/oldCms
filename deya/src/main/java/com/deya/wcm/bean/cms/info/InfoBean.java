@@ -80,6 +80,11 @@ public class InfoBean  implements java.io.Serializable,Cloneable{
 	protected int appday_hits = 0;// bigint 20
 	protected int appweek_hits = 0;// bigint 20
 	protected int appmonth_hits = 0;// bigint 20
+
+	protected int zdhits = 0;// bigint 20
+	protected int zdday_hits = 0;// bigint 20
+	protected int zdweek_hits = 0;// bigint 20
+	protected int zdmonth_hits = 0;// bigint 20
 	
 	public int getIs_am_tupage() {
 		return is_am_tupage;
@@ -532,5 +537,37 @@ public class InfoBean  implements java.io.Serializable,Cloneable{
 
 	public void setAppmonth_hits(int appmonth_hits) {
 		this.appmonth_hits = appmonth_hits;
+	}
+
+	public int getZdhits() {
+		return zdhits;
+	}
+
+	public void setZdhits(int zdhits) {
+		this.zdhits = zdhits;
+	}
+
+	public int getZdday_hits() {
+		return zdday_hits;
+	}
+
+	public void setZdday_hits(int zdday_hits) {
+		this.zdday_hits = zdday_hits;
+	}
+
+	public int getZdweek_hits() {
+		return zdweek_hits;
+	}
+
+	public void setZdweek_hits(int zdweek_hits) {
+		this.zdweek_hits = zdweek_hits;
+	}
+
+	public int getZdmonth_hits() {
+		return zdmonth_hits;
+	}
+
+	public void setZdmonth_hits(int zdmonth_hits) {
+		this.zdmonth_hits = zdmonth_hits;
 	}
 }

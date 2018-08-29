@@ -152,15 +152,16 @@ public String getHitsNewsList(HttpServletRequest request)
 public String getCountList(HttpServletRequest request){
 	String json = "";
 	String i_date = FormatUtil.formatNullString(request.getParameter("i_date"));
+	String cat_ids = FormatUtil.formatNullString(request.getParameter("cat_ids"));
 	i_date = i_date.substring(0,4)+"-"+i_date.substring(4,6)+"-"+i_date.substring(6,8);
-	json = CmsCountDAO.getCountBySource(i_date);
+	json = CmsCountDAO.getCountBySource(i_date,cat_ids);
 	json = json.replaceAll("-","");
 	return "["+json+"]";
 }
 public String getChildCategoryCountList(HttpServletRequest request){
 	String json = "";
 	String site_id = "CMScqgjj";
-	String cat_id = FormatUtil.formatNullString(request.getParameter("cat_id"));
+	String cat_id = FormatUtil.formatNullString(request.getParameter("cat_ids"));
 	String[] catArray = cat_id.split(",");
     for(String str:catArray){
         CategoryBean bean = CategoryManager.getCategoryBeanCatID(Integer.parseInt(str),site_id);

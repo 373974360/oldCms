@@ -498,7 +498,11 @@ public class InfoDAO {
      * @return int
      */
     public static int getInfoCount(Map<String, String> map) {
-        return Integer.parseInt(DBManager.getString("getAllInfoCounts", map));
+        String count = DBManager.getString("getAllInfoCounts", map);
+        if(StringUtils.isEmpty(count)){
+            count = "0";
+        }
+        return Integer.parseInt(count);
     }
 
     /**
@@ -613,6 +617,16 @@ public class InfoDAO {
      */
     public static void addAppInfoHits(Map<String, String> m) {
         DBManager.update("add_appinfo_hits", m);
+    }
+
+    /**
+     * 添加内容的点击次数
+     *
+     * @param Map<String,String> m 包含info_id,num 递增增加数,时间
+     * @return
+     */
+    public static void addZdInfoHits(Map<String, String> m) {
+        DBManager.update("add_zdinfo_hits", m);
     }
 
     /**

@@ -352,7 +352,7 @@ public class CmsCountDAO {
         }
     }
 
-    public static String getCountBySource(String date) {
+    public static String getCountBySource(String date,String cat_ids) {
         String[] source = {"wt", "mh", "app", "wx", "zzzd"};
         String json = "";
         String chlcode = "";
@@ -387,6 +387,7 @@ public class CmsCountDAO {
             Map<String, String> map = new HashMap<>();
             map.put("source", str);
             map.put("date", date);
+            map.put("cat_ids", cat_ids);
             String newsCount = DBManager.getString("getCountBySource_count", map);
             String newsHits = DBManager.getString("getCountBySource_hits", map);
             String newsDownloadHits = DBManager.getString("getCountBySource_download", map);

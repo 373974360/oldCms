@@ -529,6 +529,18 @@ public class InfoBaseRPC {
     }
 
     /**
+     * 添加内容的点击次数
+     *
+     * @param String info_id
+     * @param String num 递增增加数
+     * @return boolean
+     */
+    public static void addZdInfoHits(String info_id, String num) {
+        // TODO 处理点击事件
+        InfoBaseManager.addZdInfoHits(info_id, num, "");
+    }
+
+    /**
      * 根据用户ID，站点ID得到该用户能看到的待审信息
      *
      * @param int       user_id
