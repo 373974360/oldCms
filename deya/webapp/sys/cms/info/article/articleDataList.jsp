@@ -157,12 +157,27 @@ function blogTS(){
     if(selectIDS.split(",").length>1){
         alert('只能选择一条信息！！');
 	}else{
-        $.post("/sys/cms/info/article/blog.jsp",{id:selectIDS},function(data,status){
+        $.post("/sys/cms/info/article/blog.jsp",{id:selectIDS},function(data){
             var mess=JSON.parse(data);
             if(mess.data=='ok')
                 alert('推送成功！！');
         });
 	}
+}
+function weChatTS(){
+    var selectIDS = table.getSelecteCheckboxValue("info_id");
+    if(selectIDS.split(",").length>8){
+        alert('最多选择8条信息！！');
+    }else {
+        $.post("/sys/cms/info/article/WeChat.jsp", {id: selectIDS}, function (data) {
+            var mess = JSON.parse(data);
+            if (mess.data == 'ok') {
+                alert('推送成功！！');
+            } else {
+                alert('推送失败！！');
+            }
+        });
+    }
 }
 </script>
 </head>
@@ -272,7 +287,7 @@ function blogTS(){
 			<input id="btn332" name="btn332" type="button" onclick="deleteRecord(table,'info_id','deleteInfoData()');" value="删除" />
 			<input id="btn" name="btn" type="button" onclick="publicSelectCheckbox(table,'info_id','createStaticContentHtml()');" value="生成静态页" />
 			<input id="btn539" name="btn539" type="button" onclick="blogTS()" value="推送微博" />
-			<input id="btn540" name="btn540" type="button" onclick="" value="推送微信" />
+			<input id="btn540" name="btn540" type="button" onclick="weChatTS()" value="推送微信" />
             <input id="btnzpxx" name="btnzpxx" type="button" onclick="viewJl()" value="查看简历" />
         </td>
 	</tr>

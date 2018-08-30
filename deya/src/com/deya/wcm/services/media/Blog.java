@@ -1,40 +1,29 @@
 package com.deya.wcm.services.media;
 
-import javax.net.ssl.*;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
-import java.security.SecureRandom;
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
+import java.util.Properties;
 
 public class Blog {
-    private static void trustAllHttpsCertificates() throws Exception {
-        TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager() {
-            public X509Certificate[] getAcceptedIssuers() {
-                return null;
-            }
-            public void checkServerTrusted(X509Certificate[] arg0, String arg1) throws CertificateException {
-            }
-            public void checkClientTrusted(X509Certificate[] arg0, String arg1) throws CertificateException {
-            }
-        }};
-        SSLContext sc = SSLContext.getInstance("SSL");
-        sc.init((KeyManager[])null, trustAllCerts, (SecureRandom)null);
-        HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
-    }
-    public static void updateStatus(String text, String accessToken) {
+
+    private static String token = "";
+    private static String domain = "";
+
+    public static void updateStatus(String text,String content_url) {
+        initParams("media.properties");
+        if (!content_url.substring(0, 4).equals("http")) {
+            content_url = domain + content_url;
+        }
         String url = "https://api.weibo.com/2/statuses/share.json";
-        String parameters = "status=" + text + "&access_token=" + accessToken;
+        String parameters = "status=" + text+" "+content_url+ "&access_token=" + token;
         postUrl(url, parameters);
-        System.out.println("发布微博成功！");
     }
 
     public static void postUrl(String url, String parameters) {
         try {
-            trustAllHttpsCertificates();
             URLConnection conn = (new URL(url)).openConnection();
             conn.setDoOutput(true);
             conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
@@ -44,14 +33,29 @@ public class Blog {
             out.flush();
             out.close();
             BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            String line = null;
-
+            String line;
             while((line = reader.readLine()) != null) {
                 System.out.println(line);
             }
-        } catch (Exception var6) {
-            var6.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+    }
 
+    public static void initParams(String fileName) {
+        token = GetValueByKey(fileName, "token");
+        domain = GetValueByKey(fileName, "domain");
+    }
+    public static String GetValueByKey(String fileName, String key) {
+        Properties pps = new Properties();
+        try {
+            FileInputStream in = new FileInputStream(Weixin.class.getResource("/" + fileName).toString().substring(5));
+            pps.load(in);
+            String value = pps.getProperty(key);
+            return value;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
