@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="dz_szb">
+
+
+    <!--
+        CREATE TABLE dz_szb
+   (
+       status INT(11) DEFAULT '0',
+       create_time DATETIME,
+       id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+       title VARCHAR(60),
+       json_data TEXT
+   )
+   -->
+
+
+    <select id="getSzbList" parameterType="map" resultType="com.deya.project.dz_szb.SzbBean">
+        select
+
+        id as id,
+        title as title,
+        json_data as jsonData,
+        create_time as createTime,
+        status as status,
+        pub_date as pubDate
+
+        from dz_szb
+
+        <where>
+            status != -1
+            <if test="status!=null and status!=''">
+                AND status = #{status}
+            </if>
+        </where>
+        order by pub_date desc
+        limit #{start_num,jdbcType=INTEGER},#{page_size,jdbcType=INTEGER}
+
+
+    </select>
+
+    <select id="getSzbCount" parameterType="map" resultType="java.lang.Integer">
+        select
+
+        count(*)
+
+        from dz_szb
+
+        <where>
+            status != -1
+            <if test="status!=null and status!=''">
+                AND status = #{status}
+            </if>
+        </where>
+
+    </select>
+    <select id="getSzb" parameterType="map" resultType="com.deya.project.dz_szb.SzbBean">
+        select
+        id,title,json_data as jsonData,status,create_time as createTime,pub_date as pubDate
+        from dz_szb
+        <where>
+            status != -1
+            AND id = #{id}
+        </where>
+        limit 1
+    </select>
+   <select id="getNewestSzb" parameterType="map" resultType="com.deya.project.dz_szb.SzbBean">
+        select
+        id,title,json_data as jsonData,status,create_time as createTime,pub_date as pubDate
+        from dz_szb
+        <where>
+            status =1
+        </where>
+       order by pub_date desc
+        limit 1
+    </select>
+
+    <select id="getPrevSzb" parameterType="map" resultType="com.deya.project.dz_szb.SzbBean">
+        select
+        id,title,json_data as jsonData,status,create_time as createTime,pub_date as pubDate
+        from dz_szb
+        <where>
+            status = 1
+        </where>
+        and pub_date &lt; (select pub_date from dz_szb where id =#{id})
+       order by pub_date desc
+        limit 1
+    </select>
+    <select id="getNextSzb" parameterType="map" resultType="com.deya.project.dz_szb.SzbBean">
+        select
+        id,title,json_data as jsonData,status,create_time as createTime,pub_date as pubDate
+        from dz_szb
+        <where>
+            status =1
+        </where>
+        and pub_date &gt; (select pub_date from dz_szb where id =#{id})
+       order by pub_date asc
+        limit 1
+    </select>
+
+
+    <insert id="addSzb" parameterType="Map">
+
+        insert into dz_szb(
+title,
+json_data,
+create_time,
+status,
+pub_date
+        ) values(
+
+#{title},
+#{jsonData},
+now(),
+0,
+#{pubDate}
+        )
+
+    </insert>
+
+    <update id="updateSzb" parameterType="Map">
+        update dz_szb set
+          title = #{title},
+          json_data = #{jsonData},
+          pub_date = #{pubDate}
+        where id = #{id}
+    </update>
+    <update id="updateSzbStatus" parameterType="Map">
+        update dz_szb set
+        status = #{status}
+        where id = #{id}
+    </update>
+
+</mapper>

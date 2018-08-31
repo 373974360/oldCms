@@ -7558,8 +7558,5 @@
 	<sql><![CDATA[insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7258, 1, 455)]]></sql>
 	<sql><![CDATA[insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7259, 5, 455)]]></sql>
 -->
-
-	<sql><![CDATA[update cs_wcm_sequence set seq=530 where table_name='cs_org_opt']]></sql>
-	<sql><![CDATA[update cs_wcm_sequence set seq=570 where table_name='cs_org_menu']]></sql>
-   </table>    
+   </table>
 </root>
