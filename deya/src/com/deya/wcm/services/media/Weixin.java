@@ -27,6 +27,8 @@ public class Weixin {
     private static String defautImag="";
     private static String tocken="";
     private static String rootpath="";
+    private static String previewUrl="";
+    private static String testwxname="";
 
     public static String AccessTockenOk(){
         CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -121,37 +123,54 @@ public class Weixin {
     public static String upload(String url, List<ArticleBean> articleList) throws Exception {
         String data = "{\"articles\": [";
         String articleStr = "";
-        String imgpath = defautImag;
+        String imgpath = "";
         String tempUrl = perUploadUrl.replace("##tocken##", tocken);
         for(int i = 0; i < articleList.size(); ++i) {
+            imgpath = defautImag;
             ArticleBean ab = articleList.get(i);
             if(StringUtils.isNotEmpty(ab.getThumb_url())&&!ab.getThumb_url().substring(0,4).equals("http")){
                 imgpath = rootpath+ab.getThumb_url();
             }
             System.out.println(imgpath);
             String temp_media_id = uploadImage(tempUrl, imgpath);
-            articleStr = articleStr + ",{\"thumb_media_id\":\"" + temp_media_id + "\",\"author\":\"" + ab.getAuthor() + "\",\"title\":\"" + ab.getTitle() + "\",\"content_source_url\":\"" + domain + ab.getContent_url() + "\",\"content\":\"" + ab.getInfo_content() + "\",\"digest\":\"" + ab.getDescription() + "\",\"show_cover_pic\":\"0\"}";
+            articleStr = articleStr + ",{\"thumb_media_id\":\"" + temp_media_id + "\",\"author\":\"" + ab.getAuthor() + "\",\"title\":\"" + ab.getTitle() + "\",\"content_source_url\":\"" + domain + ab.getContent_url() + "\",\"content\":\"" + ab.getInfo_content().replace("\"","'") + "\",\"digest\":\"" + ab.getDescription() + "\",\"show_cover_pic\":\"1\"}";
         }
         data = data + articleStr.substring(1) + "]}";
         JSONObject jsonObject = CommUtil.httpRequest(url, "POST", data);
-        System.out.print(data);
         System.out.println("--图文素材--" + jsonObject.toString());
         return jsonObject.getString("media_id");
     }
 
-    public static boolean sendGroupMessage(String url, String mediaId) {
+    //正式群发 -- 已关注的所有用户
+    public static boolean sendGroupMessage(String mediaId) {
+        String sendUrl = sendAllUrl.replace("##tocken##", tocken);
         String gdata = "{\"filter\":{\"is_to_all\":true},\"mpnews\":{\"media_id\":\"" + mediaId + "\"},\"msgtype\":\"mpnews\", \"send_ignore_reprint\":0}";
-        JSONObject json = CommUtil.httpRequest(url, "POST", gdata);
+        JSONObject json = CommUtil.httpRequest(sendUrl, "POST", gdata);
         System.out.println("--群发--" + json.toString());
-        return json.containsKey("msg_id");
+        if(json.get("errcode").toString().equals("0")){
+            return true;
+        }
+        return false;
+    }
+
+
+    //群发预览  -- testwxname  指定的接收微信号
+    public static boolean previewMessage(String mediaId) {
+        String sendUrl = previewUrl.replace("##tocken##", tocken);
+        String gdata = "{\"towxname\":\""+testwxname+"\",\"mpnews\":{\"media_id\":\"" + mediaId + "\"},\"msgtype\":\"mpnews\"}";
+        JSONObject json = CommUtil.httpRequest(sendUrl, "POST", gdata);
+        System.out.println("--预览--" + json.toString());
+        if(json.get("errcode").toString().equals("0")){
+            return true;
+        }
+        return false;
     }
 
     public static boolean doPush(List<ArticleBean> articleList) throws Exception {
         initParams("media.properties");
         String upUrl = uploadUrl.replace("##tocken##", tocken);
-        String sendUrl = sendAllUrl.replace("##tocken##", tocken);
         String temp_id = upload(upUrl, articleList);
-        boolean flag = sendGroupMessage(sendUrl, temp_id);
+        boolean flag = previewMessage(temp_id);
         return flag;
     }
 
@@ -166,6 +185,8 @@ public class Weixin {
         domain = GetValueByKey(fileName, "domain");
         defautImag = GetValueByKey(fileName, "defautImag");
         rootpath = GetValueByKey(fileName, "rootpath");
+        previewUrl = GetValueByKey(fileName, "previewUrl");
+        testwxname = GetValueByKey(fileName, "testwxname");
     }
 
     public static String GetValueByKey(String fileName, String key) {
@@ -175,8 +196,8 @@ public class Weixin {
             pps.load(in);
             String value = pps.getProperty(key);
             return value;
-        } catch (IOException var5) {
-            var5.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }
