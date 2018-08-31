@@ -101,9 +101,9 @@ public class Weixin {
                 if (result == null) {
                     result = buffer.toString();
                 }
-            } catch (IOException var20) {
-                System.out.println("发送POST请求出现异常！" + var20);
-                var20.printStackTrace();
+            } catch (IOException e) {
+                System.out.println("发送POST请求出现异常！" + e);
+                e.printStackTrace();
                 throw new IOException("数据读取异常");
             } finally {
                 if (reader != null) {
@@ -111,7 +111,6 @@ public class Weixin {
                 }
 
             }
-
             System.out.println("--临时图片素材--" + result);
             JSONObject object = JSONObject.fromObject(result);
             return object.getString("media_id");
@@ -131,7 +130,6 @@ public class Weixin {
             if(StringUtils.isNotEmpty(ab.getThumb_url())&&!ab.getThumb_url().substring(0,4).equals("http")){
                 imgpath = rootpath+ab.getThumb_url();
             }
-            System.out.println(imgpath);
             String temp_media_id = uploadImage(tempUrl, imgpath);
             articleStr = articleStr + ",{\"thumb_media_id\":\"" + temp_media_id + "\",\"author\":\"" + ab.getAuthor() + "\",\"title\":\"" + ab.getTitle() + "\",\"content_source_url\":\"" + domain + ab.getContent_url() + "\",\"content\":\"" + ab.getInfo_content().replace("\"","'") + "\",\"digest\":\"" + ab.getDescription() + "\",\"show_cover_pic\":\"1\"}";
         }
