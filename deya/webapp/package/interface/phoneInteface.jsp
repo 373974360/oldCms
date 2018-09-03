@@ -3,7 +3,7 @@
 <%@page import="com.deya.wcm.bean.interview.SubjectBean,com.deya.wcm.bean.search.ResultBean,com.deya.wcm.bean.system.formodel.ModelBean,com.deya.wcm.bean.template.TurnPageBean"%>
 <%@page import="com.deya.wcm.services.appeal.sq.SQManager,com.deya.wcm.services.cms.category.CategoryManager,com.deya.wcm.services.cms.info.InfoBaseManager,com.deya.wcm.services.cms.info.ModelUtil"%>
 <%@page import="com.deya.wcm.services.model.services.InfoCustomService,com.deya.wcm.services.search.search.SearchManager,com.deya.wcm.services.system.formodel.ModelManager,com.deya.wcm.services.zwgk.info.GKInfoManager,com.deya.wcm.template.velocity.data.AppealData,com.deya.wcm.template.velocity.data.InfoUtilData"%><%@ page import="com.deya.wcm.template.velocity.data.InterViewData"%><%@ page import="org.json.JSONException"%><%@ page import="org.json.JSONObject"%><%@ page import="java.util.*"%>
-<%@page import="com.deya.wcm.dao.cms.count.CmsCountDAO"%>
+<%@page import="com.deya.wcm.dao.cms.count.CmsCountDAO"%><%@ page import="org.apache.commons.lang3.StringUtils"%>
 <%
     String action_type = request.getParameter("action_type");
     String result = "";
@@ -124,7 +124,11 @@ public String getNewsList(HttpServletRequest request)
 public String getHitsNewsList(HttpServletRequest request)
 {
 	String json = "";
-	String params = "site_id=CMScqgjj;size=10;cur_page=1;orderby=ci.hits desc;";
+	String size = request.getParameter("size");
+	if(StringUtils.isEmpty(size)){
+	    size="50";
+	}
+	String params = "site_id=CMScqgjj;size="+size+";cur_page=1;orderby=ci.hits desc;";
 	List<InfoBean> info_list = InfoUtilData.getInfoList(params);
 	if(info_list != null && info_list.size() > 0)
 	{
