@@ -339,7 +339,6 @@ public class InfoBaseManager {
                 sql = CategoryManager.getSearchSQLByCategoryIDS(user_id,category_ids,app_id,site_id);
                 map.remove("cat_id");
             }
-            System.out.println("searchString1:"+sql);
             map.put("searchString2", sql);
         }else if(map.get("info_status").equals("2")){
             String sql = "";
@@ -350,7 +349,6 @@ public class InfoBaseManager {
                     sql = " and ci.step_id="+(Integer.parseInt(map.get("step_id")));
                 }
             }
-            System.out.println("searchString2:"+sql);
             map.put("searchString2", sql);
         }
     }

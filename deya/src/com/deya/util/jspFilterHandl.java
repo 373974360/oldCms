@@ -142,7 +142,6 @@ public class jspFilterHandl {
             if (queryString.indexOf("collURL") == -1) {
                 if ((path.equals("/sys") && servletPath.indexOf("/JSON-RPC") >= 0) || (path.equals("/manager") && servletPath.indexOf("/JSON-RPC") >= 0)) {
                     String params = getRequestPayload(request);
-                    System.out.println("params：" + params);
                     if (isTureKey(params, sqlFilterStr)) {
                         return true;  //包含要过滤的关键字
                     }

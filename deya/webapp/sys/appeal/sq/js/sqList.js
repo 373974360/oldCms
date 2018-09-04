@@ -268,6 +268,7 @@ function insertProcess(pro_type) {
             sqMap.put("publish_dtime", "");
             sqMap.put("is_open", $(":radio[id='is_open_r']:checked").val());
             sqMap.put("sq_reply", pro_note);
+            sqMap.put("custom_dept_name", $("#custom_dept_name").val());
             break;
         case 2:
             sqMap.put("sq_status", 1 + "");//转办时，流程处理状态改为处理中

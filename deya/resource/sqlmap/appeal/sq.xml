@@ -213,6 +213,7 @@
             <if test="sat_score != null">sat_score = #{sat_score},</if>
             <if test="weight != null">weight = #{weight},</if>
             <if test="publish_dtime != null">publish_dtime = #{publish_dtime},</if>
+            <if test="custom_dept_name != null">custom_dept_name = #{custom_dept_name}</if>
         </set>
         where sq_id = #{sq_id}
     </update>
@@ -318,7 +319,7 @@
     <!-- ******************** 需要处理的部分 开始 ****************************** -->
     <!-- 得到诉求列表 -->
     <sql id="getSqList_sql_item">
-        pur_id,sq_code,sq_id,model_id,me_id,sq_realname,do_dept,sq_dtime,sq_title2,submit_name,supervise_flag,alarm_flag,timeout_flag,publish_status,sq_status,weight,sq_all_number,sq_number,sq_phone,sq_email,sq_content,sq_reply
+        pur_id,sq_code,sq_id,model_id,me_id,sq_realname,do_dept,sq_dtime,sq_title2,submit_name,supervise_flag,alarm_flag,timeout_flag,publish_status,sq_status,weight,sq_all_number,sq_number,sq_phone,sq_email,sq_content,sq_reply,custom_dept_name
     </sql>
     <sql id="getSqList_sql_conn">
         where model_id in (${model_id}) and sq_status != '-99'
@@ -471,7 +472,7 @@
 
     <!-- 得到信件列表（前台使用） -->
     <sql id="getBrowserSQList_sql_item">
-        sq_code,do_dept,is_open,area_id,pur_id,sq_id,sq_realname,model_id,sq_dtime,over_dtime,sq_title2,submit_name,sq_status,hits,day_hits,week_hits,month_hits,lasthit_dtime,weight,sq_all_number,sq_number
+        sq_code,do_dept,is_open,area_id,pur_id,sq_id,sq_realname,model_id,sq_dtime,over_dtime,sq_title2,submit_name,sq_status,hits,day_hits,week_hits,month_hits,lasthit_dtime,weight,sq_all_number,sq_number,custom_dept_name
     </sql>
     <select id="getBrowserSQList" parameterType="Map" resultType="com.deya.wcm.bean.appeal.sq.SQBean">
         select * from (
@@ -486,7 +487,7 @@
     </select>
     <select id="getBrowserSQList_mysql" parameterType="Map" resultType="com.deya.wcm.bean.appeal.sq.SQBean">
         select <include refid="getBrowserSQList_sql_item"/> from cp_sq
-        where sq_flag in (0,1,2) and publish_status = 1 and is_open = 1 ${con}
+        where sq_flag in (0,1,2) and publish_status = 1 and is_open = 1 ${con} and sq_status > -1
         order by ${order_by} limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
     </select>
     <select id="getBrowserSQList_mssql" parameterType="Map" resultType="com.deya.wcm.bean.appeal.sq.SQBean">

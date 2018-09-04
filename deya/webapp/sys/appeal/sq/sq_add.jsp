@@ -376,6 +376,7 @@ function doVoid(id,pro_type)
 	$("#quick_content").show();	
 	$("#gzyy_open_tr").hide();	
 	$("#weight_tr").hide();
+    $("#custom_dept_name_tr").hide();
 	//取得常用语信息
 	getCommonLangListByType(pro_type);
 	switch(pro_type)
@@ -396,6 +397,7 @@ function doVoid(id,pro_type)
 				 $("#gzyy_open_tr").show();
 			   setV("pro_note", defaultBean.sq_reply);
 			   $("#affix_tr").show();
+				$("#custom_dept_name_tr").show();
 				break;
 		case 2:$("#pro_title_th").text("转办意见：");				
 			　 $("div #sq_title_div").text("转办信件");	
@@ -838,6 +840,12 @@ function creatWord()
 					</select>
 					<span class="blank3"></span>
                     <script id="pro_note" type="text/plain" style="width:100%;height:200px;"></script>
+				</td>
+			</tr>
+			<tr id="custom_dept_name_tr" class="hidden">
+				<th>回复部门：</th>
+				<td>
+					<input id="custom_dept_name" name="custom_dept_name" type="text"/>
 				</td>
 			</tr>
             <tr id="over_dtime_tr" class="hidden">

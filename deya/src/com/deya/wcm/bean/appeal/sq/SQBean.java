@@ -65,6 +65,16 @@ public class SQBean implements java.io.Serializable{
 	private int sq_all_number = 0;//按年流水号
 	private int sq_number = 0;//	按年及业务流水号
 	private int submit_dept_id = 0;//原始提交的部门ID
+	private String custom_dept_name="";//自定义回复部门
+
+	public String getCustom_dept_name() {
+		return custom_dept_name;
+	}
+
+	public void setCustom_dept_name(String custom_dept_name) {
+		this.custom_dept_name = custom_dept_name;
+	}
+
 	public int getSubmit_dept_id() {
 		return submit_dept_id;
 	}
