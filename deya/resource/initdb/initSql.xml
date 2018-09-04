@@ -1639,1191 +1639,1193 @@
     <sql><![CDATA[insert into cs_org_opt (opt_id, parent_id, tree_position, opt_name, app_id, controller, action, opt_flag, opt_memo) values ('509', '507', '$1$507$509$', '已发信息修改权限', 'cms', '', '', '', '')]]></sql>
     <!--<sql><![CDATA[insert into cs_org_opt (opt_id, parent_id, tree_position, opt_name, app_id, controller, action, opt_flag, opt_memo) values ('510', '507', '$1$507$510$', '信息更新统计', 'cms', '', '', '', '')]]></sql>
     <sql><![CDATA[insert into cs_org_opt (opt_id, parent_id, tree_position, opt_name, app_id, controller, action, opt_flag, opt_memo) values ('511', '507', '$1$507$511$', '信息更新统计', 'cms', '', '', '', '')]]></sql>-->
-		<sql><![CDATA[insert into cs_org_opt (opt_id, parent_id, tree_position, opt_name, app_id, controller, action, opt_flag, opt_memo) values ('531','1', '$1$531$', '试点领域专栏', 'cms', '', '', '', '')]]></sql>
-		<sql><![CDATA[insert into cs_org_opt (opt_id, parent_id, tree_position, opt_name, app_id, controller, action, opt_flag, opt_memo) values (532, 531, '$1$531$532$', '内容管理', 'cms', '', '', '', '')]]></sql>
-		<sql><![CDATA[insert into cs_org_opt (opt_id, parent_id, tree_position, opt_name, app_id, controller, action, opt_flag, opt_memo) values ('533','1', '$1$533$', '集约化管理', 'cms', '', '', '', '')]]></sql>
-		<sql><![CDATA[insert into cs_org_opt (opt_id, parent_id, tree_position, opt_name, app_id, controller, action, opt_flag, opt_memo) values ('534','533', '$1$533$534$', '集约化管理', 'cms', '', '', '', '')]]></sql>
-		<sql><![CDATA[insert into cs_org_opt (opt_id, parent_id, tree_position, opt_name, app_id, controller, action, opt_flag, opt_memo) values ('539','534', '$1$533$534$539$', '栏目更新规则', 'cms', '', '', '', '')]]></sql>
-		<sql><![CDATA[insert into cs_org_opt (opt_id, parent_id, tree_position, opt_name, app_id, controller, action, opt_flag, opt_memo) values ('540','534', '$1$533$534$540$', '空白栏目检索', 'cms', '', '', '', '')]]></sql>
-		<sql><![CDATA[insert into cs_org_opt (opt_id, parent_id, tree_position, opt_name, app_id, controller, action, opt_flag, opt_memo) values ('541','534', '$1$533$534$541$', '栏目更新结果', 'cms', '', '', '', '')]]></sql>
-		<sql><![CDATA[insert into cs_org_opt (opt_id, parent_id, tree_position, opt_name, app_id, controller, action, opt_flag, opt_memo) values ('542','534', '$1$533$534$542$', '网站断链检测', 'cms', '', '', '', '')]]></sql>
+
+		<sql><![CDATA[insert into cs_org_opt (opt_id, parent_id, tree_position, opt_name, app_id, controller, action, opt_flag, opt_memo) values ('510','507', '$1$507$531$', '只看自己部门信息', 'cms', '', '', '', '')]]></sql>
+		<sql><![CDATA[insert into cs_org_opt (opt_id, parent_id, tree_position, opt_name, app_id, controller, action, opt_flag, opt_memo) values ('511','1', '$1$511$', '试点领域专栏', 'cms', '', '', '', '')]]></sql>
+		<sql><![CDATA[insert into cs_org_opt (opt_id, parent_id, tree_position, opt_name, app_id, controller, action, opt_flag, opt_memo) values (512, 511, '$1$511$512$', '内容管理', 'cms', '', '', '', '')]]></sql>
+		<sql><![CDATA[insert into cs_org_opt (opt_id, parent_id, tree_position, opt_name, app_id, controller, action, opt_flag, opt_memo) values ('513','1', '$1$513$', '集约化管理', 'cms', '', '', '', '')]]></sql>
+		<sql><![CDATA[insert into cs_org_opt (opt_id, parent_id, tree_position, opt_name, app_id, controller, action, opt_flag, opt_memo) values ('514','513', '$1$513$514$', '集约化管理', 'cms', '', '', '', '')]]></sql>
+		<sql><![CDATA[insert into cs_org_opt (opt_id, parent_id, tree_position, opt_name, app_id, controller, action, opt_flag, opt_memo) values ('515','514', '$1$513$514$515$', '栏目更新规则', 'cms', '', '', '', '')]]></sql>
+		<sql><![CDATA[insert into cs_org_opt (opt_id, parent_id, tree_position, opt_name, app_id, controller, action, opt_flag, opt_memo) values ('516','514', '$1$513$514$516$', '空白栏目检索', 'cms', '', '', '', '')]]></sql>
+		<sql><![CDATA[insert into cs_org_opt (opt_id, parent_id, tree_position, opt_name, app_id, controller, action, opt_flag, opt_memo) values ('517','514', '$1$513$514$517$', '栏目更新结果', 'cms', '', '', '', '')]]></sql>
+		<sql><![CDATA[insert into cs_org_opt (opt_id, parent_id, tree_position, opt_name, app_id, controller, action, opt_flag, opt_memo) values ('518','514', '$1$513$514$518$', '网站断链检测', 'cms', '', '', '', '')]]></sql>
 	<sql>
 	<![CDATA[
 		insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (1, 0, '系统菜单', '', '0', '0', '$1$', 1, '', '')
-	]]> 
+	]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (2, 396, '组织机构管理', '', 2, '0', '$1$396$2$', 1, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (3, 396, '数据模型管理', '', 3, '0', '$1$396$3$', 2, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (4, 397, '信息公开系统', '', 7, '0', '$1$397$4$', 1, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (5, 396, '站群管理', '', 5, '0', '$1$396$5$', 5, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (6, 396, '站点内容管理', '', 6, '0', '$1$396$6$', 6, '', 'createSiteMenu()')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (8, 4, '节点内容管理', '', 0, '0', '$1$397$4$8$', 1, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (106, 5, '站点注册', '/sys/control/site/siteList.jsp', 339, '0', '$1$396$5$106$', 1, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (107, 2, '用户管理', '/sys/org/dept/deptList.jsp', 110, '0', '$1$396$2$107$', 1, '', 'getDeptTreeJsonData()')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (108, 2, '帐号管理', '', 0, '0', '$1$396$2$108$', 2, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (109, 108, '全部帐号', '/sys/org/user/registerList.jsp?rtype=all', 326, '0', '$1$396$2$108$109$', 0, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (110, 108, '待开通帐号', '/sys/org/user/registerList.jsp?rtype=wait', 327, '0', '$1$396$2$108$110$', 1, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (111, 108, '已开通帐号', '/sys/org/user/registerList.jsp?rtype=already', 328, '0', '$1$396$2$108$111$', 2, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (112, 108, '已停用帐号', '/sys/org/user/registerList.jsp?rtype=stop', 329, '0', '$1$396$2$108$112$', 3, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (113, 2, '系统管理', '', 0, '0', '$1$396$2$113$', 3, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (114, 113, '菜单管理', '/sys/org/operate/menuList.jsp?menuID=1', 331, '0', '$1$396$2$113$114$', 2, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (147, 113, '角色管理', '/sys/org/role/roleList.jsp?app=org', 109, '0', '$1$396$2$113$147$', 3, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (148, 113, '权限管理', '/sys/org/operate/operateList.jsp', 330, '0', '$1$396$2$113$148$', 1, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (154, 5, '站群注册', '/sys/control/group/groupList.jsp', 338, '0', '$1$396$5$154$', 2, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (155, 156, '站群配置', '/sys/control/group/groupInfo.jsp', 349, '0', '$1$396$5$156$155$', 2, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (156, 5, '系统管理', '', 342, '0', '$1$396$5$156$', 5, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (157, 156, '服务器注册', '/sys/control/server/serverList.jsp', 348, '0', '$1$396$5$156$157$', 1, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (158, 5, '系统日志', '', 341, '0', '$1$396$5$158$', 4, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (159, 158, '审计日志', '/sys/system/log/csLogList.jsp', 346, '0', '$1$396$5$158$159$', 999, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (160, 158, '登录日志', '/sys/system/log/loginLogList.jsp', 347, '0', '$1$396$5$158$160$', 999, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (162, 5, '站群统计', '', 340, '0', '$1$396$5$162$', 3, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (163, 162, '信息量统计', '/sys/control/count/cmsSiteList.jsp', 343, '0', '$1$396$5$162$163$', 1, '', '')
-		]]> 
-	</sql>	
+		]]>
+	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (165, 162, '工作量统计', '/sys/control/count/cmsAssessList.jsp', 344, '0', '$1$396$5$162$165$', 2, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (474, 162, '访问量统计', '/sys/control/count/AccessCountList.jsp', 431, '0', '$1$396$5$162$474$', 3, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (166, 156, '角色管理', '/sys/org/role/roleList.jsp?app=control', 351, '0', '$1$396$5$156$166$', 4, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (169, 156, '工作流', '/sys/cms/workflow/workFlowList.jsp?app_id=cms', 352, '0', '$1$396$5$156$169$', 5, '', '')
-		]]> 
+		]]>
 	</sql>
 	<!--
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (171, 156, 'SEO设置', '/sys/system/search/searchList.jsp', 353, '0', '$1$396$5$156$171$', 6, '', '')
-		]]> 
+		]]>
 	</sql>
 	-->
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (178, 3, '元数据管理', '/sys/system/metadata/metaDataList.jsp', 337, '0', '$1$396$3$178$', 3, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (179, 3, '内容模型管理', '/sys/system/formodel/modelList.jsp', 336, '0', '$1$396$3$179$', 2, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (180, 113, '用户组管理', '/sys/org/group/groupList.jsp?appId=org&site_id=', 333, '0', '$1$396$2$113$180$', 999, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (184, 156, '热词管理', '/sys/system/assist/hotwords/hotWordDataList.jsp', 354, '0', '$1$396$5$156$184$', 7, '', '')
-		]]> 
+		]]>
 	</sql>
 	<!--
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (185, 156, 'Tags管理', '/sys/system/assist/tags/tagsDataList.jsp?app=content', 355, '0', '$1$396$5$156$185$', 8, '', '')
-		]]> 
+		]]>
 	</sql>
 	-->
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (188, 353, '角色管理', '/sys/org/role/roleList.jsp?app=system', 127, '0', '$1$396$3$353$188$', 2, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (189, 156, '编辑管理', '/sys/system/assist/author/authorDataList.jsp', 356, '0', '$1$396$5$156$189$', 9, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (190, 156, '来源管理', '/sys/system/assist/source/sourceDataList.jsp', 357, '0', '$1$396$5$156$190$', 10, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (192, 349, '角色管理', '/sys/org/role/roleList.jsp?app=cms', 129, '0', '$1$396$6$349$192$', 5, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (198, 113, '用户级别管理', '/sys/org/userLevel/userLevelList.jsp', 334, '0', '$1$396$2$113$198$', 999, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (199, 349, '站点配置', '/sys/control/siteConfig/site_config.jsp', 350, '0', '$1$396$6$349$199$', 6, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (201, 113, '部门级别管理', '/sys/org/deptLevel/deptLevelList.jsp', 335, '0', '$1$396$2$113$201$', 999, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (202, 192, '角色', '/sys/org/role/roleList.jsp?app=cms', 130, '0', '$1$396$6$349$192$202$', 999, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (205, 3, '共享目录管理', '/sys/cms/cateClass/cateClassList.jsp', 135, '0', '$1$396$3$205$', 1, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (221, 349, '目录管理', '/sys/cms/category/categoryList.jsp?app_id=cms', 149, '0', '$1$396$6$349$221$', 2, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (223, 192, '用户组管理', '/sys/org/group/groupList.jsp?appId=cms', 151, '0', '$1$396$6$349$192$223$', 999, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (224, 192, '站点用户管理', '/sys/org/siteUser/SiteUserList.jsp?appId=cms', 152, '0', '$1$396$6$349$192$224$', 999, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (226, 397, '公众诉求系统', '', 159, '0', '$1$397$226$', 3, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (227, 226, '信件办理', '', 0, '0', '$1$397$226$227$', 1, '', 'getAppealSQCount()')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (228, 227, '待处理信件', '', 0, '0', '$1$397$226$227$228$', 1, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (229, 228, '首接件', '/sys/appeal/sq/sqList.jsp?sq_flag=0&prove_type=1&sq_status=0,1&is_back=0', 181, '0', '$1$397$226$227$228$229$', 1, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (230, 228, '转办件', '/sys/appeal/sq/sqList.jsp?sq_flag=0&prove_type=2,3,4,5&sq_status=0,1&is_back=0', 182, '0', '$1$397$226$227$228$230$', 2, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (231, 228, '退回件', '/sys/appeal/sq/sqList.jsp?is_back=1&sq_flag=0&sq_status=0,1', 183, '0', '$1$397$226$227$228$231$', 3, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (232, 228, '警示件', '/sys/appeal/sq/sqList.jsp?alarm_flag=1,2,3&sq_status=0,1&sq_flag=0', 184, '0', '$1$397$226$227$228$232$', 4, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (235, 228, '待审件', '/sys/appeal/sq/sqList.jsp?sq_status=2&page_type=dsj', 185, '0', '$1$397$226$227$228$235$', 5, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (236, 227, '已处理信件', '', 0, '0', '$1$397$226$227$236$', 2, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (237, 236, '受理件', '/sys/appeal/sq/transactSQList.jsp?pro_type=0', 187, '0', '$1$397$226$227$236$237$', 2, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (238, 236, '办结件', '/sys/appeal/sq/sqList.jsp?sq_status=3', 188, '0', '$1$397$226$227$236$238$', 1, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (239, 236, '转办件', '/sys/appeal/sq/transactSQList.jsp?pro_type=2', 189, '0', '$1$397$226$227$236$239$', 4, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (240, 236, '呈办件', '/sys/appeal/sq/transactSQList.jsp?pro_type=4', 190, '0', '$1$397$226$227$236$240$', 5, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (241, 236, '交办件', '/sys/appeal/sq/transactSQList.jsp?pro_type=3', 191, '0', '$1$397$226$227$236$241$', 6, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (242, 236, '无效件', '/sys/appeal/sq/transactSQList.jsp?pro_type=6', 192, '0', '$1$397$226$227$236$242$', 7, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (243, 236, '重复件', '/sys/appeal/sq/transactSQList.jsp?pro_type=5', 193, '0', '$1$397$226$227$236$243$', 8, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (244, 236, '不予受理件', '/sys/appeal/sq/transactSQList.jsp?pro_type=7', 194, '0', '$1$397$226$227$236$244$', 9, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (246, 226, '信件管理', '', 0, '0', '$1$397$226$246$', 2, '', 'getAppealSQCount()')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (247, 246, '发布管理', '', 195, '0', '$1$397$226$246$247$', 1, '', 'getAppealSQCount()')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (248, 246, '延期审核', '', 0, '0', '$1$397$226$246$248$', 3, '', 'getAppealSQCount()')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (249, 248, '待审核件', '/sys/appeal/sq/sqList.jsp?sq_flag=0&limit_flag=2&is_back=0&is_manager_page=true', 197, '0', '$1$397$226$246$248$249$', 999, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (250, 248, '已审核件', '/sys/appeal/sq/sqList.jsp?sq_flag=0&limit_flag=1&is_back=0&is_manager_page=true', 198, '0', '$1$397$226$246$248$250$', 999, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (251, 246, '信件跟踪', '', 0, '0', '$1$397$226$246$251$', 4, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (252, 251, '信件特征跟踪', '', 0, '0', '$1$397$226$246$251$252$', 999, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (253, 251, '信件状态跟踪', '', 0, '0', '$1$397$226$246$251$253$', 999, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (254, 246, '督查督办', '', 0, '0', '$1$397$226$246$254$', 5, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (255, 254, '已督办', '/sys/appeal/sq/sqList.jsp?sq_flag=0&supervise_flag=1&is_manager_page=true', 200, '0', '$1$397$226$246$254$255$', 1, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (256, 254, '预警件', '/sys/appeal/sq/sqList.jsp?sq_flag=0&alarm_flag=1&is_manager_page=true', 201, '0', '$1$397$226$246$254$256$', 2, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (257, 254, '黄牌件', '/sys/appeal/sq/sqList.jsp?sq_flag=0&alarm_flag=2&is_manager_page=true', 202, '0', '$1$397$226$246$254$257$', 3, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (258, 254, '红牌件', '/sys/appeal/sq/sqList.jsp?sq_flag=0&alarm_flag=3&is_manager_page=true', 203, '0', '$1$397$226$246$254$258$', 4, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (259, 226, '统计分析', '', 0, '0', '$1$397$226$259$', 3, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (262, 259, '按处理单位', '', 0, '0', '$1$397$226$259$262$', 4, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (264, 259, '满意度统计', '', 0, '0', '$1$397$226$259$264$', 6, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (265, 226, '系统管理', '', 0, '0', '$1$397$226$265$', 5, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (266, 226, '业务管理', '/sys/appeal/model/modelList.jsp', 238, '0', '$1$397$226$266$', 4, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (267, 265, '部门注册', '/sys/appeal/cpDept/cpDeptList.jsp?dept_id=1', 239, '0', '$1$397$226$265$267$', 1, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (268, 265, '用户注册', '/sys/appeal/cpUser/cpUserList.jsp?dept_id=1', 240, '0', '$1$397$226$265$268$', 2, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (269, 265, '角色管理', '/sys/org/role/roleList.jsp?app=appeal', 242, '0', '$1$397$226$265$269$', 4, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (270, 265, '过滤词', '/sys/system/filterWord/filterWordList.jsp?app_id=appeal', 244, '0', '$1$397$226$265$270$', 5, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (271, 265, '满意度指标配置', '/sys/appeal/satisfaction/satisfaction.jsp', 245, '0', '$1$397$226$265$271$', 6, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (272, 398, '访谈系统', '', 220, '0', '$1$396$6$398$272$', 3, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (273, 398, '问卷调查', '', 221, '0', '$1$396$6$398$273$', 5, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (279, 272, '访谈模型管理', '/sys/interview/subject/subjectCategory.jsp', 257, '0', '$1$396$6$398$272$279$', 1, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (281, 272, '主题管理', '/sys/interview/subject/subjectManager.jsp', 258, '0', '$1$396$6$398$272$281$', 2, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (282, 272, '访谈统计', '', 0, '0', '$1$396$6$398$272$282$', 3, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (283, 282, '访谈模型统计', '/sys/interview/count/categoryCount.jsp', 260, '0', '$1$396$6$398$272$282$283$', 999, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (284, 282, '访谈热度排行', '/sys/interview/count/subjectCount.jsp', 261, '0', '$1$396$6$398$272$282$284$', 999, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (286, 265, '常用语', '/sys/appeal/lang/commonLangList.jsp', 246, '0', '$1$397$226$265$286$', 7, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (287, 349, '会员管理', '/sys/member/manager/memberList.jsp', 153, '0', '$1$396$6$349$287$', 12, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (288, 287, '注册设置', '/sys/member/config/member_config.jsp', 154, '0', '$1$396$6$349$287$288$', 999, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (289, 287, '会员管理', '/sys/member/manager/memberList.jsp', 155, '0', '$1$396$6$349$287$289$', 999, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (290, 287, '会员审核', '/sys/member/check/memberCheckList.jsp', 156, '0', '$1$396$6$349$287$290$', 999, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (291, 287, '会员分类管理', '/sys/member/category/memberCategoryList.jsp', 157, '0', '$1$396$6$349$287$291$', 999, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (292, 265, '地区分类', '/sys/appeal/area/areaList.jsp', 247, '0', '$1$397$226$265$292$', 8, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (294, 6, '素材管理', '/sys/material/operate/managerList.jsp', 158, '0', '$1$396$6$294$', 2, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (295, 273, '分类管理', '/sys/survey/surveyCategoryList.jsp', 262, '0', '$1$396$6$398$273$295$', 1, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (296, 273, '调查管理', '/sys/survey/surveyList.jsp', 263, '0', '$1$396$6$398$273$296$', 2, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (297, 273, '问卷统计', '', 0, '0', '$1$396$6$398$273$297$', 3, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (298, 297, '问卷类型统计', '/sys/survey/count/categoryCount.jsp', 265, '0', '$1$396$6$398$273$297$298$', 999, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (299, 297, '问卷热度排行', '/sys/survey/count/surveyCount.jsp', 266, '0', '$1$396$6$398$273$297$299$', 999, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (302, 262, '信件类型', '/sys/appeal/count/dept/letterType.jsp', 233, '0', '$1$397$226$259$262$302$', 2, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (308, 259, '按诉求目的', '', 0, '0', '$1$397$226$259$308$', 3, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (309, 308, '办理情况', '/sys/appeal/count/aim/letterHandle.jsp', 229, '0', '$1$397$226$259$308$309$', 1, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (310, 308, '信件类型', '/sys/appeal/count/aim/letterType.jsp', 230, '0', '$1$397$226$259$308$310$', 2, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (311, 308, '警示状态', '/sys/appeal/count/aim/letterCaution.jsp', 231, '0', '$1$397$226$259$308$311$', 3, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (312, 262, '办理情况', '/sys/appeal/count/dept/letterHandle.jsp', 232, '0', '$1$397$226$259$262$312$', 1, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (313, 262, '警示状态', '/sys/appeal/count/dept/letterCaution.jsp', 234, '0', '$1$397$226$259$262$313$', 3, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (316, 264, '按处理部门', '/sys/appeal/count/record/letterHandleDept.jsp', 236, '0', '$1$397$226$259$264$316$', 1, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (317, 264, '按诉求目的', '/sys/appeal/count/record/letterPur.jsp', 237, '0', '$1$397$226$259$264$317$', 2, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (318, 262, '诉求目的', '/sys/appeal/count/dept/letterPur.jsp', 235, '0', '$1$397$226$259$262$318$', 4, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (319, 246, '评论管理', '', 0, '0', '$1$397$226$246$319$', 6, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (320, 319, '已审核', '/sys/system/comment/commentList.jsp?type=checked', 296, '0', '$1$397$226$246$319$320$', 999, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (321, 319, '待审核', '/sys/system/comment/commentList.jsp?type=unchecked', 297, '0', '$1$397$226$246$319$321$', 999, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (329, 265, '内容分类', '/sys/appeal/category/categoryList.jsp', 248, '0', '$1$397$226$265$329$', 9, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (330, 265, '诉求目的', '/sys/appeal/purpose/purposeList.jsp', 249, '0', '$1$397$226$265$330$', 10, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (331, 265, '特征标记', '/sys/system/assist/tags/tagsDataList.jsp?app=appeal', 250, '0', '$1$397$226$265$331$', 11, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (332, 228, '延期待审', '/sys/appeal/sq/sqList.jsp?sq_status=0,1&limit_flag=2&is_back=0&page_type=dsj', 186, '0', '$1$397$226$227$228$332$', 6, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (333, 265, '工作流管理', '/sys/cms/workflow/workFlowList.jsp?app_id=appeal', 251, '0', '$1$397$226$265$333$', 12, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (334, 265, '领导人注册', '/sys/appeal/cpLead/cpLeadList.jsp', 241, '0', '$1$397$226$265$334$', 3, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (335, 265, '节假日管理', '/sys/appeal/calendar/calendarList.jsp', 252, '0', '$1$397$226$265$335$', 13, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (338, 156, '模板管理', '/sys/system/template/templateDataList.jsp', 0, '0', '$1$396$5$156$338$', 11, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (339, 236, '回复件', '/sys/appeal/sq/transactSQList.jsp?pro_type=1', 206, '0', '$1$397$226$227$236$339$', 3, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (340, 236, '内容审核件', '/sys/appeal/sq/transactSQList.jsp?pro_type=11,12', 207, '0', '$1$397$226$227$236$340$', 10, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (341, 236, '延期审核件', '/sys/appeal/sq/transactSQList.jsp?pro_type=9,10', 208, '0', '$1$397$226$227$236$341$', 11, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (342, 349, '标签分类', '/sys/system/ware/wareCategoryList.jsp?app_id=cms', 209, '0', '$1$396$6$349$342$', 3, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (343, 349, '标签管理', '/sys/system/ware/wareList.jsp?app_id=cms', 210, '0', '$1$396$6$349$343$', 4, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (347, 6, '页面管理', '/sys/page/pageList.jsp?app_id=cms', 212, '0', '$1$396$6$347$', 4, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (348, 349, '模板管理', '/sys/system/template/templateCategoryList.jsp?tid=0&app_id=cms', 213, '0', '$1$396$6$349$348$', 1, '', 'getTemplateCategoryTreeJsonData()')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (349, 6, '系统管理', '', 0, '0', '$1$396$6$349$', 8, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (350, 6, '内容维护', '', 215, '0', '$1$396$6$350$', 1, '', 'getInfoCategoryTreeByUserID()')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (351, 6, '标签维护', '', 216, '0', '$1$396$6$351$', 3, '', 'getWareCategoryTreeJsonData()')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (353, 3, '系统管理', '', 0, '0', '$1$396$3$353$', 6, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (354, 353, '过滤词', '/sys/system/filterWord/filterWordList.jsp', 219, '0', '$1$396$3$353$354$', 1, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (355, 3, '数据字典', '/sys/system/dict/dataDictList.jsp', 222, '0', '$1$396$3$355$', 5, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (360, 399, '服务目录管理', '/sys/cms/zt/fwList.jsp', 370, '0', '$1$397$399$360$', 2, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (361, 399, '内容维护', '', 369, '0', '$1$397$399$361$', 1, '', 'getFWCategoryTreeByUserID()')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (362, 4, '系统管理', '', 0, '0', '$1$397$4$362$', 8, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (364, 362, '节点分类管理', '/sys/zwgk/node/gkCategoryList.jsp', 275, '0', '$1$397$4$362$364$', 2, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (365, 362, '节点注册', '/sys/zwgk/node/gkNodeList.jsp', 276, '0', '$1$397$4$362$365$', 3, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (366, 362, '用户注册', '/sys/zwgk/user/gkUserList.jsp', 277, '0', '$1$397$4$362$366$', 4, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (367, 362, '角色管理', '/sys/org/role/roleList.jsp?app=zwgk', 278, '0', '$1$397$4$362$367$', 5, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (369, 8, '内容维护', '', 280, '0', '$1$397$4$8$369$', 1, '', 'getInfoCategoryTreeByUserID()')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (370, 372, '用户管理', '/sys/org/siteUser/SiteUserList.jsp?appId=zwgk', 281, '0', '$1$397$4$8$372$370$', 1, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (371, 372, '目录管理', '/sys/cms/category/categoryList.jsp?app_id=zwgk', 282, '0', '$1$397$4$8$372$371$', 2, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (372, 8, '系统管理', '', 0, '0', '$1$397$4$8$372$', 6, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (373, 372, '节点配置', '/sys/zwgk/node/gkNode_update.jsp', 293, '0', '$1$397$4$8$372$373$', 3, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (374, 8, '公开指南', '/sys/cms/info/article/m_gk_gkzn.jsp?cid=10&app_id=zwgk', 288, '0', '$1$397$4$8$374$', 2, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (375, 8, '公开年报', '/sys/cms/info/article/articleDataList.jsp?cat_id=11&app_id=zwgk', 289, '0', '$1$397$4$8$375$', 3, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (376, 8, '依申请公开', '/sys/zwgk/ysqgk/operate/ysqgk_list.jsp?app_id=zwgk', 290, '0', '$1$397$4$8$376$', 4, '依申请公开列表', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (377, 8, '公开统计', '', 291, '0', '$1$397$4$8$377$', 5, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (378, 4, '公开指引', '/sys/cms/info/article/articleDataList.jsp?cat_id=12&app_id=zwgk', 283, '0', '$1$397$4$378$', 3, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (379, 4, '公开统计', '', 287, '0', '$1$397$4$379$', 7, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (380, 4, '公开指南', '/sys/cms/info/article/gkZNList.jsp?cat_id=10&app_id=zwgk', 284, '0', '$1$397$4$380$', 4, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (381, 4, '公开年报', '/sys/cms/info/article/gkZNList.jsp?cat_id=11&app_id=zwgk', 285, '0', '$1$397$4$381$', 5, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (382, 398, '依申请公开', '/sys/zwgk/ysqgk/operate/ysqgk_allLists.jsp?app_id=zwgk', 286, '0', '$1$396$6$398$382$', 6, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (383, 3, '工作流管理', '/sys/cms/workflow/workFlowList.jsp?app_id=system', 294, '0', '$1$396$3$383$', 4, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (384, 349, '索引规则管理', '/sys/zwgk/index/indexRoleList.jsp', 311,  0, '$1$396$6$349$384$', 4, '','')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (385, 353, '邮件设置', '/sys/system/config/mail/smtpMail.jsp?app_id=system', 312, '0', '$1$396$3$353$385$', 5, '', '')
-		]]> 
+		]]>
 	</sql>
 	<!--sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (386, 349, 'DIGG统计', '/sys/cms/digg/infoDiggList.jsp', 313, '0', '$1$396$6$349$386$', 9, '', '')
-		]]> 
+		]]>
 	</sql-->
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (387, 349, '附件设置', '/sys/system/config/attachment/attachment.jsp?app_id=cms', 314, '0', '$1$396$6$349$387$', 11, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (388, 349, '依申请业务管理', '/sys/zwgk/ysqgk/operate/ysqgk_yw.jsp?app_id=zwgk', 320, '0', '$1$396$6$349$388$', 9, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (389, 377, '公开信息统计', '/sys/zwgk/count/gkCountList.jsp', 316, '0', '$1$397$4$8$377$389$', 1, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (390, 379, '公开信息量统计', '', 317, '0', '$1$397$4$379$390$', 1, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (391, 390, '信息量统计', '/sys/zwgk/count/countListBySite.jsp', 318, '0', '$1$397$4$379$390$391$', 1, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (392, 390, '信息量排行', '/sys/zwgk/count/infoRank.jsp', 319, '0', '$1$397$4$379$390$392$', 2, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (393, 349, '依申请常用语', '/sys/zwgk/ysqgk/operate/ysqgk_phrasal.jsp?app_id=zwgk', 321, '0', '$1$396$6$349$393$', 8, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (394, 247, '已发布件', '/sys/appeal/sq/sqList.jsp?sq_flag=0,1,2&publish_status=1&is_manager_page=true', 323, '0', '$1$397$226$246$247$394$', 2, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (395, 247, '未发布件', '/sys/appeal/sq/sqList.jsp?sq_flag=0,1,2&publish_status=0&is_manager_page=true', 324, '0', '$1$397$226$246$247$395$', 1, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (396, 1, '内容管理系统', '', 0, '0', '$1$396$', 1, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (397, 1, '政务构件库', '', 0, '0', '$1$397$', 2, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (398, 6, '应用组件', '', 0, '0', '$1$396$6$398$', 6, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (399, 397, '公共服务系统', '', 0, '0', '$1$397$399$', 2, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (402, 1, '我的平台', '/sys/org/desktop/desktopInit.jsp', 0, '0', '$1$402$', 3, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (403, 402, '修改密码', '/sys/org/user/updatePassword.jsp', 0, '0', '$1$402$403$', 999, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (404, 402, '我的权限', '/sys/org/operate/my_operate.jsp', 0, '0', '$1$402$404$', 999, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (405, 390, '工作量排行', '/sys/zwgk/count/workloadStatistics.jsp', 363, '0', '$1$397$4$379$390$405$', 3, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (406, 379, '依申请公开统计', '', 364, '0', '$1$397$4$379$406$', 2, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (407, 406, '处理方式统计', '/sys/zwgk/count/ysqTypeCnt.jsp', 365, '0', '$1$397$4$379$406$407$', 2, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (408, 406, '处理状态统计', '/sys/zwgk/count/ysqStatusCnt.jsp', 366, '0', '$1$397$4$379$406$408$', 1, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (409, 377, '申请单统计', '/sys/zwgk/count/ysqStatusByMonth.jsp', 367, '0', '$1$397$4$8$377$409$', 2, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (410, 362, '公开系统配置', '/sys/zwgk/node/node_set.jsp', 274, '0', '$1$397$4$362$410$', 1, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (411, 156, '共享资源管理', '/sys/system/template/shared_res.jsp', 368, '0', '$1$396$5$156$411$', 12, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (412, 399, '系统管理', '', 0, '0', '$1$397$399$412$', 4, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (413, 412, '系统配置', '/sys/ggfw/sys/fw_set.jsp', 372, '0', '$1$397$399$412$413$', 1, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (414, 412, '用户管理', '/sys/org/siteUser/SiteUserList.jsp?appId=ggfw&site_id=ggfw', 373, '0', '$1$397$399$412$414$', 2, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (415, 412, '角色管理', '/sys/org/role/roleList.jsp?app=ggfw&site_id=ggfw', 374, '0', '$1$397$399$412$415$', 3, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (416, 156, '搜索管理', '/sys/system/search/searchList.jsp', 376, '0', '$1$396$5$156$416$', 999, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (417, 349, '场景主题管理', '/sys/ggfw/ser/serList.jsp', 377, '0', '$1$396$6$349$417$', 10, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (418, 398, '场景式服务', '', 378, '0', '$1$396$6$398$418$', 3, '', 'getSerCategoryRootJSONTree()')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (419, 353, '系统配置', '/sys/control/sys/sys_config.jsp', 379, '0', '$1$396$3$353$419$', 6, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (420, 349, '生成内容页', '/sys/cms/info/article/createHtml.jsp?app_id=cms', 380, '0', '$1$396$6$349$420$', 13, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (421, 372, '生成内容页', '/sys/cms/info/article/createHtml.jsp?app_id=zwgk', 381, '0', '$1$397$4$8$372$421$', 4, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (422, 412, '生成内容页', '/sys/cms/info/article/createHtml.jsp?app_id=ggfw', 382, '0', '$1$397$399$412$422$', 5, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (423, 349, '索引码重置', '/sys/zwgk/index/reloadIndex.jsp', 383, '0', '$1$397$4$8$372$423$', 7, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (424, 353, '索引码重置', '/sys/zwgk/index/reloadIndex.jsp', 384, '0', '$1$397$4$362$424$', 3, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (425, 362, '生成内容页', '/sys/cms/info/article/createHtml2.jsp?app_id=zwgk', 385, '0', '$1$397$4$362$425$', 8, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (426, 246, '信件管理', '', 386, '0', '$1$397$226$246$426$', 2, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (427, 426, '待处理件', '/sys/appeal/sq/sqList.jsp?sq_flag=0,1,2&is_manager_page=true&sq_status=0', 387, '0', '$1$397$226$246$426$427$', 1, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (428, 426, '处理中件', '/sys/appeal/sq/sqList.jsp?sq_flag=0,1,2&is_manager_page=true&sq_status=1', 388, '0', '$1$397$226$246$426$428$', 2, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (429, 426, '待审核件', '/sys/appeal/sq/sqList.jsp?sq_flag=0,1,2&is_manager_page=true&sq_status=2', 389, '0', '$1$397$226$246$426$429$', 3, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (430, 426, '已办结件', '/sys/appeal/sq/sqList.jsp?sq_flag=0,1,2&is_manager_page=true&sq_status=3', 390, '0', '$1$397$226$246$426$430$', 4, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (431, 6, '应用目录', '/sys/zwgk/catalog/catalogList.jsp', 391, '0', '$1$396$6$431$', 5, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (432, 265, '系统配置', '/sys/appeal/sys/sys_config.jsp', 392, '0', '$1$397$226$265$432$', 14, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (433, 398, '自定义查询', '', 393, '0', '$1$396$6$398$433$', 7, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (434, 433, '查询业务配置', '/sys/query/query_conf.jsp', 394, '0', '$1$396$6$398$433$434$', 1, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (436, 353, '页面制作资源', '', 0, '0', '$1$396$3$353$436$', 7, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (437, 436, '主题风格', '/sys/system/design/cssList.jsp', 397, '0', '$1$396$3$353$436$437$', 1, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (438, 436, '页面布局', '/sys/system/design/layoutList.jsp', 398, '0', '$1$396$3$353$436$438$', 2, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (439, 436, '外框样式', '/sys/system/design/frameList.jsp', 399, '0', '$1$396$3$353$436$439$', 3, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (440, 436, '内容样式', '/sys/system/design/styleList.jsp', 400, '0', '$1$396$3$353$436$440$', 4, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (441, 436, '模块资源', '/sys/system/design/moduleList.jsp', 401, '0', '$1$396$3$353$436$441$', 5, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (442, 436, '方案套餐', '/sys/system/design/caseList.jsp', 402, '0', '$1$396$3$353$436$442$', 6, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (444, 6, '站点统计', '', 405, '0', '$1$396$6$444$', 7, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (445, 444, '信息统计', '/sys/cms/cmsCount/cmsCountList.jsp', 406, '0', '$1$396$6$444$445$', 1, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (446, 444, '工作量考核', '/sys/cms/cmsCount/cmsAssessList.jsp', 407, '0', '$1$396$6$444$446$', 2, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (447, 398, '公务员名录', '/sys/minlu/minlu_set.jsp', 409, '0', '$1$396$6$398$447$', 4, '', '')
-		]]> 
+		]]>
 	</sql>
 
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (448, 349, '页面纠错管理', '/sys/system/error/error_list.jsp', 410, '0', '$1$396$6$398$447$', 999, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (449, 402, '桌面设置', '/sys/org/desktop/desktopMain.jsp', 0, '0', '$1$402$449$', 3, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (454, 362, '公开目录导出', '/sys/zwgk/export/exportInfo.jsp',411, '0', '$1$397$4$362$454$', 999, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (455, 402, '待办事项', '/sys/org/desktop/desktopInit.jsp',0, '0', '$1$402$455$', 4, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (457, 372, '公开目录导出', '/sys/zwgk/export/exportInfo.jsp',413, '0', '$1$397$4$8$372$457$', 999, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (458, 398, '留言板', '',414, '0', '$1$396$6$398$458$', 8, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (459, 458, '留言分类管理', '/sys/appCom/guestbook/gbCategoryList.jsp',415, '0', '$1$396$6$398$458$459$', 1, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (460, 458, '留言主题管理', '/sys/appCom/guestbook/guestBookSubList.jsp',416, '0', '$1$396$6$398$458$460$', 2, '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (461, 458, '留言分类统计', '/sys/appCom/guestbook/gbCatCount.jsp',417, '0', '$1$396$6$398$458$461$', 3, '', '')
-		]]> 
+		]]>
 	</sql>
-	
-	
+
+
 	<sql><![CDATA[insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (462,398,'评论管理','',418,0,'$1$396$6$398$462$',7,'','')]]></sql>
 	<sql><![CDATA[insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (463,462,'评论配置','/sys/comment/commentSet.jsp?app_id=cms',419,0,'$1$396$6$398$462$463$',1,'','')]]></sql>
 	<sql><![CDATA[insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (488,462,'评论审核','/sys/comment/commentList.jsp?info_type=info',445,0,'$1$396$6$398$462$488$',2,'','')]]></sql>
@@ -2831,35 +2833,35 @@
 	<sql><![CDATA[insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (490,221,'批量修改','/sys/cms/category/updateCategory.jsp?app_id=cms',447,0,'$1$396$6$349$221$490$',999,'','')]]></sql>
 	<sql><![CDATA[insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (491,371,'批量修改','/sys/cms/category/updateCategory.jsp?app_id=zwgk',448,0,'$1$397$4$8$372$371$491$',999,'','')]]></sql>
 	<sql><![CDATA[insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, opt_id, menu_level, menu_position, menu_sort, menu_memo, handls)values (492,412,'批量修改目录','/sys/cms/category/updateCategory.jsp?app_id=ggfw',449,0,'$1$397$399$412$492$',999,'','')]]></sql>
-	
+
 	<sql><![CDATA[insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, handls, opt_id, menu_level, menu_position, menu_sort, menu_memo) values ('555', '552', '数据采集记录', '/sys/dataCollection/previewCollegeData.jsp', '', '505', '0', '$1$396$6$398$552$555$', '3', '')]]></sql>
 	<sql><![CDATA[insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, handls, opt_id, menu_level, menu_position, menu_sort, menu_memo) values ('554', '552', '采集进度', '/sys/dataCollection/collProgress.jsp', '', '504', '0', '$1$396$6$398$552$554$', '2', '')]]></sql>
 	<sql><![CDATA[insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, handls, opt_id, menu_level, menu_position, menu_sort, menu_memo) values ('553', '552', '规则管理', '/sys/dataCollection/rule_list.jsp', '', '503', '0', '$1$396$6$398$552$553$', '1', '')]]></sql>
 	<sql><![CDATA[insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, handls, opt_id, menu_level, menu_position, menu_sort, menu_memo) values ('552', '398', '数据采集', '/sys/dataCollection/ruleCategoryList.jsp', '', '502', '0', '$1$396$6$398$552$', '999', '')]]></sql>
     <sql><![CDATA[insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, handls, opt_id, menu_level, menu_position, menu_sort, menu_memo) values ('556', '552', '分类管理', '/sys/dataCollection/ruleCategoryList.jsp', '', '506', '0', '$1$396$6$398$552$556$', '0', '')]]></sql>
     	<sql><![CDATA[insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, handls, opt_id, menu_level, menu_position, menu_sort, menu_memo) values ('551', '444', '信息更新统计', '/sys/cms/cmsCount/cmsUpdateList.jsp', '', '501', '0', '$1$396$6$444$551$', '999', '')]]></sql>
-		<sql><![CDATA[insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, handls, opt_id, menu_level, menu_position, menu_sort, menu_memo) values ('571', '396', '试点领域专栏', '', '', 531, 0, '$1$396$571$', 999, '')]]></sql>
-		<sql><![CDATA[insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, handls, opt_id, menu_level, menu_position, menu_sort, menu_memo) values ('572', '571', '内容管理', '', 'getZWGKBZHCategoryTreeByUserID()', 532, 0, '$1$396$571$572$', 999, '')]]></sql>
-		<sql><![CDATA[insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, handls, opt_id, menu_level, menu_position, menu_sort, menu_memo) values ('573', '396', '集约化管理', '', '', 533, 0, '$1$396$573$', 999, '')]]></sql>
-		<sql><![CDATA[insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, handls, opt_id, menu_level, menu_position, menu_sort, menu_memo) values ('574', '573', '集约化管理', '', '', 534, 0, '$1$396$573$574$', 999, '')]]></sql>
-		<sql><![CDATA[insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, handls, opt_id, menu_level, menu_position, menu_sort, menu_memo) values ('575', '574', '栏目更新规则', '/sys/project/dz_jyhgl/infoUpdateList.jsp', '', 539, 0, '$1$396$573$574$575$', 999, '')]]></sql>
-		<sql><![CDATA[insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, handls, opt_id, menu_level, menu_position, menu_sort, menu_memo) values ('576', '574', '空白栏目检索', '/sys/project/dz_jyhgl/NullCategory.jsp', '', 540, 0, '$1$396$573$574$576$', 999, '')]]></sql>
-		<sql><![CDATA[insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, handls, opt_id, menu_level, menu_position, menu_sort, menu_memo) values ('577', '574', '栏目更新结果', '/sys/project/dz_jyhgl/infoUpdateResultList.jsp', '', 541, 0, '$1$396$573$574$577$', 999, '')]]></sql>
-		<sql><![CDATA[insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, handls, opt_id, menu_level, menu_position, menu_sort, menu_memo) values ('579', '574', '网站断链检测', '/sys/project/dz_jyhgl/checkErrorUrl.jsp', '', 542, 0, '$1$396$573$574$579$', 999, '')]]></sql>
+		<sql><![CDATA[insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, handls, opt_id, menu_level, menu_position, menu_sort, menu_memo) values ('557', '396', '试点领域专栏', '', '', 511, 0, '$1$396$557$', 999, '')]]></sql>
+		<sql><![CDATA[insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, handls, opt_id, menu_level, menu_position, menu_sort, menu_memo) values ('558', '557', '内容管理', '', 'getZWGKBZHCategoryTreeByUserID()', 512, 0, '$1$396$557$558$', 999, '')]]></sql>
+		<sql><![CDATA[insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, handls, opt_id, menu_level, menu_position, menu_sort, menu_memo) values ('559', '396', '集约化管理', '', '', 513, 0, '$1$396$559$', 999, '')]]></sql>
+		<sql><![CDATA[insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, handls, opt_id, menu_level, menu_position, menu_sort, menu_memo) values ('560', '559', '集约化管理', '', '', 514, 0, '$1$396$559$560$', 999, '')]]></sql>
+		<sql><![CDATA[insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, handls, opt_id, menu_level, menu_position, menu_sort, menu_memo) values ('561', '560', '栏目更新规则', '/sys/project/dz_jyhgl/infoUpdateList.jsp', '', 515, 0, '$1$396$559$560$561$', 999, '')]]></sql>
+		<sql><![CDATA[insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, handls, opt_id, menu_level, menu_position, menu_sort, menu_memo) values ('562', '560', '空白栏目检索', '/sys/project/dz_jyhgl/NullCategory.jsp', '', 516, 0, '$1$396$559$560$562$', 999, '')]]></sql>
+		<sql><![CDATA[insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, handls, opt_id, menu_level, menu_position, menu_sort, menu_memo) values ('563', '560', '栏目更新结果', '/sys/project/dz_jyhgl/infoUpdateResultList.jsp', '', 517, 0, '$1$396$559$560$563$', 999, '')]]></sql>
+		<sql><![CDATA[insert into cs_org_menu (menu_id, parent_id, menu_name, menu_url, handls, opt_id, menu_level, menu_position, menu_sort, menu_memo) values ('564', '560', '网站断链检测', '/sys/project/dz_jyhgl/checkErrorUrl.jsp', '', 518, 0, '$1$396$559$560$564$', 999, '')]]></sql>
 	<sql>
 	<![CDATA[
 		insert into cs_info_category (id, cat_id, class_id, parent_id, wf_id, is_wf_publish, cat_code, cat_ename, cat_cname, cat_position, cat_level, is_mutilpage, template_index, template_list, is_generate_index, urlrule_index, urlrule_list, urlrule_content, is_allow_submit, is_allow_comment, is_comment_checked, is_show, cat_keywords, cat_description, cat_sort, is_sync, cat_source_id, cat_class_id, is_disabled, cat_type, zt_cat_id, is_archive, cat_memo, app_id, site_id, jump_url, hj_sql, is_show_tree)values (244, 244, 70, 0, 0, 0, '', 'zt', '主题分类', '$0$244$', 1, 0, 0, 0, 0, '', '', '', 0, 0, 0, 1, '', '', 9999, 0, 244, 0, 1, 0, 0, 0, '', 'system', '', '', '', 1)
-	]]> 
+	]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_info_category (id, cat_id, class_id, parent_id, wf_id, is_wf_publish, cat_code, cat_ename, cat_cname, cat_position, cat_level, is_mutilpage, template_index, template_list, is_generate_index, urlrule_index, urlrule_list, urlrule_content, is_allow_submit, is_allow_comment, is_comment_checked, is_show, cat_keywords, cat_description, cat_sort, is_sync, cat_source_id, cat_class_id, is_disabled, cat_type, zt_cat_id, is_archive, cat_memo, app_id, site_id, jump_url, hj_sql, is_show_tree)values (367, 367, 74, 0, 0, 0, '', 'tcfl', '体裁分类', '$0$367$', 1, 0, 0, 0, 0, '', '', '', 0, 0, 0, 1, '', '', 9999, 0, 367, 0, 1, 0, 0, 0, '', 'system', '', '', '', 1)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_info_category (id, cat_id, class_id, parent_id, wf_id, is_wf_publish, cat_code, cat_ename, cat_cname, cat_position, cat_level, is_mutilpage, template_index, template_list, is_generate_index, urlrule_index, urlrule_list, urlrule_content, is_allow_submit, is_allow_comment, is_comment_checked, is_show, cat_keywords, cat_description, cat_sort, is_sync, cat_source_id, cat_class_id, is_disabled, cat_type, zt_cat_id, is_archive, cat_memo, app_id, site_id, jump_url, hj_sql, is_show_tree)values (383, 383, 76, 0, 0, 0, '', 'fwdxfl', '服务对象分类', '$0$383$', 1, 0, 0, 0, 0, '', '', '', 0, 0, 0, 1, '', '', 9999, 0, 383, 0, 1, 0, 0, 0, '', 'system', '', '', '', 1)
-		]]> 
+		]]>
 	</sql>
 		<sql>
 			<![CDATA[
@@ -2874,17 +2876,17 @@
 	<sql>
 	<![CDATA[
 		insert into cs_info_class (class_id, class_ename, class_cname, class_codo, class_define, class_type, app_ids)values (74, 'tcfl', '体裁分类', '', '', 0, 'zwgk')
-	]]> 
+	]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_info_class (class_id, class_ename, class_cname, class_codo, class_define, class_type, app_ids)values (76, 'fwdxfl', '服务对象分类', '', '', 0, 'appeal')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_info_class (class_id, class_ename, class_cname, class_codo, class_define, class_type, app_ids)values (70, 'ztfl', '主题分类', '', '', 0, 'zwgk')
-		]]> 
+		]]>
 	</sql>
 		<sql>
 			<![CDATA[
@@ -2899,1266 +2901,1266 @@
 	<sql>
 		<![CDATA[
 			insert into cs_site (site_id, parent_id, server_id, dept_id, site_name, site_cdkey, site_createtime, site_pausetime, site_position, site_status, site_sort, site_path, sgroup_id, site_demo)values ('HIWCMcgroup', '0', 1, 1, 'SITE.SERVER', '', '', '', '0$HIWCMcgroup', 0, 0, '', '', '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_site_group (sgroup_id, parent_id, sgroup_name, sgroup_ip, sgroup_prot, dept_id, sgroup_sort, sgroup_memo)values ('CMS', '0', '网站群', '127.0.0.1', '', 0, 0, '')
-		]]> 
+		]]>
 	</sql>
 	<sql>
 	<![CDATA[
 		insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6887, 1, 280)
-	]]> 
+	]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6772, 1, 3)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6891, 1, 291)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6906, 1, 318)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6910, 1, 365)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6914, 1, 369)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6929, 1, 184)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6933, 1, 187)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6937, 1, 191)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6952, 1, 172)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6956, 1, 176)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6960, 1, 211)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6975, 1, 296)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6979, 1, 388)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6983, 1, 226)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6998, 1, 241)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7002, 1, 246)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7006, 1, 250)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6775, 1, 127)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6778, 1, 379)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6798, 1, 346)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6801, 1, 348)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6821, 1, 212)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6824, 1, 130)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6844, 1, 301)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6847, 1, 304)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6867, 1, 265)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6870, 1, 394)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6890, 1, 290)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6893, 1, 367)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6913, 1, 8)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6916, 1, 371)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6936, 1, 190)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6939, 1, 193)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6959, 1, 180)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6962, 1, 161)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6982, 1, 224)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6985, 1, 230)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7005, 1, 249)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7008, 1, 252)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6764, 1, 334)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6787, 1, 294)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6810, 1, 357)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6856, 1, 360)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6879, 1, 277)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6902, 1, 285)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6925, 1, 162)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6948, 1, 168)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6971, 1, 201)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6994, 1, 237)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6769, 1, 327)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6792, 1, 339)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6815, 1, 153)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6838, 1, 215)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6861, 1, 260)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6884, 1, 384)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6907, 1, 319)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6930, 1, 185)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6953, 1, 173)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6976, 1, 297)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6999, 1, 242)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6788, 1, 336)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6926, 1, 181)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6949, 1, 169)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6972, 1, 202)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6995, 1, 225)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6759, 1, 108)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6782, 1, 399)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6805, 1, 352)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6851, 1, 308)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6874, 1, 7)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6897, 1, 293)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6920, 1, 377)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6943, 1, 208)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6966, 1, 196)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6989, 1, 233)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6779, 1, 396)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6794, 1, 343)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6800, 1, 342)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6802, 1, 349)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6817, 1, 155)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6823, 1, 129)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6825, 1, 151)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6840, 1, 270)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6846, 1, 303)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6848, 1, 305)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6863, 1, 221)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6869, 1, 393)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6871, 1, 405)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6886, 1, 279)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6892, 1, 316)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6894, 1, 292)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6909, 1, 364)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6915, 1, 370)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6917, 1, 372)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6932, 1, 163)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6938, 1, 192)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6940, 1, 194)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6955, 1, 175)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6961, 1, 322)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6963, 1, 195)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6978, 1, 387)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6984, 1, 229)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6986, 1, 231)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7001, 1, 245)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6771, 1, 329)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6777, 1, 312)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7007, 1, 251)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7009, 1, 392)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6768, 1, 326)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6776, 1, 219)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6791, 1, 338)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6795, 1, 344)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6799, 1, 347)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6814, 1, 6)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6818, 1, 156)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6822, 1, 214)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6837, 1, 380)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6841, 1, 298)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6845, 1, 302)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6860, 1, 259)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6864, 1, 262)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6868, 1, 266)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6883, 1, 321)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7004, 1, 248)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6774, 1, 218)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6797, 1, 341)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6767, 1, 325)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6770, 1, 328)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6786, 1, 222)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6789, 1, 337)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6790, 1, 5)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6793, 1, 340)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6809, 1, 356)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6812, 1, 368)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6813, 1, 376)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6816, 1, 154)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6835, 1, 313)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6836, 1, 314)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6839, 1, 216)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6855, 1, 332)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6858, 1, 257)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6859, 1, 258)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6862, 1, 261)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6878, 1, 276)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6881, 1, 311)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6882, 1, 320)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6885, 1, 385)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6901, 1, 284)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6904, 1, 287)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6905, 1, 317)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6908, 1, 363)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6924, 1, 160)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6927, 1, 182)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6928, 1, 183)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6931, 1, 186)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6947, 1, 167)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6950, 1, 170)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6951, 1, 171)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6954, 1, 174)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6970, 1, 200)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6973, 1, 203)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6974, 1, 295)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6977, 1, 386)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6993, 1, 236)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6996, 1, 239)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6997, 1, 240)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7000, 1, 244)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6763, 1, 333)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6766, 1, 110)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6784, 1, 401)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6807, 1, 354)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6830, 1, 210)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6853, 1, 310)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6876, 1, 274)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6899, 1, 383)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6922, 1, 378)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6945, 1, 165)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6968, 1, 198)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6991, 1, 235)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6761, 1, 330)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6811, 1, 358)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6857, 1, 220)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6880, 1, 278)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6903, 1, 286)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6765, 1, 335)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6758, 1, 2)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6773, 1, 135)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6781, 1, 398)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6796, 1, 345)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6804, 1, 351)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6819, 1, 157)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6827, 1, 149)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6842, 1, 299)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6850, 1, 307)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6865, 1, 263)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6873, 1, 407)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6888, 1, 288)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6896, 1, 282)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6911, 1, 366)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6919, 1, 374)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6934, 1, 188)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6942, 1, 207)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6957, 1, 177)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6965, 1, 324)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6980, 1, 389)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6988, 1, 232)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7003, 1, 247)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6757, 1, 1)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6760, 1, 109)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6762, 1, 331)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6780, 1, 397)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6783, 1, 400)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6785, 1, 402)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6803, 1, 350)
-		]]> 
+		]]>
 	</sql>
 	<!--
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6806, 1, 353)
-		]]> 
+		]]>
 	</sql>
 	-->
 	<!--
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6808, 1, 355)
-		]]> 
+		]]>
 	</sql>
 	-->
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6826, 1, 152)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6829, 1, 209)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6831, 1, 213)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6849, 1, 306)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6852, 1, 309)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6854, 1, 315)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6872, 1, 406)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6875, 1, 273)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6877, 1, 275)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6895, 1, 281)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6898, 1, 381)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6900, 1, 283)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6918, 1, 373)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6921, 1, 382)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6923, 1, 159)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6941, 1, 206)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6944, 1, 164)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6946, 1, 166)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6964, 1, 323)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6967, 1, 197)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6969, 1, 199)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6987, 1, 227)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6990, 1, 234)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6992, 1, 228)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7010, 1, 238)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6820, 1, 158)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6843, 1, 300)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6866, 1, 264)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6889, 1, 289)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6912, 1, 391)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6935, 1, 189)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6958, 1, 178)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6981, 1, 390)
-		]]> 
+		]]>
 	</sql>
 		<sql>
 			<![CDATA[
@@ -4203,703 +4205,703 @@
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5520, 2, 110)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5521, 2, 325)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5525, 2, 329)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5516, 2, 109)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5518, 2, 334)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5519, 2, 335)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5523, 2, 327)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5524, 2, 328)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5517, 2, 333)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5522, 2, 326)
-		]]> 
+		]]>
 	</sql>
 	<!--
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6650, 3, 353)
-		]]> 
+		]]>
 	</sql>
 	-->
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6655, 3, 358)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6637, 3, 340)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6642, 3, 346)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6673, 3, 210)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6634, 3, 5)
-		]]> 
+		]]>
 	</sql>
 	<!--
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6652, 3, 355)
-		]]> 
+		]]>
 	</sql>
 	-->
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6653, 3, 356)
-		]]> 
+		]]>
 	</sql>
 	<!--
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6665, 3, 214)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6666, 3, 129)
-		]]> 
+		]]>
 	</sql>
 	-->
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6678, 3, 313)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6639, 3, 344)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6640, 3, 345)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6645, 3, 348)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6646, 3, 349)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6654, 3, 357)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6641, 3, 341)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6643, 3, 347)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6656, 3, 368)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6635, 3, 338)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6638, 3, 343)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6648, 3, 351)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6651, 3, 354)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6649, 3, 352)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6636, 3, 339)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6644, 3, 342)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6657, 3, 376)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7024, 5, 149)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7041, 5, 301)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7043, 5, 303)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7050, 5, 310)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7060, 5, 261)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7012, 5, 153)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7022, 5, 151)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7062, 5, 262)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7038, 5, 298)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7057, 5, 258)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7019, 5, 214)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7023, 5, 152)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7028, 5, 213)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7032, 5, 313)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7033, 5, 314)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7042, 5, 302)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7047, 5, 307)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7013, 5, 154)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7014, 5, 155)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7051, 5, 315)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7052, 5, 332)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7061, 5, 221)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7066, 5, 266)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7070, 5, 405)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7071, 5, 406)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7034, 5, 380)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7040, 5, 300)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7048, 5, 308)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7053, 5, 404)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7015, 5, 156)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7021, 5, 130)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7059, 5, 260)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7067, 5, 393)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7072, 5, 407)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7027, 5, 210)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7011, 5, 6)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7046, 5, 306)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7049, 5, 309)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7065, 5, 265)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7068, 5, 394)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7020, 5, 129)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7039, 5, 299)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7058, 5, 259)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7026, 5, 209)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7044, 5, 304)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7045, 5, 305)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7063, 5, 263)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7064, 5, 264)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7054, 5, 360)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7016, 5, 157)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7035, 5, 215)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7037, 5, 270)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7056, 5, 257)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7018, 5, 212)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7055, 5, 220)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7017, 5, 158)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7036, 5, 216)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5425, 5, 377)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5427, 5, 378)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5422, 6, 372)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5421, 6, 371)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5423, 6, 373)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5419, 6, 369)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5424, 6, 374)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5420, 6, 370)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5418, 6, 8)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5426, 6, 382)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (73, 10, 110)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (74, 10, 131)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (75, 10, 132)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6095, 5, 320)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6108, 11, 281)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6121, 11, 363)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6082, 11, 308)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6087, 11, 7)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6100, 11, 280)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6113, 11, 283)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6074, 11, 300)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6079, 11, 305)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6085, 11, 315)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6092, 11, 277)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6102, 11, 289)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6105, 11, 316)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6115, 11, 285)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6118, 11, 317)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6072, 11, 298)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6077, 11, 303)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6090, 11, 275)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6103, 11, 290)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6116, 5, 286)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6096, 5, 321)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6109, 11, 282)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6122, 11, 364)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6083, 11, 309)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6075, 11, 301)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6088, 11, 273)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6101, 11, 288)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6114, 11, 284)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6076, 11, 302)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6081, 11, 307)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6089, 11, 274)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6094, 11, 311)
-		]]> 
+		]]>
 	</sql>
 		<sql>
 			<![CDATA[
@@ -4909,949 +4911,949 @@
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6098, 11, 385)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6107, 11, 292)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6111, 11, 381)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6120, 11, 319)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6124, 11, 366)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6073, 11, 299)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6080, 11, 306)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6086, 11, 332)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6093, 11, 278)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6099, 11, 279)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6106, 11, 367)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6112, 5, 383)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6119, 11, 318)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6125, 5, 391)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6078, 11, 304)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6084, 11, 310)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6091, 11, 276)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6097, 11, 384)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6104, 11, 291)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6110, 11, 293)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6117, 11, 287)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (6123, 11, 365)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5556, 12, 332)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5543, 12, 299)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5549, 12, 305)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5554, 12, 310)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5560, 12, 289)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5566, 12, 281)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5548, 12, 304)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5550, 12, 306)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5555, 12, 315)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5565, 12, 292)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5567, 12, 282)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5545, 12, 301)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5562, 12, 291)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5568, 12, 293)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5570, 12, 383)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5551, 12, 307)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5553, 12, 309)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5542, 12, 298)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5559, 12, 288)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5563, 12, 316)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5546, 12, 302)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5558, 12, 280)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5557, 12, 279)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5544, 12, 300)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5561, 12, 290)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5552, 12, 308)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5569, 12, 381)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5547, 12, 303)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (5564, 12, 367)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7131, 30, 230)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7137, 30, 235)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7146, 30, 244)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7148, 30, 246)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7154, 30, 252)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7084, 30, 189)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7098, 30, 169)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7101, 30, 172)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7081, 30, 163)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7115, 30, 196)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7118, 30, 199)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7132, 30, 231)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7135, 30, 233)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7149, 30, 247)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7152, 30, 250)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7087, 30, 192)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7104, 30, 175)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7121, 30, 202)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7138, 30, 228)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7155, 30, 392)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7089, 30, 194)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7096, 30, 167)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7106, 30, 177)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7113, 30, 323)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7123, 30, 386)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7130, 30, 229)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7140, 30, 237)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7079, 30, 185)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7147, 30, 245)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7083, 30, 188)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7073, 30, 160)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7090, 30, 206)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7100, 30, 171)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7107, 30, 178)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7117, 30, 198)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7124, 30, 387)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7134, 30, 232)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7141, 30, 225)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7151, 30, 249)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7085, 30, 190)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7099, 30, 170)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7102, 30, 173)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7116, 30, 197)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7119, 30, 200)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7133, 30, 227)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7082, 30, 187)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7136, 30, 234)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7150, 30, 248)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7153, 30, 251)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7077, 30, 183)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7092, 30, 208)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7094, 30, 165)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7109, 30, 211)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7111, 30, 408)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7126, 30, 389)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7128, 30, 224)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7143, 30, 240)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7145, 30, 242)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7075, 30, 181)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7088, 30, 193)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7122, 30, 203)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7139, 30, 236)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7156, 30, 238)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7105, 30, 176)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7076, 30, 182)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7091, 30, 207)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7093, 30, 164)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7108, 30, 180)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7110, 30, 322)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7125, 30, 388)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7074, 30, 162)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7127, 30, 390)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7142, 30, 239)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7144, 30, 241)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7078, 30, 184)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7080, 30, 186)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7086, 30, 191)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7095, 30, 166)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7097, 30, 168)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7103, 30, 174)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7112, 30, 195)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7114, 30, 324)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7120, 30, 201)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7129, 30, 226)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7169, 31, 190)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7176, 31, 208)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7186, 31, 173)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7193, 31, 211)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7203, 31, 199)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7210, 31, 297)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7159, 31, 181)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7180, 31, 167)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7187, 31, 174)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7197, 31, 195)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7204, 31, 200)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7163, 31, 185)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7170, 31, 191)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7162, 31, 184)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7165, 31, 163)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7179, 31, 166)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7182, 31, 169)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7196, 31, 161)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7199, 31, 324)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7174, 31, 206)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7189, 31, 176)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7191, 31, 178)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7206, 31, 202)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7208, 31, 295)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7157, 31, 160)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7172, 31, 193)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7168, 31, 189)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7185, 31, 172)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7202, 31, 198)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7171, 31, 192)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7173, 31, 194)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7188, 31, 175)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7190, 31, 177)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7205, 31, 201)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7207, 31, 203)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7158, 31, 162)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7160, 31, 182)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7166, 31, 187)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7175, 31, 207)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7177, 31, 164)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7183, 31, 170)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7192, 31, 180)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7194, 31, 322)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7200, 31, 196)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7209, 31, 296)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7178, 31, 165)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7181, 31, 168)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7195, 31, 408)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7198, 31, 323)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7161, 31, 183)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7164, 31, 186)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7167, 31, 188)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7184, 31, 171)
-		]]> 
+		]]>
 	</sql>
 	<sql>
 		<![CDATA[
 			insert into cs_org_role_opt (role_opt_id, role_id, opt_id)values (7201, 31, 197)
-		]]> 
-	</sql>	
-	
+		]]>
+	</sql>
+
 	<sql><![CDATA[insert into cs_org_role_opt (role_opt_id, role_id, opt_id) values ('10152', '5', '505')]]></sql>
 	<sql><![CDATA[insert into cs_org_role_opt (role_opt_id, role_id, opt_id) values ('10289', '1', '505')]]></sql>
 	<sql><![CDATA[insert into cs_org_role_opt (role_opt_id, role_id, opt_id) values ('10151', '5', '504')]]></sql>
@@ -5861,15 +5863,17 @@
 	<sql><![CDATA[insert into cs_org_role_opt (role_opt_id, role_id, opt_id) values ('10149', '5', '502')]]></sql>
 	<sql><![CDATA[insert into cs_org_role_opt (role_opt_id, role_id, opt_id) values ('10286', '1', '502')]]></sql>
 	<sql><![CDATA[insert into cs_org_role_opt (role_opt_id, role_id, opt_id) values ('10158', '5', '501')]]></sql>
-		<sql><![CDATA[insert into cs_org_role_opt (role_opt_id, role_id, opt_id) values ('11223', '1', '531')]]></sql>
-		<sql><![CDATA[insert into cs_org_role_opt (role_opt_id, role_id, opt_id) values ('11224', '1', '532')]]></sql>
+
+		<sql><![CDATA[insert into cs_org_role_opt (role_opt_id, role_id, opt_id) values ('11223', '1', '511')]]></sql>
+		<sql><![CDATA[insert into cs_org_role_opt (role_opt_id, role_id, opt_id) values ('11224', '1', '512')]]></sql>
 
 
-		<sql><![CDATA[insert into cs_org_role_opt (role_opt_id, role_id, opt_id) values ('11587', '1', '533')]]></sql>
-		<sql><![CDATA[insert into cs_org_role_opt (role_opt_id, role_id, opt_id) values ('11588', '1', '534')]]></sql>
-		<sql><![CDATA[insert into cs_org_role_opt (role_opt_id, role_id, opt_id) values ('11589', '1', '535')]]></sql>
-		<sql><![CDATA[insert into cs_org_role_opt (role_opt_id, role_id, opt_id) values ('11590', '1', '536')]]></sql>
-		<sql><![CDATA[insert into cs_org_role_opt (role_opt_id, role_id, opt_id) values ('11591', '1', '537')]]></sql>
+		<sql><![CDATA[insert into cs_org_role_opt (role_opt_id, role_id, opt_id) values ('11587', '1', '513')]]></sql>
+		<sql><![CDATA[insert into cs_org_role_opt (role_opt_id, role_id, opt_id) values ('11588', '1', '514')]]></sql>
+		<sql><![CDATA[insert into cs_org_role_opt (role_opt_id, role_id, opt_id) values ('11589', '1', '515')]]></sql>
+		<sql><![CDATA[insert into cs_org_role_opt (role_opt_id, role_id, opt_id) values ('11590', '1', '516')]]></sql>
+		<sql><![CDATA[insert into cs_org_role_opt (role_opt_id, role_id, opt_id) values ('11591', '1', '517')]]></sql>
+		<sql><![CDATA[insert into cs_org_role_opt (role_opt_id, role_id, opt_id) values ('11592', '1', '518')]]></sql>
 	
 	
 	<sql>

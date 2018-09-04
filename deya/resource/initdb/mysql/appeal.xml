@@ -156,7 +156,8 @@
 					lasthit_dtime varchar(20) default '',
 					sq_all_number bigint(20) default 0,
 					sq_number bigint(20) default 0,
-					submit_dept_id bigint(20) default 0
+					submit_dept_id bigint(20) default 0,
+					custom_dept_name varchar(250) default ''
 				)
 		   ]]> 
        </sql>
