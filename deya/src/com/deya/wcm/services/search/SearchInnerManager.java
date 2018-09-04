@@ -2,9 +2,7 @@ package com.deya.wcm.services.search;
 
 import java.util.*;
 
-import com.deya.util.DateUtil;
 import com.deya.wcm.services.search.index.IndexManager;
-import com.deya.wcm.services.search.index.util.Queue;
 
 /**
  * <p>搜索所需要的管理类 -- 内部调用类</p>
@@ -89,7 +87,9 @@ public class SearchInnerManager {
 	    	
 	    	System.out.println("Start SearchIndex Task!!!");
 			if(list != null && list.size() > 0){
-				for (Map<String, Object> stringObjectMap : list) {
+				int size = list.size();//原始list 长度
+				for (Iterator it = list.iterator(); it.hasNext();) {
+					Map<String, Object> stringObjectMap = (Map<String, Object>)it.next();
 					String id = (String)stringObjectMap.get("id");
 					String flag = (String)stringObjectMap.get("flag");
 					if(flag.equals("1")){
@@ -99,6 +99,13 @@ public class SearchInnerManager {
 					if(flag.equals("0")){
 						System.out.println("Delete SearchIndex map =====" + id);
 						IndexManager.deleteSingleDocument(stringObjectMap);
+					}
+					if(list.size() > size){//在循环执行生成索引的过程中用户删除或者新增了信息 特别是用户批量删除操作 导致 list 长度改变   跳出循环等待下一次执行
+						break;
+					}else{
+						it.remove();//移除已经生成或者删除的 记录
+						size = size-1;//list 原始长度 减1
+						continue;
 					}
 				}
 			}

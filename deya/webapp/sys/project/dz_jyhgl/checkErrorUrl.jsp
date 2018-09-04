@@ -51,7 +51,7 @@ function initTable(){
 			域名：
 		</td>
 		<td align="left" width="180">
-			<input type="text" class="input_text"  name="site_domain" id="site_domain" value="http://www.itl.gov.cn" style="width:180px;"/>
+			<input type="text" class="input_text"  name="site_domain" id="site_domain" value="" style="width:180px;"/>
 		</td>
 		<td align="left" width="40">
 			编码：
