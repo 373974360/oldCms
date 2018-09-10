@@ -1,6 +1,10 @@
 <%@ page contentType="text/html; charset=utf-8"%>
+<%@page import="com.deya.wcm.bean.cms.info.InfoBean"%>
+<%@page import="com.deya.wcm.services.cms.info.InfoBaseManager"%>
 <%
 	String info_id = request.getParameter("info_id");
+	InfoBean infoBean = InfoBaseManager.getInfoById(info_id);
+	String model_id = infoBean.getModel_id()+"";
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -36,7 +40,14 @@
                 //响应式预览
                 $('.icon-monitor').addClass('active');
                 $(".icon-mobile-3").click(function () {
-                    url = "/info/iList.jsp?info_id=<%=info_id%>&tm_id=523";
+                    var tm_id=523;
+                    if("<%=model_id%>"=="10"){
+                        tm_id = 531;
+					}
+                    if("<%=model_id%>"=="13"){
+                        tm_id = 530;
+                    }
+                    url = "/info/iList.jsp?info_id=<%=info_id%>&tm_id="+tm_id;
                     $("#by").css("overflow-y", "auto");
                     $('#iframe-wrap').removeClass().addClass('mobile-width-3');
                     $('.icon-tablet,.icon-mobile-1,.icon-monitor,.icon-mobile-2,.icon-mobile-3').removeClass('active');
@@ -46,7 +57,14 @@
                 });
 
                 $(".icon-mobile-2").click(function () {
-                    url = "/info/iList.jsp?info_id=<%=info_id%>&tm_id=523";
+                    var tm_id=523;
+                    if("<%=model_id%>"=="10"){
+                        tm_id = 531;
+                    }
+                    if("<%=model_id%>"=="13"){
+                        tm_id = 530;
+                    }
+                    url = "/info/iList.jsp?info_id=<%=info_id%>&tm_id="+tm_id;
                     $("#by").css("overflow-y", "auto");
                     $('#iframe-wrap').removeClass().addClass('mobile-width-2');
                     $('.icon-tablet,.icon-mobile-1,.icon-monitor,.icon-mobile-2,.icon-mobile-3').removeClass('active');
@@ -56,7 +74,14 @@
                 });
 
                 $(".icon-mobile-1").click(function () {
-                    url = "/info/iList.jsp?info_id=<%=info_id%>&tm_id=26";
+                    var tm_id=26;
+                    if("<%=model_id%>"=="10"){
+                        tm_id = 533;
+                    }
+                    if("<%=model_id%>"=="13"){
+                        tm_id = 532;
+                    }
+                    url = "/info/iList.jsp?info_id=<%=info_id%>&tm_id="+tm_id;
                     $("#by").css("overflow-y", "auto");
                     $('#iframe-wrap').removeClass().addClass('mobile-width');
                     $('.icon-tablet,.icon-mobile,.icon-monitor,.icon-mobile-2,.icon-mobile-3').removeClass('active');
@@ -66,7 +91,14 @@
                 });
 
                 $(".icon-tablet").click(function () {
-                    url = "/info/iList.jsp?info_id=<%=info_id%>&tm_id=26";
+                    var tm_id=26;
+                    if("<%=model_id%>"=="10"){
+                        tm_id = 533;
+                    }
+                    if("<%=model_id%>"=="13"){
+                        tm_id = 532;
+                    }
+                    url = "/info/iList.jsp?info_id=<%=info_id%>&tm_id="+tm_id;
                     $("#by").css("overflow-y", "auto");
                     $('#iframe-wrap').removeClass().addClass('tablet-width');
                     $('.icon-tablet,.icon-mobile-1,.icon-monitor,.icon-mobile-2,.icon-mobile-3').removeClass('active');
