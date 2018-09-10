@@ -100,7 +100,7 @@ public class SearchInnerManager {
 						System.out.println("Delete SearchIndex map =====" + id);
 						IndexManager.deleteSingleDocument(stringObjectMap);
 					}
-					if(list.size() > size){//在循环执行生成索引的过程中用户删除或者新增了信息 特别是用户批量删除操作 导致 list 长度改变   跳出循环等待下一次执行
+					if(list.size()!=size){//在循环执行生成索引的过程中用户删除或者新增了信息 特别是用户批量删除操作 导致 list 长度改变   跳出循环等待下一次执行
 						break;
 					}else{
 						it.remove();//移除已经生成或者删除的 记录
