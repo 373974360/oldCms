@@ -1,6 +1,11 @@
 <%@page contentType="text/html; charset=utf-8"%>
 <%@page import="com.deya.util.DateUtil"%>
 <%@page import="java.util.Date"%>
+<%@ page import="com.deya.wcm.services.control.domain.SiteDomainManager" %>
+<%
+    String site_id = request.getParameter("site_id");
+    String site_doman = SiteDomainManager.getSiteDomainBySiteID(site_id);
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -25,7 +30,7 @@
         var mp = new Map();
         var beanList = null;
 
-        var site_id = "<%=request.getParameter("site_id")%>";
+        var site_id = "<%=site_id%>";
         var cat_id = <%=request.getParameter("cat_id")%>;
         var start_day = "<%=request.getParameter("start_day")%>";
         var end_day = "<%=request.getParameter("end_day")%>";
@@ -60,7 +65,8 @@
             $("#treeTableCount").empty();
             var treeHtmls = "<thead>" +
                 "<tr>" +
-                "   <th width='45%'>信息标题</th>"+
+                "   <th width='30%'>信息标题</th>"+
+                "   <th width='15%'>来源</th>"+
                 "   <th width='30%'>信息网址</th>"+
                 "   <th width='15%'>添加时间</th>"+
                 "   <th width='10%'>信息状态</th>"+
@@ -91,9 +97,10 @@
             {
                 var url = bean.content_url;
                 if(url.substring(0,4)!="http"){
-                    url = "http://www.xixianxinqu.gov.cn"+url;
+                    url = "http://"+"<%=site_doman%>"+url;
                 }
                 str+="<td><a href='"+url+"' target=\"_blank\">"+bean.title+"</a></td>";
+                str+="<td>"+bean.source+"</td>";
                 str+="<td>"+url+"</td>";
                 str+="<td>"+bean.input_dtime+"</td>";
                 var status = "";

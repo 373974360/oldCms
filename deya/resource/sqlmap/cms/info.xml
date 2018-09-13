@@ -433,55 +433,57 @@
         delete from ${table_name} where info_id in (select info_id from cs_info where final_status=-1 and cat_id in (${cat_ids}) and site_id=#{site_id})
     </delete>
     <sql id="selectInfoList_sql_conn">
-        where ci.cat_id = ca.cat_id
-        <if test="input_user != null">
-            and ci.input_user = #{input_user}
-        </if>
-        <if test="dept_user != null">
-            and ci.input_user in (${dept_user})
-        </if>
-        <if test="site_id != null">
-            and ci.site_id = #{site_id} and ci.site_id = ca.site_id
-        </if>
-        <if test="is_auto_up != null">
-            and ci.is_auto_up = ${is_auto_up}
-        </if>
-        <if test="is_host != null">
-            and ci.is_host = ${is_host}
-        </if>
-        <if test="info_status != null">
-            and ci.info_status = ${info_status}
-        </if>
-        <if test="final_status != null">
-            and ci.final_status = ${final_status}
-        </if>
-        <if test="cat_id != null">
-            and ci.cat_id = ${cat_id}
-        </if>
-        <if test="cat_ids != null and cat_ids != ''">
-            and ci.cat_id in (${cat_ids})
-        </if>
-        <if test="search_cat_ids != null and search_cat_ids != ''">
-            and ci.cat_id in (${search_cat_ids})
-        </if>
+        <where>
+            <if test="input_user != null">
+                and ci.input_user = #{input_user}
+            </if>
+            <if test="dept_user != null">
+                and ci.input_user in (${dept_user})
+            </if>
+            <if test="site_id != null">
+                and ci.site_id = #{site_id}
+            </if>
+            <if test="is_auto_up != null">
+                and ci.is_auto_up = ${is_auto_up}
+            </if>
+            <if test="is_host != null">
+                and ci.is_host = ${is_host}
+            </if>
+            <if test="info_status != null">
+                and ci.info_status = ${info_status}
+            </if>
+            <if test="final_status != null">
+                and ci.final_status = ${final_status}
+            </if>
+            <if test="cat_id != null">
+                and ci.cat_id = ${cat_id}
+            </if>
+            <if test="cat_ids != null and cat_ids != ''">
+                and ci.cat_id in (${cat_ids})
+            </if>
+            <if test="search_cat_ids != null and search_cat_ids != ''">
+                and ci.cat_id in (${search_cat_ids})
+            </if>
+            <if test="con_value != null">
+                and ( ci.title like '%${con_value}%' or ci.subtitle like '%${con_value}%' or ci.tags like '%${con_value}%' or ai.info_content like '%${con_value}%')
+            </if>
+            <if test="searchString != null">
+                and ${searchString}
+            </if>
+            <if test="searchString2 != null">
+                ${searchString2}
+            </if>
+            <if test="highSearchString != null">
+                ${highSearchString}
+            </if>
+        </where>
+    </sql>
+    <select id="getAllInfoCounts" parameterType="Map" resultType="java.lang.Integer">
+        select count(ci.id) from (select ci.*,ca.cat_cname from cs_info ci,cs_info_category ca where ci.cat_id = ca.cat_id and ci.site_id = ca.site_id
         <if test="shared_cat_ids != null">
             and ca.cat_class_id = ${shared_cat_ids}
         </if>
-        <if test="con_value != null">
-            and ( ci.title like '%${con_value}%' or ci.subtitle like '%${con_value}%' or ci.tags like '%${con_value}%')
-        </if>
-        <if test="searchString != null">
-            and ${searchString}
-        </if>
-        <if test="searchString2 != null">
-            ${searchString2}
-        </if>
-        <if test="highSearchString != null">
-            ${highSearchString}
-        </if>
-    </sql>
-    <select id="getAllInfoCounts" parameterType="Map" resultType="java.lang.Integer">
-        select count(ci.id) from cs_info ci,cs_info_category ca <include refid="selectInfoList_sql_conn"/>
+        ) ci left join cs_info_article ai on ci.info_id = ai.info_id <include refid="selectInfoList_sql_conn"/>
     </select>
     <select id="getAllGKBZHInfoCounts" parameterType="Map" resultType="java.lang.Integer">
         select count(ci.id) from cs_info ci,cs_gk_info gk,cs_info_category ca
@@ -678,7 +680,7 @@
     <select id="selectInfoList" parameterType="Map" resultType="com.deya.wcm.bean.cms.info.InfoBean" >
         select * from (
         select row_.*, rownum rownum_ from (
-        select ci.*,ca.cat_cname from cs_info ci,cs_info_category ca <include refid="selectInfoList_sql_conn"/>
+        select ci.* from (select ci.*,ca.cat_cname from cs_info ci,cs_info_category ca where ci.cat_id = ca.cat_id and ci.site_id = ca.site_id) ci left join cs_info_article ai on ci.info_id = ai.info_id <include refid="selectInfoList_sql_conn"/>
         order by ci.istop desc,ci.weight desc, ${sort_name} ${sort_type}
         <![CDATA[
 		        ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}       
@@ -687,7 +689,7 @@
     </select>
 
     <select id="selectInfoList_mysql" parameterType="Map" resultType="com.deya.wcm.bean.cms.info.InfoBean" >
-        select ci.*,ca.cat_cname from cs_info ci,cs_info_category ca <include refid="selectInfoList_sql_conn"/>
+        select ci.* from (select ci.*,ca.cat_cname from cs_info ci,cs_info_category ca where ci.cat_id = ca.cat_id and ci.site_id = ca.site_id) ci left join cs_info_article ai on ci.info_id = ai.info_id <include refid="selectInfoList_sql_conn"/>
         order by ci.istop desc,ci.weight desc,${sort_name} ${sort_type} limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
     </select>
 
@@ -737,12 +739,10 @@
     </select>
 
     <select id="selectInfoList_mssql" parameterType="Map" resultType="com.deya.wcm.bean.cms.info.InfoBean" >
-        select top ${page_size} ci.*,ca.cat_cname
-        from cs_info ci,cs_info_category ca
+        select top ${page_size} ci.* from (select ci.*,ca.cat_cname from cs_info ci,cs_info_category ca where ci.cat_id = ca.cat_id and ci.site_id = ca.site_id) ci left join cs_info_article ai on ci.info_id = ai.info_id
         <include refid="selectInfoList_sql_conn"/>
         and ci.info_id not in
-        (select top ${start_num} ci.info_id
-        from cs_info ci,cs_info_category ca
+        (select top ${start_num} ci.info_id from (select ci.*,ca.cat_cname from cs_info ci,cs_info_category ca where ci.cat_id = ca.cat_id and ci.site_id = ca.site_id) ci left join cs_info_article ai on ci.info_id = ai.info_id
         <include refid="selectInfoList_sql_conn"/>
         order by ci.istop desc,ci.weight desc, ${sort_name} ${sort_type} )
         order by ${sort_name} ${sort_type}

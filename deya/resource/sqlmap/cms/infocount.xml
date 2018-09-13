@@ -406,7 +406,7 @@
     <!-- 添加的用户工作量统计信息详细列表   add  by 2014-01-06-->
     <select id="getInfoListByUserIDTimeType" parameterType="Map" resultType="com.deya.wcm.bean.cms.info.InfoBean">
         select
-        ci.title,ci.is_pic,ci.info_id,ci.cat_id,ci.thumb_url,ci.content_url,ci.input_user,ci.input_dtime,ci.info_status
+        ci.title,ci.is_pic,ci.info_id,ci.cat_id,ci.thumb_url,ci.content_url,ci.input_user,ci.input_dtime,ci.info_status,ci.source
         from cs_info ci,cs_info_category ca where ci.cat_id = ca.cat_id and ci.site_id = ca.site_id and ci.final_status
         = 0
         <if test="site_id != null">and ci.site_id = #{site_id}</if>

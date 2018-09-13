@@ -14,6 +14,7 @@ import com.deya.wcm.bean.cms.info.InfoBean;
 import com.deya.wcm.dao.cms.count.CmsCountDAO;
 import com.deya.wcm.services.appeal.count.CountUtil;
 import com.deya.wcm.services.appeal.sq.SQManager;
+import com.deya.wcm.services.control.domain.SiteDomainManager;
 import com.deya.wcm.services.org.user.UserLogin;
 
 import javax.servlet.http.HttpServletRequest;
@@ -145,8 +146,8 @@ public class CmsCountRPC {
         String xlsFile = fileTemp2 + File.separator + xls;
         String urlFile = "/sys/cms/cmsCount/file/byuser/" + nowDate + File.separator + xls;
 
-        String[] head = {"信息标题", "信息网址", "添加时间", "信息状态"};
-        String[][] data = new String[list.size()][4];
+        String[] head = {"信息标题","信息来源", "信息网址", "添加时间", "信息状态"};
+        String[][] data = new String[list.size()][5];
         String url = "";
         String info_status = "";
         for (int i = 0; i < list.size(); i++) {
@@ -154,10 +155,11 @@ public class CmsCountRPC {
             data[i][0] = infoBean.getTitle();//信息标题
             url = infoBean.getContent_url();
             if (!url.substring(0, 4).equals("http")) {
-                url = "http://www.xixianxinqu.gov.cn" + url;
+                url = "http://"+SiteDomainManager.getSiteDomainBySiteID(map.get("site_id")) + url;
             }
-            data[i][1] = url;//信息网址
-            data[i][2] = infoBean.getInput_dtime();//添加时间
+            data[i][1] = infoBean.getSource();//信息来源
+            data[i][2] = url;//信息网址
+            data[i][3] = infoBean.getInput_dtime();//添加时间
             if (infoBean.getInfo_status() == 8) {
                 info_status = "已发";
             }
@@ -173,7 +175,7 @@ public class CmsCountRPC {
             if (infoBean.getInfo_status() == 0) {
                 info_status = "草稿";
             }
-            data[i][3] = info_status;//信息状态
+            data[i][4] = info_status;//信息状态
         }
 
         OutExcel oe = new OutExcel("详细信息列表");
