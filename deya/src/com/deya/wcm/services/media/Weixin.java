@@ -29,6 +29,7 @@ public class Weixin {
     private static String rootpath="";
     private static String previewUrl="";
     private static String testwxname="";
+    private static String sendtype="";
 
     public static String AccessTockenOk(){
         CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -168,7 +169,12 @@ public class Weixin {
         initParams("media.properties");
         String upUrl = uploadUrl.replace("##tocken##", tocken);
         String temp_id = upload(upUrl, articleList);
-        boolean flag = previewMessage(temp_id);
+        boolean flag = false;
+        if(sendtype.equals("0")){
+            flag = sendGroupMessage(temp_id);//正式群发
+        }else{
+            flag = previewMessage(temp_id);//测试预览
+        }
         return flag;
     }
 
@@ -185,6 +191,7 @@ public class Weixin {
         rootpath = GetValueByKey(fileName, "rootpath");
         previewUrl = GetValueByKey(fileName, "previewUrl");
         testwxname = GetValueByKey(fileName, "testwxname");
+        sendtype = GetValueByKey(fileName, "sendtype");
     }
 
     public static String GetValueByKey(String fileName, String key) {
