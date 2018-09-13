@@ -344,6 +344,7 @@ public class CmsCountManager {
 		for(String s : m.keySet()){
 			CmsCountBean bean = m.get(s);
 			bean.setInputCount(bean.getCount()); // 设置取得的全部信息
+			bean.setSort(bean.getSort());
 			if(m1.containsKey(s)){
 				CmsCountBean temBean = m1.get(s);  // 已发布信息
 				bean.setReleasedCount(temBean.getCount());
@@ -367,8 +368,12 @@ public class CmsCountManager {
             bean.setReleaseRate();
 			ret.add(m.get(s));
 		}
-		// 排序
-		Collections.sort(ret, new CntDescComparator());
+		if(mp.get("sort_type").toString().equals("i.count")){
+			// 排序
+			Collections.sort(ret, new CntDescComparator());
+		}else{
+			Collections.sort(ret, new DepDescComparator());
+		}
 		return ret;
 	}
 	
@@ -957,16 +962,20 @@ class DescComparator implements Comparator<CmsCountBean>{
 		return ret;
 	}
 }
-
 /**
  * 按录入人员统计时,列表的降序统计器
  * @author liqi
  *
  */
 class CntDescComparator implements Comparator<CmsCountBean>{
-
 	public int compare(CmsCountBean o1, CmsCountBean o2) {
 		int ret = 0 - o1.getInputCount() + o2.getInputCount();
+		return ret;
+	}
+}
+class DepDescComparator implements Comparator<CmsCountBean>{
+	public int compare(CmsCountBean o1, CmsCountBean o2) {
+		int ret = 0 - o2.getSort() + o1.getSort();
 		return ret;
 	}
 }

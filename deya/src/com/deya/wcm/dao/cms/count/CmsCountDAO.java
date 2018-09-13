@@ -113,6 +113,7 @@ public class CmsCountDAO {
             String count = "0";
             String input_user = "0";
             String user_name = "";
+			String sort = "999";
             if(m.get("COUNT") != null ){
                 count = m.get("COUNT").toString(); // 取得返回的count列
             }
@@ -122,7 +123,10 @@ public class CmsCountDAO {
             if(m.get("USER_REALNAME") != null ){
                 user_name = m.get("USER_REALNAME").toString(); // 取得返回的count列
             }
-			CmsCountBean cmb = new CmsCountBean(input_user, user_name, count);
+			if(m.get("SORT") != null ){
+				sort = m.get("SORT").toString(); // 取得返回的count列
+			}
+			CmsCountBean cmb = new CmsCountBean(input_user, user_name, count,sort);
 			ret.put(input_user, cmb);
 		}
 		return ret;

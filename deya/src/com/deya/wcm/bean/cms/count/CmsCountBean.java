@@ -26,6 +26,22 @@ public class CmsCountBean implements Serializable{
 			
 		}
 	}
+
+	public CmsCountBean(String input_user, String user_name, String count,String sort){
+		int i_count = 0;
+		int i_input_user = 0;
+		setUser_name(user_name);
+		try{
+			i_count = Integer.parseInt(count);
+			i_input_user = Integer.parseInt(input_user);
+
+			setCount(i_count);
+			setInput_user(i_input_user);
+			setSort(Integer.parseInt(sort));
+		}catch(NumberFormatException ne){
+
+		}
+	}
 	
 	public CmsCountBean(){
 	}
@@ -64,6 +80,7 @@ public class CmsCountBean implements Serializable{
 	private String releaseRate; // 信息发布率
 	
 	private int picInfoCount = 0; //已发信息 并且有图片的信息
+	private int sort = 999;
 	
 	private String time; //统计时间
 	
@@ -220,5 +237,13 @@ public class CmsCountBean implements Serializable{
 
 	public void setPicInfoCount(int picInfoCount) {
 		this.picInfoCount = picInfoCount;
+	}
+
+	public int getSort() {
+		return sort;
+	}
+
+	public void setSort(int sort) {
+		this.sort = sort;
 	}
 }

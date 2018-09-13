@@ -30,7 +30,7 @@
 
     <!-- *****************取得站点工作量统计信息******************* -->
     <select id="getInputCountList" parameterType="Map" resultType="Map">
-        select i.count, u.user_id, u.user_realname from (
+        select i.count, u.user_id, u.user_realname,u.sort from (
         select count(*) count, input_user from cs_info where
         final_status=0
         <if test="info_status != null">
@@ -60,7 +60,7 @@
         and site_id = #{site_id}
         group by input_user
         ) i right join cs_org_user u on i.input_user = u.user_id
-        order by count
+        order by ${sort_type}
     </select>
 
     <!-- *****************取得站点工作量统计信息******************* -->

@@ -134,14 +134,25 @@ function openSelectPage(){
         </td>
     </tr>
     <tr>
-    	<td class="search_td fromTabs">
-        	<span class="span_left">信息范围:</span>
-  </td>
+        <td>
+            <span class="span_left">信息范围:</span>
+        </td>
+        <td>
+            <input id="ref_info" class="checkBox_mid" type="checkbox" name="info_scope" value="ref"/><span class="checkBox_text">包含引用信息</span>
+            <input id="link_info" class="checkBox_mid" type="checkbox" name="info_scope" value="link"/><span class="checkBox_text">包含链接信息</span>
+            <span class="checkBox_text" style="margin-left:20px; color:#A0A0A4" >注:默认只统计录入的信息</span>
+        </td>
+    </tr>
+    <tr>
         <td class="search_td fromTabs">
-        	<input id="ref_info" class="checkBox_mid" type="checkbox" name="info_scope" value="ref"/><span class="checkBox_text">包含引用信息</span>
-          <input id="link_info" class="checkBox_mid" type="checkbox" name="info_scope" value="link"/><span class="checkBox_text">包含链接信息</span>
-          <span class="checkBox_text" style="margin-left:20px; color:#A0A0A4" >注:默认只统计录入的信息</span>
-      </td>
+            <span class="span_left">排序方式:</span>
+        </td>
+        <td class="search_td fromTabs">
+            <select name="sort_type" id="sort_type">
+                <option value="i.count">发布量降序</option>
+                <option value="u.sort">部门排序</option>
+            </select>
+        </td>
     </tr>
 </table>
 <span class="blank3"></span>

@@ -57,6 +57,7 @@ function showList(){
 	// mp.put("cat_id",cat_id);  // TODO
 	mp.put("start_day",start_day + " 00:00:00");
 	mp.put("end_day",end_day + " 23:59:59");
+    mp.put("sort_type",$("#sort_type").val());
 	
 	beanList = CmsCountRPC.getInputCountList(mp);
 	beanList = List.toJSList(beanList);
