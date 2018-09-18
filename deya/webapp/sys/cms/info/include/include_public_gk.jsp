@@ -218,7 +218,7 @@
 	</tbody>
 </table>
 
-<table id="" class="table_form hidden" border="0" cellpadding="0" cellspacing="0">
+<table id="" class="table_form" border="0" cellpadding="0" cellspacing="0">
 	<tbody>
 	<tr>
 		<th>文号：</th>
