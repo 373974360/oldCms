@@ -36,6 +36,7 @@
 				  id NUMBER(20) not null PRIMARY KEY,
 				  rule_id NUMBER(20) DEFAULT '0',
 				  rcat_id NUMBER(20) DEFAULT '0',
+				  model_id NUMBER(20) DEFAULT '0',
 				  title varchar2(250) DEFAULT '',
 				  listUrl_start varchar2(250) DEFAULT '',
 				  listUrl_end varchar2(250) DEFAULT '',

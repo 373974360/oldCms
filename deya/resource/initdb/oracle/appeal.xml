@@ -282,7 +282,7 @@
 					rec_id NUMBER(20) not null PRIMARY KEY,
 					sq_id NUMBER(20) default '0',
 					sat_id NUMBER(20) default '0',					
-					sat_score NUMBER(4) default '0',
+					sat_score varchar(20) default '0',
 					add_dtime VARCHAR2(250) default ''
 				)
 		   ]]> 

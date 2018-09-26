@@ -18,7 +18,23 @@
 
 		   ]]> 
 
-       </sql>        
+       </sql>
+        <sql>
+
+            <![CDATA[
+				create table cs_gk_ysq_process (
+                  pro_id NUMBER(20) not null,
+                  ysq_id NUMBER(20),
+                  do_dept NUMBER(20),
+                  do_dept_name VARCHAR2(250) default '',
+                  old_dept NUMBER(20),
+                  old_dept_name VARCHAR2(250) default '',
+                  pro_content clob default '',
+                  pro_dtime VARCHAR2(250) default '',
+                )
+		   ]]>
+
+        </sql>
 
 	   <sql>
 
@@ -61,6 +77,7 @@
 			ir_value varchar2(250) default '',
 			ir_space varchar2(250) default '',
 			is_valid number(4) default 1,
+			site_id varchar2(250) default '',
 			sort_id number(4) default 0,
 			ir_type number(4) default 0
 		)
@@ -117,7 +134,12 @@
 					gk_duty_dept VARCHAR2(250) default '',
 					gk_input_dept VARCHAR2(250) default '',
 					file_head VARCHAR2(250) default '',
-					gk_signer VARCHAR2(250) default ''
+					gk_signer VARCHAR2(250) default '',
+					gk_signer VARCHAR2(250) default '',
+					gkbzh_id NUMBER(20) default 0,
+					gkbzh_name VARCHAR2(250) default '',
+					gkhj_id NUMBER(20) default 0,
+					gkhj_name VARCHAR2(250) default ''
 				)
 		   ]]> 
        </sql>
@@ -204,7 +226,15 @@
 					gk_wsbl clob default '',
 					gk_ztcx clob default '',
 					gk_wsts clob default '',
-					gk_memo varchar2(1000) default ''
+					gk_memo varchar2(1000) default '',
+					gk_xzcj varchar2(500) default '',
+					gk_tbfw varchar2(500) default '',
+					gk_ssztxz varchar2(500) default '',
+					gk_lbjg varchar2(500) default '',
+					gk_fdbjsx varchar2(500) default '',
+					gk_jddh varchar(500) default '',
+					gk_bljg clob default '',
+					gk_bgxz clob default ''
 					
 				)
 		   ]]> 
@@ -287,7 +317,8 @@
 			template_content number(4) default 0,
 			template_over number(4) default 0,
 			template_print number(4) default 0,
-			template_query number(4) default 0
+			template_query number(4) default 0,
+			site_id  varchar2(250) default ''
 		)
 	   ]]>
 	   </sql>
@@ -345,7 +376,8 @@
 					week_hits NUMBER(20) default 0,
 					month_hits NUMBER(20) default 0,
 					lasthit_dtime VARCHAR2(20) default '',
-					weight NUMBER(4) default 60
+					weight NUMBER(4) default 60,
+			        site_id  VARCHAR2(250) default ''
 				)
 		   ]]> 
        </sql>
