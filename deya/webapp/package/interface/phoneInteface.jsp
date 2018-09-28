@@ -166,10 +166,22 @@ public String getChildCategoryCountList(HttpServletRequest request){
 	String json = "";
 	String site_id = "CMScqgjj";
 	String cat_id = FormatUtil.formatNullString(request.getParameter("cat_ids"));
+	String start_time = request.getParameter("start_time");
+	String end_time = request.getParameter("end_time");
+	if(StringUtils.isNotEmpty(start_time)){
+	    start_time = start_time+" 00:00:00";
+	}else{
+	    start_time="";
+	}
+	if(StringUtils.isNotEmpty(end_time)){
+	    end_time = end_time+" 23:59:59";
+	}else{
+	    end_time="";
+	}
 	String[] catArray = cat_id.split(",");
     for(String str:catArray){
         CategoryBean bean = CategoryManager.getCategoryBeanCatID(Integer.parseInt(str),site_id);
-        String params = "site_id=" + site_id + ";cat_id="+bean.getCat_id()+";size=10;cur_page=1;orderby=ci.released_dtime desc;";
+        String params = "site_id=" + site_id + ";cat_id="+bean.getCat_id()+";start_time="+start_time+";end_time="+end_time+";size=10;cur_page=1;orderby=ci.released_dtime desc;";
         TurnPageBean tpb = InfoUtilData.getInfoCount(params);
         json += ",{\"columntital\":\""+bean.getCat_cname()+"\",\"columnCount\":\""+tpb.getCount()+"\"}";
     }
