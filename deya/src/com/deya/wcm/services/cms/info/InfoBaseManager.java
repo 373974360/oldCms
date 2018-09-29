@@ -323,7 +323,7 @@ public class InfoBaseManager {
             String sql = "";
             if(category_ids == null || category_ids.trim().equals("")){
                 if(map.get("step_id") != null && !map.get("step_id").trim().equals("")){
-                    if(Integer.parseInt(map.get("step_id"))<100){
+                    if(Integer.parseInt(map.get("step_id"))<100&&Integer.parseInt(map.get("step_id"))>1){
                         sql = " and ci.step_id="+(Integer.parseInt(map.get("step_id"))-1);
                     }else{
                         sql = " and ci.step_id="+(Integer.parseInt(map.get("step_id")));
@@ -343,7 +343,7 @@ public class InfoBaseManager {
         }else if(map.get("info_status").equals("2")){
             String sql = "";
             if(!map.containsKey("is_my_info_step")){
-                if(Integer.parseInt(map.get("step_id"))<100){
+                if(Integer.parseInt(map.get("step_id"))<100&&Integer.parseInt(map.get("step_id"))>1){
                     sql = " and ci.step_id="+(Integer.parseInt(map.get("step_id"))-1);
                 }else{
                     sql = " and ci.step_id="+(Integer.parseInt(map.get("step_id")));

@@ -578,7 +578,7 @@ function clickLabelHandl(num)
 		break;
 	case 4:
 		infoStatus = "1";
-		stepID = "0";
+		stepID = "1";
 		finalStatus = "0";
 		search_steps = "";
 		break;

@@ -11,6 +11,7 @@
 <%@ page import="com.deya.project.dz_jyhgl.InfoUpdateResultBean" %>
 <%@ page import="com.deya.project.dz_jyhgl.InfoUpdateResultManager" %>
 <%
+    String opt_ids1 = UserLogin.getOptIDSByUserAPPSite(UserLogin.getUserBySession(request).getUser_id()+"", "cms", "");
     int user_id = UserLogin.getUserBySession(request).getUser_id();
     List<DeskTopBean> desk_list = UserManRPC.getUserDesktop(user_id);
     Map<String, String> sq_con_map = new HashMap<String, String>();
@@ -114,7 +115,7 @@
                 }
                 str += "</tbody></table></div></div>";
             }
-            if ("ysqgk".equals(det.getApp_type())) {
+            if ("ysqgk".equals(det.getApp_type())&&opt_ids1.indexOf(",286,")>-1) {
                 sq_con_map.put("sort_name", "ysq_id");
                 sq_con_map.put("sort_type", "desc");
                 sq_con_map.put("do_state", "0");
