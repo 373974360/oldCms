@@ -22,6 +22,12 @@
 				</ul>
 			</td>
 		</tr>
+		<tr id="audit_tr" class="hidden">
+			<th>选择审核人：</th>
+			<td id="audit_list">
+
+			</td>
+		</tr>
         <tr>
 			<th valign="top">推荐：</th>
 			<td>
