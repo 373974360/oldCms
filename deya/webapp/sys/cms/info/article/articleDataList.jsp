@@ -126,21 +126,21 @@ function setUserOperate()
             if(step_id == 100)
             {
                 isChangeDelete = true;
-            }else{
+            }/*else{
                 $(":button[name='btn302']").hide();
                 $(":button[name='btn303']").hide();
-			}
+			}*/
         }else{
 
         }
     }
-    if(!isChangeDelete)
+    /*if(!isChangeDelete)
     {
         $(":button[name='btn332']").hide();
         $(":button[name='btn307']").hide();
         $(":button[name='btn306']").hide();
         $(":button[name='btn305']").hide();
-    }
+    }*/
 }
 
 function openSendInfoPage()

@@ -564,6 +564,9 @@ function clickLabelHandl(num)
 		infoStatus = "2";
         var temp_wf_id = CategoryRPC.getWFIDByCatID(cid,site_id);
         stepID = getMaxStepIDByUserID(temp_wf_id,app,site_id)+"";
+        if(stepID==1){
+            stepID="0";
+        }
         is_my_info_step = false;
 		//getTheLeafNodes();
 		finalStatus = "0";

@@ -24,6 +24,10 @@ public class jspFilterHandl {
 
     private static String[] editorParams = {"ware_content","t_content","sq_content","correct_content","c_spyj","c_sqtj","c_jzxyq","c_sqclml","c_sfyj","c_fulu"};
 
+    private static String[] no_filter_rpc={"SurveyRPC","InfoBaseRPC","TemplateRPC","WareRPC","ModelUtilRPC"};
+
+    private static String[] rpc_filter_str={"<",">"};
+
     static {
         String[] jspArr = JconfigUtilContainer.bashConfig().getPropertyNamesByCategory("filter_jsp_page");
         if (jspArr != null && jspArr.length > 0) {
@@ -142,6 +146,18 @@ public class jspFilterHandl {
             if (queryString.indexOf("collURL") == -1) {
                 if ((path.equals("/sys") && servletPath.indexOf("/JSON-RPC") >= 0) || (path.equals("/manager") && servletPath.indexOf("/JSON-RPC") >= 0)) {
                     String params = getRequestPayload(request);
+                    boolean b = false;
+                    for(String rpc:no_filter_rpc){
+                        if(params.contains(rpc)){
+                            b = true;
+                            break;
+                        }
+                    }
+                    if(!b){
+                        if (isTureKey(params, rpc_filter_str)) {
+                            return true;  //包含要过滤的关键字
+                        }
+                    }
                     if (isTureKey(params, sqlFilterStr)) {
                         return true;  //包含要过滤的关键字
                     }
@@ -156,17 +172,24 @@ public class jspFilterHandl {
                     String arr = (String) o;
                     String value = request.getParameter(arr);
                     boolean isEditorParam = false;
-                    for (String editorParam : editorParams) {
-                        if(editorParam.equals(arr)){
-                            isEditorParam = true;
-                            break;
+                    if (arr.equals("sq_content")) {
+                        String[] filter = new String[]{"alert", "%00", "script","object","data","select","option","window","location","href","confirm","window.location.href","session","cookie","iframe","frame"};
+                        if (isTureKey(value, filter)) {
+                            return true;
+                        }
+                    }else{
+                        for (String editorParam : editorParams) {
+                            if(editorParam.equals(arr)){
+                                isEditorParam = true;
+                                break;
+                            }
                         }
                     }
                     if(isEditorParam){
                         continue;
                     }
                     for (String str : integerParamStr) {
-                        if (str.equals(arr)) {
+                        if(str.equals(arr)) {
                             try {
                                 if (value != null && !"".equals(value) && !"null".equals(value)) {
                                     int i = Integer.parseInt(value);
