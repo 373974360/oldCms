@@ -1,16 +1,6 @@
 <%@ page contentType="text/html; charset=utf-8"%>
 <%
 String site_id = request.getParameter("site_id");
-String ywlsh = request.getParameter("ywlsh");
-String file_path = request.getParameter("file_path");
-String wjbh = request.getParameter("wjbh");
-String fbqd = request.getParameter("fbqd");
-String curinfo = request.getParameter("curinfo");
-String depname = request.getParameter("depname");
-String creator = request.getParameter("creator");
-String create_date = request.getParameter("create_date");
-String start_date = request.getParameter("start_date");
-String end_date = request.getParameter("end_date");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -157,16 +147,7 @@ String end_date = request.getParameter("end_date");
 		var s_id = request.getParameter("s_id");
 		var is_update = true;//是否允许修改,true表示该问卷还没有答卷，false为有答卷，已有的数据不能删除排序，不允许在选项中间进行插入操作
 		var defaultBean;
-		var ywlsh = "<%=ywlsh%>";
-    	var file_path = "<%=file_path%>";
-    	var wjbh = "<%=wjbh%>";
-    	var fbqd = "<%=fbqd%>";
-    	var curinfo = "<%=curinfo%>";
-		var depname = "<%=depname%>";
-		var creator = "<%=creator%>";
-		var create_date = "<%=create_date%>";
-		var start_date = "<%=start_date%>";
-		var end_date = "<%=end_date%>";
+
 		$(document).ready(function () {
 			initButtomStyle();
 			init_FromTabsStyle();
@@ -178,6 +159,7 @@ String end_date = request.getParameter("end_date");
 			sd.showWareArea();	
 			
 			getSurveyCategoryName();//得到问卷分类名称
+            publicUploadButtomAllFile("uploadify",true,false,"",0,5,"CMScqgjj","txt,doc,docx,xlsx,xls,pdf","*.txt;*.doc;*.docx;*.xlsx;*.xls,*.pdf","saveFilePath");
 
 			if(s_id != "" && s_id != null)
 			{
@@ -204,19 +186,45 @@ String end_date = request.getParameter("end_date");
 					$("#spacing_type").val(defaultBean.spacing_interval.substring(0,1));
 					$("#spacing_time").val(defaultBean.spacing_interval.substring(1))
 				}
-			}else{
-                $("#ywlsh").val(ywlsh);
-                $("#file_path").val(file_path);
-                $("#wjbh").val(wjbh);
-                $("#fbqd").val(fbqd);
-                $("#curinfo").val(curinfo);
-                $("#depname").val(depname);
-                $("#creator").val(creator);
-                $("#create_date").val(create_date);
-                $("#start_time").val(start_date);
-                $("#end_time").val(end_date);
+                if(defaultBean.fbqd != "")
+                {
+                    if(defaultBean.fbqd.indexOf('wt') < 0 ){
+                        $("input[name='fbqd']").each(function(){
+                            if($(this).val() == "wt"){
+                                $(this).removeAttr("checked");
+                            }
+                        });
+                    }
+                    if(defaultBean.fbqd.indexOf('pc') < 0 ){
+                        $("input[name='fbqd']").each(function(){
+                            if($(this).val() == "pc"){
+                                $(this).removeAttr("checked");
+                            }
+                        });
+                    }
+                    if(defaultBean.fbqd.indexOf('app') < 0 ){
+                        $("input[name='fbqd']").each(function(){
+                            if($(this).val() == "app"){
+                                $(this).removeAttr("checked");
+                            }
+                        });
+                    }
+                    if(defaultBean.fbqd.indexOf('wx') < 0 ){
+                        $("input[name='fbqd']").each(function(){
+                            if($(this).val() == "wx"){
+                                $(this).removeAttr("checked");
+                            }
+                        });
+                    }
+                    if(defaultBean.fbqd.indexOf('xxfb') < 0 ){
+                        $("input[name='fbqd']").each(function(){
+                            if($(this).val() == "xxfb"){
+                                $(this).removeAttr("checked");
+                            }
+                        });
+                    }
+                }
 			}
-		
 			setContentAreaHeight();
 			$("#addButton").click(saveSurvey);
 		}); 
@@ -264,6 +272,10 @@ String end_date = request.getParameter("end_date");
 		function getHtmls()
 		{			
 			return $("#content_area").html();
+		}
+		function saveFilePath(url)
+		{
+			$("#file_path").val(url);
 		}
 
 	//-->

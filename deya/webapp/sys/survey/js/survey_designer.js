@@ -2070,20 +2070,24 @@ sDesigner = function(){
 				 str += '<div class="blankH5" ></div>';
 				 str += '<div ><a class="button" href="#" onclick="this.blur(); return false;" hidefocus="true" style="float:left"><span onclick="ObjectPool['+this.name+'].openHTMLEditor(\'s_description\')">&nbsp;HTML编辑器</span></a></div>';
 				 str += '<div class="blankH5" ></div>';
-				 str += '<div class="text_div">业务流水号</div>';
-				 str += '<div id=""><input type="text" class="input_border" id="ywlsh" name="ywlsh" value="请输入业务流水号" style="width:98%" onkeyUP="ObjectPool['+this.name+'].setValue(this)"></div>';
 				 str += '<div class="text_div">附件</div>';
-				 str += '<div id=""><input type="text" class="input_border" id="file_path" name="file_path" value="" style="width:98%" onkeyUP="ObjectPool['+this.name+'].setValue(this)"></div>';
+				 str += '<div id=""><input type="text" class="input_border" id="file_path" name="file_path" value="" style="width:98%" onkeyUP="ObjectPool['+this.name+'].setValue(this)"><input type="file" name="uploadify" id="uploadify"/></div>';
 				 str += '<div class="text_div">问卷编号</div>';
 				 str += '<div id=""><input type="text" class="input_border" id="wjbh" name="wjbh" value="" style="width:98%" onkeyUP="ObjectPool['+this.name+'].setValue(this)"></div>';
-				 str += '<div class="text_div">发布渠道</div>';
-				 str += '<div id=""><input type="text" class="input_border" id="fbqd" name="fbqd" value="" style="width:98%" onkeyUP="ObjectPool['+this.name+'].setValue(this)"></div>';
+				str += '<div class="text_div">发布渠道</div>';
+				str += '<div id="">' +
+					'<input type="checkbox" class="checkbox" name="fbqd" value="wt" onkeyUP="ObjectPool['+this.name+'].setValue(this)" checked="checked">网厅' +
+					'<input type="checkbox" class="checkbox" name="fbqd" value="pc" onkeyUP="ObjectPool['+this.name+'].setValue(this)" checked="checked">门户网站' +
+					'<input type="checkbox" class="checkbox" name="fbqd" value="app" onkeyUP="ObjectPool['+this.name+'].setValue(this)" checked="checked">APP' +
+					'<input type="checkbox" class="checkbox" name="fbqd" value="wx" onkeyUP="ObjectPool['+this.name+'].setValue(this)" checked="checked">微信' +
+                    '<input type="checkbox" class="checkbox" name="fbqd" value="xxfb" onkeyUP="ObjectPool['+this.name+'].setValue(this)" checked="checked">线下发布' +
+					'</div>';
 				 str += '<div class="text_div">发起人</div>';
 				 str += '<div id=""><input type="text" class="input_border" id="creator" name="creator" value="" style="width:98%" onkeyUP="ObjectPool['+this.name+'].setValue(this)"></div>';
 				 str += '<div class="text_div">发起部门</div>';
 				 str += '<div id=""><input type="text" class="input_border" id="depname" name="depname" value="" style="width:98%" onkeyUP="ObjectPool['+this.name+'].setValue(this)"></div>';
 				 str += '<div class="text_div">发起时间</div>';
-				 str += '<div id=""><input type="text" class="input_border" id="create_date" name="create_date" value="" style="width:98%" onkeyUP="ObjectPool['+this.name+'].setValue(this)">';
+				 str += '<div id=""><input type="text" class="input_border Wdate" id="create_date" name="create_date" onfocus="WdatePicker({dateFmt:\'yyyy-MM-dd\',isShowClear:true,readOnly:true})" readonly="true" style="width:98%" onkeyUP="ObjectPool['+this.name+'].setValue(this)">';
 				 str += '<input type="hidden" id="curinfo" name="curinfo" value="" onkeyUP="ObjectPool['+this.name+'].setValue(this)"></div>';
 				 str += '</div>';
 				str += '</div>';

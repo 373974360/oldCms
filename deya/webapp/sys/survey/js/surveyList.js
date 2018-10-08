@@ -160,6 +160,11 @@
 /********** 显示table end*************/
 
 /**********************添加操作　开始*************************************/
+
+function fnAddSurvey()
+{
+	window.location.href = "add_survey.jsp?site_id="+site_id;
+}
 function saveSurvey()
 {
 	$("#max_item_num").val(sd.item_num);//设置当前选项最大值
@@ -195,6 +200,18 @@ function saveSurvey()
 		bean.spacing_interval = $("#spacing_type").val()+$("#spacing_time").val();
 	}
 
+    var fbqd = "";
+    $("input[name='fbqd']:checked").each(function(){
+        fbqd += "," + $(this).val() ;
+    });
+    if(fbqd.length > 1){
+        fbqd = fbqd.substr(1);
+    }else{
+        alert("发布渠道不能为空！");
+        return;
+    }
+    bean.fbqd = fbqd;
+
 	if(bean.s_id.trim() == "")
 	{
 		bean.add_user = parent.LoginUserBean.user_id;
@@ -202,7 +219,7 @@ function saveSurvey()
 		if(SurveyRPC.insertSurvey(bean,getSurveySubList()))
 		{
 			parent.msgAlert("保存成功");
-            fnUpdateSurveySetting(bean.ywlsh);
+            //fnUpdateSurveySetting(bean.ywlsh);
 		}
 	}
 	else
@@ -214,7 +231,7 @@ function saveSurvey()
 		if(SurveyRPC.updateSurvey(bean,getSurveySubList()))
 		{
             parent.msgAlert("保存成功");
-            fnUpdateSurveySetting(bean.ywlsh);
+            //fnUpdateSurveySetting(bean.ywlsh);
 		}
 	}
 }
@@ -597,7 +614,7 @@ function openAnswer()
 //推送到呼叫中心
 function pushAnswer()
 {
-	var ywlsh = table.getSelecteCheckboxValue("ywlsh");
+	var ywlsh = table.getSelecteCheckboxValue("id");
     var selectIDS = table.getSelecteCheckboxValue("s_id");
     if(ywlsh == "" || ywlsh == "")
     {
