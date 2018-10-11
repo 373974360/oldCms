@@ -5,7 +5,7 @@
 <%@page import="com.deya.wcm.services.model.services.InfoCustomService,com.deya.wcm.services.search.search.SearchManager,com.deya.wcm.services.system.formodel.ModelManager,com.deya.wcm.services.zwgk.info.GKInfoManager,com.deya.wcm.template.velocity.data.AppealData,com.deya.wcm.template.velocity.data.InfoUtilData"%><%@ page import="com.deya.wcm.template.velocity.data.InterViewData"%><%@ page import="org.json.JSONException"%><%@ page import="org.json.JSONObject"%><%@ page import="java.util.*"%>
 <%@page import="com.deya.wcm.dao.cms.count.CmsCountDAO"%><%@ page import="org.apache.commons.lang3.StringUtils"%>
 <%@page import="com.deya.wcm.bean.survey.*,com.deya.wcm.template.velocity.data.SurveyData,com.deya.wcm.services.survey.SurveyService" %><%@ page import="com.deya.wcm.bean.survey.SurveyAnswer"%>
-<%@page import="com.deya.wcm.services.survey.AnswerServer" %>
+<%@page import="com.deya.wcm.services.survey.AnswerServer" %><%@ page import="java.util.regex.Pattern"%><%@ page import="java.util.regex.Matcher"%>
 <%
     String action_type = request.getParameter("action_type");
     String result = "";
@@ -642,9 +642,9 @@ public String SurveyList(HttpServletRequest request){
 		for(SurveyBean surveyBean : surveyList)
 		{
 		    if(publish_source.equals("all")){
-		        json += ",{\"s_id\":\""+surveyBean.getS_id()+"\",\"s_name\":\""+surveyBean.getS_name()+"\",\"is_end\":\""+surveyBean.getIs_end()+"\",\"show_result_status\":\""+surveyBean.getShow_result_status()+"\",\"start_time\":\""+surveyBean.getStart_time()+"\",\"end_time\":\""+surveyBean.getEnd_time()+"\"}";
+		        json += ",{\"s_id\":\""+surveyBean.getS_id()+"\",\"s_name\":\""+delHTMLTag(surveyBean.getS_name())+"\",\"is_end\":\""+surveyBean.getIs_end()+"\",\"show_result_status\":\""+surveyBean.getShow_result_status()+"\",\"start_time\":\""+surveyBean.getStart_time()+"\",\"end_time\":\""+surveyBean.getEnd_time()+"\"}";
 		    }else if(surveyBean.getFbqd().indexOf(publish_source)>0){
-		        json += ",{\"s_id\":\""+surveyBean.getS_id()+"\",\"s_name\":\""+surveyBean.getS_name()+"\",\"is_end\":\""+surveyBean.getIs_end()+"\",\"show_result_status\":\""+surveyBean.getShow_result_status()+"\",\"start_time\":\""+surveyBean.getStart_time()+"\",\"end_time\":\""+surveyBean.getEnd_time()+"\"}";
+		        json += ",{\"s_id\":\""+surveyBean.getS_id()+"\",\"s_name\":\""+delHTMLTag(surveyBean.getS_name())+"\",\"is_end\":\""+surveyBean.getIs_end()+"\",\"show_result_status\":\""+surveyBean.getShow_result_status()+"\",\"start_time\":\""+surveyBean.getStart_time()+"\",\"end_time\":\""+surveyBean.getEnd_time()+"\"}";
 		    }
 		}
 		if(json.length()>0){
@@ -660,11 +660,11 @@ public String SurveyView(HttpServletRequest request){
 	String s_id = FormatUtil.formatNullString(request.getParameter("s_id"));
 	SurveyBean surveyBean = SurveyService.getSurveyBean(s_id);
 	if(surveyBean!=null){
-	    json += "{\"s_id\":\""+surveyBean.getS_id()+"\",\"s_name\":\""+surveyBean.getS_name()+"\",\"is_end\":\""+surveyBean.getIs_end()+"\",\"show_result_status\":\""+surveyBean.getShow_result_status()+"\",\"start_time\":\""+surveyBean.getStart_time()+"\",\"end_time\":\""+surveyBean.getEnd_time()+"\",\"s_description\":\""+surveyBean.getDescription()+"\",\"subjectList\":[";
+	    json += "{\"s_id\":\""+surveyBean.getS_id()+"\",\"s_name\":\""+delHTMLTag(surveyBean.getS_name())+"\",\"is_end\":\""+surveyBean.getIs_end()+"\",\"show_result_status\":\""+surveyBean.getShow_result_status()+"\",\"start_time\":\""+surveyBean.getStart_time()+"\",\"end_time\":\""+surveyBean.getEnd_time()+"\",\"s_description\":\""+delHTMLTag(surveyBean.getDescription())+"\",\"subjectList\":[";
 	    List<SurveySub> subList = SurveyService.getSurveySubjectBean(surveyBean.getS_id());
 	    if(subList != null && subList.size() > 0){
 	        for(SurveySub sub:subList){
-	            json+="{\"subject_id\":\""+sub.getSubject_id()+"\",\"sub_name\":\""+replaceStr(sub.getSub_name())+"\",\"subject_type\":\""+sub.getSubject_type()+"\",\"is_required\":\""+sub.getIs_required()+"\",\"childList\":[";
+	            json+="{\"subject_id\":\""+sub.getSubject_id()+"\",\"sub_name\":\""+delHTMLTag(sub.getSub_name())+"\",\"subject_type\":\""+sub.getSubject_type()+"\",\"is_required\":\""+sub.getIs_required()+"\",\"childList\":[";
 	            if(sub.getItemList()!=null&&sub.getItemList().size()>0){
 	                SurveySuvItem surveySuvItem = sub.getItemList().get(0);
                     List<SurveyChildItem> childList = surveySuvItem.getChildList();
@@ -691,11 +691,11 @@ public String SurveyResult(HttpServletRequest request){
 	Map map = com.deya.wcm.services.survey.StatisticsService.getStatisticsDataBySurvey(s_id,"");
 	SurveyBean surveyBean = SurveyService.getSurveyBean(s_id);
 	if(surveyBean!=null){
-	    json += "{\"s_id\":\""+surveyBean.getS_id()+"\",\"s_name\":\""+surveyBean.getS_name()+"\",\"is_end\":\""+surveyBean.getIs_end()+"\",\"show_result_status\":\""+surveyBean.getShow_result_status()+"\",\"start_time\":\""+surveyBean.getStart_time()+"\",\"end_time\":\""+surveyBean.getEnd_time()+"\",\"s_description\":\""+surveyBean.getDescription()+"\",\"subjectList\":[";
+	    json += "{\"s_id\":\""+surveyBean.getS_id()+"\",\"s_name\":\""+delHTMLTag(surveyBean.getS_name())+"\",\"is_end\":\""+surveyBean.getIs_end()+"\",\"show_result_status\":\""+surveyBean.getShow_result_status()+"\",\"start_time\":\""+surveyBean.getStart_time()+"\",\"end_time\":\""+surveyBean.getEnd_time()+"\",\"s_description\":\""+delHTMLTag(surveyBean.getDescription())+"\",\"subjectList\":[";
 	    List<SurveySub> subList = SurveyService.getSurveySubjectBean(surveyBean.getS_id());
 	    if(subList != null && subList.size() > 0){
 	        for(SurveySub sub:subList){
-	            json+="{\"subject_id\":\""+sub.getSubject_id()+"\",\"sub_name\":\""+replaceStr(sub.getSub_name())+"\",\"subject_type\":\""+sub.getSubject_type()+"\",\"is_required\":\""+sub.getIs_required()+"\",\"childList\":[";
+	            json+="{\"subject_id\":\""+sub.getSubject_id()+"\",\"sub_name\":\""+delHTMLTag(sub.getSub_name())+"\",\"subject_type\":\""+sub.getSubject_type()+"\",\"is_required\":\""+sub.getIs_required()+"\",\"childList\":[";
 	            if(sub.getItemList()!=null&&sub.getItemList().size()>0){
 	                SurveySuvItem surveySuvItem = sub.getItemList().get(0);
                     List<SurveyChildItem> childList = surveySuvItem.getChildList();
@@ -768,7 +768,26 @@ public String isToudi(HttpServletRequest request){
 	return jsonObject.toString();
 }
 
+public static String delHTMLTag(String htmlStr){
+        String regEx_script="<script[^>]*?>[\\s\\S]*?<\\/script>"; //定义script的正则表达式
+        String regEx_style="<style[^>]*?>[\\s\\S]*?<\\/style>"; //定义style的正则表达式
+        String regEx_html="<[^>]+>"; //定义HTML标签的正则表达式
 
+        Pattern p_script=Pattern.compile(regEx_script,Pattern.CASE_INSENSITIVE);
+        Matcher m_script=p_script.matcher(htmlStr);
+        htmlStr=m_script.replaceAll(""); //过滤script标签
+
+        Pattern p_style=Pattern.compile(regEx_style,Pattern.CASE_INSENSITIVE);
+        Matcher m_style=p_style.matcher(htmlStr);
+        htmlStr=m_style.replaceAll(""); //过滤style标签
+
+        Pattern p_html=Pattern.compile(regEx_html,Pattern.CASE_INSENSITIVE);
+        Matcher m_html=p_html.matcher(htmlStr);
+        htmlStr=m_html.replaceAll(""); //过滤html标签
+        htmlStr = htmlStr.replace("&nbsp;","");
+
+        return htmlStr.trim(); //返回文本字符串
+    }
 
 public static String replaceStr(String str)
 {
