@@ -192,7 +192,7 @@ public class InfoBaseRPC {
 				dept_user = dept_user.substring(0,dept_user.length()-1);
 			}
 			map.put("dept_user",dept_user);
-			System.out.println("DEPT_USER===============>>>>>"+dept_user);
+			//System.out.println("DEPT_USER===============>>>>>"+dept_user);
 		}
 		return InfoBaseManager.getInfoList(map);
 	}
@@ -487,7 +487,7 @@ public class InfoBaseRPC {
 				dept_user = dept_user.substring(0,dept_user.length()-1);
 			}
 			m.put("dept_user",dept_user);
-			System.out.println("DEPT_USER===============>>>>>"+dept_user);
+			//System.out.println("DEPT_USER===============>>>>>"+dept_user);
 		}
 		return InfoDesktop.getWaitVerifyInfoList(m);
 	}

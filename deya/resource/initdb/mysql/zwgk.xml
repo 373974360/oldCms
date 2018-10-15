@@ -480,6 +480,31 @@
 				)
 		   ]]> 
        </sql>
-       
+        <!-- 公民代表走进政府 -->
+        <sql>
+            <![CDATA[
+                create table project_zjzf(
+                    id int not null PRIMARY KEY,
+                    name varchar(250) default '',
+                    xb varchar(20) default '',
+                    csny varchar(250) default '',
+                    mz varchar(250) default '',
+                    zzmm varchar(250) default '',
+                    card varchar(250) default '',
+                    gzdw varchar(250) default '',
+                    zhiwu varchar(250) default '',
+                    zhicheng varchar(250) default '',
+                    hkszd varchar(250) default '',
+                    phone varchar(250) default '',
+                    tel varchar(250) default '',
+                    address varchar(250) default '',
+                    txdz varchar(250) default '',
+                    postcode varchar(20) default '',
+                    email varchar(250) default '',
+                    add_time varchar(20) default '',
+                    type int default 0
+                )
+		   ]]>
+        </sql>
     </table>	
 </root>

@@ -126,5 +126,6 @@
         <mapper resource="sqlmap/system/rmiserverconf.xml"/>
         <mapper resource="sqlmap/appeal/sqmyddc.xml"/>
         <mapper resource="sqlmap/project/dz_jyhgl/dz_jyhgl.xml"/>
+        <mapper resource="sqlmap/project/zjzf/zjzf.xml"/>
     </mappers>
 </configuration>

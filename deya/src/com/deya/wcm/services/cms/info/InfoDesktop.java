@@ -92,7 +92,7 @@ public class InfoDesktop {
 						{
 							//如果该栏目有流程，根据用户得到步骤ID
 							int step_id = WorkFlowManager.getMaxStepIDByUserID(cb.getWf_id(),user_id,app_id,site_id);
-							System.out.println("step_id=======>"+step_id);
+							//System.out.println("step_id=======>"+step_id);
 							if(step_id==100){
 								conn += "or (ci.cat_id = "+tempA[i]+" and ci.step_id < "+step_id+") ";
 							}else{

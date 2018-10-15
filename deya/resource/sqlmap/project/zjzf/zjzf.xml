@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="zjzf">
+	<sql id="getGongMinList_sql_conn">
+		<if test="type != null">
+			where type = ${type}
+		</if>
+	</sql>
+
+	<select id="getGongMinList" parameterType="Map" resultType="com.deya.project.zjzf.ZJZFBean">
+		select * from (
+		select row_.*, rownum rownum_ from (
+		select * from project_zjzf
+		<include refid="getGongMinList_sql_conn"/>
+		order by ${orderby}
+		<![CDATA[
+		        ) row_ where rownum <=#{page_size,,jdbcType=INTEGER}+#{start_num,,jdbcType=INTEGER}
+	    	) where rownum_ >=#{start_num,,jdbcType=INTEGER} + 1
+	    ]]>
+	</select>
+
+	<select id="getGongMinList_mysql" parameterType="Map" resultType="com.deya.project.zjzf.ZJZFBean">
+		select * from project_zjzf
+		<include refid="getGongMinList_sql_conn"/>
+		order by ${orderby} limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
+	</select>
+
+
+	<select id="getGongMinListCount" parameterType="Map" resultType="java.lang.String">
+		select count(id) from project_zjzf
+		<include refid="getGongMinList_sql_conn"/>
+	</select>
+
+	<select id="getGongMinBean" parameterType="java.lang.String" resultType="com.deya.project.zjzf.ZJZFBean">
+		select * from project_zjzf where id=#{id}
+	</select>
+
+	<insert id="insert_wnzjzf_gongmin" parameterType="com.deya.project.zjzf.ZJZFBean">
+    	insert into project_zjzf(id ,name ,xb ,csny ,mz ,zzmm ,card ,gzdw ,zhiwu ,zhicheng ,hkszd ,phone ,tel ,address ,txdz ,postcode ,email ,add_time,type )
+    	values(#{id},#{name},#{xb},#{csny},#{mz},#{zzmm},#{card},#{gzdw},#{zhiwu},#{zhicheng},#{hkszd},#{phone},#{tel},#{address},#{txdz},#{postcode},#{email},#{add_time},#{type})
+    </insert>
+
+	<delete id="delete_wnzjzf_gongmin" parameterType="Map">
+    	delete from project_zjzf where id in (${id})
+    </delete>
+</mapper>
