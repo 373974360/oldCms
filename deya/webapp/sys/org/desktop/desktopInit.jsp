@@ -115,6 +115,34 @@
                 }
                 str += "</tbody></table></div></div>";
             }
+
+            if ("info_tuigao".equals(det.getApp_type())) {
+                sq_con_map.put("sort_name", "ci.info_id");
+                sq_con_map.put("sort_type", "desc");
+                sq_con_map.put("site_id", det.getK_v());
+                sq_con_map.put("app_id", "cms");
+                sq_con_map.put("info_status", "1");
+                String opt_ids = UserLogin.getOptIDSByUserAPPSite(user_id+"", "cms", det.getK_v());
+                if(opt_ids.indexOf("531") > -1){
+                    sq_con_map.put("dept_id",UserLogin.getUserBySession(request).getDept_id()+"");
+                }
+                Map<String, Object> return_map = InfoBaseRPC.getWaitVerifyInfoList(sq_con_map);
+                String info_count = return_map.get("info_count") + "";
+                List<InfoBean> list = (List<InfoBean>) return_map.get("info_List");
+                str += "<div class=\"sq_box new_sq_box\" ><div class=\"sq_title_box\" ><div class=\"sq_title2\">" + SiteRPC.getSiteBeanBySiteID(det.getK_v()).getSite_name() + "</div>";
+                str += "<div class=\"sq_title_right2\">退稿总数：" + info_count + "条</div>";
+                str += "</div>";
+                str += "<div class=\"sq_box_content\">";
+                str += "<table id=\"sq_table\" class=\"table_view_desk\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" ><tbody>";
+                if (list != null) {
+                    for (InfoBean ib : list) {
+                        String d_time = ib.getOpt_dtime();
+                        str += "<tr><td width=\"260px\"><a href=\"javascript:openViewPage(" + ib.getInfo_id() + ",'" + ib.getSite_id() + "')\" title=\"" + ib.getTitle() + "\">" + splitString(ib.getTitle(), 20) + "</a></td>";
+                        str += "<td>" + d_time.substring(5, d_time.length() - 3) + "</td></tr>";
+                    }
+                }
+                str += "</tbody></table></div></div>";
+            }
             if ("ysqgk".equals(det.getApp_type())&&opt_ids1.indexOf(",286,")>-1) {
                 sq_con_map.put("sort_name", "ysq_id");
                 sq_con_map.put("sort_type", "desc");

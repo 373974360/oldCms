@@ -18,6 +18,8 @@ import com.deya.wcm.dao.zwgk.info.GKInfoDAO;
 import com.deya.wcm.db.BoneDataSourceFactory;
 import com.deya.wcm.db.DBManager;
 import com.deya.wcm.server.ServerManager;
+import com.deya.wcm.services.cms.info.InfoBaseManager;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * 基础信息的数据库操作类，被各个从表所引用
@@ -157,7 +159,7 @@ public class InfoDAO {
 
 		if(DBManager.insert("addInfo", info))
 		{			
-			PublicTableDAO.insertSettingLogs("添加","主信息",info.getInfo_id()+"",stl);						
+			PublicTableDAO.insertSettingLogs("添加","主信息",info.getInfo_id()+"["+info.getTitle()+"]",stl);
 			return true;
 		}else
 			return false;
@@ -171,7 +173,7 @@ public class InfoDAO {
 	 */
 	public static boolean updateInfo(InfoBean info, SettingLogsBean stl){			
 		if(DBManager.update("updateInfo", info)){			
-			PublicTableDAO.insertSettingLogs("修改","主信息",info.getInfo_id()+"",stl);
+			PublicTableDAO.insertSettingLogs("修改","主信息",info.getInfo_id()+"["+info.getTitle()+"]",stl);
 			return true;
 		}else
 			return false;
@@ -245,7 +247,13 @@ public class InfoDAO {
 		}
 		if(DBManager.update("noPass_info_status", m))
 		{
-			PublicTableDAO.insertSettingLogs("审核","信息状态为不通过",info_ids,stl);
+			if(StringUtils.isNotEmpty(info_ids)) {
+				String[] arryIds = info_ids.split(",");
+				for (String id : arryIds) {
+					InfoBean info = InfoBaseManager.getInfoById(id);
+					PublicTableDAO.insertSettingLogs("审核","信息状态为不通过",id+"["+info.getTitle()+"]",stl);
+				}
+			}
 			return true;
 		}else
 			return false;
@@ -264,7 +272,23 @@ public class InfoDAO {
 		map.put("info_ids", infoIds);
 		map.put("opt_dtime", DateUtil.getCurrentDateTime());
 		if(DBManager.update("updateInfosStatusInteger", map)){
-			PublicTableDAO.insertSettingLogs("修改","主信息最终状态更改为"+status,infoIds+"",stl);
+			String msg="";
+			if(status.equals("-1")){
+				msg="删除";
+			}
+			if(status.equals("0")){
+				msg="正常";
+			}
+			if(status.equals("1")){
+				msg="归档";
+			}
+			if(StringUtils.isNotEmpty(infoIds)) {
+				String[] arryIds = infoIds.split(",");
+				for (String id : arryIds) {
+					InfoBean info = InfoBaseManager.getInfoById(id);
+					PublicTableDAO.insertSettingLogs("修改", "主信息最终状态更改为:" + msg, id+"["+info.getTitle()+"]",stl);
+				}
+			}
 			return true;
 		}else
 			return false;
@@ -314,11 +338,22 @@ public class InfoDAO {
 	
 	
 	public static boolean deleteInfo(Map<String, String> map, SettingLogsBean stl){
-		if(deleteInfo(map)){
-			PublicTableDAO.insertSettingLogs("删除","彻底删除信息",map.get("info_ids")+"",stl);
-			return true;
-		}else
-			return false;
+		boolean result = false;
+		String info_ids = map.get("info_ids");
+		if(StringUtils.isNotEmpty(info_ids)){
+			String[] arryIds = info_ids.split(",");
+			for(String id:arryIds){
+				InfoBean info = InfoBaseManager.getInfoById(id);
+				map.put("info_ids",id);
+				if(deleteInfo(map)){
+					PublicTableDAO.insertSettingLogs("删除","彻底删除信息",id+"["+info.getTitle()+"]",stl);
+					result = true;
+				}else{
+					result = false;
+				}
+			}
+		}
+		return result;
 	}
 	
 	/**

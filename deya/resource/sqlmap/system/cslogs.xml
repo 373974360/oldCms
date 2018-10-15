@@ -95,7 +95,7 @@
 	
 	<select id="searchLogSetting_mysql" parameterType="Map" resultType="com.deya.wcm.bean.logs.SettingLogsBean">		 
 	       select * from cs_log_setting
-			where user_id != 1
+			where 1= 1
 			<if test="con_value != null">
 				and ${con_name} like '%${con_value}%'
 			</if>

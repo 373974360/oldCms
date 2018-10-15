@@ -26,7 +26,7 @@ public class jspFilterHandl {
 
     private static String[] no_filter_rpc={"SurveyRPC","InfoBaseRPC","TemplateRPC","WareRPC","ModelUtilRPC"};
 
-    private static String[] rpc_filter_str={"<",">"};
+    private static String[] rpc_filter_str={};
 
     static {
         String[] jspArr = JconfigUtilContainer.bashConfig().getPropertyNamesByCategory("filter_jsp_page");

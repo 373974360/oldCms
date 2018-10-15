@@ -29,6 +29,7 @@
             initSiteListHandel("cms", "cms_table");
 
             initSiteListHandel("cms", "info_update_table");
+            initSiteListHandel("cms", "info_tuigao_table");
 
             init_input();
 
@@ -130,6 +131,14 @@
                 desk_list.add(bean);
             });
 
+            $("#info_tuigao_table :checked").each(function () {
+                var bean = BeanUtil.getCopy(DeskTopBean);
+                bean.user_id = user_id;
+                bean.app_type = "info_tuigao";
+                bean.k_v = $(this).val();
+                desk_list.add(bean);
+            });
+
             if (UserManRPC.insertUserDesktop(user_id, desk_list)) {
                 top.msgAlert(WCMLang.Set_success);
             }
@@ -185,7 +194,7 @@
 
 
     <span class="blank6"></span>
-    <!--信件信息-->
+    <!--网站待审信息-->
     <div class="sq_box">
         <div class="sq_title_box">
             <div class="sq_title sq_title_minus">网站待审信息</div>
@@ -200,6 +209,21 @@
         </div>
     </div>
 
+    <span class="blank6"></span>
+    <!--网站退稿信息-->
+    <div class="sq_box">
+        <div class="sq_title_box">
+            <div class="sq_title sq_title_minus">网站退稿信息</div>
+            <div class="sq_title_right">点击闭合</div>
+        </div>
+        <div class="sq_box_content">
+            <table id="info_tuigao_table" class="table_view" border="0" cellpadding="0" cellspacing="0">
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
     <span class="blank6"></span>
     <!--相关信件-->
     <div class="sq_box" id="zwgk_box">

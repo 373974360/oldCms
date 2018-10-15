@@ -51,6 +51,7 @@ import com.deya.wcm.services.zwgk.index.IndexManager;
 import com.deya.wcm.services.zwgk.info.GKInfoManager;
 import com.deya.wcm.services.zwgk.node.GKNodeManager;
 import com.deya.wcm.template.velocity.impl.VelocityInfoContextImp;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * @author zhuliang
@@ -451,8 +452,22 @@ public class InfoBaseManager {
             }
             //InfoPublishManager.resetCategoryPage(cat_ids, site_id);//更新栏目
             info_ids = info_ids.substring(1);
-            if(stl != null)
-                PublicTableDAO.insertSettingLogs("修改","主信息信息状态更改为"+status+"",info_ids,stl);
+            if(stl != null){
+                String msg = "";
+                if(status.equals("8")){
+                    msg = "发布";
+                }
+                if(status.equals("3")){
+                    msg = "撤销";
+                }
+                if(StringUtils.isNotEmpty(info_ids)) {
+                    String[] arryIds = info_ids.split(",");
+                    for (String id : arryIds) {
+                        InfoBean info = InfoBaseManager.getInfoById(id);
+                        PublicTableDAO.insertSettingLogs("审核","主信息信息状态更改为:"+msg,id+"["+info.getTitle()+"]",stl);
+                    }
+                }
+            }
             return true;
         }catch(Exception e)
         {
@@ -581,10 +596,10 @@ public class InfoBaseManager {
                     }
                 }
                 InfoDAO.passInfoStatus(info.getInfo_id()+"", info_status, stepId+"",info.getReleased_dtime());
+                PublicTableDAO.insertSettingLogs("审核","信息状态为通过",info.getInfo_id()+"["+info.getTitle()+"]",stl);
             }
             InfoPublishManager.publishAfterEvent(publish_info_list,cat_ids,site_id);
             //InfoPublishManager.resetCategoryPage(cat_ids, site_id);//更新栏目
-            PublicTableDAO.insertSettingLogs("审核","信息状态为通过",ids,stl);
             return true;
         }catch(Exception e)
         {
