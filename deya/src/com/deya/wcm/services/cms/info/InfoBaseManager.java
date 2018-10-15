@@ -1095,6 +1095,9 @@ public class InfoBaseManager {
             if(cb.getWf_id() != 0) {
                 step = WorkFlowManager.getMaxStepIDByUserID(cb.getWf_id(), user_id + "", s_app_id, s_site_id);
             }
+            if(step==0){
+                step=1;
+            }
             for(InfoBean info : l)
             {
                 try{
