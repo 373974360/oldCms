@@ -286,8 +286,8 @@ function weChatTS(){
 			<input id="btn307" name="btn307" type="button" onclick="cancleInfo()" value="撤销" />
 			<input id="btn332" name="btn332" type="button" onclick="deleteRecord(table,'info_id','deleteInfoData()');" value="删除" />
 			<input id="btn" name="btn" type="button" onclick="publicSelectCheckbox(table,'info_id','createStaticContentHtml()');" value="生成静态页" />
-			<input id="btn539" name="btn539" type="button" onclick="blogTS()" value="推送微博" />
-			<input id="btn540" name="btn540" type="button" onclick="weChatTS()" value="推送微信" />
+			<input id="btn520" name="btn520" type="button" onclick="blogTS()" value="推送微博" />
+			<input id="btn521" name="btn521" type="button" onclick="weChatTS()" value="推送微信" />
             <input id="btnzpxx" name="btnzpxx" type="button" onclick="viewJl()" value="查看简历" />
         </td>
 	</tr>

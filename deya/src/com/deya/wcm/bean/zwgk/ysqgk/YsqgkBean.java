@@ -66,6 +66,7 @@ public class YsqgkBean implements java.io.Serializable{
 	private String lasthit_dtime="";
 	private int weight=60;
 	private String site_id="";
+	private String file_path="";
 
 	public String getSite_id() {
 		return site_id;
@@ -386,5 +387,13 @@ public class YsqgkBean implements java.io.Serializable{
 	}
 	public void setLasthit_dtime(String lasthitDtime) {
 		lasthit_dtime = lasthitDtime;
+	}
+
+	public String getFile_path() {
+		return file_path;
+	}
+
+	public void setFile_path(String file_path) {
+		this.file_path = file_path;
 	}
 }

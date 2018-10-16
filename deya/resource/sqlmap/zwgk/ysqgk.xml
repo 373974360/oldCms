@@ -84,7 +84,8 @@
 				      month_hits,
 				      lasthit_dtime,
 				      weight,
-				      site_id
+				      site_id,
+				      file_path
 		)  values (
 				      #{ysq_id},
 				      #{ysq_code},
@@ -122,8 +123,8 @@
 				      #{reply_dtime},
 				      #{reply_user},
 				      #{is_mail},
-				      0,
-				      '',
+				      #{node_id},
+				      #{node_name},
 				      #{do_state},
 				      #{final_status},
 				      #{publish_state},
@@ -137,7 +138,8 @@
 				      #{month_hits},
 				      #{lasthit_dtime},
 				      #{weight},
-				      #{site_id}
+				      #{site_id},
+				      #{file_path}
 		    )
 	</insert>
 	
@@ -208,7 +210,8 @@
 						<if test="supervise_flag != null"> supervise_flag = #{supervise_flag},</if>
 						<if test="weight != null"> weight = #{weight}, </if>
 						<if test="node_id != null"> node_id = #{node_id}, </if>
-						<if test="node_name != null"> node_name = #{node_name} </if>
+						<if test="node_name != null"> node_name = #{node_name}, </if>
+						<if test="file_path != null"> file_path = #{file_path} </if>
 					</set>
 		<where>
 			<if test="ysq_id != null">
@@ -289,7 +292,8 @@
 						<if test="time_limit != null">time_limit=#{time_limit},</if>
 						<if test="timeout_flag != null">timeout_flag=#{timeout_flag},</if>
 						<if test="lasthit_dtime != null">lasthit_dtime=#{lasthit_dtime},</if>
-						<if test="weight != null">weight=#{weight}</if>
+						<if test="weight != null">weight=#{weight},</if>
+						<if test="file_path != null">weight=#{file_path}</if>
 			</set>
 		<where>
 			<if test="ysq_id != null">

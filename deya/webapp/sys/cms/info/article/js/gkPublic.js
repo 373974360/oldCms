@@ -44,7 +44,11 @@ function reloadPublicGKInfo()
 		publicUploadFileButtomLoad("uploadify_file",true,true,"",0,5,rela_site_id,"saveFileUrl");
 		iniOpt();
 
-		$("#source").val(SiteRPC.getSiteBeanBySiteID(rela_site_id).site_name)
+		if(deptBean.dept_name=='组织机构'){
+            $("#source").val(SiteRPC.getSiteBeanBySiteID(rela_site_id).site_name)
+		}else{
+            $("#source").val(deptBean.dept_name);
+		}
 		$("#author").val(LoginUserBean.user_realname);
 		$("#editor").val(LoginUserBean.user_realname);
 	}

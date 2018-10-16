@@ -430,7 +430,7 @@ function showTurnPage(){
         	is_my_info = true;
     	}
 
-    if(opt_ids.indexOf("531") > -1){
+    if(opt_ids.indexOf("510") > -1){
         m.put("dept_id",LoginUserBean.dept_id+"");
     }
 	if(is_my_info)

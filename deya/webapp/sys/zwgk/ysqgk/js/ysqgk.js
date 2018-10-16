@@ -93,7 +93,7 @@ function addYsqgkInfo(node_id)
 	if(YsqgkRPC.insertYsqgkInfo(ysqgk_bean))
 	{
 		top.msgAlert("依申请公开信息"+WCMLang.Add_success+"!");
-		window.location.href = "/sys/zwgk/ysqgk/operate/ysqgk_list.jsp?app_id=zwgk&site_id="+node_id;
+		window.location.href = "/sys/zwgk/ysqgk/operate/ysqgk_list.jsp?app_id=zwgk&site_id="+site_id;
 	}
 	else
 	{
@@ -435,6 +435,7 @@ function insertProcess(pro_type,node_id,ysq_id)
 				dealMap.put("do_state","2");
 				dealMap.put("dealtype","1");
 				dealMap.put("final_status","0");
+            	dealMap.put("file_path",$("#file_path").val());
 		}
 	}else if(pro_type == 2){
 			   	dealMap.put("do_state","-1");//置为无效状态	
@@ -457,7 +458,7 @@ function insertProcess(pro_type,node_id,ysq_id)
 	if(YsqgkRPC.updateStatus(dealMap))
 	{
 		top.msgAlert("操作成功!");
-		window.location.href="/sys/zwgk/ysqgk/operate/ysqgk_list.jsp?app_id=zwgk&site_id="+node_id;
+		window.location.href="/sys/zwgk/ysqgk/operate/ysqgk_allLists.jsp?app_id=zwgk&site_id="+node_id;
 		reloadInfoDataList();
 	}else
 	{

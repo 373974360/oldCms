@@ -378,7 +378,8 @@
 					month_hits bigint(20) default 0,
 					lasthit_dtime varchar(20) default '',
 					weight int(4) default 60,
-			        site_id  varchar(250) default ''
+			        site_id  varchar(250) default '',
+			        file_path varchar(255) default ''
 				)
 		   ]]> 
        </sql>

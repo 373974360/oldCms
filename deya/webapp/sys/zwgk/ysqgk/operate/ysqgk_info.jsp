@@ -32,7 +32,8 @@ $(document).ready(function(){
 	iniSQbox();
 	initTabAndStatus();
 	YsqgkConfigBean = jsonrpc.YsqgkRPC.getYsqgkConfigBeanBySiteId(site_id);
-	
+
+    publicUploadButtomAllFile("uploadify",true,false,"",0,5,site_id,"txt,doc,docx,xlsx,xls,pdf,jpg,png,bmp,jpeg","*.txt;*.doc;*.docx;*.xlsx;*.xls,*.pdf,*.png,*.bmp,*.jpeg","saveFilePath");
 	if(ysq_id != "" && ysq_id != "null" && ysq_id != null)
     {
         getProcessList();
@@ -186,6 +187,7 @@ function doVoid(id,pro_type)
     $("#replay_type_tr").hide();
     $("#is_mail_tr").hide();
     $("#SubmitButtons").show();
+    $("#file_path_tr").hide();
     // $("#affix_tr").show();	
 	
 	switch(pro_type)
@@ -204,6 +206,7 @@ function doVoid(id,pro_type)
             	$("#is_third").show();
             	$("#is_extend").show();
             	$("#zbdw_tr").hide();
+            $("#file_path_tr").show();
 
 			   $("select[@name=reply_type] option").each(function(){
 					 if($(this).val() == 0)
@@ -277,6 +280,10 @@ function getProcessList()
     }
 }
 
+function saveFilePath(url)
+{
+    $("#file_path").val(url);
+}
 </script>
 </head>
 <body>
@@ -563,6 +570,13 @@ function getProcessList()
 						<option value="4">非本单位公开信息</option>
 						<option value="5">信息不存在</option>
 					</select>
+				</td>
+			</tr>
+			<tr id="file_path_tr">
+				<th>附件：</th>
+				<td>
+					<div style="float:left"><input id="file_path" name="file_path" type="text"/></div>
+					<div style="float:left">&#160;<input type="file" name="uploadify" id="uploadify"/></div>
 				</td>
 			</tr>
 			<tr>
