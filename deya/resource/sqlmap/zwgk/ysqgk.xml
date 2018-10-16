@@ -206,7 +206,9 @@
 						<if test="final_status != null"> final_status = #{final_status},</if>
 						<if test="publish_state != null"> publish_state = #{publish_state},</if>
 						<if test="supervise_flag != null"> supervise_flag = #{supervise_flag},</if>
-						<if test="weight != null"> weight = #{weight} </if>
+						<if test="weight != null"> weight = #{weight}, </if>
+						<if test="node_id != null"> node_id = #{node_id}, </if>
+						<if test="node_name != null"> node_name = #{node_name} </if>
 					</set>
 		<where>
 			<if test="ysq_id != null">
@@ -404,5 +406,14 @@
 					 from cs_gk_ysq	<include refid="getYsqgkLists_sql_conn"/> 
 					 order by ${sort_name} ${sort_type}  )
 			order by ${sort_name} ${sort_type}
+	</select>
+
+
+
+	<insert id="insertYsqgkProess" parameterType="Map">
+		insert into cs_gk_ysq_process (pro_id,ysq_id,do_dept,do_dept_name,old_dept,old_dept_name,pro_content,pro_dtime) values (#{pro_id},#{ysq_id},#{do_dept},#{do_dept_name},#{old_dept},#{old_dept_name},#{pro_content},#{pro_dtime})
+	</insert>
+	<select id="getYsqgkProessList" parameterType="Map" resultType="com.deya.wcm.bean.zwgk.ysqgk.YsqgkProcessBean">
+		select * from cs_gk_ysq_process where ysq_id = #{ysq_id} order by pro_dtime desc
 	</select>
 </mapper>

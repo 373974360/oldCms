@@ -18,8 +18,10 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 
 import com.deya.wcm.bean.cms.workflow.WorkFlowBean;
+import com.deya.wcm.bean.org.dept.DeptBean;
 import com.deya.wcm.services.cms.category.*;
 import com.deya.wcm.services.model.services.BeanToMapUtil;
+import com.deya.wcm.services.org.dept.DeptManager;
 import com.deya.wcm.services.org.role.RoleUserManager;
 import org.apache.commons.beanutils.BeanUtils;
 
@@ -525,7 +527,11 @@ public class InfoBaseManager {
                     //如果是政务公开的东东，需要修改索引码
                     //得到年份
                     String gk_year = GKInfoManager.getGKYearStr(ib.getInfo_id()+"");
-                    Map<String,String> m = IndexManager.getIndex(site_id,to_cat_id+"", gk_year+"-01", "");
+
+                    UserBean user = UserManager.getUserBeanByID(ib.getInput_user()+"");
+                    DeptBean dept = DeptManager.getDeptBeanByID(user.getDept_id()+"");
+
+                    Map<String,String> m = IndexManager.getIndex(site_id,to_cat_id+"", gk_year+"-01", "",dept.getDept_code());
                     if(m != null)
                     {
                         GKInfoDAO.updateGKIndex(ib.getInfo_id()+"", m.get("gk_index"), m.get("gk_num"));

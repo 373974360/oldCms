@@ -254,7 +254,7 @@
 	
 	<!-- 获取公开所有信息,用于重新生成索引号 -->
 	<select id="getAllGKInfoList" parameterType="Map" resultType="com.deya.wcm.bean.cms.info.GKInfoBean">
-		select ci.released_dtime,ci.info_id,ci.site_id,ci.cat_id,ci.input_dtime,gk.gk_year,ci.app_id from 
+		select ci.released_dtime,ci.info_id,ci.site_id,ci.cat_id,ci.input_dtime,gk.gk_year,ci.app_id,ci.input_user from
 		cs_info ci,cs_gk_info gk where ci.info_id = gk.info_id and ci.final_status = 0 and ci.from_id = 0 
 		<if test="site_id != null"> and ci.site_id = #{site_id} </if>
 		<if test="start_time">and ci.released_dtime > #{start_time}</if>

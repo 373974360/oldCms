@@ -80,8 +80,13 @@ var is_upload_remote_img = false;//是否上传成功标识
 var img_total = 0;//需要上传的总数
 var already_remote_count = 0;//已上传的总数
 function addInfoData()
-{	
-	//判断是否需要上传远程图片
+{
+	var is_shemi = $(":radio[name='is_shemi'][checked]").val();
+	if(is_shemi==1){
+		alert("请再次确认所发信息是否涉密，如为非涉密信息，请选择“非涉密”选项");
+		return false;
+	}
+	//判断是否需要上传远程图片"""
 	if($("#is_remote").is(':checked'))
 	{//判断是否已上传，没有话执行上传函数
 		if(is_upload_remote_img == false)

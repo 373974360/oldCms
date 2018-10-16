@@ -377,6 +377,7 @@ function doVoid(id,pro_type)
 	$("#gzyy_open_tr").hide();	
 	$("#weight_tr").hide();
     $("#custom_dept_name_tr").hide();
+    $("#over_dtime_tr").hide();
 	//取得常用语信息
 	getCommonLangListByType(pro_type);
 	switch(pro_type)
@@ -398,6 +399,7 @@ function doVoid(id,pro_type)
 			   setV("pro_note", defaultBean.sq_reply);
 			   $("#affix_tr").show();
 				$("#custom_dept_name_tr").show();
+            	$("#over_dtime_tr").show();
 				break;
 		case 2:$("#pro_title_th").text("转办意见：");				
 			　 $("div #sq_title_div").text("转办信件");	

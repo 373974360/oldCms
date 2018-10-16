@@ -369,7 +369,7 @@ public class ResolveHtml {
                     bean.setIs_am_tupage(0);
                     bean.setWeight(60);
                     bean.setContent_url(articleBean.getUrl());
-                    Map<String,String> imap = IndexManager.getIndex(site_id,articleBean.getCat_id(),"","");
+                    Map<String,String> imap = IndexManager.getIndex(site_id,articleBean.getCat_id(),"","","SYSCOLLDATA");
                     if(!imap.isEmpty()&&imap.containsKey("gk_index"))
                     {
                         bean.setGk_index(imap.get("gk_index"));

@@ -41,6 +41,18 @@
 <input id="word_count" type="hidden" class="width200" value="0" />
 <input type="hidden" id="info_level" name="info_level" value="B" />
 <input type="hidden" id="isIpLimit" name="isIpLimit" value="0" />
+<table id="" class="table_form" border="0" cellpadding="0" cellspacing="0">
+	<tbody>
+	<tr>
+		<th><span class="f_red">*</span>是否涉密：</th>
+		<td>
+			<input type="radio" name="is_shemi" id="is_shemi" value="0"/>非涉密
+			<input type="radio" name="is_shemi" id="is_shemi" value="1" checked/>涉密
+		</td>
+		<td></td>
+	</tr>
+	</tbody>
+</table>
 <table id="" class="table_form table_option" border="0" cellpadding="0" cellspacing="0">
 	<tbody>
 	<tr>

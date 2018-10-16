@@ -27,7 +27,7 @@ function initTable()
 function updateRoleList()
 {
 	var list = new List();
-	for(var i=0; i<7; i++)
+	for(var i=0; i<8; i++)
 	{
 		var str_pre = "cell_" + i +"_";
 		var roleBean = BeanUtil.getCopy(indexRoleBean);

@@ -6,9 +6,12 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import com.deya.wcm.bean.logs.SettingLogsBean;
+import com.deya.wcm.bean.org.dept.DeptBean;
 import com.deya.wcm.bean.zwgk.index.IndexRoleBean;
 import com.deya.wcm.bean.zwgk.index.IndexSequenceBean;
 import com.deya.wcm.services.Log.LogManager;
+import com.deya.wcm.services.org.dept.DeptManager;
+import com.deya.wcm.services.org.user.UserLogin;
 
 public class IndexRPC {
 
@@ -21,9 +24,10 @@ public class IndexRPC {
 	 * @param stl	
 	 * @return	生成的索引号
 	 */
-	public static Map<String, String> getIndex(String nodeId, String catId, String ymd, String seq)
+	public static Map<String, String> getIndex(String nodeId, String catId, String ymd, String seq,HttpServletRequest request)
 	{
-		return IndexManager.getIndex(nodeId, catId, ymd, seq);
+		DeptBean dept = DeptManager.getDeptBeanByID(UserLogin.getUserBySession(request).getDept_id()+"");
+		return IndexManager.getIndex(nodeId, catId, ymd, seq,dept.getDept_code());
 	}
 	
 	/**

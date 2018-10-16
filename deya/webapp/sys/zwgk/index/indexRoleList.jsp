@@ -45,10 +45,31 @@ $(document).ready(function(){
             </tr>
 			</thead>
 			<tbody>
+            <tr id="row_7">
+                <td class=""><input id="cell_7_is_valid" type="checkbox" value="1"/></td>
+                <td class="">
+                    <strong>前段码</strong>
+                    <input id="cell_7_ir_id" class="hidden" type="text" value="H"/>
+                    <input id="cell_7_ir_item" class="hidden" type="text" value="组织机构代码"/>
+                    <input id="cell_7_sort_id" class="hidden" type="text" value="8"/>
+                    <input id="cell_7_ir_type" class="hidden" type="text" value="0"/>
+                </td>
+                <td class="">各部门社会信用码</td>
+                <td class=""><select id="cell_7_ir_space" style="width:80px;">
+                    <option value="">无分隔</option>
+                    <option selected="selected" value="/">反斜杠(/)</option>
+                    <option value="_">下划线(_)</option>
+                    <option value="-">横杠(-)</option>
+                </select>
+                </td>
+                <td ><input id="cell_7_id" type="hidden" value="" />
+                    <input id="cell_7_ir_value" type="hidden" value=""/>
+                </td>
+            </tr>
             <tr id="row_0">
               <td class=""><input id="cell_0_is_valid" type="checkbox" value="1"/></td>
               <td class="">
-                  <strong>前段码</strong>
+                  <strong>前段码-固定值</strong>
                   <input id="cell_0_ir_id" class="hidden" type="text" value="A"/>
                   <input id="cell_0_ir_item" class="hidden" type="text" value="前段码"/>
                   <input id="cell_0_sort_id" class="hidden" type="text" value="1"/>
@@ -65,7 +86,7 @@ $(document).ready(function(){
               <td ><input id="cell_0_id" type="hidden" value="" /></td>
             </tr>
             <tr id="row_1">
-              <td class=""><input id="cell_1_is_valid" type="checkbox" disabled="disabled" /></td>
+              <td class=""><input id="cell_1_is_valid" type="checkbox" disabled="disabled"/></td>
               <td class="">
                   <strong>区域及部门编号</strong>
                   <input id="cell_1_ir_id" class="hidden" type="text" value="B"/>
@@ -110,7 +131,7 @@ $(document).ready(function(){
               <td ><input id="cell_2_id" type="hidden" value="" /></td>
             </tr>
             <tr id="row_3">
-              <td class=""><input id="cell_3_is_valid" type="checkbox"  checked="checked" disabled="disabled" /></td>
+              <td class=""><input id="cell_3_is_valid" type="checkbox" checked="checked"/></td>
               <td class="">
                   <strong>信息编制年份</strong>
                   <input id="cell_3_ir_id" class="hidden" type="text" value="D"/>

@@ -126,13 +126,13 @@ public class IndexManager implements ISyncCatch{
 	 * @param stl
 	 * @return
 	 */
-	public static Map<String, String> getIndex(String nodeId, String catId, String seqYmd, String seq)
+	public static Map<String, String> getIndex(String nodeId, String catId, String seqYmd, String seq,String dept_code)
 	{
 		IndexSequenceBean isb = new IndexSequenceBean();
 		isb.setSeq_ymd(seqYmd);
 		isb.setSite_id(nodeId);
 		//System.out.println("isb----------" + isb);
-		return getIndex(nodeId, catId, isb, seq);
+		return getIndex(nodeId, catId, isb, seq,dept_code);
 	}
 	
 	/**
@@ -144,7 +144,7 @@ public class IndexManager implements ISyncCatch{
 	 * @param stl
 	 * @return
 	 */
-	public static Map<String, String> getIndex(String nodeId, String catId, IndexSequenceBean isb, String seq)
+	public static Map<String, String> getIndex(String nodeId, String catId, IndexSequenceBean isb, String seq,String dept_code)
 	{
 		Map<String, String> retMp = new HashMap<String, String>();
 		String ret = "";
@@ -158,9 +158,17 @@ public class IndexManager implements ISyncCatch{
 		IndexRoleBean roleBean = roleBeanList.get(5);
 		// 信息编制年份格式 key=D
 		//IndexRoleBean yearRoleBean = role_mp.get("D");
-		
+
+
+
+		//社会信用代码
+		IndexRoleBean irb = roleBeanList.get(7);
+		if(irb.getIs_valid() == VALID_NUM){
+			ret+=dept_code + irb.getIr_space();
+		}
+
 		// 添加前段码  key=A
-		IndexRoleBean irb = roleBeanList.get(0);
+		irb = roleBeanList.get(0);
 		//System.out.println(role_mp);
 		//System.out.println(VALID_NUM);
 		//System.out.println(irb.getIs_valid());

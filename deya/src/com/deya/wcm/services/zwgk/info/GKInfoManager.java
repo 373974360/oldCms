@@ -9,9 +9,13 @@ import com.deya.wcm.bean.cms.info.GKFbsznBean;
 import com.deya.wcm.bean.cms.info.GKInfoBean;
 import com.deya.wcm.bean.cms.info.GKResFileBean;
 import com.deya.wcm.bean.cms.info.InfoBean;
+import com.deya.wcm.bean.org.dept.DeptBean;
+import com.deya.wcm.bean.org.user.UserBean;
 import com.deya.wcm.dao.cms.info.InfoDAO;
 import com.deya.wcm.dao.zwgk.info.GKInfoDAO;
 import com.deya.wcm.services.cms.info.InfoBaseManager;
+import com.deya.wcm.services.org.dept.DeptManager;
+import com.deya.wcm.services.org.user.UserManager;
 import com.deya.wcm.services.zwgk.index.IndexManager;
 
 public class GKInfoManager {
@@ -153,8 +157,10 @@ public class GKInfoManager {
 				{
 					ymd = input_time;
 				}
-				
-				Map<String, String> m = IndexManager.getIndex(site_id, cat_id+"", ymd, "");
+
+				UserBean user = UserManager.getUserBeanByID(gkb.getInput_user()+"");
+				DeptBean dept = DeptManager.getDeptBeanByID(user.getDept_id()+"");
+				Map<String, String> m = IndexManager.getIndex(site_id, cat_id+"", ymd, "",dept.getDept_code());
 				if(m!=null){
 					if(GKInfoDAO.updateGKIndex(info_id+"", m.get("gk_index"), m.get("gk_num"))) {//得到该信息被引用 的
 						List<InfoBean> il =  InfoDAO.getFromInfoListByIDS(info_id+"");
