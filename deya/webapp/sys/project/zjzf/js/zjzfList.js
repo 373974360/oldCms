@@ -45,6 +45,7 @@ function showList(){
 	m.put("page_size", tp.pageSize);
 	m.put("type", "1");	
 	m.put("orderby", "id desc");
+	m.put("type",type);
 	
 	beanList = ZJZFRPC.getGongMinList(m);//第一个参数为站点ID，暂时默认为空	
 	beanList = List.toJSList(beanList);//把list转成JS的List对象	

@@ -1,4 +1,7 @@
 ﻿<%@ page contentType="text/html; charset=utf-8"%>
+<%
+	String type = request.getParameter("type");
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -9,16 +12,14 @@
 <jsp:include page="../../include/include_tools.jsp"/>
 <script type="text/javascript" src="js/zjzfList.js"></script>
 <script type="text/javascript">
-
+var type = "<%=type%>";
 $(document).ready(function(){
 	initButtomStyle();
 	init_FromTabsStyle();
 	if($.browser.msie&&$.browser.version=="6.0"&&$("html")[0].scrollHeight>$("html").height()) $("html").css("overflowY","scroll"); 
 
 	initTable();
-	reloadPicViewList();	
-
-	
+	reloadPicViewList();
 });
 
 function exportZJZF()
