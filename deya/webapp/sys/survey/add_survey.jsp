@@ -223,6 +223,13 @@ String site_id = request.getParameter("site_id");
                             }
                         });
                     }
+                    if(defaultBean.fbqd.indexOf('zzzd') < 0 ){
+                        $("input[name='fbqd']").each(function(){
+                            if($(this).val() == "zzzd"){
+                                $(this).removeAttr("checked");
+                            }
+                        });
+                    }
                 }
 			}
 			setContentAreaHeight();

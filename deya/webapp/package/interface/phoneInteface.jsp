@@ -643,7 +643,7 @@ public String SurveyList(HttpServletRequest request){
 		{
 		    if(publish_source.equals("all")){
 		        json += ",{\"s_id\":\""+surveyBean.getS_id()+"\",\"s_name\":\""+delHTMLTag(surveyBean.getS_name())+"\",\"is_end\":\""+surveyBean.getIs_end()+"\",\"show_result_status\":\""+surveyBean.getShow_result_status()+"\",\"start_time\":\""+surveyBean.getStart_time()+"\",\"end_time\":\""+surveyBean.getEnd_time()+"\"}";
-		    }else if(surveyBean.getFbqd().indexOf(publish_source)>0){
+		    }else if(surveyBean.getFbqd().indexOf(publish_source)>-1){
 		        json += ",{\"s_id\":\""+surveyBean.getS_id()+"\",\"s_name\":\""+delHTMLTag(surveyBean.getS_name())+"\",\"is_end\":\""+surveyBean.getIs_end()+"\",\"show_result_status\":\""+surveyBean.getShow_result_status()+"\",\"start_time\":\""+surveyBean.getStart_time()+"\",\"end_time\":\""+surveyBean.getEnd_time()+"\"}";
 		    }
 		}

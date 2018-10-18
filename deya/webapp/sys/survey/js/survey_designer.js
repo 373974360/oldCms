@@ -2081,6 +2081,7 @@ sDesigner = function(){
 					'<input type="checkbox" class="checkbox" name="fbqd" value="app" onkeyUP="ObjectPool['+this.name+'].setValue(this)" checked="checked">APP' +
 					'<input type="checkbox" class="checkbox" name="fbqd" value="wx" onkeyUP="ObjectPool['+this.name+'].setValue(this)" checked="checked">微信' +
                     '<input type="checkbox" class="checkbox" name="fbqd" value="xxfb" onkeyUP="ObjectPool['+this.name+'].setValue(this)" checked="checked">线下发布' +
+                    '<input type="checkbox" class="checkbox" name="fbqd" value="zzzd" onkeyUP="ObjectPool['+this.name+'].setValue(this)" checked="checked">自助终端' +
 					'</div>';
 				 str += '<div class="text_div">发起人</div>';
 				 str += '<div id=""><input type="text" class="input_border" id="creator" name="creator" value="" style="width:98%" onkeyUP="ObjectPool['+this.name+'].setValue(this)"></div>';
