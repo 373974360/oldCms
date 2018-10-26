@@ -501,5 +501,69 @@
         order by ${order_by}
     </select>
 
+    <!-- 根据条件统计信件总数 -->
+    <select id="getSQStatistics" parameterType="Map" resultType="java.lang.String">
+        select count(sq_id) count from cp_sq
+        <where>
+            <if test="wsl_con != null">
+                and sq_status = 0
+            </if>
+            <!-- 已受理和已处理的信件(受理数) -->
+            <if test="sl_con != null">
+                and sq_status > 0
+            </if>
+            <!-- 已办结的信件(回复数) -->
+            <choose>
+                <when test="bj_con != null">
+                    <if test="overdtime_s != null">
+                        <![CDATA[ and over_dtime > #{overdtime_s} ]]>
+                    </if>
+                    <if test="overdtime_e != null">
+                        <![CDATA[ and over_dtime < #{overdtime_e} ]]>
+                    </if>
+                    <if test="ultimo != null">
+                        <![CDATA[ and over_dtime like '%${ultimo}%' ]]>
+                    </if>
+                    <if test="instant != null">
+                        <![CDATA[ and over_dtime like '%${instant}%' ]]>
+                    </if>
+                    and sq_status = 3
+                </when>
+                <otherwise>
+                    <if test="ultimo != null">
+                        <![CDATA[ and sq_dtime like '%${ultimo}%' ]]>
+                    </if>
+                    <if test="instant != null">
+                        <![CDATA[ and sq_dtime like '%${instant}%' ]]>
+                    </if>
+                </otherwise>
+            </choose>
 
+            <!--昨日总共件-->
+            <if test="yesterday_con != null">
+                <if test="start_data != null">
+                    <![CDATA[ and sq_dtime > #{start_data} ]]>
+                </if>
+                <if test="end_data != null">
+                    <![CDATA[ and sq_dtime < #{end_data} ]]>
+                </if>
+            </if>
+            <!--今日总共件-->
+            <if test="cur_data != null">
+                <if test="start_data != null">
+                    <![CDATA[	and sq_dtime > #{start_data} ]]>
+                </if>
+            </if>
+            <!-- 指定业务 -->
+            <if test="model_ids != null">
+                and model_id in (${model_ids})
+            </if>
+            <if test="do_dept != null">
+                and do_dept = ${do_dept}
+            </if>
+            <if test="timeout_flag != null">
+                and timeout_flag=#{timeout_flag}
+            </if>
+        </where>
+    </select>
 </mapper>

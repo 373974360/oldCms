@@ -234,6 +234,8 @@
 
             var sq_atta_path = "";
             var sq_atta_name = "";
+            var submit_name = $(":radio[name='do_dept']:checked").parent().attr("title");
+            sq.submit_name = submit_name;
             var SQAttBean = BeanUtil.getCopy(SQAttachment);
 
             if (sq_atta_path != "") {
