@@ -458,7 +458,7 @@ function insertProcess(pro_type,node_id,ysq_id)
 	if(YsqgkRPC.updateStatus(dealMap))
 	{
 		top.msgAlert("操作成功!");
-		window.location.href="/sys/zwgk/ysqgk/operate/ysqgk_allLists.jsp?app_id=zwgk&site_id="+node_id;
+		window.location.href="/sys/zwgk/ysqgk/operate/ysqgk_allLists.jsp?app_id=zwgk&site_id="+site_id;
 		reloadInfoDataList();
 	}else
 	{

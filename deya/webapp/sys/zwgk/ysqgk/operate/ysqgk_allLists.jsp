@@ -11,7 +11,10 @@
 	<link type="text/css" rel="stylesheet" href="../../../styles/sq.css" />
 	<%
 		String site_id = request.getParameter("site_id");
-		String node_id = CpUserManager.getSQDeptIDbyUserID(UserLogin.getUserBySession(request).getUser_id())+"";
+		String node_id = "";
+		if(!UserLogin.isSiteManager(UserLogin.getUserBySession(request).getUser_id()+"","cms",site_id)){
+			node_id = CpUserManager.getSQDeptIDbyUserID(UserLogin.getUserBySession(request).getUser_id())+"";
+		}
 	%>
 	<jsp:include page="../../../include/include_tools.jsp"/>
 	<script type="text/javascript" src="../../../js/jquery-easyui/jquery.easyui.min.js"></script>
@@ -20,9 +23,9 @@
 	<script type="text/javascript" src="../js/allysqgk.js"></script>
 	<script type="text/javascript">
         var node_id = "<%=node_id %>";
-        if(node_id <= 2){
-            node_id = null;
-        }
+        if(node_id.length==0){
+            node_id=null;
+		}
         var app_id = "zwgk";
         var site_id = "<%=site_id%>";
         var snum = "<%=request.getParameter("snum")%>";

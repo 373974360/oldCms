@@ -112,6 +112,16 @@ function savePicUrl(url)
 {
 	$("#thumb_url").val(url);
 }
+function setPicUrl(){
+    var thumb_url = $("#thumb_url").val();
+    var thumb_url_ext = thumb_url.substring(thumb_url.lastIndexOf("."),thumb_url.length);
+    if(thumb_url_ext==".jpg"||thumb_url_ext==".jpeg"||thumb_url_ext==".png"||thumb_url_ext==".bmp"||thumb_url_ext==".gif"){
+        thumb_url = thumb_url.substring(0,thumb_url.lastIndexOf("."));
+        $("#thumb_url").val(thumb_url+"_s"+thumb_url_ext);
+	}else{
+        alert("该文件为非图片文件！");
+	}
+}
 </script>
 </head>
 
@@ -135,6 +145,7 @@ function savePicUrl(url)
 				<div style="float:left;margin:auto;"><input id="thumb_url" name="thumb_url" type="text" style="width:250px;" value="" /></div>
 				<div style="float:left"><input type="file" name="uploadify" id="uploadify"/></div>
 				<div style="float:left">&nbsp;<input id="i005" name="i005" type="button" onclick="selectPageHandle()" value="图片库" /></div>
+				<div style="float:left">&nbsp;<input id="i006" name="i006" type="button" onclick="setPicUrl()" value="使用原图" /></div>
 			</td>
 		</tr>
 	  </tbody>

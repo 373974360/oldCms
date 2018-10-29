@@ -58,7 +58,6 @@ function addInfoData()
 	{
 		return;
 	}
-    bean.gk_ldzw = getV(gk_ldzw);
     bean.gk_grjl = getV(gk_grjl);
     bean.gk_gzfg = getV(gk_gzfg);
 	
@@ -92,7 +91,6 @@ function updateInfoData()
 	{
 		return;
 	}
-	bean.gk_ldzw = getV(gk_ldzw);
 	bean.gk_grjl = getV(gk_grjl);
 	bean.gk_gzfg = getV(gk_gzfg);
 

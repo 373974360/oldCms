@@ -49,7 +49,6 @@ var rela_site_id = "";//该节点所关联的站点
 
 	$(document).ready(function(){		
 		reloadPublicGKInfo();
-        initUeditor(gk_ldzw);
         initUeditor(gk_grjl);
         initUeditor(gk_gzfg);
 		publicUploadButtomLoad("uploadify",true,false,"",0,5,getReleSiteID(),"savePicUrl");
@@ -58,7 +57,6 @@ var rela_site_id = "";//该节点所关联的站点
 			defaultBean = ModelUtilRPC.select(infoid,site_id,"gkfldcy");
 			if(defaultBean){
 				$("#info_article_table").autoFill(defaultBean);
-                setV(gk_ldzw,defaultBean.gk_ldzw);
                 setV(gk_grjl,defaultBean.gk_grjl);
                 setV(gk_gzfg,defaultBean.gk_gzfg);
 				publicReloadUpdateGKInfos();
@@ -103,7 +101,7 @@ if(cb.getMlsx()==1){
 		<tr>
 			<th style="vertical-align:top;">领导职务：</th>
 			<td style="">
-				<script id="gk_ldzw" type="text/plain" style="width:95%;height:200px;"></script>
+				<input id="gk_ldzw" name="gk_ldzw" type="text" class="width350" maxlength="80" value="" />
 			</td>
 		</tr>
         <tr>
