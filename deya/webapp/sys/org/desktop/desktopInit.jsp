@@ -1,13 +1,12 @@
 <%@ page contentType="text/html; charset=utf-8" %>
-<%@page import="com.deya.wcm.bean.appeal.sq.SQBean,com.deya.wcm.bean.cms.info.InfoBean,com.deya.wcm.bean.org.desktop.DeskTopBean" %>
-<%@page import="com.deya.wcm.services.appeal.sq.SQManager,com.deya.wcm.services.cms.info.InfoBaseRPC,com.deya.wcm.services.control.site.SiteRPC" %>
-<%@page import="com.deya.wcm.services.org.user.UserLogin,com.deya.wcm.services.org.user.UserManRPC,com.deya.wcm.services.zwgk.node.GKNodeRPC" %>
+<%@ page import="com.deya.wcm.bean.appeal.sq.SQBean,com.deya.wcm.bean.cms.info.InfoBean,com.deya.wcm.bean.org.desktop.DeskTopBean" %>
+<%@ page import="com.deya.wcm.services.appeal.sq.SQManager,com.deya.wcm.services.cms.info.InfoBaseRPC,com.deya.wcm.services.control.site.SiteRPC" %>
+<%@ page import="com.deya.wcm.services.org.user.UserLogin,com.deya.wcm.services.org.user.UserManRPC" %>
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="com.deya.wcm.services.zwgk.ysqgk.YsqgkInfoManager" %>
 <%@ page import="com.deya.wcm.bean.zwgk.ysqgk.YsqgkListBean" %>
-<%@ page import="static com.deya.wcm.services.search.util.tongyinci.InitCiku.list" %>
 <%@ page import="com.deya.project.dz_jyhgl.InfoUpdateResultBean" %>
 <%@ page import="com.deya.project.dz_jyhgl.InfoUpdateResultManager" %>
 <%
@@ -117,18 +116,22 @@
             }
 
             if ("info_tuigao".equals(det.getApp_type())) {
-                sq_con_map.put("sort_name", "ci.info_id");
-                sq_con_map.put("sort_type", "desc");
-                sq_con_map.put("site_id", det.getK_v());
+                sq_con_map.clear();
                 sq_con_map.put("app_id", "cms");
+                sq_con_map.put("final_status", "0");
+                sq_con_map.put("highSearchString", "");
                 sq_con_map.put("info_status", "1");
-                String opt_ids = UserLogin.getOptIDSByUserAPPSite(user_id+"", "cms", det.getK_v());
-                if(opt_ids.indexOf("531") > -1){
-                    sq_con_map.put("dept_id",UserLogin.getUserBySession(request).getDept_id()+"");
+                if(!UserLogin.isSiteManager(user_id+"","cms",det.getK_v())){
+                    sq_con_map.put("input_user", user_id+"");
                 }
-                Map<String, Object> return_map = InfoBaseRPC.getWaitVerifyInfoList(sq_con_map);
-                String info_count = return_map.get("info_count") + "";
-                List<InfoBean> list = (List<InfoBean>) return_map.get("info_List");
+                sq_con_map.put("page_size", "15");
+                sq_con_map.put("site_id", det.getK_v());
+                sq_con_map.put("sort_name", "ci.released_dtime desc,ci.id");
+                sq_con_map.put("sort_type", "desc");
+                sq_con_map.put("start_num", "0");
+                sq_con_map.put("user_id", user_id+"");
+                List<InfoBean> list = InfoBaseRPC.getInfoList(sq_con_map);
+                String info_count = list.size() + "";
                 str += "<div class=\"sq_box new_sq_box\" ><div class=\"sq_title_box\" ><div class=\"sq_title2\">" + SiteRPC.getSiteBeanBySiteID(det.getK_v()).getSite_name() + "</div>";
                 str += "<div class=\"sq_title_right2\">退稿总数：" + info_count + "条</div>";
                 str += "</div>";

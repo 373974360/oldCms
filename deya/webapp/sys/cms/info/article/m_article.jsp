@@ -100,11 +100,12 @@ if(cb.getMlsx()==1){
 			<td style="">
 				<script id="info_content" type="text/plain" style="width:95%;height:400px;"></script>
 				<div class="hidden" id="word_count_div"></div>
-			<span class="blank9"></span>
-			<input id="is_remote" name="is_remote" type="checkbox" /><label for="is_remote">远程图片本地化</label>&nbsp;&nbsp;
-			<input id="is_am_tupage" name="is_am_tupage" type="checkbox" value="1"/><label for="is_am_tupage">自动翻页</label>&nbsp;&nbsp;
-			翻页字数<input id="tupage_num" name="tupage_num" type="text" value="1000" onblur="checkInputValue('tupage_num',true,5,'翻页字数','checkInt')"/>
-					<input type="button" onclick="errorWordCompare()" value="错别字识别" />
+				<span class="blank9"></span>
+				<input id="is_desc" name="is_desc" type="checkbox" checked/><label for="is_desc">自动截取前200字为摘要</label>&nbsp;&nbsp;
+				<input id="is_remote" name="is_remote" type="checkbox" /><label for="is_remote">远程图片本地化</label>&nbsp;&nbsp;
+				<input id="is_am_tupage" name="is_am_tupage" type="checkbox" value="1"/><label for="is_am_tupage">自动翻页</label>&nbsp;&nbsp;
+				翻页字数<input id="tupage_num" name="tupage_num" type="text" value="1000" onblur="checkInputValue('tupage_num',true,5,'翻页字数','checkInt')"/>
+				<input type="button" onclick="errorWordCompare()" value="错别字识别" />
 			</td>
 		</tr>
 		<tr>

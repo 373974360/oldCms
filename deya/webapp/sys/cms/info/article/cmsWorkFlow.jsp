@@ -65,15 +65,12 @@
         }
 
         function initTable() {
-            var colsMap = new Map();
             var colsList = new List();
 
             colsList.add(setTitleClos("title", "标题", "", "", "", ""));//英文名，显示名，宽，高，样式名，点击事件　
             colsList.add(setTitleClos("cat_cname", "所属栏目", "100px", "", "", ""));
             colsList.add(setTitleClos("input_user_name", "添加人", "100px", "", "", ""));
-            colsList.add(setTitleClos("input_dtime", "添加时间", "100px", "", "", ""));
-            colsList.add(setTitleClos("modify_user_name", "审核人", "100px", "", "", ""));
-            colsList.add(setTitleClos("released_dtime", "审核时间", "100px", "", "", ""));
+            colsList.add(setTitleClos("step_list", "审核记录", "500px", "", "", ""));
 
             table.setColsList(colsList);
             table.setAllColsList(colsList);
@@ -115,7 +112,7 @@
                 con_map.put("con_name", table.con_name);
                 con_map.put("con_value", table.con_value);
             }
-            beanList = InfoBaseRPC.getInfoList(con_map);
+            beanList = InfoBaseRPC.getInfoWorkFLowList(con_map);
             beanList = List.toJSList(beanList);//把list转成JS的List对象
 
             curr_bean = null;
@@ -150,6 +147,21 @@
                     $(this).css("padding-left","20px");
                     var url = beanList.get(i-1).content_url;
                     $(this).html('<a href="'+url+'" target=_blank>'+title_flag+beanList.get(i-1).title+'</a>'+title_end_str);
+                }
+            });
+            table.getCol("step_list").each(function (i) {
+                $(this).css({"text-align":"left"});
+                var step_list = "<ul>";
+                if(i>0) {
+                    var arrayList = beanList.get(i-1).stepList;
+                    console.log(arrayList);
+                    if(arrayList != null){
+                        for(var s=0;s<arrayList.list.length;s++){
+                            step_list+= "<li style='width:500px;height:25px;line-height:25px;'><div style='padding:0 3px;float:left;'>"+(s+1)+":</div><div style='padding:0 3px;float:left;width:100px;'>"+arrayList.list[s].user_name+"</div><div style='padding:0 3px;float:left;width:100px;'>"+arrayList.list[s].work_time+"</div><div style='padding:0 3px;float:left;width:250px;'>"+arrayList.list[s].description+"</div></li>";
+                        }
+					}
+                    step_list+= "</ul>";
+                    $(this).html(step_list);
                 }
             });
             current_page_num = tp.curr_page;

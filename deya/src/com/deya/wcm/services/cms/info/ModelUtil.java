@@ -4,7 +4,12 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.deya.util.DateUtil;
+import com.deya.wcm.bean.cms.info.InfoWorkStep;
 import com.deya.wcm.bean.system.formodel.ModelBean;
+import com.deya.wcm.dao.PublicTableDAO;
+import com.deya.wcm.dao.cms.info.InfoDAO;
+import com.deya.wcm.services.cms.workflow.WorkFlowRPC;
 import com.deya.wcm.services.system.formodel.ModelManager;
 import org.apache.commons.beanutils.BeanUtils;
 
@@ -60,6 +65,17 @@ public class ModelUtil {
                 if (info.getInfo_status() == 8) {//发布后要处理的事情
                     InfoPublishManager.publishAfterEvent(info);
                 }
+                InfoWorkStep infoWorkStep = new InfoWorkStep();
+                int id = PublicTableDAO.getIDByTableName("cs_info_workstep");
+                infoWorkStep.setId(id);
+                infoWorkStep.setInfo_id(info.getInfo_id());
+                infoWorkStep.setStep_id(WorkFlowRPC.getMaxStepIDByUserID(info.getWf_id(),stl.getUser_id()+"",info.getApp_id(),info.getSite_id()));
+                infoWorkStep.setUser_id(stl.getUser_id());
+                infoWorkStep.setUser_name(stl.getUser_name());
+                infoWorkStep.setDescription("添加信息");
+                infoWorkStep.setPass_status(1);
+                infoWorkStep.setWork_time(DateUtil.getCurrentDateTime());
+                InfoDAO.insertInfoWorkStep(infoWorkStep);
                 return true;
             } else
                 return false;

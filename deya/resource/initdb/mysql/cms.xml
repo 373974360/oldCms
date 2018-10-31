@@ -555,8 +555,19 @@
 				)
 		   ]]>
         </sql>
+        <sql>
+            <![CDATA[
+                create table cs_info_workstep (
+                    id int(11) not null PRIMARY KEY,
+                    info_id int(11),
+                    user_id int(11),
+                    user_name varchar(250) default '',
+                    step_id int(11),
+                    pass_status int(11),
+                    description varchar(500) default '',
+                    work_time varchar(20) default ''
+                )
+		   ]]>
+        </sql>
     </table>
-
-    
-
 </root>

@@ -192,9 +192,26 @@ public class InfoBaseRPC {
 				dept_user = dept_user.substring(0,dept_user.length()-1);
 			}
 			map.put("dept_user",dept_user);
-			//System.out.println("DEPT_USER===============>>>>>"+dept_user);
 		}
 		return InfoBaseManager.getInfoList(map);
+	}
+	public static List<InfoBean> getInfoWorkFLowList(Map<String, String> map){
+		if(map.containsKey("dept_id")){
+			String dept_user="";
+			List<UserBean> list = UserManager.getUserListByDeptID(map.get("dept_id"));
+			if(!list.isEmpty()){
+				for(UserBean userBean:list){
+					dept_user+=userBean.getUser_id()+",";
+				}
+				dept_user = dept_user.substring(0,dept_user.length()-1);
+			}
+			map.put("dept_user",dept_user);
+		}
+		List<InfoBean> list = InfoBaseManager.getInfoList(map);
+		for (InfoBean infoBean:list){
+			infoBean.setStepList(InfoDAO.getInfoWorkStepByInfoId(infoBean.getInfo_id()));
+		}
+		return list;
 	}
 	
 	public static int getInfoCount(Map<String, String> map){

@@ -9,6 +9,7 @@ import com.deya.util.DateUtil;
 import com.deya.wcm.bean.cms.count.InfoAccessBean;
 import com.deya.wcm.bean.cms.count.InfoCountBean;
 import com.deya.wcm.bean.cms.info.InfoBean;
+import com.deya.wcm.bean.cms.info.InfoWorkStep;
 import com.deya.wcm.bean.cms.info.RelatedInfoBean;
 import com.deya.wcm.bean.logs.SettingLogsBean;
 import com.deya.wcm.bean.org.user.UserRegisterBean;
@@ -740,6 +741,22 @@ public class InfoDAO {
         return DBManager.getString("getInfoByUrl", m);
     }
 
+	/**
+	 * 插入信息审批流程步骤
+	 */
+	public static boolean insertInfoWorkStep(InfoWorkStep infoWorkStep) {
+		return DBManager.insert("insertInfoWorkStep", infoWorkStep);
+	}
+
+
+	/**
+	 * 获取审批流程
+	 */
+	public static List<InfoWorkStep> getInfoWorkStepByInfoId(int info_id) {
+		Map<String,String> m = new HashMap<String,String>();
+		m.put("info_id",info_id+"");
+		return DBManager.queryFList("getInfoWorkStepByInfoId", m);
+	}
 	
 	public static void main(String[] args) {
 		

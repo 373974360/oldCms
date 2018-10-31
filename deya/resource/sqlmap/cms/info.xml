@@ -876,4 +876,21 @@
         select count(*) from cs_info where info_status=8 and final_status=0 and content_url like '%${content_url}%'
     </select>
 
+
+
+
+    <!-- 插入信息审批流程步骤 -->
+    <insert id="insertInfoWorkStep" parameterType="com.deya.wcm.bean.cms.info.InfoWorkStep">
+        insert into cs_info_workstep(id,info_id,user_id,user_name,step_id,pass_status,description,work_time)
+        values(${id},${info_id},${user_id},#{user_name},${step_id},${pass_status},#{description},#{work_time})
+    </insert>
+    <!-- 根据信息id获取最新的审批流程步骤 -->
+    <select id="getInfoWorkStepByInfoId" parameterType="Map" resultType="com.deya.wcm.bean.cms.info.InfoWorkStep">
+        select id,info_id,user_id,user_name,step_id,pass_status,description,work_time
+        from cs_info_workstep where info_id = #{info_id}
+        <if test="pass_status != null">
+            and pass_status = #{pass_status}
+        </if>
+        order by work_time
+    </select>
 </mapper>

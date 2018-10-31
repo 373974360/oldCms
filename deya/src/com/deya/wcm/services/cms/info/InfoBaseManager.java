@@ -17,9 +17,11 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.deya.wcm.bean.cms.info.*;
 import com.deya.wcm.bean.cms.workflow.WorkFlowBean;
 import com.deya.wcm.bean.org.dept.DeptBean;
 import com.deya.wcm.services.cms.category.*;
+import com.deya.wcm.services.cms.workflow.WorkFlowRPC;
 import com.deya.wcm.services.model.services.BeanToMapUtil;
 import com.deya.wcm.services.org.dept.DeptManager;
 import com.deya.wcm.services.org.role.RoleUserManager;
@@ -31,10 +33,6 @@ import com.deya.wcm.bean.cms.category.CategoryBean;
 import com.deya.wcm.bean.cms.category.SyncBean;
 import com.deya.wcm.bean.cms.count.InfoAccessBean;
 import com.deya.wcm.bean.cms.count.InfoCountBean;
-import com.deya.wcm.bean.cms.info.GKInfoBean;
-import com.deya.wcm.bean.cms.info.GKResFileBean;
-import com.deya.wcm.bean.cms.info.InfoBean;
-import com.deya.wcm.bean.cms.info.RelatedInfoBean;
 import com.deya.wcm.bean.logs.SettingLogsBean;
 import com.deya.wcm.bean.org.user.UserBean;
 import com.deya.wcm.bean.org.user.UserRegisterBean;
@@ -425,6 +423,19 @@ public class InfoBaseManager {
                     if(ib.getReleased_dtime() == null || "".equals(ib.getReleased_dtime()))
                         ib.setReleased_dtime(DateUtil.getCurrentDateTime());
                     publish_info_list.add(ib);
+
+
+                    InfoWorkStep infoWorkStep = new InfoWorkStep();
+                    int id = PublicTableDAO.getIDByTableName("cms_info_workstep");
+                    infoWorkStep.setId(id);
+                    infoWorkStep.setInfo_id(ib.getInfo_id());
+                    infoWorkStep.setStep_id(WorkFlowRPC.getMaxStepIDByUserID(ib.getWf_id(),stl.getUser_id()+"",ib.getApp_id(),ib.getSite_id()));
+                    infoWorkStep.setUser_id(stl.getUser_id());
+                    infoWorkStep.setUser_name(stl.getUser_name());
+                    infoWorkStep.setDescription("信息发布");
+                    infoWorkStep.setPass_status(1);
+                    infoWorkStep.setWork_time(DateUtil.getCurrentDateTime());
+                    InfoDAO.insertInfoWorkStep(infoWorkStep);
                 }
                 if("3".equals(status))
                 {//撤消
@@ -601,6 +612,17 @@ public class InfoBaseManager {
                         cat_ids.add(info.getCat_id());
                     }
                 }
+                InfoWorkStep infoWorkStep = new InfoWorkStep();
+                int id = PublicTableDAO.getIDByTableName("cs_info_workstep");
+                infoWorkStep.setId(id);
+                infoWorkStep.setInfo_id(info.getInfo_id());
+                infoWorkStep.setStep_id(WorkFlowRPC.getMaxStepIDByUserID(info.getWf_id(),stl.getUser_id()+"",info.getApp_id(),site_id));
+                infoWorkStep.setUser_id(stl.getUser_id());
+                infoWorkStep.setUser_name(stl.getUser_name());
+                infoWorkStep.setDescription("信息审核通过");
+                infoWorkStep.setPass_status(1);
+                infoWorkStep.setWork_time(DateUtil.getCurrentDateTime());
+                InfoDAO.insertInfoWorkStep(infoWorkStep);
                 InfoDAO.passInfoStatus(info.getInfo_id()+"", info_status, stepId+"",info.getReleased_dtime());
                 PublicTableDAO.insertSettingLogs("审核","信息状态为通过",info.getInfo_id()+"["+info.getTitle()+"]",stl);
             }
@@ -623,7 +645,29 @@ public class InfoBaseManager {
      */
     public static boolean noPassInfoStatus(String info_ids,String auto_desc,SettingLogsBean stl)
     {
-        return InfoDAO.noPassInfoStatus(info_ids,auto_desc, stl);
+        try {
+            if(StringUtils.isNotEmpty(info_ids)){
+                String[] arryIds = info_ids.split(",");
+                for(String ids:arryIds){
+                    InfoWorkStep infoWorkStep = new InfoWorkStep();
+                    int id = PublicTableDAO.getIDByTableName("cs_info_workstep");
+                    infoWorkStep.setId(id);
+                    infoWorkStep.setInfo_id(Integer.parseInt(ids));
+                    infoWorkStep.setStep_id(1);
+                    infoWorkStep.setUser_id(stl.getUser_id());
+                    infoWorkStep.setUser_name(stl.getUser_name());
+                    infoWorkStep.setDescription("审核不通过："+auto_desc);
+                    infoWorkStep.setPass_status(0);
+                    infoWorkStep.setWork_time(DateUtil.getCurrentDateTime());
+                    InfoDAO.insertInfoWorkStep(infoWorkStep);
+                    InfoDAO.noPassInfoStatus(ids,auto_desc, stl);
+                }
+            }
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     /**

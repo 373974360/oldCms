@@ -764,7 +764,10 @@ function gotoListPage(bean) {
     top.getCurrentFrameObj(topnum).reloadInfoDataList();
     top.tab_colseOnclick(top.curTabIndex);
 }
-
+function stripHTML(str) {
+    var reTag = /<(?:.|\s)*?>/g;
+    return str.replace(reTag,"");
+}
 //公用保存处理事件
 function publicSaveInfoEvent(bean, model_ename, save_type) {
     var info_id = bean.info_id;
@@ -772,6 +775,19 @@ function publicSaveInfoEvent(bean, model_ename, save_type) {
     var font_Size = fontSize + "px";  //标题大小
     titleColor = $("#title_color").val(); //标题颜色
     var fontSpace = fontspacesize + "px";
+
+    //自动截取前200字为摘要
+    if($("#is_desc").is(':checked')){//判断是否已上传，没有话执行上传函数
+        if(bean.description==''||bean.description==null){
+            var info_content = stripHTML(bean.info_content);
+            if(info_content.length>=200){
+                bean.description = info_content.substring(0,200)+"...";
+            }else{
+                bean.description = info_content;
+            }
+        }
+    }
+
     /*
     if(titleStyle != "") //清空title样式
     {
@@ -966,6 +982,7 @@ function publicSaveInfoEvent(bean, model_ename, save_type) {
     }
     */
 //	bean.title = bean.title.replace(/\"/g,"＂");
+
     bean.title = $("#title").val();
     if (app_id == "zwgk") {
         /*
