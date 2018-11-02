@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.deya.util.CryptoTools;
 import com.deya.util.RandomStrg;
+import com.deya.util.SM4Utils;
 import com.deya.wcm.bean.logs.SettingLogsBean;
 import com.deya.wcm.bean.org.user.UserBean;
 import com.deya.wcm.bean.org.user.UserLevelBean;
@@ -335,8 +336,7 @@ public class UserDAODBImpl implements IUserDAO{
 	public boolean insertRegister(UserRegisterBean urb,SettingLogsBean stl){
 		int id = PublicTableDAO.getIDByTableName(PublicTableDAO.USERREGISTER_TABLE_NAME);
 		urb.setRegister_id(id);
-		CryptoTools ct = new CryptoTools();
-		urb.setPassword(ct.encode(urb.getPassword()));
+		urb.setPassword(SM4Utils.encryptEcb(urb.getPassword()));
 		if(DBManager.insert("insert_register", urb))
 		{
 			PublicTableDAO.insertSettingLogs("添加","帐号",id+"",stl);
@@ -352,10 +352,7 @@ public class UserDAODBImpl implements IUserDAO{
      * @return boolean
      * */
 	public boolean updateRegister(UserRegisterBean urb,SettingLogsBean stl){
-		CryptoTools ct = new CryptoTools();
-		if(!urb.getPassword().substring(0,3).equals("=#=")){
-			urb.setPassword(ct.encode(urb.getPassword()));
-		}
+		urb.setPassword(SM4Utils.encryptEcb(urb.getPassword()));
 		if(DBManager.update("update_register", urb))
 		{
 			PublicTableDAO.insertSettingLogs("修改","帐号",urb.getRegister_id()+"",stl);

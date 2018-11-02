@@ -85,13 +85,13 @@ function openUpdatePicViewPage(id)
 		c_id = table.getSelecteCheckboxValue("id");
 	}
 	
-	top.addTab(true,"/manager/project/wnzjzf/view_zjzf.jsp?id="+c_id+"&topnum="+top.curTabIndex,"报名信息");
+	top.addTab(true,"/sys/project/zjzf/view_zjzf.jsp?id="+c_id+"&topnum="+top.curTabIndex,"报名信息");
 	
 }
 
 function openUpdatePicUpdatePage(id)
 {
-	top.addTab(true,"/manager/project/picview/update_pic.jsp?id="+id+"&topnum="+top.curTabIndex+"&audit_type="+audit_type+"&publish_type="+publish_type,"投稿信息");
+	top.addTab(true,"/sys/project/picview/update_pic.jsp?id="+id+"&topnum="+top.curTabIndex+"&audit_type="+audit_type+"&publish_type="+publish_type,"投稿信息");
 }
 
 //删除投稿

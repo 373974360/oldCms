@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.deya.util.CryptoTools;
+import com.deya.util.SM4Utils;
 import com.deya.wcm.bean.logs.SettingLogsBean;
 import com.deya.wcm.bean.org.user.LoginUserBean;
 import com.deya.wcm.bean.org.user.UserBean;
@@ -166,8 +167,7 @@ public class UserRegisterManager implements ISyncCatch{
 			UserRegisterBean new_ub = new UserRegisterBean();			
 			if(user_id == ulbo.getUser_id())
 			{
-				CryptoTools ct = new CryptoTools();
-				new_ub.setPassword(ulbo.getPassword());
+				new_ub.setPassword(SM4Utils.decryptEcb(ulbo.getPassword()));
 				new_ub.setRegister_id(ulbo.getRegister_id());
 				new_ub.setRegister_status(ulbo.getRegister_status());
 				new_ub.setUser_id(ulbo.getUser_id());
@@ -299,7 +299,7 @@ public class UserRegisterManager implements ISyncCatch{
 			
 			CryptoTools ct = new CryptoTools();
 			//System.out.println("pass_word---11--"+pass_word);
-			pass_word = ct.encode(pass_word);
+			pass_word = SM4Utils.encryptEcb(pass_word);
 			//System.out.println("pass_word---22--"+pass_word);
 			//System.out.println("urb.getPassword()-----"+urb.getPassword());
 			if(pass_word.equals(urb.getPassword()))

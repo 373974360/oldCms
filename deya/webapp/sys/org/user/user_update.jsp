@@ -125,7 +125,7 @@ function updateRegister()
 		<tr>
 			<th><span class="f_red">*</span>密码：</th>
 			<td >
-				<input id="password" name="password" type="password" class="width200" value="" onblur="checkInputValue('password',false,30,'密码','')"/>请输入6-16位字符
+				<input id="password" name="password" type="password" class="width200" value="" onblur="checkInputValue('password',false,100,'密码','')"/>请输入6-16位字符
 			</td>
 		</tr>
 		<tr>

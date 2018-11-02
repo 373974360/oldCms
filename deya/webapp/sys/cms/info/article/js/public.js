@@ -1276,7 +1276,7 @@ function errorWordCompare() {
     var content = getV(contentId);
     var data = {
         url: 'http://api.jiucuoyun.cn/api/word',
-        token: '4612D7D77261D19F9DDF6716226F152169817F652F628BE71844BB66744B6FAD92B42DFC837369A0',
+        token: 'E7AB57315ACA302A77CE52F435E4AB10A19104AA32032AC59E1049BAA155D20392B42DFC837369A0',
         correct_content: content
     }
     $.post('/sys/interface/FontCorrect.jsp', data, function (result) {
