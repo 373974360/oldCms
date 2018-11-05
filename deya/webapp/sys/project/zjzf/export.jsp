@@ -50,14 +50,13 @@
 	public static String[] getFileUrl(){
 		//删除今天以前的文件夹
 		String root_path = JconfigUtilContainer.bashConfig().getProperty("path", "", "manager_path");
-		String path = FormatUtil.formatPath(root_path + "/project/wnzjzf/export");  
+		String path = FormatUtil.formatPath(root_path + "/project/zjzf/export");
 		//System.out.println("path===" + path);
 		CountUtil.deleteFile(path);
 		
 		//创建今天的文件夹和xls文件
 		String nowDate = CountUtil.getNowDayDate();
-		String fileTemp2 = FormatUtil.formatPath(path+File.separator+nowDate);
-		//System.out.println("fileTemp2===" + fileTemp2);
+		String fileTemp2 = FormatUtil.formatPath(path+File.separator);
 		File file2 = new File(fileTemp2);
 		if(!file2.exists()){
 			file2.mkdir();
@@ -65,8 +64,8 @@
 		String nowTime = CountUtil.getNowDayDateTime();
 		String xls = nowTime + CountUtil.getEnglish(1)+".xls";
 		String xlsFile = fileTemp2+File.separator+xls;
-		String urlFile = "/manager/project/wnzjzf/export/"+nowDate+File.separator+xls;
-		//System.out.println("xlsFile===" + xlsFile);
+		String urlFile = "/sys/project/zjzf/export/"+File.separator+xls;
+		System.out.println("xlsFile===" + xlsFile);
 		String[] str = {xlsFile,urlFile};
 		
 		return str;
