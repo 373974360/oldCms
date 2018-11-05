@@ -303,7 +303,7 @@
        </sql>
        <sql>
           <![CDATA[
-				insert into cs_org_register(register_id,user_id,username,password,register_status)values('1','1','system','=#=hlQpsPUdyX+OAB9CkPBjnA==','0')
+				insert into cs_org_register(register_id,user_id,username,password,register_status)values('1','1','system','b83da62da283bfafb9bcbcd1ee7fdd74','0')
 		   ]]> 
        </sql>
        <sql>
