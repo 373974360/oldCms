@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import com.deya.wcm.bean.cms.info.InfoBean;
+import com.deya.wcm.bean.cms.info.InfoWorkStep;
 import com.deya.wcm.bean.cms.info.RelatedInfoBean;
 import com.deya.wcm.bean.logs.SettingLogsBean;
 import com.deya.wcm.bean.org.user.UserBean;
@@ -195,23 +196,8 @@ public class InfoBaseRPC {
 		}
 		return InfoBaseManager.getInfoList(map);
 	}
-	public static List<InfoBean> getInfoWorkFLowList(Map<String, String> map){
-		if(map.containsKey("dept_id")){
-			String dept_user="";
-			List<UserBean> list = UserManager.getUserListByDeptID(map.get("dept_id"));
-			if(!list.isEmpty()){
-				for(UserBean userBean:list){
-					dept_user+=userBean.getUser_id()+",";
-				}
-				dept_user = dept_user.substring(0,dept_user.length()-1);
-			}
-			map.put("dept_user",dept_user);
-		}
-		List<InfoBean> list = InfoBaseManager.getInfoList(map);
-		for (InfoBean infoBean:list){
-			infoBean.setStepList(InfoDAO.getInfoWorkStepByInfoId(infoBean.getInfo_id()));
-		}
-		return list;
+	public static List<InfoWorkStep> getInfoWorkFLowList(String info_id){
+		return InfoDAO.getInfoWorkStepByInfoId(Integer.parseInt(info_id));
 	}
 	
 	public static int getInfoCount(Map<String, String> map){

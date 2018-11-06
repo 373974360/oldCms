@@ -74,16 +74,6 @@ public class InfoBean  implements java.io.Serializable,Cloneable{
     protected String info_level = "";//稿件评级
     protected String isIpLimit = "";//是否IP限制
 
-	private List<InfoWorkStep>  stepList = new ArrayList<>();
-
-	public List<InfoWorkStep> getStepList() {
-		return stepList;
-	}
-
-	public void setStepList(List<InfoWorkStep> stepList) {
-		this.stepList = stepList;
-	}
-
 	public int getIs_am_tupage() {
 		return is_am_tupage;
 	}

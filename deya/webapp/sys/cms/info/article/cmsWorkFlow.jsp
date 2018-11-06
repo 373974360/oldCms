@@ -112,7 +112,7 @@
                 con_map.put("con_name", table.con_name);
                 con_map.put("con_value", table.con_value);
             }
-            beanList = InfoBaseRPC.getInfoWorkFLowList(con_map);
+            beanList = InfoBaseRPC.getInfoList(con_map);
             beanList = List.toJSList(beanList);//把list转成JS的List对象
 
             curr_bean = null;
@@ -153,8 +153,8 @@
                 $(this).css({"text-align":"left"});
                 var step_list = "<ul>";
                 if(i>0) {
-                    var arrayList = beanList.get(i-1).stepList;
-                    console.log(arrayList);
+                    var arrayList = InfoBaseRPC.getInfoWorkFLowList(beanList.get(i-1).info_id);
+                    arrayList = List.toJSList(arrayList);//把list转成JS的List对象
                     if(arrayList != null){
                         for(var s=0;s<arrayList.list.length;s++){
                             step_list+= "<li style='width:500px;height:25px;line-height:25px;'><div style='padding:0 3px;float:left;'>"+(s+1)+":</div><div style='padding:0 3px;float:left;width:100px;'>"+arrayList.list[s].user_name+"</div><div style='padding:0 3px;float:left;width:100px;'>"+arrayList.list[s].work_time+"</div><div style='padding:0 3px;float:left;width:250px;'>"+arrayList.list[s].description+"</div></li>";
