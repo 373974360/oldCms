@@ -510,7 +510,7 @@
         <if test="source=='wt' or source=='mh'">
             sum(day_hits)
         </if>
-         from cs_info where lasthit_dtime like '%${date}%' and publish_source like '%${source}%'
+         from cs_info where lasthit_dtime like '%${date}%'
         <if test="cat_ids!=null and cat_ids!=''">
             and cat_id in (${cat_ids})
         </if>
@@ -529,7 +529,7 @@
         <if test="source=='wt' or source=='mh'">
             sum(day_hits)
         </if>
-         from cs_info where cat_id in (10066,10067,10068,10069,10070) and lasthit_dtime like '%${date}%' and publish_source like '%${source}%'
+         from cs_info where cat_id in (10066,10067,10068,10069,10070) and lasthit_dtime like '%${date}%'
     </select>
     <select id="getCountBySource_survey" parameterType="Map" resultType="java.lang.String">
         select sum(t.count) from (select count(s_id) as count from cp_survey_answer where s_id in (select s_id from cp_survey where is_delete = 0) and source = '${surveySource}' and answer_time like '%${date}%' group by ip) t

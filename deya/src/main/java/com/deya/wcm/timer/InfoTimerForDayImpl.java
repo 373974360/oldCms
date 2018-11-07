@@ -26,12 +26,24 @@ public class InfoTimerForDayImpl implements Job{
         Map<String,String> m = new HashMap<String,String>();
         m.put("item_name", "day_hits");
         InfoDAO.clearInfoHits(m);
+        m.put("item_name", "wxday_hits");
+        InfoDAO.clearInfoHits(m);
+        m.put("item_name", "appday_hits");
+        InfoDAO.clearInfoHits(m);
+        m.put("item_name", "zdday_hits");
+        InfoDAO.clearInfoHits(m);
         SiteVisitCountManager.clearHits("");//顺便清空下站点的访问量统计:)
         //判断今天是否为周一，如果是，清空周点击量    周一的值为2
         try {
             if(DateUtil.getDayOfWek(DateUtil.getDate(DateUtil.getCurrentDateTime())) == 2)
             {
                 m.put("item_name", "week_hits");
+                InfoDAO.clearInfoHits(m);
+                m.put("item_name", "wxweek_hits");
+                InfoDAO.clearInfoHits(m);
+                m.put("item_name", "appweek_hits");
+                InfoDAO.clearInfoHits(m);
+                m.put("item_name", "zdweek_hits");
                 InfoDAO.clearInfoHits(m);
                 SiteVisitCountManager.clearHits("week");
             }
@@ -45,6 +57,12 @@ public class InfoTimerForDayImpl implements Job{
             if(DateUtil.getDayOfMonth(DateUtil.getDate(DateUtil.getCurrentDateTime())) == 1)
             {
                 m.put("item_name", "month_hits");
+                InfoDAO.clearInfoHits(m);
+                m.put("item_name", "wxmonth_hits");
+                InfoDAO.clearInfoHits(m);
+                m.put("item_name", "appmonth_hits");
+                InfoDAO.clearInfoHits(m);
+                m.put("item_name", "zdmonth_hits");
                 InfoDAO.clearInfoHits(m);
                 SiteVisitCountManager.clearHits("month");
             }
