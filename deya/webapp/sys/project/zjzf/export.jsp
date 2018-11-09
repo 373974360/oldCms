@@ -2,17 +2,20 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@page import="com.deya.util.FormatUtil,com.deya.project.zjzf.*,com.deya.util.OutExcel,com.deya.util.jconfig.JconfigUtilContainer,com.deya.wcm.services.appeal.count.CountUtil,java.io.File"%>
 <%
+	String type = request.getParameter("type");
+	String size = request.getParameter("size");
 	String[] path = getFileUrl();
-	String[] head = getExcelHeadName();	
+	String[] head = getExcelHeadName();
 	Map<String,String> m = new HashMap<String,String>();
-	m.put("start_num", "0");	
-	m.put("page_size", "10000");
-	m.put("type", "1");
+	m.put("start_num", "0");
+	m.put("page_size", size);
+	m.put("type", type);
 	m.put("orderby", "id desc");
+	m.put("suiji", "suiji");
 	List<ZJZFBean> l = ZJZFManager.getGongMinList(m);
 	String[][] data = new String[l.size()][head.length];
 	int i=0;
-	try{					
+	try{
 		for(ZJZFBean zjxf : l)
 		{
 			data[i][0] = zjxf.getName();
@@ -31,10 +34,10 @@
 			data[i][13] = zjxf.getTxdz();
 			data[i][14] = zjxf.getPostcode();
 			data[i][15] = zjxf.getEmail();
-			
+
 			i++;
-		}		
-		
+		}
+
 		OutExcel oe=new OutExcel("报名信息表");
 		oe.doOut(path[0],head,data);
 	}catch(Exception e)
@@ -46,14 +49,14 @@
 	out.println("<script>document.write('<a href=\""+path[1]+"\" target=\"_blank\">下载文件</a>')</script>");
 %>
 <%!
-//删除今天以前的文件夹  并 创建今天的文件夹和xls文件
+	//删除今天以前的文件夹  并 创建今天的文件夹和xls文件
 	public static String[] getFileUrl(){
 		//删除今天以前的文件夹
 		String root_path = JconfigUtilContainer.bashConfig().getProperty("path", "", "manager_path");
 		String path = FormatUtil.formatPath(root_path + "/project/zjzf/export");
 		//System.out.println("path===" + path);
 		CountUtil.deleteFile(path);
-		
+
 		//创建今天的文件夹和xls文件
 		String nowDate = CountUtil.getNowDayDate();
 		String fileTemp2 = FormatUtil.formatPath(path+File.separator);
@@ -67,14 +70,14 @@
 		String urlFile = "/sys/project/zjzf/export/"+File.separator+xls;
 		System.out.println("xlsFile===" + xlsFile);
 		String[] str = {xlsFile,urlFile};
-		
+
 		return str;
 	}
 
 	public static String[] getExcelHeadName()
 	{
 		String[] head = "姓名,性别,出生年月,民族,政治面貌,身份证,工作单位,职务,职称,户口所在地,手机号码,固定电话,常住地址,通信地址,邮编,电子邮箱".split(",");
-		
+
 		return head;
 	}
 %>

@@ -6,6 +6,9 @@
 		<if test="type != null">
 			where type = ${type}
 		</if>
+		<if test="suiji != null">
+			and id in (select t.id from (SELECT id,RAND() as r FROM project_zjzf order by r limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}) t)
+		</if>
 	</sql>
 
 	<select id="getGongMinList" parameterType="Map" resultType="com.deya.project.zjzf.ZJZFBean">

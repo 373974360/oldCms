@@ -21,10 +21,9 @@ $(document).ready(function(){
 	initTable();
 	reloadPicViewList();
 });
-
 function exportZJZF()
 {
-	window.open("export.jsp");
+	window.open("export.jsp?type="+type+"&size="+$("#num").val());
 }
 
 </script>
@@ -35,6 +34,8 @@ function exportZJZF()
 	<table class="table_option" border="0" cellpadding="0" cellspacing="0" >
 		<tr>		
 			<td class="fromTabs">
+				随机导出：
+				<input style="width:50px;" id="num" name="num" value="50" type="text">条信息
 				<input id="btn3" name="btn3" type="button" onclick="exportZJZF();" value="导出" />
 				<input id="btn3" name="btn3" type="button" onclick="deleteRecord(table,'id','deletePicView()');" value="删除" />
 				<span class="blank3"></span>
@@ -51,7 +52,6 @@ function exportZJZF()
 	<table class="table_option" border="0" cellpadding="0" cellspacing="0">
 	<tr>
 		<td align="left" valign="middle">
-			<input id="btn3" name="btn3" type="button" onclick="exportZJZF();" value="导出" />
 			<input id="btn3" name="btn3" type="button" onclick="deleteRecord(table,'id','deletePicView()');" value="删除" />
 		</td>
 	</tr>
