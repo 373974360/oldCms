@@ -80,6 +80,11 @@
                 changeCreateImage();
             }, 1000 * 120);
         });
+        $(document).keyup(function(event){
+            if(event.keyCode ==13){
+                checkCookie();
+            }
+        });
 
         function checkCookie() {
             username = $.trim($("#username").val());
@@ -370,7 +375,7 @@
                                                                                                             src="createImage.jsp"
                                                                                                             style=" height:26px; line-height:26px; overflow:hidden;vertical-align:middle;"/>
                         <!--&nbsp;&nbsp;<a href="javascript:changeCreateImage()">看不清，换一个</a>--></span>
-                    <span class="left"><input id="btnSubmit" name="btnSubmit" type="submit" onClick="checkCookie()"
+                    <span class="left"><input id="btnSubmit" name="btnSubmit" type="button" onClick="checkCookie()"
                                               class="btn" value="登 录"/></span>
                 </form>
             </div>
