@@ -27,11 +27,6 @@ $(document).ready(function(){
 				</select>
 			</td>
 			<td width="10"></td>
-			<td align="left" valign="middle">
-				<input id="btn1" name="btn1" type="button" onclick="openAddPage()" value="新建规则" />
-				<input id="btn2" name="btn2" type="button" onclick="updateRecord(table,'gz_id','openUpdatePage()');" value="修改" />
-				<input id="btn3" name="btn3" type="button" onclick="deleteRecord(table,'gz_id','funDelete()');" value="删除" />
-			</td>
 		</tr>
 		<tr style="height:10px; line-height:10px;overflow:hidden"><td  colspan="3" style="height:10px; line-height:10px;overflow:hidden"></td></tr>
 	</table>

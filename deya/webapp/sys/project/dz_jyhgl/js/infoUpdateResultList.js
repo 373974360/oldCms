@@ -32,6 +32,7 @@ function reloadDataList()
 function showList(){
 	var m = new Map();
     m.put("site_id", $("#site_id").val());
+    m.put("update_desc","");
 	beanList = InfoUpdateResultRPC.getInfoUpdateResultList(m);//第一个参数为站点ID，暂时默认为空
 	beanList = List.toJSList(beanList);//把list转成JS的List对象
 	table.setBeanList(beanList,"td_list");//设置列表内容的样式

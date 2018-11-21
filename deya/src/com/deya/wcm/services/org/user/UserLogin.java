@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.deya.util.FormatUtil;
 import com.deya.wcm.bean.control.SiteBean;
 import com.deya.wcm.bean.org.app.AppBean;
 import com.deya.wcm.bean.org.operate.MenuBean;
@@ -56,7 +57,7 @@ public class UserLogin {
 		if("0".equals(ms))
 		{
 			LoginUserBean lub = UserRegisterManager.getLoginUserBeanByUname(user_name);
-			lub.setIp(request.getRemoteAddr());
+			lub.setIp(FormatUtil.getIpAddr(request));
 			setWCmSession(lub,request);	
 			LogManager.insertLoginLog(lub);
 		}

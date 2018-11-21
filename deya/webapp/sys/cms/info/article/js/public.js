@@ -667,12 +667,12 @@ function insertOtherInfos(bean, model_ename, info_id) {
                     }
                     else {
                         bean.info_status = 2;
-                        bean.step_id = 0;
+                        bean.step_id = 1;
                     }
                 }
                 else {
                     bean.info_status = 2;
-                    bean.step_id = 0;
+                    bean.step_id = 1;
                 }
             }
             bean.cat_id = ids[i];
