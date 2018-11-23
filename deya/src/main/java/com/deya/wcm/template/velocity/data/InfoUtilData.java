@@ -1976,37 +1976,21 @@ public class InfoUtilData {
     }
 
 
-    public static List<WangDianVo> getWangdianResultList(String deptype,String bknktype,String bustype,String bktype,String keyword){
+    public static List<WangDianVo> getWangdianResultList(String query_type,String bantype,String networktype,String networkarea,String orgcode,String keyword,String limit,String start){
         Map<String,String> map = new HashMap<>();
-        map.put("depcode","");//机构代码
-        if(StringUtils.isEmpty(deptype)){
-            deptype="1";
+        if(StringUtils.isEmpty(start)){
+            start="1";
         }
-        map.put("deptype1",deptype);//机构类型0 所有 1 机构 2 网点
-        map.put("bknktype",bknktype);//网点类型
-        map.put("bktype",bktype);//银行航别
-        map.put("noparentnode","1");//1表示不显示根节点，其他表示显示
-        if(StringUtils.isEmpty(bustype)){
-            bustype="0";
-        }
-        map.put("bustype",bustype);//业务类型默认层级：0， 归集：1， 贷款：2
-        map.put("centercode","");//中心编号
-        map.put("keyword",keyword);//搜索关键字 机构地址  机构名称  服务范围
-
+        map.put("query_type",query_type);//查询标识
+        map.put("bantype",bantype);//银行行别
+        map.put("networktype",networktype);//网点类型1：一手房贷款银行网点 2：二手房贷款银行网点
+        map.put("networkarea",networkarea);//所在区域
+        map.put("orgcode",orgcode);//机构代码
+        map.put("keyword",keyword);//关键字
+        map.put("limit",limit);//每页条数
+        map.put("start",start);//起始页
         List<WangDianVo> list = WangDianServiceClient.getWangdianResultList(map);
-        List<WangDianVo> resultList = new ArrayList<>();
-        if(deptype.equals("2")&&bustype.equals("1")){//机构类型选择银行网点，且业务类型为缴存银行网点的时候
-            if(!list.isEmpty()){
-                for(WangDianVo wangdian:list){
-                    if(wangdian.getPid().equals("14")||wangdian.getPid().equals("15")||wangdian.getPid().equals("16")||wangdian.getPid().equals("17")){
-                        resultList.add(wangdian);
-                    }
-                }
-            }
-        }else{
-            resultList = list;
-        }
-        return resultList;
+        return list;
     }
 
     //计算器1

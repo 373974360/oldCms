@@ -25,56 +25,52 @@ import java.util.Map;
 
 public class WangDianServiceClient {
 
-    private static String depcode = "";//机构代码
-    private static String deptype1 = "";//机构类型
-    private static String bktype = "";//银行行别
-    private static String noparentnode    = "";//是否显示根节点
-    private static String bustype = "";//业务类型
-    private static String centercode = "";//中心编号
-    private static String keyword = "";//搜索关键字 机构地址  机构名称  服务范围
-    private static String bknktype = "";//网点类型
+    private static String query_type = "";//查询标识
+    private static String bantype = "";//银行行别
+    private static String networktype = "";//网点类型1：一手房贷款银行网点 2：二手房贷款银行网点
+    private static String networkarea = "";//所在区域
+    private static String orgcode = "";//机构代码
+    private static String keyword = "";//关键字
+    private static String limit = "";//每页条数
+    private static String start = "";//起始页
 
     public static List<WangDianVo> getWangdianResultList(Map<String, String> map) {
-        depcode = map.get("depcode");
-        deptype1 = map.get("deptype1");
-        bktype = map.get("bktype");
-        noparentnode = map.get("noparentnode");
-        bustype = map.get("bustype");
-        centercode = map.get("centercode");
+        query_type = map.get("query_type");
+        bantype = map.get("bantype");
+        networktype = map.get("networktype");
+        networkarea = map.get("networkarea");
+        orgcode = map.get("orgcode");
         keyword = map.get("keyword");
-        bknktype = map.get("bknktype");
-        String s = WebServiceClientUtil.doHttpPost("trader", "NLC009", getparamValue());
+        limit = map.get("limit");
+        start = map.get("start");
+        String s = WebServiceClientUtil.doHttpPost("trader", "NLC130", getparamValue());
         return getWangdianResultList(s);
     }
     public static String getparamValue() {
         StringBuilder _xmlstr = new StringBuilder();
-        if (depcode != null && !"".equals(depcode)) {
-            _xmlstr.append("<depcode>").append(depcode).append("</depcode>");
+        if (query_type != null && !"".equals(query_type)) {
+            _xmlstr.append("<query_type>").append(query_type).append("</query_type>");
         }
-        if (deptype1 != null && !"".equals(deptype1)) {
-            _xmlstr.append("<deptype1>").append(deptype1).append("</deptype1>");
-        }else{
-            _xmlstr.append("<deptype1>").append(0).append("</deptype1>");
+        if (bantype != null && !"".equals(bantype)) {
+            _xmlstr.append("<bantype>").append(bantype).append("</bantype>");
         }
-        if (bknktype != null && !"".equals(bknktype)) {
-            _xmlstr.append("<bknktype>").append(bknktype).append("</bknktype>");
+        if (networktype != null && !"".equals(networktype)) {
+            _xmlstr.append("<networktype>").append(networktype).append("</networktype>");
         }
-        if (bktype != null && !"".equals(bktype)) {
-            _xmlstr.append("<bktype>").append(bktype).append("</bktype>");
+        if (networkarea != null && !"".equals(networkarea)) {
+            _xmlstr.append("<networkarea>").append(networkarea).append("</networkarea>");
         }
-        if (noparentnode != null && !"".equals(noparentnode)) {
-            _xmlstr.append("<noparentnode>").append(noparentnode).append("</noparentnode>");
-        }
-        if (bustype != null && !"".equals(bustype)) {
-            _xmlstr.append("<bustype>").append(bustype).append("</bustype>");
-        }else{
-            _xmlstr.append("<bustype>").append(0).append("</bustype>");
-        }
-        if (centercode != null && !"".equals(centercode)) {
-            _xmlstr.append("<centercode>").append(centercode).append("</centercode>");
+        if (orgcode != null && !"".equals(orgcode)) {
+            _xmlstr.append("<orgcode>").append(orgcode).append("</orgcode>");
         }
         if (keyword != null && !"".equals(keyword)) {
             _xmlstr.append("<keyword>").append(keyword).append("</keyword>");
+        }
+        if (limit != null && !"".equals(limit)) {
+            _xmlstr.append("<limit>").append(limit).append("</limit>");
+        }
+        if (start != null && !"".equals(start)) {
+            _xmlstr.append("<start>").append(start).append("</start>");
         }
         return _xmlstr.toString();
     }
@@ -91,55 +87,75 @@ public class WangDianServiceClient {
                     while (personInfos.hasNext()) {
                         Element questionnaire = (Element) personInfos.next();
                         WangDianVo wangDianVo = new WangDianVo();
-                        if (questionnaire.element("id") != null) {
-                            wangDianVo.setId(questionnaire.element("id").getTextTrim());
+                        if (questionnaire.element("networkid") != null) {
+                            wangDianVo.setNetworkid(questionnaire.element("networkid").getTextTrim());
                         } else {
-                            wangDianVo.setId("");
+                            wangDianVo.setNetworkid("");
                         }
-                        if (questionnaire.element("pid") != null) {
-                            wangDianVo.setPid(questionnaire.element("pid").getTextTrim());
+                        if (questionnaire.element("networkname") != null) {
+                            wangDianVo.setNetworkname(questionnaire.element("networkname").getTextTrim());
                         } else {
-                            wangDianVo.setPid("");
+                            wangDianVo.setNetworkname("");
                         }
-                        if (questionnaire.element("depcode") != null) {
-                            wangDianVo.setDepcode(questionnaire.element("depcode").getTextTrim());
+                        if (questionnaire.element("networkarea") != null) {
+                            wangDianVo.setNetworkarea(questionnaire.element("networkarea").getTextTrim());
                         } else {
-                            wangDianVo.setDepcode("");
+                            wangDianVo.setNetworkarea("");
                         }
-                        if (questionnaire.element("name") != null) {
-                            wangDianVo.setName(questionnaire.element("name").getTextTrim());
+                        if (questionnaire.element("networkaddress") != null) {
+                            wangDianVo.setNetworkaddress(questionnaire.element("networkaddress").getTextTrim());
                         } else {
-                            wangDianVo.setName("");
+                            wangDianVo.setNetworkaddress("");
                         }
-                        if (questionnaire.element("depaddr") != null) {
-                            wangDianVo.setDepaddr(questionnaire.element("depaddr").getTextTrim());
+                        if (questionnaire.element("contactnumber") != null) {
+                            wangDianVo.setContactnumber(questionnaire.element("contactnumber").getTextTrim());
                         } else {
-                            wangDianVo.setDepaddr("");
+                            wangDianVo.setContactnumber("");
                         }
-                        if (questionnaire.element("depphone") != null) {
-                            wangDianVo.setDepphone(questionnaire.element("depphone").getTextTrim());
+                        if (questionnaire.element("networklongitud") != null) {
+                            wangDianVo.setNetworklongitud(questionnaire.element("networklongitud").getTextTrim());
                         } else {
-                            wangDianVo.setDepphone("");
+                            wangDianVo.setNetworklongitud("");
                         }
-                        if (questionnaire.element("longitude") != null) {
-                            wangDianVo.setLongitude(questionnaire.element("longitude").getTextTrim());
+                        if (questionnaire.element("networklatitud") != null) {
+                            wangDianVo.setNetworklatitud(questionnaire.element("networklatitud").getTextTrim());
                         } else {
-                            wangDianVo.setLongitude("");
+                            wangDianVo.setNetworklatitud("");
                         }
-                        if (questionnaire.element("latitude") != null) {
-                            wangDianVo.setLatitude(questionnaire.element("latitude").getTextTrim());
+                        if (questionnaire.element("projectname") != null) {
+                            wangDianVo.setProjectname(questionnaire.element("projectname").getTextTrim());
                         } else {
-                            wangDianVo.setLatitude("");
+                            wangDianVo.setProjectname("");
                         }
-                        if (questionnaire.element("sertime") != null) {
-                            wangDianVo.setSertime(questionnaire.element("sertime").getTextTrim());
+                        if (questionnaire.element("projectaddress") != null) {
+                            wangDianVo.setProjectaddress(questionnaire.element("projectaddress").getTextTrim());
                         } else {
-                            wangDianVo.setSertime("");
+                            wangDianVo.setProjectaddress("");
                         }
-                        if (questionnaire.element("serarea") != null) {
-                            wangDianVo.setSerarea(questionnaire.element("serarea").getTextTrim());
+                        if (questionnaire.element("takebank") != null) {
+                            wangDianVo.setTakebank(questionnaire.element("takebank").getTextTrim());
                         } else {
-                            wangDianVo.setSerarea("");
+                            wangDianVo.setTakebank("");
+                        }
+                        if (questionnaire.element("receiptcorp") != null) {
+                            wangDianVo.setReceiptcorp(questionnaire.element("receiptcorp").getTextTrim());
+                        } else {
+                            wangDianVo.setReceiptcorp("");
+                        }
+                        if (questionnaire.element("orgname") != null) {
+                            wangDianVo.setOrgname(questionnaire.element("orgname").getTextTrim());
+                        } else {
+                            wangDianVo.setOrgname("");
+                        }
+                        if (questionnaire.element("orgaddress") != null) {
+                            wangDianVo.setOrgaddress(questionnaire.element("orgaddress").getTextTrim());
+                        } else {
+                            wangDianVo.setOrgaddress("");
+                        }
+                        if (questionnaire.element("contacttime") != null) {
+                            wangDianVo.setContacttime(questionnaire.element("contacttime").getTextTrim());
+                        } else {
+                            wangDianVo.setContacttime("");
                         }
                         wangDianVoArrayList.add(wangDianVo);
                     }

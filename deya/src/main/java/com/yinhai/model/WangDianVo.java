@@ -9,94 +9,133 @@ import java.io.Serializable;
  */
 public class WangDianVo implements Serializable {
 
-    private String id;//机构/网点id
-    private String pid;//上级机构代码
-    private String depcode;//机构代码
-    private String name;//机构/网点名称
-    private String depaddr;//机构地址
-    private String depphone;//机构联系电话
-    private String longitude;//经度
-    private String latitude;//纬度
-    private String sertime;//服务时间
-    private String serarea;//服务范围
+    private String networkid;//ID
+    private String networkname;//网点名称
+    private String networkarea;//所在区域
+    private String networkaddress;//网点地址
+    private String contactnumber;//联系电话
+    private String networklongitud;//经度
+    private String networklatitud;//纬度
 
-    public String getId() {
-        return id;
+    private String projectname;//楼盘名称
+    private String projectaddress;//项目地址
+    private String takebank;//承办银行
+    private String receiptcorp;//售房单位
+
+    private String orgname;//机构名称
+    private String orgaddress;//机构地址
+    private String contacttime;//办公时间
+
+
+    public String getNetworkid() {
+        return networkid;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setNetworkid(String networkid) {
+        this.networkid = networkid;
     }
 
-    public String getPid() {
-        return pid;
+    public String getNetworkname() {
+        return networkname;
     }
 
-    public void setPid(String pid) {
-        this.pid = pid;
+    public void setNetworkname(String networkname) {
+        this.networkname = networkname;
     }
 
-    public String getDepcode() {
-        return depcode;
+    public String getNetworkarea() {
+        return networkarea;
     }
 
-    public void setDepcode(String depcode) {
-        this.depcode = depcode;
+    public void setNetworkarea(String networkarea) {
+        this.networkarea = networkarea;
     }
 
-    public String getName() {
-        return name;
+    public String getNetworkaddress() {
+        return networkaddress;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNetworkaddress(String networkaddress) {
+        this.networkaddress = networkaddress;
     }
 
-    public String getDepaddr() {
-        return depaddr;
+    public String getContactnumber() {
+        return contactnumber;
     }
 
-    public void setDepaddr(String depaddr) {
-        this.depaddr = depaddr;
+    public void setContactnumber(String contactnumber) {
+        this.contactnumber = contactnumber;
     }
 
-    public String getDepphone() {
-        return depphone;
+    public String getNetworklongitud() {
+        return networklongitud;
     }
 
-    public void setDepphone(String depphone) {
-        this.depphone = depphone;
+    public void setNetworklongitud(String networklongitud) {
+        this.networklongitud = networklongitud;
     }
 
-    public String getLongitude() {
-        return longitude;
+    public String getNetworklatitud() {
+        return networklatitud;
     }
 
-    public void setLongitude(String longitude) {
-        this.longitude = longitude;
+    public void setNetworklatitud(String networklatitud) {
+        this.networklatitud = networklatitud;
     }
 
-    public String getLatitude() {
-        return latitude;
+    public String getProjectname() {
+        return projectname;
     }
 
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
+    public void setProjectname(String projectname) {
+        this.projectname = projectname;
     }
 
-    public String getSertime() {
-        return sertime;
+    public String getProjectaddress() {
+        return projectaddress;
     }
 
-    public void setSertime(String sertime) {
-        this.sertime = sertime;
+    public void setProjectaddress(String projectaddress) {
+        this.projectaddress = projectaddress;
     }
 
-    public String getSerarea() {
-        return serarea;
+    public String getTakebank() {
+        return takebank;
     }
 
-    public void setSerarea(String serarea) {
-        this.serarea = serarea;
+    public void setTakebank(String takebank) {
+        this.takebank = takebank;
+    }
+
+    public String getReceiptcorp() {
+        return receiptcorp;
+    }
+
+    public void setReceiptcorp(String receiptcorp) {
+        this.receiptcorp = receiptcorp;
+    }
+
+    public String getOrgname() {
+        return orgname;
+    }
+
+    public void setOrgname(String orgname) {
+        this.orgname = orgname;
+    }
+
+    public String getOrgaddress() {
+        return orgaddress;
+    }
+
+    public void setOrgaddress(String orgaddress) {
+        this.orgaddress = orgaddress;
+    }
+
+    public String getContacttime() {
+        return contacttime;
+    }
+
+    public void setContacttime(String contacttime) {
+        this.contacttime = contacttime;
     }
 }
