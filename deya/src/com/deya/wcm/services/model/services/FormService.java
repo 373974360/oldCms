@@ -221,12 +221,12 @@ public class FormService {
 					hmParam.put("tableName", table_name);
 					hmParam.put("fieldName", fields.getField_enname().toLowerCase());
 					if(fields.getField_type().equals("0")){
-						hmParam.put("fieldSize", "4000");
+						hmParam.put("fieldSize","500");
 						FormUtil.updateFieldDesc("addFieldVarchar", hmParam);
 					}else if(fields.getField_type().equals("1") || fields.getField_type().equals("2")){
 						FormUtil.updateFieldDesc("addFieldLongtext", hmParam);
 					}else if(fields.getField_type().equals("3")){
-						hmParam.put("fieldSize", "3000");
+						hmParam.put("fieldSize", "20");
 						FormUtil.updateFieldDesc("addFieldVarchar", hmParam);
 					}else if(fields.getField_type().equals("4")){
 						hmParam.put("fieldSize", "20");
@@ -235,7 +235,7 @@ public class FormService {
 						hmParam.put("fieldSize", "255");
 						FormUtil.updateFieldDesc("addFieldVarchar", hmParam);
 					}else if(fields.getField_type().equals("6")){
-						hmParam.put("fieldSize", "3000"); 
+						hmParam.put("fieldSize", "3000");
 						FormUtil.updateFieldDesc("addFieldVarchar", hmParam);
 					}
 

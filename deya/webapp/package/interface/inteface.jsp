@@ -5,7 +5,7 @@
 <%@ page import="java.util.Map"%>
 <%@ page import="com.deya.wcm.services.zwgk.index.IndexManager"%>
 <%@ page import="com.deya.util.DateUtil"%>
-<%@ page import="com.deya.wcm.services.cms.info.ModelUtil"%>
+<%@ page import="com.deya.wcm.services.cms.info.ModelUtil"%><%@ page import="org.apache.commons.lang3.StringUtils"%><%@ page import="com.deya.util.Base64Utiles"%><%@ page import="com.deya.wcm.services.search.util.word.WordService"%><%@ page import="java.io.File"%>
 <%
     String callback = request.getParameter("callback");
     if(callback != null && !"".equals(callback)){
@@ -17,18 +17,42 @@
 <%!
     public String setNews(HttpServletRequest request){
         String json = "";
-        String site_id = "CMSxxxq";
-        int cat_id = 10013;
+        String site_id = "CMSxxxq";//站点ID
+        String upload_path="/deya/cms/vhosts/www.xixianxinqu.gov.cn/ROOT/upload/"+site_id+"/"+DateUtil.getCurrentDateTime("yyyyMMdd")+"/";
+        int cat_id = 10002;//写入目录
         String title = FormatUtil.formatNullString(request.getParameter("title"));//标题
         String doc_no = FormatUtil.formatNullString(request.getParameter("doc_no"));//发文字号
         String publish_dept = FormatUtil.formatNullString(request.getParameter("publish_dept"));//发布机构
+        String gk_signer = FormatUtil.formatNullString(request.getParameter("gk_signer"));//签发人
         String keywords = FormatUtil.formatNullString(request.getParameter("keywords"));//关键字
         String publish_date = FormatUtil.formatNullString(request.getParameter("publish_date"));//发布日期
-        String info_content = FormatUtil.formatNullString(request.getParameter("info_content"));//正文内容
+        String info_content = FormatUtil.formatNullString(request.getParameter("info_content"));//纯文字推送的 正文内容
+        String info_content_file = FormatUtil.formatNullString(request.getParameter("info_content_file"));//word推送的 正文内容
+
+        //附件相关
+        String file_size = FormatUtil.formatNullString(request.getParameter("file_count"));//附件个数
+        String file_arry = FormatUtil.formatNullString(request.getParameter("file"));//附件base64编码
+        String file_arry_name = FormatUtil.formatNullString(request.getParameter("file_name"));//附件中文名称
+
+        File currentDir = new File(upload_path);
+        if (!currentDir.exists()) {
+            currentDir.mkdirs();
+        }
+
+        if(StringUtils.isNotEmpty(info_content_file)){
+            String ext = info_content_file.substring(info_content_file.lastIndexOf("."),info_content_file.length());
+            String fileName = DateUtil.getCurrentDateTime("yyyyMMddHHmmss") +ext;
+            boolean b = Base64Utiles.base64ToFile(info_content_file.substring(0,info_content_file.lastIndexOf(".")),upload_path+fileName);
+            if(b){
+                info_content = WordService.wordToString(upload_path+fileName);
+            }
+        }
+
+
         ArticleBean article = new ArticleBean();
         article.setCat_id(cat_id);
         article.setInput_user(1);//默认录入人是系统管理员
-        article.setInfo_status(0);//默认状态为草稿
+        article.setInfo_status(2);//默认状态待审
         article.setModel_id(11);
         article.setApp_id("cms");
         article.setSite_id(site_id);
@@ -43,6 +67,7 @@
         article.setEditor("");
         article.setDescription("");
         article.setThumb_url("");
+        article.setGk_signer(gk_signer);
         Map<String,String> imap = IndexManager.getIndex(site_id,article.getCat_id()+"","","","");
         if(!imap.isEmpty()&&imap.containsKey("gk_index")){
             article.setGk_index(imap.get("gk_index"));

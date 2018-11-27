@@ -210,12 +210,12 @@ public class CustomFormRMIImpl extends UnicastRemoteObject implements ICustomFor
 			hmParam.put("tableName", mb.getTable_name());
 			hmParam.put("fieldName", fields.getField_enname().toLowerCase());
 			if(fields.getField_type().equals("0")){
-				hmParam.put("fieldSize","4000"); 
+				hmParam.put("fieldSize","500");
 				FormUtil.updateFieldDesc("addFieldVarchar", hmParam);
 			}else if(fields.getField_type().equals("1") || fields.getField_type().equals("2")){
 				FormUtil.updateFieldDesc("addFieldLongtext", hmParam);
 			}else if(fields.getField_type().equals("3")){
-				hmParam.put("fieldSize", "3000");
+				hmParam.put("fieldSize", "20");
 				FormUtil.updateFieldDesc("addFieldVarchar", hmParam);
 			}else if(fields.getField_type().equals("4")){
 				hmParam.put("fieldSize", "20");

@@ -94,7 +94,7 @@
 		}else{
 			sb.setMe_id(0);
 		}
-		sb.setSq_ip(request.getRemoteAddr());
+		sb.setSq_ip(FormatUtil.getIpAddr(request));
 		if(do_dept !="")
 		{
 			SQBean newSB = SQManager.insertSQ(sb,sqa);
