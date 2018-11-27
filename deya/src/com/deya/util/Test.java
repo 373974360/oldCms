@@ -15,18 +15,21 @@ public class Test {
 
     public static void setNews() {
         String url = "http://111.20.241.184:12345/interface/inteface_s.jsp";
-        String file_txt = Base64Utiles.fileToBase64("/Users/chaoweima/Downloads/重庆市住房公积金信息化工程应用软件系统建设项目_附件2.1_新增申请表20181108_（综合服务平台需求新增）.docx");
+        String info_content_file = Base64Utiles.fileToBase64("/Users/chaoweima/Downloads/门户网站接口文档.docx");
         NameValuePair[] data = {
-                new NameValuePair("title", "信息标题"),
-                new NameValuePair("doc_no", "文号"),
-                new NameValuePair("publish_dept", "发布机构"),
-                new NameValuePair("gk_signer", "签发人"),
-                new NameValuePair("keywords", "关键字"),
-                new NameValuePair("publish_date", "2018-11-02 14:35:00"),
-                new NameValuePair("info_content", "纯文字推送的 正文内容"),
-                new NameValuePair("info_content_file", file_txt),
-                new NameValuePair("file_arry", file_txt),
-                new NameValuePair("file_arry_name", "2018版-信息协同接口设计-外部协作的信息协同接口1.0")
+                new NameValuePair("title", "门户网站接口文档111"),//信息标题
+                new NameValuePair("doc_no", "文号"),//发文字号
+                new NameValuePair("publish_dept", "发布机构"),//发布机构
+                new NameValuePair("gk_signer", "签发人"),//签发人
+                new NameValuePair("keywords", "关键字"),//关键字
+                new NameValuePair("publish_date", "2018-11-02 14:35:00"),//发布日期
+                new NameValuePair("info_content", "纯文字推送的 正文内容"),//正文内容 纯文字
+                new NameValuePair("info_content_file", info_content_file),//正文内容 word格式 需要转 base 64编码
+                new NameValuePair("file_count", "0"),//附件个数
+                new NameValuePair("file_1", ""),//附件 base64编码
+                new NameValuePair("file_name_1", "2018版-信息协同接口设计-外部协作的信息协同接口1.0"),//附件中文名称
+                new NameValuePair("file_2", ""),//附件 base64编码
+                new NameValuePair("file_name_2", "2018版-信息协同接口设计-外部协作的信息协同接口1.0")//附件中文名称
         };
         doPost(url, data);
     }

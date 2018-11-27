@@ -14,7 +14,6 @@ import com.deya.wcm.services.system.formodel.ModelManager;
 import org.apache.commons.beanutils.BeanUtils;
 
 import com.deya.util.labelUtil.AutoPagerHandl;
-import com.deya.wcm.bean.cms.info.ArticleBean;
 import com.deya.wcm.bean.cms.info.InfoBean;
 import com.deya.wcm.bean.cms.info.PicBean;
 import com.deya.wcm.bean.logs.SettingLogsBean;
@@ -22,7 +21,6 @@ import com.deya.wcm.dao.cms.info.ModelUtilDAO;
 import com.deya.wcm.services.model.services.BeanToMapUtil;
 import com.deya.wcm.services.model.services.InfoCustomService;
 import com.deya.wcm.services.model.services.MapManager;
-import org.apache.poi.hssf.model.Model;
 
 /**
  * 内容模型通用处理类，包括文章模型，通用图组新闻，通用视频新闻，用户自定义字段等
