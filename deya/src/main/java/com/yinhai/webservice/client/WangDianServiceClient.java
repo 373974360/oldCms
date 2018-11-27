@@ -82,7 +82,7 @@ public class WangDianServiceClient {
                 s = s.substring(s.indexOf("<data>"), s.indexOf("</return>"));
                 Document xmlDoc = DocumentHelper.parseText(s);
                 Element rootElement = xmlDoc.getRootElement();
-                Iterator personInfos = rootElement.elementIterator("list");
+                Iterator personInfos = rootElement.elementIterator("reslist");
                 if (personInfos != null) {
                     while (personInfos.hasNext()) {
                         Element questionnaire = (Element) personInfos.next();
