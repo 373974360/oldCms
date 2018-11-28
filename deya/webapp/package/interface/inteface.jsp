@@ -30,7 +30,7 @@
         String info_content = FormatUtil.formatNullString(request.getParameter("info_content"));//纯文字推送的 正文内容
         String info_content_file = FormatUtil.formatNullString(request.getParameter("info_content_file"));//word推送的 正文内容
 
-        File currentDir = new File(file_path);
+        File currentDir = new File(upload_path+file_path);
         if (!currentDir.exists()) {
             currentDir.mkdirs();
         }
@@ -68,7 +68,6 @@
             info_content += downHtml;
         }
 
-
         info_content = info_content.replace(upload_path,"");
 
 
@@ -91,7 +90,7 @@
         article.setDescription("");
         article.setThumb_url("");
         article.setGk_signer(gk_signer);
-        Map<String,String> imap = IndexManager.getIndex(site_id,article.getCat_id()+"","","","");
+        Map<String,String> imap = IndexManager.getIndex(site_id,article.getCat_id()+"","","");
         if(!imap.isEmpty()&&imap.containsKey("gk_index")){
             article.setGk_index(imap.get("gk_index"));
         }

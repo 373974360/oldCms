@@ -7,6 +7,9 @@ import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.params.HttpMethodParams;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Test {
 
     public static void main(String[] args){
@@ -15,32 +18,36 @@ public class Test {
 
     public static void setNews() {
         String url = "http://111.20.241.184:12345/interface/inteface_s.jsp";
-        String info_content_file = Base64Utiles.fileToBase64("/Users/chaoweima/Downloads/门户网站接口文档.docx");
-        NameValuePair[] data = {
-                new NameValuePair("title", "门户网站接口文档111"),//信息标题
-                new NameValuePair("doc_no", "文号"),//发文字号
-                new NameValuePair("publish_dept", "发布机构"),//发布机构
-                new NameValuePair("gk_signer", "签发人"),//签发人
-                new NameValuePair("keywords", "关键字"),//关键字
-                new NameValuePair("publish_date", "2018-11-02 14:35:00"),//发布日期
-                new NameValuePair("info_content", "纯文字推送的 正文内容"),//正文内容 纯文字
-                new NameValuePair("info_content_file", info_content_file),//正文内容 word格式 需要转 base 64编码
-                new NameValuePair("file_count", "0"),//附件个数
-                new NameValuePair("file_1", ""),//附件 base64编码
-                new NameValuePair("file_name_1", "2018版-信息协同接口设计-外部协作的信息协同接口1.0"),//附件中文名称
-                new NameValuePair("file_2", ""),//附件 base64编码
-                new NameValuePair("file_name_2", "2018版-信息协同接口设计-外部协作的信息协同接口1.0")//附件中文名称
-        };
+        String info_content_file = Base64Utiles.fileToBase64("/Users/chaoweima/Downloads/OA公文写入接口.docx");
+        List<NameValuePair> data = new ArrayList<>();
+        data.add(new NameValuePair("title", "门户网站接口文档111"));
+        data.add(new NameValuePair("doc_no", "文号"));
+        data.add(new NameValuePair("publish_dept", "发布机构"));
+        data.add(new NameValuePair("gk_signer", "签发人"));
+        data.add(new NameValuePair("keywords", "关键字"));
+        data.add(new NameValuePair("publish_date", "2018-11-02 14:35:00"));
+        data.add(new NameValuePair("info_content", "纯文字推送的 正文内容"));
+        data.add(new NameValuePair("info_content_file", info_content_file));
+        data.add(new NameValuePair("file_count", "0"));
+        data.add(new NameValuePair("file_1", ""));
+        data.add(new NameValuePair("file_name_1", "2018版-信息协同接口设计-外部协作的信息协同接口1.0"));
+        data.add(new NameValuePair("file_2", ""));
+        data.add(new NameValuePair("file_name_2", "2018版-信息协同接口设计-外部协作的信息协同接口1.0"));
         doPost(url, data);
     }
 
-    public static String doPost(String url, NameValuePair[] data) {
+    public static String doPost(String url, List<NameValuePair> data) {
         String response = "";
 
         HttpClient httpclient = new HttpClient();
         PostMethod postMethod = new PostMethod(url);
         postMethod.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET,"UTF-8");
-        postMethod.setRequestBody(data);
+        if(!data.isEmpty()){
+            for(NameValuePair nameValuePair:data){
+                postMethod.addParameter(nameValuePair);
+            }
+        }
+        //postMethod.setRequestBody((NameValuePair[]) data.toArray());
         int statusCode = 0;
 
         try {
@@ -74,3 +81,4 @@ public class Test {
         return response;
     }
 }
+
