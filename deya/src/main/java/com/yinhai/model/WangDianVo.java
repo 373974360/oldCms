@@ -14,8 +14,8 @@ public class WangDianVo implements Serializable {
     private String networkarea;//所在区域
     private String networkaddress;//网点地址
     private String contactnumber;//联系电话
-    private String networklongitud;//经度
-    private String networklatitud;//纬度
+    private String networklongitude;//经度
+    private String networklatitude;//纬度
 
     private String projectname;//楼盘名称
     private String projectaddress;//项目地址
@@ -67,20 +67,20 @@ public class WangDianVo implements Serializable {
         this.contactnumber = contactnumber;
     }
 
-    public String getNetworklongitud() {
-        return networklongitud;
+    public String getNetworklongitude() {
+        return networklongitude;
     }
 
-    public void setNetworklongitud(String networklongitud) {
-        this.networklongitud = networklongitud;
+    public void setNetworklongitude(String networklongitude) {
+        this.networklongitude = networklongitude;
     }
 
-    public String getNetworklatitud() {
-        return networklatitud;
+    public String getNetworklatitude() {
+        return networklatitude;
     }
 
-    public void setNetworklatitud(String networklatitud) {
-        this.networklatitud = networklatitud;
+    public void setNetworklatitude(String networklatitude) {
+        this.networklatitude = networklatitude;
     }
 
     public String getProjectname() {

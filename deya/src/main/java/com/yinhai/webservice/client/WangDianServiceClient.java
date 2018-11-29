@@ -112,15 +112,15 @@ public class WangDianServiceClient {
                         } else {
                             wangDianVo.setContactnumber("");
                         }
-                        if (questionnaire.element("networklongitud") != null) {
-                            wangDianVo.setNetworklongitud(questionnaire.element("networklongitud").getTextTrim());
+                        if (questionnaire.element("networklongitude") != null) {
+                            wangDianVo.setNetworklongitude(questionnaire.element("networklongitude").getTextTrim());
                         } else {
-                            wangDianVo.setNetworklongitud("");
+                            wangDianVo.setNetworklongitude("");
                         }
-                        if (questionnaire.element("networklatitud") != null) {
-                            wangDianVo.setNetworklatitud(questionnaire.element("networklatitud").getTextTrim());
+                        if (questionnaire.element("networklatitude") != null) {
+                            wangDianVo.setNetworklatitude(questionnaire.element("networklatitude").getTextTrim());
                         } else {
-                            wangDianVo.setNetworklatitud("");
+                            wangDianVo.setNetworklatitude("");
                         }
                         if (questionnaire.element("projectname") != null) {
                             wangDianVo.setProjectname(questionnaire.element("projectname").getTextTrim());
