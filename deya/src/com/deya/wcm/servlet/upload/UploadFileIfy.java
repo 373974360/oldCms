@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.baidu.ueditor.define.AppInfo;
-import com.deya.util.jspFilterHandl;
+import com.deya.util.*;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -25,9 +25,6 @@ import com.baidu.ueditor.PathFormat;
 import com.baidu.ueditor.define.BaseState;
 import com.baidu.ueditor.define.State;
 import com.baidu.ueditor.upload.StorageManager;
-import com.deya.util.DateUtil;
-import com.deya.util.FormatUtil;
-import com.deya.util.UploadManager;
 import com.deya.util.img.ImageUtils;
 import com.deya.util.jconfig.JconfigUtilContainer;
 import com.deya.wcm.bean.logs.SettingLogsBean;
@@ -81,6 +78,7 @@ public class UploadFileIfy extends HttpServlet {
         thum_url = "";
 
         String savePath = UploadManager.getUploadFilePath(site_id) + "/";
+        String rootPath = savePath;
 
         DiskFileItemFactory fac = new DiskFileItemFactory();
         ServletFileUpload upload = new ServletFileUpload(fac);
@@ -151,6 +149,19 @@ public class UploadFileIfy extends HttpServlet {
             if (savePath.startsWith("//"))
                 savePath = savePath.substring(1);
         }
+
+        //如果是视频格式，转码m3u8
+        if(extName.equals(".flv")||extName.equals(".mp4")||extName.equals(".avi")||extName.equals(".wmv")){
+            if(VideoUtils.executeCodecs(rootPath,name + extName)){
+                savePath+=name+"/";
+                extName=".m3u8";
+                name= "out";
+                thum_url = name+extName;
+            }else{
+                System.out.println("转码M3U8失败。。。");
+            }
+        }
+
         String outStr = "{\"att_path\":\"" + savePath + "\",\"att_ename\":\"" + name + extName + "\",\"hd_url\":\"" + hd_url + "\",\"thum_url\":\"" + thum_url + "\"}";
 
         response.getWriter().print(outStr);

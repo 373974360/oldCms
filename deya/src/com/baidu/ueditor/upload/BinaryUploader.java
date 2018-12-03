@@ -5,12 +5,9 @@ import com.baidu.ueditor.define.AppInfo;
 import com.baidu.ueditor.define.BaseState;
 import com.baidu.ueditor.define.FileType;
 import com.baidu.ueditor.define.State;
-import com.deya.util.DateUtil;
-import com.deya.util.FormatUtil;
-import com.deya.util.UploadManager;
+import com.deya.util.*;
 import com.deya.util.img.ImageUtils;
 import com.deya.util.jconfig.JconfigUtilContainer;
-import com.deya.util.jspFilterHandl;
 import com.deya.wcm.bean.logs.SettingLogsBean;
 import com.deya.wcm.bean.material.MateInfoBean;
 import com.deya.wcm.server.ServerManager;
@@ -61,6 +58,7 @@ public class BinaryUploader {
             */
 
             String savePath = UploadManager.getUploadFilePath(site_id) + "/";
+            String rootPath = savePath;
 
             DiskFileItemFactory fac = new DiskFileItemFactory();
             ServletFileUpload upload = new ServletFileUpload(fac);
@@ -158,6 +156,19 @@ public class BinaryUploader {
             mb.setAlias_name(pic_name);
             mb.setFilesize(totalSpace);
             MateInfoManager.insertMateInfo(mb,stl);
+
+
+            //如果是视频格式，转码m3u8
+            if(extName.equals(".flv")||extName.equals(".mp4")||extName.equals(".avi")||extName.equals(".wmv")){
+                if(VideoUtils.executeCodecs(rootPath,name + extName)){
+                    savePath+=name+"/";
+                    extName=".m3u8";
+                    name= "out";
+                }else{
+                    System.out.println("转码M3U8失败。。。");
+                }
+            }
+
 
             ueditorUpload = new BaseState(true);
             ueditorUpload.putInfo("title",pic_name);
