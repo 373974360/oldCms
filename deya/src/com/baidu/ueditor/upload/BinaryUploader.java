@@ -163,7 +163,7 @@ public class BinaryUploader {
                 if(VideoUtils.executeCodecs(rootPath,name + extName)){
                     savePath+=name+"/";
                     extName=".m3u8";
-                    name= "out";
+                    name= "index";
                 }else{
                     System.out.println("转码M3U8失败。。。");
                 }

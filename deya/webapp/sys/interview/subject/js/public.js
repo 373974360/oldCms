@@ -193,7 +193,7 @@ function checkImgFile(files)
 //判断视频格式
 function checkVideoFile(files) 
 {
-	var ext = "asf,avi,mpg,mpeg,mpe,mov,wmv,wav,mid,midi,mp3,mpa,mp2,ra,wma";
+	var ext = "asf,avi,mpg,mpeg,mpe,mov,wmv,wav,mid,midi,mp3,mpa,mp2,ra,wma,m3u8";
 	if(files.replace(/(^\s*)|(\s*$)/g,"") != "")
 	{    		  
 		if(files.indexOf(".") == -1) 
@@ -207,7 +207,7 @@ function checkVideoFile(files)
 		} 
 		else
 		{ 					
-			parent.alertWar("<span style='color:red'>上传的视频文件格式不对，只允许上传 asf，avi，mpg，mpeg，mpe，mov，wmv，wav，mid，midi，mp3，mpa，mp2，ra，wma 等格式的文件，请重新上传！</span>"); 
+			parent.alertWar("<span style='color:red'>上传的视频文件格式不对，只允许上传 asf，avi，mpg，mpeg，mpe，mov，wmv，wav，mid，midi，mp3，mpa，mp2，ra，wma，m3u8 等格式的文件，请重新上传！</span>");
 			return false;
 		}
 	}

@@ -1,7 +1,7 @@
 var VideoBean = new Bean("com.deya.wcm.bean.cms.info.VideoBean",true);
 
 // 视频格式类型
-var video_form = "asf,avi,mpg,mpeg,mpe,mov,rmvb,wmv,wav,mid,midi,mp3,mpa,mp2,ra,ram,rm,wma,flv,mp4";
+var video_form = "asf,avi,mpg,mpeg,mpe,mov,rmvb,wmv,wav,mid,midi,mp3,mpa,mp2,ra,ram,rm,wma,flv,mp4,m3u8";
 // 添加视频新闻操作
 function addInfoData()
 {

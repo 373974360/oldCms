@@ -155,7 +155,7 @@ public class UploadFileIfy extends HttpServlet {
             if(VideoUtils.executeCodecs(rootPath,name + extName)){
                 savePath+=name+"/";
                 extName=".m3u8";
-                name= "out";
+                name= "index";
                 thum_url = name+extName;
             }else{
                 System.out.println("转码M3U8失败。。。");

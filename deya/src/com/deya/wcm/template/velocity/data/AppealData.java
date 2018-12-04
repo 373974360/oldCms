@@ -1,9 +1,6 @@
 package com.deya.wcm.template.velocity.data;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -462,7 +459,7 @@ public class AppealData{
 	/**
 	 * 根据业务ID，信件类型得到总数
 	 * @param String count_type 信件类型 all 所有，sl 受理信件　bj　办结信件（回复件）
-	 * 				 count_data yesterday昨天的  ultimo 上月的 instant 本月 cur_data 当天
+	 * 				 count_data years本年度  yesterday昨天的  ultimo 上月的 instant 本月 cur_data 当天
 	 * @return String
 	 */
 	public static String getAllAppealCount(String params)
@@ -488,11 +485,17 @@ public class AppealData{
 			{
 				String count_data = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=")+1));
 				if(!"".equals(count_data) && !count_data.startsWith("$count_data") && FormatUtil.isValiditySQL(count_data))
-				{		
+				{
+					if("years".equals(count_data))
+					{
+						m.put("start_data", DateUtil.getYear(new Date())+"-01-01 00:00:00");
+						m.put("years_con", "years");
+					}
 					if("yesterday".equals(count_data))
 					{
 						m.put("start_data", DateUtil.getDateBefore(DateUtil.getCurrentDateTime(),1)+" 00:00:00");
 						m.put("end_data", DateUtil.getDateBefore(DateUtil.getCurrentDateTime(),1)+" 23:59:59");
+						m.put("yesterday_con", "yesterday");
 					}
 					if("ultimo".equals(count_data))
 					{
@@ -521,6 +524,7 @@ public class AppealData{
 					if("cur_data".equals(count_data))
 					{
 						m.put("start_data", DateUtil.getCurrentDate()+" 00:00:00");
+						m.put("cur_data", "cur_data");
 					}
 				}				
 			}		
@@ -531,6 +535,22 @@ public class AppealData{
 				{				
 					m.put("model_ids", model_id);
 				}				
+			}
+			if(tempA[i].toLowerCase().startsWith("publish_status="))
+			{
+				String publish_status = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=")+1));
+				if(!"".equals(publish_status) && !publish_status.startsWith("$publish_status") && FormatUtil.isValiditySQL(publish_status))
+				{
+					m.put("publish_status", publish_status);
+				}
+			}
+			if(tempA[i].toLowerCase().startsWith("is_open="))
+			{
+				String is_open = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=")+1));
+				if(!"".equals(is_open) && !is_open.startsWith("$is_open") && FormatUtil.isValiditySQL(is_open))
+				{
+					m.put("is_open", is_open);
+				}
 			}
 			if(tempA[i].toLowerCase().startsWith("do_dept="))
 			{

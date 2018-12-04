@@ -508,6 +508,12 @@
             <if test="wsl_con != null">
                 and sq_status = 0
             </if>
+            <if test="is_open != null">
+                and is_open = #{is_open}
+            </if>
+            <if test="publish_status != null">
+                and publish_status = #{publish_status}
+            </if>
             <!-- 已受理和已处理的信件(受理数) -->
             <if test="sl_con != null">
                 and sq_status > 0
@@ -550,6 +556,12 @@
             </if>
             <!--今日总共件-->
             <if test="cur_data != null">
+                <if test="start_data != null">
+                    <![CDATA[	and sq_dtime > #{start_data} ]]>
+                </if>
+            </if>
+            <!--本年度总共件-->
+            <if test="years_con != null">
                 <if test="start_data != null">
                     <![CDATA[	and sq_dtime > #{start_data} ]]>
                 </if>

@@ -774,8 +774,8 @@ function initUPLoadMedia(file_name,text_input)
 		'queueID' :'fileQueue',//与下面的上传文件列表id对应
 		'queueSizeLimit' :1,//上传文件的数量
 		//'scriptData' :{'is_press':0,'press_osition':0,'site_id':site_id},//向后台传的数据
-		'fileDesc' :'asf,avi,mpg,mpeg,mpe,mov,rmvb,wmv,wav,mid,midi,mp3,mpa,mp2,ra,ram,rm,wma,flv',//上传文件类型说明
-		'fileExt' :'*.asf;*.avi;*.mpg;*.mpeg;*.mpe;*.mov;*.rmvb;*.wmv;*.wav;*.mid;*.midi;*.mp3;*.mpa;*.mp2;*.ra;*.ram;*.rm;*.wma;*.flv', //控制可上传文件的扩展名，启用本项时需同时声明fileDesc
+		'fileDesc' :'asf,avi,mpg,mpeg,mpe,mov,rmvb,wmv,wav,mid,midi,mp3,mpa,mp2,ra,ram,rm,wma,flv,mp4',//上传文件类型说明
+		'fileExt' :'*.asf;*.avi;*.mpg;*.mpeg;*.mpe;*.mov;*.rmvb;*.wmv;*.wav;*.mid;*.midi;*.mp3;*.mpa;*.mp2;*.ra;*.ram;*.rm;*.wma;*.flv;*.mp4', //控制可上传文件的扩展名，启用本项时需同时声明fileDesc
 		'method':'get',//如果向后台传输数据，必须是get
 		'sizeLimit':sizeLimit,//文件上传的大小限制，单位是字节
 		'auto' :true,//是否自动上传

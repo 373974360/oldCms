@@ -30,7 +30,7 @@ public class VideoUtils {
                 oldFile.delete();
                 oldPath = filePath+pathName+"/"+pathName+".mp4";
             }
-            String commandTs = "ffmpeg -i "+oldPath+" -codec copy -vbsf h264_mp4toannexb -map 0 -f segment -segment_list "+filePath+pathName+"/out.m3u8 -segment_time 10 "+filePath+pathName+"/out%03d.ts";
+            String commandTs = "ffmpeg -i "+oldPath+" -codec copy -vbsf h264_mp4toannexb -map 0 -f segment -segment_list "+filePath+pathName+"/index.m3u8 -segment_time 10 "+filePath+pathName+"/index%03d.ts";
             runCmd(commandTs);
             File oldFile = new File(oldPath);
             oldFile.delete();
