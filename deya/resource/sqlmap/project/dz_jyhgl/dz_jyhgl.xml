@@ -77,7 +77,7 @@
 
 
     <select id="getInfoUpdateCountByTimeAndCatId" parameterType="Map" resultType="java.lang.String">
-        <![CDATA[select count(*) as totle from cs_info where released_dtime > #{starttime} and released_dtime <= #{endtime} and cat_id in (${cat_id})]]>
+        <![CDATA[select count(*) as totle from cs_info where released_dtime > #{starttime} and released_dtime <= #{endtime} and cat_id in (${cat_id}) and info_status=8 and final_status=0]]>
     </select>
 
 
