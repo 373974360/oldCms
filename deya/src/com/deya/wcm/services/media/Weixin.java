@@ -13,11 +13,10 @@ import org.apache.http.util.EntityUtils;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 
 public class Weixin {
-    private static String appid = "";
+    public static String appid = "";
     private static String secret = "";
     private static String accessTockenUrl = "";
     private static String perUploadUrl = "";
@@ -30,6 +29,9 @@ public class Weixin {
     private static String previewUrl="";
     private static String testwxname="";
     private static String sendtype="";
+    private static String jsapiTicketUrl="";
+    private static Map<String,String> tokenMap = new HashMap<>();
+    private static Map<String,String> ticketMap = new HashMap<>();
 
     public static String AccessTockenOk(){
         CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -50,6 +52,82 @@ public class Weixin {
             e.printStackTrace();
         }
         return tokenStr;
+    }
+    public static String getToken(){
+        String lifeStr = tokenMap.get("tokenLife") == null ? null : tokenMap.get("tokenLife").toString();
+        Long life = 0L;
+        if (lifeStr != null && !"".equals(lifeStr)) {
+            life = Long.parseLong(lifeStr);
+        }
+
+        String tokenValue = tokenMap.get("tokenValue") == null ? null : tokenMap.get("tokenValue").toString();
+        System.out.println("@@@@@@@@@@tokenValue" + tokenValue);
+        if (!"".equals(tokenValue) && tokenValue != null && (new Date()).getTime() <= life + 7200000L) {
+            return tokenValue;
+        } else {
+            String token = AccessTockenOk();
+            System.out.println("@@@@@@@@@@token" + token);
+            saveToken(token, String.valueOf((new Date()).getTime()));
+            return token;
+        }
+    }
+
+    public static void saveToken(String value, String life){
+        tokenMap.put("tokenLife", life);
+        tokenMap.put("tokenValue", value);
+    }
+
+    public static String getJSApiTicket(){
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+        String url = jsapiTicketUrl.replace("##tocken##", tocken);
+        HttpGet httpGet = new HttpGet(url);
+        JSONObject jsonObject;
+        String ticket = "";
+        try {
+            CloseableHttpResponse response = httpClient.execute(httpGet);
+            HttpEntity entity = response.getEntity();
+            if (entity != null) {
+                String result = EntityUtils.toString(entity, "UTF-8");
+                System.out.println(result);
+                jsonObject = JSONObject.fromObject(result);
+                boolean isExit = jsonObject.containsKey("ticket");
+                ticket = isExit ? jsonObject.getString("ticket") : "";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ticket;
+    }
+    public static String getTicket(){
+        String lifeStr = ticketMap.get("ticketLife") == null ? null : ticketMap.get("ticketLife").toString();
+        Long life = 0L;
+        if (lifeStr != null && !"".equals(lifeStr)) {
+            life = Long.parseLong(lifeStr);
+        }
+
+        String ticketValue = ticketMap.get("ticketValue") == null ? null : ticketMap.get("ticketValue").toString();
+        System.out.println("@@@@@@@@@@ticketValue" + ticketValue);
+        if (!"".equals(ticketValue) && ticketValue != null && (new Date()).getTime() <= life + 7200000L) {
+            return ticketValue;
+        } else {
+            String ticket = getJSApiTicket();
+            System.out.println("@@@@@@@@@@ticket" + ticket);
+            saveTicket(ticket, String.valueOf((new Date()).getTime()));
+            return ticket;
+        }
+    }
+
+    public static void saveTicket(String value, String life){
+        ticketMap.put("ticketLife", life);
+        ticketMap.put("ticketValue", value);
+    }
+
+    public static String create_nonce_str() {
+        return UUID.randomUUID().toString();
+    }
+
+    public static String create_timestamp() {
+        return Long.toString(System.currentTimeMillis() / 1000);
     }
 
     public static String uploadImage(String url, String filePath) throws IOException {
@@ -179,7 +257,7 @@ public class Weixin {
     }
 
     public static void initParams(String fileName) {
-        tocken = AccessTockenOk();
+        tocken = getToken();
         appid = GetValueByKey(fileName, "appid");
         secret = GetValueByKey(fileName, "secret");
         accessTockenUrl = GetValueByKey(fileName, "accessTockenUrl") + appid + "&secret=" + secret;
@@ -192,6 +270,7 @@ public class Weixin {
         previewUrl = GetValueByKey(fileName, "previewUrl");
         testwxname = GetValueByKey(fileName, "testwxname");
         sendtype = GetValueByKey(fileName, "sendtype");
+        jsapiTicketUrl = GetValueByKey(fileName, "jsapiTicketUrl");
     }
 
     public static String GetValueByKey(String fileName, String key) {
