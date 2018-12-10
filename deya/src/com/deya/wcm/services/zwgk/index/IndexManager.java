@@ -163,7 +163,7 @@ public class IndexManager implements ISyncCatch{
 
 		//社会信用代码
 		IndexRoleBean irb = roleBeanList.get(7);
-		if(irb.getIs_valid() == VALID_NUM){
+		if(irb.getIs_valid() == VALID_NUM&&StringUtils.isNotEmpty(dept_code)){
 			ret+=dept_code + irb.getIr_space();
 		}
 
