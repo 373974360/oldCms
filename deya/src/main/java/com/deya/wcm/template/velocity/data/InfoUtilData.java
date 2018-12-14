@@ -1979,7 +1979,7 @@ public class InfoUtilData {
     public static List<WangDianVo> getWangdianResultList(String query_type,String bantype,String networktype,String networkarea,String orgcode,String keyword,String limit,String start){
         Map<String,String> map = new HashMap<>();
         if(StringUtils.isEmpty(start)){
-            start="1";
+            start="0";
         }
         map.put("query_type",query_type);//查询标识
         map.put("bantype",bantype);//银行行别
