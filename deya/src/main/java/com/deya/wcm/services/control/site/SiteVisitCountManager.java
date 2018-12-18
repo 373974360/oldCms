@@ -57,7 +57,8 @@ public class SiteVisitCountManager {
 	 * @return int
 	 */
 	public static int getHit(String hit_type,HttpServletRequest request)
-	{		 
+	{
+		reloadSiteVisitCount();
 		String site_id = SiteDomainManager.getSiteIDByUrl(request.getRequestURL().toString());
 		if(hit_type.equals("day_hits"))
 		{
@@ -165,8 +166,8 @@ public class SiteVisitCountManager {
 		svcb.setMonth_hits(svcb.getMonth_hits()+svcb.getClick_step());
 		svcb.setWeek_hits(svcb.getWeek_hits()+svcb.getClick_step());
 		
-		if(svcb.getTemp_count() == DEFAULT_FREQUENCY)
-		{
+		//if(svcb.getTemp_count() == DEFAULT_FREQUENCY)
+		//{
 			//达到频率了，入库
 			int count = svcb.getTemp_count() * 1;
 			Map<String,String> m = new HashMap<String,String>();
@@ -189,7 +190,7 @@ public class SiteVisitCountManager {
 					svcb.setIs_exist(true);
 				}
 			}
-		}
+		//}
 	}
 	
 	/**
