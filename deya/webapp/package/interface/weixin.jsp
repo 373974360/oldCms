@@ -4,7 +4,8 @@
 <%@ page contentType="application/json; charset=utf-8"%>
 <%
     String url = FormatUtil.formatNullString(request.getParameter("content_url"));//正文地址
-    String result = sign(url);
+    String site_id = FormatUtil.formatNullString(request.getParameter("site_id"));//正文地址
+    String result = sign(url,site_id);
     String callback = request.getParameter("callback");
     if(callback != null && !"".equals(callback)){
         out.println(callback + "(" + result + ")");
@@ -13,8 +14,8 @@
     }
 %>
 <%!
-    public static String sign(String url) {
-        Weixin.initParams("media.properties");
+    public static String sign(String url,String site_id) {
+        Weixin.initParams("media.properties",site_id);
         String reslut = "";
         String nonce_str = Weixin.create_nonce_str();
         String timestamp = Weixin.create_timestamp();

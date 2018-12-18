@@ -169,7 +169,7 @@ function weChatTS(){
     if(selectIDS.split(",").length>8){
         alert('最多选择8条信息！！');
     }else {
-        $.post("/sys/cms/info/article/WeChat.jsp", {id: selectIDS}, function (data) {
+        $.post("/sys/cms/info/article/WeChat.jsp", {id: selectIDS,siteid:site_id}, function (data) {
             var mess = JSON.parse(data);
             if (mess.data == 'ok') {
                 alert('推送成功！！');
