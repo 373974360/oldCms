@@ -17,8 +17,7 @@ public class Test {
     }
 
     public static void setNews() {
-        String url = "http://111.20.241.184:12345/interface/inteface_s.jsp";
-        String info_content_file = Base64Utiles.fileToBase64("/Users/chaoweima/Downloads/OA公文写入接口.docx");
+        String url = "http://39.106.141.135/interface/inteface.jsp";
         List<NameValuePair> data = new ArrayList<>();
         data.add(new NameValuePair("title", "门户网站接口文档111"));
         data.add(new NameValuePair("doc_no", "文号"));
@@ -27,12 +26,10 @@ public class Test {
         data.add(new NameValuePair("keywords", "关键字"));
         data.add(new NameValuePair("publish_date", "2018-11-02 14:35:00"));
         data.add(new NameValuePair("info_content", "纯文字推送的 正文内容"));
-        data.add(new NameValuePair("info_content_file", info_content_file));
-        data.add(new NameValuePair("file_count", "0"));
-        data.add(new NameValuePair("file_1", ""));
+        data.add(new NameValuePair("info_content_file", "/upload/CMSsxaj/201812/201812190936012.docx"));
+        data.add(new NameValuePair("file_count", "1"));
+        data.add(new NameValuePair("file_1", "/upload/CMSsxaj/201812/201812190936012.docx"));
         data.add(new NameValuePair("file_name_1", "2018版-信息协同接口设计-外部协作的信息协同接口1.0"));
-        data.add(new NameValuePair("file_2", ""));
-        data.add(new NameValuePair("file_name_2", "2018版-信息协同接口设计-外部协作的信息协同接口1.0"));
         doPost(url, data);
     }
 

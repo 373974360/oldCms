@@ -5,7 +5,7 @@
 <%@ page import="java.util.Map"%>
 <%@ page import="com.deya.wcm.services.zwgk.index.IndexManager"%>
 <%@ page import="com.deya.util.DateUtil"%>
-<%@ page import="com.deya.wcm.services.cms.info.ModelUtil"%><%@ page import="org.apache.commons.lang3.StringUtils"%><%@ page import="com.deya.util.Base64Utiles"%><%@ page import="com.deya.wcm.services.search.util.word.WordService"%><%@ page import="java.io.File"%><%@ page import="com.deya.util.WordUtils"%>
+<%@ page import="com.deya.wcm.services.cms.info.ModelUtil"%><%@ page import="org.apache.commons.lang3.StringUtils"%><%@ page import="com.deya.util.WordUtils"%>
 <%
     String callback = request.getParameter("callback");
     if(callback != null && !"".equals(callback)){
@@ -17,10 +17,9 @@
 <%!
     public String setNews(HttpServletRequest request){
         String json = "";
-        String site_id = "CMSxxxq";//站点ID
-        String upload_path = "/deya/cms/vhosts/www.xixianxinqu.gov.cn/ROOT";
-        String file_path= "/upload/"+site_id+"/"+DateUtil.getCurrentDateTime("yyyyMMdd")+"/";
-        int cat_id = 10002;//写入目录
+        String site_id = "CMSsxaj";//站点ID
+        String root_path = "/deya/cms/vhosts/www.snsafety.gov.cn/ROOT";
+        int cat_id = 10527;//写入目录
         String title = FormatUtil.formatNullString(request.getParameter("title"));//标题
         String doc_no = FormatUtil.formatNullString(request.getParameter("doc_no"));//发文字号
         String publish_dept = FormatUtil.formatNullString(request.getParameter("publish_dept"));//发布机构
@@ -30,22 +29,15 @@
         String info_content = FormatUtil.formatNullString(request.getParameter("info_content"));//纯文字推送的 正文内容
         String info_content_file = FormatUtil.formatNullString(request.getParameter("info_content_file"));//word推送的 正文内容
 
-        File currentDir = new File(upload_path+file_path);
-        if (!currentDir.exists()) {
-            currentDir.mkdirs();
-        }
-
         //word内容推送解析
         if(StringUtils.isNotEmpty(info_content_file)){
-            String ext = info_content_file.substring(info_content_file.lastIndexOf("."),info_content_file.length());
-            String fileName = DateUtil.getCurrentDateTime("yyyyMMddHHmmss") +ext;
-            boolean b = Base64Utiles.base64ToFile(info_content_file.substring(0,info_content_file.lastIndexOf(".")),upload_path+file_path+fileName);
-            if(b){
-                if(ext.equals(".docx")||ext.equals(".DOCX")){
-                    info_content = WordUtils.Word2007ToHtml(upload_path+file_path,fileName);
-                }else{
-                    info_content = "";
-                }
+            String fileName = info_content_file.substring(info_content_file.lastIndexOf("/")+1,info_content_file.length());
+            String filePath = root_path+info_content_file.substring(0,info_content_file.lastIndexOf("/"))+"/";
+            String ext = fileName.substring(fileName.lastIndexOf("."),fileName.length());
+            if(ext.equals(".docx")||ext.equals(".DOCX")){
+                info_content = WordUtils.Word2007ToHtml(filePath,fileName);
+            }else{
+                info_content = "";
             }
         }
 
@@ -55,21 +47,15 @@
         if(file_count>0){
             String downHtml = "<p>附件：</p>";
             for(int i=0;i<file_count;i++){
-                String file = FormatUtil.formatNullString(request.getParameter("file_"+(i+1)));//附件base64编码
+                String file_path = FormatUtil.formatNullString(request.getParameter("file_"+(i+1)));//附件base64编码
                 String file_name = FormatUtil.formatNullString(request.getParameter("file_name_"+(i+1)));//附件中文名称
 
-                String ext = file.substring(file.lastIndexOf("."),file.length());
-                String fileName = DateUtil.getCurrentDateTime("yyyyMMddHHmmss") +ext;
-                boolean b = Base64Utiles.base64ToFile(file.substring(0,file.lastIndexOf(".")),upload_path+file_path+fileName);
-                if(b){
-                    downHtml += "<p><a href='"+file_path+fileName+"' target='_blank'>"+file_name+"</a></p>";
-                }
+                downHtml += "<p><a href='"+file_path+"' target='_blank'>"+file_name+"</a></p>";
             }
             info_content += downHtml;
         }
 
-        info_content = info_content.replace(upload_path,"");
-
+        info_content = info_content.replace(root_path,"");
 
         ArticleBean article = new ArticleBean();
         article.setCat_id(cat_id);
