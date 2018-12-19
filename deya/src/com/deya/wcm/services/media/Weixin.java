@@ -197,6 +197,7 @@ public class Weixin {
 
             }
             JSONObject object = JSONObject.fromObject(result);
+            System.out.println(object.toString());
             return object.getString("media_id");
         } else {
             throw new IOException("文件不存在");
@@ -264,6 +265,7 @@ public class Weixin {
 
             }
             JSONObject object = JSONObject.fromObject(result);
+            System.out.println(object.toString());
             return object.getString("url");
         } else {
             throw new IOException("文件不存在");
@@ -280,6 +282,10 @@ public class Weixin {
             imgpath = defautImag;
             ArticleBean ab = articleList.get(i);
             String content = ab.getInfo_content().replace("\"", "'");
+            String description = ab.getDescription();
+            if(StringUtils.isNotEmpty(description)&&description.length()>50){
+                description = description.substring(0,50);
+            }
             List<String> imgList = getImgSrc(content);
             if(!imgList.isEmpty()){
                 for(String str:imgList){
@@ -306,10 +312,11 @@ public class Weixin {
                 imgpath = rootpath + ab.getThumb_url();
             }
             String temp_media_id = uploadImage(tempUrl, imgpath);
-            articleStr = articleStr + ",{\"thumb_media_id\":\"" + temp_media_id + "\",\"author\":\"" + ab.getAuthor() + "\",\"title\":\"" + ab.getTitle() + "\",\"content_source_url\":\"" + domain + ab.getContent_url() + "\",\"content\":\"" + content + "\",\"digest\":\"" + ab.getDescription() + "\",\"show_cover_pic\":\"" + show_cover_pic + "\"}";
+            articleStr = articleStr + ",{\"thumb_media_id\":\"" + temp_media_id + "\",\"author\":\"" + ab.getAuthor() + "\",\"title\":\"" + ab.getTitle() + "\",\"content_source_url\":\"" + domain + ab.getContent_url() + "\",\"content\":\"" + content + "\",\"digest\":\"" + description + "\",\"show_cover_pic\":\"" + show_cover_pic + "\"}";
         }
         data = data + articleStr.substring(1) + "]}";
         JSONObject jsonObject = CommUtil.httpRequest(url, "POST", data);
+        System.out.println(jsonObject.toString());
         return jsonObject.getString("media_id");
     }
 
