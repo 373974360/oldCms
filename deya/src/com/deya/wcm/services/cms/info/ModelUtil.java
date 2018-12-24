@@ -63,17 +63,20 @@ public class ModelUtil {
                 if (info.getInfo_status() == 8) {//发布后要处理的事情
                     InfoPublishManager.publishAfterEvent(info);
                 }
-                InfoWorkStep infoWorkStep = new InfoWorkStep();
-                int id = PublicTableDAO.getIDByTableName("cs_info_workstep");
-                infoWorkStep.setId(id);
-                infoWorkStep.setInfo_id(info.getInfo_id());
-                infoWorkStep.setStep_id(WorkFlowRPC.getMaxStepIDByUserID(info.getWf_id(),stl.getUser_id()+"",info.getApp_id(),info.getSite_id()));
-                infoWorkStep.setUser_id(stl.getUser_id());
-                infoWorkStep.setUser_name(stl.getUser_name());
-                infoWorkStep.setDescription("添加信息");
-                infoWorkStep.setPass_status(1);
-                infoWorkStep.setWork_time(DateUtil.getCurrentDateTime());
-                InfoDAO.insertInfoWorkStep(infoWorkStep);
+
+                if(info.getWf_id()>0){
+                    InfoWorkStep infoWorkStep = new InfoWorkStep();
+                    int id = PublicTableDAO.getIDByTableName("cs_info_workstep");
+                    infoWorkStep.setId(id);
+                    infoWorkStep.setInfo_id(info.getInfo_id());
+                    infoWorkStep.setStep_id(WorkFlowRPC.getMaxStepIDByUserID(info.getWf_id(),stl.getUser_id()+"",info.getApp_id(),info.getSite_id()));
+                    infoWorkStep.setUser_id(stl.getUser_id());
+                    infoWorkStep.setUser_name(stl.getUser_name());
+                    infoWorkStep.setDescription("添加信息");
+                    infoWorkStep.setPass_status(1);
+                    infoWorkStep.setWork_time(DateUtil.getCurrentDateTime());
+                    InfoDAO.insertInfoWorkStep(infoWorkStep);
+                }
                 return true;
             } else
                 return false;

@@ -425,17 +425,19 @@ public class InfoBaseManager {
                     publish_info_list.add(ib);
 
 
-                    InfoWorkStep infoWorkStep = new InfoWorkStep();
-                    int id = PublicTableDAO.getIDByTableName("cms_info_workstep");
-                    infoWorkStep.setId(id);
-                    infoWorkStep.setInfo_id(ib.getInfo_id());
-                    infoWorkStep.setStep_id(WorkFlowRPC.getMaxStepIDByUserID(ib.getWf_id(),stl.getUser_id()+"",ib.getApp_id(),ib.getSite_id()));
-                    infoWorkStep.setUser_id(stl.getUser_id());
-                    infoWorkStep.setUser_name(stl.getUser_name());
-                    infoWorkStep.setDescription("信息发布");
-                    infoWorkStep.setPass_status(1);
-                    infoWorkStep.setWork_time(DateUtil.getCurrentDateTime());
-                    InfoDAO.insertInfoWorkStep(infoWorkStep);
+                    if(ib.getWf_id()>0){
+                        InfoWorkStep infoWorkStep = new InfoWorkStep();
+                        int id = PublicTableDAO.getIDByTableName("cms_info_workstep");
+                        infoWorkStep.setId(id);
+                        infoWorkStep.setInfo_id(ib.getInfo_id());
+                        infoWorkStep.setStep_id(WorkFlowRPC.getMaxStepIDByUserID(ib.getWf_id(),stl.getUser_id()+"",ib.getApp_id(),ib.getSite_id()));
+                        infoWorkStep.setUser_id(stl.getUser_id());
+                        infoWorkStep.setUser_name(stl.getUser_name());
+                        infoWorkStep.setDescription("信息发布");
+                        infoWorkStep.setPass_status(1);
+                        infoWorkStep.setWork_time(DateUtil.getCurrentDateTime());
+                        InfoDAO.insertInfoWorkStep(infoWorkStep);
+                    }
                 }
                 if("3".equals(status))
                 {//撤消
