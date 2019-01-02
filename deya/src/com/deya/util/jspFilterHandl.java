@@ -98,7 +98,7 @@ public class jspFilterHandl {
 
     public static boolean isRPCParames(String params){
         try{
-            params = params.substring(params.indexOf("[")+9,params.indexOf("}")+1);
+            params = params.substring(params.indexOf("\"map\"")+6,params.indexOf("}")+1);
             JSONObject jsonObject = new JSONObject(params);
             Iterator iterator = jsonObject.keys();
             while (iterator.hasNext()) {
