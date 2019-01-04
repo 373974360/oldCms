@@ -112,7 +112,7 @@ public class SurveyService implements ISyncCatch{
 	{
 		 
 		Map m = new HashMap();
-		m.put("ordery_by", ordery_by);
+		m.put("orderyby", ordery_by);
 		m.put("start_num", start_num);//设置启始条数
 		m.put("page_size", page_size);//设置结束条数
 		con += " and cs.publish_status = 1 ";
@@ -179,6 +179,7 @@ public class SurveyService implements ISyncCatch{
 		m.put("page_size", page_size);//设置结束条数
 		m.put("con", con);
 		m.put("site_id", site_id);
+		m.put("orderby", "cs.add_time desc");
 		return SurveyDAO.getSurveyList(m);
 	}
 	

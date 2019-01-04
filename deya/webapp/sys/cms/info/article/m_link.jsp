@@ -117,7 +117,7 @@ function setPicUrl(){
     var thumb_url_ext = thumb_url.substring(thumb_url.lastIndexOf("."),thumb_url.length);
     if(thumb_url_ext==".jpg"||thumb_url_ext==".jpeg"||thumb_url_ext==".png"||thumb_url_ext==".bmp"||thumb_url_ext==".gif"){
         thumb_url = thumb_url.substring(0,thumb_url.lastIndexOf("."));
-        $("#thumb_url").val(thumb_url+"_s"+thumb_url_ext);
+        $("#thumb_url").val(thumb_url+"_b"+thumb_url_ext);
 	}else{
         alert("该文件为非图片文件！");
 	}
