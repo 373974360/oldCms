@@ -449,8 +449,9 @@ public class UserRegisterManager implements ISyncCatch{
 	public static boolean updatePasswordByUserID(int user_id,String password,SettingLogsBean stl)
 	{
 		UserRegisterBean urb = new UserRegisterBean();
-		CryptoTools ct = new CryptoTools();
-		password = ct.encode(password);
+		//CryptoTools ct = new CryptoTools();
+		//password = ct.encode(password);
+		password = SM4Utils.encryptEcb(password);
 		urb.setPassword(password);
 		urb.setUser_id(user_id);
 		
