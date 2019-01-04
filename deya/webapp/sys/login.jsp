@@ -19,8 +19,8 @@
             String locked_time = userBean.getLocked_time();
             String now = DateUtil.getCurrentDateTime();
             if (locked >= 5) {
-                if (DateUtil.compareDatetime1(now, locked_time) <= 20) {
-                    response.getWriter().print("{\"loginCode\":6}");
+                if (DateUtil.compareDatetime1(now, locked_time) <= 1) {
+                    response.getWriter().print("{\"loginCode\":6,\"errorCount\":0}");
                 } else {
                     userBean.setLocked(0);
                     userBean.setLocked_time("");
@@ -30,19 +30,24 @@
                 String res = UserLoginRPC.checkUserLogin(user_name, pass_word, auth_code, request);
                 SessionManager.remove(request, "valiCode");
                 if ("auth_code_error".equals(res)) {
-                    response.getWriter().print("{\"loginCode\":-1}");
+                    response.getWriter().print("{\"loginCode\":-1,\"errorCount\":0}");
                 } else {
                     int msg = Integer.parseInt(res);
+                    if(msg==0){
+                        userBean.setLocked(0);
+                        userBean.setLocked_time("");
+                        UserManager.updateUser(userBean, null);
+                    }
                     if (msg >= 1) {
                         userBean.setLocked(userBean.getLocked() + 1);
                         userBean.setLocked_time(DateUtil.getCurrentDateTime());
                         UserManager.updateUser(userBean, null);
                     }
-                    response.getWriter().print("{\"loginCode\":" + msg + "}");
+                    response.getWriter().print("{\"loginCode\":" + msg + ",\"errorCount\":"+userBean.getLocked()+"}");
                 }
             }
         }else{
-            response.getWriter().print("{\"loginCode\":5}");
+            response.getWriter().print("{\"loginCode\":5,\"errorCount\":0}");
         }
     }
 %>
@@ -126,6 +131,7 @@
             $.post("login.jsp", {username: username, password: password, auth_code: auth_code}, function (data) {
                 data = data.substring(0, data.indexOf("}") + 1);
                 data = eval("(" + data + ")");
+                var num = 5-data.errorCount;
                 switch (data.loginCode) {
                     case -1:
                         alert("验证码不正确");
@@ -143,12 +149,20 @@
                         changeCreateImage();
                         break;
                     case 3:
-                        alert("用户名密码不正确");
+                        if(num>0){
+                            alert("用户名密码不正确，您还可以再输入"+num+"次！");
+                        }else{
+                            alert("用户名密码不正确，帐号登录错误次数过多，已被限制登录20分钟！");
+                        }
                         changeCreateImage();
                         setLoginErrorTimes(username);
                         break;
                     case 4:
-                        alert("用户名密码不正确");
+                        if(num>0){
+                            alert("用户名密码不正确，您还可以再输入"+num+"次！");
+                        }else{
+                            alert("用户名密码不正确，帐号登录错误次数过多，已被限制登录20分钟！");
+                        }
                         changeCreateImage();
                         setLoginErrorTimes(username);
                         break;
@@ -163,7 +177,11 @@
                         setLoginErrorTimes(username);
                         break;
                     default:
-                        alert("用户名密码不正确");
+                        if(num>0){
+                            alert("用户名密码不正确，您还可以再输入"+num+"次！");
+                        }else{
+                            alert("用户名密码不正确，帐号登录错误次数过多，已被限制登录20分钟！");
+                        }
                         changeCreateImage();
                         setLoginErrorTimes(username);
                         break;
