@@ -259,8 +259,9 @@ public class UserRegisterManager implements ISyncCatch{
 	public static boolean checkUserLogin2(String user_name,String pass_word)
 	{
 		UserRegisterBean urb = getUserRegisterBeanByUname(user_name);
-		CryptoTools ct = new CryptoTools();		
-		pass_word = ct.encode(pass_word);		
+		//CryptoTools ct = new CryptoTools();
+		//pass_word = ct.encode(pass_word);
+		pass_word = SM4Utils.encryptEcb(pass_word);
 		return pass_word.equals(urb.getPassword());
 	}
 	

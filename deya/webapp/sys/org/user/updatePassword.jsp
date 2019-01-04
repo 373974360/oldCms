@@ -27,9 +27,9 @@ function updatePassword()
 	var password = $("#password").val();
 	var confirm_password = $("#confirm_password").val();
 
-    if(password.length < 8)
+    if(password.length < 12)
     {
-        val.showError("password","密码不能少于6个字符");
+        val.showError("password","密码不能少于12个字符");
         return;
     }
     else
@@ -38,7 +38,7 @@ function updatePassword()
         var level = password.replace(/^(?:(?=.{4})(?=.*([a-z])|.)(?=.*([A-Z])|.)(?=.*(\d)|.)(?=.*(\W)|.).*|.*)$/, "$1$2$3$4").length;
         if(level < 2)
         {
-            val.showError("password","密码设置太简单，请重新设置，建议8位以上字母+数字，区分大小写！");
+            val.showError("password","密码设置太简单，请重新设置，建议12位以上字母+数字，区分大小写！");
             return false;
         }
     }
@@ -80,7 +80,7 @@ function updatePassword()
 		<tr>
 			<th><span class="f_red">*</span>密　　码：</th>
 			<td colspan="7">
-				<input id="password" name="password" type="password" class="width200" value="" maxlength="30" onblur="checkInputValue('password',false,30,'密码','')"/>请输入8-16位字符
+				<input id="password" name="password" type="password" class="width200" value="" maxlength="30" onblur="checkInputValue('password',false,30,'密码','')"/>请输入12-16位字符
 			</td>
 		</tr>
 		<tr>

@@ -19,7 +19,7 @@
             String locked_time = userBean.getLocked_time();
             String now = DateUtil.getCurrentDateTime();
             if (locked >= 5) {
-                if (DateUtil.compareDatetime(now, locked_time) <= 1) {
+                if (DateUtil.compareDatetime1(now, locked_time) <= 20) {
                     response.getWriter().print("{\"loginCode\":6}");
                 } else {
                     userBean.setLocked(0);
@@ -99,7 +99,7 @@
                     $.cookie("loginErrorDate-" + $.md5(username), null, {expires: now});
                     login();
                 } else {
-                    alert("该帐号登录错误次数过多，已被限制登录1小时！");
+                    alert("该帐号登录错误次数过多，已被限制登录20分钟！");
                 }
             } else {
                 login();
@@ -158,7 +158,7 @@
                         setLoginErrorTimes(username);
                         break;
                     case 6:
-                        alert("该帐号登录错误次数过多，已被限制登录1小时！");
+                        alert("该帐号登录错误次数过多，已被限制登录20分钟！");
                         changeCreateImage();
                         setLoginErrorTimes(username);
                         break;

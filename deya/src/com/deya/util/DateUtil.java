@@ -519,6 +519,35 @@ public class DateUtil {
 			return (timestamp2 - timestamp1) / 3600;
 
 	}
+
+    /**
+     * 比较两个时间的差值
+     *
+     * @param date1
+     *            yyyy-MM-dd HH:mm:ss
+     * @param date2
+     *            yyyy-MM-dd HH:mm:ss
+     * @return int 分钟
+     */
+    public static long compareDatetime1(String date1, String date2) {
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        long timestamp1 = -1;
+        long timestamp2 = -1;
+        // 先将时间格式转换成Timestamp
+        try {
+            timestamp1 = df.parse(date1).getTime() / 1000;
+            timestamp2 = df.parse(date2).getTime() / 1000;
+        } catch (ParseException e) {
+            System.out.println("时间格式 [ " + date1 + " ] 或 [ " + date2
+                    + " ] 无法被解析");
+            return -1;
+        }
+        if (timestamp1 > timestamp2)
+            return (timestamp1 - timestamp2) / 60;
+        else
+            return (timestamp2 - timestamp1) / 60;
+
+    }
 	
 	/**
 	 * 得到某个数值之后的时间
