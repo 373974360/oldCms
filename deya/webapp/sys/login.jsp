@@ -87,7 +87,9 @@
         });
         $(document).keyup(function(event){
             if(event.keyCode ==13){
-                checkCookie();
+                if (document.activeElement.id != 'btnSubmit') {
+                    $("#btnSubmit").click();
+                }
             }
         });
 
