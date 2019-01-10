@@ -3,8 +3,8 @@
 "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 <mapper namespace="zjzf">
 	<sql id="getGongMinList_sql_conn">
-		<if test="type != null">
-			where type = ${type}
+		<if test="type != 0">
+			and type = ${type}
 		</if>
 		<if test="suiji != null">
 			and id in (select t.id from (SELECT id,RAND() as r FROM project_zjzf order by r limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}) t)
@@ -14,7 +14,7 @@
 	<select id="getGongMinList" parameterType="Map" resultType="com.deya.project.zjzf.ZJZFBean">
 		select * from (
 		select row_.*, rownum rownum_ from (
-		select * from project_zjzf
+		select * from project_zjzf where 1=1
 		<include refid="getGongMinList_sql_conn"/>
 		order by ${orderby}
 		<![CDATA[
@@ -24,14 +24,14 @@
 	</select>
 
 	<select id="getGongMinList_mysql" parameterType="Map" resultType="com.deya.project.zjzf.ZJZFBean">
-		select * from project_zjzf
+		select * from project_zjzf where 1=1
 		<include refid="getGongMinList_sql_conn"/>
 		order by ${orderby} limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
 	</select>
 
 
 	<select id="getGongMinListCount" parameterType="Map" resultType="java.lang.String">
-		select count(id) from project_zjzf
+		select count(id) from project_zjzf where 1=1
 		<include refid="getGongMinList_sql_conn"/>
 	</select>
 
@@ -47,4 +47,24 @@
 	<delete id="delete_wnzjzf_gongmin" parameterType="Map">
     	delete from project_zjzf where id in (${id})
     </delete>
+
+
+
+
+	<select id="getZjzfTypeBean" parameterType="java.lang.String" resultType="com.deya.project.zjzf.ZjzfTypeBean">
+		select * from project_zjzf_type where id=#{id}
+	</select>
+	<select id="getZjzfTypeList" parameterType="Map" resultType="com.deya.project.zjzf.ZjzfTypeBean">
+		select * from project_zjzf_type order by start_time desc
+	</select>
+	<insert id="insert_zjzftype" parameterType="com.deya.project.zjzf.ZjzfTypeBean">
+		insert into project_zjzf_type(name,start_time,end_time,remark)
+		values(#{name},#{start_time},#{end_time},#{remark})
+	</insert>
+	<delete id="delete_zjzftype" parameterType="Map">
+		delete from project_zjzf_type where id in (${id})
+	</delete>
+	<update id="update_zjzftype" parameterType="com.deya.project.zjzf.ZjzfTypeBean">
+		update project_zjzf_type set name=#{name},start_time=#{start_time},end_time=#{end_time},remark=#{remark} where id = #{id}
+	</update>
 </mapper>

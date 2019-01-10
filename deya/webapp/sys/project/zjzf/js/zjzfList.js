@@ -1,4 +1,5 @@
 ﻿var ZJZFRPC = top.jsonrpc.ZJZFRPC;
+var ZjzfTypeRPC = jsonrpc.ZjzfTypeRPC;
 
 var selectBean = null;//当前选中项对象
 var val=new Validator();
@@ -13,6 +14,7 @@ var m = new Map();
 
 function reloadPicViewList()
 {
+	type = $("#zjzfType").val();
 	showList();	
 	showTurnPage();	
 }
@@ -43,7 +45,7 @@ function showList(){
 	
 	m.put("start_num", tp.getStart());	
 	m.put("page_size", tp.pageSize);
-	m.put("type", "1");	
+	m.put("type", type);
 	m.put("orderby", "id desc");
 	m.put("type",type);
 	

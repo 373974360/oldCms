@@ -20,6 +20,11 @@ $(document).ready(function(){
 
 	initTable();
 	reloadPicViewList();
+
+    var typebeanList = ZjzfTypeRPC.getZjzfTypeList();
+    for(var i=0;i < typebeanList.list.length;i++){
+        $("#zjzfType").append("<option value=\""+typebeanList.list[i].id+"\">"+typebeanList.list[i].name+"</option>");
+	}
 });
 function exportZJZF()
 {
@@ -34,6 +39,9 @@ function exportZJZF()
 	<table class="table_option" border="0" cellpadding="0" cellspacing="0" >
 		<tr>		
 			<td class="fromTabs">
+				<select id="zjzfType" class="input_select width80" onchange="reloadPicViewList()">
+					<option value="0">请选择</option>
+				</select>
 				随机导出：
 				<input style="width:50px;" id="num" name="num" value="50" type="text">条信息
 				<input id="btn3" name="btn3" type="button" onclick="exportZJZF();" value="导出" />

@@ -1,7 +1,12 @@
 <%@ page contentType="text/html; charset=utf-8"%>
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@page import="com.deya.util.FormatUtil,com.deya.project.zjzf.*"%>
+<%@ page import="com.deya.util.DateUtil" %>
+<%@ page import="org.apache.commons.lang3.StringUtils" %>
 <%
+
+
+
 	String name  = FormatUtil.formatNullString(request.getParameter("name"));
 	String xb  = FormatUtil.formatNullString(request.getParameter("xb"));
 	String csny  = FormatUtil.formatNullString(request.getParameter("csny"));
@@ -21,6 +26,34 @@
 	String type  = FormatUtil.formatNullString(request.getParameter("type"));
 		
 	String codeSession = (String)request.getSession().getAttribute("valiCode");
+
+
+
+	ZjzfTypeBean bean = ZjzfTypeManager.getZjzfTypeBean(Integer.parseInt(type));
+
+	String startTime = bean.getStart_time();
+	String endTime = bean.getEnd_time();
+	String currDate = DateUtil.getCurrentDateTime("yyyy-MM-dd");
+
+	if(StringUtils.isNotEmpty(startTime)){
+		if(!DateUtil.compare_date(currDate,startTime)){
+			out.println("<script>");
+			out.println("top.alert('报名还未开始请稍后提交')");
+			out.println("</script>");
+			return;
+		}
+	}
+
+
+	if(StringUtils.isNotEmpty(endTime)) {
+		if (!DateUtil.compare_date(currDate, endTime)) {
+			out.println("<script>");
+			out.println("top.alert('报名已结束')");
+			out.println("</script>");
+			return;
+		}
+	}
+
 
 
 	
