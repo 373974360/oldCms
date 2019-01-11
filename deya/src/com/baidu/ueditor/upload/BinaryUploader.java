@@ -159,7 +159,7 @@ public class BinaryUploader {
 
 
             //如果是视频格式，转码m3u8
-            if(extName.equals(".flv")||extName.equals(".mp4")||extName.equals(".avi")||extName.equals(".wmv")){
+            /*if(extName.equals(".flv")||extName.equals(".mp4")||extName.equals(".avi")||extName.equals(".wmv")){
                 if(VideoUtils.executeCodecs(rootPath,name + extName)){
                     savePath+=name+"/";
                     extName=".m3u8";
@@ -167,7 +167,7 @@ public class BinaryUploader {
                 }else{
                     System.out.println("转码M3U8失败。。。");
                 }
-            }
+            }*/
 
 
             ueditorUpload = new BaseState(true);
