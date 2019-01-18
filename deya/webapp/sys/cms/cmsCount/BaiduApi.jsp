@@ -6,15 +6,15 @@
     String method = request.getParameter("method");
 
     JSONObject header = new JSONObject();
-    header.put("username", "15529333653");//用户名
-    header.put("password", "WANGmin521!!!");//用户密码
-    header.put("token", "3a7a0002dd24966d09351632b64f2a5b");//申请到的token
+    header.put("username", "deyatech");//用户名
+    header.put("password", "88352636");//用户密码
+    header.put("token", "bf55eda2497952a541cfcaaa0fd2cdcf");//申请到的token
     header.put("account_type", "1");
     String urlStr = "https://api.baidu.com/json/tongji/v1/ReportService/getData";
     String charset = "utf-8";
 
     JSONObject body = new JSONObject();
-    body.put("siteId", "12787364");
+    body.put("siteId", "12812612");
     body.put("method", method);//需要获取的数据
     //今日流量
     if(method.equals("overview/getOutline")){

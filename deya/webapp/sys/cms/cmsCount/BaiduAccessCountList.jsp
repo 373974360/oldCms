@@ -176,9 +176,6 @@
         </table>
     </div>
     <div class="gaikuang1">
-        <div class="overview-card-title">趋势图</div>
-    </div>
-    <div class="gaikuang1">
         <div class="overview-card-title">Top10搜索词</div>
         <table id="keywords" class="table_option" border="0" cellpadding="0" cellspacing="0" >
             <tr>
@@ -221,23 +218,6 @@
                 <td width="100"></td>
             </tr>
         </table>
-    </div>
-    <div class="gaikuang1">
-        <div class="overview-card-title">新老访客</div>
-        <table id="visitorType" class="table_option" border="0" cellpadding="0" cellspacing="0">
-            <tr>
-                <td></td>
-                <td>新访客</td>
-                <td>老访客</td>
-                <td></td>
-            </tr>
-        </table>
-    </div>
-    <div class="gaikuang1">
-        <div class="overview-card-title">访客属性-年龄分布</div>
-    </div>
-    <div class="gaikuang1">
-        <div class="overview-card-title">地域分布</div>
     </div>
 </body>
 </html>
