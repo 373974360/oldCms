@@ -80,11 +80,15 @@ function publicReloadUpdateGKInfos()
 		showTopTitle();
 	}
 
-	if(defaultBean.subtitle != "")
-	{
-		$("#stt").attr("checked",true);
-		showSubTitle();
-	}
+    if(defaultBean.subtitle != "")
+    {
+        $("#stt").attr("checked",true);
+        showSubTitle();
+    }
+    if(defaultBean.title_weight == 1)
+    {
+        $("#title_weight").attr("checked",true);
+    }
 
     $("input[name=info_level]").attr("checked",false);
     $("input[name='info_level'][value='" + defaultBean.info_level +"']").attr("checked",true);

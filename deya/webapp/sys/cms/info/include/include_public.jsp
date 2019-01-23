@@ -106,7 +106,17 @@
             </div>
              -->
 			<input id="title" name="title" type="text" class="width400" value="" onkeypress="showStringLength('title','wordnum')" onkeyup="showStringLength('title','wordnum')"  onblur="checkInputValue('title',false,240,'信息标题','')"/>
+
 			<span id="wordnum">0</span>字
+			<input id="title_color" name="title_color" type="text" style="width:60px;" class="iColorPicker" onchange="changeTitleColor(this)" value="" readOnly="readOnly" title="双击清空颜色值"/>
+			<SCRIPT LANGUAGE="JavaScript">
+                <!--
+                $("#title_color").dblclick(function(){
+                    $(this).val("").css("background","");
+                });
+                //-->
+			</SCRIPT>
+			<input id="title_weight" name="title_weight" type="checkbox" value="1"/><label for="sttop">标题加粗</label>
 			<input id="sttop" name="dd" type="checkbox"  onclick="showTopTitle()"/><label for="sttop">上标题</label>
 			<input id="stt" name="dd" type="checkbox"  onclick="showSubTitle()"/><label for="stt">副标题</label>
 		</td>

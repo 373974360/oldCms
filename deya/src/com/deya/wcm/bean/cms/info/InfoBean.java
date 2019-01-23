@@ -25,6 +25,7 @@ public class InfoBean  implements java.io.Serializable,Cloneable{
 	protected String title = "";// varchar 250
 	protected String subtitle = "";// varchar 500
 	protected String title_color = "";// varchar 250
+	protected int title_weight = 0;//是否加粗 0 不加粗，1加粗
 	protected String thumb_url = "";// varchar 250
 	protected String description = "";// varchar 1000	
 	protected String author = "";// varchar 250
@@ -454,4 +455,12 @@ public class InfoBean  implements java.io.Serializable,Cloneable{
     public void setIsIpLimit(String isIpLimit) {
         this.isIpLimit = isIpLimit;
     }
+
+	public int getTitle_weight() {
+		return title_weight;
+	}
+
+	public void setTitle_weight(int title_weight) {
+		this.title_weight = title_weight;
+	}
 }

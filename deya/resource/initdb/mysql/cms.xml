@@ -376,6 +376,7 @@
 					title               varchar(250),
 					subtitle               varchar(500),
 					title_color               varchar(250)  default '#000',
+					title_weight               bigint(20),
 					thumb_url               varchar(250),
 					description               varchar(1000),
 					author               varchar(250)   default '',
