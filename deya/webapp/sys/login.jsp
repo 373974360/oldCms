@@ -85,13 +85,6 @@
                 changeCreateImage();
             }, 1000 * 120);
         });
-        $(document).keyup(function(event){
-            if(event.keyCode ==13){
-                if (document.activeElement.id != 'btnSubmit') {
-                    $("#btnSubmit").click();
-                }
-            }
-        });
 
         function checkCookie() {
             username = $.trim($("#username").val());
