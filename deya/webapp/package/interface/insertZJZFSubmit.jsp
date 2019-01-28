@@ -36,7 +36,7 @@
 	String currDate = DateUtil.getCurrentDateTime("yyyy-MM-dd");
 
 	if(StringUtils.isNotEmpty(startTime)){
-		if(!DateUtil.compare_date(currDate,startTime)){
+		if(!DateUtil.compare_date(startTime,currDate)){
 			out.println("<script>");
 			out.println("top.alert('报名还未开始请稍后提交')");
 			out.println("</script>");
