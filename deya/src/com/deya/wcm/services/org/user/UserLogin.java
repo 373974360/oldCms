@@ -85,11 +85,11 @@ public class UserLogin {
 	 */
 	public static void setWCmSession(LoginUserBean lub,HttpServletRequest request)
 	{
-        boolean hasLogin = MySessionListener.checkIfHasLogin(lub);
+        /*boolean hasLogin = MySessionListener.checkIfHasLogin(lub);
         HttpSession session = request.getSession();
         if (hasLogin)
             MySessionListener.removeUserSession(lub.getUser_id());
-        MySessionListener.addUserSession(session);
+        MySessionListener.addUserSession(session);*/
 
 		SessionManager.set(request, "cicro_wcm_user", lub);
 	}
