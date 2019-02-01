@@ -302,9 +302,9 @@ public class SubjectServices implements ISyncCatch{
 			sub.setAudit_user(sub.getApply_user());
 			sub.setAudit_time(current_time);
 		}
-		sub_map.clear();
 		if(SubjectDAO.insertSubject(sub,stl))
 		{
+			clearMap();
 			insertResouseBySubject(sub,current_time,stl);
 			return true;
 		}else{
@@ -366,6 +366,7 @@ public class SubjectServices implements ISyncCatch{
 			sr.setAdd_user(sub.getApply_user());
 			SubjectDAO.insertResouse(sr,stl);
 		}
+		clearMap();
 	}
 	
 	/**
@@ -374,13 +375,13 @@ public class SubjectServices implements ISyncCatch{
      * @return boolean　true or false
      * */
 	public static boolean updateSubject(SubjectBean sub,SettingLogsBean stl)
-	{		
-		sub_map.clear();
+	{
 		sub.setUpdate_time(DateUtil.getCurrentDateTime());
 		if(SubjectDAO.updateSubject(sub,stl))
 		{
 			SubjectDAO.deleteResouseBySub(sub.getSub_id());
 			insertResouseBySubject(sub,DateUtil.getCurrentDateTime(),stl);
+			clearMap();
 			return true;
 		}else
 			return false;
@@ -394,7 +395,7 @@ public class SubjectServices implements ISyncCatch{
      * */
 	public static boolean deleteSubject(String ids,String user_name,SettingLogsBean stl)
 	{
-		sub_map.clear();
+		clearMap();
 		Map<String,String> m = new HashMap<String,String>();
 		m.put("ids", ids);
 		m.put("user_name", user_name);
@@ -415,7 +416,6 @@ public class SubjectServices implements ISyncCatch{
      * */
 	public static boolean updateSubjectStatus(String ids,String filds,String status_flag,String oper_name,String oper_message,String user_name,String user_id,SettingLogsBean stl)
 	{
-		sub_map.clear();
 		Map<String,String> m = new HashMap<String,String>();
 		m.put("ids", ids);
 		m.put("filds", filds);
@@ -427,6 +427,7 @@ public class SubjectServices implements ISyncCatch{
 		m.put("current_time", DateUtil.getCurrentDateTime());
 		if(SubjectDAO.updateSubjectStatus(m,stl))
 		{
+			clearMap();
 			//如果将访谈状态设置成　直播状态，从库中加载出此主题的相关信息
 			if("status".equals(filds) && "1".equals(status_flag))
 			{
@@ -448,7 +449,7 @@ public class SubjectServices implements ISyncCatch{
      * */
 	public static boolean subjectSubmit(String ids,int status_flag,String user_id,SettingLogsBean stl)
 	{
-		sub_map.clear();
+		clearMap();
 		Map<String,String> m = new HashMap<String,String>();
 		m.put("ids", ids);
 		m.put("status", ""+status_flag);
