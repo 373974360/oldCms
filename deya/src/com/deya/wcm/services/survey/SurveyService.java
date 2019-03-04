@@ -112,7 +112,7 @@ public class SurveyService implements ISyncCatch{
 	{
 		 
 		Map m = new HashMap();
-		m.put("orderyby", ordery_by);
+		m.put("orderby", ordery_by);
 		m.put("start_num", start_num);//设置启始条数
 		m.put("page_size", page_size);//设置结束条数
 		con += " and cs.publish_status = 1 ";

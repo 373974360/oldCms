@@ -446,8 +446,8 @@ function insertProcess(pro_type,node_id,ysq_id)
 		       	dealMap.put("final_status","0");
 		       	dealMap.put("is_mail","0");	
 		       	dealMap.put("reply_content","");
-				dealMap.put("reply_user","");
-				dealMap.put("reply_type","");
+				dealMap.put("reply_user","0");
+				dealMap.put("reply_type","1");
 				dealMap.put("publish_state","0");		       		       	
 	}else if(pro_type == 3){
         dealMap.put("reply_content",deal_content);
