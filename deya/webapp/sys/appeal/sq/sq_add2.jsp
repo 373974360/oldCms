@@ -16,6 +16,7 @@
 <link type="text/css" rel="stylesheet" href="/sys/styles/uploadify.css" />
 <script language="javascript" src="../../js/jquery.uploadify.js"></script>
 <script language="javascript" src="../../js/uploadFile/swfobject.js"></script>
+<script language="javascript" src="../../js/kindeditor/kindeditor.js"></script>
 <script type="text/javascript" src="js/sqList.js"></script>
 <script type="text/javascript">
 var sq_id = "<%=sq_id%>";
