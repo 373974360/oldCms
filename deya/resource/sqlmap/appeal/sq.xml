@@ -319,7 +319,7 @@
     <!-- ******************** 需要处理的部分 开始 ****************************** -->
     <!-- 得到诉求列表 -->
     <sql id="getSqList_sql_item">
-        pur_id,sq_code,sq_id,model_id,me_id,sq_realname,do_dept,sq_dtime,sq_title2,submit_name,supervise_flag,alarm_flag,timeout_flag,publish_status,sq_status,weight,sq_all_number,sq_number,sq_phone,sq_email,sq_content,sq_reply,custom_dept_name
+        pur_id,sq_code,sq_id,model_id,me_id,sq_realname,do_dept,sq_dtime,sq_title2,submit_name,supervise_flag,alarm_flag,timeout_flag,publish_status,sq_status,weight,sq_all_number,sq_number,sq_phone,sq_email,sq_content,sq_reply,custom_dept_name, sq_ip
     </sql>
     <sql id="getSqList_sql_conn">
         where model_id in (${model_id}) and sq_status != '-99'
@@ -397,7 +397,7 @@
 
     <!-- 得到已办理的信件列表 -->
     <sql id="getTransactSQList_sql_item">
-        distinct cs.sq_id,cs.publish_status,cs.sq_status,cs.sq_code,cs.model_id,cs.me_id,cs.sq_realname,cs.do_dept,cs.sq_dtime,cs.sq_title2,cs.submit_name,cs.supervise_flag,cs.alarm_flag,cs.timeout_flag,cs.weight
+        distinct cs.sq_id,cs.publish_status,cs.sq_status,cs.sq_code,cs.model_id,cs.me_id,cs.sq_realname,cs.do_dept,cs.sq_dtime,cs.sq_title2,cs.submit_name,cs.supervise_flag,cs.alarm_flag,cs.timeout_flag,cs.weight, cs.sq_ip
     </sql>
     <sql id="getTransactSQList_sql_conn">
         where cs.sq_id = cp.sq_id and cs.model_id in (${model_id}) and cp.do_dept = #{do_dept}

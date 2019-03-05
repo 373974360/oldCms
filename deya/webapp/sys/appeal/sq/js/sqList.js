@@ -35,6 +35,7 @@ function initTable() {
     //colsList.add(setTitleClos("sq_realname","来信人","100px","","",""));
     if (sq_status == 3)
         colsList.add(setTitleClos("over_dtime", "办结时间", "80px", "", "", ""));
+    colsList.add(setTitleClos("sq_ip", "写信人IP", "52px", "", "", ""));
     colsList.add(setTitleClos("do_dept_name", "处理部门", "52px", "", "", ""));
     colsList.add(setTitleClos("sq_status", "信件状态", "52px", "", "", ""));
     colsList.add(setTitleClos("model_id", "递交渠道", "52px", "", "", ""));
@@ -93,6 +94,12 @@ function showList(show_type) {
             $(this).text(beanList.get(i - 1).sq_dtime.substring(0, 10));
         }
     });
+
+    table.getCol("sq_ip").each(function (i) {
+        if (i > 0) {
+            $(this).text(beanList.get(i-1).sq_ip)
+        }
+    })
 
     table.getCol("over_dtime").each(function (i) {
         if (i > 0) {
