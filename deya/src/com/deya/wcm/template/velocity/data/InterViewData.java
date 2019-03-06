@@ -1,5 +1,6 @@
 package com.deya.wcm.template.velocity.data;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.deya.util.FormatUtil;
@@ -7,10 +8,13 @@ import com.deya.util.jconfig.JconfigUtilContainer;
 import com.deya.wcm.bean.interview.SubReleInfo;
 import com.deya.wcm.bean.interview.SubjectActor;
 import com.deya.wcm.bean.interview.SubjectBean;
+import com.deya.wcm.bean.interview.SubjectResouse;
 import com.deya.wcm.bean.template.TurnPageBean;
+import com.deya.wcm.services.interview.ChatRoomServices;
 import com.deya.wcm.services.interview.SubReleInfoServices;
 import com.deya.wcm.services.interview.SubjectActorServices;
 import com.deya.wcm.services.interview.SubjectServices;
+import org.apache.commons.lang3.StringUtils;
 
 public class InterViewData {
 	private static int cur_page  = 1;
@@ -194,7 +198,59 @@ public class InterViewData {
 	{
 		return SubReleInfoServices.getSubReleInfo(id);
 	}
-	
+
+	/**
+	 * 获取访谈对象
+	 * @param sub_id
+	 */
+	public static SubjectBean getSubjectById(String sub_id) {
+		SubjectBean subjectBean = null;
+		subjectBean = SubjectServices.getSubjectObjBySubID(sub_id);
+		List<SubjectResouse> fjList = SubjectServices.getResouseListByManager(sub_id);
+		String s_for_pic = "";//预告图片地址
+		String s_for_video = "";//访谈视频地址
+		String s_live_video = "";//直播视频地址
+		String s_history_video = "";//历史视频地址
+		for(int i=0; i<fjList.size(); i++) {
+			SubjectResouse subjectResouse = fjList.get(i);
+			String affixStatus = subjectResouse.getAffix_status();
+			String affixType = subjectResouse.getAffix_type();
+			if (!"".equals(affixStatus) && !"".equals(affixType)) {
+				if (affixStatus.equals("forecast")) {
+					if (affixType.equals("pic")) {
+						s_for_pic = subjectResouse.getAffix_path();
+					}
+					if (affixType.equals("video")) {
+						s_for_video = subjectResouse.getAffix_path();
+					}
+				}
+				if (affixStatus.equals("live")) {
+					if (affixType.equals("video")) {
+						s_live_video = subjectResouse.getAffix_path();
+					}
+				}
+				if (affixStatus.equals("history")) {
+					if (affixType.equals("video")) {
+						s_history_video = subjectResouse.getAffix_path();
+					}
+				}
+			}
+		}
+		subjectBean.setS_for_pic(s_for_pic);
+		subjectBean.setS_for_video(s_for_video);
+		subjectBean.setS_live_video(s_live_video);
+		subjectBean.setS_history_video(s_history_video);
+
+		if (StringUtils.isBlank(subjectBean.getHistory_record_pic())) {
+			List chatList = ChatRoomServices.getChatListByDB(sub_id);
+			if (null != chatList) {
+				subjectBean.setHistory_record_pic(chatList.toString());
+			}
+		}
+
+		return subjectBean;
+	}
+
 	public static void main(String[] args)
 	{
 		System.out.println(getInterViewCount("status=0;size=5;cur_page=2;"));		

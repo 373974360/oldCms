@@ -5,6 +5,7 @@
 <%@page import="com.deya.wcm.services.search.search.SearchManager,com.deya.wcm.services.system.formodel.ModelManager,com.deya.wcm.services.zwgk.info.GKInfoManager,com.deya.wcm.template.velocity.data.AppealData,com.deya.wcm.template.velocity.data.InfoUtilData,com.deya.wcm.template.velocity.data.InterViewData"%><%@ page import="org.json.JSONException"%><%@ page import="org.json.JSONObject"%><%@ page import="java.util.Iterator"%><%@ page import="java.util.List"%><%@ page import="java.util.Map"%><%@ page import="java.util.Set"%>
 <%
 String action_type = request.getParameter("action_type");
+
 String result = "";
 if("news_list".equals(action_type))
 {
@@ -77,6 +78,9 @@ if("custom_info".equals(action_type))
 if("searchInfo".equals(action_type))
 {
 	result = searchInfo(request);
+}
+if ("ft_content".equals(action_type)) {
+    result = getFTContent(request);
 }
 String callback = request.getParameter("callback");
 if(callback != null && !"".equals(callback)){
@@ -529,6 +533,24 @@ public static String replaceStr(String str)
 //替换标题里面的font标签
 public static String replaceFont(String str){
     return str.replaceAll("<font([^>]*)>", "").replaceAll("</font([^>]*)>", "");
+}
+
+/**
+* 获取访谈内容
+* @param request
+* @return
+*/
+public String getFTContent(HttpServletRequest request)
+{
+    String json = "";
+	String ft_id = FormatUtil.formatNullString(request.getParameter("ft_id"));
+	String sub_id = FormatUtil.formatNullString(request.getParameter("sub_id"));
+	SubjectBean sub_info = null;
+	if (null != sub_id && !"".equals((sub_id))) {
+	    sub_info = InterViewData.getSubjectById(sub_id);
+        return net.sf.json.JSONObject.fromObject(sub_info).toString();
+	}
+	return "{'message': 'sub_id不能为空'}";
 }
 
 %>
