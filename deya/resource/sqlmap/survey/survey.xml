@@ -342,7 +342,7 @@
 		]]>
 	     		<if test="site_id != null"> and cc.site_id = #{site_id} </if>
 	     <![CDATA[
-			 and cc.is_delete = 0 and cc.publish_status = 1 ${con} order by ${orderby} limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
+			 and cc.is_delete = 0 and cc.publish_status = 1 ${con} order by cs.add_time desc limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
 		]]>
 	</select>
 	<select id="getSurveyList_mssql" parameterType="Map" resultType="com.deya.wcm.bean.survey.SurveyBean">
