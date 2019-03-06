@@ -3,6 +3,7 @@
 <%@page import="com.deya.wcm.bean.appeal.model.*,com.deya.wcm.services.appeal.model.*"%>
 <%@page import="com.deya.wcm.bean.appeal.sq.*,com.deya.wcm.services.appeal.sq.*"%>
 <%@page import="com.deya.wcm.template.velocity.*,com.deya.wcm.template.velocity.impl.*,com.deya.util.FormatUtil"%>
+<%@ page import="org.apache.commons.lang3.StringUtils" %>
 <%
 
 	String action_type = request.getParameter("action_type"); 
@@ -71,7 +72,11 @@
 		sb.setSubmit_name(submit_name);
 		sb.setIs_open(Integer.parseInt(is_open));
 		sb.setMe_id(Integer.parseInt(me_id));
-		sb.setSq_ip(request.getRemoteAddr());
+		String sq_ip = FormatUtil.formatNullString(request.getParameter("sq_ip"));
+		if (StringUtils.isBlank(sq_ip)) {
+			sq_ip = request.getRemoteAddr();
+		}
+		sb.setSq_ip(sq_ip);
 
 		SQBean newSB = SQManager.insertSQ(sb,sqa);
 		if(newSB != null)
