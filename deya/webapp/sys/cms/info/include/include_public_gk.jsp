@@ -183,9 +183,9 @@
             </select>
         </td>
         -->
-		<th style="width:66px;">发布时间：</th>
-		<td style="width: 160px;">
-			<input id="released_dtime" name="released_dtime" type="text"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:true,readOnly:true,maxDate:'%y-%M-%d'})" readonly="readonly" onblur="checkGkDataTimeAfter('released_dtime','generate_dtime','released_dtime')"/>
+		<th class="isShow" style="width:66px; display: none;">发布时间：</th>
+		<td class="isShow" style="width: 160px; display: none;">
+			<input id="released_dtime" name="released_dtime" type="text"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:true,readOnly:true})" readonly="readonly" onblur="checkGkDataTimeAfter('released_dtime','generate_dtime','released_dtime')"/>
 		</td>
 
 		<th style="width:66px;">成文日期：</th>
