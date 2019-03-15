@@ -204,13 +204,13 @@ function getSelectInfoBeans()
 						<div class="tab_right">已发</div>
 					</div>
 				</li>
-                <!--
+
 				<li class="list_tab">
 					<div class="tab_left">
-						<div class="tab_right">待发</div>
+						<div class="tab_right">定时</div>
 					</div>
 				</li>
-				 -->
+
 				<li class="list_tab">
 					<div class="tab_left">
 						<div class="tab_right">已撤</div>
