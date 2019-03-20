@@ -285,7 +285,7 @@ function openFromInfoPage()
 					<li id="opt_303" class="hidden"><input id="c" name="info_status" type="radio" value="99" onclick="isShowAudit(true)" /><label for="c">通过</label></li>
 					<li id="opt_304" class="hidden"><input id="d" name="info_status" type="radio" value="1" onclick="isShowAudit(false)" /><label for="d">退稿</label></li>
 					<li id="opt_307" class="hidden"><input id="e" name="info_status" type="radio" value="3" onclick="isShowAudit(false)" /><label for="e">撤销</label></li>
-                    <!--<li id="opt_999" class="hidden"><input id="g" name="info_status" type="radio" value="4" onclick="isShowAudit(false)" /><label for="g">待发</label></li>-->
+                    <li id="opt_999" class="hidden"><input id="g" name="info_status" type="radio" value="4" onclick="isShowAudit(false)" /><label for="g">定时</label></li>
 					<li id="opt_302" class="hidden"><input id="f" name="info_status" type="radio" value="8" onclick="isShowAudit(false)" /><label for="f">发布</label></li>
 				</ul>
 			</td>
