@@ -38,20 +38,6 @@ public class MyHttpServletRequestWrapper extends HttpServletRequestWrapper {
     public ServletInputStream getInputStream() throws IOException {
         final ByteArrayInputStream bais = new ByteArrayInputStream(body);
         return new ServletInputStream() {
-            @Override
-            public boolean isFinished() {
-                return false;
-            }
-
-            @Override
-            public boolean isReady() {
-                return false;
-            }
-
-            @Override
-            public void setReadListener(ReadListener readListener) {
-
-            }
 
             @Override
             public int read() throws IOException {
