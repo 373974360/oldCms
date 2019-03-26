@@ -30,6 +30,8 @@
     <script type="text/javascript" src="../../../js/indexjs/tools.js"></script>
     <script type="text/javascript" src="js/public.js"></script>
 
+    <script type="text/javascript" src="js/info.js?v=20170412"></script>
+
     <script type="text/javascript">
 
         var site_id = "<%=siteid%>";
@@ -394,8 +396,8 @@
             <tr>
                 <td align="left" valign="middle">
                     <%--<input id="btn303" name="btn1" type="button" onclick="publicSelectCheckbox(table,'info_id','onPass()');" value="通过" />
-                    <input id="btn303" name="btn2" type="button" onclick="publicSelectCheckbox(table,'info_id','noPassDesc()');" value="退稿" />
-                    <input id="btn301" name="btn3" type="button" onclick="deleteRecord(table,'info_id','deleteInfoData()');" value="删除" />--%>
+                    <input id="btn303" name="btn2" type="button" onclick="publicSelectCheckbox(table,'info_id','noPassDesc()');" value="退稿" />--%>
+                    <input id="btn301" name="btn3" type="button" onclick="deleteRecord(table,'info_id','deleteInfoData()');" value="删除" />
                 </td>
             </tr>
         </table>
