@@ -157,7 +157,7 @@ public class BinaryUploader {
 
             ueditorUpload = new BaseState(true);
             ueditorUpload.putInfo("title",pic_name);
-            ueditorUpload.putInfo("url",savePath + name + extName);
+            ueditorUpload.putInfo("url",savePath + name + (extName.equals(".jpg")? "_b" : "") + extName);
             ueditorUpload.putInfo("type",extName);
             ueditorUpload.putInfo("original",pic_name);
         } catch (Exception e) {
@@ -332,6 +332,7 @@ public class BinaryUploader {
                     ImageUtils.cutImage(prev_img_width,savePath + name + extName,savePath + thum_url);
                 }
             }
+            System.out.println("savePath=" + savePath);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -361,7 +361,7 @@ public class UploadFileIfy extends HttpServlet {
 
         State storageState = new BaseState(true);
         storageState.putInfo("title", pic_name);
-        storageState.putInfo("url", savePath + name + extName);
+        storageState.putInfo("url", savePath + name + (extName.equals(".jpg")? "_b" : "") + extName);
         //System.out.println("****************************url*************************" + savePath + name + extName);
         storageState.putInfo("type", extName);
         storageState.putInfo("original", pic_name);
