@@ -136,7 +136,7 @@ public String getNewsList(HttpServletRequest request)
 	{
 		for(InfoBean info : info_list)
 		{
-			json += ",{\"info_id\":\""+info.getInfo_id()+"\",\"title\":\""+replaceFont(info.getTitle())+"\",\"model_id\":\""+info.getModel_id()+"\",\"content_url\":\""+info.getContent_url()+"\",\"description\":\""+replaceStr(info.getDescription())+"\",\"source\":\""+info.getSource()+"\",\"released_dtime\":\""+info.getReleased_dtime()+"\"}";
+			json += ",{\"info_id\":\""+info.getInfo_id()+"\",\"title\":\""+replaceFont(info.getTitle())+"\",\"model_id\":\""+info.getModel_id()+"\",\"content_url\":\""+info.getContent_url()+"\",\"description\":\""+replaceStr(info.getDescription())+"\",\"source\":\""+info.getSource()+"\",\"released_dtime\":\""+info.getReleased_dtime()+"\", \"thumb_url\":\""+info.getThumb_url()+"\"}";
 		}
 		json = json.substring(1);
 	}
