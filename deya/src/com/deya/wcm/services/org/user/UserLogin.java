@@ -1,8 +1,6 @@
 package com.deya.wcm.services.org.user;
 
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.List;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -85,13 +83,41 @@ public class UserLogin {
 	 */
 	public static void setWCmSession(LoginUserBean lub,HttpServletRequest request)
 	{
-        boolean hasLogin = MySessionListener.checkIfHasLogin(lub);
-        HttpSession session = request.getSession();
-        if (hasLogin)
-            MySessionListener.removeUserSession(lub.getUser_id());
-        MySessionListener.addUserSession(session);
+//        boolean hasLogin = MySessionListener.checkIfHasLogin(lub);
+//        HttpSession session = request.getSession();
+//        if (hasLogin){
+//			System.out.println("是否移除session:" + session);
+//			MySessionListener.removeUserSession(lub.getUser_id());
+//		}
+//		System.out.println("是否注入新session:" + session);
+//        MySessionListener.addUserSession(session);
+//
+//		SessionManager.set(request, "cicro_wcm_user", lub);
+
+		HttpSession oldSession = request.getSession();
+		Enumeration attrNames = oldSession.getAttributeNames();
+		Map attrMap = new HashMap();
+
+		while(attrNames != null && attrNames.hasMoreElements()) {
+			String attrName = (String)attrNames.nextElement();
+			attrMap.put(attrName, oldSession.getAttribute(attrName));
+		}
+
+		MySessionListener.removeUserSession(lub.getUser_id());
+		HttpSession newSession = request.getSession(true);
+
+		Set keySet = attrMap.keySet();
+		if(keySet != null && !keySet.isEmpty()) {
+			Iterator it = keySet.iterator();
+			while(it != null && it.hasNext()) {
+				String key = (String)it.next();
+				newSession.setAttribute(key, attrMap.get(key));
+			}
+		}
+		MySessionListener.addUserSession(newSession);
 
 		SessionManager.set(request, "cicro_wcm_user", lub);
+
 	}
 	
 	/**
