@@ -12,6 +12,11 @@ function addInfoData()
 	}	
 	var st = $(":radio[name='info_status'][checked]").val();
 	bean.info_status = (st == null ? "2" : st);
+    var up_dtime = $("#up_dtime").val();
+    if (up_dtime != null && up_dtime != '') {
+        bean.info_status = 4;
+    }
+
 	infoNextId = 0;
 	if(infoIdGoble == 0){
 		infoNextId = InfoBaseRPC.getInfoId();

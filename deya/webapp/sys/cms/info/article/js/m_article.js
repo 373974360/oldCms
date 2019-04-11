@@ -128,6 +128,12 @@ function addInfoData()
 
 	var st = $(":radio[name='info_status'][checked]").val();
 	bean.info_status = (st == null ? "2" : st);
+
+    var up_dtime = $("#up_dtime").val();
+    if (up_dtime != null && up_dtime != '') {
+        bean.info_status = 4;
+    }
+
     var info_level = $(":radio[name='info_level'][checked]").val();
     bean.info_level = (info_level == null ? "B" : info_level);
     var isIpLimit = $(":radio[name='isIpLimit'][checked]").val();
