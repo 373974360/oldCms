@@ -217,11 +217,11 @@
         function openUpdatePage(cid, Infoid, model_id, is_host) {
             if (is_host == 1) {
                 //引用信息只修改信息主表内容
-                parent.addTab(true, "/sys/cms/info/article/update_info.jsp?cid=" + cid + "&info_id=" + Infoid + "&site_id=" + site_id + "&app_id=" + app + "&model=" + model_id + "&topnum=" + parent.curTabIndex, "修改信息");
+                parent.addTab(true, "/sys/cms/info/article/update_info.jsp?timestamp="+new Date().getTime()+"&cid=" + cid + "&info_id=" + Infoid + "&site_id=" + site_id + "&app_id=" + app + "&model=" + model_id + "&topnum=" + parent.curTabIndex, "修改信息");
             }
             else {
                 var model = getAddPagebyModel(model_id);
-                parent.addTab(true, "/sys/cms/info/article/" + getAddPagebyModel(model_id) + "?cid=" + cid + "&info_id=" + Infoid + "&site_id=" + site_id + "&app_id=" + app + "&model=" + model_id + "&topnum=" + parent.curTabIndex, "修改信息");
+                parent.addTab(true, "/sys/cms/info/article/" + getAddPagebyModel(model_id) + "?timestamp="+new Date().getTime()+"&cid=" + cid + "&info_id=" + Infoid + "&site_id=" + site_id + "&app_id=" + app + "&model=" + model_id + "&topnum=" + parent.curTabIndex, "修改信息");
             }
         }
 
