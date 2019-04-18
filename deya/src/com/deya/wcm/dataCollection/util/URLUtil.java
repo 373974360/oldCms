@@ -21,9 +21,15 @@ public class URLUtil {
     public static String getDomainUrl(String url) {
         String domain = "";
         if (url.length() > 0) {
-            String reg = ".*\\/\\/([^\\/\\:]*).*";
-            domain = "http://" + url.replaceAll(reg, "$1");
+            if(url.startsWith("http://")){
+                String reg = ".*\\/\\/([^\\/\\:]*).*";
+                domain = "http://" + url.replaceAll(reg, "$1");
+            }else{
+                String reg = ".*\\/\\/([^\\/\\:]*).*";
+                domain = "https://" + url.replaceAll(reg, "$1");
+            }
         }
+        System.out.println(domain);
         return domain;
     }
 
