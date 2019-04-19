@@ -598,6 +598,13 @@ public class InfoUtilData
                     con_map.put("info_status", info_status);
                 }
             }
+            if (tempA[i].toLowerCase().startsWith("final_status="))
+            {
+                String final_status = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
+                if ((!"".equals(final_status)) && (!final_status.startsWith("$final_status")) && (FormatUtil.isValiditySQL(final_status))) {
+                    con_map.put("final_status", final_status);
+                }
+            }
             if (tempA[i].toLowerCase().startsWith("is_host="))
             {
                 String is_host = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
