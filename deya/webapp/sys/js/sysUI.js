@@ -786,7 +786,7 @@ function initUeditor(input_id) {
     if (EWEBEDITOR.Instances[input_id]) {
         return;
     }
-    EWEBEDITOR.Replace(input_id, {style: "gray", width: "550", height: "350"});
+    EWEBEDITOR.Create(input_id, {style: "gray", width: "810", height: "550"});
 }
 
 function distoryUeditor(input_id) {
@@ -801,7 +801,8 @@ function getV(input_id) {
 }
 
 function setV(input_id, v) {
-    EWEBEDITOR.Instances[input_id].setHTML(v);
+    EWEBEDITOR.SetHtmlAsync(input_id,v);
+    // EWEBEDITOR.Instances[input_id].setHTML(v);
 }
 
 function insertV(input_id, v) {

@@ -14,5 +14,7 @@
 <script type="text/javascript" src="/sys/js/uploadTools.js"></script>
 <script type="text/javascript" src="/sys/js/jquery.uploadify.js"></script>
 <script type="text/javascript" src="/sys/js/uploadFile/swfobject.js"></script>
+<script type="text/javascript" src="/sys/ewebeditor/ewebeditor.js"></script>
+<%--
 <script type="text/javascript" src="/sys/ueditor/ueditor.config.js"></script>
-<script type="text/javascript" src="/sys/ueditor/ueditor.all.min.js"></script>
+<script type="text/javascript" src="/sys/ueditor/ueditor.all.min.js"></script>--%>
