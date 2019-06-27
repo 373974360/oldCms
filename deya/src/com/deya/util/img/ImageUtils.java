@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.NumberFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -45,9 +46,13 @@ public final class ImageUtils {
             int w = bis.getWidth();
             int h = bis.getHeight();
             int nh = nw * h / w;
-            double sx = nw / w;
-            double sy = nh / h;
-            transform.setToScale(sx, sy);
+            //创建一个数值格式化对象
+            NumberFormat numberFormat = NumberFormat.getInstance();
+            //设置精确到小数点后2位
+            numberFormat.setMaximumFractionDigits(5);
+            String sx = numberFormat.format((float)nw / (float)w);
+            String sy = numberFormat.format((float)nh / (float)h);
+            transform.setToScale(Double.parseDouble(sx), Double.parseDouble(sy));
 
             AffineTransformOp ato = new AffineTransformOp(transform, null);
             BufferedImage bid = new BufferedImage(nw, nh, 5);
