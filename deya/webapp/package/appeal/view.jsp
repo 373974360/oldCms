@@ -16,7 +16,7 @@
 	if(sq_code != null && !"".equals(sq_code) && query_code != null && !"".equals(query_code) && (sq_id == null || "".equals(sq_id)))
 	{
 		SQBean sb = SQManager.searchBrowserSQBean(sq_code,query_code);
-		if(sb != null)
+		if(sb != null && sb.getIs_open() != 0 && sb.getPublish_status() != 0 && sb.getSq_status() == 3)
 		{
 			sq_id = sb.getSq_id()+"";
 			model_id = sb.getModel_id()+"";

@@ -28,7 +28,7 @@
 	<script type="text/javascript" src="js/jquery-ui/jquery.ui.position.js"></script>
 	<script type="text/javascript" src="js/jquery-ui/jquery.ui.dialog.js"></script>
 	<script type="text/javascript" src="js/tools.js"></script>
-	<script type="text/javascript" src="js/sysUI.js"></script>
+	<script type="text/javascript" src="js/sysUI.js?20190613"></script>
 	<script type="text/javascript" src="js/java.js"></script>
 	<script type="text/javascript" src="js/extend.js"></script>
 	<script type="text/javascript" src="js/jsonrpc.js"></script>
