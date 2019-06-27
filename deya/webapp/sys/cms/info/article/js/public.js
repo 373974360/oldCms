@@ -660,6 +660,10 @@ function insertOtherInfos(bean, model_ename, info_id) {
                 var temp_step_id = getMaxStepIDByUserID(bean.wf_id, app_id, site_id);
                 //首先判断该栏目是否需要审核,且用户有审核权限
                 if (userOpts.indexOf(",303,") > -1) {
+                    var workFlowBean = jsonrpc.WorkFlowRPC.getWorkFlowBean(bean.wf_id);
+                    if(workFlowBean.wf_steps==temp_step_id){//判断步骤ID是否为最后一步，如果是返回终审状态值
+                        temp_step_id=100;
+                    }
                     //得到管理员审核流程中最大的步骤ID, 只有最终审核的人才有终审通过权限
                     if (temp_step_id == 100) {
                         bean.info_status = 8;
