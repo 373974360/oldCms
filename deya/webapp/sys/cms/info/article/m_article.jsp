@@ -65,13 +65,13 @@ $(document).ready(function(){
 	initButtomStyle();
 
 	// 判断是否是站点管理员或超级管理员
-	if (top.isSiteManager(app_id,site_id)) {
+	<!--if (top.isSiteManager(app_id,site_id)) {
 		$(".isShow").show();
 	} else {
 		if ($("#released_dtime").val() == "" || $("#released_dtime").val() == ''){
 			$("#released_dtime").val(new Date().format("yyyy-MM-dd hh:mm:ss"))
 		}
-	}
+	}-->
 
 });
 

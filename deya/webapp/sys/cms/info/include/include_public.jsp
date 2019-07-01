@@ -193,8 +193,8 @@
             </select>
         </td>
         -->
-		<th class="isShow" style="width:66px; display: none;">发布时间：</th>
-		<td class="isShow" style="display: none;">
+		<th style="width:66px;">发布时间：</th>
+		<td>
 			<input id="released_dtime" name="released_dtime" type="text"  onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:true,readOnly:true})" readonly="readonly" />
 		</td>
 		<!--
