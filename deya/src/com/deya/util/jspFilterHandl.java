@@ -20,7 +20,7 @@ public class jspFilterHandl {
 
     private static String[] sqlFilterStr = {"exec ", "insert ", "delete ", "trancate", "update ", "drop table"};
 
-    private static String[] integerParamStr = {"cat_id", "model_id", "sq_id", "tm_id", "info_id", "info_status", "dept_id", "final_status", "f_id"};
+    private static String[] integerParamStr = {"cat_id","sq_id", "tm_id", "info_id", "info_status", "dept_id", "final_status", "f_id"};
 
     private static String[] editorParams = {"ware_content","t_content","sq_content","correct_content","c_spyj","c_sqtj","c_jzxyq","c_sqclml","c_sfyj","c_fulu"};
 
