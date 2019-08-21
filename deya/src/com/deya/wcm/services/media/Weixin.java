@@ -40,6 +40,7 @@ public class Weixin {
     private static String show_cover_pic = "";
     private static String uploadConImg = "";
     private static String savePath = "";
+    private static String sendmessage = "";
     private static Map<String, String> tokenMap = new HashMap<>();
     private static Map<String, String> ticketMap = new HashMap<>();
 
@@ -348,10 +349,20 @@ public class Weixin {
         String upUrl = uploadUrl.replace("##tocken##", tocken);
         String temp_id = upload(upUrl, articleList);
         boolean flag = false;
-        if (sendtype.equals("0")) {
-            flag = sendGroupMessage(temp_id);//正式群发
-        } else {
-            flag = previewMessage(temp_id);//测试预览
+        if(sendmessage.equals("1")){
+            //群发
+            if (sendtype.equals("0")) {
+                //正式群发
+                flag = sendGroupMessage(temp_id);
+            } else {
+                //测试预览
+                flag = previewMessage(temp_id);
+            }
+        }else{
+            //不群发
+            if(StringUtils.isNotBlank(temp_id)){
+                flag = true;
+            }
         }
         return flag;
     }
@@ -374,6 +385,7 @@ public class Weixin {
         show_cover_pic = GetValueByKey(fileName, "show_cover_pic");
         uploadConImg = GetValueByKey(fileName, "uploadConImg");
         savePath = UploadManager.getUploadFilePath(site_id) + "/";
+        sendmessage = GetValueByKey(fileName, "sendmessage");
     }
 
     public static List<String> getImgSrc(String htmlStr) {
