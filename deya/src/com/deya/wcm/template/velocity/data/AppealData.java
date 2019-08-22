@@ -276,9 +276,18 @@ public class AppealData{
                 //判断是否不为空，且查询条件是正确的，不含特殊字符的
                 if(!"".equals(st) && !st.startsWith("$sq_content") && FormatUtil.isValiditySQL(st))
                 {
-                    con += " and sq_content2 like '%"+st+"%'";
+                    con += " and (sq_content2 like '%"+st+"%' or sq_content like '%"+st+"%' or sq_reply like '%"+st+"%')";
                 }
             }
+			if(tempA[i].toLowerCase().startsWith("sq_key="))
+			{
+				String st = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=")+1));
+				//判断是否不为空，且查询条件是正确的，不含特殊字符的
+				if(!"".equals(st) && !st.startsWith("sq_key") && FormatUtil.isValiditySQL(st))
+				{
+					con += " and (sq_title like '%"+st+"%' or sq_title2 like '%"+st+"%' or sq_content like '%"+st+"%' or sq_content2 like '%"+st+"%' or sq_reply like '%"+st+"%')";
+				}
+			}
 			if(tempA[i].toLowerCase().startsWith("start_time="))
 			{
 				String sd = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=")+1));
