@@ -17,6 +17,7 @@ public class IndexBeanInfo extends IndexBean {
     private String publish_time; //发布时间
     private String typed; //小分类
     private List<InfoPic> infoPics = new ArrayList<InfoPic>();
+    private String doc_no;
 	
 	public IndexBeanInfo(){
 		super("info"); 
@@ -51,8 +52,16 @@ public class IndexBeanInfo extends IndexBean {
 		return infoPics;
 	}
 
+	public String getDoc_no() {
+		return doc_no;
+	}
+
+	public void setDoc_no(String doc_no) {
+		this.doc_no = doc_no;
+	}
+
 	public void setInfoPics(List<InfoPic> infoPics) {
 		this.infoPics = infoPics;
 	}
-	
+
 }

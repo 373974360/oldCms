@@ -61,8 +61,11 @@ public class SearchInfoManager {
 			if(scope.equals("")){
 				fieldsList.add("title");
 				fieldsList.add("content");
+				fieldsList.add("doc_no");
 				keysList.add(q);
 				keysList.add(q);
+				keysList.add(q);
+				occurList.add(BooleanClause.Occur.SHOULD);
 				occurList.add(BooleanClause.Occur.SHOULD);
 				occurList.add(BooleanClause.Occur.SHOULD);
 			}else if(scope.equals("title")){
@@ -72,6 +75,10 @@ public class SearchInfoManager {
 			}
 			else if(scope.equals("content")){
 				fieldsList.add("content");
+				keysList.add(q);
+				occurList.add(BooleanClause.Occur.SHOULD);
+			} else if(scope.equals("doc_no")){
+				fieldsList.add("doc_no");
 				keysList.add(q);
 				occurList.add(BooleanClause.Occur.SHOULD);
 			}
@@ -511,8 +518,16 @@ public class SearchInfoManager {
 						booleanQuery.add(queryDsId, BooleanClause.Occur.MUST_NOT);
 					}
 				}
-			}  
-			
+			}
+
+
+			//文号过滤
+			if(map.containsKey("wnumber")){
+				Query queryGkNo = getQuery("doc_no",map.get("wnumber").toString());
+				booleanQuery.add(queryGkNo, BooleanClause.Occur.MUST);
+				System.out.println(booleanQuery.toString());
+			}
+
 			//合并多个query对象
 			String q2 = (String)map.get("q2")==null?"":(String)map.get("q2");
 			
@@ -568,6 +583,7 @@ public class SearchInfoManager {
 			map.remove("qn3");
 			map.remove("sort");
 			map.remove("datetype");
+			map.remove("wnumber");
 
 			//如有信息栏目参数 就得到该栏目下面的所有子栏目
 			if(map.get("categoryId")!=null && !"".equals(map.get("categoryId"))){//有栏目参数

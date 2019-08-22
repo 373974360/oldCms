@@ -32,7 +32,7 @@
 		     <![CDATA[
 				select * from (
 				   select row_.*, rownum rownum_ from (       
-					   select i.is_host,i.model_id,i.app_id,i.id,i.info_id,i.title,a.info_content,i.content_url,i.site_id,i.cat_id,i.released_dtime from cs_info i,cs_info_article a where i.info_id=a.info_id and i.site_id = #{site_id}  and i.info_status=8 and i.final_status=0
+					   select i.is_host,i.model_id,i.app_id,i.id,i.info_id,i.title,a.info_content,i.content_url,i.site_id,i.cat_id,i.released_dtime,g.doc_no from cs_info i,cs_info_article a,cs_gk_info g where i.info_id=a.info_id and a.info_id=g.info_id and i.site_id = #{site_id}  and i.info_status=8 and i.final_status=0
 					  ]]>   
 					   <include refid="getInfoBeanList_sql_conn"/>
 					 <![CDATA[
@@ -45,7 +45,7 @@
 		     <![CDATA[ 
 				select * from (
 				   select row_.*, rownum rownum_ from (       
-					   select i.is_host,i.model_id,i.app_id,i.id,i.info_id,i.title,a.info_content,i.content_url,i.site_id,i.cat_id,i.released_dtime from cs_info i,cs_info_article a where i.info_id=a.info_id and i.app_id = #{app_id}  and i.info_status=8 and i.final_status=0 
+					   select i.is_host,i.model_id,i.app_id,i.id,i.info_id,i.title,a.info_content,i.content_url,i.site_id,i.cat_id,i.released_dtime,g.doc_no from cs_info i,cs_info_article a,cs_gk_info g where i.info_id=a.info_id and a.info_id=g.info_id and i.app_id = #{app_id}  and i.info_status=8 and i.final_status=0
 					   ]]>   
 					   <include refid="getInfoBeanList_sql_conn"/>
 					 <![CDATA[
@@ -58,7 +58,7 @@
 	<select id="getInfoListBySiteIdPages_mysql" parameterType="Map" resultType="Map">
 		 <if test="app_id == null">
 		     <![CDATA[
-				 select i.is_host,i.model_id,i.app_id,i.id,i.info_id,i.title,a.info_content,i.content_url,i.site_id,i.cat_id,i.released_dtime from cs_info i,cs_info_article a where i.info_id=a.info_id and i.site_id = #{site_id}  and i.info_status=8 and i.final_status=0
+				 select i.is_host,i.model_id,i.app_id,i.id,i.info_id,i.title,a.info_content,i.content_url,i.site_id,i.cat_id,i.released_dtime,g.doc_no from cs_info i,cs_info_article a,cs_gk_info g where i.info_id=a.info_id and a.info_id=g.info_id and i.site_id = #{site_id}  and i.info_status=8 and i.final_status=0
 				 ]]>   
 					   <include refid="getInfoBeanList_sql_conn"/>
 				<![CDATA[
@@ -67,7 +67,7 @@
 		 </if> 
 		 <if test="app_id != null">
 		     <![CDATA[ 
-				select i.is_host,i.model_id,i.app_id,i.id,i.info_id,i.title,a.info_content,i.content_url,i.site_id,i.cat_id,i.released_dtime from cs_info i,cs_info_article a where i.info_id=a.info_id and i.app_id = #{app_id}  and i.info_status=8 and i.final_status=0
+				select i.is_host,i.model_id,i.app_id,i.id,i.info_id,i.title,a.info_content,i.content_url,i.site_id,i.cat_id,i.released_dtime,g.doc_no from cs_info i,cs_info_article a,cs_gk_info g where i.info_id=a.info_id and a.info_id=g.info_id and i.app_id = #{app_id}  and i.info_status=8 and i.final_status=0
 				]]>   
 					   <include refid="getInfoBeanList_sql_conn"/>
 				<![CDATA[
@@ -78,16 +78,16 @@
 	<select id="getInfoListBySiteIdPages_mssql" parameterType="Map" resultType="Map">
 		 <if test="app_id == null">
 		     <![CDATA[
-			select top ${page_size} i.is_host,i.model_id,i.app_id,i.id,i.info_id,i.title,a.info_content,i.content_url,i.site_id,i.cat_id,i.released_dtime 
-			  from cs_info i,cs_info_article a  
-			  where i.info_id=a.info_id and i.site_id = #{site_id}  and i.info_status=8  and i.final_status=0
+			select top ${page_size} i.is_host,i.model_id,i.app_id,i.id,i.info_id,i.title,a.info_content,i.content_url,i.site_id,i.cat_id,i.released_dtime,g.doc_no
+			  from cs_info i,cs_info_article a,cs_gk_info g
+			  where i.info_id=a.info_id and a.info_id=g.info_id and i.site_id = #{site_id}  and i.info_status=8  and i.final_status=0
 				 ]]>   
 					   <include refid="getInfoBeanList_sql_conn"/>
 				<![CDATA[
 				and i.id not in
 				  (select top ${start_num} i.id
-					 from cs_info i,cs_info_article a 
-					  where i.info_id=a.info_id and i.site_id = #{site_id}  and i.info_status=8 and i.final_status=0
+					 from cs_info i,cs_info_article a,cs_gk_info g
+					  where i.info_id=a.info_id and a.info_id=g.info_id and i.site_id = #{site_id}  and i.info_status=8 and i.final_status=0
 					  ]]>   
 					   <include refid="getInfoBeanList_sql_conn"/>
 					<![CDATA[
@@ -97,7 +97,7 @@
 		 </if> 
 		 <if test="app_id != null">
 		     <![CDATA[ 
-				select top ${page_size} i.is_host,i.model_id,i.app_id,i.id,i.info_id,i.title,a.info_content,i.content_url,i.site_id,i.cat_id,i.released_dtime
+				select top ${page_size} i.is_host,i.model_id,i.app_id,i.id,i.info_id,i.title,a.info_content,i.content_url,i.site_id,i.cat_id,i.released_dtime,g.doc_no
 			  from cs_info i,cs_info_article a  
 			  where i.info_id=a.info_id and i.app_id = #{app_id}  and i.info_status=8 and i.final_status=0
 				 ]]>   
@@ -119,7 +119,7 @@
 	<select id="getInfoListBySiteIdCount" parameterType="Map" resultType="java.lang.Integer">
 	    <if test="app_id == null">
 		     <![CDATA[    
-		        select count(i.info_id) from cs_info i,cs_info_article a where i.info_id=a.info_id and i.site_id = #{site_id}  and i.info_status=8 and i.final_status=0
+		        select count(i.info_id) from cs_info i,cs_info_article a,cs_gk_info g where i.info_id=a.info_id and a.info_id=g.info_id and i.site_id = #{site_id}  and i.info_status=8 and i.final_status=0
 				]]>   
 					   <include refid="getInfoBeanList_sql_conn"/>
 				<![CDATA[
@@ -127,7 +127,7 @@
 		 </if>
 		 <if test="app_id != null">
 		     <![CDATA[    
-		        select count(i.info_id) from cs_info i,cs_info_article a where i.info_id=a.info_id and i.app_id = #{app_id}  and i.info_status=8 and i.final_status=0
+		        select count(i.info_id) from cs_info i,cs_info_article a,cs_gk_info g where i.info_id=a.info_id and a.info_id=g.info_id and i.app_id = #{app_id}  and i.info_status=8 and i.final_status=0
 				]]>   
 					   <include refid="getInfoBeanList_sql_conn"/>
 				<![CDATA[
@@ -137,7 +137,7 @@
 	<select id="getInfoById" parameterType="Map" resultType="Map">
 		<if test="app_id == null">
 		     <![CDATA[   
-				 select i.is_host,i.model_id,i.app_id,i.id,i.info_id,i.title,a.info_content,i.content_url,i.site_id,i.cat_id,i.released_dtime from cs_info i,cs_info_article a where i.info_id=a.info_id and i.id = #{id}  and i.info_status=8 and i.final_status=0
+				 select i.is_host,i.model_id,i.app_id,i.id,i.info_id,i.title,a.info_content,i.content_url,i.site_id,i.cat_id,i.released_dtime,g.doc_no from cs_info i,cs_info_article a,cs_gk_info g where i.info_id=a.info_id and a.info_id=g.info_id and i.id = #{id}  and i.info_status=8 and i.final_status=0
 				 ]]>   
 					   <include refid="getInfoBeanList_sql_conn"/>
 				<![CDATA[
@@ -145,7 +145,7 @@
 		 </if>
 		 <if test="app_id != null">
 		     <![CDATA[ 
-				 select i.is_host,i.model_id,i.app_id,i.id,i.info_id,i.title,a.info_content,i.content_url,i.site_id,i.cat_id,i.released_dtime from cs_info i,cs_info_article a where i.info_id=a.info_id and i.id = #{id}  and i.info_status=8 and i.final_status=0
+				 select i.is_host,i.model_id,i.app_id,i.id,i.info_id,i.title,a.info_content,i.content_url,i.site_id,i.cat_id,i.released_dtime,g.doc_no from cs_info i,cs_info_article a,cs_gk_info g where i.info_id=a.info_id and a.info_id=g.info_id and i.id = #{id}  and i.info_status=8 and i.final_status=0
 				 ]]>   
 					   <include refid="getInfoBeanList_sql_conn"/>
 				<![CDATA[

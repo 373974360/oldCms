@@ -251,7 +251,7 @@ public class SearchUtil {
 	        //高级要用到的参数 -- 法律法规文件
 	        String wnumber = (String)request.getParameter("wnumber");
 	        if(wnumber!=null && !wnumber.equals("")){  
-	        	sb.append("<param><key>wnumber</key><value><![CDATA["+Encode.iso_8859_1ToUtf8(wnumber)+"]]></value></param>");
+	        	sb.append("<param><key>wnumber</key><value><![CDATA["+wnumber+"]]></value></param>");
 	        }
 	        String object_words = (String)request.getParameter("object_words");
 	        if(object_words!=null && !object_words.equals("")){  

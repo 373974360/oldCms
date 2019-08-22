@@ -74,6 +74,7 @@ public class IndexInfoServiceImpl implements IndexService {
 			 Field site_id_delField = new Field("site_id_del", "",Field.Store.YES, Field.Index.NOT_ANALYZED);
 			 
 			 Field is_hostField = new Field("is_host", "",Field.Store.YES, Field.Index.ANALYZED);
+			Field doc_noField = new Field("doc_no", "",Field.Store.YES, Field.Index.ANALYZED);
 			 
 			 //得到indexWriter
 			 indexWriter = IndexLuceneManager.getIndexModifier(false);
@@ -136,6 +137,9 @@ public class IndexInfoServiceImpl implements IndexService {
 	    			  
 	    			  is_hostField.setValue(indexBeanInfo.getIs_host());
 	    			  doc.add(is_hostField);
+
+					  doc_noField.setValue(indexBeanInfo.getDoc_no());
+					  doc.add(doc_noField);
 	    			  
 	    			  //添加一条条info的索引
 	    			  IndexLuceneManager.AddDocument(indexWriter,doc);
@@ -305,7 +309,7 @@ public class IndexInfoServiceImpl implements IndexService {
 				Map mapC = new HashMap();
 				mapC.put("id",id);
 				Map map = (Map)s.selectOne(DBManager.getSqlNameByDataType("search.getInfoById"), mapC);
-				
+				System.out.println(map);
 				if(map==null){
 					//判断是不是链接信息
 					InfoBean infoBean = InfoBaseManager.getInfoById(id+"");
@@ -347,6 +351,7 @@ public class IndexInfoServiceImpl implements IndexService {
   				Field model_idField = new Field("model_id", "",Field.Store.YES, Field.Index.NOT_ANALYZED);
   				
   				Field is_hostField = new Field("is_host", "",Field.Store.YES, Field.Index.ANALYZED);
+				Field doc_noField = new Field("doc_no", "",Field.Store.YES, Field.Index.ANALYZED);
   				
   				//Document对象不要重用，Field对象可以重用 以加快速度
 	  			Document doc = new Document();
@@ -390,7 +395,10 @@ public class IndexInfoServiceImpl implements IndexService {
   			  
 	  			is_hostField.setValue(indexBeanInfo.getIs_host());
   			    doc.add(is_hostField);
-	  			
+
+				doc_noField.setValue(indexBeanInfo.getDoc_no());
+				doc.add(doc_noField);
+
   			    //添加一条条info的索引
   			    IndexLuceneManager.AddDocument(indexWriter,doc);
   			    
@@ -505,6 +513,11 @@ public class IndexInfoServiceImpl implements IndexService {
 			  indexBeanInfo.setCategoryId(com.deya.util.FormatUtil.formatNullString((String)infoMap.get("cat_id")));
 			  
 			  indexBeanInfo.setIs_host(com.deya.util.FormatUtil.formatNullString((String)infoMap.get("is_host")));
+			  String doc_no="";
+			  if(infoMap.containsKey("doc_no")&&infoMap.get("doc_no")!=null){
+				  indexBeanInfo.setDoc_no(com.deya.util.FormatUtil.formatNullString((String)infoMap.get("doc_no")));
+			  }
+			 indexBeanInfo.setDoc_no(doc_no);
 			  
 			  String time = ((String)infoMap.get("released_dtime"));
 			  time = time == null ? "" : time.replaceAll("-","").replaceAll(" ", "").replaceAll(":","");
