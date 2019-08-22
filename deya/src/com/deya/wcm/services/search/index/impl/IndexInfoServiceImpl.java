@@ -513,11 +513,8 @@ public class IndexInfoServiceImpl implements IndexService {
 			  indexBeanInfo.setCategoryId(com.deya.util.FormatUtil.formatNullString((String)infoMap.get("cat_id")));
 			  
 			  indexBeanInfo.setIs_host(com.deya.util.FormatUtil.formatNullString((String)infoMap.get("is_host")));
-			  String doc_no="";
-			  if(infoMap.containsKey("doc_no")&&infoMap.get("doc_no")!=null){
-				  indexBeanInfo.setDoc_no(com.deya.util.FormatUtil.formatNullString((String)infoMap.get("doc_no")));
-			  }
-			 indexBeanInfo.setDoc_no(doc_no);
+
+			  indexBeanInfo.setDoc_no(com.deya.util.FormatUtil.formatNullString((String)infoMap.get("doc_no")));
 			  
 			  String time = ((String)infoMap.get("released_dtime"));
 			  time = time == null ? "" : time.replaceAll("-","").replaceAll(" ", "").replaceAll(":","");
