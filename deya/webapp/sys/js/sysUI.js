@@ -783,26 +783,32 @@ function reloadAfter() {
 }
 
 function initUeditor(input_id) {
-    if (EWEBEDITOR.Instances[input_id]) {
-        return;
-    }
-    EWEBEDITOR.Create(input_id, {style: "gray", width: "810", height: "550"});
+    //if (EWEBEDITOR.Instances[input_id]) {
+    //    return;
+    //}
+    //EWEBEDITOR.Create(input_id, {style: "gray", width: "810", height: "550"});
+    UE.getEditor(input_id);
 }
 
 function distoryUeditor(input_id) {
-    if (!EWEBEDITOR.Instances[input_id]) {
-        return;
-    }
-    EWEBEDITOR.Instances[input_id].Remove();
+    //if (!EWEBEDITOR.Instances[input_id]) {
+    //    return;
+    //}
+    //EWEBEDITOR.Instances[input_id].Remove();
+    UE.getEditor(input_id).destroy();
 }
 
 function getV(input_id) {
-    return EWEBEDITOR.Instances[input_id].getHTML()
+    //return EWEBEDITOR.Instances[input_id].getHTML()
+    return UE.getEditor(input_id).getContent();
 }
 
 function setV(input_id, v) {
-    EWEBEDITOR.SetHtmlAsync(input_id,v);
+    //EWEBEDITOR.SetHtmlAsync(input_id,v);
     // EWEBEDITOR.Instances[input_id].setHTML(v);
+    UE.getEditor(input_id).ready(function(){
+        UE.getEditor(input_id).setContent(v);//这里给编辑器添加内容
+    });
 }
 
 function insertV(input_id, v) {

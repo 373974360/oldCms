@@ -17,9 +17,9 @@
 <script type="text/javascript" src="../../../js/lang/zh-cn.js"></script>
 <script type="text/javascript" src="../../../js/sysUI.js"></script>
 <script type="text/javascript" src="../../../js/jquery-plugin/iColorPicker.js"></script>
-<script type="text/javascript" src="../../../ewebeditor/ewebeditor.js"></script>
-<%--<script type="text/javascript" src="../../../ueditor/ueditor.config.js"></script>
-<script type="text/javascript" src="../../../ueditor/ueditor.all.min.js"></script>--%>
+<%--<script type="text/javascript" src="../../../ewebeditor/ewebeditor.js"></script>--%>
+<script type="text/javascript" src="../../../ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="../../../ueditor/ueditor.all.min.js"></script>
 <script type="text/javascript" src="../../../js/jquery-easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../../../js/indexjs/indexList.js"></script>
 <script type="text/javascript" src="../../../js/indexjs/tools.js"></script>
