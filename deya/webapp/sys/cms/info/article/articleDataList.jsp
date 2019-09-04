@@ -153,31 +153,69 @@ function getSelectInfoBeans()
 	return table.getSelecteBeans();
 }
 function blogTS(){
-    var selectIDS = table.getSelecteCheckboxValue("info_id");
-    if(selectIDS.split(",").length>1){
-        alert('只能选择一条信息！！');
-	}else{
-        $.post("/sys/cms/info/article/blog.jsp",{id:selectIDS},function(data){
-            var mess=JSON.parse(data);
-            if(mess.data=='ok')
-                alert('推送成功！！');
-        });
-	}
+    var selectList = table.getSelecteBeans();
+    if(selectList.list.length>0){
+        if(selectList.list.length>1){
+            alert('只能选择一条信息！！');
+        }else {
+            var selectIDS = "";
+            var pushBoolean = true;
+            for(var i=0;i<selectList.list.length;i++){
+                if(selectList.list[i].model_id==11){
+                    selectIDS += ","+selectList.list[i].info_id;
+                }else{
+                    pushBoolean = false;
+                    break;
+                }
+            }
+            if(pushBoolean){
+                selectIDS = selectIDS.substring(1);
+                $.post("/sys/cms/info/article/blog.jsp",{id:selectIDS},function(data){
+                    var mess=JSON.parse(data);
+                    if(mess.data=='ok')
+                        alert('推送成功！！');
+                });
+            }else{
+                alert("信息推送仅支持文章模型，请确保未选中其他模型！");
+            }
+        }
+    }else{
+        alert("请至少选择一条信息！");
+    }
 }
 function weChatTS(){
-    var selectIDS = table.getSelecteCheckboxValue("info_id");
-    if(selectIDS.split(",").length>8){
-        alert('最多选择8条信息！！');
-    }else {
-        $.post("/sys/cms/info/article/WeChat.jsp", {id: selectIDS,siteid:site_id}, function (data) {
-            var mess = JSON.parse(data);
-            if (mess.data == 'ok') {
-                alert('推送成功！！');
-            } else {
-                alert('推送失败！！');
-            }
-        });
-    }
+    var selectList = table.getSelecteBeans();
+    if(selectList.list.length>0){
+        if(selectList.list.length>8){
+            alert('最多选择8条信息！');
+        }else {
+            var selectIDS = "";
+            var pushBoolean = true;
+			for(var i=0;i<selectList.list.length;i++){
+			    if(selectList.list[i].model_id==11){
+                    selectIDS += ","+selectList.list[i].info_id;
+				}else{
+                    pushBoolean = false;
+                    break;
+				}
+			}
+			if(pushBoolean){
+                selectIDS = selectIDS.substring(1);
+                $.post("/sys/cms/info/article/WeChat.jsp", {id: selectIDS,siteid:site_id}, function (data) {
+                    var mess = JSON.parse(data);
+                    if (mess.data == 'ok') {
+                        alert('推送成功！');
+                    } else {
+                        alert('推送失败！');
+                    }
+                });
+			}else{
+                alert("信息推送仅支持文章模型，请确保未选中其他模型！");
+			}
+        }
+	}else{
+        alert("请至少选择一条信息！");
+	}
 }
 </script>
 </head>
