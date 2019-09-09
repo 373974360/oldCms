@@ -10,6 +10,7 @@ import com.deya.wcm.bean.zwgk.ysqgk.YsqgkProcessBean;
 import com.deya.wcm.dao.PublicTableDAO;
 import com.deya.wcm.dao.zwgk.ysqgk.YsqgkInfoDAO;
 import com.deya.wcm.dao.zwgk.ysqgk.YsqgkProessDAO;
+import com.deya.wcm.services.appeal.cpDept.CpDeptManager;
 import com.deya.wcm.services.zwgk.node.GKNodeManager;
 
 import java.io.PrintStream;
@@ -35,7 +36,7 @@ public class YsqgkInfoManager {
         if ((ysqgk.getPut_dtime() == null) || ("".equals(ysqgk.getPut_dtime()))) {
             ysqgk.setPut_dtime(DateUtil.getCurrentDateTime().substring(0, 10));
         }
-        ysqgk.setNode_name(GKNodeManager.getNodeNameByNodeID(ysqgk.getNode_id()));
+        ysqgk.setNode_name(CpDeptManager.getCpDeptName(Integer.parseInt(ysqgk.getNode_id())));
         if (YsqgkInfoDAO.insertYsqgkInfo(ysqgk, stl)) {
             Map<String, String> m = new HashMap();
             m.put("ysq_code", ysqCode);
