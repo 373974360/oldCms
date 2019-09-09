@@ -144,7 +144,7 @@ public class jspFilterHandl {
                 queryString = "";
             }
             if (queryString.indexOf("collURL") == -1) {
-                if ((path.equals("/sys") && servletPath.indexOf("/JSON-RPC") >= 0) || (path.equals("/manager") && servletPath.indexOf("/JSON-RPC") >= 0)) {
+                if (servletPath.indexOf("/JSON-RPC") >= 0) {
                     String params = getRequestPayload(request);
                     boolean b = false;
                     for(String rpc:no_filter_rpc){
