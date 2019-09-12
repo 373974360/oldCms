@@ -2,6 +2,7 @@
 <%@ page import="com.deya.wcm.services.org.user.*" %>
 <%@ page import="com.deya.wcm.bean.org.user.UserBean" %>
 <%@ page import="com.deya.util.DateUtil" %>
+<%@ page import="sun.misc.BASE64Decoder" %>
 <%
     boolean isLogin = UserLogin.checkLoginBySession(request);
     if (isLogin) {
@@ -13,6 +14,8 @@
     String auth_code = request.getParameter("auth_code");
     response.setCharacterEncoding("UTF-8");
     if (user_name != null && !"".equals(user_name)) {
+        BASE64Decoder decoder = new BASE64Decoder();
+        pass_word =new String(decoder.decodeBuffer(pass_word),"UTF-8");
         UserBean userBean = UserRegisterManager.getUserBeanByUname(user_name);
         if (userBean != null) {
             int locked = userBean.getLocked();
@@ -68,6 +71,7 @@
     <script type="text/javascript" src="js/jquery.easyui.min.js"></script>
     <script type="text/javascript" src="js/jquery-plugin/jquery.cookie.js?v=20161215"></script>
     <script type="text/javascript" src="js/md5.js"></script>
+    <script type="text/javascript" src="js/base64.js"></script>
     <script type="text/javascript">
         var username, password, auth_code;
         $(document).ready(function () {
@@ -89,6 +93,7 @@
         function checkCookie() {
             username = $.trim($("#username").val());
             password = $.trim($("#password").val());
+            password=encode64(utf16to8(password));
             auth_code = $.trim($("#auth_code").val());
             var loginErrorTimes = $.cookie("loginErrorTimes-" + $.md5(username));
             if (loginErrorTimes != null && loginErrorTimes >= 3) {
@@ -122,7 +127,6 @@
                 $("#auth_code").focus();
                 return;
             }
-
             $.post("login.jsp", {username: username, password: password, auth_code: auth_code}, function (data) {
                 data = data.substring(0, data.indexOf("}") + 1);
                 data = eval("(" + data + ")");
