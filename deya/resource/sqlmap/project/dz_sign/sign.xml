@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="sign">
+	<sql id="getSignBeanList_sql_conn">
+		<if test="me_account != null">
+			and r.me_account = #{me_account}
+		</if>
+		<if test="sign_time != null">
+			and s.sign_time like '%${sign_time}%'
+		</if>
+	</sql>
+	<select id="getSignBeanList" parameterType="Map" resultType="com.deya.project.dz_sign.SignBean">
+		select m.me_id,r.me_account,m.me_vocation,m.me_sex,m.me_realname,s.sign_time,s.sign_status,s.hall_name from cs_member_register r,cs_member m,dz_member_sign s where r.me_id = m.me_id and m.me_id=s.member_id and m.me_status=1
+		<include refid="getSignBeanList_sql_conn"/>
+		order by s.sign_time desc limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
+	</select>
+
+
+	<select id="getGongMinListCount" parameterType="Map" resultType="java.lang.String">
+		select count(id) from dz_project_sign where 1=1
+		<include refid="getSignBeanList_sql_conn"/>
+	</select>
+
+	<insert id="insert_sign" parameterType="com.deya.project.dz_sign.SignBean">
+    	insert into dz_member_sign(sign_id ,member_id ,hall_name ,sign_time ,sign_status)
+    	values(#{sign_id},#{member_id},#{hall_name},#{sign_time},#{sign_status})
+    </insert>
+
+</mapper>
