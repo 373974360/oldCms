@@ -55,14 +55,13 @@ function pcSearch()
 	val.checkEmpty(s_val,"查询条件","searchkey");	
 	if(!val.getResult()){		
 		return;
-	}	
-	$("#searchFields option").each(function(){
-		if($(this).attr("selected") == true)
-		{
-			m.put($(this).val(),s_val);
-		}else
-			m.remove($(this).val());
-	});
+	}
+    $("#searchFields option").each(function(){
+        m.remove($(this).val());
+    });
+
+    var text = $("#searchFields option:selected").val();
+    m.put(text,s_val);
 	m.remove("search_date");
 	m.remove("tag_ids");
 	reloadSQList("transact");
