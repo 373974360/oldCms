@@ -18,16 +18,23 @@ public class SignRPC {
     }
 
     public static SignBean getSignByAccount(String account){
-        System.out.println(account);
         Map<String,String> map = new HashMap<>();
         map.put("me_account",account);
         map.put("sign_time", DateUtil.getCurrentDate());
         map.put("start_num","0");
         map.put("page_size","20");
-        List<SignBean> list = SignManager.signBeanList(map);
+        List<SignBean> list = SignManager.getSignBeanList(map);
         if(list!=null&&list.size()>0){
             return list.get(0);
         }
         return null;
+    }
+
+
+    public static List<SignBean> getSignBeanList(Map<String,String> map){
+        return SignManager.getSignBeanList(map);
+    }
+    public static String getSignBeanListCount(Map<String,String> map){
+        return SignManager.getSignBeanListCount(map);
     }
 }

@@ -20,7 +20,10 @@ public class SignManager {
         return SignDAO.insertSign(signBean);
     }
 
-    public static List<SignBean> signBeanList(Map<String,String> map){
-        return SignDAO.signBeanList(map);
+    public static List<SignBean> getSignBeanList(Map<String,String> map){
+        return SignDAO.getSignBeanList(map);
+    }
+    public static String getSignBeanListCount(Map<String,String> map){
+        return SignDAO.getSignBeanListCount(map);
     }
 }

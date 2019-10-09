@@ -17,7 +17,10 @@ public class SignDAO {
         return DBManager.insert("insert_sign", signBean);
     }
 
-    public static List<SignBean> signBeanList(Map<String,String> map){
+    public static List<SignBean> getSignBeanList(Map<String,String> map){
         return DBManager.queryFList("getSignBeanList", map);
+    }
+    public static String getSignBeanListCount(Map<String,String> map){
+        return DBManager.getString("getSignBeanListCount", map);
     }
 }

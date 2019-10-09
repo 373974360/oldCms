@@ -9,16 +9,19 @@
 		<if test="sign_time != null">
 			and s.sign_time like '%${sign_time}%'
 		</if>
+		<if test="hall_name != null">
+			and s.hall_name like '%${hall_name}%'
+		</if>
 	</sql>
 	<select id="getSignBeanList" parameterType="Map" resultType="com.deya.project.dz_sign.SignBean">
-		select m.me_id,r.me_account,m.me_vocation,m.me_sex,m.me_realname,s.sign_time,s.sign_status,s.hall_name from cs_member_register r,cs_member m,dz_member_sign s where r.me_id = m.me_id and m.me_id=s.member_id and m.me_status=1
+		select m.me_id,r.me_account,m.me_vocation,m.me_sex,m.me_realname,s.sign_time,s.sign_status,s.hall_name,m.me_phone from cs_member_register r,cs_member m,dz_member_sign s where r.me_id = m.me_id and m.me_id=s.member_id and m.me_status=1
 		<include refid="getSignBeanList_sql_conn"/>
 		order by s.sign_time desc limit #{start_num,,jdbcType=INTEGER},#{page_size,,jdbcType=INTEGER}
 	</select>
 
 
-	<select id="getGongMinListCount" parameterType="Map" resultType="java.lang.String">
-		select count(id) from dz_project_sign where 1=1
+	<select id="getSignBeanListCount" parameterType="Map" resultType="java.lang.String">
+		select count(s.sign_id) from cs_member_register r,cs_member m,dz_member_sign s where r.me_id = m.me_id and m.me_id=s.member_id and m.me_status=1
 		<include refid="getSignBeanList_sql_conn"/>
 	</select>
 
