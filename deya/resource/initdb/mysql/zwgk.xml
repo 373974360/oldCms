@@ -122,7 +122,10 @@
 					gkbzh_id bigint(20) default 0,
 					gkbzh_name varchar(250) default '',
 					gkhj_id bigint(20) default 0,
-					gkhj_name varchar(250) default ''
+					gkhj_name varchar(250) default '',
+					zfgb_year varchar(20) default '',
+					zfgb_qishu varchar(255) default '',
+					zfgb_lbmc varchar(255) default ''
 				)
 		   ]]> 
        </sql>

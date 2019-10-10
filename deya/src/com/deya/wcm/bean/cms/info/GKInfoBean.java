@@ -47,6 +47,10 @@ public class GKInfoBean extends InfoBean implements java.io.Serializable{
 	protected int gkhj_id = 0;//公开环节分类ID
 	protected String gkhj_name="";//公开环节分类名称
 
+	private String zfgb_year="";//政府公报年份
+	private String zfgb_qishu="";//政府公报期数
+	private String zfgb_lbmc="";//政府公报分类
+
 	
 	public String getGk_signer() {
 		return gk_signer;
@@ -265,5 +269,29 @@ public class GKInfoBean extends InfoBean implements java.io.Serializable{
 
 	public void setGkhj_name(String gkhj_name) {
 		this.gkhj_name = gkhj_name;
+	}
+
+	public String getZfgb_year() {
+		return zfgb_year;
+	}
+
+	public void setZfgb_year(String zfgb_year) {
+		this.zfgb_year = zfgb_year;
+	}
+
+	public String getZfgb_qishu() {
+		return zfgb_qishu;
+	}
+
+	public void setZfgb_qishu(String zfgb_qishu) {
+		this.zfgb_qishu = zfgb_qishu;
+	}
+
+	public String getZfgb_lbmc() {
+		return zfgb_lbmc;
+	}
+
+	public void setZfgb_lbmc(String zfgb_lbmc) {
+		this.zfgb_lbmc = zfgb_lbmc;
 	}
 }

@@ -17,9 +17,10 @@ public class SignRPC {
         return SignManager.insertSign(signBean);
     }
 
-    public static SignBean getSignByAccount(String account){
+    public static SignBean getSignByAccount(String account,String hallName){
         Map<String,String> map = new HashMap<>();
         map.put("me_account",account);
+        map.put("hall_name",hallName);
         map.put("sign_time", DateUtil.getCurrentDate());
         map.put("start_num","0");
         map.put("page_size","20");

@@ -76,6 +76,15 @@
 		<if test="gk_hj != null">
 			and gk.gkhj_name = ${gk_hj}
 		</if>
+		<if test="zfgb_year != null">
+			and gk.zfgb_year = ${zfgb_year}
+		</if>
+		<if test="zfgb_qishu != null">
+			and gk.zfgb_qishu = ${zfgb_qishu}
+		</if>
+		<if test="zfgb_lbmc != null">
+			and gk.zfgb_lbmc = ${zfgb_lbmc}
+		</if>
 		and ci.info_status = 8 and ci.final_status = 0
 	</sql>
 	
@@ -215,8 +224,8 @@
 	</select>
 	
 	<insert id="insert_gk_info" parameterType="com.deya.wcm.bean.cms.info.GKInfoBean">
-		insert into cs_gk_info(info_id,gk_index,gk_year,gk_num,doc_no,gk_file,generate_dtime,effect_dtime,aboli_dtime,topic_id,topic_name,theme_id,theme_name,serve_id,serve_name,topic_key,place_key,language,carrier_type,gk_validity,gk_format,gk_way,gk_type,gk_no_reason,gk_time_limit ,gk_range,gk_proc,gk_duty_dept,gk_input_dept,file_head,gk_signer,gkbzh_id,gkbzh_name,gkhj_id,gkhj_name)
-		values(#{info_id},#{gk_index},#{gk_year},#{gk_num},#{doc_no},#{gk_file},#{generate_dtime},#{effect_dtime},#{aboli_dtime},#{topic_id},#{topic_name},#{theme_id},#{theme_name},#{serve_id},#{serve_name},#{topic_key},#{place_key},#{language},#{carrier_type},#{gk_validity},#{gk_format},#{gk_way},#{gk_type},#{gk_no_reason},#{gk_time_limit },#{gk_range},#{gk_proc},#{gk_duty_dept},#{gk_input_dept},#{file_head},#{gk_signer},${gkbzh_id},#{gkbzh_name},#{gkhj_id},#{gkhj_name})
+		insert into cs_gk_info(info_id,gk_index,gk_year,gk_num,doc_no,gk_file,generate_dtime,effect_dtime,aboli_dtime,topic_id,topic_name,theme_id,theme_name,serve_id,serve_name,topic_key,place_key,language,carrier_type,gk_validity,gk_format,gk_way,gk_type,gk_no_reason,gk_time_limit ,gk_range,gk_proc,gk_duty_dept,gk_input_dept,file_head,gk_signer,gkbzh_id,gkbzh_name,gkhj_id,gkhj_name,zfgb_year,zfgb_qishu,zfgb_lbmc)
+		values(#{info_id},#{gk_index},#{gk_year},#{gk_num},#{doc_no},#{gk_file},#{generate_dtime},#{effect_dtime},#{aboli_dtime},#{topic_id},#{topic_name},#{theme_id},#{theme_name},#{serve_id},#{serve_name},#{topic_key},#{place_key},#{language},#{carrier_type},#{gk_validity},#{gk_format},#{gk_way},#{gk_type},#{gk_no_reason},#{gk_time_limit },#{gk_range},#{gk_proc},#{gk_duty_dept},#{gk_input_dept},#{file_head},#{gk_signer},${gkbzh_id},#{gkbzh_name},#{gkhj_id},#{gkhj_name},#{zfgb_year},#{zfgb_qishu},#{zfgb_lbmc})
 	</insert>
 	
 	<update id="update_gk_info" parameterType="com.deya.wcm.bean.cms.info.GKInfoBean">
@@ -226,7 +235,8 @@
 		topic_key = #{topic_key},place_key = #{place_key},language = #{language},carrier_type = #{carrier_type},gk_validity = #{gk_validity},
 		gk_format = #{gk_format},gk_way = #{gk_way},gk_type = #{gk_type},gk_no_reason = #{gk_no_reason},gk_time_limit = #{gk_time_limit},
 		gk_range = #{gk_range},gk_proc = #{gk_proc},gk_duty_dept = #{gk_duty_dept},gk_input_dept = #{gk_input_dept},file_head=#{file_head},
-		gk_signer=#{gk_signer},gkbzh_id=${gkbzh_id},gkbzh_name=#{gkbzh_name},gkhj_id=#{gkhj_id},gkhj_name=#{gkhj_name}
+		gk_signer=#{gk_signer},gkbzh_id=${gkbzh_id},gkbzh_name=#{gkbzh_name},gkhj_id=#{gkhj_id},gkhj_name=#{gkhj_name},
+		zfgb_year=#{zfgb_year},zfgb_qishu=#{zfgb_qishu},zfgb_lbmc=#{zfgb_lbmc}
 		where info_id = #{info_id}
 	</update>
 	
@@ -398,7 +408,7 @@
 	
 	<!-- 前台信息列表查询sql　,gk.gk_duty_dept,gk.gk_input_dept -->
 	<sql id="getBroGKInfoList_sql_item">
-		ci.*,gk.gk_index,gk.gk_year,gk.gk_num,gk.doc_no,gk.gk_file,gk.generate_dtime,gk.effect_dtime,gk.aboli_dtime,gk.topic_id,gk.topic_name,gk.theme_id,gk.theme_name,gk.serve_id,gk.serve_name,gk.topic_key,gk.place_key,gk.language,gk.carrier_type,gk.gk_validity,gk.gk_format,gk.gk_way,gk.gk_type,gk.gk_no_reason,gk.gk_time_limit ,gk.gk_range,gk.gk_proc,ca.cat_cname,gk.file_head,gk.gk_signer,gk.gk_duty_dept,gk.gk_input_dept,gk.gkbzh_id,gk.gkbzh_name,gk.gkhj_id,gk.gkhj_name
+		ci.*,gk.gk_index,gk.gk_year,gk.gk_num,gk.doc_no,gk.gk_file,gk.generate_dtime,gk.effect_dtime,gk.aboli_dtime,gk.topic_id,gk.topic_name,gk.theme_id,gk.theme_name,gk.serve_id,gk.serve_name,gk.topic_key,gk.place_key,gk.language,gk.carrier_type,gk.gk_validity,gk.gk_format,gk.gk_way,gk.gk_type,gk.gk_no_reason,gk.gk_time_limit ,gk.gk_range,gk.gk_proc,ca.cat_cname,gk.file_head,gk.gk_signer,gk.gk_duty_dept,gk.gk_input_dept,gk.gkbzh_id,gk.gkbzh_name,gk.gkhj_id,gk.gkhj_name,gk.zfgb_year,gk.zfgb_qishu,gk.zfgb_lbmc
 	</sql>
 	
 	<select id="getBroGKInfoList" parameterType="Map" resultType="com.deya.wcm.bean.cms.info.GKInfoBean" >

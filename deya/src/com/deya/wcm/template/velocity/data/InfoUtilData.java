@@ -645,6 +645,27 @@ public class InfoUtilData
                     con_map.put("gkhj_id", gkhj_id);
                 }
             }
+
+            if (tempA[i].toLowerCase().startsWith("zfgb_year=")) {
+                String zfgb_year = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
+                if (!"".equals(zfgb_year) && !zfgb_year.startsWith("zfgb_year") && FormatUtil.isValiditySQL(zfgb_year)) {
+                    con_map.put("zfgb_year", zfgb_year);
+                }
+            }
+
+            if (tempA[i].toLowerCase().startsWith("zfgb_qishu=")) {
+                String zfgb_qishu = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
+                if (!"".equals(zfgb_qishu) && !zfgb_qishu.startsWith("zfgb_qishu") && FormatUtil.isValiditySQL(zfgb_qishu)) {
+                    con_map.put("zfgb_qishu", zfgb_qishu);
+                }
+            }
+
+            if (tempA[i].toLowerCase().startsWith("zfgb_lbmc=")) {
+                String zfgb_lbmc = FormatUtil.formatNullString(tempA[i].substring(tempA[i].indexOf("=") + 1));
+                if (!"".equals(zfgb_lbmc) && !zfgb_lbmc.startsWith("zfgb_lbmc") && FormatUtil.isValiditySQL(zfgb_lbmc)) {
+                    con_map.put("zfgb_lbmc", zfgb_lbmc);
+                }
+            }
         }
 
         if (!"".equals(cat_id) && !"0".equals(cat_id) && !cat_id.startsWith("$cat_id") && FormatUtil.isValiditySQL(cat_id)) {

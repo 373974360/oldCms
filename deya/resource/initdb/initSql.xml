@@ -5941,6 +5941,11 @@
 			insert into cs_info_model (model_id, model_ename, model_name, table_name, model_sort, template_list, template_show, app_id, disabled, model_memo, model_icon, add_page, view_page)values (11, 'article', '文章', 'cs_info_article', 1, '', '148', 'cms', 0, '', 'ico_article', 'm_article.jsp', '')
 		]]> 
 	</sql>
+	<sql>
+		<![CDATA[
+			insert into cs_info_model (model_id, model_ename, model_name, table_name, model_sort, template_list, template_show, app_id, disabled, model_memo, model_icon, add_page, view_page)values (51, 'zfgb', '政府公报', 'cs_info_article', 12, '', '', 'cms', 0, '', 'ico_gov', 'm_zfgb.jsp', '')
+		]]>
+	</sql>
 	<!--
 	<sql>
 	<![CDATA[
@@ -6490,6 +6495,56 @@
 	</sql>
 	<sql>
 		<![CDATA[
+			insert into cs_sys_dict (id, dict_cat_id, dict_id, dict_name, dict_sort, is_defult, app_id, site_id)values (529, 'zfgblb', '01', '重要言论', 1, 0, '0', '0')
+		]]>
+	</sql>
+	<sql>
+		<![CDATA[
+			insert into cs_sys_dict (id, dict_cat_id, dict_id, dict_name, dict_sort, is_defult, app_id, site_id)values (530, 'zfgblb', '02', '省政府文件', 1, 0, '0', '0')
+		]]>
+	</sql>
+	<sql>
+		<![CDATA[
+			insert into cs_sys_dict (id, dict_cat_id, dict_id, dict_name, dict_sort, is_defult, app_id, site_id)values (531, 'zfgblb', '03', '省政府办公厅文件', 1, 0, '0', '0')
+		]]>
+	</sql>
+	<sql>
+		<![CDATA[
+			insert into cs_sys_dict (id, dict_cat_id, dict_id, dict_name, dict_sort, is_defult, app_id, site_id)values (532, 'zfgblb', '04', '市政府文件', 1, 0, '0', '0')
+		]]>
+	</sql>
+	<sql>
+		<![CDATA[
+			insert into cs_sys_dict (id, dict_cat_id, dict_id, dict_name, dict_sort, is_defult, app_id, site_id)values (533, 'zfgblb', '05', '市政府办公室文件', 1, 0, '0', '0')
+		]]>
+	</sql>
+	<sql>
+		<![CDATA[
+			insert into cs_sys_dict (id, dict_cat_id, dict_id, dict_name, dict_sort, is_defult, app_id, site_id)values (534, 'zfgblb', '06', '人事与机构', 1, 0, '0', '0')
+		]]>
+	</sql>
+	<sql>
+		<![CDATA[
+			insert into cs_sys_dict (id, dict_cat_id, dict_id, dict_name, dict_sort, is_defult, app_id, site_id)values (535, 'zfgblb', '07', '领导讲话', 1, 0, '0', '0')
+		]]>
+	</sql>
+	<sql>
+		<![CDATA[
+			insert into cs_sys_dict (id, dict_cat_id, dict_id, dict_name, dict_sort, is_defult, app_id, site_id)values (536, 'zfgblb', '08', '调查研究', 1, 0, '0', '0')
+		]]>
+	</sql>
+	<sql>
+		<![CDATA[
+			insert into cs_sys_dict (id, dict_cat_id, dict_id, dict_name, dict_sort, is_defult, app_id, site_id)values (537, 'zfgblb', '09', '文件目录', 1, 0, '0', '0')
+		]]>
+	</sql>
+	<sql>
+		<![CDATA[
+			insert into cs_sys_dict (id, dict_cat_id, dict_id, dict_name, dict_sort, is_defult, app_id, site_id)values (538, 'zfgblb', '10', '市政府大事记', 1, 0, '0', '0')
+		]]>
+	</sql>
+	<sql>
+		<![CDATA[
 			insert into cs_sys_dict_category (id, dict_cat_id, dict_cat_name, dict_cat_memo, is_sys, app_id, site_id)values (86, 'file_head', '文件题头', ' ', 1, '0', '0')
 		]]> 
 	</sql>
@@ -6571,7 +6626,12 @@
 	<sql>
 		<![CDATA[
 			insert into cs_sys_dict_category (id, dict_cat_id, dict_cat_name, dict_cat_memo, is_sys, app_id, site_id)values (85, 'pre_title', '标题前缀', '', 1, '0', '0')
-		]]> 
+		]]>
+	</sql>
+	<sql>
+		<![CDATA[
+		insert into cs_sys_dict_category (id, dict_cat_id, dict_cat_name, dict_cat_memo, is_sys, app_id, site_id)values (87, 'zfgblb', '政府公报类别', '', 1, '0', '0')
+	]]>
 	</sql>
 	<sql>
 	<![CDATA[
