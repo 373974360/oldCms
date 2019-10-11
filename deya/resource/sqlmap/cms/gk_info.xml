@@ -77,13 +77,13 @@
 			and gk.gkhj_name = ${gk_hj}
 		</if>
 		<if test="zfgb_year != null">
-			and gk.zfgb_year = ${zfgb_year}
+			and gk.zfgb_year = #{zfgb_year}
 		</if>
 		<if test="zfgb_qishu != null">
-			and gk.zfgb_qishu = ${zfgb_qishu}
+			and gk.zfgb_qishu = #{zfgb_qishu}
 		</if>
 		<if test="zfgb_lbmc != null">
-			and gk.zfgb_lbmc = ${zfgb_lbmc}
+			and gk.zfgb_lbmc = #{zfgb_lbmc}
 		</if>
 		and ci.info_status = 8 and ci.final_status = 0
 	</sql>
