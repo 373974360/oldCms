@@ -18,6 +18,7 @@ public class SignBean extends MemberBean implements Serializable {
     private String hall_name;
     private String sign_time;
     private int sign_status;
+    private String theme_name;
 
     public int getSign_id() {
         return sign_id;
@@ -57,5 +58,13 @@ public class SignBean extends MemberBean implements Serializable {
 
     public void setSign_status(int sign_status) {
         this.sign_status = sign_status;
+    }
+
+    public String getTheme_name() {
+        return theme_name;
+    }
+
+    public void setTheme_name(String theme_name) {
+        this.theme_name = theme_name;
     }
 }
