@@ -207,7 +207,7 @@ public class InfoPublishManager {
                         //文章内容模型有翻页的
                         Object o = ModelUtil.select(ib.getInfo_id() + "", temp_site_id, model_ename);
                         String item_name = "";//内容字段的名称
-                        if (InfoBaseManager.ARTICLE_MODEL_ENAME.equals(model_ename))
+                        if (InfoBaseManager.ARTICLE_MODEL_ENAME.equals(model_ename) || InfoBaseManager.ZFGB_MODEL_NAME.equals(model_ename))
                             item_name = "info_content";
                         if (InfoBaseManager.GKTYGS_MODEL_ENAME.equals(model_ename))
                             item_name = "gk_content";
