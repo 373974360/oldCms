@@ -202,7 +202,7 @@ public class InfoPublishManager {
                     int model_id = ib.getModel_id();
                     String template_id = CategoryModelManager.getTemplateID(cat_id + "", ib.getSite_id(), model_id);
 
-                    if ((InfoBaseManager.ARTICLE_MODEL_ENAME.equals(model_ename) || InfoBaseManager.GKTYGS_MODEL_ENAME.equals(model_ename)) && ib.getPage_count() > 1) {
+                    if ((InfoBaseManager.ARTICLE_MODEL_ENAME.equals(model_ename) || InfoBaseManager.GKTYGS_MODEL_ENAME.equals(model_ename) || InfoBaseManager.ZFGB_MODEL_NAME.equals(model_ename)) && ib.getPage_count() > 1) {
                         //手动翻页
                         //文章内容模型有翻页的
                         Object o = ModelUtil.select(ib.getInfo_id() + "", temp_site_id, model_ename);

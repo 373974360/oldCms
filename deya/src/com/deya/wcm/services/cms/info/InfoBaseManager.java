@@ -62,6 +62,7 @@ public class InfoBaseManager {
     protected static String LINK_MODEL_ENAME = "link";
     public static String ARTICLE_MODEL_ENAME = "article";
     public static String GKTYGS_MODEL_ENAME = "gkftygs";
+    public static String ZFGB_MODEL_NAME = "zfgb";
     public static InfoBean getInfoById(String info_id,String site_id){
         return InfoDAO.getInfoById(info_id,site_id);
     }
