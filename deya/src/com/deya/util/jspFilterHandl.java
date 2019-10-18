@@ -20,9 +20,13 @@ public class jspFilterHandl {
 
     private static String[] sqlFilterStr = {"exec ", "insert ", "delete ", "trancate", "update ", "drop table"};
 
-    private static String[] integerParamStr = {"cat_id", "model_id", "sq_id", "tm_id", "info_id", "info_status", "dept_id", "final_status", "f_id"};
+    private static String[] integerParamStr = {"cat_id","sq_id", "tm_id", "info_id", "info_status", "dept_id", "final_status", "f_id"};
 
     private static String[] editorParams = {"ware_content","t_content","sq_content","correct_content","c_spyj","c_sqtj","c_jzxyq","c_sqclml","c_sfyj","c_fulu"};
+
+    private static String[] no_filter_rpc={"SurveyRPC","InfoBaseRPC","TemplateRPC","WareRPC","ModelUtilRPC"};
+
+    private static String[] rpc_filter_str={};
 
     static {
         String[] jspArr = JconfigUtilContainer.bashConfig().getPropertyNamesByCategory("filter_jsp_page");
@@ -94,7 +98,7 @@ public class jspFilterHandl {
 
     public static boolean isRPCParames(String params){
         try{
-            params = params.substring(params.indexOf("[")+9,params.indexOf("}")+1);
+            params = params.substring(params.indexOf("\"map\"")+6,params.indexOf("}")+1);
             JSONObject jsonObject = new JSONObject(params);
             Iterator iterator = jsonObject.keys();
             while (iterator.hasNext()) {
@@ -140,9 +144,20 @@ public class jspFilterHandl {
                 queryString = "";
             }
             if (queryString.indexOf("collURL") == -1) {
-                if ((path.equals("/sys") && servletPath.indexOf("/JSON-RPC") >= 0) || (path.equals("/manager") && servletPath.indexOf("/JSON-RPC") >= 0)) {
+                if (servletPath.indexOf("/JSON-RPC") >= 0) {
                     String params = getRequestPayload(request);
-                    System.out.println("params：" + params);
+                    boolean b = false;
+                    for(String rpc:no_filter_rpc){
+                        if(params.contains(rpc)){
+                            b = true;
+                            break;
+                        }
+                    }
+                    if(!b){
+                        if (isTureKey(params, rpc_filter_str)) {
+                            return true;  //包含要过滤的关键字
+                        }
+                    }
                     if (isTureKey(params, sqlFilterStr)) {
                         return true;  //包含要过滤的关键字
                     }
@@ -157,17 +172,24 @@ public class jspFilterHandl {
                     String arr = (String) o;
                     String value = request.getParameter(arr);
                     boolean isEditorParam = false;
-                    for (String editorParam : editorParams) {
-                        if(editorParam.equals(arr)){
-                            isEditorParam = true;
-                            break;
+                    if (arr.equals("sq_content")) {
+                        String[] filter = new String[]{"alert", "%00", "script","object","data","select","option","window","location","href","confirm","window.location.href","session","cookie","iframe","frame"};
+                        if (isTureKey(value, filter)) {
+                            return true;
+                        }
+                    }else{
+                        for (String editorParam : editorParams) {
+                            if(editorParam.equals(arr)){
+                                isEditorParam = true;
+                                break;
+                            }
                         }
                     }
                     if(isEditorParam){
                         continue;
                     }
                     for (String str : integerParamStr) {
-                        if (str.equals(arr)) {
+                        if(str.equals(arr)) {
                             try {
                                 if (value != null && !"".equals(value) && !"null".equals(value)) {
                                     int i = Integer.parseInt(value);

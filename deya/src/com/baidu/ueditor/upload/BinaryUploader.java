@@ -43,8 +43,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 public class BinaryUploader {
 
-    public static String[] NOTUPLOAT_FILE_EXT = {"php ","php3","php5","phtml","asp ","aspx","ascx","jsp","cfm","cfc",
-            "pl","bat","exe","dll","reg","cgi","js"};
+    public static String[] UPLOAT_FILE_EXT = {".jpg",".png",".jpeg",".gif",".mp4",".wmv",".flv",".swf",".zip",".tar.gz",".tar",".rar",".doc",".docx",".xls",".xlsx",".pdf",".ppt",".pptx",".text"};
 
     public static final State save(HttpServletRequest request,
                                    Map<String,Object> conf) {
@@ -96,7 +95,7 @@ public class BinaryUploader {
                 if ((name != null) && (!name.trim().equals(""))) {
                     if (name.lastIndexOf(".") >= 0) {
                         extName = name.substring(name.lastIndexOf(".")).toLowerCase();
-                        String str[] = NOTUPLOAT_FILE_EXT;
+                        String str[] = UPLOAT_FILE_EXT;
                         boolean result = false;
                         for(int i=0;i<str.length;i++){
                             String s = str[i];
@@ -108,7 +107,8 @@ public class BinaryUploader {
                                 }
                             }
                         }
-                        if (result){
+                        if (!result){
+                            System.out.println("非法文件上传，后缀名："+extName+"；不允许上传！");
                             return null;
                         }
                     }

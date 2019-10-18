@@ -62,8 +62,10 @@ public class RemoteImgSer extends HttpServlet {
             String extName = "";
             if (src.lastIndexOf(".") >= 0) {
                 extName = src.substring(src.lastIndexOf(".")).toLowerCase();
-                if (UploadFileIfy.NOTUPLOAT_FILE_EXT.contains("," + extName.substring(1) + ","))
+                if(!UploadFileIfy.UPLOAT_FILE_EXT.contains(","+extName.substring(1)+",")){
+                    System.out.println("非法文件上传，后缀名："+extName+"；不允许上传！");
                     return;
+                }
             }
             if (saveImgUrlAs(src, savePath, fileName, extName, site_id)) {
                 att_ename = fileName + extName;

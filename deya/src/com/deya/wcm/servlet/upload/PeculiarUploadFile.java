@@ -89,8 +89,10 @@ public class PeculiarUploadFile extends HttpServlet {
 				if (name.lastIndexOf(".") >= 0) {
 					extName = name.substring(name.lastIndexOf("."))
 							.toLowerCase();
-					if(UploadFileIfy.NOTUPLOAT_FILE_EXT.contains(","+extName.substring(1)+","))
+					if(!UploadFileIfy.UPLOAT_FILE_EXT.contains(","+extName.substring(1)+",")){
+						System.out.println("非法文件上传，后缀名："+extName+"；不允许上传！");
 						return;
+					}
 				}
 				File file = null;
 				do {
