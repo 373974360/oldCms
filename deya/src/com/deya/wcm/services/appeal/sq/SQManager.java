@@ -194,14 +194,22 @@ public class SQManager {
         setTimeCon(m);
         getSqSearchCon(m, user_id);
         List<SQBean> l = SQDAO.getSqList(m);
+        List<SQBean> rl = new ArrayList<>();
         if (l != null && l.size() > 0) {
             for (int i = 0; i < l.size(); i++) {
                 if (l.get(i).getDo_dept() != 0) {
                     CpDeptBean cdb = CpDeptManager.getCpDeptBean(l.get(i).getDo_dept());
-                    if (cdb != null)
+                    if (cdb != null){
                         l.get(i).setDo_dept_name(cdb.getDept_name());
+                        if(m.containsKey("do_dept_name") && m.get("do_dept_name").equals(cdb.getDept_name())){
+                            rl.add(l.get(i));
+                        }
+                    }
                 }
             }
+        }
+        if(m.containsKey("do_dept_name")){
+            return rl;
         }
         return l;
     }

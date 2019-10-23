@@ -123,6 +123,9 @@
         <if test="sq_realname != null">and sq_realname like '%${sq_realname}%'</if>
         <if test="sq_content2 != null">and sq_content2 like '%${sq_content2}%'</if>
         <if test="sq_code != null">and sq_code = #{sq_code}</if>
+        <if test="me_id != null">and me_id = #{me_id}</if>
+        <if test="sq_id != null">and sq_id in (${sq_id})</if>
+        <if test="sq_phone != null">and sq_phone = #{sq_phone}</if>
     </select>
 
     <!-- 得到已办理的信件总数 -->
@@ -367,6 +370,7 @@
         <if test="sq_code != null">and sq_code = #{sq_code}</if>
         <if test="me_id != null">and me_id = #{me_id}</if>
         <if test="sq_id != null">and sq_id in (${sq_id})</if>
+        <if test="sq_phone != null">and sq_phone = #{sq_phone}</if>
     </sql>
     <select id="getSqList" parameterType="Map" resultType="com.deya.wcm.bean.appeal.sq.SQBean">
         select * from (

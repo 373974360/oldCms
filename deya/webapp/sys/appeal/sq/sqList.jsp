@@ -175,6 +175,8 @@ function downFile(){
 					<option value="submit_name">收信单位</option>
 					<option value="sq_content2">信件内容</option>
 					<option value="sq_code">信件编码</option>
+					<option value="sq_phone">联系电话</option>
+					<option value="do_dept_name">处理部门</option>
 					<option value="tag">特征标记</option>
 				</select>
 				<input id="searchkey" type="text" class="" value="" style="width:70px" /><input id="btnSearch" type="button" value="搜索" onclick="pcSearch()"/>
