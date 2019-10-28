@@ -14,9 +14,8 @@
 	}
 %>
 <%!
-	public static String searchUrl = "http://zw.xixianxinqu.gov.cn/icity/c/api.server/execute?action=getSearchIndex&pagemode=serverV3P5&region_code=617000&key=";
 	public static String getZwfwSearch(HttpServletRequest request){
-		searchUrl = searchUrl + request.getParameter("key");
+		String searchUrl = "http://zw.xixianxinqu.gov.cn/icity/c/api.server/execute?action=getSearchIndex&pagemode=serverV3P5&region_code=617000&key=" + request.getParameter("key");
 		System.out.println(searchUrl);
 		HttpURLConnection connection = null;
 		InputStream is = null;
