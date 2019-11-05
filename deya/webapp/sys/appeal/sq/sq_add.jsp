@@ -399,6 +399,8 @@ function doVoid(id,pro_type)
 			   setV("pro_note", defaultBean.sq_reply);
 			   $("#affix_tr").show();
 				$("#custom_dept_name_tr").show();
+            	$("#custom_dept_name").val(defaultBean.custom_dept_name);
+            	$("#over_dtime").val(defaultBean.over_dtime);
             	$("#over_dtime_tr").show();
 				break;
 		case 2:$("#pro_title_th").text("转办意见：");				
