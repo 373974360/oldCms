@@ -200,6 +200,7 @@ function createTableByDate(beanList)
     "   <th>主信息</th>   " +
     "	<th>引用信息</th> " +
     "	<th>连接信息</th>     " +
+	"	<th>详细</th>     " +
     " </tr>" +
     "</thead>" +
     "<tbody>" ;
@@ -229,10 +230,24 @@ function stuffTableByDate(bean)
     treeHtml += "<td>"+ bean.hostInfoCount +"</td>";
     treeHtml += "<td>"+ bean.refInfoCount +"</td>";
     treeHtml += "<td>"+ bean.linkInfoCount +"</td>";
+    treeHtml += "<td><a href=\"javascript:openUInfoList('"+bean.time+"')\">"+ "查看"+"</a></td>";
 	treeHtml+="</tr>";
 	return treeHtml;
 }
-
+function openUInfoList(month)
+{
+	var st = "";
+	var et = "";
+	if(month.length==10){
+        st = month;
+        et = month;
+	}
+    if(month.length==7){
+        st = month+"-01";
+        et = month+"-31";
+    }
+    top.OpenModalWindow("详细信息列表","/sys/cms/cmsCount/UserInfoList.jsp?site_id="+site_id+"&start_day="+st+"&end_day="+et,1000,600);
+}
 
 // 取得每个月的最后一天 参数为一个代表月份的数值(1-12,如果这个取值无效,返回0),一个为年份
 function lastDayOfMonth(month,year){

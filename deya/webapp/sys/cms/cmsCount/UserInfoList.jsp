@@ -48,7 +48,7 @@
         // 显示统计结果列表
         function showList()
         {
-            mp.put("start_day",start_day);
+            mp.put("start_day",start_day+" 00:00:00");
             mp.put("end_day",end_day +" 23:59:59");
             mp.put("site_id",site_id);
             mp.put("cat_id",cat_id);
