@@ -159,8 +159,12 @@ public class GKInfoManager {
 				}
 
 				UserBean user = UserManager.getUserBeanByID(gkb.getInput_user()+"");
-				DeptBean dept = DeptManager.getDeptBeanByID(user.getDept_id()+"");
-				Map<String, String> m = IndexManager.getIndex(site_id, cat_id+"", ymd, "",dept.getDept_code());
+				String deptCode = "";
+				if(user!=null){
+					DeptBean dept = DeptManager.getDeptBeanByID(user.getDept_id()+"");
+					deptCode = dept.getDept_code();
+				}
+				Map<String, String> m = IndexManager.getIndex(site_id, cat_id+"", ymd, "",deptCode);
 				if(m!=null){
 					if(GKInfoDAO.updateGKIndex(info_id+"", m.get("gk_index"), m.get("gk_num"))) {//得到该信息被引用 的
 						List<InfoBean> il =  InfoDAO.getFromInfoListByIDS(info_id+"");
