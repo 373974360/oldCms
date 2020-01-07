@@ -317,12 +317,13 @@ public class GKInfoDAO {
 	 * @param Map<String, String> m
 	 * @return List
 	 */
-	public static boolean updateGKIndex(String info_id,String gk_index,String gk_num)
+	public static boolean updateGKIndex(String info_id,String gk_index,String gk_num,String gk_year)
 	{
 		Map<String, String> m = new HashMap<String, String>();
 		m.put("gk_index", gk_index);
 		m.put("gk_num", gk_num);
 		m.put("info_id", info_id);
+		m.put("gk_year", gk_year);
 		return DBManager.update("update_gkinfo_index", m);
 	}
 	

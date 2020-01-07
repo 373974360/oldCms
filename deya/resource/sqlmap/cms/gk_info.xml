@@ -274,7 +274,7 @@
 	
 	<!-- 修改索引号 -->
 	<update id="update_gkinfo_index" parameterType="Map">
-		update cs_gk_info set gk_index=#{gk_index},gk_num=#{gk_num} where info_id = #{info_id}
+		update cs_gk_info set gk_index=#{gk_index},gk_num=#{gk_num},gk_year=#{gk_year} where info_id = #{info_id}
 	</update>
 	
 	<!-- 清空index sequence表 -->

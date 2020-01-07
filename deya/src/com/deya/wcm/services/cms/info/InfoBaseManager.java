@@ -548,7 +548,7 @@ public class InfoBaseManager {
                     Map<String,String> m = IndexManager.getIndex(site_id,to_cat_id+"", gk_year+"-01", "",dept.getDept_code());
                     if(m != null)
                     {
-                        GKInfoDAO.updateGKIndex(ib.getInfo_id()+"", m.get("gk_index"), m.get("gk_num"));
+                        GKInfoDAO.updateGKIndex(ib.getInfo_id()+"", m.get("gk_index"), m.get("gk_num"),m.get("gk_year"));
                     }
                 }
             }
