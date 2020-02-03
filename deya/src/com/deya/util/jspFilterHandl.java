@@ -18,7 +18,7 @@ public class jspFilterHandl {
             "injected", "ACUstart", "ACUend", "():;", "acu:Expre", "window.location.href", "document", "parameter: ", "<OBJECT", "javascript", "confirm", "<script>", "</script>", "..", "cat ", "click", "function", "prompt(", "<", ">", "'", "‘", "’", "�", "ndhlmt:expre", "ssion", "ndhlmt"};
     private static String no_filter_jsp;
 
-    private static String[] sqlFilterStr = {"exec ", "insert ", "delete ", "trancate", "update ", "drop table","select","concat"," "};
+    private static String[] sqlFilterStr = {"exec ", "insert ", "delete ", "trancate", "update ", "drop table","select ","concat"};
 
     private static String[] integerParamStr = {"cat_id","tm_id", "info_id", "info_status", "dept_id", "final_status", "f_id"};
 
