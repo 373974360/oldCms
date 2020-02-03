@@ -18,7 +18,7 @@ public class jspFilterHandl {
             "injected", "ACUstart", "ACUend", "():;", "acu:Expre", "window.location.href", "document", "parameter: ", "<OBJECT", "javascript", "confirm", "<script>", "</script>", "..", "cat ", "click", "function", "prompt(", "<", ">", "'", "‘", "’", "�", "ndhlmt:expre", "ssion", "ndhlmt"};
     private static String no_filter_jsp;
 
-    private static String[] sqlFilterStr = {"exec ", "insert ", "delete ", "trancate", "update ", "drop table"};
+    private static String[] sqlFilterStr = {"exec ", "insert ", "delete ", "trancate", "update ", "drop table","select","concat"," "};
 
     private static String[] integerParamStr = {"cat_id","tm_id", "info_id", "info_status", "dept_id", "final_status", "f_id"};
 
@@ -98,7 +98,12 @@ public class jspFilterHandl {
 
     public static boolean isRPCParames(String params){
         try{
-            params = params.substring(params.indexOf("\"map\"")+6,params.indexOf("}")+1);
+            if(params.indexOf("map") >= 0){
+                params = params.substring(params.indexOf("\"map\"")+6,params.indexOf("}")+1);
+            }
+            if(params.indexOf("params") >=0){
+                params = params.substring(params.indexOf("\"params\"")+11,params.indexOf("}")+1);
+            }
             JSONObject jsonObject = new JSONObject(params);
             Iterator iterator = jsonObject.keys();
             while (iterator.hasNext()) {
@@ -114,6 +119,9 @@ public class jspFilterHandl {
                             return true;
                         }
                     }
+                }
+                if(isTureKey(json_value)){
+                    return true;
                 }
             }
         } catch (Exception e){
@@ -161,7 +169,7 @@ public class jspFilterHandl {
                     if (isTureKey(params, sqlFilterStr)) {
                         return true;  //包含要过滤的关键字
                     }
-                    if(params.indexOf("map") >= 0){//jsonRPC携带的参数集合
+                    if(params.indexOf("map") >= 0 || params.indexOf("params") >=0 ){//jsonRPC携带的参数集合
                         if(isRPCParames(params)){
                             return true;
                         }
