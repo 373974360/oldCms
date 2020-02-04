@@ -98,12 +98,7 @@ public class jspFilterHandl {
 
     public static boolean isRPCParames(String params){
         try{
-            if(params.indexOf("map") >= 0){
-                params = params.substring(params.indexOf("\"map\"")+6,params.indexOf("}")+1);
-            }
-            if(params.indexOf("params") >=0){
-                params = params.substring(params.indexOf("\"params\"")+11,params.indexOf("}")+1);
-            }
+            params = params.substring(params.indexOf("\"map\"")+6,params.indexOf("}")+1);
             JSONObject jsonObject = new JSONObject(params);
             Iterator iterator = jsonObject.keys();
             while (iterator.hasNext()) {
@@ -119,9 +114,6 @@ public class jspFilterHandl {
                             return true;
                         }
                     }
-                }
-                if(isTureKey(json_value)){
-                    return true;
                 }
             }
         } catch (Exception e){
@@ -169,7 +161,7 @@ public class jspFilterHandl {
                     if (isTureKey(params, sqlFilterStr)) {
                         return true;  //包含要过滤的关键字
                     }
-                    if(params.indexOf("map") >= 0 || params.indexOf("params") >=0 ){//jsonRPC携带的参数集合
+                    if(params.indexOf("map") >= 0){//jsonRPC携带的参数集合
                         if(isRPCParames(params)){
                             return true;
                         }
