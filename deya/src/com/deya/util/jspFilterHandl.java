@@ -165,14 +165,14 @@ public class jspFilterHandl {
                         if (isTureKey(params, rpc_filter_str)) {
                             return true;  //包含要过滤的关键字
                         }
+                        if(params.indexOf("map") >= 0 || params.indexOf("params") >=0 ){//jsonRPC携带的参数集合
+                            if(isRPCParames(params)){
+                                return true;
+                            }
+                        }
                     }
                     if (isTureKey(params, sqlFilterStr)) {
                         return true;  //包含要过滤的关键字
-                    }
-                    if(params.indexOf("map") >= 0 || params.indexOf("params") >=0 ){//jsonRPC携带的参数集合
-                        if(isRPCParames(params)){
-                            return true;
-                        }
                     }
                 }
                 for (Enumeration e = request.getParameterNames(); e.hasMoreElements(); ) {
